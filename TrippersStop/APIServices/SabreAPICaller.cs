@@ -22,7 +22,7 @@ namespace TrippersStop.SabreAPIWrapper
             }
             set
             {
-                this._TokenUri = new Uri("https://api.test.sabre.com/"); 
+                this._TokenUri = value; 
             }
         }
         Uri _BaseAPIUri;
@@ -34,7 +34,7 @@ namespace TrippersStop.SabreAPIWrapper
             }
             set
             {
-                this._BaseAPIUri = new Uri("https://api.test.sabre.com/");
+                this._BaseAPIUri = value;
             }
         }
         String _ClientId;
@@ -42,7 +42,7 @@ namespace TrippersStop.SabreAPIWrapper
         {
             set
             {
-                this._ClientId = ConfigurationManager.AppSettings["ClientID"].ToString();
+                this._ClientId = value;
             }
         }
         String _ClientSecret;
@@ -50,8 +50,16 @@ namespace TrippersStop.SabreAPIWrapper
         {
             set
             {
-                this._ClientSecret = ConfigurationManager.AppSettings["ClientID"].ToString();
+                this._ClientSecret = value;
             }
+        }
+
+        public SabreAPICaller()
+        {
+            TokenUri = new Uri(ConfigurationManager.AppSettings["SabreTokenUri"].ToString() );
+            BaseAPIUri = new Uri(ConfigurationManager.AppSettings["SabreBaseAPIUri"].ToString() );
+            ClientId = ConfigurationManager.AppSettings["SabreClientID"].ToString();
+            ClientSecret = ConfigurationManager.AppSettings["SabreClientSecret"].ToString();
         }
        
         public async Task<String> GetToken()
