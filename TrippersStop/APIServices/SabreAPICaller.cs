@@ -15,11 +15,7 @@ namespace TrippersStop.SabreAPIWrapper
         Uri _TokenUri;
         
         public Uri TokenUri
-        {
-            get
-            {
-                return this._TokenUri;
-            }
+        {            
             set
             {
                 this._TokenUri = value; 
@@ -53,35 +49,55 @@ namespace TrippersStop.SabreAPIWrapper
                 this._ClientSecret = value;
             }
         }
-
+        String _Accept;
+        public String Accept
+        {
+            set
+            {
+                this._Accept = value;
+            }
+        }
+        String _ContentType;
+        public String ContentType
+        {
+            set
+            {
+                this._ContentType = value;
+            }
+        }
+        String _Authorization;
+        public String Authorization
+        {
+            set
+            {
+                this._Authorization = value;
+            }
+        }
         public SabreAPICaller()
         {
-            TokenUri = new Uri(ConfigurationManager.AppSettings["SabreTokenUri"].ToString() );
+            TokenUri = new Uri(ConfigurationManager.AppSettings["SabreTokenUri"].ToString());
             BaseAPIUri = new Uri(ConfigurationManager.AppSettings["SabreBaseAPIUri"].ToString() );
             ClientId = ConfigurationManager.AppSettings["SabreClientID"].ToString();
             ClientSecret = ConfigurationManager.AppSettings["SabreClientSecret"].ToString();
         }
-       
+
+
         public async Task<String> GetToken()
         {
             using (var client = new HttpClient())
             {                
-                // Create form parameters that we will send to data market.
-                Dictionary<string, string> requestDetails = new Dictionary<string, string>
-                {
-                    //auth_flow:client_cred
-                    { "grant_type", "client_credentials" },
-                    { "client_id",   _ClientId},
-                    { "client_secret",  _ClientSecret },
-                    
-                };
+                string _Accept = "application/json";
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_Accept));
 
-                FormUrlEncodedContent requestContent = new FormUrlEncodedContent(requestDetails);                
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-
-                //send to data market
-                HttpResponseMessage sabreResponse = await client.PostAsync(this.TokenUri + "io-docs/getoauth2accesstoken", requestContent);
+                string cre = String.Format("{0}:{1}", _ClientId, _ClientSecret);
+                byte[] bytes = System.Text.Encoding.UTF8.GetBytes(cre);
+                string base64 = Convert.ToBase64String(bytes);
+                client.DefaultRequestHeaders.Add("Authorization", String.Format("Basic {0}", base64));
+                HttpContent requestContent = new StringContent("grant_type=client_credentials");
+                string _ContentType = "application/x-www-form-urlencoded";
+                requestContent.Headers.Add("Content-Type", _ContentType);
+               
+                HttpResponseMessage sabreResponse = await client.PostAsync(_TokenUri + "v1/auth/token/", requestContent);
 
                 // If client authentication failed then we get a JSON response from Azure Market Place
                 if (!sabreResponse.IsSuccessStatusCode)
@@ -97,49 +113,18 @@ namespace TrippersStop.SabreAPIWrapper
                 return HttpUtility.UrlEncode(response.Value<string>("access_token"));
             }
         }
-        public async Task<String> PostUrlEncoded(string token, string accessUri, Dictionary<string, string> requestDetails)
+        
+        public async Task<String> Post(string Method, string Body)
         {
             using (var client = new HttpClient())
-            {
-               /* Dictionary<string, string> requestDetails = new Dictionary<string, string>
-                {
-                    { "origin" , "CLT"},
-                    { "departuredate" , "2014-03-15"},
-                    { "returndate" , "2014-03-25"},
-                    { "theme" , "2014-03-25"},
-                };*/
-
-                FormUrlEncodedContent requestContent = new FormUrlEncodedContent(requestDetails);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);                
+            {                               
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(this._Accept));
+                HttpContent requestContent = new StringContent(Body);               
+                requestContent.Headers.Add("Content-Type", _ContentType);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_Authorization, GetToken().ToString());
 
                 //send to data market
-                HttpResponseMessage sabreResponse = await client.PostAsync(this.BaseAPIUri + accessUri, requestContent);
-
-                // If client authentication failed then we get a JSON response from Sabre
-                if (!sabreResponse.IsSuccessStatusCode)
-                {
-                    JToken error = await sabreResponse.Content.ReadAsAsync<JToken>();
-                    string errorType = error.Value<string>("error");
-                    string errorDescription = error.Value<string>("error_description");
-                    throw new HttpRequestException(string.Format("Sabre request failed: {0} {1}", errorType, errorDescription));
-                }
-
-                // Get the access token to attach to the original request from the response body
-                JToken response = await sabreResponse.Content.ReadAsAsync<JToken>();
-                return HttpUtility.UrlEncode(response.Value<string>("access_token"));
-            }
-        }
-        public async Task<String> Post<T>(string token, string accessUri, T value)
-        {
-            using (var client = new HttpClient())
-            {
-                               
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-                //send to data market
-                HttpResponseMessage sabreResponse = await client.PostAsJsonAsync(this.BaseAPIUri + accessUri, value);
+                HttpResponseMessage sabreResponse = await client.PostAsJsonAsync(this.BaseAPIUri + Method, requestContent);
 
                 // If client authentication failed then we get a JSON response from Sabre
                 if (!sabreResponse.IsSuccessStatusCode)
@@ -154,16 +139,16 @@ namespace TrippersStop.SabreAPIWrapper
             }            
         }
 
-        public async Task<String> Get(string token, string accessUri)
+        public async Task<String> Get(string Method)
         {
             using (var client = new HttpClient())
             {
                 
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_Authorization, GetToken().ToString());
 
                 //send to data market
-                HttpResponseMessage sabreResponse = await client.GetAsync(this.BaseAPIUri + accessUri);
+                HttpResponseMessage sabreResponse = await client.GetAsync(this.BaseAPIUri + Method);
 
                 // If client authentication failed then we get a JSON response from Sabre
                 if (!sabreResponse.IsSuccessStatusCode)
