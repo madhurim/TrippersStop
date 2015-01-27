@@ -6,9 +6,9 @@ using System.Configuration;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Web;
-using TrippersStop.Services;
+using TrippersStop.TraveLayer;
 
-namespace TrippersStop.SabreAPIWrapper
+namespace TrippersStop.TraveLayer
 {
     public class SabreAPICaller : IAPIAsyncCaller
     {

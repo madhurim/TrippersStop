@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace TrippersStop.Services
+namespace TrippersStop.TraveLayer
 {
     public interface IAPIAsyncCaller
     {
