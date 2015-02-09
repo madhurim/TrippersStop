@@ -4,7 +4,8 @@ using TrippersStop.TraveLayer;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using TraveLayer.CustomTypes.Sabre;
-
+using System.Collections.Generic;
+using Moq;
 
 namespace TrippersStop.Tests.Controllers
 {
@@ -22,7 +23,6 @@ namespace TrippersStop.Tests.Controllers
 
             // Act
             string result = apiWrapper.GetToken().Result;
-
            
             // Assert
             Assert.IsNotNull(result);
@@ -38,7 +38,7 @@ namespace TrippersStop.Tests.Controllers
             apiWrapper.ContentType = "application/x-www-form-urlencoded";
 
             // Act
-            string token = apiWrapper.GetToken().Result;
+            string token = apiWrapper.GetToken().Result;            
 
             //GET https://api.sabre.com/v1/historical/flights/JFK/seasonality HTTP/1.1
 
@@ -67,13 +67,34 @@ namespace TrippersStop.Tests.Controllers
             apiWrapper.Authorization = "bearer";
             apiWrapper.ContentType = "application/json";
 
-            string body = "json body";
+            //string body = @"{"OTA_AirLowFareSearchRQ":{"OriginDestinationInformation":[{"DepartureDateTime":"2014-11-11T00:00:00","DestinationLocation":{"LocationCode":"EWR"},"OriginLocation":{"LocationCode":"DFW"},"RPH":1},{"DepartureDateTime":"2014-11-11T00:00:00","DestinationLocation":{"LocationCode":"EWR"},"OriginLocation":{"LocationCode":"DFW"},"RPH":1}],"POS":{"Source":[{"RequestorID":{"CompanyName":{"Code":"TN"},"ID":"REQ.ID","Type":"0.AAA.X"}}]},"TPA_Extensions":{"IntelliSellTransaction":{"RequestType":{"Name":"50ITINS"}},"NumTrips":{"Number":1}},"TravelerInfoSummary":{"AirTravelerAvail":[{"PassengerTypeQuantity":[{"Code":"ADT","Quantity":1}]}]},"TravelPreferences":{"TPA_Extensions":{}}}}";
 
+            string body = "json body";
+            
             String result = apiWrapper.Post("v1.8.2/shop/flights?mode=live", body).Result;
 
             // Assert
             Assert.IsNotNull(result);
 
+        }
+        [TestMethod]
+        public void MoqTest()
+        {
+            //Arrange
+            Mock<IAPIAsyncCaller> mockContainer = new Mock<IAPIAsyncCaller>();
+            SabreAPICaller apicaller = new Mock<SabreAPICaller>().Object;
+
+            var mock = new Mock<IAPIAsyncCaller>();
+            mock.Setup(foo => foo.Get("http://localhost/").Result );
+
+            apicaller.Accept = "application/json";
+            apicaller.ContentType = "application/x-www-form-urlencoded";
+
+            // Act
+            string result = apicaller.GetToken().Result;
+
+            // Assert
+            Assert.IsNotNull(result);
         }
         [TestMethod]
         public void SerializationTest()
@@ -99,7 +120,7 @@ namespace TrippersStop.Tests.Controllers
             odinfoDest.OriginLocation.LocationCode = "EWR";
             odinfoDest.RPH = 1;
             odinfoDest.DepartureDateTime = "2014-11-20T00:00:00";
-            bf.OTA_AirLowFareSearchRQ.OriginDestinationInformation.Add(odinfoOrig);
+            bf.OTA_AirLowFareSearchRQ.OriginDestinationInformation.Add(odinfoDest);
 
             bf.OTA_AirLowFareSearchRQ.POS = new POS();
             bf.OTA_AirLowFareSearchRQ.POS.Source = new System.Collections.Generic.List<Source>();
@@ -116,14 +137,96 @@ namespace TrippersStop.Tests.Controllers
                 Name = "50ITINS"
 
             };
+            bf.OTA_AirLowFareSearchRQ.TravelPreferences = new TravelPreferences();
+            bf.OTA_AirLowFareSearchRQ.TravelPreferences.TPA_Extensions = new TPAExtensions();
+            bf.OTA_AirLowFareSearchRQ.TravelPreferences.TPA_Extensions.NumTrips = new NumTrips();
+            bf.OTA_AirLowFareSearchRQ.TravelPreferences.TPA_Extensions.NumTrips.Number = 1;
 
+            bf.OTA_AirLowFareSearchRQ.TravelerInfoSummary = new TravelerInfoSummary();
+            bf.OTA_AirLowFareSearchRQ.TravelerInfoSummary.AirTravelerAvail = new List<AirTravelerAvail>();
+            
+            AirTravelerAvail air = new AirTravelerAvail();
+            air.PassengerTypeQuantity = new List<PassengerTypeQuantity>();
+            PassengerTypeQuantity pq = new PassengerTypeQuantity();
+            pq.Quantity = 1;
+            pq.Code = "ADT";
+            air.PassengerTypeQuantity.Add(pq);
+            bf.OTA_AirLowFareSearchRQ.TravelerInfoSummary.AirTravelerAvail.Add(air);            
 
             ServiceStack.Text.JsonSerializer<BargainFinder> seri = new ServiceStack.Text.JsonSerializer<BargainFinder>();
             String bfJson = seri.SerializeToString(bf);
 
+            // Assert
+            Assert.AreEqual(bfJson,String.Empty);
         }
     }
 
+    
+
+/*{
+	"OTA_AirLowFareSearchRQ": {
+		"OriginDestinationInformation": [
+			{
+				"DepartureDateTime": "2014-11-11T00:00:00",
+				"DestinationLocation": {
+					"LocationCode": "EWR"
+				},
+				"OriginLocation": {
+					"LocationCode": "DFW"
+				},
+				"RPH": 1
+			},
+			{
+				"DepartureDateTime": "2014-11-11T00:00:00",
+				"DestinationLocation": {
+					"LocationCode": "EWR"
+				},
+				"OriginLocation": {
+					"LocationCode": "DFW"
+				},
+				"RPH": 1
+			}
+		],
+		"POS": {
+			"Source": [
+				{
+					"RequestorID": {
+						"CompanyName": {
+							"Code": "TN"
+						},
+						"ID": "REQ.ID",
+						"Type": "0.AAA.X"
+					}
+				}
+			]
+		},
+		"TPA_Extensions": {
+			"IntelliSellTransaction": {
+				"RequestType": {
+					"Name": "50ITINS"
+				}
+			},
+			"NumTrips": {
+				"Number": 1
+			}
+		},
+		"TravelerInfoSummary": {
+			"AirTravelerAvail": [
+				{
+					"PassengerTypeQuantity": [
+						{
+							"Code": "ADT",
+							"Quantity": 1
+						}
+					]
+				}
+			]
+		},
+		"TravelPreferences": {
+			"TPA_Extensions": {}
+		}
+	}
+}
     /*{
     "OTA_AirLowFareSearchRQ": {
         "OriginDestinationInformation": [
