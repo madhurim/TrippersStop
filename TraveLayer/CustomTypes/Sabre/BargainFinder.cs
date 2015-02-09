@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Sabre
 {
+
+   
+
         public class DestinationLocation
         {
             public string LocationCode { get; set; }
@@ -98,8 +101,8 @@ namespace TraveLayer.CustomTypes.Sabre
         {
             public OTAAirLowFareSearchRQ OTA_AirLowFareSearchRQ { get; set; }
         }
-    }
-
+    
+}
 /*{
     "OTA_AirLowFareSearchRQ": {
         "OriginDestinationInformation": [
@@ -163,6 +166,7 @@ namespace TraveLayer.CustomTypes.Sabre
                 }
             ]
         }
+>>>>>>> a1f90482850bf7812625749382dd6a79234dc6f6
     }
 }
 */
