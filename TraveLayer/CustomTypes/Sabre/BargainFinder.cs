@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace TraveLayer.CustomTypes.Sabre
 {
 
-    class BargainFinder
-    {
+   
 
         public class DestinationLocation
         {
@@ -93,7 +92,7 @@ namespace TraveLayer.CustomTypes.Sabre
         {
             public OTAAirLowFareSearchRQ OTA_AirLowFareSearchRQ { get; set; }
         }
-    }
+    
 }
 /*{
     "OTA_AirLowFareSearchRQ": {
