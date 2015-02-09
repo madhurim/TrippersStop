@@ -55,12 +55,19 @@ namespace TraveLayer.CustomTypes.Sabre
         {
             public RequestType RequestType { get; set; }
         }
-
+        public class TravelPreferences
+        {
+            public TPAExtensions TPA_Extensions { get; set; }
+        }
         public class TPAExtensions
         {
             public IntelliSellTransaction IntelliSellTransaction { get; set; }
+            public NumTrips NumTrips { get; set; }
         }
-
+        public class NumTrips
+        {
+            public int Number { get; set; }
+        }
         public class PassengerTypeQuantity
         {
             public string Code { get; set; }
@@ -83,9 +90,11 @@ namespace TraveLayer.CustomTypes.Sabre
             public POS POS { get; set; }
             public TPAExtensions TPA_Extensions { get; set; }
             public TravelerInfoSummary TravelerInfoSummary { get; set; }
+            public TravelPreferences TravelPreferences { get; set; }
+
         }
 
-        public class BargainFinder
+        public class BargainFinder : ICustomType
         {
             public OTAAirLowFareSearchRQ OTA_AirLowFareSearchRQ { get; set; }
         }

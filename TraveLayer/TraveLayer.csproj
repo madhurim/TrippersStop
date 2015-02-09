@@ -53,7 +53,9 @@
   <ItemGroup>
     <Compile Include="APIServices\IAPICaller.cs" />
     <Compile Include="APIServices\SabreAPICaller.cs" />
+    <Compile Include="APIServices\ServiceStackSerializer.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="CustomTypes\ICustomType.cs" />
     <Compile Include="CustomTypes\Sabre\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>

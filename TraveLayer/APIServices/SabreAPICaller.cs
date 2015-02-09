@@ -144,13 +144,14 @@ namespace TrippersStop.TraveLayer
         public async Task<String> Post(string Method, string Body)
         {
             using (var client = new HttpClient())
-            {                               
+            {
+                client.DefaultRequestHeaders.Clear();           
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(this._Accept));
                 HttpContent requestContent = new StringContent(Body, System.Text.Encoding.UTF8, _ContentType);               
                 
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_Authorization, _longTermToken);
                 
-                HttpResponseMessage sabreResponse = await client.PostAsJsonAsync(this.BaseAPIUri + Method, requestContent);
+                HttpResponseMessage sabreResponse = await client.PostAsync(this.BaseAPIUri + Method, requestContent);
 
                 // If client authentication failed then we get a JSON response from Sabre
                 if (!sabreResponse.IsSuccessStatusCode)
