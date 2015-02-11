@@ -96,6 +96,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CustomTypes\Sabre\BargainFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\LeadPriceCalendar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
