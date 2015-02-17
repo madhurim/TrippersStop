@@ -19,6 +19,7 @@ namespace TraveLayer.CustomTypes.Sabre
             public string LocationCode { get; set; }
         }
 
+
         public class OriginDestinationInformation
         {
             public string DepartureDateTime { get; set; }
@@ -97,7 +98,7 @@ namespace TraveLayer.CustomTypes.Sabre
 
         }
 
-        public class BargainFinder : ICustomType
+        public class BargainFinder
         {
             public OTAAirLowFareSearchRQ OTA_AirLowFareSearchRQ { get; set; }
         }

@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 using TraveLayer.CustomTypes.Sabre;
 using System.Collections.Generic;
 using Moq;
+using TraveLayer.APIServices;
+using TraveLayer.CustomTypes;
 
 namespace TrippersStop.Tests.Controllers
 {
@@ -159,9 +161,51 @@ namespace TrippersStop.Tests.Controllers
             // Assert
             Assert.AreEqual(bfJson,String.Empty);
         }
-    }
+        [TestMethod]
+        public void DeSerializationTest()
+        {
 
-    
+            SabreAPICaller bargainFinderAPI = new SabreAPICaller();
+
+            //Parse the Json Data
+            //Build the Json data in the front end in such a way that , it desrializes into OriginDestinationInformation
+            BargainFinder bf = new BargainFinder();
+
+            string req = @"{  ""OriginDestinationInformation"": 
+                [
+			        {
+				        ""DepartureDateTime"": ""2014-11-11T00:00:00"",
+				        ""DestinationLocation"": {
+					        ""LocationCode"": ""EWR""
+				        },
+				        ""OriginLocation"": {
+					        ""LocationCode"": ""DFW""
+				        },
+				        ""RPH"": 1
+			        },
+			        {
+				        ""DepartureDateTime"": ""2014-11-11T00:00:00"",
+				        ""DestinationLocation"": {
+					        ""LocationCode"": ""EWR""
+				        },
+				        ""OriginLocation"": {
+					        ""LocationCode"": ""DFW""
+				        },
+				        ""RPH"": 1
+			        }
+		        ] 
+            }";
+
+            bf.OTA_AirLowFareSearchRQ = new OTAAirLowFareSearchRQ();
+            bf.OTA_AirLowFareSearchRQ.OriginDestinationInformation = new System.Collections.Generic.List<OriginDestinationInformation>();
+            List<OriginDestinationInformation> odinfoOrig = new List<OriginDestinationInformation>();
+            odinfoOrig = ServiceStackSerializer.DeSerialize<List<OriginDestinationInformation>>(req);            
+
+            // Assert
+            Assert.AreEqual(odinfoOrig, String.Empty);
+        }
+
+    }    
 
 /*{
 	"OTA_AirLowFareSearchRQ": {
