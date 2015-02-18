@@ -95,8 +95,23 @@
     <Compile Include="CustomTypes\Sabre\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CustomTypes\Sabre\AirportsAtCitiesLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\AlternateDate.cs" />
     <Compile Include="CustomTypes\Sabre\BargainFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\CityPairsLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\CountriesLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\DestinationFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\FareRange.cs" />
+    <Compile Include="CustomTypes\Sabre\InstaFlightsSearch.cs" />
     <Compile Include="CustomTypes\Sabre\LeadPriceCalendar.cs" />
+    <Compile Include="CustomTypes\Sabre\LowFareForecast.cs" />
+    <Compile Include="CustomTypes\Sabre\MultiAirportCityLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\PointofSaleCountryCodeLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\ThemeAirportLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\TopDestinations.cs" />
+    <Compile Include="CustomTypes\Sabre\TravelSeasonality.cs" />
+    <Compile Include="CustomTypes\Sabre\TravelSeasonalityAirportsLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\TravelThemeLookup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

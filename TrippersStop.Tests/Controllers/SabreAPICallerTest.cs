@@ -159,8 +159,36 @@ namespace TrippersStop.Tests.Controllers
             // Assert
             Assert.AreEqual(bfJson,String.Empty);
         }
+
+        [TestMethod]
+        public void SerializationTestForLeadPriceCalendar()
+        {
+            LeadPriceCalendar lpc = new LeadPriceCalendar();
+            lpc.OTA_LeadPriceCalendar = new OTA_LeadPriceCalendar();
+
+            lpc.OTA_LeadPriceCalendar.FareInfo = new System.Collections.Generic.List<FareInfo>();
+
+            FareInfo fareInfo_ = new FareInfo();
+            fareInfo_.CurrencyCode = "USD";
+            fareInfo_.DepartureDateTime = "2015-03-05";
+            fareInfo_.LowestFare = "342.0";
+            fareInfo_.ReturnDateTime = "2013-04-08";
+            fareInfo_.LowestNonStopFare = "349.8";
+
+            lpc.OTA_LeadPriceCalendar.Links = new List<Link>();
+            Link links_ = new Link();
+            links_.href = "https://api.sabre.com/v1/shop/flights?origin=ATL&destination=LAS&departuredate=2013-02-05&returndate=2013-02-08&offset=<offset>&limit=<limit>&sortby=<sortby>&order=<order>&sortby2=<sortby2>&order2=<order2>";
+            links_.rel = "shop";
+           
+        }
+
+        
+
+        }
+
     }
 
+    
     
 
 /*{
@@ -293,4 +321,4 @@ namespace TrippersStop.Tests.Controllers
     }
 }
 */
-}
+
