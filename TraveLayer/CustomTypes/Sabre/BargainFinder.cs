@@ -5,9 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Sabre
-{
-
-   
+{ 
 
         public class DestinationLocation
         {
@@ -86,18 +84,8 @@ namespace TraveLayer.CustomTypes.Sabre
         {
             public List<AirTravelerAvail> AirTravelerAvail { get; set; }
         }
-
-        //public class OTAAirLowFareSearchRQ
-        //{
-        //    public List<OriginDestinationInformation> OriginDestinationInformation { get; set; }
-        //    public POS POS { get; set; }
-        //    public TPAExtensions TPA_Extensions { get; set; }
-        //    public TravelerInfoSummary TravelerInfoSummary { get; set; }
-        //    public TravelPreferences TravelPreferences { get; set; }
-
-        //}
-
-        public class BargainFinder : ICustomType
+    
+        public class BargainFinder
         {
             public OTAAirLowFareSearchRQ OTA_AirLowFareSearchRQ { get; set; }
         }

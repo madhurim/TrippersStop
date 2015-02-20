@@ -6,16 +6,7 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Sabre
 {
-    //class MultiAirportCityLookup
-    //{
-    //}
-
-    //public class Link
-    //{
-    //    public string rel { get; set; }
-    //    public string href { get; set; }
-    //}
-
+ 
     public class City
     {
         public string code { get; set; }
@@ -26,19 +17,13 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link> Links { get; set; }
     }
 
-    //public class Link2
-    //{
-    //    public string rel { get; set; }
-    //    public string href { get; set; }
-    //}
-
     public class OTA_MultiAirportCityLookup
     {
         public List<City> Cities { get; set; }
         public List<Link> Links { get; set; }
     }
 
-    public class MultiAirportCityLookup : ICustomType
+    public class MultiAirportCityLookup
     {
         public OTA_MultiAirportCityLookup OTA_MultiAirportCityLookup { get; set; }
     }

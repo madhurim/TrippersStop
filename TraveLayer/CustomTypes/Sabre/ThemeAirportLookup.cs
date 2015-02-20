@@ -6,17 +6,6 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Sabre
 {
-    //class ThemeAirportLookup
-    //{
-    //}
-
-
-    //public class Link
-    //{
-    //    public string rel { get; set; }
-    //    public string href { get; set; }
-    //}
-
     public class Destination
     {
         public string Destinations { get; set; }
@@ -24,19 +13,13 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link> Links { get; set; }
     }
 
-    //public class Link2
-    //{
-    //    public string rel { get; set; }
-    //    public string href { get; set; }
-    //}
-
     public class OTA_ThemeAirportLookup
     {
         public List<Destination> Destinations { get; set; }
-       // public List<Link2> Links { get; set; }
+        public List<Link2> Links { get; set; }
     }
 
-    public class ThemeAirportLookup : ICustomType
+    public class ThemeAirportLookup
     {
         public OTA_ThemeAirportLookup OTA_ThemeAirportLookup { get; set; }
     }

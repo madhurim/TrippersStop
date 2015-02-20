@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Sabre
 {
-    //class TravelSeasonality
-    //{
-    //}
-
     public class Seasonality
     {
         public int YearWeekNumber { get; set; }
@@ -19,20 +15,14 @@ namespace TraveLayer.CustomTypes.Sabre
         public string WeekStartDate { get; set; }
     }
 
-    //public class Link
-    //{
-    //    public string rel { get; set; }
-    //    public string href { get; set; }
-    //}
-
     public class OTA_TravelSeasonality
     {
         public string DestinationLocation { get; set; }
         public List<Seasonality> Seasonality { get; set; }
-       // public List<Link> Links { get; set; }
+        public List<Link> Links { get; set; }
     }
 
-    public class TravelSeasonality : ICustomType
+    public class TravelSeasonality
     {
         public OTA_TravelSeasonality OTA_TravelSeasonality { get; set; }
     }

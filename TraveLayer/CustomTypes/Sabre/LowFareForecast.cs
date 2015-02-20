@@ -6,24 +6,14 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Sabre
 {
-    //class LowFareForecast
-    //{
-    //}
-
-
+   
     public class Forecast
     {
         public int HighestPredictedFare { get; set; }
         public string CurrencyCode { get; set; }
         public int LowestPredictedFare { get; set; }
     }
-
-    //public class Link
-    //{
-    //    public string rel { get; set; }
-    //    public string href { get; set; }
-    //}
-
+    
     public class OTA_LowFareForecast
     {
         public string OriginLocation { get; set; }
@@ -37,7 +27,7 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link> Links { get; set; }
     }
 
-    public class LowFareForecast : ICustomType
+    public class LowFareForecast
     {
         public OTA_LowFareForecast OTA_LowFareForecast { get; set; }
     }

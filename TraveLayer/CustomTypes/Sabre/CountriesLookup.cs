@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Sabre
 {
-    //class CountriesLookup
-    //{
-    //}
-
-
+  
     public class OriginCountry
     {
         public string CountryCode { get; set; }
@@ -23,30 +19,22 @@ namespace TraveLayer.CustomTypes.Sabre
         public string CountryName { get; set; }
     }
 
-    //public class Link
-    //{
-    //    public string rel { get; set; }
-    //    public string href { get; set; }
-    //}
-
+   
     public class OTA_CountriesLookup
     {
         public string PointOfSale { get; set; }
         public List<OriginCountry> OriginCountries { get; set; }
         public List<DestinationCountry> DestinationCountries { get; set; }
-       // public List<Link> Links { get; set; }
+        public List<Link> Links { get; set; }
     }
 
-    public class CountriesLookup : ICustomType
+    public class CountriesLookup
     {
         public OTA_CountriesLookup OTA_CountriesLookup { get; set; }
     }
 
 
 }
-
-
-
 
 
  //    {

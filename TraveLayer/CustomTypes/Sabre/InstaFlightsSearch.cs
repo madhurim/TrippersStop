@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Sabre
 {
-    //class InstaFlightsSearch
-    //{
-    //}
-
-
     public class InstaCabin
     {
         public string Cabin { get; set; }
@@ -86,13 +81,7 @@ namespace TraveLayer.CustomTypes.Sabre
     {
         public List<FareBasisCode> FareBasisCode { get; set; }
     }
-
-    //public class PassengerTypeQuantity
-    //{
-    //    public int Quantity { get; set; }
-    //    public string Code { get; set; }
-    //}
-
+    
     public class TotalTax
     {
         public double Amount { get; set; }
@@ -165,7 +154,7 @@ namespace TraveLayer.CustomTypes.Sabre
 
     public class AirItineraryPricingInfo
     {
-       // public FareInfos FareInfos { get; set; }
+        public FareInfos FareInfos { get; set; }
         public ItinTotalFare ItinTotalFare { get; set; }
         public PTCFareBreakdowns PTC_FareBreakdowns { get; set; }
         public TPAExtensions2 TPA_Extensions { get; set; }
@@ -277,12 +266,6 @@ namespace TraveLayer.CustomTypes.Sabre
         public TicketingInfo TicketingInfo { get; set; }
     }
 
-    //public class Link
-    //{
-    //    public string rel { get; set; }
-    //    public string href { get; set; }
-    //}
-
     public class OTA_InstaFlightsSearch
     {
         public string DepartureDateTime { get; set; }
@@ -293,7 +276,7 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link> Links { get; set; }
     }
 
-    public class InstaFlightsSearch : ICustomType
+    public class InstaFlightsSearch
     {
         public OTA_InstaFlightsSearch OTA_InstaFlightsSearch { get; set; }
     }

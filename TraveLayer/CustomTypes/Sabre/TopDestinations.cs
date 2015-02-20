@@ -6,15 +6,7 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Sabre
 {
-    //class TopDestinations
-    //{
-    //}
-    //public class Link
-    //{
-    //    public string rel { get; set; }
-    //    public string href { get; set; }
-    //}
-
+   
     public class Destination2
     {
         public string DestinationLocation { get; set; }
@@ -27,12 +19,6 @@ namespace TraveLayer.CustomTypes.Sabre
         public string MetropolitanAreaName { get; set; }
         public List<Link> Links { get; set; }
     }
-
-    //public class Destination
-    //{
-    //    public int Rank { get; set; }
-    //    public Destination2 Destination { get; set; }
-    //}
 
     public class Link2
     {
@@ -48,7 +34,7 @@ namespace TraveLayer.CustomTypes.Sabre
     }
 
 
-    public class TopDestinations : ICustomType
+    public class TopDestinations
     {
         public OTA_TopDestinations OTA_TopDestinations { get; set; }
     }
