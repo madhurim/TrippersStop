@@ -21,14 +21,14 @@ namespace TrippersStop.Tests.Controllers
             SabreAPICaller apiWrapper = new SabreAPICaller();
 
             apiWrapper.Accept = "application/json";
-            apiWrapper.ContentType = "application/x-www-form-urlencoded";            
+            apiWrapper.ContentType = "application/x-www-form-urlencoded";
 
             // Act
             string result = apiWrapper.GetToken().Result;
-           
+
             // Assert
             Assert.IsNotNull(result);
-           
+
         }
         [TestMethod]
         public void Get()
@@ -40,7 +40,7 @@ namespace TrippersStop.Tests.Controllers
             apiWrapper.ContentType = "application/x-www-form-urlencoded";
 
             // Act
-            string token = apiWrapper.GetToken().Result;            
+            string token = apiWrapper.GetToken().Result;
 
             //GET https://api.sabre.com/v1/historical/flights/JFK/seasonality HTTP/1.1
 
@@ -72,7 +72,7 @@ namespace TrippersStop.Tests.Controllers
             //string body = @"{"OTA_AirLowFareSearchRQ":{"OriginDestinationInformation":[{"DepartureDateTime":"2014-11-11T00:00:00","DestinationLocation":{"LocationCode":"EWR"},"OriginLocation":{"LocationCode":"DFW"},"RPH":1},{"DepartureDateTime":"2014-11-11T00:00:00","DestinationLocation":{"LocationCode":"EWR"},"OriginLocation":{"LocationCode":"DFW"},"RPH":1}],"POS":{"Source":[{"RequestorID":{"CompanyName":{"Code":"TN"},"ID":"REQ.ID","Type":"0.AAA.X"}}]},"TPA_Extensions":{"IntelliSellTransaction":{"RequestType":{"Name":"50ITINS"}},"NumTrips":{"Number":1}},"TravelerInfoSummary":{"AirTravelerAvail":[{"PassengerTypeQuantity":[{"Code":"ADT","Quantity":1}]}]},"TravelPreferences":{"TPA_Extensions":{}}}}";
 
             string body = "json body";
-            
+
             String result = apiWrapper.Post("v1.8.2/shop/flights?mode=live", body).Result;
 
             // Assert
@@ -87,7 +87,7 @@ namespace TrippersStop.Tests.Controllers
             SabreAPICaller apicaller = new Mock<SabreAPICaller>().Object;
 
             var mock = new Mock<IAPIAsyncCaller>();
-            mock.Setup(foo => foo.Get("http://localhost/").Result );
+            mock.Setup(foo => foo.Get("http://localhost/").Result);
 
             apicaller.Accept = "application/json";
             apicaller.ContentType = "application/x-www-form-urlencoded";
@@ -146,20 +146,20 @@ namespace TrippersStop.Tests.Controllers
 
             bf.OTA_AirLowFareSearchRQ.TravelerInfoSummary = new TravelerInfoSummary();
             bf.OTA_AirLowFareSearchRQ.TravelerInfoSummary.AirTravelerAvail = new List<AirTravelerAvail>();
-            
+
             AirTravelerAvail air = new AirTravelerAvail();
             air.PassengerTypeQuantity = new List<PassengerTypeQuantity>();
             PassengerTypeQuantity pq = new PassengerTypeQuantity();
             pq.Quantity = 1;
             pq.Code = "ADT";
             air.PassengerTypeQuantity.Add(pq);
-            bf.OTA_AirLowFareSearchRQ.TravelerInfoSummary.AirTravelerAvail.Add(air);            
+            bf.OTA_AirLowFareSearchRQ.TravelerInfoSummary.AirTravelerAvail.Add(air);
 
             ServiceStack.Text.JsonSerializer<BargainFinder> seri = new ServiceStack.Text.JsonSerializer<BargainFinder>();
             String bfJson = seri.SerializeToString(bf);
 
             // Assert
-            Assert.AreEqual(bfJson,String.Empty);
+            Assert.AreEqual(bfJson, String.Empty);
         }
 
 
@@ -182,17 +182,8 @@ namespace TrippersStop.Tests.Controllers
             Link links_ = new Link();
             links_.href = "https://api.sabre.com/v1/shop/flights?origin=ATL&destination=LAS&departuredate=2013-02-05&returndate=2013-02-08&offset=<offset>&limit=<limit>&sortby=<sortby>&order=<order>&sortby2=<sortby2>&order2=<order2>";
             links_.rel = "shop";
-           
-        }
-
-        
 
         }
-
-    }
-
-    
-    
 
         [TestMethod]
         public void DeSerializationTest()
@@ -232,16 +223,13 @@ namespace TrippersStop.Tests.Controllers
             bf.OTA_AirLowFareSearchRQ = new OTAAirLowFareSearchRQ();
             bf.OTA_AirLowFareSearchRQ.OriginDestinationInformation = new System.Collections.Generic.List<OriginDestinationInformation>();
             List<OriginDestinationInformation> odinfoOrig = new List<OriginDestinationInformation>();
-            odinfoOrig = ServiceStackSerializer.DeSerialize<List<OriginDestinationInformation>>(req);            
+            odinfoOrig = ServiceStackSerializer.DeSerialize<List<OriginDestinationInformation>>(req);
 
             // Assert
             Assert.AreEqual(odinfoOrig, String.Empty);
         }
 
-    }    
-
-
-/*{
+        /*{
 	"OTA_AirLowFareSearchRQ": {
 		"OriginDestinationInformation": [
 			{
@@ -371,4 +359,11 @@ namespace TrippersStop.Tests.Controllers
     }
 }
 */
+    }
+
+
+}
+
+       
+
 

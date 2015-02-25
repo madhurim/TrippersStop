@@ -38,7 +38,7 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link> Links { get; set; }
     }
 
-    public class LeadPriceCalendar : ICustomType
+    public class LeadPriceCalendar //: ICustomType
     {
         public OTA_LeadPriceCalendar OTA_LeadPriceCalendar { get; set; }
     }
