@@ -23,7 +23,7 @@ namespace TraveLayer.CustomTypes.Sabre
             public List<DayOrDaysRange> dayOrDaysRange { get; set; }
         }
 
-        
+         
         public class OTAAirLowFareSearchRQ
         {
             public List<OriginDestinationInformation> OriginDestinationInformation { get; set; }
