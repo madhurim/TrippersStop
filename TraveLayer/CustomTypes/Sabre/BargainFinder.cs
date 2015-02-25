@@ -17,6 +17,7 @@ namespace TraveLayer.CustomTypes.Sabre
             public string LocationCode { get; set; }
         }
 
+
         public class OriginDestinationInformation
         {
             public string DepartureDateTime { get; set; }
@@ -84,7 +85,19 @@ namespace TraveLayer.CustomTypes.Sabre
         {
             public List<AirTravelerAvail> AirTravelerAvail { get; set; }
         }
-    
+
+
+        //public class OTAAirLowFareSearchRQ
+        //{
+        //    public List<OriginDestinationInformation> OriginDestinationInformation { get; set; }
+        //    public POS POS { get; set; }
+        //    public TPAExtensions TPA_Extensions { get; set; }
+        //    public TravelerInfoSummary TravelerInfoSummary { get; set; }
+        //    public TravelPreferences TravelPreferences { get; set; }
+
+        //}
+
+
         public class BargainFinder
         {
             public OTAAirLowFareSearchRQ OTA_AirLowFareSearchRQ { get; set; }
