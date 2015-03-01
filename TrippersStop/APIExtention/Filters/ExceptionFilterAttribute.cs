@@ -1,5 +1,5 @@
 ﻿
-namespace Trippism
+namespace TrippismApi
 {
     using System;
     using System.Net;

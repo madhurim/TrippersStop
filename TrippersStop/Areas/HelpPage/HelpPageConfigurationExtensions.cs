@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using Trippism.Areas.HelpPage.ModelDescriptions;
-using Trippism.Areas.HelpPage.Models;
+using TrippismApi.Areas.HelpPage.ModelDescriptions;
+using TrippismApi.Areas.HelpPage.Models;
 
-namespace Trippism.Areas.HelpPage
+namespace TrippismApi.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

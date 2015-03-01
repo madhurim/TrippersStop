@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace Trippism.Areas.HelpPage
+namespace TrippismApi.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

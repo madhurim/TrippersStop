@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 //using StackExchange.Redis;
 using System.Linq.Expressions;
 using System.Reflection;
-using TraveLayer.APIServices;
+//using TraveLayer.APIServices;
 using ServiceStack.Redis;
 using ServiceStack.Redis.Generic;
 using System.Configuration;
 using System.Web.Configuration;
 
-namespace Trippism.TraveLayer
+namespace TrippismApi.TraveLayer
 {
 
     public class RedisService : ICacheService

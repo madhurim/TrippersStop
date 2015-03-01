@@ -5,13 +5,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre;
-using Trippism.TraveLayer;
-using TraveLayer.APIServices;
+using TrippismApi.TraveLayer;
 using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre.Response;
 
-namespace Trippism.Areas.Sabre.Controllers
+namespace TrippismApi.Areas.Sabre.Controllers
 {
     public class TopDestinationsController : ApiController
     {

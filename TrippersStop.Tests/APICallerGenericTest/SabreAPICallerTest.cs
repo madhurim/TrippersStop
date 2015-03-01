@@ -1,15 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Trippism.TraveLayer;
+using TrippismApi.TraveLayer;
 using System.Threading.Tasks;
 using TraveLayer.CustomTypes.Sabre;
 using System.Collections.Generic;
 using Moq;
-using TraveLayer.APIServices;
 using TraveLayer.CustomTypes;
 using TraveLayer.CustomTypes.Sabre.Response;
 
-namespace Trippism.Tests.Controllers
+namespace TrippismApi.Tests.Controllers
 {
     [TestClass]
     public class SabreAPICallerTest

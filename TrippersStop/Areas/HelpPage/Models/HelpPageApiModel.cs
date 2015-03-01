@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using Trippism.Areas.HelpPage.ModelDescriptions;
+using TrippismApi.Areas.HelpPage.ModelDescriptions;
 
-namespace Trippism.Areas.HelpPage.Models
+namespace TrippismApi.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

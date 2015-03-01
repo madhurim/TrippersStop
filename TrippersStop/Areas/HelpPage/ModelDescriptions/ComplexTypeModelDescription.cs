@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace Trippism.Areas.HelpPage.ModelDescriptions
+namespace TrippismApi.Areas.HelpPage.ModelDescriptions
 {
     public class ComplexTypeModelDescription : ModelDescription
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Trippism.Areas.HelpPage.ModelDescriptions
+namespace TrippismApi.Areas.HelpPage.ModelDescriptions
 {
     public class ParameterDescription
     {

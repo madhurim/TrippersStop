@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace Trippism.Areas.HelpPage.ModelDescriptions
+namespace TrippismApi.Areas.HelpPage.ModelDescriptions
 {
     internal static class ModelNameHelper
     {

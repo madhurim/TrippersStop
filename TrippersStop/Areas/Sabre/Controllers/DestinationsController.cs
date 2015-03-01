@@ -5,8 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre;
-using Trippism.TraveLayer;
-using TraveLayer.APIServices;
+using TrippismApi.TraveLayer;
 using ServiceStack;
 using System.Reflection;
 using System.Text;
@@ -16,14 +15,14 @@ using TraveLayer.CustomTypes.Sabre.Response;
 using System.Configuration;
 
 
-namespace Trippism.Areas.Sabre.Controllers
+namespace TrippismApi.Areas.Sabre.Controllers
 {
     public class DestinationsController : ApiController
     {
 
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
-        const string _destinationKey = "Trippism.Destinations.All";
+        const string _destinationKey = "TrippismApi.Destinations.All";
         string _expireTime = ConfigurationManager.AppSettings["RedisExpireInMin"].ToString();
         public DestinationsController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {

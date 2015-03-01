@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Trippism.Areas.IATA
+namespace TrippismApi.Areas.IATA
 {
     public class IATAAreaRegistration : AreaRegistration
     {

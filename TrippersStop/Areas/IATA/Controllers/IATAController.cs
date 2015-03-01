@@ -15,7 +15,7 @@ using MongoDB.Driver;
 
 
 
-namespace Trippism.Areas.IATA.Controllers
+namespace TrippismApi.Areas.IATA.Controllers
 {
     public class IATAController : ApiController
     {

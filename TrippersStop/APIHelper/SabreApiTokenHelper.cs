@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Trippism.TraveLayer;
+using TrippismApi.TraveLayer;
 
-namespace Trippism
+namespace TrippismApi
 {
     public static class SabreApiTokenHelper
     {

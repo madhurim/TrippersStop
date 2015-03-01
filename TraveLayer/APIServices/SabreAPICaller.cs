@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Web;
-using Trippism.TraveLayer;
+using TrippismApi.TraveLayer;
 using ServiceStack.Text;
 using ServiceStack.Redis;
 using System.Web.Configuration;
@@ -13,7 +13,7 @@ using TraveLayer.CustomTypes.Sabre.Response;
 using System.Net;
 
 
-namespace Trippism.TraveLayer
+namespace TrippismApi.TraveLayer
 {
     public class SabreAPICaller : IAsyncSabreAPICaller
     {
@@ -42,7 +42,7 @@ namespace Trippism.TraveLayer
         {
             get
             {
-                return "Trippism.SabreToken";
+                return "TrippismApi.SabreToken";
             }
         }
 
@@ -50,7 +50,7 @@ namespace Trippism.TraveLayer
         {
             get
             {
-                return "Trippism.SabreToken.ExpireIn";
+                return "TrippismApi.SabreToken.ExpireIn";
             }
         }
         

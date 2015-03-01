@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Trippism.Controllers
+namespace TrippismApi.Controllers
 {
     public class HomeController : Controller
     {

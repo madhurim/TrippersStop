@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Trippism.Areas.HelpPage.ModelDescriptions
+namespace TrippismApi.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

@@ -5,8 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre;
-using Trippism.TraveLayer;
-using TraveLayer.APIServices;
+using TrippismApi.TraveLayer;
 using ServiceStack;
 using AutoMapper;
 using Newtonsoft.Json;
@@ -17,7 +16,7 @@ using System.Xml.Linq;
 using System.Web.Hosting;
 using TraveLayer.CustomTypes.Sabre.Response;
 
-namespace Trippism.Areas.Sabre.Controllers
+namespace TrippismApi.Areas.Sabre.Controllers
 {
     public class BargainFinderController : ApiController
     {

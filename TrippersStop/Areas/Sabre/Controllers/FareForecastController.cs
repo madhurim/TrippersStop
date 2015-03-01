@@ -4,15 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Trippism.TraveLayer;
+using TrippismApi.TraveLayer;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre;
 using AutoMapper;
-using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre.Response;
 
 
-namespace Trippism.Areas.Sabre.Controllers
+namespace TrippismApi.Areas.Sabre.Controllers
 {
     public class FareForecastController : ApiController
     {

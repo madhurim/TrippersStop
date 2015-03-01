@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using TraveLayer.CustomTypes.Sabre.Response;
 
-namespace Trippism.TraveLayer
+namespace TrippismApi.TraveLayer
 {
     public interface IAPIAsyncCaller
     {

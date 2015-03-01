@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using Trippism.Areas.HelpPage.ModelDescriptions;
-using Trippism.Areas.HelpPage.Models;
+using TrippismApi.Areas.HelpPage.ModelDescriptions;
+using TrippismApi.Areas.HelpPage.Models;
 
-namespace Trippism.Areas.HelpPage.Controllers
+namespace TrippismApi.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

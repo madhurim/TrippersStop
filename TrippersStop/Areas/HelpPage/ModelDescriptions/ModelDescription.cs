@@ -1,6 +1,6 @@
 using System;
 
-namespace Trippism.Areas.HelpPage.ModelDescriptions
+namespace TrippismApi.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.
