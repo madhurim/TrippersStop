@@ -92,6 +92,8 @@
     <Compile Include="CustomTypes\Sabre\BargainFinder.cs" />
     <Compile Include="CustomTypes\Sabre\CityPairsLookup.cs" />
     <Compile Include="CustomTypes\Sabre\CountriesLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Request\LowFareSearchRequest .cs" />
+    <Compile Include="CustomTypes\Sabre\Request\TopDestinationRequest.cs" />
     <Compile Include="CustomTypes\Sabre\DestinationFinder.cs" />
     <Compile Include="CustomTypes\Sabre\FareRange.cs" />
     <Compile Include="CustomTypes\Sabre\InstaFlightsSearch.cs" />

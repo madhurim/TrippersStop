@@ -9,9 +9,9 @@ using TrippersStop.TraveLayer;
 using TraveLayer.APIServices;
 using ServiceStack;
 
-namespace TrippersStop.Areas.Sabre
+namespace TrippersStop.Areas.Sabre.Controllers
 {
-    public class BargainFinderController : ApiController
+    public class BargainFinderOldController : ApiController
     {
         // GET api/bargainfinder
         public IEnumerable<string> Get()
@@ -27,8 +27,9 @@ namespace TrippersStop.Areas.Sabre
         }
 
         // POST api/bargainfinder
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]string value)
         {
+           
             SabreAPICaller bargainFinderAPI = new SabreAPICaller();
 
             //Parse the Json Data
@@ -65,6 +66,10 @@ namespace TrippersStop.Areas.Sabre
             OriginDestinationInformation odinfoOrig = new OriginDestinationInformation();
           //  odinfoOrig = ServiceStackSerializer.DeSerialize(req).ConvertTo<OriginDestinationInformation>();
             String result = bargainFinderAPI.Post("v1.8.2/shop/flights?mode=live", PopulateBargainFinder(bf)).Result;
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            
+
+            return response;
         }
 
         // PUT api/bargainfinder/5
