@@ -45,13 +45,30 @@ namespace TrippismApi.Areas.Sabre.Controllers
             return GetResponse(url);
         }
 
-        [Route("api/destinations/cheapestprice/{count}")]
+        [Route("api/destinations/cheapest/{count}")]
         [HttpGet]
         public HttpResponseMessage GetTopCheapestDestinations(int count, string origin, string departuredate, string returndate, string lengthofstay)
         {
             string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", origin, departuredate, returndate, lengthofstay);
             return GetResponse(url, count);
         }
+
+        [Route("api/destinations/maxfare/{maxfare}")]
+        [HttpGet]
+        public HttpResponseMessage GetDestinationsByMaxFare(double maxfare, string origin, string departuredate, string returndate, string lengthofstay)
+        {
+            string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&maxfare={3}&lengthofstay={4}", origin, departuredate, returndate,maxfare, lengthofstay);
+            return GetResponse(url);
+        }
+
+        [Route("api/destinations/country/{country}")]
+        [HttpGet]
+        public HttpResponseMessage GetDestinationsByCountry(string country, string origin, string departuredate, string returndate, string lengthofstay)
+        {
+            string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&maxfare={3}&lengthofstay={4}&location={4}", origin, departuredate, returndate, lengthofstay, country);
+            return GetResponse(url);
+        }
+
 
         private string GetURL(Destinations destinationsRequest)
         {
