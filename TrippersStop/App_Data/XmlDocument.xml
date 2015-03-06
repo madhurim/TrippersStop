@@ -481,6 +481,107 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.AdvancedCalendarController">
+            <summary>
+            AdvancedCalendar is used for -
+            Consumers who want to shop across a large set of travel dates. 
+            Consumers who know their destination, but are flexible on their travel dates and want to search flight options across a large set or range of travel dates, or lengths of stay.
+            Consumers who want to shop across several specific shopping parameters.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.AdvancedCalendarController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.AdvancedCalendarController.Post(TraveLayer.CustomTypes.Sabre.OTA_AdvancedCalendar)">
+            <summary>
+            To get priced air itineraries to a destination airport on specific roundtrip travel dates.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.AdvancedCalendarController.DeSerializeResponse(System.String)">
+            <summary>
+            Serialize the json reponse
+            </summary>
+        </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.AirportsAtCitiesController">
+            <summary>
+            API to retrieve data for multiple major airports, as opposed to data for a single airport code
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.AirportsAtCitiesController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.AirportsAtCitiesController.Get(System.String)">
+            <summary>
+             Retrieves the airport, rail station and other codes associated with the MAC code
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.AirportsAtCitiesController.GetResponse(System.String)">
+            <summary>
+            Get response from api based on url.
+            </summary>
+        </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.CityPairsController">
+            <summary>
+             To retrieve city pairs of origin and destination airports
+             To get the complete list of origin and destination city pairs that we support
+             To get destination airport codes that are associated with an origin
+             To get origin and destination airport codes in a specific region or country
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.CityPairsController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.CityPairsController.Get(System.String)">
+            <summary>
+            Retrieve city pairs that can be passed to applicable Air Shopping
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.CityPairsController.GetResponse(System.String)">
+            <summary>
+            Get response from api based on url.
+            </summary>
+        </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.CountriesController">
+            <summary>
+            Retrieves a list of origin and destination countries.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.CountriesController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.CountriesController.Get">
+            <summary>
+            Retrieves a list of origin and destination countries.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.CountriesController.Get(System.String)">
+            <summary>
+            Retrieves a list of origin and destination countries based on point of sale country.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.CountriesController.GetResponse(System.String)">
+            <summary>
+            Get response from api based on url.
+            </summary>
+        </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.DestinationsController">
+            <summary>
+            Return the current nonstop lead fare and an overall lead fare available to destinations
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.DestinationsController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
         <member name="M:TrippismApi.Areas.Sabre.Controllers.DestinationsController.Get(TraveLayer.CustomTypes.Sabre.ViewModels.Destinations)">
             <summary>
             Return the current nonstop lead fare and an overall lead fare available to destinations from a specific origin on roundtrip travel dates 
@@ -508,9 +609,243 @@
             Filters the response for destinations in the country or countries you specify
             </summary>
         </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.DestinationsController.GetURL(TraveLayer.CustomTypes.Sabre.ViewModels.Destinations)">
+            <summary>
+            Format url based on request.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.DestinationsController.GetResponse(System.String,System.Int32)">
+            <summary>
+            Get response from api based on url.
+            </summary>
+        </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.FareRangeController">
+            <summary>
+            API returns the median, highest, and lowest published fares 
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.FareRangeController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.FareRangeController.Get(TraveLayer.CustomTypes.Sabre.ViewModels.FareForecast)">
+            <summary>
+            API returns the median, highest, and lowest published fares 
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.FareRangeController.GetResponse(System.String)">
+            <summary>
+            Get response from api based on url.
+            </summary>
+        </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.MultiAirportCityController">
+            <summary>
+            API retrieves a list of multi-airport city (MAC) codes.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.MultiAirportCityController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.MultiAirportCityController.Get(System.String)">
+            <summary>
+            API retrieves a list of multi-airport city (MAC) codes based on country.
+            Multi-airport cities located in the requested country(s), sorted by city name, in ascending rank order. If no country is specified, then all MAC codes and cities are returned
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.MultiAirportCityController.GetResponse(System.String)">
+            <summary>
+            Get response from api based on url.
+            </summary>
+        </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.SaleCountryController">
+            <summary>
+            To retrieve a list of supported point of sale country codes. 
+            To obtain country codes to use as a request parameter for other REST APIs.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.SaleCountryController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.SaleCountryController.Get">
+            <summary>
+            Retrieves a list of supported point of sale country codes and associated country names
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.SaleCountryController.GetResponse(System.String)">
+            <summary>
+            Get response from api based on url.
+            </summary>
+        </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.SeasonalityController">
+            <summary>
+            API rates weekly traffic volumes to certain destination airports. The API looks up the traffic volume booked 
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.SeasonalityController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.SeasonalityController.Get(System.String)">
+            <summary>
+            API rates weekly traffic volumes to certain destination airports. The API looks up the traffic volume booked 
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.SeasonalityController.GetResponse(System.String)">
+            <summary>
+            Get response from api based on url.
+            </summary>
+        </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.ThemeAirportController">
+            <summary>
+            API retrieves a list of destination airport and multi-airport city (MAC) codes that are associated with the theme in the request
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.ThemeAirportController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.ThemeAirportController.Get(System.String)">
+            <summary>
+            To get a reference of destination airport codes that have been associated with a theme
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.ThemeAirportController.GetResponse(System.String)">
+            <summary>
+            Get response from api based on url.
+            </summary>
+        </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.TravelThemeController">
+            <summary>
+             API retrieves a list of themes
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TravelThemeController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TravelThemeController.Get">
+            <summary>
+             API retrieves a list of themes
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TravelThemeController.GetResponse(System.String)">
+            <summary>
+            Get response from api based on url.
+            </summary>
+        </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.BargainFinderController">
+            <summary>
+            Search for the lowest available priced itineraries based upon a travel date
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.BargainFinderController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
         <member name="M:TrippismApi.Areas.Sabre.Controllers.BargainFinderController.Post(TraveLayer.CustomTypes.Sabre.BargainFinder)">
             <summary>
-            Return lower-priced itineraries for available flights
+            To search for the lowest priced itineraries available for specific travel dates
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.BargainFinderController.GetPOS">
+            <summary>
+            Get Point of sale settings from config
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.BargainFinderController.DeSerializeResponse(System.String)">
+            <summary>
+            DeSerialize the Json request
+            </summary>
+        </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.FareForecastController">
+            <summary>
+            Forecasts the price range into which the lowest published fare that is available 
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.FareForecastController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.FareForecastController.Get(TraveLayer.CustomTypes.Sabre.ViewModels.TravelInfo)">
+            <summary>
+            Forecasts the price range into which the lowest published fare that is available 
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.FareForecastController.GetResponse(System.String)">
+            <summary>
+            Get response from api based on url.
+            </summary>
+        </member>
+        <member name="T:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController">
+            <summary>
+              Travelers who want to choose a destination based on popularity.
+              Travelers who want to choose a destination based on theme, e.g., BEACH .
+              Travelers who want to choose a destination based on country or region, e.g., EUROPE .
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.Get">
+            <summary>
+            API retrieves top booked leisure destinations and returns them in ascending rank order.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.GetTopDestinationByTheme(System.String,System.String,System.String)">
+            <summary>
+            API retrieves top booked leisure destinations from a given origin, theme, region and returns them in ascending rank order.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.GetTopDestinationByBackweeks(System.String,System.String,System.String)">
+            <summary>
+            API retrieves top booked leisure destinations from a given origin and returns them in ascending rank order.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.GetTopDestinationByairportCode(System.String)">
+            <summary>
+            API retrieves top booked leisure destinations from a given airport code and returns them in ascending rank order.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.GetTopDestinationByCountryCode(System.String)">
+            <summary>
+            API retrieves top booked leisure destinations from a given origin country and returns them in ascending rank order.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.GetTopDestinationByDestinationType(System.String,System.String)">
+            <summary>
+            API retrieves top booked leisure destinations from a given origin, destination type and returns them in ascending rank order.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.GetTopDestinations(System.Int32)">
+            <summary>
+            API retrieves top n booked leisure destinations and returns them in ascending rank order.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.GetTopDestinationsByDestinationCountry(System.String)">
+            <summary>
+            API retrieves top booked leisure destinations from a given destination country and returns them in ascending rank order.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.GetTopDestinationsByRegion(System.String)">
+            <summary>
+            API retrieves top booked leisure destinations from a given region and returns them in ascending rank order.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.GetResponse(System.String)">
+            <summary>
+            Get response from api based on url.
             </summary>
         </member>
     </members>

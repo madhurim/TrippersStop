@@ -12,20 +12,32 @@ using TrippismApi.TraveLayer;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
+    /// <summary>
+    ///  API retrieves a list of themes
+    /// </summary>
     public class TravelThemeController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        /// <summary>
+        /// Set api class and cache service.
+        /// </summary>
         public TravelThemeController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;         
         }
+        /// <summary>
+        ///  API retrieves a list of themes
+        /// </summary>
         public HttpResponseMessage Get()
         {
             string url = string.Format("v1/lists/supported/shop/themes");
             return GetResponse(url);
         }
+        /// <summary>
+        /// Get response from api based on url.
+        /// </summary>
         private HttpResponseMessage GetResponse(string url)
         {
             SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);

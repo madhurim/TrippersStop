@@ -12,20 +12,33 @@ using TrippismApi.TraveLayer;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
+    /// <summary>
+    /// API retrieves a list of multi-airport city (MAC) codes.
+    /// </summary>
     public class MultiAirportCityController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        /// <summary>
+        /// Set api class and cache service.
+        /// </summary>
         public MultiAirportCityController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;         
         }
+        /// <summary>
+        /// API retrieves a list of multi-airport city (MAC) codes based on country.
+        /// Multi-airport cities located in the requested country(s), sorted by city name, in ascending rank order. If no country is specified, then all MAC codes and cities are returned
+        /// </summary>
         public HttpResponseMessage Get(string country)
         {
             string url = string.Format("v1/lists/supported/cities?country={0}", country);
             return GetResponse(url);
         }
+        /// <summary>
+        /// Get response from api based on url.
+        /// </summary>
         private HttpResponseMessage GetResponse(string url)
         {
             SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);

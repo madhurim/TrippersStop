@@ -18,10 +18,16 @@ using TraveLayer.CustomTypes.Sabre.Response;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
+    /// <summary>
+    /// Search for the lowest available priced itineraries based upon a travel date
+    /// </summary>
     public class BargainFinderController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        /// <summary>
+        /// Set api class and cache service.
+        /// </summary>
         public BargainFinderController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
@@ -29,7 +35,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         }
         // POST api/bargainfinder
         /// <summary>
-        /// Return lower-priced itineraries for available flights
+        /// To search for the lowest priced itineraries available for specific travel dates
         /// </summary>
         public HttpResponseMessage Post(BargainFinder bargainFinder)
         {
@@ -53,7 +59,9 @@ namespace TrippismApi.Areas.Sabre.Controllers
             }
             return Request.CreateResponse(result.StatusCode, result.Response); 
         }
-
+        /// <summary>
+        /// Get Point of sale settings from config
+        /// </summary>
         private POS GetPOS()
         {
             XElement xelement = XElement.Load(HostingEnvironment.MapPath("/Areas/Sabre/POS/PointOfSales.xml"));
@@ -86,7 +94,9 @@ namespace TrippismApi.Areas.Sabre.Controllers
             }
             return null;
         }
-
+        /// <summary>
+        /// DeSerialize the Json request
+        /// </summary>
         private LowFareSearch DeSerializeResponse(string result)
         {
             BargainFinderReponse reponse = new BargainFinderReponse();

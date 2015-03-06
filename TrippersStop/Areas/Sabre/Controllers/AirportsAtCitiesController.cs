@@ -12,20 +12,32 @@ using TrippismApi.TraveLayer;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
+    /// <summary>
+    /// API to retrieve data for multiple major airports, as opposed to data for a single airport code
+    /// </summary>
     public class AirportsAtCitiesController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        /// <summary>
+        /// Set api class and cache service.
+        /// </summary>
         public AirportsAtCitiesController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;
         }
+        /// <summary>
+        ///  Retrieves the airport, rail station and other codes associated with the MAC code
+        /// </summary>
         public HttpResponseMessage Get(string city)
         {
             string url = string.Format("v1/lists/supported/cities/{0}/airports/", city);           
             return GetResponse(url);
         }
+        /// <summary>
+        /// Get response from api based on url.
+        /// </summary>
         private HttpResponseMessage GetResponse(string url)
         {
             SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);

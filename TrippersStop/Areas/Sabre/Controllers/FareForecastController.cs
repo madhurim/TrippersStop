@@ -13,21 +13,33 @@ using TraveLayer.CustomTypes.Sabre.Response;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
+    /// <summary>
+    /// Forecasts the price range into which the lowest published fare that is available 
+    /// </summary>
     public class FareForecastController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        /// <summary>
+        /// Set api class and cache service.
+        /// </summary>
         public FareForecastController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;
         }
+        /// <summary>
+        /// Forecasts the price range into which the lowest published fare that is available 
+        /// </summary>
         // GET api/lowfareforecast
         public HttpResponseMessage Get([FromUri]TravelInfo lowFareForecastRequest)
         {
             string url = string.Format("v1/forecast/flights/fares?origin={0}&destination={1}&departuredate={2}&returndate={3}", lowFareForecastRequest.Origin, lowFareForecastRequest.Destination, lowFareForecastRequest.DepartureDate, lowFareForecastRequest.ReturnDate);
             return GetResponse(url);
         }
+        /// <summary>
+        /// Get response from api based on url.
+        /// </summary>
         private HttpResponseMessage GetResponse(string url)
         {
             SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);

@@ -208,8 +208,8 @@ namespace TrippismApi.TraveLayer
 
         public async Task<APIResponse> Get(string Method)
         {
-            const string statusComplete = "Complete";
-            const string statusMessage = "No results were found";
+            //const string statusComplete = "Complete";
+            //const string statusMessage = "No results were found";
             using (var client = new HttpClient())
             {   
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_Accept));

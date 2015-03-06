@@ -12,15 +12,27 @@ using TrippismApi.TraveLayer;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
+    /// <summary>
+    ///  To retrieve city pairs of origin and destination airports
+    ///  To get the complete list of origin and destination city pairs that we support
+    ///  To get destination airport codes that are associated with an origin
+    ///  To get origin and destination airport codes in a specific region or country
+    /// </summary>
     public class CityPairsController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        /// <summary>
+        /// Set api class and cache service.
+        /// </summary>
         public CityPairsController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;           
         }
+        /// <summary>
+        /// Retrieve city pairs that can be passed to applicable Air Shopping
+        /// </summary>
         public HttpResponseMessage Get(string type)
         {
             string url=string.Empty;
@@ -40,6 +52,9 @@ namespace TrippismApi.Areas.Sabre.Controllers
             }
             return GetResponse(url);
         }
+        /// <summary>
+        /// Get response from api based on url.
+        /// </summary>
         private HttpResponseMessage GetResponse(string url)
         {
             SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
