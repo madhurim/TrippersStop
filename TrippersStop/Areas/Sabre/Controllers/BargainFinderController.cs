@@ -19,9 +19,11 @@ namespace TrippersStop.Areas.Sabre.Controllers
             SabreAPICaller bargainFinderAPI = new SabreAPICaller();
             bargainFinderAPI.Accept = "application/json";
             bargainFinderAPI.ContentType = "application/x-www-form-urlencoded";
+            //TBD : Aoid call for getting token
             string token = bargainFinderAPI.GetToken().Result;
             bargainFinderAPI.Authorization = "bearer";
             bargainFinderAPI.ContentType = "application/json";
+            //TBD : URL configurable using XML
             String result = bargainFinderAPI.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
              HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);         
             return response;

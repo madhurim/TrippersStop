@@ -165,7 +165,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Areas\Sabre\Controllers\BargainFinderController.cs" />
-    <Compile Include="Areas\Sabre\Controllers\BargainFinderOldController.cs" />
     <Compile Include="Areas\Sabre\Controllers\DestinationFinderController.cs" />
     <Compile Include="Areas\Sabre\Controllers\LookupController.cs" />
     <Compile Include="Areas\Sabre\SabreAreaRegistration.cs" />
