@@ -12,7 +12,7 @@ using ServiceStack;
 namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class BargainFinderController : ApiController
-    {     
+    {
         // POST api/bargainfinder
         public HttpResponseMessage Post(BargainFinder bargainFinder)
         {
