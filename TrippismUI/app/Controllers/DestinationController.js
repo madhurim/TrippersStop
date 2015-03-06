@@ -402,7 +402,7 @@
                 for (var i = 0; i < $scope.myMarkers.length; i++)
                     $scope.myMarkers[i].setMap(null);
                 $scope.myMarkers.length = 0;
-                $scope.markerCluster.clearMarkers();
+               // $scope.markerCluster.clearMarkers();
             }
 
             $scope.myMarkers = [];

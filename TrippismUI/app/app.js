@@ -9,7 +9,7 @@
                         ]);
 
 TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/destination');
+    $urlRouterProvider.when('', '/destination').otherwise('/destination');
     $stateProvider
         // HOME STATES AND NESTED VIEWS ========================================
          .state('destination', {
@@ -21,12 +21,9 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: '/app/Views/fareforecast.html'
         })
      .state('/', {
-         url: '/fareforecast',
-         templateUrl: '/app/Views/fareforecast.html'
+         url: '/destination',
+         templateUrl: '/app/Views/destination.html'
      })
-
-  
-        
 });
 
 TrippismUIApp.directive("scroll", function ($window) {
