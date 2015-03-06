@@ -17,21 +17,31 @@ using MongoDB.Driver;
 
 namespace TrippismApi.Areas.IATA.Controllers
 {
+    /// <summary>
+    /// API to retrieve data for city pairs.
+    /// </summary>
     public class IATAController : ApiController
     {
         IDBService _dbService;
-
+        /// <summary>
+        /// Set db service.
+        /// </summary>
         public IATAController(IDBService dbService)
         {
             _dbService = dbService;
         }
 
-        // GET api/DestinationFinder
+
+        /// <summary>
+        /// Get available city pairs.
+        /// </summary>
         public HttpResponseMessage Get()
         {
             return GetResponse();
         }
-
+        /// <summary>
+        /// Get response from IATA service..
+        /// </summary>
         private HttpResponseMessage GetResponse()
         {
             List<IATACode> AirPortCodes;

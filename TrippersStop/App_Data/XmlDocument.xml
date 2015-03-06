@@ -481,6 +481,26 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:TrippismApi.Areas.IATA.Controllers.IATAController">
+            <summary>
+            API to retrieve data for city pairs.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.IATA.Controllers.IATAController.#ctor(DataLayer.IDBService)">
+            <summary>
+            Set db service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.IATA.Controllers.IATAController.Get">
+            <summary>
+            Get available city pairs.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.IATA.Controllers.IATAController.GetResponse">
+            <summary>
+            Get response from IATA service..
+            </summary>
+        </member>
         <member name="T:TrippismApi.Areas.Sabre.Controllers.AdvancedCalendarController">
             <summary>
             AdvancedCalendar is used for -
