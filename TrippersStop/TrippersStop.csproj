@@ -148,11 +148,16 @@
   <ItemGroup>
     <Compile Include="APIExtention\Filters\ExceptionFilterAttribute.cs" />
     <Compile Include="APIExtention\Filters\ValidateModelAttribute.cs" />
+    <Compile Include="Areas\Sabre\Controllers\AirportsAtCitiesController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\CityPairsController.cs" />
     <Compile Include="Areas\Sabre\Controllers\CountriesController.cs" />
     <Compile Include="Areas\Sabre\Controllers\DestinationFinderController.cs" />
     <Compile Include="Areas\Sabre\Controllers\FareForecastController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\MultiAirportCityController.cs" />
     <Compile Include="Areas\Sabre\Controllers\SaleCountryController.cs" />
     <Compile Include="Areas\Sabre\Controllers\SeasonalRateController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\ThemeAirportController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\TravelThemeController.cs" />
     <Compile Include="Areas\Sabre\Models\FareForecastRequest.cs" />
     <Compile Include="Areas\Sabre\Models\LowFareForecastRequest.cs" />
     <Compile Include="Helper\APIHelper.cs" />
