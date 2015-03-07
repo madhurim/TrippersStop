@@ -18,7 +18,7 @@ namespace TrippersStop.Areas.Sabre.Controllers
         // GET api/DestinationFinder
         public HttpResponseMessage Get(string origin, string departuredate, string returndate)
         {
-            string url = string.Format("https://api.test.sabre.com/v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}",origin,departuredate,returndate);
+            string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}",origin,departuredate,returndate);
             return GetDataFeomSabre(url);
         }
 
@@ -27,32 +27,32 @@ namespace TrippersStop.Areas.Sabre.Controllers
         // GET api/DestinationFinder
         public HttpResponseMessage Get(string origin, string lengthofstay)
         {
-            string url = string.Format("https://api.test.sabre.com/v1/shop/flights/fares?origin={0}&lengthofstay={1}", origin, lengthofstay);
+            string url = string.Format("v1/shop/flights/fares?origin={0}&lengthofstay={1}", origin, lengthofstay);
             return GetDataFeomSabre(url);
         }
 
         public HttpResponseMessage Get(string origin, string earliestdeparturedate, string latestdeparturedate, string lengthofstay)
         {
-            string url = string.Format("https://api.test.sabre.com/v1/shop/flights/fares?origin={0}&earliestdeparturedate={1}&latestdeparturedate={2}&lengthofstay={3}", origin, earliestdeparturedate, latestdeparturedate, lengthofstay);
+            string url = string.Format("v1/shop/flights/fares?origin={0}&earliestdeparturedate={1}&latestdeparturedate={2}&lengthofstay={3}", origin, earliestdeparturedate, latestdeparturedate, lengthofstay);
             return GetDataFeomSabre(url);
         }
 
         public HttpResponseMessage Get(string origin, string earliestdeparturedate, string latestdeparturedate, string lengthofstay, string theme)
         {
-            //string url = string.Format("https://api.test.sabre.com/v1/shop/flights/fares?origin={0}&earliestdeparturedate={1}&latestdeparturedate={2}&lengthofstay={3}&theme={4}", destinationFinderRequest.Origin, destinationFinderRequest.Earliestdeparturedate, destinationFinderRequest.Latestdeparturedate, destinationFinderRequest.Lengthofstay, destinationFinderRequest.Theme);
-            string url = string.Format("https://api.test.sabre.com/v1/shop/flights/fares?origin={0}&earliestdeparturedate={1}&latestdeparturedate={2}&lengthofstay={3}&theme={4}", origin, earliestdeparturedate, latestdeparturedate, lengthofstay,theme);
+            //string url = string.Format("v1/shop/flights/fares?origin={0}&earliestdeparturedate={1}&latestdeparturedate={2}&lengthofstay={3}&theme={4}", destinationFinderRequest.Origin, destinationFinderRequest.Earliestdeparturedate, destinationFinderRequest.Latestdeparturedate, destinationFinderRequest.Lengthofstay, destinationFinderRequest.Theme);
+            string url = string.Format("v1/shop/flights/fares?origin={0}&earliestdeparturedate={1}&latestdeparturedate={2}&lengthofstay={3}&theme={4}", origin, earliestdeparturedate, latestdeparturedate, lengthofstay,theme);
             return GetDataFeomSabre(url);
         }
 
         public HttpResponseMessage GetDestinationByMaxFare(string origin, string departuredate, string returndate, string maxfare)
         {
-            string url = string.Format("https://api.test.sabre.com/v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&maxfare={3}", origin, departuredate, returndate, maxfare);
+            string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&maxfare={3}", origin, departuredate, returndate, maxfare);
             return GetDataFeomSabre(url);
         }
 
         public HttpResponseMessage GetTopDestination(string origin, string departuredate, string returndate, string topdestinations)
         {
-            string url = string.Format("https://api.test.sabre.com/v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&topdestinations={3}", origin, departuredate, returndate, topdestinations);
+            string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&topdestinations={3}", origin, departuredate, returndate, topdestinations);
             return GetDataFeomSabre(url);
         }
         private HttpResponseMessage GetDataFeomSabre(string url)
@@ -65,7 +65,7 @@ namespace TrippersStop.Areas.Sabre.Controllers
             topDestinationAPI.Authorization = "bearer";
             topDestinationAPI.ContentType = "application/json";
             //TBD : URL configurable using XML
-            String result = topDestinationAPI.GetResponseByUrl(url).Result;
+            String result = topDestinationAPI.Get(url).Result;
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }
