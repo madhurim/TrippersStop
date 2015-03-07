@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TraveLayer.CustomTypes.Sabre.Request
+namespace TraveLayer.CustomTypes.Sabre
 {
     public class DestinationFinderRequest
     {
