@@ -150,6 +150,7 @@
     <Compile Include="APIExtention\Filters\ValidateModelAttribute.cs" />
     <Compile Include="Areas\Sabre\Controllers\DestinationFinderController.cs" />
     <Compile Include="Areas\Sabre\Controllers\FareForecastController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\SeasonalRateController.cs" />
     <Compile Include="Areas\Sabre\Models\FareForecastRequest.cs" />
     <Compile Include="Areas\Sabre\Models\LowFareForecastRequest.cs" />
     <Compile Include="Helper\APIHelper.cs" />
