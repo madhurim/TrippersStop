@@ -28,6 +28,9 @@ namespace TrippismApi.Areas.Sabre.Controllers
             _cacheService = cacheService;          
         }
         // POST api/bargainfinder
+        /// <summary>
+        /// Return lower-priced itineraries for available flights
+        /// </summary>
         public HttpResponseMessage Post(BargainFinder bargainFinder)
         {
             var pos = GetPOS();

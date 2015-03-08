@@ -31,12 +31,21 @@ namespace TrippismApi.Areas.Sabre.Controllers
         }
 
         // GET api/DestinationFinder
+        /// <summary>
+        /// Return the current nonstop lead fare and an overall lead fare available to destinations from a specific origin on roundtrip travel dates 
+        /// </summary>
+        /// <param name="destinationsRequest">
+        /// Return record based on destinations Request Type</param>
         public HttpResponseMessage Get([FromUri]Destinations destinationsRequest)
         {
             string url = GetURL(destinationsRequest);
             return GetResponse(url);
         }
 
+        // GET api/DestinationFinder
+        /// <summary>
+        /// Filters the response for destination airport codes associated with a travel theme
+        /// </summary>
         [Route("api/destinations/theme/{theme}")]
         [HttpGet]
         public HttpResponseMessage GetDestinationsByTheme(string theme,string origin,string departuredate,string returndate,string lengthofstay)
@@ -44,7 +53,10 @@ namespace TrippismApi.Areas.Sabre.Controllers
             string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}&theme={4}", origin, departuredate, returndate, lengthofstay, theme);
             return GetResponse(url);
         }
-
+        // GET api/DestinationFinder
+        /// <summary>
+        /// Return the cheapest detinations 
+        /// </summary>
         [Route("api/destinations/cheapest/{count}")]
         [HttpGet]
         public HttpResponseMessage GetTopCheapestDestinations(int count, string origin, string departuredate, string returndate, string lengthofstay)
@@ -52,7 +64,10 @@ namespace TrippismApi.Areas.Sabre.Controllers
             string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", origin, departuredate, returndate, lengthofstay);
             return GetResponse(url, count);
         }
-
+        // GET api/DestinationFinder
+        /// <summary>
+        /// Filters the response for overall lead fares that are equal to or less than the maximum, and returns the value in LowestFare
+        /// </summary>
         [Route("api/destinations/maxfare/{maxfare}")]
         [HttpGet]
         public HttpResponseMessage GetDestinationsByMaxFare(double maxfare, string origin, string departuredate, string returndate, string lengthofstay)
@@ -60,7 +75,10 @@ namespace TrippismApi.Areas.Sabre.Controllers
             string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&maxfare={3}&lengthofstay={4}", origin, departuredate, returndate,maxfare, lengthofstay);
             return GetResponse(url);
         }
-
+        // GET api/DestinationFinder
+        /// <summary>
+        /// Filters the response for destinations in the country or countries you specify
+        /// </summary>
         [Route("api/destinations/country/{country}")]
         [HttpGet]
         public HttpResponseMessage GetDestinationsByCountry(string country, string origin, string departuredate, string returndate, string lengthofstay)
