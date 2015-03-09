@@ -158,9 +158,6 @@
     <Compile Include="Areas\Sabre\Controllers\SeasonalRateController.cs" />
     <Compile Include="Areas\Sabre\Controllers\ThemeAirportController.cs" />
     <Compile Include="Areas\Sabre\Controllers\TravelThemeController.cs" />
-    <Compile Include="Areas\Sabre\Models\DestinationsRequest.cs" />
-    <Compile Include="Areas\Sabre\Models\FareForecastRequest.cs" />
-    <Compile Include="Areas\Sabre\Models\LowFareForecastRequest.cs" />
     <Compile Include="Helper\APIHelper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -307,6 +304,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Sabre\Models\" />
     <Folder Include="Areas\Sabre\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>

@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-namespace TrippersStop.Areas.Sabre.Models
+namespace TraveLayer.CustomTypes.Sabre.ViewModel
 {
-    public class LowFareForecastRequest
+    public class LowFareForecast
     {
-         [Required]
+        
         public string Origin { get; set; }
-        [Required]
+    
         public string Destination { get; set; }
 
-        [Required]
+      
         public string DepartureDate { get; set; }
-        [Required]
+ 
         public string ReturnDate { get; set; }
 
     }

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrippersStop.Areas.Sabre.Models
+namespace TraveLayer.CustomTypes.Sabre.ViewModel
 {
-    public class DestinationsRequest
+    public class Destinations
     {
-        [Required]
+       
         public string Origin { get; set; }
         public string Earliestdeparturedate{ get; set; }
         public string Latestdeparturedate{ get; set; }

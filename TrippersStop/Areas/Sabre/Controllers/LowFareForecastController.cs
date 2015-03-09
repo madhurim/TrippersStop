@@ -6,14 +6,15 @@ using System.Net.Http;
 using System.Web.Http;
 using TrippersStop.TraveLayer;
 using TrippersStop.Helper;
-using TrippersStop.Areas.Sabre.Models;
+using TraveLayer.CustomTypes.Sabre.ViewModel;
+
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class LowFareForecastController : ApiController
     {
         // GET api/lowfareforecast
-        public HttpResponseMessage Get([FromUri]LowFareForecastRequest lowFareForecastRequest)
+        public HttpResponseMessage Get([FromUri]LowFareForecast lowFareForecastRequest)
         {
             string url = string.Format("v1/forecast/flights/fares?origin={0}&destination={1}&departuredate={2}&returndate={3}", lowFareForecastRequest.Origin, lowFareForecastRequest.Destination, lowFareForecastRequest.DepartureDate, lowFareForecastRequest.ReturnDate);
             return GetResponse(url);

@@ -9,18 +9,24 @@ using TrippersStop.TraveLayer;
 using TraveLayer.APIServices;
 using ServiceStack;
 using TrippersStop.Helper;
-using TrippersStop.Areas.Sabre.Models;
 using System.Reflection;
 using System.Text;
+using TraveLayer.CustomTypes.Sabre.ViewModel;
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class DestinationsController : ApiController
     {
         // GET api/DestinationFinder
-        public HttpResponseMessage Get([FromUri]DestinationsRequest destinationsRequest)
+        public HttpResponseMessage Get([FromUri]Destinations destinationsRequest)
         {
-            StringBuilder url = new StringBuilder ();
+            string url = GetURL(destinationsRequest);
+            return GetResponse(url);
+        }
+
+        private string GetURL(Destinations destinationsRequest)
+        {
+            StringBuilder url = new StringBuilder();
             url.Append("v1/shop/flights/fares?");
             Type type = destinationsRequest.GetType();
             PropertyInfo[] properties = type.GetProperties();
@@ -29,7 +35,7 @@ namespace TrippersStop.Areas.Sabre.Controllers
             string separator = string.Empty;
             foreach (PropertyInfo property in properties)
             {
-                propertyName = property.Name ;               
+                propertyName = property.Name;
                 var result = property.GetValue(destinationsRequest, null);
                 if (result != null)
                 {
@@ -41,9 +47,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
                         separator = "&";
                     }
                 }
-                 
             }
-            return GetResponse(url.ToString());
+            return url.ToString();
         }
         // GET api/DestinationFinder
         //public HttpResponseMessage Get(string origin, string departuredate, string returndate)

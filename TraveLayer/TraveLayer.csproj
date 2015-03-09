@@ -92,8 +92,6 @@
     <Compile Include="CustomTypes\Sabre\BargainFinder.cs" />
     <Compile Include="CustomTypes\Sabre\CityPairsLookup.cs" />
     <Compile Include="CustomTypes\Sabre\CountriesLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\Request\LowFareSearchRequest .cs" />
-    <Compile Include="CustomTypes\Sabre\Request\TopDestinationRequest.cs" />
     <Compile Include="CustomTypes\Sabre\DestinationFinder.cs" />
     <Compile Include="CustomTypes\Sabre\FareRange.cs" />
     <Compile Include="CustomTypes\Sabre\InstaFlightsSearch.cs" />
@@ -106,6 +104,9 @@
     <Compile Include="CustomTypes\Sabre\TravelSeasonality.cs" />
     <Compile Include="CustomTypes\Sabre\TravelSeasonalityAirportsLookup.cs" />
     <Compile Include="CustomTypes\Sabre\TravelThemeLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\Destinations.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\FareForecast.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\LowFareForecast.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
