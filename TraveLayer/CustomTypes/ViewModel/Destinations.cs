@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TraveLayer.CustomTypes.Sabre.ViewModel
+namespace TraveLayer.CustomTypes.ViewModel
 {
     public class Destinations
     {

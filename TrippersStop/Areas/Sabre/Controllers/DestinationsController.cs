@@ -11,7 +11,7 @@ using ServiceStack;
 using TrippersStop.Helper;
 using System.Reflection;
 using System.Text;
-using TraveLayer.CustomTypes.Sabre.ViewModel;
+using TraveLayer.CustomTypes.ViewModel;
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {

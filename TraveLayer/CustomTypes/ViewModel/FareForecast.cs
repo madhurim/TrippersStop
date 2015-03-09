@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-namespace TraveLayer.CustomTypes.Sabre.ViewModel
+namespace TraveLayer.CustomTypes.ViewModel
 {
     public class FareForecast
     {

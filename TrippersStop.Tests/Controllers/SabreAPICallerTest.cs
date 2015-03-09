@@ -34,6 +34,7 @@ namespace TrippersStop.Tests.Controllers
         public void Get()
         {
             // Arrange
+
             SabreAPICaller apiWrapper = new SabreAPICaller();
 
             apiWrapper.Accept = "application/json";
