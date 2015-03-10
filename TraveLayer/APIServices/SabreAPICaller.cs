@@ -14,7 +14,6 @@ namespace TrippersStop.TraveLayer
     {
         Uri _TokenUri;
         String _longTermToken = String.Empty;
-        
         public Uri TokenUri
         {            
             set
@@ -113,7 +112,7 @@ namespace TrippersStop.TraveLayer
                 //grant_type=client_credentials
                 
                 HttpContent requestContent = new StringContent("grant_type=client_credentials", System.Text.Encoding.UTF8, _ContentType);
-                HttpResponseMessage sabreResponse = await client.PostAsync(_TokenUri + "v1/auth/token/", requestContent);
+                HttpResponseMessage sabreResponse = await client.PostAsync(_TokenUri + "v1/auth/token/", requestContent).ConfigureAwait(false);;
 
                 // If client authentication failed then we get a JSON response from Azure Market Place
                 if (!sabreResponse.IsSuccessStatusCode)
@@ -150,8 +149,8 @@ namespace TrippersStop.TraveLayer
                 HttpContent requestContent = new StringContent(Body, System.Text.Encoding.UTF8, _ContentType);               
                 
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_Authorization, _longTermToken);
-                
-                HttpResponseMessage sabreResponse = await client.PostAsync(this.BaseAPIUri + Method, requestContent);
+
+                HttpResponseMessage sabreResponse = await client.PostAsync(this.BaseAPIUri + Method, requestContent).ConfigureAwait(false); 
 
                 // If client authentication failed then we get a JSON response from Sabre
                 if (!sabreResponse.IsSuccessStatusCode)
@@ -175,7 +174,7 @@ namespace TrippersStop.TraveLayer
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_Accept));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_Authorization, _longTermToken);
 
-                HttpResponseMessage sabreResponse = await client.GetAsync(this.BaseAPIUri + Method);
+                HttpResponseMessage sabreResponse = await client.GetAsync(this.BaseAPIUri + Method).ConfigureAwait(false);
                 
 
                 // If client authentication failed then we get a JSON response from Sabre
@@ -193,6 +192,7 @@ namespace TrippersStop.TraveLayer
                 return ret;
             }
         }
+     
     }
         
 }

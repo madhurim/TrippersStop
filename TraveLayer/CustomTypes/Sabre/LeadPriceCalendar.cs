@@ -21,21 +21,28 @@ namespace TraveLayer.CustomTypes.Sabre
         public string DepartureDateTime { get; set; }
         public string ReturnDateTime { get; set; }
         public List<Link> Links { get; set; }
+        public string DestinationLocation { get; set; } // Copying from DestinationFinder.
     }
 
-    public class Link2
-    {
-        public string rel { get; set; }
-        public string href { get; set; }
-    }
+    //public class Link2
+    //{
+    //    public string rel { get; set; }
+    //    public string href { get; set; }
+    //}
 
-    public class LeadPriceCalendar
+    public class OTA_LeadPriceCalendar
     {
         public string OriginLocation { get; set; }
         public string DestinationLocation { get; set; }
         public List<FareInfo> FareInfo { get; set; }
-        public List<Link2> Links { get; set; }
+        public List<Link> Links { get; set; }
     }
+
+    public class LeadPriceCalendar //: ICustomType
+    {
+        public OTA_LeadPriceCalendar OTA_LeadPriceCalendar { get; set; }
+    }
+
 }
 
 //    {

@@ -7,108 +7,125 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace TraveLayer.CustomTypes.Sabre
-{
+{   
+        public class Day
+        {
+            public string Date { get; set; }
+        }
 
-    class AdvancedCalendar
-    {
-        //public class Day
-        //{
-        //    public string Date { get; set; }
-        //}
+        public class DayOrDaysRange
+        {
+            public Day Day { get; set; }
+        }
 
-        //public class DayOrDaysRange
-        //{
-        //    public Day Day { get; set; }
-        //}
+        public class DepartureDates
+        {
+            public List<DayOrDaysRange> dayOrDaysRange { get; set; }
+        }
 
-        //public class DepartureDates
-        //{
-        //    public List<DayOrDaysRange> dayOrDaysRange { get; set; }
-        //}
+        
+        public class OTAAirLowFareSearchRQ
+        {
+            public List<OriginDestinationInformation> OriginDestinationInformation { get; set; }
+            public POS POS { get; set; }
+            public TPAExtensions TPA_Extensions { get; set; }
+            public TravelerInfoSummary TravelerInfoSummary { get; set; }
+            public TravelPreferences TravelPreferences { get; set; } // copying from AlternateDates.
+        }
 
-        //public class DestinationLocation
-        //{
-        //    public string LocationCode { get; set; }
-        //}
+        public class OTA_AdvancedCalendar
+        {
+            public OTAAirLowFareSearchRQ OTA_AirLowFareSearchRQ { get; set; }
+        }
 
-        //public class OriginLocation
-        //{
-        //    public string LocationCode { get; set; }
-        //}
-
-        //public class OriginDestinationInformation
-        //{
-        //    public DepartureDates DepartureDates { get; set; }
-        //    public DestinationLocation DestinationLocation { get; set; }
-        //    public OriginLocation OriginLocation { get; set; }
-        //    public int RPH { get; set; }
-        //}
-
-        //public class CompanyName
-        //{
-        //    public string Code { get; set; }
-        //}
-
-        //public class RequestorID
-        //{
-        //    public CompanyName CompanyName { get; set; }
-        //    public string ID { get; set; }
-        //    public string Type { get; set; }
-        //}
-
-        //public class Source
-        //{
-        //    public RequestorID RequestorID { get; set; }
-        //}
-
-        //public class POS
-        //{
-        //    public List<Source> Source { get; set; }
-        //}
-
-        //public class RequestType
-        //{
-        //    public string Name { get; set; }
-        //}
-
-        //public class IntelliSellTransaction
-        //{
-        //    public RequestType RequestType { get; set; }
-        //}
-
-        //public class TPAExtensions
-        //{
-        //    public IntelliSellTransaction IntelliSellTransaction { get; set; }
-        //}
-
-        //public class PassengerTypeQuantity
-        //{
-        //    public string Code { get; set; }
-        //    public int Quantity { get; set; }
-        //}
-
-        //public class AirTravelerAvail
-        //{
-        //    public List<PassengerTypeQuantity> PassengerTypeQuantity { get; set; }
-        //}
-
-        //public class TravelerInfoSummary
-        //{
-        //    public List<AirTravelerAvail> AirTravelerAvail { get; set; }
-        //}
-
-        //public class OTAAirLowFareSearchRQ
-        //{
-        //    public List<OriginDestinationInformation> OriginDestinationInformation { get; set; }
-        //    public POS POS { get; set; }
-        //    public TPAExtensions TPA_Extensions { get; set; }
-        //    public TravelerInfoSummary TravelerInfoSummary { get; set; }
-        //}
-
-        //public class AdvancedCalendar
-        //{
-        //    public OTAAirLowFareSearchRQ OTA_AirLowFareSearchRQ { get; set; }
-        //}
+        public class AdvancedCalendar
+        {
+            public OTA_AdvancedCalendar OTA_AdvancedCalendar { get; set; }
+        }
     }
 
-}
+
+
+//{
+//    "OTA_AirLowFareSearchRQ": {
+//        "OriginDestinationInformation": [
+//            {
+//                "DepartureDates": {
+//                    "dayOrDaysRange": [
+//                        {
+//                            "Day": {
+//                                "Date": "2015-05-05"
+//                            }
+//                        }
+//                    ]
+//                },
+//                "DestinationLocation": {
+//                    "LocationCode": "LAX"
+//                },
+//                "OriginLocation": {
+//                    "LocationCode": "DFW"
+//                },
+//                "RPH": 1
+//            },
+//            {
+//                "DepartureDates": {
+//                    "dayOrDaysRange": [
+//                        {
+//                            "Day": {
+//                                "Date": "2015-05-06"
+//                            }
+//                        }
+//                    ]
+//                },
+//                "DestinationLocation": {
+//                    "LocationCode": "DFW"
+//                },
+//                "OriginLocation": {
+//                    "LocationCode": "LAX"
+//                },
+//                "RPH": 2
+//            }
+//        ],
+//        "POS": {
+//            "Source": [
+//                {
+//                    "RequestorID": {
+//                        "CompanyName": {
+//                            "Code": "TN"
+//                        },
+//                        "ID": "REQ.ID",
+//                        "Type": "0.AAA.X"
+//                    }
+//                }
+//            ]
+//        },
+//        "TPA_Extensions": {
+//            "IntelliSellTransaction": {
+//                "RequestType": {
+//                    "Name": "ADC1000"
+//                }
+//            }
+//        },
+//        "TravelPreferences": {
+//            "TPA_Extensions": {
+//                "NumTrips": {
+//                    "Number": 1
+//                }
+//            }
+//        },
+//        "TravelerInfoSummary": {
+//            "AirTravelerAvail": [
+//                {
+//                    "PassengerTypeQuantity": [
+//                        {
+//                            "Code": "ADT",
+//                            "Quantity": 1
+//                        }
+//                    ]
+//                }
+//            ]
+//        }
+//    }
+//}
+
+
