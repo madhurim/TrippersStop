@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,8 @@ namespace TraveLayer.CustomTypes.Sabre
     public class OTA_AirportsAtCitiesLookup
     {
         public List<Airport> Airports { get; set; }
-        public List<RailStation> __invalid_name__Railstations { get; set; }
+        [JsonProperty("Rail stations")]
+        public List<RailStation> Railstations { get; set; }
         public List<object> Others { get; set; }
         public List<Link> Links { get; set; }
     }
