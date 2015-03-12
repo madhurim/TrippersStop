@@ -24,6 +24,7 @@ namespace TrippersStop.Areas.Sabre.Controllers
             string result = APIHelper.GetDataFromSabre(url);
             OTA_AirportsAtCitiesLookup airportsAtCities = new OTA_AirportsAtCitiesLookup();
             airportsAtCities = ServiceStackSerializer.DeSerialize<OTA_AirportsAtCitiesLookup>(result);
+            Mapper.CreateMap<OTA_AirportsAtCitiesLookup, AirportsAtCities>();
             AirportsAtCities airports = Mapper.Map<OTA_AirportsAtCitiesLookup, AirportsAtCities>(airportsAtCities);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, airports);
             return response;
