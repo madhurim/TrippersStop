@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -6,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
+using TraveLayer.CustomTypes.ViewModel;
 using TrippersStop.Helper;
 
 namespace TrippersStop.Areas.Sabre.Controllers
@@ -22,7 +24,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
             string result = APIHelper.GetDataFromSabre(url);
             OTA_AirportsAtCitiesLookup airportsAtCities = new OTA_AirportsAtCitiesLookup();
             airportsAtCities = ServiceStackSerializer.DeSerialize<OTA_AirportsAtCitiesLookup>(result);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            AirportsAtCities airports = Mapper.Map<OTA_AirportsAtCitiesLookup, AirportsAtCities>(airportsAtCities);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, airports);
             return response;
         }
     }

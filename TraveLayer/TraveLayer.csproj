@@ -104,6 +104,7 @@
     <Compile Include="CustomTypes\Sabre\TravelSeasonality.cs" />
     <Compile Include="CustomTypes\Sabre\TravelSeasonalityAirportsLookup.cs" />
     <Compile Include="CustomTypes\Sabre\TravelThemeLookup.cs" />
+    <Compile Include="CustomTypes\ViewModel\AirportsAtCities.cs" />
     <Compile Include="CustomTypes\ViewModel\Destinations.cs" />
     <Compile Include="CustomTypes\ViewModel\FareForecast.cs" />
     <Compile Include="CustomTypes\ViewModel\LowFareForecast.cs" />
