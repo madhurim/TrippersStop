@@ -23,9 +23,9 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link> Links { get; set; }
     }
 
-    public class MultiAirportCityLookup
-    {
-        public OTA_MultiAirportCityLookup OTA_MultiAirportCityLookup { get; set; }
-    }
+    //public class MultiAirportCityLookup
+    //{
+    //    public OTA_MultiAirportCityLookup OTA_MultiAirportCityLookup { get; set; }
+    //}
 
 }

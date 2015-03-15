@@ -20,10 +20,10 @@ namespace TraveLayer.CustomTypes.Sabre
         //public List<Link2> Links { get; set; }
     }
 
-    public class PointofSaleCountryCodeLookup
-    {
-        public OTA_PointofSaleCountryCodeLookup OTA_PointofSaleCountryCodeLookup { get; set; }
-    }
+    //public class PointofSaleCountryCodeLookup
+    //{
+    //    public OTA_PointofSaleCountryCodeLookup OTA_PointofSaleCountryCodeLookup { get; set; }
+    //}
 }
 
 

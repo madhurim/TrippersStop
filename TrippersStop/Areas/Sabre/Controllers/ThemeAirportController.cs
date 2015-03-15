@@ -1,9 +1,13 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using TraveLayer.APIServices;
+using TraveLayer.CustomTypes.Sabre;
+using TraveLayer.CustomTypes.Sabre.ViewModel;
 using TrippersStop.Helper;
 
 namespace TrippersStop.Areas.Sabre.Controllers
@@ -18,7 +22,11 @@ namespace TrippersStop.Areas.Sabre.Controllers
         private HttpResponseMessage GetResponse(string url)
         {
             string result = APIHelper.GetDataFromSabre(url);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            OTA_ThemeAirportLookup themeAirportLookup = new OTA_ThemeAirportLookup();
+            themeAirportLookup = ServiceStackSerializer.DeSerialize<OTA_ThemeAirportLookup>(result);
+            Mapper.CreateMap<OTA_ThemeAirportLookup, ThemeAirport>();
+            ThemeAirport themeAirport = Mapper.Map<OTA_ThemeAirportLookup, ThemeAirport>(themeAirportLookup);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, themeAirport);
             return response;
         }
     }

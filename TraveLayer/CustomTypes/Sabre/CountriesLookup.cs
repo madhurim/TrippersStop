@@ -28,10 +28,10 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link> Links { get; set; }
     }
 
-    public class CountriesLookup
-    {
-        public OTA_CountriesLookup OTA_CountriesLookup { get; set; }
-    }
+    //public class CountriesLookup
+    //{
+    //    public OTA_CountriesLookup OTA_CountriesLookup { get; set; }
+    //}
 
 
 }

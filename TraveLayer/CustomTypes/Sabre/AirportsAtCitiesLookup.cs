@@ -27,8 +27,8 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<object> Others { get; set; }
         public List<Link> Links { get; set; }
     }
-    public class AirportsAtCitiesLookup
-    {
-        public OTA_AirportsAtCitiesLookup OTA_AirportsAtCitiesLookup { get; set; }
-    }
+    //public class AirportsAtCitiesLookup
+    //{
+    //    public OTA_AirportsAtCitiesLookup OTA_AirportsAtCitiesLookup { get; set; }
+    //}
 }
