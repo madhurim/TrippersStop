@@ -90,14 +90,14 @@
     <Compile Include="CustomTypes\Sabre\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CustomTypes\Sabre\AirportsAtCitiesLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\AlternateDate.cs" />
-    <Compile Include="CustomTypes\Sabre\BargainFinder.cs" />
-    <Compile Include="CustomTypes\Sabre\CityPairsLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\CountriesLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\DestinationFinder.cs" />
-    <Compile Include="CustomTypes\Sabre\FareRange.cs" />
-    <Compile Include="CustomTypes\Sabre\InstaFlightsSearch.cs" />
+    <Compile Include="CustomTypes\Sabre\response\AirportsAtCitiesLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\request\AlternateDate.cs" />
+    <Compile Include="CustomTypes\Sabre\request\BargainFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\response\CityPairsLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\response\CountriesLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\response\DestinationFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\response\FareRange.cs" />
+    <Compile Include="CustomTypes\Sabre\response\InstaFlightsSearch.cs" />
     <Compile Include="CustomTypes\Sabre\LeadPriceCalendar.cs" />
     <Compile Include="CustomTypes\Sabre\LowFareForecast.cs" />
     <Compile Include="CustomTypes\Sabre\MultiAirportCityLookup.cs" />

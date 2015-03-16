@@ -24,7 +24,7 @@ namespace TraveLayer.CustomTypes.Sabre
         public string OriginLocation { get; set; }
         public string DestinationLocation { get; set; }
         public List<FareData> FareData { get; set; }
-        public List<Link2> Links { get; set; }
+        public List<Link> Links { get; set; }
     }
 
     public class FareRange

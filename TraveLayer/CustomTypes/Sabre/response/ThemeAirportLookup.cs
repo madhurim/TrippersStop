@@ -16,7 +16,7 @@ namespace TraveLayer.CustomTypes.Sabre
     public class OTA_ThemeAirportLookup
     {
         public List<Destination> Destinations { get; set; }
-        public List<Link2> Links { get; set; }
+        public List<Link> Links { get; set; }
     }
 
     public class ThemeAirportLookup

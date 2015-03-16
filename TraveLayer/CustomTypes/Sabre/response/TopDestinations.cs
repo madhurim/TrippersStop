@@ -20,17 +20,17 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link> Links { get; set; }
     }
 
-    public class Link2
-    {
-        public string rel { get; set; }
-        public string href { get; set; }
-    }
+    //public class Link2
+    //{
+    //    public string rel { get; set; }
+    //    public string href { get; set; }
+    //}
 
     public class OTA_TopDestinations
     {
         public string OriginLocation { get; set; }
         public List<Destination> Destinations { get; set; }
-        public List<Link2> Links { get; set; }
+        public List<Link> Links { get; set; }
     }
 
 

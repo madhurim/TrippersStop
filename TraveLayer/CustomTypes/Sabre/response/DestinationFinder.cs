@@ -11,7 +11,7 @@ namespace TraveLayer.CustomTypes.Sabre  // All the properties same as LeadPriceC
     {
         public string OriginLocation { get; set; }
         public List<FareInfo> FareInfo { get; set; }
-        public List<Link2> Links { get; set; }
+        public List<Link> Links { get; set; }
     }
 
     public class DestinationFinder
