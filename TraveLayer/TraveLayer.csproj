@@ -118,6 +118,7 @@
     <Compile Include="CustomTypes\Sabre\ViewModel\TravelInfo.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModel\LowFareSearch.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModel\TravelSeasonality.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\TravelTheme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
