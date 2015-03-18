@@ -1,0 +1,184 @@
+
+Request
+http://localhost:14606/api/FareForecast?origin=ATL&destination=LAS&EarliestDepartureDate=2015-03-20&LatestDepartureDate=2015-03-28&LengthOfStay=4
+
+
+Response
+
+{
+    "OriginLocation": "ATL",
+    "DestinationLocation": "LAS",
+    "FareData": [
+        {
+            "MaximumFare": 1092.2,
+            "MinimumFare": 194.1,
+            "MedianFare": 367.35,
+            "CurrencyCode": "USD",
+            "Count": "Low",
+            "DepartureDateTime": "2015-03-20T00:00:00",
+            "ReturnDateTime": "2015-03-24T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=ATL&destination=LAS&departuredate=2015-03-20&returndate=2015-03-24&pointofsalecountry=US"
+                },
+                {
+                    "rel": "forecast",
+                    "href": "https://api.test.sabre.com/v1/forecast/flights/fares?origin=ATL&destination=LAS&departuredate=2015-03-20&returndate=2015-03-24"
+                }
+            ]
+        },
+        {
+            "MaximumFare": 1092.2,
+            "MinimumFare": 194.1,
+            "MedianFare": 367.35,
+            "CurrencyCode": "USD",
+            "Count": "Low",
+            "DepartureDateTime": "2015-03-21T00:00:00",
+            "ReturnDateTime": "2015-03-25T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=ATL&destination=LAS&departuredate=2015-03-21&returndate=2015-03-25&pointofsalecountry=US"
+                },
+                {
+                    "rel": "forecast",
+                    "href": "https://api.test.sabre.com/v1/forecast/flights/fares?origin=ATL&destination=LAS&departuredate=2015-03-21&returndate=2015-03-25"
+                }
+            ]
+        },
+        {
+            "MaximumFare": 1092.2,
+            "MinimumFare": 194.1,
+            "MedianFare": 367.35,
+            "CurrencyCode": "USD",
+            "Count": "Low",
+            "DepartureDateTime": "2015-03-22T00:00:00",
+            "ReturnDateTime": "2015-03-26T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=ATL&destination=LAS&departuredate=2015-03-22&returndate=2015-03-26&pointofsalecountry=US"
+                },
+                {
+                    "rel": "forecast",
+                    "href": "https://api.test.sabre.com/v1/forecast/flights/fares?origin=ATL&destination=LAS&departuredate=2015-03-22&returndate=2015-03-26"
+                }
+            ]
+        },
+        {
+            "MaximumFare": 882.2,
+            "MinimumFare": 174.05,
+            "MedianFare": 488.2,
+            "CurrencyCode": "USD",
+            "Count": "High",
+            "DepartureDateTime": "2015-03-23T00:00:00",
+            "ReturnDateTime": "2015-03-27T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=ATL&destination=LAS&departuredate=2015-03-23&returndate=2015-03-27&pointofsalecountry=US"
+                },
+                {
+                    "rel": "forecast",
+                    "href": "https://api.test.sabre.com/v1/forecast/flights/fares?origin=ATL&destination=LAS&departuredate=2015-03-23&returndate=2015-03-27"
+                }
+            ]
+        },
+        {
+            "MaximumFare": 882.2,
+            "MinimumFare": 174.05,
+            "MedianFare": 488.2,
+            "CurrencyCode": "USD",
+            "Count": "High",
+            "DepartureDateTime": "2015-03-24T00:00:00",
+            "ReturnDateTime": "2015-03-28T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=ATL&destination=LAS&departuredate=2015-03-24&returndate=2015-03-28&pointofsalecountry=US"
+                },
+                {
+                    "rel": "forecast",
+                    "href": "https://api.test.sabre.com/v1/forecast/flights/fares?origin=ATL&destination=LAS&departuredate=2015-03-24&returndate=2015-03-28"
+                }
+            ]
+        },
+        {
+            "MaximumFare": 882.2,
+            "MinimumFare": 174.05,
+            "MedianFare": 488.2,
+            "CurrencyCode": "USD",
+            "Count": "High",
+            "DepartureDateTime": "2015-03-25T00:00:00",
+            "ReturnDateTime": "2015-03-29T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=ATL&destination=LAS&departuredate=2015-03-25&returndate=2015-03-29&pointofsalecountry=US"
+                },
+                {
+                    "rel": "forecast",
+                    "href": "https://api.test.sabre.com/v1/forecast/flights/fares?origin=ATL&destination=LAS&departuredate=2015-03-25&returndate=2015-03-29"
+                }
+            ]
+        },
+        {
+            "MaximumFare": 882.2,
+            "MinimumFare": 174.05,
+            "MedianFare": 488.2,
+            "CurrencyCode": "USD",
+            "Count": "High",
+            "DepartureDateTime": "2015-03-26T00:00:00",
+            "ReturnDateTime": "2015-03-30T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=ATL&destination=LAS&departuredate=2015-03-26&returndate=2015-03-30&pointofsalecountry=US"
+                },
+                {
+                    "rel": "forecast",
+                    "href": "https://api.test.sabre.com/v1/forecast/flights/fares?origin=ATL&destination=LAS&departuredate=2015-03-26&returndate=2015-03-30"
+                }
+            ]
+        },
+        {
+            "MaximumFare": 882.2,
+            "MinimumFare": 174.05,
+            "MedianFare": 488.2,
+            "CurrencyCode": "USD",
+            "Count": "High",
+            "DepartureDateTime": "2015-03-27T00:00:00",
+            "ReturnDateTime": "2015-03-31T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=ATL&destination=LAS&departuredate=2015-03-27&returndate=2015-03-31&pointofsalecountry=US"
+                },
+                {
+                    "rel": "forecast",
+                    "href": "https://api.test.sabre.com/v1/forecast/flights/fares?origin=ATL&destination=LAS&departuredate=2015-03-27&returndate=2015-03-31"
+                }
+            ]
+        },
+        {
+            "MaximumFare": 882.2,
+            "MinimumFare": 174.05,
+            "MedianFare": 488.2,
+            "CurrencyCode": "USD",
+            "Count": "High",
+            "DepartureDateTime": "2015-03-28T00:00:00",
+            "ReturnDateTime": "2015-04-01T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=ATL&destination=LAS&departuredate=2015-03-28&returndate=2015-04-01&pointofsalecountry=US"
+                },
+                {
+                    "rel": "forecast",
+                    "href": "https://api.test.sabre.com/v1/forecast/flights/fares?origin=ATL&destination=LAS&departuredate=2015-03-28&returndate=2015-04-01"
+                }
+            ]
+        }
+    ]
+}
