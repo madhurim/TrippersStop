@@ -84,10 +84,10 @@
     <Compile Include="APIServices\IAPICaller.cs" />
     <Compile Include="APIServices\SabreAPICaller.cs" />
     <Compile Include="APIServices\ServiceStackSerializer.cs" />
-    <Compile Include="CustomTypes\Sabre\request\AdvancedCalendar.cs">
+    <Compile Include="CustomTypes\Sabre\Request\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CustomTypes\Sabre\response\BargainFinderResponse.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\BargainFinder.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModel\AirportsAtCities.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModel\CityPairs.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModel\FareRange.cs" />
@@ -103,23 +103,23 @@
     <Compile Include="CustomTypes\Sabre\ViewModel\LowFareSearch.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModel\TravelSeasonality.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModel\TravelTheme.cs" />
-    <Compile Include="CustomTypes\Sabre\response\AirportsAtCitiesLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\request\AlternateDate.cs" />
-    <Compile Include="CustomTypes\Sabre\request\BargainFinder.cs" />
-    <Compile Include="CustomTypes\Sabre\response\CityPairsLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\response\CountriesLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\response\DestinationFinder.cs" />
-    <Compile Include="CustomTypes\Sabre\response\FareRange.cs" />
-    <Compile Include="CustomTypes\Sabre\response\InstaFlightsSearch.cs" />
-    <Compile Include="CustomTypes\Sabre\response\LeadPriceCalendar.cs" />
-    <Compile Include="CustomTypes\Sabre\response\LowFareForecast.cs" />
-    <Compile Include="CustomTypes\Sabre\response\MultiAirportCityLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\response\PointofSaleCountryCodeLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\response\ThemeAirportLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\response\TopDestinations.cs" />
-    <Compile Include="CustomTypes\Sabre\response\TravelSeasonality.cs" />
-    <Compile Include="CustomTypes\Sabre\response\TravelSeasonalityAirportsLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\response\TravelThemeLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\AirportsAtCitiesLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Request\AlternateDate.cs" />
+    <Compile Include="CustomTypes\Sabre\Request\BargainFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\CityPairsLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\CountriesLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\DestinationFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\FareRange.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\InstaFlightsSearch.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\LeadPriceCalendar.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\LowFareForecast.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\MultiAirportCityLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\PointofSaleCountryCodeLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\ThemeAirportLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\TopDestinations.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\TravelSeasonality.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\TravelSeasonalityAirportsLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\TravelThemeLookup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Sabre
 {
+    
+﻿    /// <summary>
+    ///  BargainFinder Reponse class.
+    /// </summary>
+    //TBD : Need to clean up more
     public class Success
     {
     }
