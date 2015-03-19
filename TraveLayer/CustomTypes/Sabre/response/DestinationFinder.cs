@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+///  This class  retrieves current nonstop lead fare and an overall lead fare available to destinations from a specific origin on round-trip travel dates from the Sabre cache.
+/// </summary>
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

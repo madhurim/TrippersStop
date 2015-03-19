@@ -1,4 +1,10 @@
-﻿using System;
+﻿/// <summary>
+///  This class  returns the median, highest, and lowest published fares that were ticketed via the Sabre GDS 
+///  during the previous 4 weeks for each of the future departure dates in a range, using the specific origin, 
+///  destination, and length of stay in the request.
+/// </summary>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

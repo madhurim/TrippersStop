@@ -1,4 +1,11 @@
-﻿using System;
+﻿/// <summary>
+///  This class retrieves a list of themes. A theme is similar to a travel category, 
+///  and is based on geography, points of interest, and recreational activities
+/// </summary>
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

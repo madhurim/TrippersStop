@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+///  This class retrieves airports that we support as a destination airport. 
+/// </summary>
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

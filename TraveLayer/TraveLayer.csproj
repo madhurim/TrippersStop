@@ -87,7 +87,7 @@
     <Compile Include="APIServices\IAPICaller.cs" />
     <Compile Include="APIServices\SabreAPICaller.cs" />
     <Compile Include="APIServices\ServiceStackSerializer.cs" />
-    <Compile Include="CustomTypes\Sabre\AdvancedCalendar.cs">
+    <Compile Include="CustomTypes\Sabre\request\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CustomTypes\Sabre\response\AirportsAtCitiesLookup.cs" />
@@ -98,15 +98,15 @@
     <Compile Include="CustomTypes\Sabre\response\DestinationFinder.cs" />
     <Compile Include="CustomTypes\Sabre\response\FareRange.cs" />
     <Compile Include="CustomTypes\Sabre\response\InstaFlightsSearch.cs" />
-    <Compile Include="CustomTypes\Sabre\LeadPriceCalendar.cs" />
-    <Compile Include="CustomTypes\Sabre\LowFareForecast.cs" />
-    <Compile Include="CustomTypes\Sabre\MultiAirportCityLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\PointofSaleCountryCodeLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\ThemeAirportLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\TopDestinations.cs" />
-    <Compile Include="CustomTypes\Sabre\TravelSeasonality.cs" />
-    <Compile Include="CustomTypes\Sabre\TravelSeasonalityAirportsLookup.cs" />
-    <Compile Include="CustomTypes\Sabre\TravelThemeLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\response\LeadPriceCalendar.cs" />
+    <Compile Include="CustomTypes\Sabre\response\LowFareForecast.cs" />
+    <Compile Include="CustomTypes\Sabre\response\MultiAirportCityLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\response\PointofSaleCountryCodeLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\response\ThemeAirportLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\response\TopDestinations.cs" />
+    <Compile Include="CustomTypes\Sabre\response\TravelSeasonality.cs" />
+    <Compile Include="CustomTypes\Sabre\response\TravelSeasonalityAirportsLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\response\TravelThemeLookup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

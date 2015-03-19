@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+///  This class retrieves a list of origin and destination countries.
+/// </summary>
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

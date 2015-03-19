@@ -1,4 +1,11 @@
-﻿using System;
+﻿/// <summary>
+///  This class retrieves a list of destination airport codes that are associated with the theme in the request.
+///  A theme is similar to a travel category, and is based on geography, points of interest, or recreational activities
+/// </summary>
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

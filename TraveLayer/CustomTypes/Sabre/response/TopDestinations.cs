@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+///  This class retrieves top booked leisure destinations from a given origin and returns them in ascending rank order.
+/// </summary>
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

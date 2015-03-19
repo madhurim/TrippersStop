@@ -1,4 +1,10 @@
-﻿using System;
+﻿/// <summary>
+///  This class  retrieves current nonstop lead fare and overall lead fare available on future calendar dates
+/// </summary>
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,13 +28,7 @@ namespace TraveLayer.CustomTypes.Sabre
         public string ReturnDateTime { get; set; }
         public List<Link> Links { get; set; }
         public string DestinationLocation { get; set; } // Copying from DestinationFinder.
-    }
-
-    //public class Link2
-    //{
-    //    public string rel { get; set; }
-    //    public string href { get; set; }
-    //}
+    }   
 
     public class OTA_LeadPriceCalendar
     {

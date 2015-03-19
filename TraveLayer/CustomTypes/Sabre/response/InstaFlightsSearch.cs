@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+///  This class retrives  round-trip flight itineraries with published fares and fare breakdowns available from the Sabre cache for a certain origin, destination, and round-trip travel dates.
+/// </summary>
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

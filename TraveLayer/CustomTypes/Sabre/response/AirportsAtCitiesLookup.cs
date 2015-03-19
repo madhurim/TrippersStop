@@ -1,4 +1,11 @@
-﻿using System;
+﻿/// <summary>
+///  This class retrieves our list of major airport, rail station and other codes that are associated with 
+///  a single multi-airport city (MAC) code in the request.
+/// </summary>
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

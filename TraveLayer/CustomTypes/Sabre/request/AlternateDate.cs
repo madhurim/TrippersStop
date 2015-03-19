@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+///  Alternate Date class is used to search for the lowest available priced itineraries based upon +/-1 or +/-3 alternate dates .his 
+/// </summary>
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

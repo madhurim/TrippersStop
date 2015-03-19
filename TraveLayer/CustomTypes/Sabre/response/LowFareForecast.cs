@@ -1,4 +1,11 @@
-﻿using System;
+﻿/// <summary>
+///  This class  forecasts the price range into which the lowest published fare that is available 
+///  via the Sabre GDS is predicted to fall within the next 7 days.
+/// </summary>
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

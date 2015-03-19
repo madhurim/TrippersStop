@@ -1,4 +1,10 @@
-﻿using System;
+﻿/// <summary>
+///  This class rates weekly traffic volumes to certain destination airports.
+///  Looks up the traffic volume booked via the Sabre GDS to the requested destination airport.
+/// </summary>
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
