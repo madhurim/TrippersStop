@@ -90,6 +90,7 @@
     <Compile Include="CustomTypes\Sabre\AirportsAtCitiesLookup.cs" />
     <Compile Include="CustomTypes\Sabre\AlternateDate.cs" />
     <Compile Include="CustomTypes\Sabre\BargainFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\BargainFinderResponse.cs" />
     <Compile Include="CustomTypes\Sabre\CityPairsLookup.cs" />
     <Compile Include="CustomTypes\Sabre\CountriesLookup.cs" />
     <Compile Include="CustomTypes\Sabre\DestinationFinder.cs" />
