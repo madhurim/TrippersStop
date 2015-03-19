@@ -1,4 +1,10 @@
-﻿using System;
+﻿/// <summary>
+///  This class retrieve city pairs that can be passed to applicable Air Shopping REST APIs. 
+///  A city pair is passed as a combination of an origin and destination airport.
+/// </summary>
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,8 +38,9 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link> Links { get; set; }
     }
 
-    //public class CityPairsLookup
-    //{
-    //    public OTA_CityPairsLookup OTA_CityPairsLookup { get; set; }
-    //}
+    //TBD: Need to be clean 
+    public class CityPairsLookup
+    {
+        public OTA_CityPairsLookup OTA_CityPairsLookup { get; set; }
+    }
 }

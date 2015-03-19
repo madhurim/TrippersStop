@@ -1,4 +1,10 @@
-﻿using Newtonsoft.Json;
+
+﻿/// <summary>
+///  This class retrieves our list of major airport, rail station and other codes that are associated with 
+///  a single multi-airport city (MAC) code in the request.
+/// </summary>
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +33,10 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<object> Others { get; set; }
         public List<Link> Links { get; set; }
     }
-    //public class AirportsAtCitiesLookup
-    //{
-    //    public OTA_AirportsAtCitiesLookup OTA_AirportsAtCitiesLookup { get; set; }
-    //}
+
+    //TBD: Need to be clean 
+    public class AirportsAtCitiesLookup
+    {
+        public OTA_AirportsAtCitiesLookup OTA_AirportsAtCitiesLookup { get; set; }
+    }
 }

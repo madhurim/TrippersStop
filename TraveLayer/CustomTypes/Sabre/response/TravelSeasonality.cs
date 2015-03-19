@@ -1,4 +1,10 @@
-﻿using System;
+﻿/// <summary>
+///  This class rates weekly traffic volumes to certain destination airports.
+///  Looks up the traffic volume booked via the Sabre GDS to the requested destination airport.
+/// </summary>
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,9 +27,9 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Seasonality> Seasonality { get; set; }
         public List<Link> Links { get; set; }
     }
-
-    //public class TravelSeasonality
-    //{
-    //    public OTA_TravelSeasonality OTA_TravelSeasonality { get; set; }
-    //}
+    //TBD: Need to be clean 
+    public class TravelSeasonality
+    {
+        public OTA_TravelSeasonality OTA_TravelSeasonality { get; set; }
+    }
 }

@@ -1,4 +1,11 @@
-﻿using System;
+﻿/// <summary>
+///  This class retrieves a list of themes. A theme is similar to a travel category, 
+///  and is based on geography, points of interest, and recreational activities
+/// </summary>
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +23,7 @@ namespace TraveLayer.CustomTypes.Sabre
     public class OTA_TravelThemeLookup
     {
         public List<Theme> Themes { get; set; }
-        public List<Link2> Links { get; set; }
+        public List<Link> Links { get; set; }
     }
 
     public class TravelThemeLookup

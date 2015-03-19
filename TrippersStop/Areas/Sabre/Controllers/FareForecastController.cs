@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using TrippersStop.TraveLayer;
 using TrippersStop.Helper;
-using TraveLayer.CustomTypes.Sabre.ViewModel;
+using VM= TraveLayer.CustomTypes.Sabre.ViewModel;
 using TraveLayer.APIServices;
 using AutoMapper;
 using TraveLayer.CustomTypes.Sabre;
@@ -16,7 +16,7 @@ namespace TrippersStop.Areas.Sabre.Controllers
     public class FareForecastController : ApiController
     {
         // GET api/lowfareforecast
-        public HttpResponseMessage Get([FromUri]FareForecast fareForecastRequest)
+        public HttpResponseMessage Get([FromUri]VM.FareForecast  fareForecastRequest)
         {
             string url = string.Format("v1/historical/flights/fares?origin={0}&destination={1}&earliestdeparturedate={2}&latestdeparturedate={3}&lengthofstay={4}", fareForecastRequest.Origin, fareForecastRequest.Destination, fareForecastRequest.EarliestDepartureDate, fareForecastRequest.LatestDepartureDate, fareForecastRequest.LengthOfStay);
             return GetResponse(url);

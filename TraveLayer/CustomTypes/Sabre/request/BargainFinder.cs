@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+///  This class is used to search for the lowest available priced itineraries based upon a travel date.
+/// </summary>
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

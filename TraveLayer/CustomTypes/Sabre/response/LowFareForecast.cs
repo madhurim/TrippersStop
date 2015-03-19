@@ -1,4 +1,11 @@
-﻿using System;
+﻿/// <summary>
+///  This class  forecasts the price range into which the lowest published fare that is available 
+///  via the Sabre GDS is predicted to fall within the next 7 days.
+/// </summary>
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,11 +33,11 @@ namespace TraveLayer.CustomTypes.Sabre
         public string CurrencyCode { get; set; }
         public List<Link> Links { get; set; }
     }
-
-    //public class FareForecast
-    //{
-    //    public OTA_LowFareForecast OTA_LowFareForecast { get; set; }
-    //}
+    //TBD: Need to be clean 
+    public class FareForecast
+    {
+        public OTA_LowFareForecast OTA_LowFareForecast { get; set; }
+    }
 }
 
 

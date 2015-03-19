@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+///  This class retrieves a list of supported point of sale country codes and associated country names.
+/// </summary>
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +24,11 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Country> Countries { get; set; }
         //public List<Link2> Links { get; set; }
     }
-
-    //public class PointofSaleCountryCodeLookup
-    //{
-    //    public OTA_PointofSaleCountryCodeLookup OTA_PointofSaleCountryCodeLookup { get; set; }
-    //}
+    //TBD: Need to be clean 
+    public class PointofSaleCountryCodeLookup
+    {
+        public OTA_PointofSaleCountryCodeLookup OTA_PointofSaleCountryCodeLookup { get; set; }
+    }
 }
 
 

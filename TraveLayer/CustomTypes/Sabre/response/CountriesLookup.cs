@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+///  This class retrieves a list of origin and destination countries.
+/// </summary>
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,11 +32,11 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<DestinationCountry> DestinationCountries { get; set; }
         public List<Link> Links { get; set; }
     }
-
-    //public class CountriesLookup
-    //{
-    //    public OTA_CountriesLookup OTA_CountriesLookup { get; set; }
-    //}
+    //TBD: Need to be clean 
+    public class CountriesLookup
+    {
+        public OTA_CountriesLookup OTA_CountriesLookup { get; set; }
+    }
 
 
 }
