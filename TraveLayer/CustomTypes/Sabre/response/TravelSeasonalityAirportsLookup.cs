@@ -26,7 +26,7 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<DestinationLocation> DestinationLocations { get; set; }
         public List<Link> Links { get; set; }
     }
-
+    //TBD: Need to be clean 
     public class TravelSeasonalityAirportsLookup
     {
         public OTA_TravelSeasonalityAirportsLookup OTA_TravelSeasonalityAirportsLookup { get; set; }
