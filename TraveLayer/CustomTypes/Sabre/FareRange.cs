@@ -27,9 +27,9 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link2> Links { get; set; }
     }
 
-    public class FareRange
-    {
-        public OTA_FareRange OTA_FareRange { get; set; }
-    }
+    //public class FareRange
+    //{
+    //    public OTA_FareRange OTA_FareRange { get; set; }
+    //}
 
 }

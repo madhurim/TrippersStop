@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-namespace TraveLayer.CustomTypes.ViewModel
+
+namespace TraveLayer.CustomTypes.Sabre.ViewModel
 {
-    public class LowFareForecast
+    /// <summary>
+    /// Sabre LowFareForecastController Request
+    /// </summary> 
+    public class TravelInfo
     {
-        
         public string Origin { get; set; }
-    
         public string Destination { get; set; }
-
-      
         public string DepartureDate { get; set; }
- 
         public string ReturnDate { get; set; }
-
     }
 }

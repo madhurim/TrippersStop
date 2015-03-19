@@ -11,7 +11,8 @@ using ServiceStack;
 using TrippersStop.Helper;
 using System.Reflection;
 using System.Text;
-using TraveLayer.CustomTypes.ViewModel;
+using TraveLayer.CustomTypes.Sabre.ViewModel;
+using AutoMapper;
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
@@ -52,7 +53,11 @@ namespace TrippersStop.Areas.Sabre.Controllers
         private HttpResponseMessage GetResponse(string url)
         {
             string result = APIHelper.GetDataFromSabre(url);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            OTA_DestinationFinder cities = new OTA_DestinationFinder();
+            cities = ServiceStackSerializer.DeSerialize<OTA_DestinationFinder>(result);
+            Mapper.CreateMap<OTA_DestinationFinder, Fares>();
+            Fares fares = Mapper.Map<OTA_DestinationFinder, Fares>(cities);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
             return response;
         }
     }

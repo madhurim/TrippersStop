@@ -13,16 +13,17 @@ namespace TraveLayer.CustomTypes.Sabre
         public string href { get; set; }
     }
 
-    public class FareInfo
-    {
-        public object LowestFare { get; set; }
-        public string CurrencyCode { get; set; }
-        public object LowestNonStopFare { get; set; }
-        public string DepartureDateTime { get; set; }
-        public string ReturnDateTime { get; set; }
-        public List<Link> Links { get; set; }
-        public string DestinationLocation { get; set; } // Copying from DestinationFinder.
-    }
+    // Move to bargain finder response
+    //public class FareInfo
+    //{
+    //    public object LowestFare { get; set; }
+    //    public string CurrencyCode { get; set; }
+    //    public object LowestNonStopFare { get; set; }
+    //    public string DepartureDateTime { get; set; }
+    //    public string ReturnDateTime { get; set; }
+    //    public List<Link> Links { get; set; }
+    //    public string DestinationLocation { get; set; } // Copying from DestinationFinder.
+    //}
 
     //public class Link2
     //{

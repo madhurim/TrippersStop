@@ -26,8 +26,14 @@ namespace TrippersStop.Areas.Sabre.Controllers
             bargainFinderAPI.ContentType = "application/json";
             //TBD : URL configurable using XML
             String result = bargainFinderAPI.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
-             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);         
+             DeSerializeResponse(result);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);         
             return response;
+        }
+
+        private void DeSerializeResponse(string result)
+        {
+            throw new NotImplementedException();
         }
    }
 }

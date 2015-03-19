@@ -1,0 +1,384 @@
+
+Request
+http://localhost:14606/api/SeasonalRate?destination=JFK
+
+
+Response
+
+
+{
+    "DestinationLocation": "JFK",
+    "Seasonality": [
+        {
+            "YearWeekNumber": 1,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2016-01-10T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2016-01-04T00:00:00"
+        },
+        {
+            "YearWeekNumber": 2,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2016-01-17T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2016-01-11T00:00:00"
+        },
+        {
+            "YearWeekNumber": 3,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2016-01-24T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2016-01-18T00:00:00"
+        },
+        {
+            "YearWeekNumber": 4,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2016-01-31T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2016-01-25T00:00:00"
+        },
+        {
+            "YearWeekNumber": 5,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2016-02-07T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2016-02-01T00:00:00"
+        },
+        {
+            "YearWeekNumber": 6,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2016-02-14T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2016-02-08T00:00:00"
+        },
+        {
+            "YearWeekNumber": 7,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2016-02-21T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2016-02-15T00:00:00"
+        },
+        {
+            "YearWeekNumber": 8,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2016-02-28T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2016-02-22T00:00:00"
+        },
+        {
+            "YearWeekNumber": 9,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2016-03-06T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2016-02-29T00:00:00"
+        },
+        {
+            "YearWeekNumber": 10,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2016-03-13T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2016-03-07T00:00:00"
+        },
+        {
+            "YearWeekNumber": 11,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2015-03-15T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-03-09T00:00:00"
+        },
+        {
+            "YearWeekNumber": 12,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2015-03-22T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-03-16T00:00:00"
+        },
+        {
+            "YearWeekNumber": 13,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2015-03-29T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-03-23T00:00:00"
+        },
+        {
+            "YearWeekNumber": 14,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-04-05T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-03-30T00:00:00"
+        },
+        {
+            "YearWeekNumber": 15,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-04-12T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-04-06T00:00:00"
+        },
+        {
+            "YearWeekNumber": 16,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-04-19T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-04-13T00:00:00"
+        },
+        {
+            "YearWeekNumber": 17,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-04-26T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-04-20T00:00:00"
+        },
+        {
+            "YearWeekNumber": 18,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-05-03T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-04-27T00:00:00"
+        },
+        {
+            "YearWeekNumber": 19,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-05-10T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-05-04T00:00:00"
+        },
+        {
+            "YearWeekNumber": 20,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-05-17T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-05-11T00:00:00"
+        },
+        {
+            "YearWeekNumber": 21,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-05-24T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-05-18T00:00:00"
+        },
+        {
+            "YearWeekNumber": 22,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-05-31T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-05-25T00:00:00"
+        },
+        {
+            "YearWeekNumber": 23,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-06-07T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-06-01T00:00:00"
+        },
+        {
+            "YearWeekNumber": 24,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-06-14T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-06-08T00:00:00"
+        },
+        {
+            "YearWeekNumber": 25,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-06-21T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-06-15T00:00:00"
+        },
+        {
+            "YearWeekNumber": 26,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-06-28T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-06-22T00:00:00"
+        },
+        {
+            "YearWeekNumber": 27,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-07-05T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-06-29T00:00:00"
+        },
+        {
+            "YearWeekNumber": 28,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-07-12T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-07-06T00:00:00"
+        },
+        {
+            "YearWeekNumber": 29,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-07-19T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-07-13T00:00:00"
+        },
+        {
+            "YearWeekNumber": 30,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-07-26T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-07-20T00:00:00"
+        },
+        {
+            "YearWeekNumber": 31,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-08-02T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-07-27T00:00:00"
+        },
+        {
+            "YearWeekNumber": 32,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-08-09T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-08-03T00:00:00"
+        },
+        {
+            "YearWeekNumber": 33,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-08-16T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-08-10T00:00:00"
+        },
+        {
+            "YearWeekNumber": 34,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-08-23T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-08-17T00:00:00"
+        },
+        {
+            "YearWeekNumber": 35,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-08-30T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-08-24T00:00:00"
+        },
+        {
+            "YearWeekNumber": 36,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-09-06T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-08-31T00:00:00"
+        },
+        {
+            "YearWeekNumber": 37,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-09-13T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-09-07T00:00:00"
+        },
+        {
+            "YearWeekNumber": 38,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-09-20T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-09-14T00:00:00"
+        },
+        {
+            "YearWeekNumber": 39,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-09-27T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-09-21T00:00:00"
+        },
+        {
+            "YearWeekNumber": 40,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-10-04T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-09-28T00:00:00"
+        },
+        {
+            "YearWeekNumber": 41,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-10-11T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-10-05T00:00:00"
+        },
+        {
+            "YearWeekNumber": 42,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-10-18T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-10-12T00:00:00"
+        },
+        {
+            "YearWeekNumber": 43,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-10-25T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-10-19T00:00:00"
+        },
+        {
+            "YearWeekNumber": 44,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-11-01T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-10-26T00:00:00"
+        },
+        {
+            "YearWeekNumber": 45,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-11-08T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-11-02T00:00:00"
+        },
+        {
+            "YearWeekNumber": 46,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2015-11-15T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-11-09T00:00:00"
+        },
+        {
+            "YearWeekNumber": 47,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-11-22T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-11-16T00:00:00"
+        },
+        {
+            "YearWeekNumber": 48,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-11-29T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-11-23T00:00:00"
+        },
+        {
+            "YearWeekNumber": 49,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-12-06T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-11-30T00:00:00"
+        },
+        {
+            "YearWeekNumber": 50,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-12-13T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-12-07T00:00:00"
+        },
+        {
+            "YearWeekNumber": 51,
+            "SeasonalityIndicator": "High",
+            "WeekEndDate": "2015-12-20T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-12-14T00:00:00"
+        },
+        {
+            "YearWeekNumber": 52,
+            "SeasonalityIndicator": "Medium",
+            "WeekEndDate": "2015-12-27T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-12-21T00:00:00"
+        },
+        {
+            "YearWeekNumber": 53,
+            "SeasonalityIndicator": "Low",
+            "WeekEndDate": "2016-01-03T00:00:00",
+            "NumberOfObservations": "GreaterThan10000",
+            "WeekStartDate": "2015-12-28T00:00:00"
+        }
+    ]
+}

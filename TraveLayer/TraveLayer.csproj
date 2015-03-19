@@ -90,6 +90,7 @@
     <Compile Include="CustomTypes\Sabre\AirportsAtCitiesLookup.cs" />
     <Compile Include="CustomTypes\Sabre\AlternateDate.cs" />
     <Compile Include="CustomTypes\Sabre\BargainFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\BargainFinderResponse.cs" />
     <Compile Include="CustomTypes\Sabre\CityPairsLookup.cs" />
     <Compile Include="CustomTypes\Sabre\CountriesLookup.cs" />
     <Compile Include="CustomTypes\Sabre\DestinationFinder.cs" />
@@ -104,9 +105,21 @@
     <Compile Include="CustomTypes\Sabre\TravelSeasonality.cs" />
     <Compile Include="CustomTypes\Sabre\TravelSeasonalityAirportsLookup.cs" />
     <Compile Include="CustomTypes\Sabre\TravelThemeLookup.cs" />
-    <Compile Include="CustomTypes\ViewModel\Destinations.cs" />
-    <Compile Include="CustomTypes\ViewModel\FareForecast.cs" />
-    <Compile Include="CustomTypes\ViewModel\LowFareForecast.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\AirportsAtCities.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\CityPairs.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\FareRange.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\Fares.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\Countries.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\Destinations.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\FareForecast.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\LowFareForecast.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\MultiAirportCity.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\PointofSaleCountryCode.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\ThemeAirport.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\TravelInfo.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\LowFareSearch.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\TravelSeasonality.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModel\TravelTheme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

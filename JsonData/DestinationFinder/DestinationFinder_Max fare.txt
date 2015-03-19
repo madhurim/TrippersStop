@@ -1,0 +1,3120 @@
+
+
+Request
+http://localhost:14606/api/Destinations/?Origin=CLT&departuredate=2015-04-15&returndate=2015-04-25&maxfare=450&lengthofstay=4
+
+Response
+{
+    "OriginLocation": "CLT",
+    "FareInfo": [
+        {
+            "LowestFare": "299.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "422.69",
+            "DepartureDateTime": "2015-03-17T00:00:00",
+            "ReturnDateTime": "2015-03-21T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MSY&departuredate=2015-03-17&returndate=2015-03-21&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MSY"
+        },
+        {
+            "LowestFare": "287.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-03-18T00:00:00",
+            "ReturnDateTime": "2015-03-22T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-03-18&returndate=2015-03-22&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "299.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "322.69",
+            "DepartureDateTime": "2015-03-18T00:00:00",
+            "ReturnDateTime": "2015-03-22T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MSY&departuredate=2015-03-18&returndate=2015-03-22&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MSY"
+        },
+        {
+            "LowestFare": "287.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-03-19T00:00:00",
+            "ReturnDateTime": "2015-03-23T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-03-19&returndate=2015-03-23&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "299.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "322.69",
+            "DepartureDateTime": "2015-03-19T00:00:00",
+            "ReturnDateTime": "2015-03-23T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MSY&departuredate=2015-03-19&returndate=2015-03-23&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MSY"
+        },
+        {
+            "LowestFare": "446.2",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "644.5",
+            "DepartureDateTime": "2015-03-19T00:00:00",
+            "ReturnDateTime": "2015-03-23T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=YYZ&departuredate=2015-03-19&returndate=2015-03-23&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "YYZ"
+        },
+        {
+            "LowestFare": "281.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "347.23",
+            "DepartureDateTime": "2015-03-20T00:00:00",
+            "ReturnDateTime": "2015-03-24T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-03-20&returndate=2015-03-24&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "287.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-03-20T00:00:00",
+            "ReturnDateTime": "2015-03-24T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-03-20&returndate=2015-03-24&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "293.61",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "293.61",
+            "DepartureDateTime": "2015-03-20T00:00:00",
+            "ReturnDateTime": "2015-03-24T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-03-20&returndate=2015-03-24&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "299.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "322.69",
+            "DepartureDateTime": "2015-03-20T00:00:00",
+            "ReturnDateTime": "2015-03-24T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MSY&departuredate=2015-03-20&returndate=2015-03-24&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MSY"
+        },
+        {
+            "LowestFare": "351.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "711.69",
+            "DepartureDateTime": "2015-03-20T00:00:00",
+            "ReturnDateTime": "2015-03-24T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-03-20&returndate=2015-03-24&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "446.2",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "644.5",
+            "DepartureDateTime": "2015-03-20T00:00:00",
+            "ReturnDateTime": "2015-03-24T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=YYZ&departuredate=2015-03-20&returndate=2015-03-24&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "YYZ"
+        },
+        {
+            "LowestFare": "281.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "347.23",
+            "DepartureDateTime": "2015-03-21T00:00:00",
+            "ReturnDateTime": "2015-03-25T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-03-21&returndate=2015-03-25&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "287.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-03-21T00:00:00",
+            "ReturnDateTime": "2015-03-25T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-03-21&returndate=2015-03-25&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "293.61",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "293.61",
+            "DepartureDateTime": "2015-03-21T00:00:00",
+            "ReturnDateTime": "2015-03-25T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-03-21&returndate=2015-03-25&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "299.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "322.69",
+            "DepartureDateTime": "2015-03-21T00:00:00",
+            "ReturnDateTime": "2015-03-25T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MSY&departuredate=2015-03-21&returndate=2015-03-25&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MSY"
+        },
+        {
+            "LowestFare": "351.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "706.69",
+            "DepartureDateTime": "2015-03-21T00:00:00",
+            "ReturnDateTime": "2015-03-25T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-03-21&returndate=2015-03-25&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "446.2",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "644.5",
+            "DepartureDateTime": "2015-03-21T00:00:00",
+            "ReturnDateTime": "2015-03-25T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=YYZ&departuredate=2015-03-21&returndate=2015-03-25&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "YYZ"
+        },
+        {
+            "LowestFare": "287.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-03-22T00:00:00",
+            "ReturnDateTime": "2015-03-26T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-03-22&returndate=2015-03-26&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "319.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "618.44",
+            "DepartureDateTime": "2015-03-22T00:00:00",
+            "ReturnDateTime": "2015-03-26T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-03-22&returndate=2015-03-26&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "299.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "422.69",
+            "DepartureDateTime": "2015-03-22T00:00:00",
+            "ReturnDateTime": "2015-03-26T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MSY&departuredate=2015-03-22&returndate=2015-03-26&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MSY"
+        },
+        {
+            "LowestFare": "371.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "736.69",
+            "DepartureDateTime": "2015-03-22T00:00:00",
+            "ReturnDateTime": "2015-03-26T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-03-22&returndate=2015-03-26&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "319.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "607.07",
+            "DepartureDateTime": "2015-03-23T00:00:00",
+            "ReturnDateTime": "2015-03-27T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-03-23&returndate=2015-03-27&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "299.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "422.69",
+            "DepartureDateTime": "2015-03-23T00:00:00",
+            "ReturnDateTime": "2015-03-27T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MSY&departuredate=2015-03-23&returndate=2015-03-27&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MSY"
+        },
+        {
+            "LowestFare": "355.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "731.69",
+            "DepartureDateTime": "2015-03-23T00:00:00",
+            "ReturnDateTime": "2015-03-27T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-03-23&returndate=2015-03-27&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "446.2",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "644.5",
+            "DepartureDateTime": "2015-03-23T00:00:00",
+            "ReturnDateTime": "2015-03-27T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=YYZ&departuredate=2015-03-23&returndate=2015-03-27&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "YYZ"
+        },
+        {
+            "LowestFare": "340.87",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "340.87",
+            "DepartureDateTime": "2015-03-24T00:00:00",
+            "ReturnDateTime": "2015-03-28T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-03-24&returndate=2015-03-28&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "356.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "356.7",
+            "DepartureDateTime": "2015-03-24T00:00:00",
+            "ReturnDateTime": "2015-03-28T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-03-24&returndate=2015-03-28&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "304.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "607.07",
+            "DepartureDateTime": "2015-03-24T00:00:00",
+            "ReturnDateTime": "2015-03-28T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-03-24&returndate=2015-03-28&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "299.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "422.69",
+            "DepartureDateTime": "2015-03-24T00:00:00",
+            "ReturnDateTime": "2015-03-28T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MSY&departuredate=2015-03-24&returndate=2015-03-28&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MSY"
+        },
+        {
+            "LowestFare": "327.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "706.69",
+            "DepartureDateTime": "2015-03-24T00:00:00",
+            "ReturnDateTime": "2015-03-28T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-03-24&returndate=2015-03-28&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "446.2",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "644.5",
+            "DepartureDateTime": "2015-03-24T00:00:00",
+            "ReturnDateTime": "2015-03-28T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=YYZ&departuredate=2015-03-24&returndate=2015-03-28&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "YYZ"
+        },
+        {
+            "LowestFare": "340.87",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "340.87",
+            "DepartureDateTime": "2015-03-25T00:00:00",
+            "ReturnDateTime": "2015-03-29T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-03-25&returndate=2015-03-29&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "319.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "356.7",
+            "DepartureDateTime": "2015-03-25T00:00:00",
+            "ReturnDateTime": "2015-03-29T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-03-25&returndate=2015-03-29&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "328.61",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "328.61",
+            "DepartureDateTime": "2015-03-25T00:00:00",
+            "ReturnDateTime": "2015-03-29T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-03-25&returndate=2015-03-29&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "299.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "322.69",
+            "DepartureDateTime": "2015-03-25T00:00:00",
+            "ReturnDateTime": "2015-03-29T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MSY&departuredate=2015-03-25&returndate=2015-03-29&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MSY"
+        },
+        {
+            "LowestFare": "443.2",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "474.7",
+            "DepartureDateTime": "2015-03-25T00:00:00",
+            "ReturnDateTime": "2015-03-29T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=ORD&departuredate=2015-03-25&returndate=2015-03-29&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "ORD"
+        },
+        {
+            "LowestFare": "327.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "716.69",
+            "DepartureDateTime": "2015-03-25T00:00:00",
+            "ReturnDateTime": "2015-03-29T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-03-25&returndate=2015-03-29&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "446.2",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "644.5",
+            "DepartureDateTime": "2015-03-25T00:00:00",
+            "ReturnDateTime": "2015-03-29T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=YYZ&departuredate=2015-03-25&returndate=2015-03-29&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "YYZ"
+        },
+        {
+            "LowestFare": "314.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "314.7",
+            "DepartureDateTime": "2015-03-26T00:00:00",
+            "ReturnDateTime": "2015-03-30T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-03-26&returndate=2015-03-30&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "339.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "356.7",
+            "DepartureDateTime": "2015-03-26T00:00:00",
+            "ReturnDateTime": "2015-03-30T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-03-26&returndate=2015-03-30&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "328.61",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "328.61",
+            "DepartureDateTime": "2015-03-26T00:00:00",
+            "ReturnDateTime": "2015-03-30T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-03-26&returndate=2015-03-30&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "299.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "322.69",
+            "DepartureDateTime": "2015-03-26T00:00:00",
+            "ReturnDateTime": "2015-03-30T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MSY&departuredate=2015-03-26&returndate=2015-03-30&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MSY"
+        },
+        {
+            "LowestFare": "331.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "726.69",
+            "DepartureDateTime": "2015-03-26T00:00:00",
+            "ReturnDateTime": "2015-03-30T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-03-26&returndate=2015-03-30&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "446.2",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "644.5",
+            "DepartureDateTime": "2015-03-26T00:00:00",
+            "ReturnDateTime": "2015-03-30T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=YYZ&departuredate=2015-03-26&returndate=2015-03-30&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "YYZ"
+        },
+        {
+            "LowestFare": "250.86",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "250.86",
+            "DepartureDateTime": "2015-03-27T00:00:00",
+            "ReturnDateTime": "2015-03-31T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-03-27&returndate=2015-03-31&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "321.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "321.7",
+            "DepartureDateTime": "2015-03-27T00:00:00",
+            "ReturnDateTime": "2015-03-31T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-03-27&returndate=2015-03-31&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "268.61",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "268.61",
+            "DepartureDateTime": "2015-03-27T00:00:00",
+            "ReturnDateTime": "2015-03-31T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-03-27&returndate=2015-03-31&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "299.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "322.69",
+            "DepartureDateTime": "2015-03-27T00:00:00",
+            "ReturnDateTime": "2015-03-31T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MSY&departuredate=2015-03-27&returndate=2015-03-31&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MSY"
+        },
+        {
+            "LowestFare": "352.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-03-27T00:00:00",
+            "ReturnDateTime": "2015-03-31T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-03-27&returndate=2015-03-31&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "446.2",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "644.5",
+            "DepartureDateTime": "2015-03-27T00:00:00",
+            "ReturnDateTime": "2015-03-31T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=YYZ&departuredate=2015-03-27&returndate=2015-03-31&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "YYZ"
+        },
+        {
+            "LowestFare": "340.87",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "340.87",
+            "DepartureDateTime": "2015-03-28T00:00:00",
+            "ReturnDateTime": "2015-04-01T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-03-28&returndate=2015-04-01&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "289.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "321.7",
+            "DepartureDateTime": "2015-03-28T00:00:00",
+            "ReturnDateTime": "2015-04-01T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-03-28&returndate=2015-04-01&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "446.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-03-28T00:00:00",
+            "ReturnDateTime": "2015-04-01T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-03-28&returndate=2015-04-01&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "268.61",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "268.61",
+            "DepartureDateTime": "2015-03-28T00:00:00",
+            "ReturnDateTime": "2015-04-01T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-03-28&returndate=2015-04-01&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "299.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "322.69",
+            "DepartureDateTime": "2015-03-28T00:00:00",
+            "ReturnDateTime": "2015-04-01T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MSY&departuredate=2015-03-28&returndate=2015-04-01&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MSY"
+        },
+        {
+            "LowestFare": "343.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-03-28T00:00:00",
+            "ReturnDateTime": "2015-04-01T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-03-28&returndate=2015-04-01&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "428.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "1238.7",
+            "DepartureDateTime": "2015-03-28T00:00:00",
+            "ReturnDateTime": "2015-04-01T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-03-28&returndate=2015-04-01&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "446.2",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "644.5",
+            "DepartureDateTime": "2015-03-28T00:00:00",
+            "ReturnDateTime": "2015-04-01T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=YYZ&departuredate=2015-03-28&returndate=2015-04-01&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "YYZ"
+        },
+        {
+            "LowestFare": "321.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "321.7",
+            "DepartureDateTime": "2015-03-29T00:00:00",
+            "ReturnDateTime": "2015-04-02T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-03-29&returndate=2015-04-02&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "304.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "618.44",
+            "DepartureDateTime": "2015-03-29T00:00:00",
+            "ReturnDateTime": "2015-04-02T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-03-29&returndate=2015-04-02&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "299.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "422.69",
+            "DepartureDateTime": "2015-03-29T00:00:00",
+            "ReturnDateTime": "2015-04-02T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MSY&departuredate=2015-03-29&returndate=2015-04-02&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MSY"
+        },
+        {
+            "LowestFare": "401.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-03-29T00:00:00",
+            "ReturnDateTime": "2015-04-02T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-03-29&returndate=2015-04-02&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "428.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "1268.7",
+            "DepartureDateTime": "2015-03-29T00:00:00",
+            "ReturnDateTime": "2015-04-02T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-03-29&returndate=2015-04-02&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "356.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "356.7",
+            "DepartureDateTime": "2015-03-30T00:00:00",
+            "ReturnDateTime": "2015-04-03T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-03-30&returndate=2015-04-03&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "304.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "618.46",
+            "DepartureDateTime": "2015-03-30T00:00:00",
+            "ReturnDateTime": "2015-04-03T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-03-30&returndate=2015-04-03&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "396.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-03-30T00:00:00",
+            "ReturnDateTime": "2015-04-03T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-03-30&returndate=2015-04-03&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "176.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "210.49",
+            "DepartureDateTime": "2015-03-31T00:00:00",
+            "ReturnDateTime": "2015-04-04T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-03-31&returndate=2015-04-04&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "173.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "356.7",
+            "DepartureDateTime": "2015-03-31T00:00:00",
+            "ReturnDateTime": "2015-04-04T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-03-31&returndate=2015-04-04&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "398.69",
+            "DepartureDateTime": "2015-03-31T00:00:00",
+            "ReturnDateTime": "2015-04-04T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-03-31&returndate=2015-04-04&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "404.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "748.7",
+            "DepartureDateTime": "2015-03-31T00:00:00",
+            "ReturnDateTime": "2015-04-04T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-03-31&returndate=2015-04-04&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "304.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "618.46",
+            "DepartureDateTime": "2015-03-31T00:00:00",
+            "ReturnDateTime": "2015-04-04T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-03-31&returndate=2015-04-04&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "384.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "384.7",
+            "DepartureDateTime": "2015-03-31T00:00:00",
+            "ReturnDateTime": "2015-04-04T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-03-31&returndate=2015-04-04&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "181.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-01T00:00:00",
+            "ReturnDateTime": "2015-04-05T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-04-01&returndate=2015-04-05&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "173.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "356.7",
+            "DepartureDateTime": "2015-04-01T00:00:00",
+            "ReturnDateTime": "2015-04-05T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-04-01&returndate=2015-04-05&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "498.69",
+            "DepartureDateTime": "2015-04-01T00:00:00",
+            "ReturnDateTime": "2015-04-05T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-01&returndate=2015-04-05&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "404.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "758.7",
+            "DepartureDateTime": "2015-04-01T00:00:00",
+            "ReturnDateTime": "2015-04-05T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-01&returndate=2015-04-05&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "227.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "227.7",
+            "DepartureDateTime": "2015-04-01T00:00:00",
+            "ReturnDateTime": "2015-04-05T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-01&returndate=2015-04-05&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "203.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-01T00:00:00",
+            "ReturnDateTime": "2015-04-05T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-01&returndate=2015-04-05&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "181.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-02T00:00:00",
+            "ReturnDateTime": "2015-04-06T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-04-02&returndate=2015-04-06&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "173.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "356.7",
+            "DepartureDateTime": "2015-04-02T00:00:00",
+            "ReturnDateTime": "2015-04-06T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-04-02&returndate=2015-04-06&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "448.69",
+            "DepartureDateTime": "2015-04-02T00:00:00",
+            "ReturnDateTime": "2015-04-06T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-02&returndate=2015-04-06&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "404.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "768.7",
+            "DepartureDateTime": "2015-04-02T00:00:00",
+            "ReturnDateTime": "2015-04-06T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-02&returndate=2015-04-06&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "202.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "202.7",
+            "DepartureDateTime": "2015-04-02T00:00:00",
+            "ReturnDateTime": "2015-04-06T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-02&returndate=2015-04-06&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "203.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-02T00:00:00",
+            "ReturnDateTime": "2015-04-06T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-02&returndate=2015-04-06&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "428.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-02T00:00:00",
+            "ReturnDateTime": "2015-04-06T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-02&returndate=2015-04-06&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "181.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-03T00:00:00",
+            "ReturnDateTime": "2015-04-07T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-04-03&returndate=2015-04-07&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "173.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "543.7",
+            "DepartureDateTime": "2015-04-03T00:00:00",
+            "ReturnDateTime": "2015-04-07T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-04-03&returndate=2015-04-07&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "498.69",
+            "DepartureDateTime": "2015-04-03T00:00:00",
+            "ReturnDateTime": "2015-04-07T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-03&returndate=2015-04-07&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "404.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "646.7",
+            "DepartureDateTime": "2015-04-03T00:00:00",
+            "ReturnDateTime": "2015-04-07T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-03&returndate=2015-04-07&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "227.69",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "227.69",
+            "DepartureDateTime": "2015-04-03T00:00:00",
+            "ReturnDateTime": "2015-04-07T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-03&returndate=2015-04-07&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "202.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-03T00:00:00",
+            "ReturnDateTime": "2015-04-07T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-03&returndate=2015-04-07&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "376.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-03T00:00:00",
+            "ReturnDateTime": "2015-04-07T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-03&returndate=2015-04-07&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "181.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-04T00:00:00",
+            "ReturnDateTime": "2015-04-08T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-04-04&returndate=2015-04-08&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "173.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "283.7",
+            "DepartureDateTime": "2015-04-04T00:00:00",
+            "ReturnDateTime": "2015-04-08T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-04-04&returndate=2015-04-08&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "448.69",
+            "DepartureDateTime": "2015-04-04T00:00:00",
+            "ReturnDateTime": "2015-04-08T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-04&returndate=2015-04-08&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "377.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "641.7",
+            "DepartureDateTime": "2015-04-04T00:00:00",
+            "ReturnDateTime": "2015-04-08T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-04&returndate=2015-04-08&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "202.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "202.7",
+            "DepartureDateTime": "2015-04-04T00:00:00",
+            "ReturnDateTime": "2015-04-08T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-04&returndate=2015-04-08&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "397.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-04T00:00:00",
+            "ReturnDateTime": "2015-04-08T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHX&departuredate=2015-04-04&returndate=2015-04-08&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHX"
+        },
+        {
+            "LowestFare": "376.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-04T00:00:00",
+            "ReturnDateTime": "2015-04-08T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-04&returndate=2015-04-08&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "181.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "250.5",
+            "DepartureDateTime": "2015-04-05T00:00:00",
+            "ReturnDateTime": "2015-04-09T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-04-05&returndate=2015-04-09&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "173.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "283.7",
+            "DepartureDateTime": "2015-04-05T00:00:00",
+            "ReturnDateTime": "2015-04-09T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-04-05&returndate=2015-04-09&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "398.69",
+            "DepartureDateTime": "2015-04-05T00:00:00",
+            "ReturnDateTime": "2015-04-09T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-05&returndate=2015-04-09&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "404.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "728.7",
+            "DepartureDateTime": "2015-04-05T00:00:00",
+            "ReturnDateTime": "2015-04-09T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-05&returndate=2015-04-09&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "304.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "629.83",
+            "DepartureDateTime": "2015-04-05T00:00:00",
+            "ReturnDateTime": "2015-04-09T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-05&returndate=2015-04-09&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "203.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-05T00:00:00",
+            "ReturnDateTime": "2015-04-09T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-05&returndate=2015-04-09&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "418.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "1116.7",
+            "DepartureDateTime": "2015-04-05T00:00:00",
+            "ReturnDateTime": "2015-04-09T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHX&departuredate=2015-04-05&returndate=2015-04-09&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHX"
+        },
+        {
+            "LowestFare": "376.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-05T00:00:00",
+            "ReturnDateTime": "2015-04-09T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-05&returndate=2015-04-09&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "181.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "250.5",
+            "DepartureDateTime": "2015-04-06T00:00:00",
+            "ReturnDateTime": "2015-04-10T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-04-06&returndate=2015-04-10&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "173.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "538.7",
+            "DepartureDateTime": "2015-04-06T00:00:00",
+            "ReturnDateTime": "2015-04-10T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-04-06&returndate=2015-04-10&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "413.69",
+            "DepartureDateTime": "2015-04-06T00:00:00",
+            "ReturnDateTime": "2015-04-10T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-06&returndate=2015-04-10&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "404.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "763.7",
+            "DepartureDateTime": "2015-04-06T00:00:00",
+            "ReturnDateTime": "2015-04-10T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-06&returndate=2015-04-10&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "304.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "618.44",
+            "DepartureDateTime": "2015-04-06T00:00:00",
+            "ReturnDateTime": "2015-04-10T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-06&returndate=2015-04-10&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "203.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-06T00:00:00",
+            "ReturnDateTime": "2015-04-10T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-06&returndate=2015-04-10&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "376.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-06T00:00:00",
+            "ReturnDateTime": "2015-04-10T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-06&returndate=2015-04-10&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "174.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "174.7",
+            "DepartureDateTime": "2015-04-07T00:00:00",
+            "ReturnDateTime": "2015-04-11T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-04-07&returndate=2015-04-11&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "173.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "210.7",
+            "DepartureDateTime": "2015-04-07T00:00:00",
+            "ReturnDateTime": "2015-04-11T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-04-07&returndate=2015-04-11&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "413.69",
+            "DepartureDateTime": "2015-04-07T00:00:00",
+            "ReturnDateTime": "2015-04-11T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-07&returndate=2015-04-11&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "370.11",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "529.69",
+            "DepartureDateTime": "2015-04-07T00:00:00",
+            "ReturnDateTime": "2015-04-11T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-07&returndate=2015-04-11&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "439.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "613.69",
+            "DepartureDateTime": "2015-04-07T00:00:00",
+            "ReturnDateTime": "2015-04-11T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAX&departuredate=2015-04-07&returndate=2015-04-11&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAX"
+        },
+        {
+            "LowestFare": "304.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "629.83",
+            "DepartureDateTime": "2015-04-07T00:00:00",
+            "ReturnDateTime": "2015-04-11T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-07&returndate=2015-04-11&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-07T00:00:00",
+            "ReturnDateTime": "2015-04-11T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=ORD&departuredate=2015-04-07&returndate=2015-04-11&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "ORD"
+        },
+        {
+            "LowestFare": "184.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "184.7",
+            "DepartureDateTime": "2015-04-07T00:00:00",
+            "ReturnDateTime": "2015-04-11T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-07&returndate=2015-04-11&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "443.69",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "509.69",
+            "DepartureDateTime": "2015-04-07T00:00:00",
+            "ReturnDateTime": "2015-04-11T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHX&departuredate=2015-04-07&returndate=2015-04-11&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHX"
+        },
+        {
+            "LowestFare": "397.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "723.7",
+            "DepartureDateTime": "2015-04-07T00:00:00",
+            "ReturnDateTime": "2015-04-11T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-07&returndate=2015-04-11&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "179.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "179.7",
+            "DepartureDateTime": "2015-04-08T00:00:00",
+            "ReturnDateTime": "2015-04-12T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-04-08&returndate=2015-04-12&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "173.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "210.7",
+            "DepartureDateTime": "2015-04-08T00:00:00",
+            "ReturnDateTime": "2015-04-12T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-04-08&returndate=2015-04-12&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "368.69",
+            "DepartureDateTime": "2015-04-08T00:00:00",
+            "ReturnDateTime": "2015-04-12T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-08&returndate=2015-04-12&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "370.11",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "564.69",
+            "DepartureDateTime": "2015-04-08T00:00:00",
+            "ReturnDateTime": "2015-04-12T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-08&returndate=2015-04-12&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "439.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "508.69",
+            "DepartureDateTime": "2015-04-08T00:00:00",
+            "ReturnDateTime": "2015-04-12T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAX&departuredate=2015-04-08&returndate=2015-04-12&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAX"
+        },
+        {
+            "LowestFare": "212.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "212.7",
+            "DepartureDateTime": "2015-04-08T00:00:00",
+            "ReturnDateTime": "2015-04-12T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-08&returndate=2015-04-12&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-08T00:00:00",
+            "ReturnDateTime": "2015-04-12T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=ORD&departuredate=2015-04-08&returndate=2015-04-12&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "ORD"
+        },
+        {
+            "LowestFare": "202.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "224.7",
+            "DepartureDateTime": "2015-04-08T00:00:00",
+            "ReturnDateTime": "2015-04-12T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-08&returndate=2015-04-12&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "433.69",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "514.69",
+            "DepartureDateTime": "2015-04-08T00:00:00",
+            "ReturnDateTime": "2015-04-12T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHX&departuredate=2015-04-08&returndate=2015-04-12&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHX"
+        },
+        {
+            "LowestFare": "413.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "598.69",
+            "DepartureDateTime": "2015-04-08T00:00:00",
+            "ReturnDateTime": "2015-04-12T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-08&returndate=2015-04-12&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "181.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "184.7",
+            "DepartureDateTime": "2015-04-09T00:00:00",
+            "ReturnDateTime": "2015-04-13T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-04-09&returndate=2015-04-13&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "173.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "210.7",
+            "DepartureDateTime": "2015-04-09T00:00:00",
+            "ReturnDateTime": "2015-04-13T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-04-09&returndate=2015-04-13&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "348.69",
+            "DepartureDateTime": "2015-04-09T00:00:00",
+            "ReturnDateTime": "2015-04-13T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-09&returndate=2015-04-13&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "404.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "514.69",
+            "DepartureDateTime": "2015-04-09T00:00:00",
+            "ReturnDateTime": "2015-04-13T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-09&returndate=2015-04-13&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "439.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "488.69",
+            "DepartureDateTime": "2015-04-09T00:00:00",
+            "ReturnDateTime": "2015-04-13T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAX&departuredate=2015-04-09&returndate=2015-04-13&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAX"
+        },
+        {
+            "LowestFare": "202.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "202.7",
+            "DepartureDateTime": "2015-04-09T00:00:00",
+            "ReturnDateTime": "2015-04-13T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-09&returndate=2015-04-13&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "474.7",
+            "DepartureDateTime": "2015-04-09T00:00:00",
+            "ReturnDateTime": "2015-04-13T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=ORD&departuredate=2015-04-09&returndate=2015-04-13&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "ORD"
+        },
+        {
+            "LowestFare": "203.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "224.69",
+            "DepartureDateTime": "2015-04-09T00:00:00",
+            "ReturnDateTime": "2015-04-13T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-09&returndate=2015-04-13&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "433.69",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "494.69",
+            "DepartureDateTime": "2015-04-09T00:00:00",
+            "ReturnDateTime": "2015-04-13T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHX&departuredate=2015-04-09&returndate=2015-04-13&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHX"
+        },
+        {
+            "LowestFare": "361.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "578.69",
+            "DepartureDateTime": "2015-04-09T00:00:00",
+            "ReturnDateTime": "2015-04-13T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-09&returndate=2015-04-13&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "179.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "179.7",
+            "DepartureDateTime": "2015-04-10T00:00:00",
+            "ReturnDateTime": "2015-04-14T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BOS&departuredate=2015-04-10&returndate=2015-04-14&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BOS"
+        },
+        {
+            "LowestFare": "173.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "210.7",
+            "DepartureDateTime": "2015-04-10T00:00:00",
+            "ReturnDateTime": "2015-04-14T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-04-10&returndate=2015-04-14&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "363.69",
+            "DepartureDateTime": "2015-04-10T00:00:00",
+            "ReturnDateTime": "2015-04-14T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-10&returndate=2015-04-14&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "404.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "529.69",
+            "DepartureDateTime": "2015-04-10T00:00:00",
+            "ReturnDateTime": "2015-04-14T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-10&returndate=2015-04-14&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "396.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "503.69",
+            "DepartureDateTime": "2015-04-10T00:00:00",
+            "ReturnDateTime": "2015-04-14T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAX&departuredate=2015-04-10&returndate=2015-04-14&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAX"
+        },
+        {
+            "LowestFare": "212.69",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "212.69",
+            "DepartureDateTime": "2015-04-10T00:00:00",
+            "ReturnDateTime": "2015-04-14T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-10&returndate=2015-04-14&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "N/A",
+            "DepartureDateTime": "2015-04-10T00:00:00",
+            "ReturnDateTime": "2015-04-14T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=ORD&departuredate=2015-04-10&returndate=2015-04-14&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "ORD"
+        },
+        {
+            "LowestFare": "304.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "304.7",
+            "DepartureDateTime": "2015-04-10T00:00:00",
+            "ReturnDateTime": "2015-04-14T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-10&returndate=2015-04-14&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "416.69",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "509.69",
+            "DepartureDateTime": "2015-04-10T00:00:00",
+            "ReturnDateTime": "2015-04-14T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHX&departuredate=2015-04-10&returndate=2015-04-14&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHX"
+        },
+        {
+            "LowestFare": "361.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "593.69",
+            "DepartureDateTime": "2015-04-10T00:00:00",
+            "ReturnDateTime": "2015-04-14T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-10&returndate=2015-04-14&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "173.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "210.7",
+            "DepartureDateTime": "2015-04-11T00:00:00",
+            "ReturnDateTime": "2015-04-15T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=BWI&departuredate=2015-04-11&returndate=2015-04-15&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "BWI"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "363.69",
+            "DepartureDateTime": "2015-04-11T00:00:00",
+            "ReturnDateTime": "2015-04-15T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-11&returndate=2015-04-15&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "370.49",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "529.69",
+            "DepartureDateTime": "2015-04-11T00:00:00",
+            "ReturnDateTime": "2015-04-15T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-11&returndate=2015-04-15&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "439.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "503.69",
+            "DepartureDateTime": "2015-04-11T00:00:00",
+            "ReturnDateTime": "2015-04-15T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAX&departuredate=2015-04-11&returndate=2015-04-15&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAX"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "363.69",
+            "DepartureDateTime": "2015-04-11T00:00:00",
+            "ReturnDateTime": "2015-04-15T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MIA&departuredate=2015-04-11&returndate=2015-04-15&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MIA"
+        },
+        {
+            "LowestFare": "304.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "304.7",
+            "DepartureDateTime": "2015-04-11T00:00:00",
+            "ReturnDateTime": "2015-04-15T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-11&returndate=2015-04-15&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "431.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "509.69",
+            "DepartureDateTime": "2015-04-11T00:00:00",
+            "ReturnDateTime": "2015-04-15T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHX&departuredate=2015-04-11&returndate=2015-04-15&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHX"
+        },
+        {
+            "LowestFare": "400.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "593.69",
+            "DepartureDateTime": "2015-04-11T00:00:00",
+            "ReturnDateTime": "2015-04-15T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-11&returndate=2015-04-15&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "376.93",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "484.33",
+            "DepartureDateTime": "2015-04-12T00:00:00",
+            "ReturnDateTime": "2015-04-16T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=CUN&departuredate=2015-04-12&returndate=2015-04-16&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "CUN"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "418.69",
+            "DepartureDateTime": "2015-04-12T00:00:00",
+            "ReturnDateTime": "2015-04-16T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-12&returndate=2015-04-16&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "404.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "534.69",
+            "DepartureDateTime": "2015-04-12T00:00:00",
+            "ReturnDateTime": "2015-04-16T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-12&returndate=2015-04-16&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "439.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "618.69",
+            "DepartureDateTime": "2015-04-12T00:00:00",
+            "ReturnDateTime": "2015-04-16T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAX&departuredate=2015-04-12&returndate=2015-04-16&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAX"
+        },
+        {
+            "LowestFare": "304.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "481.7",
+            "DepartureDateTime": "2015-04-12T00:00:00",
+            "ReturnDateTime": "2015-04-16T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-12&returndate=2015-04-16&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "209.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "418.69",
+            "DepartureDateTime": "2015-04-12T00:00:00",
+            "ReturnDateTime": "2015-04-16T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MCO&departuredate=2015-04-12&returndate=2015-04-16&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MCO"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "418.69",
+            "DepartureDateTime": "2015-04-12T00:00:00",
+            "ReturnDateTime": "2015-04-16T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MIA&departuredate=2015-04-12&returndate=2015-04-16&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MIA"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "278.7",
+            "DepartureDateTime": "2015-04-12T00:00:00",
+            "ReturnDateTime": "2015-04-16T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=ORD&departuredate=2015-04-12&returndate=2015-04-16&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "ORD"
+        },
+        {
+            "LowestFare": "203.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "244.7",
+            "DepartureDateTime": "2015-04-12T00:00:00",
+            "ReturnDateTime": "2015-04-16T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-12&returndate=2015-04-16&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "431.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "514.69",
+            "DepartureDateTime": "2015-04-12T00:00:00",
+            "ReturnDateTime": "2015-04-16T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHX&departuredate=2015-04-12&returndate=2015-04-16&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHX"
+        },
+        {
+            "LowestFare": "422.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "728.7",
+            "DepartureDateTime": "2015-04-12T00:00:00",
+            "ReturnDateTime": "2015-04-16T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-12&returndate=2015-04-16&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "225.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "472.7",
+            "DepartureDateTime": "2015-04-12T00:00:00",
+            "ReturnDateTime": "2015-04-16T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=TPA&departuredate=2015-04-12&returndate=2015-04-16&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "TPA"
+        },
+        {
+            "LowestFare": "376.93",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "484.33",
+            "DepartureDateTime": "2015-04-13T00:00:00",
+            "ReturnDateTime": "2015-04-17T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=CUN&departuredate=2015-04-13&returndate=2015-04-17&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "CUN"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "398.69",
+            "DepartureDateTime": "2015-04-13T00:00:00",
+            "ReturnDateTime": "2015-04-17T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-13&returndate=2015-04-17&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "404.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "514.69",
+            "DepartureDateTime": "2015-04-13T00:00:00",
+            "ReturnDateTime": "2015-04-17T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-13&returndate=2015-04-17&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "439.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "598.69",
+            "DepartureDateTime": "2015-04-13T00:00:00",
+            "ReturnDateTime": "2015-04-17T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAX&departuredate=2015-04-13&returndate=2015-04-17&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAX"
+        },
+        {
+            "LowestFare": "304.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "481.7",
+            "DepartureDateTime": "2015-04-13T00:00:00",
+            "ReturnDateTime": "2015-04-17T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-13&returndate=2015-04-17&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "209.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "398.69",
+            "DepartureDateTime": "2015-04-13T00:00:00",
+            "ReturnDateTime": "2015-04-17T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MCO&departuredate=2015-04-13&returndate=2015-04-17&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MCO"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "398.69",
+            "DepartureDateTime": "2015-04-13T00:00:00",
+            "ReturnDateTime": "2015-04-17T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MIA&departuredate=2015-04-13&returndate=2015-04-17&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MIA"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "278.7",
+            "DepartureDateTime": "2015-04-13T00:00:00",
+            "ReturnDateTime": "2015-04-17T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=ORD&departuredate=2015-04-13&returndate=2015-04-17&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "ORD"
+        },
+        {
+            "LowestFare": "203.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "244.69",
+            "DepartureDateTime": "2015-04-13T00:00:00",
+            "ReturnDateTime": "2015-04-17T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-13&returndate=2015-04-17&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "361.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "708.7",
+            "DepartureDateTime": "2015-04-13T00:00:00",
+            "ReturnDateTime": "2015-04-17T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-13&returndate=2015-04-17&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "225.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "452.7",
+            "DepartureDateTime": "2015-04-13T00:00:00",
+            "ReturnDateTime": "2015-04-17T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=TPA&departuredate=2015-04-13&returndate=2015-04-17&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "TPA"
+        },
+        {
+            "LowestFare": "376.93",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "504.33",
+            "DepartureDateTime": "2015-04-14T00:00:00",
+            "ReturnDateTime": "2015-04-18T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=CUN&departuredate=2015-04-14&returndate=2015-04-18&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "CUN"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "398.69",
+            "DepartureDateTime": "2015-04-14T00:00:00",
+            "ReturnDateTime": "2015-04-18T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-14&returndate=2015-04-18&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "357.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "514.69",
+            "DepartureDateTime": "2015-04-14T00:00:00",
+            "ReturnDateTime": "2015-04-18T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-14&returndate=2015-04-18&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "439.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "598.69",
+            "DepartureDateTime": "2015-04-14T00:00:00",
+            "ReturnDateTime": "2015-04-18T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAX&departuredate=2015-04-14&returndate=2015-04-18&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAX"
+        },
+        {
+            "LowestFare": "304.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "481.7",
+            "DepartureDateTime": "2015-04-14T00:00:00",
+            "ReturnDateTime": "2015-04-18T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-14&returndate=2015-04-18&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "209.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "398.69",
+            "DepartureDateTime": "2015-04-14T00:00:00",
+            "ReturnDateTime": "2015-04-18T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MCO&departuredate=2015-04-14&returndate=2015-04-18&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MCO"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "398.69",
+            "DepartureDateTime": "2015-04-14T00:00:00",
+            "ReturnDateTime": "2015-04-18T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MIA&departuredate=2015-04-14&returndate=2015-04-18&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MIA"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "278.7",
+            "DepartureDateTime": "2015-04-14T00:00:00",
+            "ReturnDateTime": "2015-04-18T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=ORD&departuredate=2015-04-14&returndate=2015-04-18&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "ORD"
+        },
+        {
+            "LowestFare": "304.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "304.7",
+            "DepartureDateTime": "2015-04-14T00:00:00",
+            "ReturnDateTime": "2015-04-18T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-14&returndate=2015-04-18&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "399.69",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "494.69",
+            "DepartureDateTime": "2015-04-14T00:00:00",
+            "ReturnDateTime": "2015-04-18T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHX&departuredate=2015-04-14&returndate=2015-04-18&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHX"
+        },
+        {
+            "LowestFare": "361.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "708.7",
+            "DepartureDateTime": "2015-04-14T00:00:00",
+            "ReturnDateTime": "2015-04-18T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-14&returndate=2015-04-18&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "225.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "452.7",
+            "DepartureDateTime": "2015-04-14T00:00:00",
+            "ReturnDateTime": "2015-04-18T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=TPA&departuredate=2015-04-14&returndate=2015-04-18&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "TPA"
+        },
+        {
+            "LowestFare": "376.93",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "569.33",
+            "DepartureDateTime": "2015-04-15T00:00:00",
+            "ReturnDateTime": "2015-04-19T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=CUN&departuredate=2015-04-15&returndate=2015-04-19&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "CUN"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "348.69",
+            "DepartureDateTime": "2015-04-15T00:00:00",
+            "ReturnDateTime": "2015-04-19T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-15&returndate=2015-04-19&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "432.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "544.69",
+            "DepartureDateTime": "2015-04-15T00:00:00",
+            "ReturnDateTime": "2015-04-19T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-15&returndate=2015-04-19&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "439.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "488.69",
+            "DepartureDateTime": "2015-04-15T00:00:00",
+            "ReturnDateTime": "2015-04-19T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAX&departuredate=2015-04-15&returndate=2015-04-19&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAX"
+        },
+        {
+            "LowestFare": "212.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "212.7",
+            "DepartureDateTime": "2015-04-15T00:00:00",
+            "ReturnDateTime": "2015-04-19T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-15&returndate=2015-04-19&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "209.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "348.69",
+            "DepartureDateTime": "2015-04-15T00:00:00",
+            "ReturnDateTime": "2015-04-19T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MCO&departuredate=2015-04-15&returndate=2015-04-19&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MCO"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "348.69",
+            "DepartureDateTime": "2015-04-15T00:00:00",
+            "ReturnDateTime": "2015-04-19T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MIA&departuredate=2015-04-15&returndate=2015-04-19&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MIA"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "278.7",
+            "DepartureDateTime": "2015-04-15T00:00:00",
+            "ReturnDateTime": "2015-04-19T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=ORD&departuredate=2015-04-15&returndate=2015-04-19&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "ORD"
+        },
+        {
+            "LowestFare": "304.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "304.7",
+            "DepartureDateTime": "2015-04-15T00:00:00",
+            "ReturnDateTime": "2015-04-19T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-15&returndate=2015-04-19&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "433.69",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "494.69",
+            "DepartureDateTime": "2015-04-15T00:00:00",
+            "ReturnDateTime": "2015-04-19T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHX&departuredate=2015-04-15&returndate=2015-04-19&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHX"
+        },
+        {
+            "LowestFare": "361.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "578.69",
+            "DepartureDateTime": "2015-04-15T00:00:00",
+            "ReturnDateTime": "2015-04-19T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-15&returndate=2015-04-19&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "225.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "352.7",
+            "DepartureDateTime": "2015-04-15T00:00:00",
+            "ReturnDateTime": "2015-04-19T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=TPA&departuredate=2015-04-15&returndate=2015-04-19&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "TPA"
+        },
+        {
+            "LowestFare": "376.93",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "574.33",
+            "DepartureDateTime": "2015-04-16T00:00:00",
+            "ReturnDateTime": "2015-04-20T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=CUN&departuredate=2015-04-16&returndate=2015-04-20&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "CUN"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "348.69",
+            "DepartureDateTime": "2015-04-16T00:00:00",
+            "ReturnDateTime": "2015-04-20T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=FLL&departuredate=2015-04-16&returndate=2015-04-20&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "FLL"
+        },
+        {
+            "LowestFare": "404.5",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "514.69",
+            "DepartureDateTime": "2015-04-16T00:00:00",
+            "ReturnDateTime": "2015-04-20T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAS&departuredate=2015-04-16&returndate=2015-04-20&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAS"
+        },
+        {
+            "LowestFare": "439.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "488.69",
+            "DepartureDateTime": "2015-04-16T00:00:00",
+            "ReturnDateTime": "2015-04-20T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LAX&departuredate=2015-04-16&returndate=2015-04-20&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LAX"
+        },
+        {
+            "LowestFare": "202.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "202.7",
+            "DepartureDateTime": "2015-04-16T00:00:00",
+            "ReturnDateTime": "2015-04-20T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=LGA&departuredate=2015-04-16&returndate=2015-04-20&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "LGA"
+        },
+        {
+            "LowestFare": "209.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "348.69",
+            "DepartureDateTime": "2015-04-16T00:00:00",
+            "ReturnDateTime": "2015-04-20T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MCO&departuredate=2015-04-16&returndate=2015-04-20&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MCO"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "348.69",
+            "DepartureDateTime": "2015-04-16T00:00:00",
+            "ReturnDateTime": "2015-04-20T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=MIA&departuredate=2015-04-16&returndate=2015-04-20&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "MIA"
+        },
+        {
+            "LowestFare": "255.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "278.7",
+            "DepartureDateTime": "2015-04-16T00:00:00",
+            "ReturnDateTime": "2015-04-20T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=ORD&departuredate=2015-04-16&returndate=2015-04-20&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "ORD"
+        },
+        {
+            "LowestFare": "203.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "224.69",
+            "DepartureDateTime": "2015-04-16T00:00:00",
+            "ReturnDateTime": "2015-04-20T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHL&departuredate=2015-04-16&returndate=2015-04-20&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHL"
+        },
+        {
+            "LowestFare": "392.69",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "494.69",
+            "DepartureDateTime": "2015-04-16T00:00:00",
+            "ReturnDateTime": "2015-04-20T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=PHX&departuredate=2015-04-16&returndate=2015-04-20&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "PHX"
+        },
+        {
+            "LowestFare": "361.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "578.69",
+            "DepartureDateTime": "2015-04-16T00:00:00",
+            "ReturnDateTime": "2015-04-20T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=SFO&departuredate=2015-04-16&returndate=2015-04-20&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "SFO"
+        },
+        {
+            "LowestFare": "225.7",
+            "CurrencyCode": "USD",
+            "LowestNonStopFare": "352.7",
+            "DepartureDateTime": "2015-04-16T00:00:00",
+            "ReturnDateTime": "2015-04-20T00:00:00",
+            "Links": [
+                {
+                    "rel": "shop",
+                    "href": "https://api.test.sabre.com/v1/shop/flights?origin=CLT&destination=TPA&departuredate=2015-04-16&returndate=2015-04-20&pointofsalecountry=US"
+                }
+            ],
+            "DestinationLocation": "TPA"
+        }
+    ]
+}
+

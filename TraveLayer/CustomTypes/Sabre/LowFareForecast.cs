@@ -27,10 +27,10 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link> Links { get; set; }
     }
 
-    public class LowFareForecast
-    {
-        public OTA_LowFareForecast OTA_LowFareForecast { get; set; }
-    }
+    //public class FareForecast
+    //{
+    //    public OTA_LowFareForecast OTA_LowFareForecast { get; set; }
+    //}
 }
 
 

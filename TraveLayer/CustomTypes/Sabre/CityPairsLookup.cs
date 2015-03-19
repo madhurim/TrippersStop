@@ -32,8 +32,8 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link> Links { get; set; }
     }
 
-    public class CityPairsLookup
-    {
-        public OTA_CityPairsLookup OTA_CityPairsLookup { get; set; }
-    }
+    //public class CityPairsLookup
+    //{
+    //    public OTA_CityPairsLookup OTA_CityPairsLookup { get; set; }
+    //}
 }

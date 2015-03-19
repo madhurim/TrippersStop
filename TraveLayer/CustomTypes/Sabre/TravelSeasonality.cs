@@ -22,8 +22,8 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link> Links { get; set; }
     }
 
-    public class TravelSeasonality
-    {
-        public OTA_TravelSeasonality OTA_TravelSeasonality { get; set; }
-    }
+    //public class TravelSeasonality
+    //{
+    //    public OTA_TravelSeasonality OTA_TravelSeasonality { get; set; }
+    //}
 }
