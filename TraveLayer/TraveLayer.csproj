@@ -88,21 +88,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CustomTypes\Sabre\Response\BargainFinder.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\AirportsAtCities.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\CityPairs.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\FareRange.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\Fares.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\Countries.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\Destinations.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\FareForecast.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\LowFareForecast.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\MultiAirportCity.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\PointofSaleCountryCode.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\ThemeAirport.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\TravelInfo.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\LowFareSearch.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\TravelSeasonality.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModel\TravelTheme.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\AirportsAtCities.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\CityPairs.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\FareRange.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\Fares.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\Countries.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\Destinations.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\FareForecast.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\LowFareForecast.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\MultiAirportCity.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\PointofSaleCountryCode.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\ThemeAirport.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\TravelInfo.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\LowFareSearch.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\TravelSeasonality.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\TravelTheme.cs" />
     <Compile Include="CustomTypes\Sabre\Response\AirportsAtCitiesLookup.cs" />
     <Compile Include="CustomTypes\Sabre\Request\AlternateDate.cs" />
     <Compile Include="CustomTypes\Sabre\Request\BargainFinder.cs" />
