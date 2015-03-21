@@ -115,8 +115,23 @@
   <ItemGroup>
     <Compile Include="APICallerGenericTest\SabreAPICallerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SabreAPITests\DestinationFinderTest.cs" />
-    <Compile Include="SabreAPITests\BargainFinderTest.cs" />
+    <Compile Include="SabreAPITests\TestRequest\AdvancedCalendar.cs" />
+    <Compile Include="SabreAPITests\TestResponse\AirportsAtCitiesLookup.cs" />
+    <Compile Include="SabreAPITests\TestResponse\CityPairsLookup.cs" />
+    <Compile Include="SabreAPITests\TestResponse\CountriesLookup.cs" />
+    <Compile Include="SabreAPITests\TestResponse\DestinationFinderTest.cs" />
+    <Compile Include="SabreAPITests\TestRequest\BargainFinderTest.cs" />
+    <Compile Include="SabreAPITests\TestResponse\FareRange.cs" />
+    <Compile Include="SabreAPITests\TestResponse\InstaFlightsSearch.cs" />
+    <Compile Include="SabreAPITests\TestResponse\LeadPriceCalendar.cs" />
+    <Compile Include="SabreAPITests\TestResponse\LowFareForecast.cs" />
+    <Compile Include="SabreAPITests\TestResponse\MultiAirportCityLookup.cs" />
+    <Compile Include="SabreAPITests\TestResponse\PointofSaleCountryCodeLookup.cs" />
+    <Compile Include="SabreAPITests\TestResponse\ThemeAirportLookup.cs" />
+    <Compile Include="SabreAPITests\TestResponse\TopDestinations.cs" />
+    <Compile Include="SabreAPITests\TestResponse\TravelSeasonality.cs" />
+    <Compile Include="SabreAPITests\TestResponse\TravelSeasonalityAirportsLookup.cs" />
+    <Compile Include="SabreAPITests\TestResponse\TravelThemeLookup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
