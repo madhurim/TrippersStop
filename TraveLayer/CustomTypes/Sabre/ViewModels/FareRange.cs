@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TraveLayer.CustomTypes.Sabre.ViewModel
+namespace TraveLayer.CustomTypes.Sabre.ViewModels
 {
     /// <summary>
     /// Sabre FareForecastController Response

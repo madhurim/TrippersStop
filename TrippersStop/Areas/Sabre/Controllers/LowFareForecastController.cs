@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using TrippersStop.TraveLayer;
 using TrippersStop.Helper;
-using TraveLayer.CustomTypes.Sabre.ViewModel;
+using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre;
 using AutoMapper;
 using TraveLayer.APIServices;
