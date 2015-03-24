@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -32,6 +33,7 @@ namespace TrippismApi
             //JsConfig.EmitLowercaseUnderscoreNames = true;
             var container = new Container();
             container.RegisterWebApiRequest<IAsyncSabreAPICaller, SabreAPICaller>();
+            container.RegisterWebApiRequest<IAsyncWeatherAPICaller, WeatherAPICaller>();          
             container.RegisterWebApiRequest<ICacheService, RedisService>();
             container.RegisterWebApiRequest<IDBService, MongoService>();
 
@@ -42,6 +44,8 @@ namespace TrippismApi
 
             GlobalConfiguration.Configuration.DependencyResolver =
                 new SimpleInjectorWebApiDependencyResolver(container);
+
+            //GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
         }
     }
 }

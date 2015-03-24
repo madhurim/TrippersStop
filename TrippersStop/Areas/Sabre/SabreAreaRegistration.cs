@@ -15,16 +15,30 @@ namespace TrippismApi.Areas.Sabre
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+         //   context.Routes.MapHttpRoute(
+         //    name: "Sabre_default",
+         //    routeTemplate: "api/Sabre/Destinations/{id}",
+         //    defaults: new { controller = "Destinations", id = RouteParameter.Optional }
+         //);
+
+  //          context.Routes.MapHttpRoute("Sabre_default",
+  //"Sabre/api/{controller}/{id}",
+  //new { id = RouteParameter.Optional });
+
             //context.MapRoute(
             //    "Sabre_default",
-            //    "Sabre/{controller}/{action}/{id}",
-            //    new { action = "Index", id = UrlParameter.Optional }
+            //    "api/Sabre/{controller}/{action}/{id}",
+            //    new { aomction = "Index", id = UrlParameter.Optional }
             //);
             context.MapHttpRoute(
               name: "Sabre_default",
               routeTemplate: "Sabre/api/{controller}/{id}",
               defaults: new { id = RouteParameter.Optional }
           );
+
+   //         context.Routes.MapHttpRoute("Sabre_default",
+   //"Sabre/api/{controller}/{id}",
+   //new { id = RouteParameter.Optional });
         }
     }
 }

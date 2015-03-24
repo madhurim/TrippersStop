@@ -13,5 +13,9 @@ namespace TrippismApi.TraveLayer
         String SabreTokenExpireKey { get; }
         String LongTermToken { get; set; }
         String TokenExpireIn { get; set; }
+
+        String Authorization { set; }
+
+        String ClientSecret { set; }
     }
 }
