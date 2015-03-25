@@ -70,6 +70,9 @@ namespace TraveLayer.CustomTypes.Sabre
         {
             public IntelliSellTransaction IntelliSellTransaction { get; set; }
             public NumTrips NumTrips { get; set; }
+
+            // BF Response
+            public ETicket eTicket { get; set; }
         }
         public class NumTrips
         {

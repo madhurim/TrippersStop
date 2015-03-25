@@ -27,9 +27,13 @@ namespace TraveLayer.CustomTypes.Sabre
         public InstaTPAExtensions TPA_Extensions { get; set; }
     }
 
+
     public class FareInfos
     {
         public List<FareInfo> InstaFareInfo { get; set; }
+
+        //Come from Bargain Finder reponse
+        //public List<FareInfo> FareInfo { get; set; }
     }
 
     public class Tax

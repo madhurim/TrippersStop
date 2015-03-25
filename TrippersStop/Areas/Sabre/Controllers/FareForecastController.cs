@@ -26,8 +26,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
             string result = APIHelper.GetDataFromSabre(url);
             OTA_FareRange fares = new OTA_FareRange();
             fares = ServiceStackSerializer.DeSerialize<OTA_FareRange>(result);
-            Mapper.CreateMap<OTA_FareRange, FareRange>();
-            FareRange fareRange = Mapper.Map<OTA_FareRange, FareRange>(fares);
+            Mapper.CreateMap<OTA_FareRange, VM.FareRange>();
+            VM.FareRange fareRange = Mapper.Map<OTA_FareRange, VM.FareRange>(fares);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fareRange);
             return response;
         }
