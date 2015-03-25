@@ -24,7 +24,7 @@ namespace TrippersStop.Areas.Sabre.Controllers
             string result = APIHelper.GetDataFromSabre(url);
             OTA_TravelSeasonality seasonality = new OTA_TravelSeasonality();
             seasonality = ServiceStackSerializer.DeSerialize<OTA_TravelSeasonality>(result);
-            Mapper.CreateMap<OTA_TravelSeasonality, TravelSeasonality>();
+            Mapper.CreateMap<OTA_TravelSeasonality, VM.TravelSeasonality>();
             VM.TravelSeasonality travelSeasonality = Mapper.Map<OTA_TravelSeasonality, VM.TravelSeasonality>(seasonality);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, travelSeasonality);
             return response;

@@ -36,6 +36,9 @@ namespace TraveLayer.CustomTypes.Sabre
     public class FareRange
     {
         public OTA_FareRange OTA_FareRange { get; set; }
+        //public string OriginLocation { get; set; }
+        //public string DestinationLocation { get; set; }
+        //public List<FareData> FareData { get; set; }
     }
 
 }

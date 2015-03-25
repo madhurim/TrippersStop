@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -320,33 +321,35 @@ namespace TraveLayer.CustomTypes.Sabre
         public bool BelowMin { get; set; }
     }
 
-    //public class Cabin
-    //{
-    //    public string Cabin { get; set; }
-    //}
+    public class Cabin
+    {
+         [DataMember(Name = "Cabin")]
+        public string cabin { get; set; }
+    }
 
     public class TPAExtensions4
     {
         public SeatsRemaining SeatsRemaining { get; set; }
-        public string Cabin { get; set; }
+       
+        public Cabin Cabin { get; set; }
     }
 
-    public class FareInfo : FareInfoLeadPriceCalendar
-    {
-        public string FareReference { get; set; }
-        public TPAExtensions4 TPA_Extensions { get; set; }
-
-    }
-    public class FareInfoLeadPriceCalendar
-    {
-        public object LowestFare { get; set; }
-        public string CurrencyCode { get; set; }
-        public object LowestNonStopFare { get; set; }
-        public string DepartureDateTime { get; set; }
-        public string ReturnDateTime { get; set; }
-        public List<Link> Links { get; set; }
-        public string DestinationLocation { get; set; } // Copying from DestinationFinder.
-    }
+    // Move To Lead price calender
+    //public class FareInfo
+    //{
+    //    public string FareReference { get; set; }
+    //    public TPAExtensions4 TPA_Extensions { get; set; }
+    //}
+    //public class FareInfoLeadPriceCalendar
+    //{
+    //    public object LowestFare { get; set; }
+    //    public string CurrencyCode { get; set; }
+    //    public object LowestNonStopFare { get; set; }
+    //    public string DepartureDateTime { get; set; }
+    //    public string ReturnDateTime { get; set; }
+    //    public List<Link> Links { get; set; }
+    //    public string DestinationLocation { get; set; } // Copying from DestinationFinder.
+    //}
     //public class FareInfos
     //{
     //    public List<FareInfo> FareInfo { get; set; }
@@ -427,7 +430,7 @@ namespace TraveLayer.CustomTypes.Sabre
 
 
 
-    public class RootObject
+    public class BargainFinderReponse
     {
         public OTAAirLowFareSearchRS OTA_AirLowFareSearchRS { get; set; }
         public List<Link> Links { get; set; }
