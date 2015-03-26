@@ -12,6 +12,8 @@ using TrippersStop.Helper;
 using AutoMapper;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using TraveLayer.CustomTypes.Sabre.ViewModels;
+
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
@@ -30,17 +32,18 @@ namespace TrippersStop.Areas.Sabre.Controllers
             //TBD : URL configurable using XML
             String result = bargainFinderAPI.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
             var bargainResponse= DeSerializeResponse(result);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);         
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, bargainResponse);         
             return response;
         }
 
-        private BargainFinder DeSerializeResponse(string result)
+        private LowFareSearch DeSerializeResponse(string result)
         {
             BargainFinderReponse reponse = new BargainFinderReponse();
             reponse = ServiceStackSerializer.DeSerialize<BargainFinderReponse>(result);
-            Mapper.CreateMap<BargainFinderReponse, BargainFinder>();
-            BargainFinder bargainFinder = Mapper.Map<BargainFinderReponse, BargainFinder>(reponse);
-            return bargainFinder;
+            Mapper.CreateMap<BargainFinderReponse, LowFareSearch>()
+                    .ForMember(o => o.AirLowFareSearchRS, m => m.MapFrom(s => s.OTA_AirLowFareSearchRS));
+            LowFareSearch lowFareSearch = Mapper.Map<BargainFinderReponse, LowFareSearch>(reponse);
+            return lowFareSearch;
         }
 
     }

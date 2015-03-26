@@ -33,7 +33,7 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<FareInfo> InstaFareInfo { get; set; }
 
         //Come from Bargain Finder reponse
-        //public List<FareInfo> FareInfo { get; set; }
+        public List<FareInfo> FareInfo { get; set; }
     }
 
     public class Tax

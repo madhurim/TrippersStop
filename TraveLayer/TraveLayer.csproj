@@ -102,7 +102,6 @@
     <Compile Include="CustomTypes\Sabre\ViewModels\PointofSaleCountryCode.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\ThemeAirport.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TravelInfo.cs" />
-    <Compile Include="CustomTypes\Sabre\ViewModels\LowFareSearch.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TravelSeasonality.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TravelTheme.cs" />
     <Compile Include="CustomTypes\Sabre\Response\AirportsAtCitiesLookup.cs" />

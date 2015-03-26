@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Sabre.ViewModels
 {
-    public class BargainFinder
+    public class LowFareSearch
     {
         public OTAAirLowFareSearchRS AirLowFareSearchRS { get; set; }
     }

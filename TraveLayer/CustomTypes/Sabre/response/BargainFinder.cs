@@ -323,7 +323,7 @@ namespace TraveLayer.CustomTypes.Sabre
 
     public class Cabin
     {
-         [DataMember(Name = "Cabin")]
+        [DataMember(Name = "Cabin")]
         public string cabin { get; set; }
     }
 
