@@ -30,6 +30,8 @@ namespace Trippism.Areas.Weather.Controllers
         [HttpGet]
         public HttpResponseMessage Get(string latitude, string longitude,DateTime date)
         {
+
+            //http://localhost:14606/api/Weather/History?latitude=37.776289&longitude=-122.395234&date=2006-04-05
        // http://api.wunderground.com/api/1fc34e46d99dde6d/history_20060405/q/37.776289,-122.395234.json
             string historyDate = date.ToString("yyyyMMdd");
 

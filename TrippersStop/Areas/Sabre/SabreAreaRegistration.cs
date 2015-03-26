@@ -30,15 +30,27 @@ namespace TrippismApi.Areas.Sabre
             //    "api/Sabre/{controller}/{action}/{id}",
             //    new { aomction = "Index", id = UrlParameter.Optional }
             //);
-            context.MapHttpRoute(
-              name: "Sabre_default",
-              routeTemplate: "Sabre/api/{controller}/{id}",
-              defaults: new { id = RouteParameter.Optional }
-          );
+          //  context.MapHttpRoute(
+          //    name: "Sabre_default",
+          //    routeTemplate: "Sabre/api/{controller}/{id}",
+          //    defaults: new { id = RouteParameter.Optional }
+          //);
 
    //         context.Routes.MapHttpRoute("Sabre_default",
    //"Sabre/api/{controller}/{id}",
    //new { id = RouteParameter.Optional });
+
+            //context.Routes.MapHttpRoute(
+            //name: "Sabre_default",
+            //routeTemplate: "api/Sabre/{controller}/{id}",
+            //defaults: new { area = "Sabre", id = RouteParameter.Optional });
+        //    context.Routes.MapMvcAttributeRoutes();
+
+            context.MapRoute(
+    "Sabre_default1",
+    "Sabre/{controller}/{action}/{id}",
+    new { controller = "Destinations", action = "Get", id = UrlParameter.Optional }
+);
         }
     }
 }
