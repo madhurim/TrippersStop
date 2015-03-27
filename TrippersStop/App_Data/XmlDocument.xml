@@ -491,11 +491,6 @@
             Set db service.
             </summary>
         </member>
-        <member name="M:TrippismApi.Areas.IATA.Controllers.IATAController.Get">
-            <summary>
-            Get available city pairs.
-            </summary>
-        </member>
         <member name="M:TrippismApi.Areas.IATA.Controllers.IATAController.GetResponse">
             <summary>
             Get response from IATA service..

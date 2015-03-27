@@ -1,20 +1,13 @@
-﻿using System;
+﻿using DataLayer;
+using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Http;
-using DataLayer;
-using System.Net.Http;
-using System.Reflection;
 using System.Net;
-using TraveLayer.CustomTypes.Sabre.Response;
-using TraveLayer.CustomTypes.IATA.ViewModels;
-using System.Text;
-using MongoDB.Driver;
+using System.Net.Http;
+using System.Web.Http;
 using System.Web.Http.Description;
-
-
+using TraveLayer.CustomTypes.IATA.ViewModels;
 
 namespace TrippismApi.Areas.IATA.Controllers
 {
@@ -32,7 +25,7 @@ namespace TrippismApi.Areas.IATA.Controllers
             _dbService = dbService;
         }
 
-
+        [Route("api/IATA/airports")]
         /// <summary>
         /// Get available city pairs.
         /// </summary>
@@ -51,12 +44,8 @@ namespace TrippismApi.Areas.IATA.Controllers
 
             var collection = _dbService.Get<IATACode>("IATA");
             AirPortCodes = collection.ToList();
-          
+
             return Request.CreateResponse(HttpStatusCode.OK, AirPortCodes);
         }
-       
-     
-
-       
     }
 }
