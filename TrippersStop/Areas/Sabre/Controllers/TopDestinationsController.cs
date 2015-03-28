@@ -7,6 +7,9 @@ using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre;
 using TrippersStop.TraveLayer;
 using TrippersStop.Helper;
+using TraveLayer.APIServices;
+using AutoMapper;
+using TraveLayer.CustomTypes.Sabre.ViewModels;
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
@@ -60,7 +63,11 @@ namespace TrippersStop.Areas.Sabre.Controllers
         private HttpResponseMessage GetResponse(string url)
         {
             string result = APIHelper.GetDataFromSabre(url);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            OTA_TopDestinations destinations = new OTA_TopDestinations();
+            destinations = ServiceStackSerializer.DeSerialize<OTA_TopDestinations>(result);
+            Mapper.CreateMap<OTA_TopDestinations, TopDestination>();                     
+            TopDestination topDestinations = Mapper.Map<OTA_TopDestinations, TopDestination>(destinations);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, topDestinations);
             return response;
         }
     }

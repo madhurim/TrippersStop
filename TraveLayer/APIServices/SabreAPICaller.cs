@@ -4,9 +4,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Configuration;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using System.Web;
 using TrippersStop.TraveLayer;
+using ServiceStack.Text;
 
 namespace TrippersStop.TraveLayer
 {
@@ -117,19 +117,19 @@ namespace TrippersStop.TraveLayer
                 // If client authentication failed then we get a JSON response from Azure Market Place
                 if (!sabreResponse.IsSuccessStatusCode)
                 {
-                    JToken error = await sabreResponse.Content.ReadAsAsync<JToken>();
-                    string errorType = error.Value<string>("error");
-                    string errorDescription = error.Value<string>("error_description");
+                    JsonObject error = await sabreResponse.Content.ReadAsAsync<JsonObject>();
+                    string errorType = error.Get<string>("error");
+                    string errorDescription = error.Get<string>("error_description");
                     throw new HttpRequestException(string.Format("Sabre request failed: {0} {1}", errorType, errorDescription));
                 }
 
                // "{  "access_token": "Shared/IDL:IceSess\\/SessMgr:1\\.0.IDL/Common/!ICESMS\\/ACPCRTC!ICESMSLB\\/CRT.LB!-3572677658411405181!1757770!0!!E2E-1",  "token_type": "bearer",  "expires_in": 900}"
                 
                     // Get the access token to attach to the original request from the response body
-                JToken response = await sabreResponse.Content.ReadAsAsync<JToken>();
+                JsonObject response = await sabreResponse.Content.ReadAsAsync<JsonObject>();
 
                 //should we URLencode this ?
-                _longTermToken = HttpUtility.UrlEncode(response.Value<string>("access_token"));
+                _longTermToken = HttpUtility.UrlEncode(response.Get<string>("access_token"));
 
                 // TODO : add them to the class
                // string _token_type = response.Value<string>("token_type");
@@ -155,9 +155,9 @@ namespace TrippersStop.TraveLayer
                 // If client authentication failed then we get a JSON response from Sabre
                 if (!sabreResponse.IsSuccessStatusCode)
                 {
-                    JToken error = await sabreResponse.Content.ReadAsAsync<JToken>();
-                    string errorType = error.Value<string>("error");
-                    string errorDescription = error.Value<string>("error_description");
+                    JsonObject error = await sabreResponse.Content.ReadAsAsync<JsonObject>();
+                    string errorType = error.Get<string>("error");
+                    string errorDescription = error.Get<string>("error_description");
                     throw new HttpRequestException(string.Format("Sabre request failed: {0} {1}", errorType, errorDescription));
                 }
 
@@ -180,9 +180,9 @@ namespace TrippersStop.TraveLayer
                 // If client authentication failed then we get a JSON response from Sabre
                 if (!sabreResponse.IsSuccessStatusCode)
                 {
-                    JToken error = await sabreResponse.Content.ReadAsAsync<JToken>();
-                    string errorType = error.Value<string>("error");
-                    string errorDescription = error.Value<string>("error_description");
+                    JsonObject error = await sabreResponse.Content.ReadAsAsync<JsonObject>();
+                    string errorType = error.Get<string>("error");
+                    string errorDescription = error.Get<string>("error_description");
                     throw new HttpRequestException(string.Format("Sabre request failed: {0} {1}", errorType, errorDescription));
                 }
 
