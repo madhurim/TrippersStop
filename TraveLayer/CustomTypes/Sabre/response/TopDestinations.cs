@@ -38,7 +38,7 @@ namespace TraveLayer.CustomTypes.Sabre
         public List<Link> Links { get; set; }
     }
 
-
+    //TBD : remove
     public class TopDestinations
     {
         public OTA_TopDestinations OTA_TopDestinations { get; set; }

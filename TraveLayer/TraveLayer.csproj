@@ -34,12 +34,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.JsonResult">
-      <HintPath>..\packages\Newtonsoft.JsonResult.1.0.5369.19299\lib\net40\Newtonsoft.JsonResult.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
@@ -101,6 +95,7 @@
     <Compile Include="CustomTypes\Sabre\ViewModels\MultiAirportCity.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\PointofSaleCountryCode.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\ThemeAirport.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\TopDestination.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TravelInfo.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TravelSeasonality.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TravelTheme.cs" />
@@ -124,6 +119,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

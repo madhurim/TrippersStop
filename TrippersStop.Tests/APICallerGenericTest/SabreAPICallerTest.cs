@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TrippersStop.TraveLayer;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using TraveLayer.CustomTypes.Sabre;
 using System.Collections.Generic;
 using Moq;
