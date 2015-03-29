@@ -168,7 +168,8 @@ namespace TrippersStop.TraveLayer
 
         public async Task<String> Get(string Method)
         {
-            
+            const string statusComplete = "Complete";
+            const string statusMessage = "No results were found";
             using (var client = new HttpClient())
             {   
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_Accept));
@@ -183,6 +184,10 @@ namespace TrippersStop.TraveLayer
                     JsonObject error = await sabreResponse.Content.ReadAsAsync<JsonObject>();
                     string errorType = error.Get<string>("error");
                     string errorDescription = error.Get<string>("error_description");
+                    string message = error.Get<string>("message");
+                    string status = error.Get<string>("status");
+                    if (status == statusComplete && message == statusMessage)
+                        return string.Empty;
                     throw new HttpRequestException(string.Format("Sabre request failed: {0} {1}", errorType, errorDescription));
                 }
 

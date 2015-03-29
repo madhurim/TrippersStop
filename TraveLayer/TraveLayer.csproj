@@ -79,10 +79,11 @@
     <Compile Include="APIServices\IAPICaller.cs" />
     <Compile Include="APIServices\SabreAPICaller.cs" />
     <Compile Include="APIServices\ServiceStackSerializer.cs" />
-    <Compile Include="CustomTypes\Sabre\Request\AdvancedCalendar.cs">
+    <Compile Include="CustomTypes\Sabre\Response\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CustomTypes\Sabre\Response\BargainFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\AdvancedCalendar.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\AirportsAtCities.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\BargainFinder.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\CityPairs.cs" />
