@@ -32,7 +32,7 @@ namespace Trippism.Areas.Weather.Controllers
         public HttpResponseMessage Get([FromUri]WeatherInfo weatherInfo)
         {
 
-            //http://localhost:14606/api/weather/history?state=CA&city=San_Francisco&departdate=2015-07-06&returndate=2015-07-09
+            //http://localhost:14606/api/weather/history?State=CA&City=San_Francisco&DepartDate=2015-07-06&ReturnDate=2015-07-09
             // http://api.wunderground.com/api/Your_Key/planner_MMDDMMDD/q/CA/San_Francisco.json
             string fromDate = weatherInfo.DepartDate.ToString("MMdd");
             string toDate = weatherInfo.ReturnDate.ToString("MMdd");
