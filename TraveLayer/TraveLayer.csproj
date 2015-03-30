@@ -149,6 +149,8 @@
     <Compile Include="CacheServices\ICacheService.cs" />
     <Compile Include="CacheServices\RedisService.cs" />
     <Compile Include="CustomTypes\Weather\Request\WeatherInfo.cs" />
+    <Compile Include="CustomTypes\Weather\Response\WeatherFeatures.cs" />
+    <Compile Include="CustomTypes\Weather\ViewModels\TripWeather.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -157,10 +159,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CustomTypes\Weather\Response\" />
-    <Folder Include="CustomTypes\Weather\ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

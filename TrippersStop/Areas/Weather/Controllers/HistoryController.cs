@@ -47,9 +47,14 @@ namespace Trippism.Areas.Weather.Controllers
             _apiCaller.Accept = "application/json";
             _apiCaller.ContentType = "application/json";
             APIResponse result = _apiCaller.Get(url). Result;
+   
             if (result.StatusCode == HttpStatusCode.OK)
             {
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result.Response);
+                WeatherFeatures weather = new WeatherFeatures();
+                weather = ServiceStackSerializer.DeSerialize<WeatherFeatures>(result.Response);
+                //Mapper.CreateMap<OTA_ThemeAirportLookup, ThemeAirport>();
+                //ThemeAirport themeAirport = Mapper.Map<OTA_ThemeAirportLookup, ThemeAirport>(themeAirportLookup);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, weather);
                 return response;
             }
             return Request.CreateResponse(result.StatusCode, result.Response); 
