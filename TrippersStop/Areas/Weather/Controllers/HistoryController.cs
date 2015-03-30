@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre.Response;
+using TraveLayer.CustomTypes.Weather;
 using TrippismApi.TraveLayer;
 
 namespace Trippism.Areas.Weather.Controllers
@@ -26,16 +27,16 @@ namespace Trippism.Areas.Weather.Controllers
         /// Retrieve city pairs that can be passed to applicable Air Shopping
         /// </summary>
         //[ResponseType(typeof(CityPairs))] 
-        [Route("api/Weather/History")]
+        [Route("api/weather/history")]
         [HttpGet]
-        public HttpResponseMessage Get(string latitude, string longitude,DateTime date)
+        public HttpResponseMessage Get([FromUri]WeatherInfo weatherInfo)
         {
 
-            //http://localhost:14606/api/Weather/History?latitude=37.776289&longitude=-122.395234&date=2006-04-05
-       // http://api.wunderground.com/api/1fc34e46d99dde6d/history_20060405/q/37.776289,-122.395234.json
-            string historyDate = date.ToString("yyyyMMdd");
-
-            string url = string.Format("history_{0}/q/{1},{2}.json", historyDate, latitude, longitude);
+            //http://localhost:14606/api/weather/history?state=CA&city=San_Francisco&departdate=2015-07-06&returndate=2015-07-09
+            // http://api.wunderground.com/api/Your_Key/planner_MMDDMMDD/q/CA/San_Francisco.json
+            string fromDate = weatherInfo.DepartDate.ToString("MMdd");
+            string toDate = weatherInfo.ReturnDate.ToString("MMdd");
+            string url = string.Format("planner_{0}{1}/q/{2}/{3}.json", fromDate, toDate, weatherInfo.State, weatherInfo.City);
             return GetResponse(url);
         }
         /// <summary>

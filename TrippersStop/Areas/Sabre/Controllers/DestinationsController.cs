@@ -56,6 +56,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// Filters the response for destination airport codes associated with a travel theme
         /// </summary>
         [Route("api/destinations/theme/{theme}")]
+        [Route("api/sabre/destinations/theme/{theme}")]
         [HttpGet]
         [ResponseType(typeof(Fares))]
         public HttpResponseMessage GetDestinationsByTheme(string theme, string origin, string departuredate, string returndate, string lengthofstay)
@@ -68,6 +69,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// Return the cheapest detinations 
         /// </summary>
         [Route("api/destinations/cheapest/{count}")]
+        [Route("api/sabre/destinations/cheapest/{count}")]
         [HttpGet]
         [ResponseType(typeof(Fares))]
         public HttpResponseMessage GetTopCheapestDestinations(int count, string origin, string departuredate, string returndate, string lengthofstay)
@@ -80,6 +82,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// Filters the response for overall lead fares that are equal to or less than the maximum, and returns the value in LowestFare
         /// </summary>
         [Route("api/destinations/maxfare/{maxfare}")]
+        [Route("api/sabre/destinations/maxfare/{maxfare}")]
         [HttpGet]
         [ResponseType(typeof(Fares))]
         public HttpResponseMessage GetDestinationsByMaxFare(double maxfare, string origin, string departuredate, string returndate, string lengthofstay)
@@ -91,7 +94,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// Filters the response for destinations in the country or countries you specify
         /// </summary>
-        [Route("api/destinations/country/{country}")]
+        [Route("api/sabre/destinations/country/{country}")]
         [HttpGet]
         [ResponseType(typeof(Fares))]
         public HttpResponseMessage GetDestinationsByCountry(string country, string origin, string departuredate, string returndate, string lengthofstay)

@@ -16,11 +16,16 @@ namespace TrippismApi
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/sabre/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
 
-        
+            config.Routes.MapHttpRoute(
+                    name: "DefaultApi1",
+                    routeTemplate: "api/{controller}/{id}",
+                    defaults: new { id = RouteParameter.Optional }
+                );
+
 
             config.Filters.Add(new TripperExceptionFilterAttribute());
             config.Filters.Add(new ValidateModelAttribute());

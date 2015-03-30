@@ -868,7 +868,7 @@
             Set api class and cache service.
             </summary>
         </member>
-        <member name="M:Trippism.Areas.Weather.Controllers.HistoryController.Get(System.String,System.String,System.DateTime)">
+        <member name="M:Trippism.Areas.Weather.Controllers.HistoryController.Get(TraveLayer.CustomTypes.Weather.WeatherInfo)">
             <summary>
             Retrieve city pairs that can be passed to applicable Air Shopping
             </summary>

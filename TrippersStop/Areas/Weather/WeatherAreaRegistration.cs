@@ -17,34 +17,9 @@ namespace TrippismApi.Areas.Weather
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-//            context.Routes.MapHttpRoute("Weather_default",
-//"Weather/api/{controller}/{id}",
-//new { id = RouteParameter.Optional });
-
-            //context.Routes.MapHttpRoute(
-            //    name: "Weather_default",
-            //    routeTemplate: "api/Weather/{id}",
-            //    defaults: new { controller = "History", id = RouteParameter.Optional }
-            //);
-
-            //context.MapRoute(
-            //    "Weather_default1",
-            //    "api/Weather/{controller}/{action}/{id}",
-            //    new { action = "Index", id = UrlParameter.Optional }
-            //);
-           // context.MapHttpRoute(
-           //    name: "Weather_default",
-           //    routeTemplate: "Weather/{controller}/{action}/{id}",
-           //    defaults: new { id = RouteParameter.Optional }
-           //);
-           // context.Routes.MapHttpRoute(
-           //name: "Weather_default",
-           //routeTemplate: "api/Weather/{controller}/{id}",
-           //defaults: new { area = "Weather", id = RouteParameter.Optional });
-           // context.Routes.MapMvcAttributeRoutes();
 
             context.MapRoute(
-        "Weather_default1",
+        "Weather_default",
         "Weather/{controller}/{action}/{id}",
         new { controller = "History", action = "Get", id = UrlParameter.Optional }
     );

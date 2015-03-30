@@ -25,7 +25,7 @@ namespace TrippismApi.Areas.IATA.Controllers
             _dbService = dbService;
         }
 
-        [Route("api/IATA/airports")]
+        [Route("api/iata/airports")]
         /// <summary>
         /// Get available city pairs.
         /// </summary>
