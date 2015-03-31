@@ -369,7 +369,7 @@ namespace TraveLayer.CustomTypes.Weather
         public ChanceOf chance_of { get; set; }
     }
 
-    public class WeatherFeatures
+    public class HistoryOutput 
     {
         public Response response { get; set; }
         public Trip trip { get; set; }

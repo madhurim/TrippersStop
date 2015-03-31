@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -16,7 +17,7 @@ namespace Trippism.Areas.Weather.Controllers
         IAsyncWeatherAPICaller _apiCaller;
         ICacheService _cacheService;
         /// <summary>
-        /// Set api class and cache service.
+        /// Returns a weather summary based on historical information between the specified dates (30 days max).
         /// </summary>
         public HistoryController(IAsyncWeatherAPICaller apiCaller, ICacheService cacheService)
         {
@@ -24,12 +25,12 @@ namespace Trippism.Areas.Weather.Controllers
             _cacheService = cacheService;           
         }
         /// <summary>
-        /// Retrieve city pairs that can be passed to applicable Air Shopping
+        /// Returns a weather summary based on historical information between the specified dates (30 days max).
         /// </summary>
-        //[ResponseType(typeof(CityPairs))] 
+        [ResponseType(typeof(TripWeather))]
         [Route("api/weather/history")]
         [HttpGet]
-        public HttpResponseMessage Get([FromUri]WeatherInfo weatherInfo)
+        public HttpResponseMessage Get([FromUri]HistoryInput weatherInfo)
         {
 
             //http://localhost:14606/api/weather/history?State=CA&City=San_Francisco&DepartDate=2015-07-06&ReturnDate=2015-07-09
@@ -50,10 +51,14 @@ namespace Trippism.Areas.Weather.Controllers
    
             if (result.StatusCode == HttpStatusCode.OK)
             {
-                WeatherFeatures weather = new WeatherFeatures();
-                weather = ServiceStackSerializer.DeSerialize<WeatherFeatures>(result.Response);
-                //Mapper.CreateMap<OTA_ThemeAirportLookup, ThemeAirport>();
-                //ThemeAirport themeAirport = Mapper.Map<OTA_ThemeAirportLookup, ThemeAirport>(themeAirportLookup);
+                HistoryOutput weather = new HistoryOutput();
+                weather = ServiceStackSerializer.DeSerialize<HistoryOutput>(result.Response);
+                //Mapper.CreateMap<HistoryOutput, TripWeather>()
+                //   .ForMember(h => h.TempHighAvg, m => m.MapFrom(s => s.trip.temp_high))
+                //   .ForMember(h => h.TempLowAvg, m => m.MapFrom(s => s.trip.temp_low))
+                //   .ForMember(h => h.ChanceOf, m => m.MapFrom(s => s.trip.chance_of))
+                //   .ForMember(h => h.CloudCover, m => m.MapFrom(s => s.trip.cloud_cover));
+                //TripWeather tripWeather = Mapper.Map<HistoryOutput, TripWeather>(weather);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, weather);
                 return response;
             }

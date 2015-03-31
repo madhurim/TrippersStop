@@ -148,8 +148,8 @@
     <Compile Include="CustomTypes\Sabre\Response\TravelThemeLookup.cs" />
     <Compile Include="CacheServices\ICacheService.cs" />
     <Compile Include="CacheServices\RedisService.cs" />
-    <Compile Include="CustomTypes\Weather\Request\WeatherInfo.cs" />
-    <Compile Include="CustomTypes\Weather\Response\WeatherFeatures.cs" />
+    <Compile Include="CustomTypes\Weather\Request\HistoryInput.cs" />
+    <Compile Include="CustomTypes\Weather\Response\HistoryOutput.cs" />
     <Compile Include="CustomTypes\Weather\ViewModels\TripWeather.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

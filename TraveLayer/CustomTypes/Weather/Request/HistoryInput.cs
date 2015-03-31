@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Weather
 {
-   public class WeatherInfo
+    public class HistoryInput 
     {
          public string State { get; set; }
          public string City { get; set; }
