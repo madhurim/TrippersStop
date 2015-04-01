@@ -101,29 +101,29 @@ namespace TraveLayer.CustomTypes.Weather
         public Max max { get; set; }
     }
 
-    public class Min2
-    {
-        public string F { get; set; }
-        public string C { get; set; }
-    }
+    //public class Min2
+    //{
+    //    public string F { get; set; }
+    //    public string C { get; set; }
+    //}
 
-    public class Avg2
-    {
-        public string F { get; set; }
-        public string C { get; set; }
-    }
+    //public class Avg2
+    //{
+    //    public string F { get; set; }
+    //    public string C { get; set; }
+    //}
 
-    public class Max2
-    {
-        public string F { get; set; }
-        public string C { get; set; }
-    }
+    //public class Max2
+    //{
+    //    public string F { get; set; }
+    //    public string C { get; set; }
+    //}
 
     public class TempLow
     {
-        public Min2 min { get; set; }
-        public Avg2 avg { get; set; }
-        public Max2 max { get; set; }
+        public Min min { get; set; }
+        public Avg avg { get; set; }
+        public Max max { get; set; }
     }
 
     public class Min3
@@ -151,54 +151,54 @@ namespace TraveLayer.CustomTypes.Weather
         public Max3 max { get; set; }
     }
 
-    public class Min4
-    {
-        public string F { get; set; }
-        public string C { get; set; }
-    }
+    //public class Min4
+    //{
+    //    public string F { get; set; }
+    //    public string C { get; set; }
+    //}
 
-    public class Avg4
-    {
-        public string F { get; set; }
-        public string C { get; set; }
-    }
+    //public class Avg4
+    //{
+    //    public string F { get; set; }
+    //    public string C { get; set; }
+    //}
 
-    public class Max4
-    {
-        public string F { get; set; }
-        public string C { get; set; }
-    }
+    //public class Max4
+    //{
+    //    public string F { get; set; }
+    //    public string C { get; set; }
+    //}
 
     public class DewpointHigh
     {
-        public Min4 min { get; set; }
-        public Avg4 avg { get; set; }
-        public Max4 max { get; set; }
+        public Min min { get; set; }
+        public Avg avg { get; set; }
+        public Max max { get; set; }
     }
 
-    public class Min5
-    {
-        public string F { get; set; }
-        public string C { get; set; }
-    }
+    //public class Min5
+    //{
+    //    public string F { get; set; }
+    //    public string C { get; set; }
+    //}
 
-    public class Avg5
-    {
-        public string F { get; set; }
-        public string C { get; set; }
-    }
+    //public class Avg5
+    //{
+    //    public string F { get; set; }
+    //    public string C { get; set; }
+    //}
 
-    public class Max5
-    {
-        public string F { get; set; }
-        public string C { get; set; }
-    }
+    //public class Max5
+    //{
+    //    public string F { get; set; }
+    //    public string C { get; set; }
+    //}
 
     public class DewpointLow
     {
-        public Min5 min { get; set; }
-        public Avg5 avg { get; set; }
-        public Max5 max { get; set; }
+        public Min min { get; set; }
+        public Avg avg { get; set; }
+        public Max max { get; set; }
     }
 
     public class CloudCover

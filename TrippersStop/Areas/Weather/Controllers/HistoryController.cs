@@ -53,13 +53,18 @@ namespace Trippism.Areas.Weather.Controllers
             {
                 HistoryOutput weather = new HistoryOutput();
                 weather = ServiceStackSerializer.DeSerialize<HistoryOutput>(result.Response);
-                //Mapper.CreateMap<HistoryOutput, TripWeather>()
-                //   .ForMember(h => h.TempHighAvg, m => m.MapFrom(s => s.trip.temp_high))
-                //   .ForMember(h => h.TempLowAvg, m => m.MapFrom(s => s.trip.temp_low))
-                //   .ForMember(h => h.ChanceOf, m => m.MapFrom(s => s.trip.chance_of))
-                //   .ForMember(h => h.CloudCover, m => m.MapFrom(s => s.trip.cloud_cover));
-                //TripWeather tripWeather = Mapper.Map<HistoryOutput, TripWeather>(weather);
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, weather);
+                Trip trip = weather.trip;
+                Mapper.CreateMap<Trip, TripWeather>()
+                   .ForMember(h => h.TempHighAvg, m => m.MapFrom(s => s.temp_high))
+                   .ForMember(h => h.TempLowAvg, m => m.MapFrom(s => s.temp_low))
+                   .ForMember(h => h.ChanceOf, m => m.MapFrom(s => s.chance_of))
+                   .ForMember(h => h.CloudCover, m => m.MapFrom(s => s.cloud_cover));
+               Mapper.CreateMap<TempHigh, TempHighAvg>()
+                   .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
+               Mapper.CreateMap<TempLow, TempLowAvg>()
+                  .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
+                TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(trip);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, tripWeather);
                 return response;
             }
             return Request.CreateResponse(result.StatusCode, result.Response); 
