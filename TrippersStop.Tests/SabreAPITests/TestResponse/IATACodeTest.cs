@@ -1,12 +1,12 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TrippismApi.Areas.IATA.Controllers;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Hosting;
 using System.Net;
 using TraveLayer.CustomTypes.IATA.ViewModels;
 using DataLayer;
+using TrippismApi.Areas.IATA.Controllers;
 
 namespace TrippismApi.Tests.SabreAPITests.TestResponse
 {
