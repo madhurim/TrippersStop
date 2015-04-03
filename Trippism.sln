@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrippismApi", "TrippersStop\TrippismApi.csproj", "{0B9A31F4-4AD2-4BA0-A265-F24F97F1159D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrippismApi.Tests", "TrippersStop.Tests\TrippismApi.Tests.csproj", "{433A9777-2DE8-446B-A944-233993DA4833}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraveLayer", "TraveLayer\TraveLayer.csproj", "{C5BAAB69-8D1D-4402-9573-4B6F2939B7EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{D52C2D5B-E3C4-4DA9-B949-16B8B7A3A79C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrippismUI", "TrippismUI\TrippismUI.csproj", "{B01EA087-5828-4FFE-9226-1BC14884F180}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B9A31F4-4AD2-4BA0-A265-F24F97F1159D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B9A31F4-4AD2-4BA0-A265-F24F97F1159D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B9A31F4-4AD2-4BA0-A265-F24F97F1159D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B9A31F4-4AD2-4BA0-A265-F24F97F1159D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{433A9777-2DE8-446B-A944-233993DA4833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{433A9777-2DE8-446B-A944-233993DA4833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{433A9777-2DE8-446B-A944-233993DA4833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{433A9777-2DE8-446B-A944-233993DA4833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5BAAB69-8D1D-4402-9573-4B6F2939B7EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5BAAB69-8D1D-4402-9573-4B6F2939B7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5BAAB69-8D1D-4402-9573-4B6F2939B7EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5BAAB69-8D1D-4402-9573-4B6F2939B7EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D52C2D5B-E3C4-4DA9-B949-16B8B7A3A79C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D52C2D5B-E3C4-4DA9-B949-16B8B7A3A79C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D52C2D5B-E3C4-4DA9-B949-16B8B7A3A79C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D52C2D5B-E3C4-4DA9-B949-16B8B7A3A79C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B01EA087-5828-4FFE-9226-1BC14884F180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B01EA087-5828-4FFE-9226-1BC14884F180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B01EA087-5828-4FFE-9226-1BC14884F180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B01EA087-5828-4FFE-9226-1BC14884F180}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

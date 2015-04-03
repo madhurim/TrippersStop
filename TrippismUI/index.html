@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html ng-app="TrippismUIApp">
+<!--ng-controller="LandingPageController"-->
+
+<head>
+
+</head>
+<body scroll ng-controller="LandingPageController">
+    <!--block-ui="main" class="block-ui-main"-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/destination">Trippism</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ng-class="getClass('/destination')" class=""><a href="#/destination">Destination</a></li>
+                    <li ng-class="getClass('/fareforecast')"><a href="#/fareforecast">Fareforecast</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div style="margin-top:50px;">
+        <!--role="main"-->
+        <div ui-view style="" class="container-fluid">
+        </div>
+    </div>
+
+
+    <link href="app/Styles/bootstrap.css" rel="stylesheet" />
+    <link href="app/Styles/css/angular-block-ui.css" rel="stylesheet" />
+    <link href="app/Styles/css/trippismapp.css" rel="stylesheet" />
+    <script src="app/Scripts/angular.min.js"></script>
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
+    <script src="app/Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="app/Scripts/libs/event.js"></script>
+    <script src="app/Scripts/libs/ui-map.min.js"></script>
+
+    <script src="app/Scripts/angular-ui-router.min.js"></script>
+    <script src="app/Scripts/libs/angular-block-ui.js"></script>
+    <script src="app/Scripts/common.js"></script>
+    <script src="/app/app.js"></script>
+    <script src="app/Scripts/libs/underscore.js"></script>
+    <script src="/app/Factory/DestinationFactory.js"></script>
+    <script src="/app/Controllers/LandingPageController.js"></script>
+    <script src="/app/Controllers/DestinationController.js"></script>
+    <script src="app/Factory/FareforecastFactory.js"></script>
+    <script src="app/Controllers/FareforecastController.js"></script>
+    <script src="app/Directives/GoogleMap.directive.js"></script>
+    <script src="app/Utility.js"></script>
+    <script src="app/Factory/UtilFactory.js"></script>
+
+
+    <link href="app/Styles/alertifyjs/alertify.css" rel="stylesheet" />
+    <!-- include semantic ui theme  -->
+
+    <link href="app/Styles/alertifyjs/themes/semantic.css" rel="stylesheet" />
+    <link href="app/Styles/alertifyjs/themes/default.css" rel="stylesheet" />
+    <!-- include alertify script -->
+
+    <script src="app/Scripts/alertify/alertify.js"></script>
+
+    <script type="text/javascript">
+        //override defaults
+        alertify.defaults.transition = "zoom";
+        alertify.defaults.theme.ok = "ui positive button";
+        alertify.defaults.theme.cancel = "ui black button";
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp?"></script>
+    <div id="elevator_item" ng-show="EnableScroll">
+        <a id="elevator" ng-click="GoToTop()" title="Back To Top"></a>
+        <div class="qr-popup">
+            <div class="arr"></div>
+        </div>
+    </div>
+    <!--<script>
+
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            var scrolltop = $(this).scrollTop();
+            if (scrolltop >= 70) {
+                $("#elevator_item").show();
+            } else {
+                $("#elevator_item").hide();
+            }
+        });
+        $("#elevator").click(function () {
+            $("html,body").animate({ scrollTop: 0 }, 500);
+        });
+        $(".qr").hover(function () {
+            $(".qr-popup").show();
+        }, function () {
+            $(".qr-popup").hide();
+        });});
+    </script>-->
+</body>
+</html>

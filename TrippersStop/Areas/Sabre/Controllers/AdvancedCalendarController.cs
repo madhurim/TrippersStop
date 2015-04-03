@@ -5,33 +5,44 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
-using TrippersStop.TraveLayer;
+using TrippismApi.TraveLayer;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 
-namespace TrippersStop.Areas.Sabre.Controllers
+namespace TrippismApi.Areas.Sabre.Controllers
 {
+    /// <summary>
+    /// AdvancedCalendar is used for -
+    /// Consumers who want to shop across a large set of travel dates. 
+    /// Consumers who know their destination, but are flexible on their travel dates and want to search flight options across a large set or range of travel dates, or lengths of stay.
+    /// Consumers who want to shop across several specific shopping parameters.
+    /// </summary>
     public class AdvancedCalendarController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        /// <summary>
+        /// Set api class and cache service.
+        /// </summary>
         public AdvancedCalendarController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;
         }
+        /// <summary>
+        /// To get priced air itineraries to a destination airport on specific roundtrip travel dates.
+        /// </summary>
         public HttpResponseMessage Post(OTA_AdvancedCalendar advancedCalendar)
         {
-            APIHelper.SetApiToken(_apiCaller, _cacheService);
+            SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
             //TBD : URL configurable using XML
             string url="v1.8.1/shop/calendar/flights?mode=live";
             APIResponse result = _apiCaller.Post(url, ServiceStackSerializer.Serialize(advancedCalendar)).Result;            
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                APIHelper.RefreshApiToken(_cacheService, _apiCaller);             
+                SabreApiTokenHelper.RefreshApiToken(_cacheService, _apiCaller);             
                 result = _apiCaller.Post("v1.8.1/shop/calendar/flights?mode=live", ServiceStackSerializer.Serialize(advancedCalendar)).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)
@@ -42,6 +53,9 @@ namespace TrippersStop.Areas.Sabre.Controllers
             }
             return Request.CreateResponse(result.StatusCode,result.Response);
         }
+        /// <summary>
+        /// Serialize the json reponse
+        /// </summary>
         private LowFareSearch DeSerializeResponse(string result)
         {
             BargainFinderReponse reponse = new BargainFinderReponse();

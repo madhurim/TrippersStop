@@ -1,5 +1,5 @@
 ﻿
-namespace  TrippersStop
+namespace TrippismApi
 {
     using System;
     using System.Collections.Concurrent;

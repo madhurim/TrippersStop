@@ -1,4 +1,5 @@
-﻿using ServiceStack.Text;
+﻿using DataLayer;
+using ServiceStack.Text;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using System;
@@ -9,9 +10,10 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using TrippersStop.TraveLayer;
+using TrippismApi.TraveLayer;
 
-namespace TrippersStop
+
+namespace TrippismApi
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -22,7 +24,8 @@ namespace TrippersStop
         {
             AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            //WebApiConfig.Register(GlobalConfiguration.Configuration);
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
@@ -30,7 +33,8 @@ namespace TrippersStop
             var container = new Container();
             container.RegisterWebApiRequest<IAsyncSabreAPICaller, SabreAPICaller>();
             container.RegisterWebApiRequest<ICacheService, RedisService>();
-            
+            container.RegisterWebApiRequest<IDBService, MongoService>();
+
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 

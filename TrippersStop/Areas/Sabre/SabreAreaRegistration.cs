@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Mvc;
 
-namespace TrippersStop.Areas.Sabre
+namespace TrippismApi.Areas.Sabre
 {
     public class SabreAreaRegistration : AreaRegistration
     {

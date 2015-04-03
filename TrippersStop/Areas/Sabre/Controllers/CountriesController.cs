@@ -5,42 +5,56 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using TraveLayer.APIServices;
+using TraveLayer;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
-using TrippersStop.TraveLayer;
+using TrippismApi.TraveLayer;
 
-namespace TrippersStop.Areas.Sabre.Controllers
+namespace TrippismApi.Areas.Sabre.Controllers
 {
-    
+    /// <summary>
+    /// Retrieves a list of origin and destination countries.
+    /// </summary>
     public class CountriesController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        /// <summary>
+        /// Set api class and cache service.
+        /// </summary>
         public CountriesController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;        
         }
         // GET api/countries
+        /// <summary>
+        /// Retrieves a list of origin and destination countries.
+        /// </summary>
         public HttpResponseMessage Get()
         {
             string url = "v1/lists/supported/countries";
             return GetResponse(url);
         }
+        /// <summary>
+        /// Retrieves a list of origin and destination countries based on point of sale country.
+        /// </summary>
         public HttpResponseMessage Get(string pointofsalecountry)
         {
             string url = string.Format("v1/lists/supported/countries?pointofsalecountry={0}", pointofsalecountry);
             return GetResponse(url);
         }
+        /// <summary>
+        /// Get response from api based on url.
+        /// </summary>
         private HttpResponseMessage GetResponse(string url)
         {
-            APIHelper.SetApiToken(_apiCaller, _cacheService);
+            SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
             APIResponse result = _apiCaller.Get(url).Result;
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                APIHelper.RefreshApiToken(_cacheService, _apiCaller);
+                SabreApiTokenHelper.RefreshApiToken(_cacheService, _apiCaller);
                 result = _apiCaller.Get(url).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)

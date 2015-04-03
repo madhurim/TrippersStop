@@ -7,7 +7,7 @@ using ServiceStack;
 using TraveLayer.CustomTypes;
 
 
-namespace TraveLayer.APIServices
+namespace TrippismApi.TraveLayer
 {
     public static class ServiceStackSerializer
     {
