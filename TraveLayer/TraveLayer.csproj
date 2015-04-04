@@ -131,7 +131,7 @@
     <Compile Include="DBServices\RedisConnector.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DBServices\RedisRepository.cs" />
+    <Compile Include="DBServices\RedisManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@ using System.Web;
 using TrippersStop.TraveLayer;
 using ServiceStack.Text;
 using ServiceStack.Redis;
-using TraveLayer.DBServices;
+
 
 namespace TrippersStop.TraveLayer
 {

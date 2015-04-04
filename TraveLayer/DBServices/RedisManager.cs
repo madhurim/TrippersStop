@@ -8,9 +8,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 using TraveLayer.APIServices;
 using ServiceStack.Redis;
-using ServiceStack.Redis.Generic; 
+using ServiceStack.Redis.Generic;
 
-namespace TraveLayer.DBServices
+namespace TrippersStop.TraveLayer
 {
 
     public class RedisManager
