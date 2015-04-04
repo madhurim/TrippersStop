@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using Moq;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes;
+using TrippersStop.Areas.Sabre.Controllers;
+using System.Net.Http;
+using TraveLayer.CustomTypes.Sabre.ViewModels;
 
 namespace TrippersStop.Tests.SabreAPITests
 {
@@ -17,6 +20,21 @@ namespace TrippersStop.Tests.SabreAPITests
         public void GetTest()
         {
             // Arrange
+            //var dController = new DestinationsController();
+
+            // Arrange
+            var controller = new DestinationsController();
+           
+            // Act
+            Destinations ds = new Destinations();
+           // ds.Destination = "Bos";
+            ds.Origin = "CLT";
+            ds.DepartureDate = "2015-04-25T00:00:00";
+            ds.ReturnDate = "2015-04-26T00:00:00";
+            ds.Lengthofstay = "4";
+            var response = controller.Get(ds);
+  
+
             SabreAPICaller apiWrapper = new SabreAPICaller();
 
             apiWrapper.Accept = "application/json";
