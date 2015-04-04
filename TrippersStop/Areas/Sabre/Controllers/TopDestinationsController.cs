@@ -27,6 +27,11 @@ namespace TrippersStop.Areas.Sabre.Controllers
             string url = string.Format("v1/lists/top/destinations?origin={0}&theme={1}&region={2}", origin, theme, region);
             return GetResponse(url);
         }
+        public HttpResponseMessage GetTopDestinationByBackweeks(string origin, string lookbackweeks, string topdestinations)
+        {
+            string url = string.Format("v1/lists/top/destinations?origin={0}&lookbackweeks={1}&topdestinations={2}", origin, lookbackweeks, topdestinations);
+            return GetResponse(url);
+        }
         public HttpResponseMessage GetTopDestinationByairportCode(string airportCode)
         {
             string url = string.Format("v1/lists/top/destinations?origin={0}", airportCode);
@@ -63,10 +68,10 @@ namespace TrippersStop.Areas.Sabre.Controllers
         private HttpResponseMessage GetResponse(string url)
         {
             string result = APIHelper.GetDataFromSabre(url);
-            OTA_TopDestinations destinations = new OTA_TopDestinations();
-            destinations = ServiceStackSerializer.DeSerialize<OTA_TopDestinations>(result);
-            Mapper.CreateMap<OTA_TopDestinations, TopDestination>();                     
-            TopDestination topDestinations = Mapper.Map<OTA_TopDestinations, TopDestination>(destinations);
+            TopDestinations destinations = new TopDestinations();
+            destinations = ServiceStackSerializer.DeSerialize<TopDestinations>(result);
+            Mapper.CreateMap<TopDestinations, TopDestination>();
+            TopDestination topDestinations = Mapper.Map<TopDestinations, TopDestination>(destinations);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, topDestinations);
             return response;
         }

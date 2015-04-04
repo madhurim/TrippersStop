@@ -12,17 +12,60 @@ using System.Threading.Tasks;
 namespace TraveLayer.CustomTypes.Sabre
 {
    
+    //public class Destination2
+    //{
+    //    public string DestinationLocation { get; set; }
+    //    public string AirportName { get; set; }
+    //    public string CityName { get; set; }
+    //    public string CountryCode { get; set; }
+    //    public string CountryName { get; set; }
+    //    public string RegionName { get; set; }
+    //    public string Type { get; set; }
+    //    public string MetropolitanAreaName { get; set; }
+    //    public List<Link> Links { get; set; }
+    //}
+
+    ////public class Link2
+    ////{
+    ////    public string rel { get; set; }
+    ////    public string href { get; set; }
+    ////}
+
+    //public class OTA_TopDestinations
+    //{
+    //    public string OriginLocation { get; set; }
+    //    public List<Destination> Destinations { get; set; }
+    //    public List<Link> Links { get; set; }
+    //}
+
+    ////TBD : remove
+    //public class TopDestinations
+    //{
+    //    public OTA_TopDestinations OTA_TopDestinations { get; set; }
+    //}
+    //public class Link
+    //{
+    //    public string rel { get; set; }
+    //    public string href { get; set; }
+    //}
+
     public class Destination2
     {
         public string DestinationLocation { get; set; }
-        public string AirportName { get; set; }
-        public string CityName { get; set; }
         public string CountryCode { get; set; }
         public string CountryName { get; set; }
         public string RegionName { get; set; }
-        public string Type { get; set; }
         public string MetropolitanAreaName { get; set; }
         public List<Link> Links { get; set; }
+        public string Type { get; set; }
+        public string AirportName { get; set; }
+        public string CityName { get; set; }
+    }
+
+    public class Origin
+    {
+        public int Rank { get; set; }
+        public Destination2 Destination { get; set; }
     }
 
     //public class Link2
@@ -31,19 +74,13 @@ namespace TraveLayer.CustomTypes.Sabre
     //    public string href { get; set; }
     //}
 
-    public class OTA_TopDestinations
-    {
-        public string OriginLocation { get; set; }
-        public List<Destination> Destinations { get; set; }
-        public List<Link> Links { get; set; }
-    }
-
-    //TBD : remove
     public class TopDestinations
     {
-        public OTA_TopDestinations OTA_TopDestinations { get; set; }
+        public string OriginLocation { get; set; }
+        public List<Origin> Destinations { get; set; }
+        public int LookBackWeeks { get; set; }
+        public List<Link> Links { get; set; }
     }
-
 }
 
 

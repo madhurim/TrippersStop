@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Web;
 using TrippersStop.TraveLayer;
 using ServiceStack.Text;
+using ServiceStack.Redis;
+
 
 namespace TrippersStop.TraveLayer
 {
@@ -21,6 +23,23 @@ namespace TrippersStop.TraveLayer
                 this._TokenUri = value; 
             }
         }
+        //TBD : Get from config
+        public string RedisHost
+        {
+            get
+            {
+                return "127.0.0.1:6379";
+            }
+        }
+
+        public string SabreTokenKey
+        {
+            get
+            {
+                return "Trippersstop.SabreToken";
+            }
+        }
+   
         Uri _BaseAPIUri;
         public Uri BaseAPIUri
         {
@@ -82,62 +101,81 @@ namespace TrippersStop.TraveLayer
         }
         public async Task<String> GetToken()
         {
-            using (var client = new HttpClient())
+            _longTermToken = GetTokenFromRedis();
+            if (string.IsNullOrWhiteSpace(_longTermToken))
             {
-                client.DefaultRequestHeaders.Clear();                
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_Accept));
-
-                byte[] cidbytes = System.Text.Encoding.UTF8.GetBytes(_ClientId);
-                string cidbase64 = Convert.ToBase64String(cidbytes);
-
-                byte[] secdbytes = System.Text.Encoding.UTF8.GetBytes(_ClientSecret);
-                string secdbase64 = Convert.ToBase64String(secdbytes);
-
-                string cre = String.Format("{0}:{1}", cidbase64, secdbase64);
-                byte[] bytes = System.Text.Encoding.UTF8.GetBytes(cre);
-                string base64 = Convert.ToBase64String(bytes);
-
-                client.DefaultRequestHeaders.Add("Authorization", String.Format("Basic {0}", base64));
-
-                /*POST https://api.test.sabre.com/v1/auth/token HTTP/1.1
-                POST https: //api.sabre.com/v1/auth/token/ HTTP/1.1
-                Accept: application/json
-                Authorization: Basic VmpFNmJYRTBOMjVwTjJVNU5XeDFhM1l4ZHpwRVJWWkRSVTVVUlZJNlJWaFU6VTNkV1l6Qkhkak09
-                Content-Type: application/x-www-form-urlencoded
-                Host: api.test.sabre.com
-                Content-Length: 29
-                Expect: 100-continue
-                Connection: Keep-Alive*/
-
-                //grant_type=client_credentials
-                
-                HttpContent requestContent = new StringContent("grant_type=client_credentials", System.Text.Encoding.UTF8, _ContentType);
-                HttpResponseMessage sabreResponse = await client.PostAsync(_TokenUri + "v1/auth/token/", requestContent).ConfigureAwait(false);;
-
-                // If client authentication failed then we get a JSON response from Azure Market Place
-                if (!sabreResponse.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    JsonObject error = await sabreResponse.Content.ReadAsAsync<JsonObject>();
-                    string errorType = error.Get<string>("error");
-                    string errorDescription = error.Get<string>("error_description");
-                    throw new HttpRequestException(string.Format("Sabre request failed: {0} {1}", errorType, errorDescription));
-                }
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_Accept));
 
-               // "{  "access_token": "Shared/IDL:IceSess\\/SessMgr:1\\.0.IDL/Common/!ICESMS\\/ACPCRTC!ICESMSLB\\/CRT.LB!-3572677658411405181!1757770!0!!E2E-1",  "token_type": "bearer",  "expires_in": 900}"
-                
+                    byte[] cidbytes = System.Text.Encoding.UTF8.GetBytes(_ClientId);
+                    string cidbase64 = Convert.ToBase64String(cidbytes);
+
+                    byte[] secdbytes = System.Text.Encoding.UTF8.GetBytes(_ClientSecret);
+                    string secdbase64 = Convert.ToBase64String(secdbytes);
+
+                    string cre = String.Format("{0}:{1}", cidbase64, secdbase64);
+                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(cre);
+                    string base64 = Convert.ToBase64String(bytes);
+
+                    client.DefaultRequestHeaders.Add("Authorization", String.Format("Basic {0}", base64));
+
+                    /*POST https://api.test.sabre.com/v1/auth/token HTTP/1.1
+                    POST https: //api.sabre.com/v1/auth/token/ HTTP/1.1
+                    Accept: application/json
+                    Authorization: Basic VmpFNmJYRTBOMjVwTjJVNU5XeDFhM1l4ZHpwRVJWWkRSVTVVUlZJNlJWaFU6VTNkV1l6Qkhkak09
+                    Content-Type: application/x-www-form-urlencoded
+                    Host: api.test.sabre.com
+                    Content-Length: 29
+                    Expect: 100-continue
+                    Connection: Keep-Alive*/
+
+                    //grant_type=client_credentials
+
+                    HttpContent requestContent = new StringContent("grant_type=client_credentials", System.Text.Encoding.UTF8, _ContentType);
+                    HttpResponseMessage sabreResponse = await client.PostAsync(_TokenUri + "v1/auth/token/", requestContent).ConfigureAwait(false); ;
+
+                    // If client authentication failed then we get a JSON response from Azure Market Place
+                    if (!sabreResponse.IsSuccessStatusCode)
+                    {
+                        JsonObject error = await sabreResponse.Content.ReadAsAsync<JsonObject>();
+                        string errorType = error.Get<string>("error");
+                        string errorDescription = error.Get<string>("error_description");
+                        throw new HttpRequestException(string.Format("Sabre request failed: {0} {1}", errorType, errorDescription));
+                    }
+
+                    // "{  "access_token": "Shared/IDL:IceSess\\/SessMgr:1\\.0.IDL/Common/!ICESMS\\/ACPCRTC!ICESMSLB\\/CRT.LB!-3572677658411405181!1757770!0!!E2E-1",  "token_type": "bearer",  "expires_in": 900}"
+
                     // Get the access token to attach to the original request from the response body
-                JsonObject response = await sabreResponse.Content.ReadAsAsync<JsonObject>();
+                    JsonObject response = await sabreResponse.Content.ReadAsAsync<JsonObject>();
 
-                //should we URLencode this ?
-                _longTermToken = HttpUtility.UrlEncode(response.Get<string>("access_token"));
-
-                // TODO : add them to the class
-               // string _token_type = response.Value<string>("token_type");
-               // string _expires_in = response.Value<string>("access_token");
+                    //should we URLencode this ?
+                    _longTermToken = HttpUtility.UrlEncode(response.Get<string>("access_token"));
 
 
-                return _longTermToken;
+                    using (var redisClient = new RedisClient(RedisHost))
+                    {
+                        RedisManager redisManager = new RedisManager(redisClient);
+                        redisManager.Save<string>(SabreTokenKey, _longTermToken);
+                    }
+                    // TODO : add them to the class
+                    // string _token_type = response.Value<string>("token_type");
+                    // string _expires_in = response.Value<string>("access_token");        
+                }
             }
+            return _longTermToken;
+        }
+
+        private string GetTokenFromRedis()
+        {
+            string token = string.Empty;
+            using (var redisClient = new RedisClient(RedisHost))
+            {
+                RedisManager redisManager = new RedisManager(redisClient);
+                token = redisManager.GetByKey<string>(SabreTokenKey);
+            }
+            return token;
         }
         
         public async Task<String> Post(string Method, string Body)

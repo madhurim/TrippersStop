@@ -34,6 +34,17 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\packages\ServiceStack.Redis.3.9.71\lib\net35\ServiceStack.Redis.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
@@ -79,7 +90,7 @@
     <Compile Include="APIServices\IAPICaller.cs" />
     <Compile Include="APIServices\SabreAPICaller.cs" />
     <Compile Include="APIServices\ServiceStackSerializer.cs" />
-    <Compile Include="CustomTypes\Sabre\Response\AdvancedCalendar.cs">
+    <Compile Include="CustomTypes\Sabre\Request\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CustomTypes\Sabre\Response\BargainFinder.cs" />
@@ -117,6 +128,10 @@
     <Compile Include="CustomTypes\Sabre\Response\TravelSeasonality.cs" />
     <Compile Include="CustomTypes\Sabre\Response\TravelSeasonalityAirportsLookup.cs" />
     <Compile Include="CustomTypes\Sabre\Response\TravelThemeLookup.cs" />
+    <Compile Include="DBServices\RedisConnector.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DBServices\RedisManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,16 @@ namespace TraveLayer.CustomTypes.Sabre
         public string Destinations { get; set; }
         public string Type { get; set; }
         public List<Link> Links { get; set; }
+
+        // Come from Top destinations
+      
+
+          //public string DestinationLocation{ get; set; }
+          //public string  CountryCode{ get; set; }
+          //public string   CountryName{ get; set; }
+          //public string  RegionName{ get; set; }
+          //public string   MetropolitanAreaName{ get; set; }
+
     }
 
     public class OTA_ThemeAirportLookup
