@@ -9,6 +9,7 @@ namespace TraveLayer.CustomTypes.Sabre.ViewModels
     public class TopDestination
     {
         public string OriginLocation { get; set; }
-        public List<Destination> Destinations { get; set; }
+        public List<Origin> Destinations { get; set; }
+        public int LookBackWeeks { get; set; }
     }
 }
