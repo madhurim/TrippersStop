@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TrippersStop.TraveLayer;
-using TrippersStop.Helper;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre;
 using AutoMapper;
@@ -16,6 +15,16 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class LowFareForecastController : ApiController
     {
+        IAPIAsyncCaller apiCaller;
+        public LowFareForecastController(IAPIAsyncCaller repository)
+        {
+            apiCaller = repository;
+            apiCaller.Accept = "application/json";
+            apiCaller.ContentType = "application/x-www-form-urlencoded";
+            string token = apiCaller.GetToken().Result;
+            apiCaller.Authorization = "bearer";
+            apiCaller.ContentType = "application/json";
+        }
         // GET api/lowfareforecast
         public HttpResponseMessage Get([FromUri]TravelInfo lowFareForecastRequest)
         {
@@ -24,7 +33,7 @@ namespace TrippersStop.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetResponse(string url)
         {
-            string result = APIHelper.GetDataFromSabre(url);
+            String result = apiCaller.Get(url).Result;
             OTA_LowFareForecast fares = new OTA_LowFareForecast();
             fares = ServiceStackSerializer.DeSerialize<OTA_LowFareForecast>(result);
             Mapper.CreateMap<OTA_LowFareForecast, LowFareForecast>();

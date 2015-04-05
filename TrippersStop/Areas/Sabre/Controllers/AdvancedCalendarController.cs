@@ -8,7 +8,6 @@ using System.Web.Http;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
-using TrippersStop.Helper;
 using TrippersStop.TraveLayer;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 
@@ -16,17 +15,20 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class AdvancedCalendarController : ApiController
     {
+        IAPIAsyncCaller apiCaller;
+        public AdvancedCalendarController(IAPIAsyncCaller repository)
+        {
+            apiCaller = repository;
+            apiCaller.Accept = "application/json";
+            apiCaller.ContentType = "application/x-www-form-urlencoded";
+            string token = apiCaller.GetToken().Result;
+            apiCaller.Authorization = "bearer";
+            apiCaller.ContentType = "application/json";
+        }
         public HttpResponseMessage Post(OTA_AdvancedCalendar advancedCalendar)
         {
-            SabreAPICaller sabreAPICaller = new SabreAPICaller();
-            sabreAPICaller.Accept = "application/json";
-            sabreAPICaller.ContentType = "application/x-www-form-urlencoded";
-            //TBD : Aoid call for getting token
-            string token = sabreAPICaller.GetToken().Result;
-            sabreAPICaller.Authorization = "bearer";
-            sabreAPICaller.ContentType = "application/json";
             //TBD : URL configurable using XML
-            String result = sabreAPICaller.Post("v1.8.1/shop/calendar/flights?mode=live", ServiceStackSerializer.Serialize(advancedCalendar)).Result;
+            String result = apiCaller.Post("v1.8.1/shop/calendar/flights?mode=live", ServiceStackSerializer.Serialize(advancedCalendar)).Result;
             var advancedCalendarResponse = DeSerializeResponse(result);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, advancedCalendarResponse);
             return response;

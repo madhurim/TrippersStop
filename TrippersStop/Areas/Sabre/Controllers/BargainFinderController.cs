@@ -8,7 +8,6 @@ using TraveLayer.CustomTypes.Sabre;
 using TrippersStop.TraveLayer;
 using TraveLayer.APIServices;
 using ServiceStack;
-using TrippersStop.Helper;
 using AutoMapper;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
@@ -19,6 +18,16 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class BargainFinderController : ApiController
     {
+        IAPIAsyncCaller apiCaller;
+        public BargainFinderController(IAPIAsyncCaller repository)
+        {
+            apiCaller = repository;
+            apiCaller.Accept = "application/json";
+            apiCaller.ContentType = "application/x-www-form-urlencoded";
+            string token = apiCaller.GetToken().Result;
+            apiCaller.Authorization = "bearer";
+            apiCaller.ContentType = "application/json";
+        }
         // POST api/bargainfinder
         public HttpResponseMessage Post(BargainFinder bargainFinder)
         {

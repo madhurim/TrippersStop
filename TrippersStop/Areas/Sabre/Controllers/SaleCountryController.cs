@@ -8,12 +8,22 @@ using System.Web.Http;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
-using TrippersStop.Helper;
+using TrippersStop.TraveLayer;
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class SaleCountryController : ApiController
     {
+        IAPIAsyncCaller apiCaller;
+        public SaleCountryController(IAPIAsyncCaller repository)
+        {
+            apiCaller = repository;
+            apiCaller.Accept = "application/json";
+            apiCaller.ContentType = "application/x-www-form-urlencoded";
+            string token = apiCaller.GetToken().Result;
+            apiCaller.Authorization = "bearer";
+            apiCaller.ContentType = "application/json";
+        }
         public HttpResponseMessage Get()
         {
             string url = "v1/lists/supported/pointofsalecountries";
@@ -21,7 +31,7 @@ namespace TrippersStop.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetResponse(string url)
         {
-            string result = APIHelper.GetDataFromSabre(url);
+            String result = apiCaller.Get(url).Result;
             OTA_PointofSaleCountryCodeLookup countryCodes = new OTA_PointofSaleCountryCodeLookup();
             countryCodes = ServiceStackSerializer.DeSerialize<OTA_PointofSaleCountryCodeLookup>(result);
             Mapper.CreateMap<OTA_PointofSaleCountryCodeLookup, PointofSaleCountryCode>();

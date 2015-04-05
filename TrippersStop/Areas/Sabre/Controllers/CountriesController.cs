@@ -8,12 +8,23 @@ using System.Web.Http;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
-using TrippersStop.Helper;
+using TrippersStop.TraveLayer;
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
+    
     public class CountriesController : ApiController
     {
+       IAPIAsyncCaller apiCaller;
+       public CountriesController(IAPIAsyncCaller repository)
+        {
+            apiCaller = repository;
+            apiCaller.Accept = "application/json";
+            apiCaller.ContentType = "application/x-www-form-urlencoded";
+            string token = apiCaller.GetToken().Result;
+            apiCaller.Authorization = "bearer";
+            apiCaller.ContentType = "application/json";
+        }
         // GET api/countries
         public HttpResponseMessage Get()
         {
@@ -27,7 +38,7 @@ namespace TrippersStop.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetResponse(string url)
         {
-            string result = APIHelper.GetDataFromSabre(url);
+            String result = apiCaller.Get(url).Result;
             OTA_CountriesLookup cities = new OTA_CountriesLookup();
             cities = ServiceStackSerializer.DeSerialize<OTA_CountriesLookup>(result);
             Mapper.CreateMap<OTA_CountriesLookup, Countries>();

@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre;
 using TrippersStop.TraveLayer;
-using TrippersStop.Helper;
 using TraveLayer.APIServices;
 using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
@@ -15,6 +14,16 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class TopDestinationsController : ApiController
     {
+        IAPIAsyncCaller apiCaller;
+        public TopDestinationsController(IAPIAsyncCaller repository)
+        {
+            apiCaller = repository;
+            apiCaller.Accept = "application/json";
+            apiCaller.ContentType = "application/x-www-form-urlencoded";
+            string token = apiCaller.GetToken().Result;
+            apiCaller.Authorization = "bearer";
+            apiCaller.ContentType = "application/json";
+        }
         // GET api/lookup
         [HttpGet]
         public HttpResponseMessage Get()
@@ -67,7 +76,7 @@ namespace TrippersStop.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetResponse(string url)
         {
-            string result = APIHelper.GetDataFromSabre(url);
+            String result = apiCaller.Get(url).Result;
             TopDestinations destinations = new TopDestinations();
             destinations = ServiceStackSerializer.DeSerialize<TopDestinations>(result);
             Mapper.CreateMap<TopDestinations, TopDestination>();

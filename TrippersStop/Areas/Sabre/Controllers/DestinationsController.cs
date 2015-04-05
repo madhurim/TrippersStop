@@ -8,7 +8,6 @@ using TraveLayer.CustomTypes.Sabre;
 using TrippersStop.TraveLayer;
 using TraveLayer.APIServices;
 using ServiceStack;
-using TrippersStop.Helper;
 using System.Reflection;
 using System.Text;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
@@ -18,6 +17,17 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class DestinationsController : ApiController
     {
+
+        IAPIAsyncCaller apiCaller;
+        public DestinationsController(IAPIAsyncCaller repository)
+        {
+            apiCaller = repository;
+            apiCaller.Accept = "application/json";
+            apiCaller.ContentType = "application/x-www-form-urlencoded";
+            string token = apiCaller.GetToken().Result;
+            apiCaller.Authorization = "bearer";
+            apiCaller.ContentType = "application/json";
+        }
         // GET api/DestinationFinder
         public HttpResponseMessage Get([FromUri]Destinations destinationsRequest)
         {
@@ -52,7 +62,7 @@ namespace TrippersStop.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetResponse(string url)
         {
-            string result = APIHelper.GetDataFromSabre(url);
+            String result = apiCaller.Get(url).Result;
             OTA_DestinationFinder cities = new OTA_DestinationFinder();
             cities = ServiceStackSerializer.DeSerialize<OTA_DestinationFinder>(result);
             Mapper.CreateMap<OTA_DestinationFinder, Fares>();
