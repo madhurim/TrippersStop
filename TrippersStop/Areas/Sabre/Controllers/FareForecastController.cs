@@ -9,6 +9,7 @@ using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre;
 using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.Response;
+using System.Web.Http.Description;
 
 
 namespace TrippismApi.Areas.Sabre.Controllers
@@ -32,6 +33,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// Forecasts the price range into which the lowest published fare that is available 
         /// </summary>
         // GET api/lowfareforecast
+        [ResponseType(typeof(LowFareForecast))]
         public HttpResponseMessage Get([FromUri]TravelInfo lowFareForecastRequest)
         {
             string url = string.Format("v1/forecast/flights/fares?origin={0}&destination={1}&departuredate={2}&returndate={3}", lowFareForecastRequest.Origin, lowFareForecastRequest.Destination, lowFareForecastRequest.DepartureDate, lowFareForecastRequest.ReturnDate);

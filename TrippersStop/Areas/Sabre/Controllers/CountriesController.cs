@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 using TraveLayer;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
@@ -32,6 +33,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// Retrieves a list of origin and destination countries.
         /// </summary>
+        [ResponseType(typeof(Countries))]
         public HttpResponseMessage Get()
         {
             string url = "v1/lists/supported/countries";
@@ -40,6 +42,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// Retrieves a list of origin and destination countries based on point of sale country.
         /// </summary>
+        [ResponseType(typeof(Countries))]
         public HttpResponseMessage Get(string pointofsalecountry)
         {
             string url = string.Format("v1/lists/supported/countries?pointofsalecountry={0}", pointofsalecountry);

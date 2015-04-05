@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
@@ -31,6 +32,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// API retrieves a list of multi-airport city (MAC) codes based on country.
         /// Multi-airport cities located in the requested country(s), sorted by city name, in ascending rank order. If no country is specified, then all MAC codes and cities are returned
         /// </summary>
+        [ResponseType(typeof(MultiAirportCity))]
         public HttpResponseMessage Get(string country)
         {
             string url = string.Format("v1/lists/supported/cities?country={0}", country);

@@ -9,6 +9,7 @@ using TraveLayer.CustomTypes.Sabre;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 using TrippismApi.TraveLayer;
 using TraveLayer.CustomTypes.Sabre.Response;
+using System.Web.Http.Description;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
@@ -30,6 +31,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// API rates weekly traffic volumes to certain destination airports. The API looks up the traffic volume booked 
         /// </summary>
+        [ResponseType(typeof(VM.TravelSeasonality))]
         public HttpResponseMessage Get(string destination)
         {
             string url = string.Format("v1/historical/flights/{0}/seasonality", destination);

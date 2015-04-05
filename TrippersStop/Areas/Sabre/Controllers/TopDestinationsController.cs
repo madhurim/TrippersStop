@@ -9,6 +9,7 @@ using TrippismApi.TraveLayer;
 using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre.Response;
+using System.Web.Http.Description;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
@@ -34,6 +35,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// API retrieves top booked leisure destinations and returns them in ascending rank order.
         /// </summary>
         [HttpGet]
+        [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage Get()
         {
             string url = string.Format("v1/lists/top/destinations");
@@ -42,6 +44,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// API retrieves top booked leisure destinations from a given origin, theme, region and returns them in ascending rank order.
         /// </summary>
+        [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinationByTheme(string origin, string theme, string region)
         {
             string url = string.Format("v1/lists/top/destinations?origin={0}&theme={1}&region={2}", origin, theme, region);
@@ -50,6 +53,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// API retrieves top booked leisure destinations from a given origin and returns them in ascending rank order.
         /// </summary>
+        [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinationByBackweeks(string origin, string lookbackweeks, string topdestinations)
         {
             string url = string.Format("v1/lists/top/destinations?origin={0}&lookbackweeks={1}&topdestinations={2}", origin, lookbackweeks, topdestinations);
@@ -58,6 +62,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// API retrieves top booked leisure destinations from a given airport code and returns them in ascending rank order.
         /// </summary>
+        [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinationByairportCode(string airportCode)
         {
             string url = string.Format("v1/lists/top/destinations?origin={0}", airportCode);
@@ -66,6 +71,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// API retrieves top booked leisure destinations from a given origin country and returns them in ascending rank order.
         /// </summary>
+        [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinationByCountryCode(string countryCode)
         {
             string url = string.Format("v1/lists/top/destinations?origincountry={0}", countryCode);
@@ -74,7 +80,8 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// API retrieves top booked leisure destinations from a given origin, destination type and returns them in ascending rank order.
         /// </summary>
-        public HttpResponseMessage GetTopDestinationByDestinationType(string origin ,string destinationType)
+        [ResponseType(typeof(TopDestination))]
+        public HttpResponseMessage GetTopDestinationByDestinationType(string origin, string destinationType)
         {
             string url = string.Format("v1/lists/top/destinations?origin={0}&destinationtype={1}", origin,destinationType);
             return GetResponse(url);
@@ -82,6 +89,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// API retrieves top n booked leisure destinations and returns them in ascending rank order.
         /// </summary>
+        [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinations(int number)
         {
             string url = string.Format("v1/lists/top/destinations?topdestinations={0}", number);
@@ -90,6 +98,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// API retrieves top booked leisure destinations from a given destination country and returns them in ascending rank order.
         /// </summary>
+        [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinationsByDestinationCountry(string destinationcountry)
         {
             string url = string.Format("v1/lists/top/destinations?destinationcountry={0}", destinationcountry);
@@ -98,6 +107,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// API retrieves top booked leisure destinations from a given region and returns them in ascending rank order.
         /// </summary>
+        [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinationsByRegion(string region)
         {
             string url = string.Format("v1/lists/top/destinations?region={0}", region);

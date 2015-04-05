@@ -13,6 +13,7 @@ using TraveLayer.CustomTypes.Sabre.ViewModels;
 using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Configuration;
+using System.Web.Http.Description;
 
 
 namespace TrippismApi.Areas.Sabre.Controllers
@@ -43,6 +44,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// </summary>
         /// <param name="destinationsRequest">
         /// Return record based on destinations Request Type</param>
+        [ResponseType(typeof(Fares))]
         public HttpResponseMessage Get([FromUri]Destinations destinationsRequest)
         {
             string url = GetURL(destinationsRequest);
@@ -55,7 +57,8 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// </summary>
         [Route("api/destinations/theme/{theme}")]
         [HttpGet]
-        public HttpResponseMessage GetDestinationsByTheme(string theme,string origin,string departuredate,string returndate,string lengthofstay)
+        [ResponseType(typeof(Fares))]
+        public HttpResponseMessage GetDestinationsByTheme(string theme, string origin, string departuredate, string returndate, string lengthofstay)
         {
             string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}&theme={4}", origin, departuredate, returndate, lengthofstay, theme);
             return GetResponse(url);
@@ -66,6 +69,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// </summary>
         [Route("api/destinations/cheapest/{count}")]
         [HttpGet]
+        [ResponseType(typeof(Fares))]
         public HttpResponseMessage GetTopCheapestDestinations(int count, string origin, string departuredate, string returndate, string lengthofstay)
         {
             string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", origin, departuredate, returndate, lengthofstay);
@@ -77,6 +81,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// </summary>
         [Route("api/destinations/maxfare/{maxfare}")]
         [HttpGet]
+        [ResponseType(typeof(Fares))]
         public HttpResponseMessage GetDestinationsByMaxFare(double maxfare, string origin, string departuredate, string returndate, string lengthofstay)
         {
             string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&maxfare={3}&lengthofstay={4}", origin, departuredate, returndate,maxfare, lengthofstay);
@@ -88,6 +93,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// </summary>
         [Route("api/destinations/country/{country}")]
         [HttpGet]
+        [ResponseType(typeof(Fares))]
         public HttpResponseMessage GetDestinationsByCountry(string country, string origin, string departuredate, string returndate, string lengthofstay)
         {
             string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&maxfare={3}&lengthofstay={4}&location={4}", origin, departuredate, returndate, lengthofstay, country);

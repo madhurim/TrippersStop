@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
@@ -30,6 +31,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         ///  Retrieves the airport, rail station and other codes associated with the MAC code
         /// </summary>
+        [ResponseType(typeof(AirportsAtCities))]
         public HttpResponseMessage Get(string city)
         {
             string url = string.Format("v1/lists/supported/cities/{0}/airports/", city);           

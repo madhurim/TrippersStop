@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
@@ -33,6 +34,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// Retrieve city pairs that can be passed to applicable Air Shopping
         /// </summary>
+        [ResponseType(typeof(CityPairs))] 
         public HttpResponseMessage Get(string type)
         {
             string url=string.Empty;

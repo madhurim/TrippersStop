@@ -15,6 +15,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Web.Hosting;
 using TraveLayer.CustomTypes.Sabre.Response;
+using System.Web.Http.Description;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
@@ -37,6 +38,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// To search for the lowest priced itineraries available for specific travel dates
         /// </summary>
+        [ResponseType(typeof(LowFareSearch))]
         public HttpResponseMessage Post(BargainFinder bargainFinder)
         {
             var pos = GetPOS();

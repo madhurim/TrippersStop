@@ -12,6 +12,7 @@ using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.IATA.ViewModels;
 using System.Text;
 using MongoDB.Driver;
+using System.Web.Http.Description;
 
 
 
@@ -35,6 +36,7 @@ namespace TrippismApi.Areas.IATA.Controllers
         /// <summary>
         /// Get available city pairs.
         /// </summary>
+        [ResponseType(typeof(List<IATACode>))]
         public HttpResponseMessage Get()
         {
             return GetResponse();

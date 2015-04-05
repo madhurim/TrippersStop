@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
@@ -31,6 +32,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// Retrieves a list of supported point of sale country codes and associated country names
         /// </summary>
+        [ResponseType(typeof(PointofSaleCountryCode))]
         public HttpResponseMessage Get()
         {
             string url = "v1/lists/supported/pointofsalecountries";
