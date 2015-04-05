@@ -10,6 +10,8 @@ using TraveLayer.CustomTypes;
 using TrippersStop.Areas.Sabre.Controllers;
 using System.Net.Http;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
+using System.Web.Http;
+using System.Web.Http.Hosting;
 
 namespace TrippersStop.Tests.SabreAPITests
 {
@@ -24,7 +26,9 @@ namespace TrippersStop.Tests.SabreAPITests
 
             // Arrange
             var controller = new DestinationsController();
-           
+            controller.Request = new HttpRequestMessage();
+            //controller.Request.SetConfiguration(new HttpConfiguration());
+            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             // Act
             Destinations ds = new Destinations();
            // ds.Destination = "Bos";
