@@ -19,17 +19,19 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\Controllers\DestinationController.js" />
+    <Content Include="app\Controllers\EmailForDestinationDetController.js" />
     <Content Include="app\Controllers\FareforecastController.js" />
     <Content Include="app\Controllers\FareRangeController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
     <Content Include="app\Controllers\SeasonalityController.js" />
-    <Content Include="app\Controllers\ShareDestinationInformationController.js" />
     <Content Include="app\Directives\GoogleMap.directive.js" />
     <Content Include="app\Factory\DestinationFactory.js" />
+    <Content Include="app\Factory\EmailForDestinationDetFactory.js" />
     <Content Include="app\Factory\FareforecastFactory.js" />
     <Content Include="app\Factory\FareRangeFactory.js" />
     <Content Include="app\Factory\SeasonalityFactory.js" />
     <Content Include="app\Factory\UtilFactory.js" />
+    <Content Include="app\Module\angular-youtube-embed.js" />
     <Content Include="app\Scripts\common.js" />
     <Content Include="app\Scripts\libs\event.js" />
     <Content Include="app\Scripts\libs\ui-map.js" />
@@ -38,6 +40,12 @@
     <Content Include="app\Styles\bootstrap.min.css" />
     <Content Include="app\Styles\css\trippismapp.css" />
     <Content Include="app\Styles\css\icon_top.png" />
+    <Content Include="app\Styles\images\adsection_1.jpg" />
+    <Content Include="app\Styles\images\adsection_2.jpg" />
+    <Content Include="app\Styles\images\circle-info.png" />
+    <Content Include="app\Styles\images\hor-loading.png" />
+    <Content Include="app\Styles\images\thumbs_up.png" />
+    <Content Include="app\Styles\images\time.png" />
     <Content Include="app\Utility.js" />
     <Content Include="app\Views\farerange.html" />
     <Content Include="app\Views\GoogleMap.html" />
@@ -105,7 +113,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\Module\" />
     <Folder Include="Content\" />
     <Folder Include="Scripts\" />
   </ItemGroup>

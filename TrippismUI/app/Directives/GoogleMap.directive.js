@@ -1,4 +1,5 @@
-﻿'use strict';
+﻿var selected;
+'use strict';
 angular.module('TrippismUIApp')
   .directive('googleMap', function ($compile) {
       var directive = {};
@@ -11,11 +12,12 @@ angular.module('TrippismUIApp')
           defaultlng: "@"
       }
 
-      directive.controller = function ($scope, $q, $compile, $filter, $timeout) {
+      directive.controller = function ($scope, $q, $compile, $filter, $timeout, $rootScope, $http) {
+          
           $scope.destinationMap = undefined;
           $scope.faresList = [];
           $scope.myMarkers = [];
-
+         
           var styleArray = [{ featureType: "landscape.natural", elementType: "geometry.fill", stylers: [{ visibility: "on" }, { color: "#FFFFFF" }] },
                           { featureType: "poi", elementType: "geometry.fill", stylers: [{ visibility: "on" }, { hue: "#1900ff" }, { color: "#c0e8e8" }] },
                           { featureType: "poi", elementType: "labels.text", stylers: [{ visibility: "off" }] },
@@ -33,7 +35,7 @@ angular.module('TrippismUIApp')
 
           $scope.mapOptions = {
               center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng),
-              zoom: 0,
+              zoom: 2,
               minZoom: 2,
               backgroundColor: "#BCCFDE",
               styles: styleArray,
@@ -76,55 +78,100 @@ angular.module('TrippismUIApp')
               }
           }
 
+        
+
           var RenderMap = function (maps) {
               $scope.InfoWindow;
-
+            
               var bounds = new google.maps.LatLngBounds();
-
+              selected = maps;
               for (var x = 0; x < maps.length; x++) {
                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
-                  var marker = new google.maps.Marker({
+
+                  var marker = new MarkerWithLabel({
                       position: latlng1,
                       map: $scope.destinationMap,
-                      title: maps[x].DestinationLocation,
-                      icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (x + 1) + '|ff776b|000000',
+                      //title: maps[x].DestinationLocation,
+                      //labelContent: maps[x].DestinationLocation,
+                      labelAnchor: new google.maps.Point(12, 35),
+                      labelClass: "labels", // the CSS class for the label
+                      labelInBackground: false,
                       animation: google.maps.Animation.DROP,
-                      CustomMarkerInfo: maps[x]
+                      CustomMarkerInfo: maps[x],
+                      labelStyle: { opacity: 0.75 },
+                      icon: 'https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-b.png&text=' + maps[x].DestinationLocation + '&psize=11&font=fonts/Roboto-Regular.ttf&color=ff000033&ax=44&ay=48&scale=1',
                   });
+                  
+                  
                   bounds.extend(marker.position);
-                 
+                  
                   var airportName = _.find($scope.airportlist, function (airport) {
                       return airport.airport_Code == maps[x].DestinationLocation
                   });
+               
+                  var contentString = '<div style="min-width:100px;padding-top:5px;" id="content">' +
+                                          '<div class="col-sm-12 padleft0"><strong>'
+                                            + "(" + maps[x].DestinationLocation + ") " + airportName.airport_FullName + ', ' + airportName.airport_CityName + '</strong></div>' +
+                                            '<br /><div class="col-sm-12 padleft0">'+
+                                            '<label>Lowest fare: </label><strong class="text-success"> ' + maps[x].CurrencyCode + ' ' + maps[x].LowestFare + '</strong>' +
+                                    '</div> ';
 
-                  var contentString = '<div ng-controller="FareforecastController" style="min-width:200px;padding-top:5px;" id="content">' +
-                                          '<div class="col-sm-6 padleft0"><span>Destination: </span><br /><strong>'
-                                            + airportName.airport_CityName + '</strong></div>' +
-                                            '<div class="col-sm-6 padleft0"><span>Currency: </span><br /><strong>'
-                                            + maps[x].CurrencyCode + '</strong></div>' +
-                                            '<div class="col-sm-6 padleft0"><span>Lowest Fare: </span><br /><strong>'
-                                            + maps[x].LowestFare + '</strong></div>' +
-                                            '<div class="col-sm-6 padleft0"><span>Lowest Non Stop Fare: </span><br /><strong>'
-                                            + maps[x].LowestNonStopFare + '</strong></div>' +
-                                            '<div class="col-sm-6 padleft0"><span>Departure Date: </span><br /><strong>'
-                                            + $filter('date')(maps[x].DepartureDateTime, $scope.format, null) + '</strong></div>' +
-                                            '<div class="col-sm-6 padleft0"><span>Return Date: </span><br /><strong>'
-                                            + $filter('date')(maps[x].ReturnDateTime, $scope.format, null) + '</strong></div>' +
-                                     '</div>';
+                  $scope.InfoWindow = new google.maps.InfoWindow();
+                  var mapsdetails = maps[x];
 
-                  $scope.InfoWindow = new google.maps.InfoWindow()
+                  //google.maps.event.addListener(marker, 'mouseover', (function (marker, contentString, infowindow) {
+                  //    return function () {
+                  //        if ($scope.InfoWindow) $scope.InfoWindow.close();
+                  //        $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
+                  //        $scope.InfoWindow.open($scope.destinationMap, marker);
+                  //    };
+                  //})(marker, contentString, $scope.InfoWindow));
+                  
+
+                  //google.maps.event.addListener(marker, 'mouseout', function () {
+                      
+                  //});
+
                   google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
                       return function () {
-                          if ($scope.InfoWindow) $scope.InfoWindow.close();
-                          $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
-                          $scope.InfoWindow.open($scope.destinationMap, marker);
-                      };
-                  })(marker, contentString, $scope.InfoWindow));
+                          //if ($scope.InfoWindow) $scope.InfoWindow.close(); 
+                          //$scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
 
+                          //google.maps.event.addListener($scope.InfoWindow, 'closeclick', function () {                           
+                          //    $rootScope.$broadcast('CloseFareForcastInfo');
+                          //});
+
+                          //$scope.InfoWindow.open($scope.destinationMap, marker);
+
+                          var OriginairportName = _.find($scope.airportlist, function (airport) {
+                              return airport.airport_Code == $scope.$parent.Origin.toUpperCase()
+                          });
+
+                          var DestinationairportName = _.find($scope.airportlist, function (airport) {
+                              return airport.airport_Code == marker.CustomMarkerInfo.DestinationLocation
+                          });
+                          
+                          var dataForecast = {
+                              "Origin": $scope.$parent.Origin,
+                              "DepartureDate": $filter('date')(marker.CustomMarkerInfo.DepartureDateTime, 'yyyy-MM-dd'),
+                              "ReturnDate": $filter('date')(marker.CustomMarkerInfo.ReturnDateTime, 'yyyy-MM-dd'),
+                              "Destination": marker.CustomMarkerInfo.DestinationLocation
+                          };
+
+                          $rootScope.$broadcast('EmptyFareForcastInfo', {
+                              Origin: OriginairportName.airport_CityName,
+                              Destinatrion: DestinationairportName.airport_Code,
+                              Fareforecastdata: dataForecast,
+                              mapOptions: marker.CustomMarkerInfo, //mapsdetails,
+                              OriginairportName : OriginairportName,
+                              DestinationairportName: DestinationairportName
+                          });
+                     };
+                  })(marker, contentString, $scope.InfoWindow));
                   $scope.myMarkers.push(marker);
               }         
           };
-
+          
           var getMapUrlData = function (airportCode) {             
               var d = $q.defer();
               var originairport = _.find($scope.airportlist, function (airport) {
@@ -135,11 +182,7 @@ angular.module('TrippismUIApp')
                   airportCode.lat = originairport.airport_Lat;
                   airportCode.lng = originairport.airport_Lng;
                   d.resolve(airportCode); // return the original object, so you can access it's other properties
-
-              } else {
-                  d.resolve();
-              }
-
+              } else {d.resolve();}
               return d.promise;
           }
 
@@ -156,7 +199,18 @@ angular.module('TrippismUIApp')
               }
               $scope.myMarkers = [];
           }
-          
+
+          function serialize(obj) {
+              var str = [];
+              for (var p in obj)
+                  if (obj.hasOwnProperty(p)) {
+                      var propval = encodeURIComponent(obj[p]);
+                      if (propval != "undefined" && propval != "null" && propval != '')
+                          str.push(encodeURIComponent(p) + "=" + propval);
+                  }
+              return str.join("&");
+          }
+
       }
 
       directive.link = function (scope, elm, attrs) {
@@ -166,9 +220,7 @@ angular.module('TrippismUIApp')
                   scope.displayDestinations(scope.btntext, scope.destinations);
                   scope.airportlist;
               }
-              
           });
       }
-
       return directive;
   });

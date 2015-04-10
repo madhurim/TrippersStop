@@ -1,13 +1,12 @@
 ﻿(function () {
     'use strict';
-    var serviceId = 'DestinationFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope', DestinationFactory]);
+    var serviceId = 'EmailForDestinationDetFactory';
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope', EmailForDestinationDetFactory]);
 
-    function DestinationFactory($http, $rootScope) {
-
+    function EmailForDestinationDetFactory($http, $rootScope) {
         // Define the functions and properties to reveal.
         var service = {
-            findDestinations: findDestinations,
+            SendEmail: SendEmail,
         };
         return service;
 
@@ -21,17 +20,21 @@
                 }
             return str.join("&");
         }
-        function findDestinations(data) {
-            var testURL = 'Destinations?' + serialize(data);
 
-            var RequestedURL = $rootScope.apiURL + testURL;
-            return $http.get(RequestedURL)
-            .then(function (data) {
+
+        function SendEmail(data) {           
+          var url = $rootScope.apiURLForEmail
+           
+          return $http({
+                method: 'POST',
+                url: url,
+                data: serialize(data),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },                             
+            }).then(function (data) {
                 return data.data;
             }, function (e) {
                 return e;
             });
         }
-   
     }
 })();

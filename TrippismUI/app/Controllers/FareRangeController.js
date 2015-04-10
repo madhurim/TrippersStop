@@ -25,14 +25,14 @@
         Todt.setDate(Todt.getDate() + 5); // add default from 5 days
         Todt.setHours(0, 0, 0, 0)
 
-        $scope.LatestDepartureDate = ConvertToRequiredDate(Todt);
-        $scope.EarliestDepartureDate = ConvertToRequiredDate(dt);
+        $scope.LatestDepartureDate = ConvertToRequiredDate(Todt, 'UI');
+        $scope.EarliestDepartureDate = ConvertToRequiredDate(dt , 'UI');
 
         $scope.minTodayDate = new Date();
         $scope.minEarliestDepartureDate = new Date();
         $scope.minEarliestDepartureDate = $scope.minEarliestDepartureDate.setDate($scope.minEarliestDepartureDate.getDate() + 1);
 
-        $scope.MaximumEarliestDepartureDate = ConvertToRequiredDate(common.addDays(new Date(), 90));
+        $scope.MaximumEarliestDepartureDate = ConvertToRequiredDate(common.addDays(new Date(), 90),'UI');
       
         $scope.$watch(function (scope) { return scope.EarliestDepartureDate },
               function (newValue, oldValue) {
@@ -47,7 +47,7 @@
                   todate.setHours(0, 0, 0, 0);
 
                   if (newDt >= todate) {
-                      $scope.LatestDepartureDate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1))
+                      $scope.LatestDepartureDate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1),'UI')
                   }
                   /**/
 
@@ -129,8 +129,8 @@
             $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText;
             var data = {
                 "Origin": $scope.Origin,
-                "EarliestDepartureDate": ConvertToRequiredDate($scope.EarliestDepartureDate),
-                "LatestDepartureDate": ConvertToRequiredDate($scope.LatestDepartureDate),
+                "EarliestDepartureDate": ConvertToRequiredDate($scope.EarliestDepartureDate,'API'),
+                "LatestDepartureDate": ConvertToRequiredDate($scope.LatestDepartureDate,'API'),
                 "Destination": $scope.Destination,
                 "Lengthofstay": $scope.LenghtOfStay,
             };

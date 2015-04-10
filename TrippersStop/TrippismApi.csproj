@@ -95,6 +95,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.JsonResult.1.0.5369.19299\lib\net40\Newtonsoft.JsonResult.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.105.1.0\lib\net451\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
@@ -209,6 +212,7 @@
     <Compile Include="APIExtention\Filters\ExceptionFilterAttribute.cs" />
     <Compile Include="APIExtention\Filters\TrippismCache.cs" />
     <Compile Include="APIExtention\Filters\ValidateModelAttribute.cs" />
+    <Compile Include="APIHelper\MailgunEmail.cs" />
     <Compile Include="APIHelper\SabreApiTokenHelper.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -260,6 +264,7 @@
     <Compile Include="Areas\Sabre\Controllers\TopDestinationsController.cs" />
     <Compile Include="Areas\Sabre\SabreAreaRegistration.cs" />
     <Compile Include="APIExtention\AreaRegistrationContextExtensions.cs" />
+    <Compile Include="Controllers\Email\EmailController.cs" />
     <Compile Include="Areas\Weather\Controllers\HistoryController.cs" />
     <Compile Include="Areas\Weather\WeatherAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -404,6 +409,7 @@
     <Folder Include="Areas\Weather\Models\" />
     <Folder Include="Areas\Weather\Views\Shared\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\SendEmail\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
