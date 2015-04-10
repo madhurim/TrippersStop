@@ -70,10 +70,10 @@ namespace Trippism.Areas.Weather.Controllers
                    .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
                Mapper.CreateMap<TempLow, TempLowAvg>()
                   .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
-                TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(trip);
-                _cacheService.Save<TripWeather>(cacheKey, tripWeather);
+                TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(trip);              
                 tripWeather.WeatherChances = new List<WeatherChance>(); 
                 FilterChanceRecord(trip, tripWeather);
+                _cacheService.Save<TripWeather>(cacheKey, tripWeather);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, tripWeather);
                 return response;
             }

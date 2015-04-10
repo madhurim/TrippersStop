@@ -152,32 +152,32 @@ namespace TraveLayer.CustomTypes.Weather
         public string cond { get; set; }
     }
 
-    public class WeatherChance
+    public class Chance
     {
         public string name { get; set; }
         public string description { get; set; }
-        public string percentage { get; set; }
+        public double percentage { get; set; }
     }
     public class ChanceOf
     {
-        public WeatherChance tempoversixty { get; set; }
-        public WeatherChance chanceofwindyday { get; set; }
-        public WeatherChance chanceofpartlycloudyday { get; set; }
-        public WeatherChance chanceofsunnycloudyday { get; set; }
-        public WeatherChance chanceoffogday { get; set; }
-        public WeatherChance chanceofcloudyday { get; set; }
-        public WeatherChance chanceofhumidday { get; set; }
-        public WeatherChance tempoverninety { get; set; }
-        public WeatherChance chanceofsnowonground { get; set; }
-        public WeatherChance chanceoftornadoday { get; set; }
-        public WeatherChance chanceofprecip { get; set; }
-        public WeatherChance chanceofsultryday { get; set; }
-        public WeatherChance tempbelowfreezing { get; set; }
-        public WeatherChance tempoverfreezing { get; set; }
-        public WeatherChance chanceofthunderday { get; set; }
-        public WeatherChance chanceofhailday { get; set; }
-        public WeatherChance chanceofsnowday { get; set; }
-        public WeatherChance chanceofrainday { get; set; }
+        public Chance tempoversixty { get; set; }
+        public Chance chanceofwindyday { get; set; }
+        public Chance chanceofpartlycloudyday { get; set; }
+        public Chance chanceofsunnycloudyday { get; set; }
+        public Chance chanceoffogday { get; set; }
+        public Chance chanceofcloudyday { get; set; }
+        public Chance chanceofhumidday { get; set; }
+        public Chance tempoverninety { get; set; }
+        public Chance chanceofsnowonground { get; set; }
+        public Chance chanceoftornadoday { get; set; }
+        public Chance chanceofprecip { get; set; }
+        public Chance chanceofsultryday { get; set; }
+        public Chance tempbelowfreezing { get; set; }
+        public Chance tempoverfreezing { get; set; }
+        public Chance chanceofthunderday { get; set; }
+        public Chance chanceofhailday { get; set; }
+        public Chance chanceofsnowday { get; set; }
+        public Chance chanceofrainday { get; set; }
     }
 
     public class Trip
