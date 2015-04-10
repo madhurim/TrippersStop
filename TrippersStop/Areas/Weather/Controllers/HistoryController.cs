@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre.Response;
@@ -63,7 +64,7 @@ namespace Trippism.Areas.Weather.Controllers
                 Mapper.CreateMap<Trip, TripWeather>()
                    .ForMember(h => h.TempHighAvg, m => m.MapFrom(s => s.temp_high))
                    .ForMember(h => h.TempLowAvg, m => m.MapFrom(s => s.temp_low))
-                   .ForMember(h => h.ChanceOf, m => m.MapFrom(s => s.chance_of))
+                   //.ForMember(h => h.ChanceOf, m => m.MapFrom(s => s.chance_of))
                    .ForMember(h => h.CloudCover, m => m.MapFrom(s => s.cloud_cover));
                Mapper.CreateMap<TempHigh, TempHighAvg>()
                    .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
@@ -71,11 +72,54 @@ namespace Trippism.Areas.Weather.Controllers
                   .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
                 TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(trip);
                 _cacheService.Save<TripWeather>(cacheKey, tripWeather);
-                 
+                tripWeather.WeatherChances = new List<WeatherChance>(); 
+                FilterChanceRecord(trip, tripWeather);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, tripWeather);
                 return response;
             }
             return Request.CreateResponse(result.StatusCode, result.Response); 
+        }
+
+        private void FilterChanceRecord(Trip trip, TripWeather tripWeather)
+        {
+            Type type = trip.chance_of.GetType();
+            PropertyInfo[] properties = type.GetProperties();
+            string propertyName = string.Empty;
+            Chance propertyValue = null;
+            string separator = string.Empty;
+            foreach (PropertyInfo property in properties)
+            {
+                propertyName = property.Name;
+                var result = property.GetValue(trip.chance_of, null);
+                if (result != null)
+                {
+                    propertyValue = result as Chance;
+                    bool addToCollection = IsValidRecord(propertyValue);
+                    if (addToCollection)
+                        AddChanceOfRecord(tripWeather, propertyValue, propertyName);
+                }
+            }
+        }
+
+        private void AddChanceOfRecord(TripWeather tripWeather, Chance propertyValue, string propertyName)
+        {
+            tripWeather.WeatherChances.Add(new WeatherChance()
+            {
+                ChanceType = propertyName,
+                Description = propertyValue.description,
+                Name = propertyValue.name,
+                Percentage = propertyValue.percentage
+            }
+                );
+        }
+
+        private bool IsValidRecord(Chance chance)
+        {
+            if (chance !=null && chance.percentage > 30)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

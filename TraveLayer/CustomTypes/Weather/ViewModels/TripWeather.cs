@@ -10,8 +10,7 @@ namespace TraveLayer.CustomTypes.Weather
     {
         public TempHighAvg TempHighAvg { get; set; }
         public TempLowAvg TempLowAvg { get; set; }
-        public ChanceOf ChanceOf { get; set; }
-
+        public List<WeatherChance> WeatherChances { get; set; }
         public CloudCover CloudCover { get; set; }
     }
 
@@ -22,5 +21,12 @@ namespace TraveLayer.CustomTypes.Weather
     public class TempLowAvg
     {
         public Avg Avg { get; set; }
+    }
+    public class WeatherChance
+    {
+        public string ChanceType { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public double Percentage { get; set; }
     }
 }

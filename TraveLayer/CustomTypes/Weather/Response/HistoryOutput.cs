@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -101,24 +101,6 @@ namespace TraveLayer.CustomTypes.Weather
         public Max max { get; set; }
     }
 
-    //public class Min2
-    //{
-    //    public string F { get; set; }
-    //    public string C { get; set; }
-    //}
-
-    //public class Avg2
-    //{
-    //    public string F { get; set; }
-    //    public string C { get; set; }
-    //}
-
-    //public class Max2
-    //{
-    //    public string F { get; set; }
-    //    public string C { get; set; }
-    //}
-
     public class TempLow
     {
         public Min min { get; set; }
@@ -151,48 +133,12 @@ namespace TraveLayer.CustomTypes.Weather
         public Max3 max { get; set; }
     }
 
-    //public class Min4
-    //{
-    //    public string F { get; set; }
-    //    public string C { get; set; }
-    //}
-
-    //public class Avg4
-    //{
-    //    public string F { get; set; }
-    //    public string C { get; set; }
-    //}
-
-    //public class Max4
-    //{
-    //    public string F { get; set; }
-    //    public string C { get; set; }
-    //}
-
     public class DewpointHigh
     {
         public Min min { get; set; }
         public Avg avg { get; set; }
         public Max max { get; set; }
     }
-
-    //public class Min5
-    //{
-    //    public string F { get; set; }
-    //    public string C { get; set; }
-    //}
-
-    //public class Avg5
-    //{
-    //    public string F { get; set; }
-    //    public string C { get; set; }
-    //}
-
-    //public class Max5
-    //{
-    //    public string F { get; set; }
-    //    public string C { get; set; }
-    //}
 
     public class DewpointLow
     {
@@ -206,152 +152,32 @@ namespace TraveLayer.CustomTypes.Weather
         public string cond { get; set; }
     }
 
-    public class Tempoversixty
+    public class WeatherChance
     {
         public string name { get; set; }
         public string description { get; set; }
         public string percentage { get; set; }
     }
-
-    public class Chanceofwindyday
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Chanceofpartlycloudyday
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Chanceofsunnycloudyday
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Chanceoffogday
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Chanceofcloudyday
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Chanceofhumidday
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Tempoverninety
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Chanceofsnowonground
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Chanceoftornadoday
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Chanceofprecip
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Chanceofsultryday
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Tempbelowfreezing
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Tempoverfreezing
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Chanceofthunderday
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Chanceofhailday
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Chanceofsnowday
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
-    public class Chanceofrainday
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public string percentage { get; set; }
-    }
-
     public class ChanceOf
     {
-        public Tempoversixty tempoversixty { get; set; }
-        public Chanceofwindyday chanceofwindyday { get; set; }
-        public Chanceofpartlycloudyday chanceofpartlycloudyday { get; set; }
-        public Chanceofsunnycloudyday chanceofsunnycloudyday { get; set; }
-        public Chanceoffogday chanceoffogday { get; set; }
-        public Chanceofcloudyday chanceofcloudyday { get; set; }
-        public Chanceofhumidday chanceofhumidday { get; set; }
-        public Tempoverninety tempoverninety { get; set; }
-        public Chanceofsnowonground chanceofsnowonground { get; set; }
-        public Chanceoftornadoday chanceoftornadoday { get; set; }
-        public Chanceofprecip chanceofprecip { get; set; }
-        public Chanceofsultryday chanceofsultryday { get; set; }
-        public Tempbelowfreezing tempbelowfreezing { get; set; }
-        public Tempoverfreezing tempoverfreezing { get; set; }
-        public Chanceofthunderday chanceofthunderday { get; set; }
-        public Chanceofhailday chanceofhailday { get; set; }
-        public Chanceofsnowday chanceofsnowday { get; set; }
-        public Chanceofrainday chanceofrainday { get; set; }
+        public WeatherChance tempoversixty { get; set; }
+        public WeatherChance chanceofwindyday { get; set; }
+        public WeatherChance chanceofpartlycloudyday { get; set; }
+        public WeatherChance chanceofsunnycloudyday { get; set; }
+        public WeatherChance chanceoffogday { get; set; }
+        public WeatherChance chanceofcloudyday { get; set; }
+        public WeatherChance chanceofhumidday { get; set; }
+        public WeatherChance tempoverninety { get; set; }
+        public WeatherChance chanceofsnowonground { get; set; }
+        public WeatherChance chanceoftornadoday { get; set; }
+        public WeatherChance chanceofprecip { get; set; }
+        public WeatherChance chanceofsultryday { get; set; }
+        public WeatherChance tempbelowfreezing { get; set; }
+        public WeatherChance tempoverfreezing { get; set; }
+        public WeatherChance chanceofthunderday { get; set; }
+        public WeatherChance chanceofhailday { get; set; }
+        public WeatherChance chanceofsnowday { get; set; }
+        public WeatherChance chanceofrainday { get; set; }
     }
 
     public class Trip
@@ -369,7 +195,7 @@ namespace TraveLayer.CustomTypes.Weather
         public ChanceOf chance_of { get; set; }
     }
 
-    public class HistoryOutput 
+    public class HistoryOutput
     {
         public Response response { get; set; }
         public Trip trip { get; set; }
