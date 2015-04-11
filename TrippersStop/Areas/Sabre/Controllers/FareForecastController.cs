@@ -14,8 +14,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class FareForecastController : ApiController
     {
-        IAPIAsyncCaller apiCaller;
-        public FareForecastController(IAPIAsyncCaller repository)
+        IAsyncSabreAPICaller apiCaller;
+        public FareForecastController(IAsyncSabreAPICaller repository)
         {
             apiCaller = repository;
             apiCaller.Accept = "application/json";

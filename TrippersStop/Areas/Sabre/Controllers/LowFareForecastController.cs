@@ -15,8 +15,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class LowFareForecastController : ApiController
     {
-        IAPIAsyncCaller apiCaller;
-        public LowFareForecastController(IAPIAsyncCaller repository)
+        IAsyncSabreAPICaller apiCaller;
+        public LowFareForecastController(IAsyncSabreAPICaller repository)
         {
             apiCaller = repository;
             apiCaller.Accept = "application/json";

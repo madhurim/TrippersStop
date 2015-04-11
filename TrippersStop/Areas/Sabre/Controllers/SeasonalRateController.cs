@@ -14,8 +14,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class SeasonalRateController : ApiController
     {
-        IAPIAsyncCaller apiCaller;
-        public SeasonalRateController(IAPIAsyncCaller repository)
+        IAsyncSabreAPICaller apiCaller;
+        public SeasonalRateController(IAsyncSabreAPICaller repository)
         {
             apiCaller = repository;
             apiCaller.Accept = "application/json";

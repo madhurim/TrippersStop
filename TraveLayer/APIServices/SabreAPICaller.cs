@@ -8,11 +8,12 @@ using System.Web;
 using TrippersStop.TraveLayer;
 using ServiceStack.Text;
 using ServiceStack.Redis;
+using System.Web.Configuration;
 
 
 namespace TrippersStop.TraveLayer
 {
-    public class SabreAPICaller : IAPIAsyncCaller
+    public class SabreAPICaller : IAsyncSabreAPICaller
     {
         Uri _TokenUri;
         String _longTermToken = String.Empty;
@@ -23,15 +24,13 @@ namespace TrippersStop.TraveLayer
                 this._TokenUri = value; 
             }
         }
-        //TBD : Get from config
         public string RedisHost
         {
             get
             {
-                return "127.0.0.1:6379";
+                return WebConfigurationManager.AppSettings["RedisExpireInMin"];
             }
-        }
-
+        } 
         public string SabreTokenKey
         {
             get
@@ -174,6 +173,8 @@ namespace TrippersStop.TraveLayer
             {
                 RedisManager redisManager = new RedisManager(redisClient);
                 token = redisManager.GetByKey<string>(SabreTokenKey);
+                if(string.IsNullOrWhiteSpace(token))
+                    redisManager.Save<string>(SabreTokenKey, token);
             }
             return token;
         }

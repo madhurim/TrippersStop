@@ -28,7 +28,7 @@ namespace TrippersStop
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             //JsConfig.EmitLowercaseUnderscoreNames = true;
             var container = new Container();
-            container.RegisterWebApiRequest<IAPIAsyncCaller, SabreAPICaller>();
+            container.RegisterWebApiRequest<IAsyncSabreAPICaller, SabreAPICaller>();
 
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);

@@ -15,8 +15,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class AdvancedCalendarController : ApiController
     {
-        IAPIAsyncCaller apiCaller;
-        public AdvancedCalendarController(IAPIAsyncCaller repository)
+        IAsyncSabreAPICaller apiCaller;
+        public AdvancedCalendarController(IAsyncSabreAPICaller repository)
         {
             apiCaller = repository;
             apiCaller.Accept = "application/json";
