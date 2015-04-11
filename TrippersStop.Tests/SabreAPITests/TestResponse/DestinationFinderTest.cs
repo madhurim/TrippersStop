@@ -26,7 +26,7 @@ namespace TrippersStop.Tests.SabreAPITests
 
             // Arrange
 
-            IAPIAsyncCaller apiCaller = new SabreAPICaller();
+            IAsyncSabreAPICaller apiCaller = new SabreAPICaller();
             var controller = new DestinationsController(apiCaller);
             controller.Request = new HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());

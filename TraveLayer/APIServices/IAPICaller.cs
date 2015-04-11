@@ -20,7 +20,7 @@ namespace TrippersStop.TraveLayer
         Task<String> Post(string Method, string Body);
         //Task<String> Put(string Method, string Body);
         //Task<String> Delete(string Method);
-        Task<String> GetToken();
+      
        
     }
 }

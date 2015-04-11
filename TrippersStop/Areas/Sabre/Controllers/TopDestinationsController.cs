@@ -14,8 +14,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class TopDestinationsController : ApiController
     {
-        IAPIAsyncCaller apiCaller;
-        public TopDestinationsController(IAPIAsyncCaller repository)
+        IAsyncSabreAPICaller apiCaller;
+        public TopDestinationsController(IAsyncSabreAPICaller repository)
         {
             apiCaller = repository;
             apiCaller.Accept = "application/json";

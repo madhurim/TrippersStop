@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIServices\IAPICaller.cs" />
+    <Compile Include="APIServices\IAsyncSabreAPICaller.cs" />
     <Compile Include="APIServices\SabreAPICaller.cs" />
     <Compile Include="APIServices\ServiceStackSerializer.cs" />
     <Compile Include="CustomTypes\Sabre\Request\AdvancedCalendar.cs">

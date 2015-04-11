@@ -15,8 +15,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
     
     public class CountriesController : ApiController
     {
-       IAPIAsyncCaller apiCaller;
-       public CountriesController(IAPIAsyncCaller repository)
+        IAsyncSabreAPICaller apiCaller;
+        public CountriesController(IAsyncSabreAPICaller repository)
         {
             apiCaller = repository;
             apiCaller.Accept = "application/json";

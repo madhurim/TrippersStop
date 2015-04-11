@@ -14,8 +14,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class MultiAirportCityController : ApiController
     {
-        IAPIAsyncCaller apiCaller;
-        public MultiAirportCityController(IAPIAsyncCaller repository)
+        IAsyncSabreAPICaller apiCaller;
+        public MultiAirportCityController(IAsyncSabreAPICaller repository)
         {
             apiCaller = repository;
             apiCaller.Accept = "application/json";

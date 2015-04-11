@@ -14,8 +14,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class TravelThemeController : ApiController
     {
-        IAPIAsyncCaller apiCaller;
-        public TravelThemeController(IAPIAsyncCaller repository)
+        IAsyncSabreAPICaller apiCaller;
+        public TravelThemeController(IAsyncSabreAPICaller repository)
         {
             apiCaller = repository;
             apiCaller.Accept = "application/json";

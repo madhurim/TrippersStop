@@ -9,6 +9,8 @@ using System.Reflection;
 using TraveLayer.APIServices;
 using ServiceStack.Redis;
 using ServiceStack.Redis.Generic;
+using System.Configuration;
+using System.Web.Configuration;
 
 namespace TrippersStop.TraveLayer
 {
@@ -16,7 +18,14 @@ namespace TrippersStop.TraveLayer
     public class RedisManager
     {
         private readonly IRedisClient _redisClient;
-        private  double expireTime = 10;
+        public double RedisExpireInMin 
+        {
+            get 
+            {
+                return double.Parse(WebConfigurationManager.AppSettings["RedisExpireInMin"].ToString()); 
+            }
+        } 
+
         public RedisManager(IRedisClient redisClient)
         {
             _redisClient = redisClient;
@@ -26,7 +35,7 @@ namespace TrippersStop.TraveLayer
             bool isSuccess = false;
             try
             {
-                isSuccess = _redisClient.Set<T>(key, keyData, DateTime.Now.AddMinutes(expireTime));
+                isSuccess = _redisClient.Set<T>(key, keyData, DateTime.Now.AddMinutes(RedisExpireInMin));
             }
             catch
             {

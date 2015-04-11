@@ -18,8 +18,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class BargainFinderController : ApiController
     {
-        IAPIAsyncCaller apiCaller;
-        public BargainFinderController(IAPIAsyncCaller repository)
+        IAsyncSabreAPICaller apiCaller;
+        public BargainFinderController(IAsyncSabreAPICaller repository)
         {
             apiCaller = repository;
             apiCaller.Accept = "application/json";
