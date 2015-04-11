@@ -129,9 +129,7 @@
     <Compile Include="CustomTypes\Sabre\Response\TravelSeasonality.cs" />
     <Compile Include="CustomTypes\Sabre\Response\TravelSeasonalityAirportsLookup.cs" />
     <Compile Include="CustomTypes\Sabre\Response\TravelThemeLookup.cs" />
-    <Compile Include="DBServices\RedisConnector.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="DBServices\IDBService.cs" />
     <Compile Include="DBServices\RedisManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

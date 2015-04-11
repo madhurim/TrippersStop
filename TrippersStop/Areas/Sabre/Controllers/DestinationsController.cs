@@ -19,15 +19,28 @@ namespace TrippersStop.Areas.Sabre.Controllers
     {
 
         IAsyncSabreAPICaller apiCaller;
-        public DestinationsController(IAsyncSabreAPICaller repository)
+        public DestinationsController(IAsyncSabreAPICaller repository, IDBService dbService)
         {
             apiCaller = repository;
             apiCaller.Accept = "application/json";
             apiCaller.ContentType = "application/x-www-form-urlencoded";
-            string token = apiCaller.GetToken().Result;
+            apiCaller.LongTermToken = dbService.GetByKey<string>(apiCaller.SabreTokenKey);
+            apiCaller.TokenExpireIn = dbService.GetByKey<string>(apiCaller.SabreTokenExpireKey);
+            if (string.IsNullOrWhiteSpace(apiCaller.LongTermToken))
+            {
+                apiCaller.LongTermToken = apiCaller.GetToken().Result;
+            }
+            double expireTimeInSec;
+            if (!string.IsNullOrWhiteSpace(apiCaller.TokenExpireIn) && double.TryParse(apiCaller.TokenExpireIn, out expireTimeInSec))
+            {
+                dbService.Save<string>(apiCaller.SabreTokenKey, apiCaller.LongTermToken, expireTimeInSec / 60);
+                dbService.Save<string>(apiCaller.SabreTokenExpireKey, apiCaller.TokenExpireIn, expireTimeInSec / 60);
+            }
+
             apiCaller.Authorization = "bearer";
             apiCaller.ContentType = "application/json";
         }
+
         // GET api/DestinationFinder
         public HttpResponseMessage Get([FromUri]Destinations destinationsRequest)
         {

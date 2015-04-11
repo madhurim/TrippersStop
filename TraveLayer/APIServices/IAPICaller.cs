@@ -18,6 +18,9 @@ namespace TrippersStop.TraveLayer
         String Authorization { set; }
         Task<String> Get(string Method);
         Task<String> Post(string Method, string Body);
+
+     
+        
         //Task<String> Put(string Method, string Body);
         //Task<String> Delete(string Method);
       
