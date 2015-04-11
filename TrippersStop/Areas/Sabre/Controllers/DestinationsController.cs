@@ -15,7 +15,8 @@ using TraveLayer.CustomTypes.Sabre.Response;
 using System.Configuration;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
-
+using TraveLayer.CustomTypes.Weather;
+using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
@@ -26,6 +27,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
     {
 
         IAsyncSabreAPICaller _apiCaller;
+        IAsyncWeatherAPICaller _weatherApiCaller;
         ICacheService _cacheService;
         const string _destinationKey = "TrippismApi.Destinations.All";
         string _expireTime = ConfigurationManager.AppSettings["RedisExpireInMin"].ToString();
@@ -33,10 +35,11 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// Set api class and cache service.
         /// </summary>
-        public DestinationsController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
+        public DestinationsController(IAsyncSabreAPICaller apiCaller, IAsyncWeatherAPICaller weatherApiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;
+            _weatherApiCaller = weatherApiCaller;
         }
 
         // GET api/DestinationFinder
@@ -111,16 +114,19 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// </summary>
         [Route("api/sabre/destinations/insights")]
         [HttpGet]
-        public HttpResponseMessage Insights(string origin, string departuredate, string returndate, string lengthofstay)
+        public HttpResponseMessage Insights([FromUri]TripInput tripInput)
         {
-            string destinationUrl = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", origin, departuredate, returndate, lengthofstay);
-            string fareForecast = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", origin, departuredate, returndate, lengthofstay);
-            string fareRange = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", origin, departuredate, returndate, lengthofstay);
-            string seasonality = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", origin, departuredate, returndate, lengthofstay);
-            //string weather  = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", origin, departuredate, returndate, lengthofstay);
+            string lengthOfStay = (Convert.ToDateTime(tripInput.ReturnDate) - Convert.ToDateTime(tripInput.DepartureDate)).Days.ToString();
+            string destinationUrl = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", tripInput.Origin, tripInput.DepartureDate, tripInput.ReturnDate, lengthOfStay);
+            string fareForecast = string.Format("v1/forecast/flights/fares?origin={0}&destination={1}&departuredate={2}&returndate={3}", tripInput.Origin, tripInput.Destination, tripInput.DepartureDate, tripInput.ReturnDate);
+            string fareRange = string.Format("v1/historical/flights/fares?origin={0}&destination={1}&earliestdeparturedate={2}&latestdeparturedate={3}&lengthofstay={4}", tripInput.Origin, tripInput.Destination, tripInput.DepartureDate, tripInput.ReturnDate, lengthOfStay);
+            string seasonality = string.Format("v1/historical/flights/{0}/seasonality", tripInput.Destination);
 
-            HttpResponseMessage h = new HttpResponseMessage();
-            return h;
+            string fromDate = Convert.ToDateTime(tripInput.DepartureDate).ToString("MMdd");
+            string toDate = Convert.ToDateTime(tripInput.ReturnDate).ToString("MMdd");
+
+            string weather = string.Format("planner_{0}{1}/q/{2}/{3}.json", fromDate, toDate, tripInput.State, tripInput.City);
+            return GetResponse(destinationUrl, fareForecast, fareRange, seasonality, weather);
         }
 
 
@@ -184,10 +190,10 @@ namespace TrippismApi.Areas.Sabre.Controllers
             return Request.CreateResponse(result.StatusCode, result.Response);
         }
 
-        private async Task<HttpResponseMessage> GetResponse(string destinationUrl, string fareForecast, string fareRange, string seasonality)
+        private  HttpResponseMessage GetResponse(string destinationUrl, string fareForecast, string fareRange, string seasonality,string weather)
         {
             SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
-            var responses = await Task.WhenAll(
+            var responses =  Task.WhenAll(
             new[]
             {
               destinationUrl,
@@ -195,9 +201,82 @@ namespace TrippismApi.Areas.Sabre.Controllers
               fareRange,
               seasonality
             }.Select(url => _apiCaller.Get(url)));
-
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, responses);
+            var result = responses.Result;
+            TripOutput tripOutput = new TripOutput();
+            tripOutput.TripWeather=GetWeatherResponse(weather);
+            if(result[0].StatusCode==HttpStatusCode.OK )
+            tripOutput.Fares = GetDestinationResponse(result[0].Response);
+            if (result[1].StatusCode == HttpStatusCode.OK)
+                tripOutput.LowFareForecast = GetFareForecastResponse(result[1].Response);
+            if (result[2].StatusCode == HttpStatusCode.OK)
+                tripOutput.FareRange = GetFareRangeResponse(result[2].Response);
+            if (result[3].StatusCode == HttpStatusCode.OK)
+                tripOutput.TravelSeasonality = GetTravelSeasonalityResponse(result[3].Response);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, tripOutput);
             return response;
         }
+
+        private VM.TravelSeasonality GetTravelSeasonalityResponse(string jsonResponse)
+        {
+            OTA_TravelSeasonality seasonality = new OTA_TravelSeasonality();
+            seasonality = ServiceStackSerializer.DeSerialize<OTA_TravelSeasonality>(jsonResponse);
+            Mapper.CreateMap<OTA_TravelSeasonality, VM.TravelSeasonality>();
+            VM.TravelSeasonality travelSeasonality = Mapper.Map<OTA_TravelSeasonality, VM.TravelSeasonality>(seasonality);
+            return travelSeasonality;
+        }
+
+        private LowFareForecast GetFareForecastResponse(string jsonResponse)
+        {
+            OTA_LowFareForecast fares = new OTA_LowFareForecast();
+            fares = ServiceStackSerializer.DeSerialize<OTA_LowFareForecast>(jsonResponse);
+            Mapper.CreateMap<OTA_LowFareForecast, LowFareForecast>();
+            LowFareForecast lowFareForecast = Mapper.Map<OTA_LowFareForecast, LowFareForecast>(fares);
+            return lowFareForecast;
+        }
+
+        private VM.FareRange GetFareRangeResponse(string jsonResponse)
+        {
+            OTA_FareRange fares = new OTA_FareRange();
+            fares = ServiceStackSerializer.DeSerialize<OTA_FareRange>(jsonResponse);
+            Mapper.CreateMap<OTA_FareRange, VM.FareRange>();
+            VM.FareRange fareRange = Mapper.Map<OTA_FareRange, VM.FareRange>(fares);
+            return fareRange;
+        }
+
+        private Fares GetDestinationResponse(string jsonResponse)
+        {
+            OTA_DestinationFinder cities = new OTA_DestinationFinder();
+            cities = ServiceStackSerializer.DeSerialize<OTA_DestinationFinder>(jsonResponse);
+            Mapper.CreateMap<OTA_DestinationFinder, Fares>();
+            Fares fares = Mapper.Map<OTA_DestinationFinder, Fares>(cities);
+            return fares;
+        }
+
+        private TripWeather GetWeatherResponse(string weatherUrl)
+        {
+            _weatherApiCaller.Accept = "application/json";
+            _weatherApiCaller.ContentType = "application/json";
+            APIResponse result = _apiCaller.Get(weatherUrl).Result;
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                HistoryOutput weather = new HistoryOutput();
+                weather = ServiceStackSerializer.DeSerialize<HistoryOutput>(result.Response);
+                Trip trip = weather.trip;
+                Mapper.CreateMap<Trip, TripWeather>()
+                   .ForMember(h => h.TempHighAvg, m => m.MapFrom(s => s.temp_high))
+                   .ForMember(h => h.TempLowAvg, m => m.MapFrom(s => s.temp_low))
+                   .ForMember(h => h.ChanceOf, m => m.MapFrom(s => s.chance_of))
+                   .ForMember(h => h.CloudCover, m => m.MapFrom(s => s.cloud_cover));
+                Mapper.CreateMap<TempHigh, TempHighAvg>()
+                    .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
+                Mapper.CreateMap<TempLow, TempLowAvg>()
+                   .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
+                TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(trip);
+                return tripWeather;
+            }
+            return null;
+        }
+
+
     }
 }
