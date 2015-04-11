@@ -256,7 +256,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         {
             _weatherApiCaller.Accept = "application/json";
             _weatherApiCaller.ContentType = "application/json";
-            APIResponse result = _apiCaller.Get(weatherUrl).Result;
+            APIResponse result = _weatherApiCaller.Get(weatherUrl).Result;
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 HistoryOutput weather = new HistoryOutput();
