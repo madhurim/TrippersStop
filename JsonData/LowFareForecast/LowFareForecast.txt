@@ -1,0 +1,22 @@
+
+Request
+http://localhost:14606/api/LowFareForecast?origin=ATL&destination=LAS&departuredate=2015-03-20&returndate=2015-03-28
+
+
+Response
+
+
+{
+    "OriginLocation": "ATL",
+    "DestinationLocation": "LAS",
+    "DepartureDateTime": "2015-03-20T00:00:00",
+    "ReturnDateTime": "2015-03-28T00:00:00",
+    "Forecast": {
+        "HighestPredictedFare": 568,
+        "CurrencyCode": "USD",
+        "LowestPredictedFare": 458
+    },
+    "Recommendation": "unknown",
+    "LowestFare": 0,
+    "CurrencyCode": null
+}

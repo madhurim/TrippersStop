@@ -30,21 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EyeSoft.Core">
-      <HintPath>..\packages\EyeSoft.Core.1.4.0.980\lib\net45\EyeSoft.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="EyeSoft.ServiceStack.Text">
-      <HintPath>..\packages\EyeSoft.ServiceStack.Text.1.0.0.0010\lib\net45\EyeSoft.ServiceStack.Text.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.JsonResult">
-      <HintPath>..\packages\Newtonsoft.JsonResult.1.0.5369.19299\lib\net40\Newtonsoft.JsonResult.dll</HintPath>
+    <Reference Include="ServiceStack.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\packages\ServiceStack.Redis.3.9.71\lib\net35\ServiceStack.Redis.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
@@ -55,6 +54,7 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -88,21 +88,54 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIServices\IAPICaller.cs" />
+    <Compile Include="APIServices\IAsyncSabreAPICaller.cs" />
     <Compile Include="APIServices\SabreAPICaller.cs" />
     <Compile Include="APIServices\ServiceStackSerializer.cs" />
-    <Compile Include="Class1.cs" />
-    <Compile Include="CustomTypes\ICustomType.cs" />
-    <Compile Include="CustomTypes\Sabre\AdvancedCalendar.cs">
+    <Compile Include="CustomTypes\Sabre\Request\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CustomTypes\Sabre\BargainFinder.cs" />
-    <Compile Include="CustomTypes\Sabre\LeadPriceCalendar.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\BargainFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\AdvancedCalendar.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\AirportsAtCities.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\BargainFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\CityPairs.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\FareRange.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\Fares.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\Countries.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\Destinations.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\FareForecast.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\LowFareForecast.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\MultiAirportCity.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\PointofSaleCountryCode.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\ThemeAirport.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\TopDestination.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\TravelInfo.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\TravelSeasonality.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\TravelTheme.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\AirportsAtCitiesLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Request\AlternateDate.cs" />
+    <Compile Include="CustomTypes\Sabre\Request\BargainFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\CityPairsLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\CountriesLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\DestinationFinder.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\FareRange.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\InstaFlightsSearch.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\LeadPriceCalendar.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\LowFareForecast.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\MultiAirportCityLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\PointofSaleCountryCodeLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\ThemeAirportLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\TopDestinations.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\TravelSeasonality.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\TravelSeasonalityAirportsLookup.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\TravelThemeLookup.cs" />
+    <Compile Include="CacheServices\ICacheService.cs" />
+    <Compile Include="CacheServices\RedisService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Web.config.install.xdt" />
-    <None Include="Web.config.uninstall.xdt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

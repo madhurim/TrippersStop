@@ -4,17 +4,30 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Configuration;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using System.Web;
 using TrippersStop.TraveLayer;
+using ServiceStack.Text;
+using ServiceStack.Redis;
+using System.Web.Configuration;
+
 
 namespace TrippersStop.TraveLayer
 {
-    public class SabreAPICaller : IAPIAsyncCaller
+    public class SabreAPICaller : IAsyncSabreAPICaller
     {
         Uri _TokenUri;
-        String _longTermToken = String.Empty;
-        
+        public string LongTermToken
+        {
+            get
+            {
+                return _longTermToken;
+            }
+            set
+            {
+                _longTermToken = value;
+            }
+        }
+        private string _longTermToken = String.Empty;
         public Uri TokenUri
         {            
             set
@@ -22,6 +35,29 @@ namespace TrippersStop.TraveLayer
                 this._TokenUri = value; 
             }
         }
+       
+        public string SabreTokenKey
+        {
+            get
+            {
+                return "Trippersstop.SabreToken";
+            }
+        }
+
+        public string SabreTokenExpireKey
+        {
+            get
+            {
+                return "Trippersstop.SabreToken.ExpireIn";
+            }
+        }
+        
+        public string TokenExpireIn
+        {
+            get;
+            set;
+        }
+   
         Uri _BaseAPIUri;
         public Uri BaseAPIUri
         {
@@ -83,63 +119,62 @@ namespace TrippersStop.TraveLayer
         }
         public async Task<String> GetToken()
         {
-            using (var client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Clear();                
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_Accept));
-
-                byte[] cidbytes = System.Text.Encoding.UTF8.GetBytes(_ClientId);
-                string cidbase64 = Convert.ToBase64String(cidbytes);
-
-                byte[] secdbytes = System.Text.Encoding.UTF8.GetBytes(_ClientSecret);
-                string secdbase64 = Convert.ToBase64String(secdbytes);
-
-                string cre = String.Format("{0}:{1}", cidbase64, secdbase64);
-                byte[] bytes = System.Text.Encoding.UTF8.GetBytes(cre);
-                string base64 = Convert.ToBase64String(bytes);
-
-                client.DefaultRequestHeaders.Add("Authorization", String.Format("Basic {0}", base64));
-
-                /*POST https://api.test.sabre.com/v1/auth/token HTTP/1.1
-                POST https: //api.sabre.com/v1/auth/token/ HTTP/1.1
-                Accept: application/json
-                Authorization: Basic VmpFNmJYRTBOMjVwTjJVNU5XeDFhM1l4ZHpwRVJWWkRSVTVVUlZJNlJWaFU6VTNkV1l6Qkhkak09
-                Content-Type: application/x-www-form-urlencoded
-                Host: api.test.sabre.com
-                Content-Length: 29
-                Expect: 100-continue
-                Connection: Keep-Alive*/
-
-                //grant_type=client_credentials
-                
-                HttpContent requestContent = new StringContent("grant_type=client_credentials", System.Text.Encoding.UTF8, _ContentType);
-                HttpResponseMessage sabreResponse = await client.PostAsync(_TokenUri + "v1/auth/token/", requestContent);
-
-                // If client authentication failed then we get a JSON response from Azure Market Place
-                if (!sabreResponse.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    JToken error = await sabreResponse.Content.ReadAsAsync<JToken>();
-                    string errorType = error.Value<string>("error");
-                    string errorDescription = error.Value<string>("error_description");
-                    throw new HttpRequestException(string.Format("Sabre request failed: {0} {1}", errorType, errorDescription));
-                }
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_Accept));
 
-               // "{  "access_token": "Shared/IDL:IceSess\\/SessMgr:1\\.0.IDL/Common/!ICESMS\\/ACPCRTC!ICESMSLB\\/CRT.LB!-3572677658411405181!1757770!0!!E2E-1",  "token_type": "bearer",  "expires_in": 900}"
-                
+                    byte[] cidbytes = System.Text.Encoding.UTF8.GetBytes(_ClientId);
+                    string cidbase64 = Convert.ToBase64String(cidbytes);
+
+                    byte[] secdbytes = System.Text.Encoding.UTF8.GetBytes(_ClientSecret);
+                    string secdbase64 = Convert.ToBase64String(secdbytes);
+
+                    string cre = String.Format("{0}:{1}", cidbase64, secdbase64);
+                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(cre);
+                    string base64 = Convert.ToBase64String(bytes);
+
+                    client.DefaultRequestHeaders.Add("Authorization", String.Format("Basic {0}", base64));
+
+                    /*POST https://api.test.sabre.com/v1/auth/token HTTP/1.1
+                    POST https: //api.sabre.com/v1/auth/token/ HTTP/1.1
+                    Accept: application/json
+                    Authorization: Basic VmpFNmJYRTBOMjVwTjJVNU5XeDFhM1l4ZHpwRVJWWkRSVTVVUlZJNlJWaFU6VTNkV1l6Qkhkak09
+                    Content-Type: application/x-www-form-urlencoded
+                    Host: api.test.sabre.com
+                    Content-Length: 29
+                    Expect: 100-continue
+                    Connection: Keep-Alive*/
+
+                    //grant_type=client_credentials
+
+                    HttpContent requestContent = new StringContent("grant_type=client_credentials", System.Text.Encoding.UTF8, _ContentType);
+                    HttpResponseMessage sabreResponse = await client.PostAsync(_TokenUri + "v1/auth/token/", requestContent).ConfigureAwait(false); ;
+
+                    // If client authentication failed then we get a JSON response from Azure Market Place
+                    if (!sabreResponse.IsSuccessStatusCode)
+                    {
+                        JsonObject error = await sabreResponse.Content.ReadAsAsync<JsonObject>();
+                        string errorType = error.Get<string>("error");
+                        string errorDescription = error.Get<string>("error_description");
+                        throw new HttpRequestException(string.Format("Sabre request failed: {0} {1}", errorType, errorDescription));
+                    }
+
+                    // "{  "access_token": "Shared/IDL:IceSess\\/SessMgr:1\\.0.IDL/Common/!ICESMS\\/ACPCRTC!ICESMSLB\\/CRT.LB!-3572677658411405181!1757770!0!!E2E-1",  "token_type": "bearer",  "expires_in": 900}"
+
                     // Get the access token to attach to the original request from the response body
-                JToken response = await sabreResponse.Content.ReadAsAsync<JToken>();
+                    JsonObject response = await sabreResponse.Content.ReadAsAsync<JsonObject>();
 
-                //should we URLencode this ?
-                _longTermToken = HttpUtility.UrlEncode(response.Value<string>("access_token"));
+                    //should we URLencode this ?
+                    LongTermToken = HttpUtility.UrlEncode(response.Get<string>("access_token"));
 
-                // TODO : add them to the class
-               // string _token_type = response.Value<string>("token_type");
-               // string _expires_in = response.Value<string>("access_token");
-
-
-                return _longTermToken;
+                    // TODO : add them to the class
+                    // string _token_type = response.Value<string>("token_type");
+                    TokenExpireIn = response.Get<string>("expires_in");        
             }
+            return LongTermToken;
         }
+    
         
         public async Task<String> Post(string Method, string Body)
         {
@@ -147,18 +182,18 @@ namespace TrippersStop.TraveLayer
             {
                 client.DefaultRequestHeaders.Clear();           
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(this._Accept));
-                HttpContent requestContent = new StringContent(Body, System.Text.Encoding.UTF8, _ContentType);               
-                
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_Authorization, _longTermToken);
-                
-                HttpResponseMessage sabreResponse = await client.PostAsync(this.BaseAPIUri + Method, requestContent);
+                HttpContent requestContent = new StringContent(Body, System.Text.Encoding.UTF8, _ContentType);
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_Authorization, LongTermToken);
+
+                HttpResponseMessage sabreResponse = await client.PostAsync(this.BaseAPIUri + Method, requestContent).ConfigureAwait(false); 
 
                 // If client authentication failed then we get a JSON response from Sabre
                 if (!sabreResponse.IsSuccessStatusCode)
                 {
-                    JToken error = await sabreResponse.Content.ReadAsAsync<JToken>();
-                    string errorType = error.Value<string>("error");
-                    string errorDescription = error.Value<string>("error_description");
+                    JsonObject error = await sabreResponse.Content.ReadAsAsync<JsonObject>();
+                    string errorType = error.Get<string>("error");
+                    string errorDescription = error.Get<string>("error_description");
                     throw new HttpRequestException(string.Format("Sabre request failed: {0} {1}", errorType, errorDescription));
                 }
 
@@ -169,21 +204,26 @@ namespace TrippersStop.TraveLayer
 
         public async Task<String> Get(string Method)
         {
-            
+            const string statusComplete = "Complete";
+            const string statusMessage = "No results were found";
             using (var client = new HttpClient())
             {   
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_Accept));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_Authorization, _longTermToken);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_Authorization, LongTermToken);
 
-                HttpResponseMessage sabreResponse = await client.GetAsync(this.BaseAPIUri + Method);
+                HttpResponseMessage sabreResponse = await client.GetAsync(this.BaseAPIUri + Method).ConfigureAwait(false);
                 
 
                 // If client authentication failed then we get a JSON response from Sabre
                 if (!sabreResponse.IsSuccessStatusCode)
                 {
-                    JToken error = await sabreResponse.Content.ReadAsAsync<JToken>();
-                    string errorType = error.Value<string>("error");
-                    string errorDescription = error.Value<string>("error_description");
+                    JsonObject error = await sabreResponse.Content.ReadAsAsync<JsonObject>();
+                    string errorType = error.Get<string>("error");
+                    string errorDescription = error.Get<string>("error_description");
+                    string message = error.Get<string>("message");
+                    string status = error.Get<string>("status");
+                    if (status == statusComplete && message == statusMessage)
+                        return string.Empty;
                     throw new HttpRequestException(string.Format("Sabre request failed: {0} {1}", errorType, errorDescription));
                 }
 
@@ -193,6 +233,7 @@ namespace TrippersStop.TraveLayer
                 return ret;
             }
         }
+     
     }
         
 }

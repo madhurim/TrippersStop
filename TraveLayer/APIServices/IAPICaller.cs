@@ -9,18 +9,21 @@ namespace TrippersStop.TraveLayer
 {
     public interface IAPIAsyncCaller
     {
-        Uri BaseAPIUri { get; set; }        
+        Uri BaseAPIUri { get; set; }
         String ClientId { set; }
         String ClientSecret { set; }
         String Accept { set; }
         String ContentType { set; }
         //String Accept-Encoding { set; }
+        String Authorization { set; }
+        Task<String> Get(string Method);
+        Task<String> Post(string Method, string Body);
 
-
-        Task<String> Get(string Method);        
-        Task<String> Post(string Method,string Body);
+     
+        
         //Task<String> Put(string Method, string Body);
         //Task<String> Delete(string Method);
+      
        
     }
 }
