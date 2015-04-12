@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TrippersStop.TraveLayer;
-using TrippersStop.Helper;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre;
 using AutoMapper;
@@ -16,6 +15,28 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class LowFareForecastController : ApiController
     {
+        IAsyncSabreAPICaller apiCaller;
+        public LowFareForecastController(IAsyncSabreAPICaller repository, ICacheService cacheService)
+        {
+            apiCaller = repository;
+            apiCaller.Accept = "application/json";
+            apiCaller.ContentType = "application/x-www-form-urlencoded";
+            apiCaller.LongTermToken = cacheService.GetByKey<string>(apiCaller.SabreTokenKey);
+            apiCaller.TokenExpireIn = cacheService.GetByKey<string>(apiCaller.SabreTokenExpireKey);
+            if (string.IsNullOrWhiteSpace(apiCaller.LongTermToken))
+            {
+                apiCaller.LongTermToken = apiCaller.GetToken().Result;
+            }
+            double expireTimeInSec;
+            if (!string.IsNullOrWhiteSpace(apiCaller.TokenExpireIn) && double.TryParse(apiCaller.TokenExpireIn, out expireTimeInSec))
+            {
+                cacheService.Save<string>(apiCaller.SabreTokenKey, apiCaller.LongTermToken, expireTimeInSec / 60);
+                cacheService.Save<string>(apiCaller.SabreTokenExpireKey, apiCaller.TokenExpireIn, expireTimeInSec / 60);
+            }
+
+            apiCaller.Authorization = "bearer";
+            apiCaller.ContentType = "application/json";
+        }
         // GET api/lowfareforecast
         public HttpResponseMessage Get([FromUri]TravelInfo lowFareForecastRequest)
         {
@@ -24,7 +45,7 @@ namespace TrippersStop.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetResponse(string url)
         {
-            string result = APIHelper.GetDataFromSabre(url);
+            String result = apiCaller.Get(url).Result;
             OTA_LowFareForecast fares = new OTA_LowFareForecast();
             fares = ServiceStackSerializer.DeSerialize<OTA_LowFareForecast>(result);
             Mapper.CreateMap<OTA_LowFareForecast, LowFareForecast>();

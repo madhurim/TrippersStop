@@ -8,14 +8,26 @@ using System.Web;
 using TrippersStop.TraveLayer;
 using ServiceStack.Text;
 using ServiceStack.Redis;
+using System.Web.Configuration;
 
 
 namespace TrippersStop.TraveLayer
 {
-    public class SabreAPICaller : IAPIAsyncCaller
+    public class SabreAPICaller : IAsyncSabreAPICaller
     {
         Uri _TokenUri;
-        String _longTermToken = String.Empty;
+        public string LongTermToken
+        {
+            get
+            {
+                return _longTermToken;
+            }
+            set
+            {
+                _longTermToken = value;
+            }
+        }
+        private string _longTermToken = String.Empty;
         public Uri TokenUri
         {            
             set
@@ -23,21 +35,27 @@ namespace TrippersStop.TraveLayer
                 this._TokenUri = value; 
             }
         }
-        //TBD : Get from config
-        public string RedisHost
-        {
-            get
-            {
-                return "127.0.0.1:6379";
-            }
-        }
-
+       
         public string SabreTokenKey
         {
             get
             {
                 return "Trippersstop.SabreToken";
             }
+        }
+
+        public string SabreTokenExpireKey
+        {
+            get
+            {
+                return "Trippersstop.SabreToken.ExpireIn";
+            }
+        }
+        
+        public string TokenExpireIn
+        {
+            get;
+            set;
         }
    
         Uri _BaseAPIUri;
@@ -101,9 +119,6 @@ namespace TrippersStop.TraveLayer
         }
         public async Task<String> GetToken()
         {
-            _longTermToken = GetTokenFromRedis();
-            if (string.IsNullOrWhiteSpace(_longTermToken))
-            {
                 using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Clear();
@@ -151,32 +166,15 @@ namespace TrippersStop.TraveLayer
                     JsonObject response = await sabreResponse.Content.ReadAsAsync<JsonObject>();
 
                     //should we URLencode this ?
-                    _longTermToken = HttpUtility.UrlEncode(response.Get<string>("access_token"));
+                    LongTermToken = HttpUtility.UrlEncode(response.Get<string>("access_token"));
 
-
-                    using (var redisClient = new RedisClient(RedisHost))
-                    {
-                        RedisManager redisManager = new RedisManager(redisClient);
-                        redisManager.Save<string>(SabreTokenKey, _longTermToken);
-                    }
                     // TODO : add them to the class
                     // string _token_type = response.Value<string>("token_type");
-                    // string _expires_in = response.Value<string>("access_token");        
-                }
+                    TokenExpireIn = response.Get<string>("expires_in");        
             }
-            return _longTermToken;
+            return LongTermToken;
         }
-
-        private string GetTokenFromRedis()
-        {
-            string token = string.Empty;
-            using (var redisClient = new RedisClient(RedisHost))
-            {
-                RedisManager redisManager = new RedisManager(redisClient);
-                token = redisManager.GetByKey<string>(SabreTokenKey);
-            }
-            return token;
-        }
+    
         
         public async Task<String> Post(string Method, string Body)
         {
@@ -184,9 +182,9 @@ namespace TrippersStop.TraveLayer
             {
                 client.DefaultRequestHeaders.Clear();           
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(this._Accept));
-                HttpContent requestContent = new StringContent(Body, System.Text.Encoding.UTF8, _ContentType);               
-                
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_Authorization, _longTermToken);
+                HttpContent requestContent = new StringContent(Body, System.Text.Encoding.UTF8, _ContentType);
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_Authorization, LongTermToken);
 
                 HttpResponseMessage sabreResponse = await client.PostAsync(this.BaseAPIUri + Method, requestContent).ConfigureAwait(false); 
 
@@ -211,7 +209,7 @@ namespace TrippersStop.TraveLayer
             using (var client = new HttpClient())
             {   
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_Accept));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_Authorization, _longTermToken);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_Authorization, LongTermToken);
 
                 HttpResponseMessage sabreResponse = await client.GetAsync(this.BaseAPIUri + Method).ConfigureAwait(false);
                 

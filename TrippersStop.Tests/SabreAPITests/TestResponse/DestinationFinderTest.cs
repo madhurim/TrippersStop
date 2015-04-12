@@ -26,9 +26,11 @@ namespace TrippersStop.Tests.SabreAPITests
             //var dController = new DestinationsController();
 
             // Arrange
-            var controller = new DestinationsController();
+
+            IAsyncSabreAPICaller apiCaller = new SabreAPICaller();
+            ICacheService dbService = new RedisService();
+            var controller = new DestinationsController(apiCaller, dbService);
             controller.Request = new HttpRequestMessage();
-            //controller.Request.SetConfiguration(new HttpConfiguration());
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             // Act
             Destinations ds = new Destinations();

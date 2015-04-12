@@ -1,4 +1,6 @@
 ﻿using ServiceStack.Text;
+using SimpleInjector;
+using SimpleInjector.Integration.WebApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +9,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using TrippersStop.TraveLayer;
 
 namespace TrippersStop
 {
@@ -24,6 +27,17 @@ namespace TrippersStop
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             //JsConfig.EmitLowercaseUnderscoreNames = true;
+            var container = new Container();
+            container.RegisterWebApiRequest<IAsyncSabreAPICaller, SabreAPICaller>();
+            container.RegisterWebApiRequest<ICacheService, RedisService>();
+            
+            // This is an extension method from the integration package.
+            container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
+
+            container.Verify();
+
+            GlobalConfiguration.Configuration.DependencyResolver =
+                new SimpleInjectorWebApiDependencyResolver(container);
         }
     }
 }
