@@ -15,7 +15,7 @@ using System.Web.Configuration;
 namespace TrippersStop.TraveLayer
 {
 
-    public class RedisManager : IDBService
+    public class RedisService : ICacheService
     {
         public double RedisExpireInMin 
         {

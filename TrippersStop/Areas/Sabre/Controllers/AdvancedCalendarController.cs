@@ -16,13 +16,13 @@ namespace TrippersStop.Areas.Sabre.Controllers
     public class AdvancedCalendarController : ApiController
     {
         IAsyncSabreAPICaller apiCaller;
-        public AdvancedCalendarController(IAsyncSabreAPICaller repository, IDBService dbService)
+        public AdvancedCalendarController(IAsyncSabreAPICaller repository, ICacheService cacheService)
         {
             apiCaller = repository;
             apiCaller.Accept = "application/json";
             apiCaller.ContentType = "application/x-www-form-urlencoded";
-            apiCaller.LongTermToken = dbService.GetByKey<string>(apiCaller.SabreTokenKey);
-            apiCaller.TokenExpireIn = dbService.GetByKey<string>(apiCaller.SabreTokenExpireKey);
+            apiCaller.LongTermToken = cacheService.GetByKey<string>(apiCaller.SabreTokenKey);
+            apiCaller.TokenExpireIn = cacheService.GetByKey<string>(apiCaller.SabreTokenExpireKey);
             if (string.IsNullOrWhiteSpace(apiCaller.LongTermToken))
             {
                 apiCaller.LongTermToken = apiCaller.GetToken().Result;
@@ -30,8 +30,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
             double expireTimeInSec;
             if (!string.IsNullOrWhiteSpace(apiCaller.TokenExpireIn) && double.TryParse(apiCaller.TokenExpireIn, out expireTimeInSec))
             {
-                dbService.Save<string>(apiCaller.SabreTokenKey, apiCaller.LongTermToken, expireTimeInSec / 60);
-                dbService.Save<string>(apiCaller.SabreTokenExpireKey, apiCaller.TokenExpireIn, expireTimeInSec / 60);
+                cacheService.Save<string>(apiCaller.SabreTokenKey, apiCaller.LongTermToken, expireTimeInSec / 60);
+                cacheService.Save<string>(apiCaller.SabreTokenExpireKey, apiCaller.TokenExpireIn, expireTimeInSec / 60);
             }
 
             apiCaller.Authorization = "bearer";

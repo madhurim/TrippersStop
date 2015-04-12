@@ -29,7 +29,7 @@ namespace TrippersStop
             //JsConfig.EmitLowercaseUnderscoreNames = true;
             var container = new Container();
             container.RegisterWebApiRequest<IAsyncSabreAPICaller, SabreAPICaller>();
-            container.RegisterWebApiRequest<IDBService, RedisManager>();
+            container.RegisterWebApiRequest<ICacheService, RedisService>();
             
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);

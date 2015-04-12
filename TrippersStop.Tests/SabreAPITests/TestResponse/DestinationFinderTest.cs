@@ -27,7 +27,7 @@ namespace TrippersStop.Tests.SabreAPITests
             // Arrange
 
             IAsyncSabreAPICaller apiCaller = new SabreAPICaller();
-            IDBService dbService = new RedisManager();
+            ICacheService dbService = new RedisService();
             var controller = new DestinationsController(apiCaller, dbService);
             controller.Request = new HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());

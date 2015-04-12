@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrippersStop.TraveLayer
 {
-    public interface IDBService
+    public interface ICacheService
     {
         bool Save<T>(string key, T keyData);
 

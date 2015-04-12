@@ -129,8 +129,8 @@
     <Compile Include="CustomTypes\Sabre\Response\TravelSeasonality.cs" />
     <Compile Include="CustomTypes\Sabre\Response\TravelSeasonalityAirportsLookup.cs" />
     <Compile Include="CustomTypes\Sabre\Response\TravelThemeLookup.cs" />
-    <Compile Include="DBServices\IDBService.cs" />
-    <Compile Include="DBServices\RedisManager.cs" />
+    <Compile Include="CacheServices\ICacheService.cs" />
+    <Compile Include="CacheServices\RedisService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
