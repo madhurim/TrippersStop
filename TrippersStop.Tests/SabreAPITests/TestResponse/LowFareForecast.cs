@@ -8,6 +8,12 @@ using TraveLayer.APIServices;
 using TraveLayer.CustomTypes;
 using TraveLayer.CustomTypes.Sabre;
 using TrippersStop.TraveLayer;
+using TrippersStop.Areas.Sabre.Controllers;
+using System.Net.Http;
+using System.Web.Http.Hosting;
+using TraveLayer.CustomTypes.Sabre.ViewModels;
+using System.Web.Http;
+using System.Net;
 
 namespace TrippersStop.Tests.SabreAPITests
 {
@@ -18,18 +24,24 @@ namespace TrippersStop.Tests.SabreAPITests
 
         public void GetTest()
         {
-            SabreAPICaller apiWrapper = new SabreAPICaller();
+            // Arrange
+            //var dController = new DestinationsController();
 
-            apiWrapper.Accept = "application/json";
-            apiWrapper.ContentType = "application/x-www-form-urlencoded";
-
-            string token = apiWrapper.GetToken().Result;
-
-            apiWrapper.Authorization = "bearer";
-
-            string result = apiWrapper.Get("v1/forecast/flights/fares?origin=ATL&destination=LAS&departuredate=2015-08-25&returndate=2015-08-28").Result;
-
-            Assert.IsNotNull(result);
+            // Arrange
+            var controller = new LowFareForecastController();
+            controller.Request = new HttpRequestMessage();
+            //controller.Request.SetConfiguration(new HttpConfiguration());
+            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            // Act
+            TravelInfo ds = new TravelInfo();
+            // ds.Destination = "Bos";
+            ds.Origin = "ATL";
+            ds.DepartureDate = "2015-04-25T00:00:00";
+            ds.ReturnDate= "2015-04-26T00:00:00";
+            ds.Destination= "LAS";
+            //ds.Lengthofstay = "4";
+            var response = controller.Get(ds);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
     }
 }

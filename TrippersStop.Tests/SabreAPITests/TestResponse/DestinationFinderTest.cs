@@ -12,6 +12,7 @@ using System.Net.Http;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using System.Web.Http;
 using System.Web.Http.Hosting;
+using System.Net;
 
 namespace TrippersStop.Tests.SabreAPITests
 {
@@ -37,26 +38,34 @@ namespace TrippersStop.Tests.SabreAPITests
             ds.ReturnDate = "2015-04-26T00:00:00";
             ds.Lengthofstay = "4";
             var response = controller.Get(ds);
-  
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
-            SabreAPICaller apiWrapper = new SabreAPICaller();
+          
+        }
 
-            apiWrapper.Accept = "application/json";
-            apiWrapper.ContentType = "application/x-www-form-urlencoded";
+        [TestMethod]
+        public void GetTestMax()
+        {
+            // Arrange
+            //var dController = new DestinationsController();
 
+            // Arrange
+            var controller = new DestinationsController();
+            controller.Request = new HttpRequestMessage();
+            //controller.Request.SetConfiguration(new HttpConfiguration());
+            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             // Act
-            string token = apiWrapper.GetToken().Result;
+            Destinations ds = new Destinations();
+            // ds.Destination = "Bos";
+            ds.Origin = "CLT";
+            ds.DepartureDate = "2015-04-25T00:00:00";
+            ds.ReturnDate = "2015-04-26T00:00:00";
+            ds.Lengthofstay = "4";
+            ds.Maxfare = "450";
+            var response = controller.Get(ds);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
-            apiWrapper.Authorization = "bearer";
 
-            //you don't need serialization here , the Get call of Destination Finder takes parameters in Url
-            //build url , call UrlData
-            
-            //replace here with Destination Finder Url
-            String result = apiWrapper.Get("v1/historical/flights/JFK/seasonality").Result;
-
-            // Assert
-            Assert.IsNotNull(result);
         }
         private string UrlData()
         {
