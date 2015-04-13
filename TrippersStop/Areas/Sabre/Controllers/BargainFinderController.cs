@@ -12,6 +12,8 @@ using AutoMapper;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
+using System.Xml;
+using System.Xml.Linq;
 
 
 namespace TrippersStop.Areas.Sabre.Controllers
@@ -43,6 +45,31 @@ namespace TrippersStop.Areas.Sabre.Controllers
         // POST api/bargainfinder
         public HttpResponseMessage Post(BargainFinder bargainFinder)
         {
+            BargainFinder bFinder = new BargainFinder();
+            //bFinder.
+            POS pos = new POS();
+            XElement xelement = XElement.Load(System.Web.Hosting.HostingEnvironment.MapPath("/POS/PointOfSales.xml"));
+            var element = from nm in xelement.Elements("POS")
+                       where (string)nm.Element("IsActive") == "true" && (string)nm.Element("RequestType") == "BargainFinder"
+                       select nm;
+            //XmlDocument xmlDocument = new XmlDocument();
+            //xmlDocument.Load(@"\POS\PointOfSales.xml");
+            //XmlNodeList nodeList = xmlDocument.DocumentElement.SelectNodes("/PointOfSales");
+            //var node =nodeList
+            //string proID = "", proName = "", price = "";
+            //foreach (XmlNode node in nodeList)
+            //{
+            //    proID = node.SelectSingleNode("Product_id").InnerText;
+            //    proName = node.SelectSingleNode("Product_name").InnerText;
+            //    price = node.SelectSingleNode("Product_price").InnerText;
+            //}
+            var element1 = from p in xelement.Elements("PointOfSales")
+                           where (string)p.Element("POS").Attribute("IsActive") == "true" && (string)p.Element("POS").Attribute("RequestType") == "BargainFinder"
+                           select p;
+            var e = element1.ElementAt(1).Element("CompanyCode").Value;
+            var f = element1.ElementAt(1).Element("ID").Value;
+            var g = element1.ElementAt(1).Element("Type").Value;
+
             SabreAPICaller bargainFinderAPI = new SabreAPICaller();
             bargainFinderAPI.Accept = "application/json";
             bargainFinderAPI.ContentType = "application/x-www-form-urlencoded";
