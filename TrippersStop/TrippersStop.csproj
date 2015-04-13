@@ -181,6 +181,7 @@
   <ItemGroup>
     <Compile Include="APIExtention\Filters\ExceptionFilterAttribute.cs" />
     <Compile Include="APIExtention\Filters\ValidateModelAttribute.cs" />
+    <Compile Include="APIHelper\APIHelper.cs" />
     <Compile Include="Areas\Sabre\Controllers\AdvancedCalendarController.cs" />
     <Compile Include="Areas\Sabre\Controllers\AirportsAtCitiesController.cs" />
     <Compile Include="Areas\Sabre\Controllers\CityPairsController.cs" />
@@ -292,6 +293,7 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Areas\Sabre\Views\Web.config" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="POS\PointOfSales.xml" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
