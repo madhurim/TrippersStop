@@ -181,6 +181,7 @@
   <ItemGroup>
     <Compile Include="APIExtention\Filters\ExceptionFilterAttribute.cs" />
     <Compile Include="APIExtention\Filters\ValidateModelAttribute.cs" />
+    <Compile Include="APIHelper\APIHelper.cs" />
     <Compile Include="Areas\Sabre\Controllers\AdvancedCalendarController.cs" />
     <Compile Include="Areas\Sabre\Controllers\AirportsAtCitiesController.cs" />
     <Compile Include="Areas\Sabre\Controllers\CityPairsController.cs" />

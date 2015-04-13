@@ -15,27 +15,12 @@ namespace TrippersStop.Areas.Sabre.Controllers
     
     public class CountriesController : ApiController
     {
-        IAsyncSabreAPICaller apiCaller;
-        public CountriesController(IAsyncSabreAPICaller repository, ICacheService cacheService)
+        IAsyncSabreAPICaller _apiCaller;
+        ICacheService _cacheService;
+        public CountriesController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
-            apiCaller = repository;
-            apiCaller.Accept = "application/json";
-            apiCaller.ContentType = "application/x-www-form-urlencoded";
-            apiCaller.LongTermToken = cacheService.GetByKey<string>(apiCaller.SabreTokenKey);
-            apiCaller.TokenExpireIn = cacheService.GetByKey<string>(apiCaller.SabreTokenExpireKey);
-            if (string.IsNullOrWhiteSpace(apiCaller.LongTermToken))
-            {
-                apiCaller.LongTermToken = apiCaller.GetToken().Result;
-            }
-            double expireTimeInSec;
-            if (!string.IsNullOrWhiteSpace(apiCaller.TokenExpireIn) && double.TryParse(apiCaller.TokenExpireIn, out expireTimeInSec))
-            {
-                cacheService.Save<string>(apiCaller.SabreTokenKey, apiCaller.LongTermToken, expireTimeInSec / 60);
-                cacheService.Save<string>(apiCaller.SabreTokenExpireKey, apiCaller.TokenExpireIn, expireTimeInSec / 60);
-            }
-
-            apiCaller.Authorization = "bearer";
-            apiCaller.ContentType = "application/json";
+            _apiCaller = apiCaller;
+            _cacheService = cacheService;        
         }
         // GET api/countries
         public HttpResponseMessage Get()
@@ -50,7 +35,8 @@ namespace TrippersStop.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetResponse(string url)
         {
-            String result = apiCaller.Get(url).Result;
+            APIHelper.SetApiKey(_apiCaller, _cacheService);
+            String result = _apiCaller.Get(url).Result;
             OTA_CountriesLookup cities = new OTA_CountriesLookup();
             cities = ServiceStackSerializer.DeSerialize<OTA_CountriesLookup>(result);
             Mapper.CreateMap<OTA_CountriesLookup, Countries>();

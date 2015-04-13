@@ -15,32 +15,18 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class AdvancedCalendarController : ApiController
     {
-        IAsyncSabreAPICaller apiCaller;
-        public AdvancedCalendarController(IAsyncSabreAPICaller repository, ICacheService cacheService)
+        IAsyncSabreAPICaller _apiCaller;
+        ICacheService _cacheService;
+        public AdvancedCalendarController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
-            apiCaller = repository;
-            apiCaller.Accept = "application/json";
-            apiCaller.ContentType = "application/x-www-form-urlencoded";
-            apiCaller.LongTermToken = cacheService.GetByKey<string>(apiCaller.SabreTokenKey);
-            apiCaller.TokenExpireIn = cacheService.GetByKey<string>(apiCaller.SabreTokenExpireKey);
-            if (string.IsNullOrWhiteSpace(apiCaller.LongTermToken))
-            {
-                apiCaller.LongTermToken = apiCaller.GetToken().Result;
-            }
-            double expireTimeInSec;
-            if (!string.IsNullOrWhiteSpace(apiCaller.TokenExpireIn) && double.TryParse(apiCaller.TokenExpireIn, out expireTimeInSec))
-            {
-                cacheService.Save<string>(apiCaller.SabreTokenKey, apiCaller.LongTermToken, expireTimeInSec / 60);
-                cacheService.Save<string>(apiCaller.SabreTokenExpireKey, apiCaller.TokenExpireIn, expireTimeInSec / 60);
-            }
-
-            apiCaller.Authorization = "bearer";
-            apiCaller.ContentType = "application/json";
+            _apiCaller = apiCaller;
+            _cacheService = cacheService;
         }
         public HttpResponseMessage Post(OTA_AdvancedCalendar advancedCalendar)
         {
+            APIHelper.SetApiKey(_apiCaller, _cacheService);
             //TBD : URL configurable using XML
-            String result = apiCaller.Post("v1.8.1/shop/calendar/flights?mode=live", ServiceStackSerializer.Serialize(advancedCalendar)).Result;
+            String result = _apiCaller.Post("v1.8.1/shop/calendar/flights?mode=live", ServiceStackSerializer.Serialize(advancedCalendar)).Result;
             var advancedCalendarResponse = DeSerializeResponse(result);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, advancedCalendarResponse);
             return response;
