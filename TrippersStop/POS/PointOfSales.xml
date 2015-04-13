@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PointOfSales>
+  <POS IsActive="true" RequestType="BargainFinder">
+      <CompanyCode>TN</CompanyCode>
+      <ID>REQ.ID</ID>
+      <Type>0.AAA.X</Type>
+  </POS>
+</PointOfSales>
