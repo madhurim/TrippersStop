@@ -25,14 +25,13 @@ namespace TrippersStop.Areas.Sabre.Controllers
         }
         public HttpResponseMessage Post(OTA_AdvancedCalendar advancedCalendar)
         {
-            APIHelper.SetApiKey(_apiCaller, _cacheService);
+            APIHelper.SetApiToken(_apiCaller, _cacheService);
             //TBD : URL configurable using XML
-            APIResponse result = _apiCaller.Post("v1.8.1/shop/calendar/flights?mode=live", ServiceStackSerializer.Serialize(advancedCalendar)).Result;
+            string url="v1.8.1/shop/calendar/flights?mode=live";
+            APIResponse result = _apiCaller.Post(url, ServiceStackSerializer.Serialize(advancedCalendar)).Result;            
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                _cacheService.Expire(_apiCaller.SabreTokenKey);
-                _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
-                APIHelper.SetApiKey(_apiCaller, _cacheService);
+                APIHelper.RefreshApiToken(_cacheService, _apiCaller);             
                 result = _apiCaller.Post("v1.8.1/shop/calendar/flights?mode=live", ServiceStackSerializer.Serialize(advancedCalendar)).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)

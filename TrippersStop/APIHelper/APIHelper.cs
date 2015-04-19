@@ -8,7 +8,7 @@ namespace TrippersStop
 {
     public static class APIHelper
     {
-        public static void SetApiKey(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
+        public static void SetApiToken(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             apiCaller.Accept = "application/json";
             apiCaller.ContentType = "application/x-www-form-urlencoded";
@@ -27,6 +27,13 @@ namespace TrippersStop
 
             apiCaller.Authorization = "bearer";
             apiCaller.ContentType = "application/json";
+        }
+
+        public static void RefreshApiToken(ICacheService _cacheService, IAsyncSabreAPICaller _apiCaller)
+        {
+            _cacheService.Expire(_apiCaller.SabreTokenKey);
+            _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
+             APIHelper.SetApiToken(_apiCaller, _cacheService);
         }
     }
 }

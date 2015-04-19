@@ -35,14 +35,12 @@ namespace TrippersStop.Areas.Sabre.Controllers
             if (bargainFinder != null && bargainFinder.OTA_AirLowFareSearchRQ!=null && pos != null)
             bargainFinder.OTA_AirLowFareSearchRQ.POS = pos;
             //TBD : URL configurable using XML
-            APIHelper.SetApiKey(_apiCaller, _cacheService);
+            APIHelper.SetApiToken(_apiCaller, _cacheService);
             
             APIResponse result = _apiCaller.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                _cacheService.Expire(_apiCaller.SabreTokenKey);
-                _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
-                APIHelper.SetApiKey(_apiCaller, _cacheService);
+                APIHelper.RefreshApiToken(_cacheService, _apiCaller);
                 result = _apiCaller.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)

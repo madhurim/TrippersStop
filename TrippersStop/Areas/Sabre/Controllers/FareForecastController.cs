@@ -30,13 +30,11 @@ namespace TrippersStop.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetResponse(string url)
         {
-            APIHelper.SetApiKey(_apiCaller, _cacheService);
+            APIHelper.SetApiToken(_apiCaller, _cacheService);
             APIResponse result = _apiCaller.Get(url).Result;
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                _cacheService.Expire(_apiCaller.SabreTokenKey);
-                _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
-                APIHelper.SetApiKey(_apiCaller, _cacheService);
+                APIHelper.RefreshApiToken(_cacheService, _apiCaller);
                 result = _apiCaller.Get(url).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)
