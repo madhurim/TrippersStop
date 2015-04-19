@@ -8,6 +8,7 @@ using TraveLayer.APIServices;
 using TraveLayer.CustomTypes;
 using TraveLayer.CustomTypes.Sabre;
 using TrippersStop.TraveLayer;
+using TraveLayer.CustomTypes.Sabre.Response;
 
 
 namespace TrippersStop.Tests.SabreAPITests
@@ -28,7 +29,7 @@ namespace TrippersStop.Tests.SabreAPITests
 
             apiWrapper.Authorization = "bearer";
 
-            string result = apiWrapper.Get("v1/shop/flights?origin=DFW&destination=CLE&departuredate=2015-07-03&returndate=2015-07-12").Result;
+            APIResponse result = apiWrapper.Get("v1/shop/flights?origin=DFW&destination=CLE&departuredate=2015-07-03&returndate=2015-07-12").Result;
 
             Assert.IsNotNull(result);
         }

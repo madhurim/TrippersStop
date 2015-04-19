@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
+using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TrippersStop.TraveLayer;
 
@@ -36,13 +37,24 @@ namespace TrippersStop.Areas.Sabre.Controllers
         private HttpResponseMessage GetResponse(string url)
         {
             APIHelper.SetApiKey(_apiCaller, _cacheService);
-            String result = _apiCaller.Get(url).Result;
-            OTA_CountriesLookup cities = new OTA_CountriesLookup();
-            cities = ServiceStackSerializer.DeSerialize<OTA_CountriesLookup>(result);
-            Mapper.CreateMap<OTA_CountriesLookup, Countries>();
-            Countries countries = Mapper.Map<OTA_CountriesLookup, Countries>(cities);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, countries);
-            return response;
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                _cacheService.Expire(_apiCaller.SabreTokenKey);
+                _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
+                APIHelper.SetApiKey(_apiCaller, _cacheService);
+                result = _apiCaller.Get(url).Result;
+            }
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                OTA_CountriesLookup cities = new OTA_CountriesLookup();
+                cities = ServiceStackSerializer.DeSerialize<OTA_CountriesLookup>(result.Response);
+                Mapper.CreateMap<OTA_CountriesLookup, Countries>();
+                Countries countries = Mapper.Map<OTA_CountriesLookup, Countries>(cities);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, countries);
+                return response;
+            }
+            return Request.CreateResponse(result.StatusCode, result.Response);
         }
     }
 }

@@ -9,6 +9,7 @@ using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre;
 using AutoMapper;
 using TraveLayer.APIServices;
+using TraveLayer.CustomTypes.Sabre.Response;
 
 
 namespace TrippersStop.Areas.Sabre.Controllers
@@ -31,13 +32,24 @@ namespace TrippersStop.Areas.Sabre.Controllers
         private HttpResponseMessage GetResponse(string url)
         {
             APIHelper.SetApiKey(_apiCaller, _cacheService);
-            String result = _apiCaller.Get(url).Result;
-            OTA_LowFareForecast fares = new OTA_LowFareForecast();
-            fares = ServiceStackSerializer.DeSerialize<OTA_LowFareForecast>(result);
-            Mapper.CreateMap<OTA_LowFareForecast, LowFareForecast>();
-            LowFareForecast lowFareForecast = Mapper.Map<OTA_LowFareForecast, LowFareForecast>(fares);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lowFareForecast);
-            return response;
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                _cacheService.Expire(_apiCaller.SabreTokenKey);
+                _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
+                APIHelper.SetApiKey(_apiCaller, _cacheService);
+                result = _apiCaller.Get(url).Result;
+            }
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                OTA_LowFareForecast fares = new OTA_LowFareForecast();
+                fares = ServiceStackSerializer.DeSerialize<OTA_LowFareForecast>(result.Response);
+                Mapper.CreateMap<OTA_LowFareForecast, LowFareForecast>();
+                LowFareForecast lowFareForecast = Mapper.Map<OTA_LowFareForecast, LowFareForecast>(fares);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lowFareForecast);
+                return response;
+            }
+            return Request.CreateResponse(result.StatusCode, result.Response);
         }
     }
 }

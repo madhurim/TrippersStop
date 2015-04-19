@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using TraveLayer.CustomTypes.Sabre.Response;
 
 namespace TrippersStop.TraveLayer
 {
@@ -16,8 +17,8 @@ namespace TrippersStop.TraveLayer
         String ContentType { set; }
         //String Accept-Encoding { set; }
         String Authorization { set; }
-        Task<String> Get(string Method);
-        Task<String> Post(string Method, string Body);
+        Task<APIResponse> Get(string Method);
+        Task<APIResponse> Post(string Method, string Body);
 
      
         

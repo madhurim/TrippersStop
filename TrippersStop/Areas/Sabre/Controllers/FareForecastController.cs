@@ -9,6 +9,7 @@ using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.APIServices;
 using AutoMapper;
 using TraveLayer.CustomTypes.Sabre;
+using TraveLayer.CustomTypes.Sabre.Response;
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
@@ -30,13 +31,24 @@ namespace TrippersStop.Areas.Sabre.Controllers
         private HttpResponseMessage GetResponse(string url)
         {
             APIHelper.SetApiKey(_apiCaller, _cacheService);
-            String result = _apiCaller.Get(url).Result;
-            OTA_FareRange fares = new OTA_FareRange();
-            fares = ServiceStackSerializer.DeSerialize<OTA_FareRange>(result);
-            Mapper.CreateMap<OTA_FareRange, VM.FareRange>();
-            VM.FareRange fareRange = Mapper.Map<OTA_FareRange, VM.FareRange>(fares);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fareRange);
-            return response;
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                _cacheService.Expire(_apiCaller.SabreTokenKey);
+                _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
+                APIHelper.SetApiKey(_apiCaller, _cacheService);
+                result = _apiCaller.Get(url).Result;
+            }
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                OTA_FareRange fares = new OTA_FareRange();
+                fares = ServiceStackSerializer.DeSerialize<OTA_FareRange>(result.Response);
+                Mapper.CreateMap<OTA_FareRange, VM.FareRange>();
+                VM.FareRange fareRange = Mapper.Map<OTA_FareRange, VM.FareRange>(fares);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fareRange);
+                return response;
+            }
+            return Request.CreateResponse(result.StatusCode, result.Response);
         }
     }
 }

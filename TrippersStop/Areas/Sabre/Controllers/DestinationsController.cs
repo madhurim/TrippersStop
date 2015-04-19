@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Text;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using AutoMapper;
+using TraveLayer.CustomTypes.Sabre.Response;
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
@@ -61,13 +62,24 @@ namespace TrippersStop.Areas.Sabre.Controllers
         private HttpResponseMessage GetResponse(string url)
         {
             APIHelper.SetApiKey(_apiCaller, _cacheService);
-            String result = _apiCaller.Get(url).Result;
-            OTA_DestinationFinder cities = new OTA_DestinationFinder();
-            cities = ServiceStackSerializer.DeSerialize<OTA_DestinationFinder>(result);
-            Mapper.CreateMap<OTA_DestinationFinder, Fares>();
-            Fares fares = Mapper.Map<OTA_DestinationFinder, Fares>(cities);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
-            return response;
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                _cacheService.Expire(_apiCaller.SabreTokenKey);
+                _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
+                APIHelper.SetApiKey(_apiCaller, _cacheService);
+                result = _apiCaller.Get(url).Result;
+            }
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                OTA_DestinationFinder cities = new OTA_DestinationFinder();
+                cities = ServiceStackSerializer.DeSerialize<OTA_DestinationFinder>(result.Response);
+                Mapper.CreateMap<OTA_DestinationFinder, Fares>();
+                Fares fares = Mapper.Map<OTA_DestinationFinder, Fares>(cities);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
+                return response;
+            }
+            return Request.CreateResponse(result.StatusCode, result.Response);
         }
     }
 }

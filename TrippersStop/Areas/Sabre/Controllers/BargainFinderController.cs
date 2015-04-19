@@ -15,6 +15,7 @@ using TraveLayer.CustomTypes.Sabre.ViewModels;
 using System.Xml;
 using System.Xml.Linq;
 using System.Web.Hosting;
+using TraveLayer.CustomTypes.Sabre.Response;
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
@@ -35,10 +36,22 @@ namespace TrippersStop.Areas.Sabre.Controllers
             bargainFinder.OTA_AirLowFareSearchRQ.POS = pos;
             //TBD : URL configurable using XML
             APIHelper.SetApiKey(_apiCaller, _cacheService);
-            String result = _apiCaller.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
-            var bargainResponse= DeSerializeResponse(result);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, bargainResponse);         
-            return response;
+            
+            APIResponse result = _apiCaller.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                _cacheService.Expire(_apiCaller.SabreTokenKey);
+                _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
+                APIHelper.SetApiKey(_apiCaller, _cacheService);
+                result = _apiCaller.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
+            }
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                var bargainResponse = DeSerializeResponse(result.Response);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, bargainResponse);
+                return response;
+            }
+            return Request.CreateResponse(result.StatusCode, result.Response); 
         }
 
         private POS GetPOS()

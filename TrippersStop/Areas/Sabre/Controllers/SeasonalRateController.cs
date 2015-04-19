@@ -9,6 +9,7 @@ using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 using TrippersStop.TraveLayer;
+using TraveLayer.CustomTypes.Sabre.Response;
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
@@ -28,14 +29,26 @@ namespace TrippersStop.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetResponse(string url)
         {
+
             APIHelper.SetApiKey(_apiCaller, _cacheService);
-            String result = _apiCaller.Get(url).Result;
-            OTA_TravelSeasonality seasonality = new OTA_TravelSeasonality();
-            seasonality = ServiceStackSerializer.DeSerialize<OTA_TravelSeasonality>(result);
-            Mapper.CreateMap<OTA_TravelSeasonality, VM.TravelSeasonality>();
-            VM.TravelSeasonality travelSeasonality = Mapper.Map<OTA_TravelSeasonality, VM.TravelSeasonality>(seasonality);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, travelSeasonality);
-            return response;
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                _cacheService.Expire(_apiCaller.SabreTokenKey);
+                _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
+                APIHelper.SetApiKey(_apiCaller, _cacheService);
+                result = _apiCaller.Get(url).Result;
+            }
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                OTA_TravelSeasonality seasonality = new OTA_TravelSeasonality();
+                seasonality = ServiceStackSerializer.DeSerialize<OTA_TravelSeasonality>(result.Response);
+                Mapper.CreateMap<OTA_TravelSeasonality, VM.TravelSeasonality>();
+                VM.TravelSeasonality travelSeasonality = Mapper.Map<OTA_TravelSeasonality, VM.TravelSeasonality>(seasonality);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, travelSeasonality);
+                return response;
+            }
+            return Request.CreateResponse(result.StatusCode, result.Response);
         }
     }
 }

@@ -94,6 +94,7 @@
     <Compile Include="CustomTypes\Sabre\Request\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CustomTypes\Sabre\Response\APIResponse.cs" />
     <Compile Include="CustomTypes\Sabre\Response\BargainFinder.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\AdvancedCalendar.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\AirportsAtCities.cs" />

@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
+using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TrippersStop.TraveLayer;
 
@@ -43,13 +44,24 @@ namespace TrippersStop.Areas.Sabre.Controllers
         private HttpResponseMessage GetResponse(string url)
         {
             APIHelper.SetApiKey(_apiCaller, _cacheService);
-            String result = _apiCaller.Get(url).Result;
-            OTA_CityPairsLookup cities = new OTA_CityPairsLookup();
-            cities = ServiceStackSerializer.DeSerialize<OTA_CityPairsLookup>(result);
-            Mapper.CreateMap<OTA_AirportsAtCitiesLookup, CityPairs>();
-            CityPairs cityPairs = Mapper.Map<OTA_CityPairsLookup, CityPairs>(cities);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, cityPairs);
-            return response;
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                _cacheService.Expire(_apiCaller.SabreTokenKey);
+                _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
+                APIHelper.SetApiKey(_apiCaller, _cacheService);
+                result = _apiCaller.Get(url).Result;
+            }
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                OTA_CityPairsLookup cities = new OTA_CityPairsLookup();
+                cities = ServiceStackSerializer.DeSerialize<OTA_CityPairsLookup>(result.Response);
+                Mapper.CreateMap<OTA_AirportsAtCitiesLookup, CityPairs>();
+                CityPairs cityPairs = Mapper.Map<OTA_CityPairsLookup, CityPairs>(cities);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, cityPairs);
+                return response;
+            }
+            return Request.CreateResponse(result.StatusCode, result.Response); 
         }
     }
 }

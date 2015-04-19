@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Moq;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes;
+using TraveLayer.CustomTypes.Sabre.Response;
 
 namespace TrippersStop.Tests.Controllers
 {
@@ -45,7 +46,7 @@ namespace TrippersStop.Tests.Controllers
 
             apiWrapper.Authorization = "bearer";
             apiWrapper.ContentType = "application/json";
-            String result = apiWrapper.Get("v1/historical/flights/JFK/seasonality").Result;
+            APIResponse result = apiWrapper.Get("v1/historical/flights/JFK/seasonality").Result;
 
             // Assert
             Assert.IsNotNull(result);
@@ -72,7 +73,7 @@ namespace TrippersStop.Tests.Controllers
 
             string body = "json body";
 
-            String result = apiWrapper.Post("v1.8.2/shop/flights?mode=live", body).Result;
+            APIResponse result = apiWrapper.Post("v1.8.2/shop/flights?mode=live", body).Result;
 
             // Assert
             Assert.IsNotNull(result);

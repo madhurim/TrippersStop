@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
+using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TrippersStop.TraveLayer;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
@@ -26,10 +27,21 @@ namespace TrippersStop.Areas.Sabre.Controllers
         {
             APIHelper.SetApiKey(_apiCaller, _cacheService);
             //TBD : URL configurable using XML
-            String result = _apiCaller.Post("v1.8.1/shop/calendar/flights?mode=live", ServiceStackSerializer.Serialize(advancedCalendar)).Result;
-            var advancedCalendarResponse = DeSerializeResponse(result);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, advancedCalendarResponse);
-            return response;
+            APIResponse result = _apiCaller.Post("v1.8.1/shop/calendar/flights?mode=live", ServiceStackSerializer.Serialize(advancedCalendar)).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                _cacheService.Expire(_apiCaller.SabreTokenKey);
+                _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
+                APIHelper.SetApiKey(_apiCaller, _cacheService);
+                result = _apiCaller.Post("v1.8.1/shop/calendar/flights?mode=live", ServiceStackSerializer.Serialize(advancedCalendar)).Result;
+            }
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                var advancedCalendarResponse = DeSerializeResponse(result.Response);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, advancedCalendarResponse);
+                return response;
+            }
+            return Request.CreateResponse(result.StatusCode,result.Response);
         }
         private LowFareSearch DeSerializeResponse(string result)
         {

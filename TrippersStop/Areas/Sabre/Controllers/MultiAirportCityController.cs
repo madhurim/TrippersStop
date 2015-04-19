@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
+using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TrippersStop.TraveLayer;
 
@@ -29,13 +30,24 @@ namespace TrippersStop.Areas.Sabre.Controllers
         private HttpResponseMessage GetResponse(string url)
         {
             APIHelper.SetApiKey(_apiCaller, _cacheService);
-            String result = _apiCaller.Get(url).Result;
-            OTA_MultiAirportCityLookup airports = new OTA_MultiAirportCityLookup();
-            airports = ServiceStackSerializer.DeSerialize<OTA_MultiAirportCityLookup>(result);
-            Mapper.CreateMap<OTA_MultiAirportCityLookup, MultiAirportCity>();
-            MultiAirportCity multiAirportCity = Mapper.Map<OTA_MultiAirportCityLookup, MultiAirportCity>(airports);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, multiAirportCity);
-            return response;
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                _cacheService.Expire(_apiCaller.SabreTokenKey);
+                _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
+                APIHelper.SetApiKey(_apiCaller, _cacheService);
+                result = _apiCaller.Get(url).Result;
+            }
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                OTA_MultiAirportCityLookup airports = new OTA_MultiAirportCityLookup();
+                airports = ServiceStackSerializer.DeSerialize<OTA_MultiAirportCityLookup>(result.Response);
+                Mapper.CreateMap<OTA_MultiAirportCityLookup, MultiAirportCity>();
+                MultiAirportCity multiAirportCity = Mapper.Map<OTA_MultiAirportCityLookup, MultiAirportCity>(airports);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, multiAirportCity);
+                return response;
+            }
+            return Request.CreateResponse(result.StatusCode, result.Response);
         }
     }
 }

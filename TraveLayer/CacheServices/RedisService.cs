@@ -65,6 +65,23 @@ namespace TrippersStop.TraveLayer
             }
             return isSuccess;
         }
+
+        public bool Expire(string key)
+        {
+            bool isSuccess = false;
+            try
+            {
+                using (var redisClient = new RedisClient(RedisHost))
+                {
+                    isSuccess = redisClient.Expire(key,0);
+                }
+            }
+            catch
+            {
+                isSuccess = false;
+            }
+            return isSuccess;
+        }
         public  T GetByKey<T>(string key)
         {
             try

@@ -9,6 +9,7 @@ using TrippersStop.TraveLayer;
 using TraveLayer.APIServices;
 using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
+using TraveLayer.CustomTypes.Sabre.Response;
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
@@ -74,13 +75,24 @@ namespace TrippersStop.Areas.Sabre.Controllers
         private HttpResponseMessage GetResponse(string url)
         {
             APIHelper.SetApiKey(_apiCaller, _cacheService);
-            String result = _apiCaller.Get(url).Result;
-            TopDestinations destinations = new TopDestinations();
-            destinations = ServiceStackSerializer.DeSerialize<TopDestinations>(result);
-            Mapper.CreateMap<TopDestinations, TopDestination>();
-            TopDestination topDestinations = Mapper.Map<TopDestinations, TopDestination>(destinations);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, topDestinations);
-            return response;
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                _cacheService.Expire(_apiCaller.SabreTokenKey);
+                _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
+                APIHelper.SetApiKey(_apiCaller, _cacheService);
+                result = _apiCaller.Get(url).Result;
+            }
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                TopDestinations destinations = new TopDestinations();
+                destinations = ServiceStackSerializer.DeSerialize<TopDestinations>(result.Response);
+                Mapper.CreateMap<TopDestinations, TopDestination>();
+                TopDestination topDestinations = Mapper.Map<TopDestinations, TopDestination>(destinations);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, topDestinations);
+                return response;
+            }
+            return Request.CreateResponse(result.StatusCode, result.Response);
         }
     }
 }

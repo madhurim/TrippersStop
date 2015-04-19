@@ -12,5 +12,7 @@ namespace TrippersStop.TraveLayer
 
         bool Save<T>(string key, T keyData,double expireInMin);
         T GetByKey<T>(string key);
+
+        bool Expire(string key);
     }
 }
