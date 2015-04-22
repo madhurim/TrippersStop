@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrippersStop.APIExtention.Filters
+namespace TrippersStop
 {
     using System;
     using System.Net;
