@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web.Http;
+using System.Web.Mvc;
 
 namespace TrippersStop.Areas.Sabre
 {
@@ -14,11 +15,16 @@ namespace TrippersStop.Areas.Sabre
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            context.MapRoute(
-                "Sabre_default",
-                "Sabre/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+            //context.MapRoute(
+            //    "Sabre_default",
+            //    "Sabre/{controller}/{action}/{id}",
+            //    new { action = "Index", id = UrlParameter.Optional }
+            //);
+            context.MapHttpRoute(
+              name: "Sabre_default",
+              routeTemplate: "Sabre/api/{controller}/{id}",
+              defaults: new { id = RouteParameter.Optional }
+          );
         }
     }
 }

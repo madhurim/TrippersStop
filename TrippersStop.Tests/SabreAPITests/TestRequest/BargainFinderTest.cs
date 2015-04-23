@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TraveLayer.CustomTypes.Sabre;
 using TrippersStop.TraveLayer;
 using System.Collections.Generic;
+using TraveLayer.CustomTypes.Sabre.Response;
 
 namespace TrippersStop.Tests.SabreAPITests
 {
@@ -30,7 +31,7 @@ namespace TrippersStop.Tests.SabreAPITests
 
             string body = SerializeData();
 
-            String result = apiWrapper.Post("v1.8.2/shop/flights?mode=live", body).Result;
+            APIResponse result = apiWrapper.Post("v1.8.2/shop/flights?mode=live", body).Result;
 
             // Assert
             Assert.IsNotNull(result);

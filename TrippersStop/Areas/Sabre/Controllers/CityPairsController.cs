@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
+using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TrippersStop.TraveLayer;
 
@@ -14,27 +15,12 @@ namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class CityPairsController : ApiController
     {
-        IAsyncSabreAPICaller apiCaller;
-        public CityPairsController(IAsyncSabreAPICaller repository, ICacheService cacheService)
+        IAsyncSabreAPICaller _apiCaller;
+        ICacheService _cacheService;
+        public CityPairsController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
-            apiCaller = repository;
-            apiCaller.Accept = "application/json";
-            apiCaller.ContentType = "application/x-www-form-urlencoded";
-            apiCaller.LongTermToken = cacheService.GetByKey<string>(apiCaller.SabreTokenKey);
-            apiCaller.TokenExpireIn = cacheService.GetByKey<string>(apiCaller.SabreTokenExpireKey);
-            if (string.IsNullOrWhiteSpace(apiCaller.LongTermToken))
-            {
-                apiCaller.LongTermToken = apiCaller.GetToken().Result;
-            }
-            double expireTimeInSec;
-            if (!string.IsNullOrWhiteSpace(apiCaller.TokenExpireIn) && double.TryParse(apiCaller.TokenExpireIn, out expireTimeInSec))
-            {
-                cacheService.Save<string>(apiCaller.SabreTokenKey, apiCaller.LongTermToken, expireTimeInSec / 60);
-                cacheService.Save<string>(apiCaller.SabreTokenExpireKey, apiCaller.TokenExpireIn, expireTimeInSec / 60);
-            }
-
-            apiCaller.Authorization = "bearer";
-            apiCaller.ContentType = "application/json";
+            _apiCaller = apiCaller;
+            _cacheService = cacheService;           
         }
         public HttpResponseMessage Get(string type)
         {
@@ -57,13 +43,23 @@ namespace TrippersStop.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetResponse(string url)
         {
-            String result = apiCaller.Get(url).Result;
-            OTA_CityPairsLookup cities = new OTA_CityPairsLookup();
-            cities = ServiceStackSerializer.DeSerialize<OTA_CityPairsLookup>(result);
-            Mapper.CreateMap<OTA_AirportsAtCitiesLookup, CityPairs>();
-            CityPairs cityPairs = Mapper.Map<OTA_CityPairsLookup, CityPairs>(cities);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, cityPairs);
-            return response;
+            APIHelper.SetApiToken(_apiCaller, _cacheService);
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                APIHelper.RefreshApiToken(_cacheService, _apiCaller);
+                result = _apiCaller.Get(url).Result;
+            }
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                OTA_CityPairsLookup cities = new OTA_CityPairsLookup();
+                cities = ServiceStackSerializer.DeSerialize<OTA_CityPairsLookup>(result.Response);
+                Mapper.CreateMap<OTA_AirportsAtCitiesLookup, CityPairs>();
+                CityPairs cityPairs = Mapper.Map<OTA_CityPairsLookup, CityPairs>(cities);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, cityPairs);
+                return response;
+            }
+            return Request.CreateResponse(result.StatusCode, result.Response); 
         }
     }
 }

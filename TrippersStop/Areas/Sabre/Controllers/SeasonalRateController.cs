@@ -9,32 +9,18 @@ using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 using TrippersStop.TraveLayer;
+using TraveLayer.CustomTypes.Sabre.Response;
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class SeasonalRateController : ApiController
     {
-        IAsyncSabreAPICaller apiCaller;
-        public SeasonalRateController(IAsyncSabreAPICaller repository, ICacheService cacheService)
+        IAsyncSabreAPICaller _apiCaller;
+        ICacheService _cacheService;
+        public SeasonalRateController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
-            apiCaller = repository;
-            apiCaller.Accept = "application/json";
-            apiCaller.ContentType = "application/x-www-form-urlencoded";
-            apiCaller.LongTermToken = cacheService.GetByKey<string>(apiCaller.SabreTokenKey);
-            apiCaller.TokenExpireIn = cacheService.GetByKey<string>(apiCaller.SabreTokenExpireKey);
-            if (string.IsNullOrWhiteSpace(apiCaller.LongTermToken))
-            {
-                apiCaller.LongTermToken = apiCaller.GetToken().Result;
-            }
-            double expireTimeInSec;
-            if (!string.IsNullOrWhiteSpace(apiCaller.TokenExpireIn) && double.TryParse(apiCaller.TokenExpireIn, out expireTimeInSec))
-            {
-                cacheService.Save<string>(apiCaller.SabreTokenKey, apiCaller.LongTermToken, expireTimeInSec / 60);
-                cacheService.Save<string>(apiCaller.SabreTokenExpireKey, apiCaller.TokenExpireIn, expireTimeInSec / 60);
-            }
-
-            apiCaller.Authorization = "bearer";
-            apiCaller.ContentType = "application/json";
+            _apiCaller = apiCaller;
+            _cacheService = cacheService;       
         }
         public HttpResponseMessage Get(string destination)
         {
@@ -43,13 +29,24 @@ namespace TrippersStop.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetResponse(string url)
         {
-            String result = apiCaller.Get(url).Result;
-            OTA_TravelSeasonality seasonality = new OTA_TravelSeasonality();
-            seasonality = ServiceStackSerializer.DeSerialize<OTA_TravelSeasonality>(result);
-            Mapper.CreateMap<OTA_TravelSeasonality, VM.TravelSeasonality>();
-            VM.TravelSeasonality travelSeasonality = Mapper.Map<OTA_TravelSeasonality, VM.TravelSeasonality>(seasonality);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, travelSeasonality);
-            return response;
+
+            APIHelper.SetApiToken(_apiCaller, _cacheService);
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                APIHelper.RefreshApiToken(_cacheService, _apiCaller);
+                result = _apiCaller.Get(url).Result;
+            }
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                OTA_TravelSeasonality seasonality = new OTA_TravelSeasonality();
+                seasonality = ServiceStackSerializer.DeSerialize<OTA_TravelSeasonality>(result.Response);
+                Mapper.CreateMap<OTA_TravelSeasonality, VM.TravelSeasonality>();
+                VM.TravelSeasonality travelSeasonality = Mapper.Map<OTA_TravelSeasonality, VM.TravelSeasonality>(seasonality);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, travelSeasonality);
+                return response;
+            }
+            return Request.CreateResponse(result.StatusCode, result.Response);
         }
     }
 }

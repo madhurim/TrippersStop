@@ -9,33 +9,19 @@ using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre;
 using AutoMapper;
 using TraveLayer.APIServices;
+using TraveLayer.CustomTypes.Sabre.Response;
 
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
     public class LowFareForecastController : ApiController
     {
-        IAsyncSabreAPICaller apiCaller;
-        public LowFareForecastController(IAsyncSabreAPICaller repository, ICacheService cacheService)
+        IAsyncSabreAPICaller _apiCaller;
+        ICacheService _cacheService;
+        public LowFareForecastController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
-            apiCaller = repository;
-            apiCaller.Accept = "application/json";
-            apiCaller.ContentType = "application/x-www-form-urlencoded";
-            apiCaller.LongTermToken = cacheService.GetByKey<string>(apiCaller.SabreTokenKey);
-            apiCaller.TokenExpireIn = cacheService.GetByKey<string>(apiCaller.SabreTokenExpireKey);
-            if (string.IsNullOrWhiteSpace(apiCaller.LongTermToken))
-            {
-                apiCaller.LongTermToken = apiCaller.GetToken().Result;
-            }
-            double expireTimeInSec;
-            if (!string.IsNullOrWhiteSpace(apiCaller.TokenExpireIn) && double.TryParse(apiCaller.TokenExpireIn, out expireTimeInSec))
-            {
-                cacheService.Save<string>(apiCaller.SabreTokenKey, apiCaller.LongTermToken, expireTimeInSec / 60);
-                cacheService.Save<string>(apiCaller.SabreTokenExpireKey, apiCaller.TokenExpireIn, expireTimeInSec / 60);
-            }
-
-            apiCaller.Authorization = "bearer";
-            apiCaller.ContentType = "application/json";
+            _apiCaller = apiCaller;
+            _cacheService = cacheService;
         }
         // GET api/lowfareforecast
         public HttpResponseMessage Get([FromUri]TravelInfo lowFareForecastRequest)
@@ -45,13 +31,23 @@ namespace TrippersStop.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetResponse(string url)
         {
-            String result = apiCaller.Get(url).Result;
-            OTA_LowFareForecast fares = new OTA_LowFareForecast();
-            fares = ServiceStackSerializer.DeSerialize<OTA_LowFareForecast>(result);
-            Mapper.CreateMap<OTA_LowFareForecast, LowFareForecast>();
-            LowFareForecast lowFareForecast = Mapper.Map<OTA_LowFareForecast, LowFareForecast>(fares);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lowFareForecast);
-            return response;
+            APIHelper.SetApiToken(_apiCaller, _cacheService);
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                APIHelper.RefreshApiToken(_cacheService, _apiCaller);
+                result = _apiCaller.Get(url).Result;
+            }
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                OTA_LowFareForecast fares = new OTA_LowFareForecast();
+                fares = ServiceStackSerializer.DeSerialize<OTA_LowFareForecast>(result.Response);
+                Mapper.CreateMap<OTA_LowFareForecast, LowFareForecast>();
+                LowFareForecast lowFareForecast = Mapper.Map<OTA_LowFareForecast, LowFareForecast>(fares);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lowFareForecast);
+                return response;
+            }
+            return Request.CreateResponse(result.StatusCode, result.Response);
         }
     }
 }

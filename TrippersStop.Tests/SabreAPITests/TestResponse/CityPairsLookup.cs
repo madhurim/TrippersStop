@@ -8,6 +8,7 @@ using TraveLayer.APIServices;
 using TraveLayer.CustomTypes;
 using TraveLayer.CustomTypes.Sabre;
 using TrippersStop.TraveLayer;
+using TraveLayer.CustomTypes.Sabre.Response;
 
 namespace TrippersStop.Tests.SabreAPITests
 {
@@ -26,7 +27,7 @@ namespace TrippersStop.Tests.SabreAPITests
 
             apiWrapper.Authorization = "bearer";
 
-            string result = apiWrapper.Get("v1/lists/supported/shop/flights/origins-destinations?destinationcountry=AR").Result;
+            APIResponse result = apiWrapper.Get("v1/lists/supported/shop/flights/origins-destinations?destinationcountry=AR").Result;
 
             Assert.IsNotNull(result);
         }
