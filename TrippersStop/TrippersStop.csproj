@@ -188,10 +188,10 @@
     <Compile Include="Areas\Sabre\Controllers\CityPairsController.cs" />
     <Compile Include="Areas\Sabre\Controllers\CountriesController.cs" />
     <Compile Include="Areas\Sabre\Controllers\DestinationsController.cs" />
-    <Compile Include="Areas\Sabre\Controllers\FareForecastController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\FareRangeController.cs" />
     <Compile Include="Areas\Sabre\Controllers\MultiAirportCityController.cs" />
     <Compile Include="Areas\Sabre\Controllers\SaleCountryController.cs" />
-    <Compile Include="Areas\Sabre\Controllers\SeasonalRateController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\SeasonalityController.cs" />
     <Compile Include="Areas\Sabre\Controllers\ThemeAirportController.cs" />
     <Compile Include="Areas\Sabre\Controllers\TravelThemeController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

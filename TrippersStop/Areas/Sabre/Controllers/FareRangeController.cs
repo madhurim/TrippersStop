@@ -13,11 +13,11 @@ using TraveLayer.CustomTypes.Sabre.Response;
 
 namespace TrippersStop.Areas.Sabre.Controllers
 {
-    public class FareForecastController : ApiController
+    public class FareRangeController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
-        public FareForecastController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
+        public FareRangeController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;         
