@@ -30,7 +30,7 @@ namespace TrippersStop.Tests.SabreAPITests
             // Arrange
             IAsyncSabreAPICaller apiCaller = new SabreAPICaller();
             ICacheService dbService = new RedisService();
-            var controller = new LowFareForecastController(apiCaller, dbService);
+            var controller = new FareForecastController(apiCaller, dbService);
             controller.Request = new HttpRequestMessage();
             //controller.Request.SetConfiguration(new HttpConfiguration());
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
