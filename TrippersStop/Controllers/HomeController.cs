@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -49,6 +50,8 @@ namespace TrippersStop.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public JsonResult SearchResult(string org,string fdate,string tdate)
         {
+            
+            Stopwatch stopwatch = Stopwatch.StartNew();
             IAsyncSabreAPICaller apiCaller = new SabreAPICaller();
             ICacheService dbService = new RedisService();
             var controller = new DestinationsController(apiCaller, dbService);
@@ -63,12 +66,17 @@ namespace TrippersStop.Controllers
             ds.Lengthofstay = "4";
             var response = controller.Get(ds);
             var response1 =  response.Content.ReadAsStringAsync().Result;
+
+
+
             
             OTA_DestinationFinder cities = new OTA_DestinationFinder();
             cities = ServiceStackSerializer.DeSerialize<OTA_DestinationFinder>(response1);
             Mapper.CreateMap<OTA_DestinationFinder, Fares>();
             Fares fares = Mapper.Map<OTA_DestinationFinder, Fares>(cities);
             var fRes = fares.FareInfo.Take(10);
+            stopwatch.Stop();
+            long lTime=(stopwatch.ElapsedMilliseconds);
             return Json(fRes, JsonRequestBehavior.AllowGet);
         } 
     }
