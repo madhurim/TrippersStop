@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrippersStop
+namespace Trippism
 {
     using System;
     using System.Net;

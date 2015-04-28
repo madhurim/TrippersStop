@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TraveLayer.CustomTypes.Sabre;
-using TrippersStop.TraveLayer;
+using Trippism.TraveLayer;
 using System.Collections.Generic;
 using TraveLayer.CustomTypes.Sabre.Response;
 
-namespace TrippersStop.Tests.SabreAPITests
+namespace Trippism.Tests.SabreAPITests
 {
     [TestClass]
     public class BargainFinderTest

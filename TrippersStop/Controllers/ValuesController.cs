@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace TrippersStop.Controllers
+namespace Trippism.Controllers
 {
     //public class ValuesController : ApiController
     //{

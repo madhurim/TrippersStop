@@ -12,7 +12,7 @@ using ServiceStack.Redis.Generic;
 using System.Configuration;
 using System.Web.Configuration;
 
-namespace TrippersStop.TraveLayer
+namespace Trippism.TraveLayer
 {
 
     public class RedisService : ICacheService

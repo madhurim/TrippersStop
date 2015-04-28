@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre;
-using TrippersStop.TraveLayer;
+using Trippism.TraveLayer;
 using TraveLayer.APIServices;
 using ServiceStack;
 using System.Reflection;
@@ -14,7 +14,7 @@ using TraveLayer.CustomTypes.Sabre.ViewModels;
 using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.Response;
 
-namespace TrippersStop.Areas.Sabre.Controllers
+namespace Trippism.Areas.Sabre.Controllers
 {
     public class DestinationsController : ApiController
     {

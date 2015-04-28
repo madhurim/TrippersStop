@@ -4,14 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using TrippersStop.TraveLayer;
+using Trippism.TraveLayer;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.APIServices;
 using AutoMapper;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 
-namespace TrippersStop.Areas.Sabre.Controllers
+namespace Trippism.Areas.Sabre.Controllers
 {
     public class FareRangeController : ApiController
     {

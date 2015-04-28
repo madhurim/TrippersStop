@@ -9,9 +9,9 @@ using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
-using TrippersStop.TraveLayer;
+using Trippism.TraveLayer;
 
-namespace TrippersStop.Areas.Sabre.Controllers
+namespace Trippism.Areas.Sabre.Controllers
 {
     public class SaleCountryController : ApiController
     {

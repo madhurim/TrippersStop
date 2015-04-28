@@ -9,10 +9,10 @@ using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
-using TrippersStop.TraveLayer;
+using Trippism.TraveLayer;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 
-namespace TrippersStop.Areas.Sabre.Controllers
+namespace Trippism.Areas.Sabre.Controllers
 {
     public class AdvancedCalendarController : ApiController
     {

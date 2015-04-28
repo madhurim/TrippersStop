@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace TrippersStop
+namespace Trippism
 {
     public class FilterConfig
     {

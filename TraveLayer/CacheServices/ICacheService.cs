@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrippersStop.TraveLayer
+namespace Trippism.TraveLayer
 {
     public interface ICacheService
     {
