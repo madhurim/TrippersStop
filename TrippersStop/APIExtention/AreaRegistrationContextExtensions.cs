@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 
 
-namespace TrippersStop
+namespace Trippism
 {
     public static class AreaRegistrationContextExtensions
     {

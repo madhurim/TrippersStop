@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TrippersStop.TraveLayer;
+using Trippism.TraveLayer;
 using System.Threading.Tasks;
 using TraveLayer.CustomTypes.Sabre;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using TraveLayer.APIServices;
 using TraveLayer.CustomTypes;
 using TraveLayer.CustomTypes.Sabre.Response;
 
-namespace TrippersStop.Tests.Controllers
+namespace Trippism.Tests.Controllers
 {
     [TestClass]
     public class SabreAPICallerTest

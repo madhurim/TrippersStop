@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace TrippersStop
+namespace Trippism
 {
     public class BundleConfig
     {

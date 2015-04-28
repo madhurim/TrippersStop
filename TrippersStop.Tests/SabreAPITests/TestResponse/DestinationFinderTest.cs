@@ -1,20 +1,20 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TrippersStop.TraveLayer;
+using Trippism.TraveLayer;
 using System.Threading.Tasks;
 using TraveLayer.CustomTypes.Sabre;
 using System.Collections.Generic;
 using Moq;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes;
-using TrippersStop.Areas.Sabre.Controllers;
+using Trippism.Areas.Sabre.Controllers;
 using System.Net.Http;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using System.Web.Http;
 using System.Web.Http.Hosting;
 using System.Net;
 
-namespace TrippersStop.Tests.SabreAPITests
+namespace Trippism.Tests.SabreAPITests
 {
     [TestClass]
     public class DestinationFinderTest

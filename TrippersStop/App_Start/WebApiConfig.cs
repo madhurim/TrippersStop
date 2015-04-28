@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using TrippersStop;
+using Trippism;
 
-namespace TrippersStop
+namespace Trippism
 {
     public static class WebApiConfig
     {

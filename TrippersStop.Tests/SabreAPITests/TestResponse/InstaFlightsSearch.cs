@@ -7,11 +7,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes;
 using TraveLayer.CustomTypes.Sabre;
-using TrippersStop.TraveLayer;
+using Trippism.TraveLayer;
 using TraveLayer.CustomTypes.Sabre.Response;
 
 
-namespace TrippersStop.Tests.SabreAPITests
+namespace Trippism.Tests.SabreAPITests
 {
      [TestClass]
     public class InstaFlightsSearch

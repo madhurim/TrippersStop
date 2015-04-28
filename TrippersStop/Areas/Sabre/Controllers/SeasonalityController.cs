@@ -8,10 +8,10 @@ using System.Web.Http;
 using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
-using TrippersStop.TraveLayer;
+using Trippism.TraveLayer;
 using TraveLayer.CustomTypes.Sabre.Response;
 
-namespace TrippersStop.Areas.Sabre.Controllers
+namespace Trippism.Areas.Sabre.Controllers
 {
     public class SeasonalityController : ApiController
     {
