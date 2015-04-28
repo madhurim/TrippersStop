@@ -11,7 +11,7 @@ using System.Web.Configuration;
 
 namespace DataLayer
 {
-    public class MongoService : IMongoDB
+    public class MongoService : IDBService
     {
         MongoServer server;
         //MongoDatabase database;

@@ -52,10 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IMongoDB.cs" />
-    <Compile Include="Interfaces\IDBService.cs" />
+    <Compile Include="DBServices\IDBService.cs" />
     <Compile Include="MongoDBProperty.cs" />
-    <Compile Include="MongoService.cs" />
+    <Compile Include="DBServices\MongoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
