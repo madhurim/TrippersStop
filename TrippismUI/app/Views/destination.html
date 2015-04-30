@@ -1,46 +1,86 @@
 ﻿<div ng-controller="DestinationController">
-    <div class="col-md-4">
-        <form>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Enter Your Destination</label>
-                <input type="text" class="form-control" ng-model="Destination" placeholder="Enter Destination">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">From Date</label>
-                <input type="text" class="form-control" ng-model="FromDate" placeholder="From Date">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">To Date</label>
-                <input type="text" class="form-control" ng-model="ToDate" placeholder="To Date">
-            </div>
-
-
-            <button class="btn btn-default" ng-click="getDestinations()">Get Destinations</button>
-
-        </form>
-    </div>
-
     
+    <div style="margin-top:10px;">
+        <div class="col-md-4" >
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Search Destination</div>
+                <div class="panel-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Enter Your Destination</label>
+                            <input type="text" class="form-control" ng-model="Destination" placeholder="Enter Destination">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">From Date</label>
+                            <!--<input type="text" class="form-control" ng-model="FromDate" placeholder="From Date">-->
+                            <p class="input-group">
+                                <input type="text"
+                                       class="form-control"
+                                       datepicker-popup="{{format}}"
+                                       ng-model="FromDate" is-open="openedFromDate"
+                                       datepicker-options="dateOptions"
+                                       ng-required="true" close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="openFromDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">To Date</label>
+                            <!--<input type="text" class="form-control" ng-model="ToDate" placeholder="To Date">-->
+                            <p class="input-group">
+                                <input type="text" 
+                                       class="form-control" 
+                                       datepicker-popup="{{format}}" 
+                                       ng-model="ToDate" is-open="opened" 
+                                       datepicker-options="dateOptions" 
+                                       date-disabled="disabled(date, mode)" 
+                                       ng-required="true" close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
 
-    <div>
-        <table class="table" style="width:75%;">
-            <thead>
-                <tr>
-                    <th style="margin-left:10px;">Destination Location</th>
-                    <th style="margin-left:10px;">Lowest Fare</th>
-                    <th style="margin-left:10px;">Lowest NonStop Fare</th>
-                    <th style="margin-left:10px;">Departure DateTime</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="rate in faresList">
-                    <td style="margin-left:10px;">{{rate.DestinationLocation}}</td>
-                    <td style="margin-left:10px;">{{rate.LowestFare}}</td>
-                    <td style="margin-left:10px;">{{rate.LowestNonStopFare}}</td>
-                    <td style="margin-left:10px;">{{rate.DepartureDateTime}}</td>
-                </tr>
-            </tbody>
 
-        </table>
+                        <button ng-disabled="SearchbuttonIsLoading" class="btn btn-primary" ng-click="getDestinations()">{{SearchbuttonText}}</button>
+
+                    </form>
+                </div>
+
+                <!-- Table -->
+
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Available Destinations</div>
+
+                <!-- Table -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="margin-left:10px;">Destination Location</th>
+                            <th style="margin-left:10px;">Lowest Fare</th>
+                            <th style="margin-left:10px;">Lowest NonStop Fare</th>
+                            <th style="margin-left:10px;">Departure DateTime</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="rate in faresList">
+                            <td style="margin-left:10px;">{{rate.DestinationLocation}}</td>
+                            <td style="margin-left:10px;">{{rate.LowestFare}}</td>
+                            <td style="margin-left:10px;">{{rate.LowestNonStopFare}}</td>
+                            <td style="margin-left:10px;">{{rate.DepartureDateTime | date:"MM/dd/yyyy"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     </div>
+    
 </div>

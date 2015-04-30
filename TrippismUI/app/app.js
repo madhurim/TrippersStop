@@ -1,7 +1,8 @@
 ﻿var TrippismUIApp = angular.module('TrippismUIApp',
                         [
                           //'ngRoute',
-                          'ui.router'
+                          'ui.router',
+                          'ui.bootstrap'
 
                         ]);
 
