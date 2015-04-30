@@ -1,0 +1,46 @@
+﻿<div ng-controller="DestinationController">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Enter Your Destination</label>
+                <input type="text" class="form-control" ng-model="Destination" placeholder="Enter Destination">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">From Date</label>
+                <input type="text" class="form-control" ng-model="FromDate" placeholder="From Date">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">To Date</label>
+                <input type="text" class="form-control" ng-model="ToDate" placeholder="To Date">
+            </div>
+
+
+            <button class="btn btn-default" ng-click="getDestinations()">Get Destinations</button>
+
+        </form>
+    </div>
+
+    
+
+    <div>
+        <table class="table" style="width:75%;">
+            <thead>
+                <tr>
+                    <th style="margin-left:10px;">Destination Location</th>
+                    <th style="margin-left:10px;">Lowest Fare</th>
+                    <th style="margin-left:10px;">Lowest NonStop Fare</th>
+                    <th style="margin-left:10px;">Departure DateTime</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="rate in faresList">
+                    <td style="margin-left:10px;">{{rate.DestinationLocation}}</td>
+                    <td style="margin-left:10px;">{{rate.LowestFare}}</td>
+                    <td style="margin-left:10px;">{{rate.LowestNonStopFare}}</td>
+                    <td style="margin-left:10px;">{{rate.DepartureDateTime}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
