@@ -7,7 +7,9 @@
         
         // Define the functions and properties to reveal.
         var service = {
-            findDestinations: findDestinations
+            findDestinations: findDestinations,
+            fareforecast: fareforecast,
+           // lowfareforecast: lowfareforecast
         };
         return service;
 
@@ -21,5 +23,26 @@
                     return e;
                 });
         }
+
+        function fareforecast(data) {
+            var url = $rootScope.apiURL + '/api/FareForecast/Get?Origin=' + data.Origin + '&EarliestDepartureDate='
+             + data.EarliestDepartureDate + '&LatestDepartureDate=' + data.LatestDepartureDate + '&Destination=' + data.Destination + '&lengthofstay=' + data.LengthOfStay ;
+            return $http.get(url)
+                .then(function (data) {
+                    return data.data;
+                }, function (e) {
+                    return e;
+                });
+        }
+        //function lowfareforecast(data) {
+        //    var url = $rootScope.apiURL + '/api/LowFareForecast/Get?Origin=' + data.Origin + '&DepartureDate='
+        //   + data.DepartureDate + '&ReturnDate=' + data.ReturnDate + '&Destination=' + data.Destination;
+        //    return $http.get(url)
+        //        .then(function (data) {
+        //            return data.data;
+        //        }, function (e) {
+        //            return e;
+        //        });
+        //}
     }
 })();

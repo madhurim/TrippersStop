@@ -36,6 +36,12 @@
     <Content Include="app\Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="app\Scripts\angular.js" />
     <Content Include="app\Scripts\angular.min.js" />
+    <Content Include="app\Scripts\libs\underscore.js" />
+    <Content Include="app\Scripts\libs\underscore.min.js" />
+    <Content Include="app\Styles\css\angular-block-ui.css" />
+    <Content Include="app\Styles\css\angular-block-ui.min.css" />
+    <Content Include="app\Scripts\libs\angular-block-ui.js" />
+    <Content Include="app\Scripts\libs\angular-block-ui.min.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +52,10 @@
     <Content Include="app\Styles\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="app\Styles\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="app\Styles\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="app\Scripts\libs\underscore.min.map" />
+    <Content Include="app\Scripts\libs\angular-block-ui.min.js.map" />
+    <Content Include="app\Scripts\libs\angular-block-ui.js.map" />
+    <Content Include="app\Styles\css\angular-block-ui.css.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -54,10 +64,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\Constants\" />
     <Folder Include="app\Directives\" />
     <Folder Include="app\Module\" />
-    <Folder Include="app\Styles\css\" />
     <Folder Include="app\Views\Home\" />
+    <Folder Include="Content\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

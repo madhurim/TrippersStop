@@ -1,15 +1,15 @@
-﻿<div ng-controller="DestinationController">
-    
+﻿<div block-ui="main" class="block-ui-main" ng-controller="DestinationController">
+
     <div style="margin-top:10px;">
-        <div class="col-md-4" >
+        <div class="col-md-4">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">Search Destination</div>
+                <div class="panel-heading">Search Destinations</div>
                 <div class="panel-body">
                     <form>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Enter Your Destination</label>
-                            <input type="text" class="form-control" ng-model="Destination" placeholder="Enter Destination">
+                            <label for="exampleInputEmail1">Enter Your Origin</label>
+                            <input type="text" class="form-control" ng-model="Origin" placeholder="Enter Origin">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">From Date</label>
@@ -30,12 +30,12 @@
                             <label for="exampleInputPassword1">To Date</label>
                             <!--<input type="text" class="form-control" ng-model="ToDate" placeholder="To Date">-->
                             <p class="input-group">
-                                <input type="text" 
-                                       class="form-control" 
-                                       datepicker-popup="{{format}}" 
-                                       ng-model="ToDate" is-open="opened" 
-                                       datepicker-options="dateOptions" 
-                                       date-disabled="disabled(date, mode)" 
+                                <input type="text"
+                                       class="form-control"
+                                       datepicker-popup="{{format}}"
+                                       ng-model="ToDate" is-open="opened"
+                                       datepicker-options="dateOptions"
+                                       date-disabled="disabled(date, mode)"
                                        ng-required="true" close-text="Close" />
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -43,8 +43,9 @@
                             </p>
                         </div>
 
-
-                        <button ng-disabled="SearchbuttonIsLoading" class="btn btn-primary" ng-click="getDestinations()">{{SearchbuttonText}}</button>
+                        <button ng-disabled="SearchbuttonIsLoading" class="btn btn-primary" ng-click="getDestinations('All')">{{SearchbuttonText}}</button>
+                        <button ng-disabled="SearchbuttonTop10IsLoading" class="btn btn-primary" ng-click="getDestinations('Top10')">{{SearchbuttonTo10Text}}</button>
+                        <button ng-disabled="SearchbuttonChepestIsLoading" class="btn btn-primary" ng-click="getDestinations('Cheapest')">{{SearchbuttonCheapestText}}</button>
 
                     </form>
                 </div>
@@ -60,13 +61,16 @@
                 <div class="panel-heading">Available Destinations</div>
 
                 <!-- Table -->
-                <table class="table">
+                <!--{{faresList[0]}}-->
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th style="margin-left:10px;">Destination Location</th>
                             <th style="margin-left:10px;">Lowest Fare</th>
                             <th style="margin-left:10px;">Lowest NonStop Fare</th>
                             <th style="margin-left:10px;">Departure DateTime</th>
+                            <th style="margin-left:10px;">Fare Fore Cast</th>
+                            <!--<th style="margin-left:10px;">Low Fare Fore Cast</th>-->
                         </tr>
                     </thead>
                     <tbody>
@@ -75,6 +79,8 @@
                             <td style="margin-left:10px;">{{rate.LowestFare}}</td>
                             <td style="margin-left:10px;">{{rate.LowestNonStopFare}}</td>
                             <td style="margin-left:10px;">{{rate.DepartureDateTime | date:"MM/dd/yyyy"}}</td>
+                            <td> <button class="btn btn-sm btn-success" ng-click="fareforecast(rate)">Fare Forcast</button> </td>
+                            <!--<td> <button ng-click="lowfareforecast(rate)">Low Fare For Cast</button> </td>-->
                         </tr>
                     </tbody>
                 </table>
@@ -82,5 +88,51 @@
 
         </div>
     </div>
-    
+
+
+
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-body">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">Fare ForeCast Destinations : ( {{ Origin  + ' to ' + Destination}} ) </div>
+                        <div class="panel-body table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Count</th>
+                                        <th>Currency</th>
+                                        <th>Max Fare</th>
+                                        <th>MedianFare</th>
+                                        <th>Min Fare</th>
+                                        <th>DepartureDate</th>
+                                        <th>ReturnDate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="faredetails in forecastfareList">
+                                        <td>{{faredetails.Count}}</td>
+                                        <td>{{faredetails.CurrencyCode}}</td>
+                                        <td>{{faredetails.MaximumFare}}</td>
+                                        <td>{{faredetails.MedianFare}}</td>
+                                        <td>{{faredetails.MinimumFare}}</td>
+                                        <td>{{faredetails.DepartureDateTime | date:"MM/dd/yyyy"}}</td>
+                                        <td>{{faredetails.ReturnDateTime | date:"MM/dd/yyyy"}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer" style="clear:both;">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+        </div>
+    </script>
+
+
 </div>
+        

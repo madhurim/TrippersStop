@@ -2,8 +2,8 @@
                         [
                           //'ngRoute',
                           'ui.router',
-                          'ui.bootstrap'
-
+                          'ui.bootstrap',
+                          'blockUI'
                         ]);
 
 TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
