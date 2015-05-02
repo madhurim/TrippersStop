@@ -7,9 +7,9 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Description;
-using TrippersStop.Areas.HelpPage.Models;
+using Trippism.Areas.HelpPage.Models;
 
-namespace TrippersStop.Areas.HelpPage
+namespace Trippism.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

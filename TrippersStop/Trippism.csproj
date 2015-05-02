@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TrippersStop</RootNamespace>
-    <AssemblyName>TrippersStop</AssemblyName>
+    <RootNamespace>Trippism</RootNamespace>
+    <AssemblyName>Trippism</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -46,6 +46,18 @@
       <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\MongoDB.Bson.2.0.0\lib\net45\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\MongoDB.Driver.2.0.0\lib\net45\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.0.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Legacy">
+      <HintPath>..\packages\mongocsharpdriver.2.0.0\lib\net45\MongoDB.Driver.Legacy.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -179,6 +191,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIExtention\ControllerSelector\AreaHttpControllerSelector .cs" />
     <Compile Include="APIExtention\Filters\ExceptionFilterAttribute.cs" />
     <Compile Include="APIExtention\Filters\ValidateModelAttribute.cs" />
     <Compile Include="APIHelper\APIHelper.cs" />
@@ -187,10 +200,10 @@
     <Compile Include="Areas\Sabre\Controllers\CityPairsController.cs" />
     <Compile Include="Areas\Sabre\Controllers\CountriesController.cs" />
     <Compile Include="Areas\Sabre\Controllers\DestinationsController.cs" />
-    <Compile Include="Areas\Sabre\Controllers\FareForecastController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\FareRangeController.cs" />
     <Compile Include="Areas\Sabre\Controllers\MultiAirportCityController.cs" />
     <Compile Include="Areas\Sabre\Controllers\SaleCountryController.cs" />
-    <Compile Include="Areas\Sabre\Controllers\SeasonalRateController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\SeasonalityController.cs" />
     <Compile Include="Areas\Sabre\Controllers\ThemeAirportController.cs" />
     <Compile Include="Areas\Sabre\Controllers\TravelThemeController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -212,9 +225,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Areas\Sabre\Controllers\BargainFinderController.cs" />
-    <Compile Include="Areas\Sabre\Controllers\LowFareForecastController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\FareForecastController.cs" />
     <Compile Include="Areas\Sabre\Controllers\TopDestinationsController.cs" />
     <Compile Include="Areas\Sabre\SabreAreaRegistration.cs" />
+    <Compile Include="APIExtention\AreaRegistrationContextExtensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -308,6 +322,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Services.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

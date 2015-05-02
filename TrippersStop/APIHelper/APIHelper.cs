@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using TrippersStop.TraveLayer;
+using Trippism.TraveLayer;
 
-namespace TrippersStop
+namespace Trippism
 {
     public static class APIHelper
     {

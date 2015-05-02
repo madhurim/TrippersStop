@@ -1,9 +1,9 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using TrippersStop.Areas.HelpPage.Models;
+using Trippism.Areas.HelpPage.Models;
 
-namespace TrippersStop.Areas.HelpPage.Controllers
+namespace Trippism.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

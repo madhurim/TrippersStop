@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrippersStop", "TrippersStop\TrippersStop.csproj", "{0B9A31F4-4AD2-4BA0-A265-F24F97F1159D}"
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trippism", "TrippersStop\Trippism.csproj", "{0B9A31F4-4AD2-4BA0-A265-F24F97F1159D}"
+
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrippersStop.Tests", "TrippersStop.Tests\TrippersStop.Tests.csproj", "{433A9777-2DE8-446B-A944-233993DA4833}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trippism.Tests", "TrippersStop.Tests\Trippism.Tests.csproj", "{433A9777-2DE8-446B-A944-233993DA4833}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraveLayer", "TraveLayer\TraveLayer.csproj", "{C5BAAB69-8D1D-4402-9573-4B6F2939B7EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{D52C2D5B-E3C4-4DA9-B949-16B8B7A3A79C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrippismUI", "TrippismUI\TrippismUI.csproj", "{B01EA087-5828-4FFE-9226-1BC14884F180}"
 EndProject
@@ -33,6 +37,10 @@ Global
 		{B01EA087-5828-4FFE-9226-1BC14884F180}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B01EA087-5828-4FFE-9226-1BC14884F180}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B01EA087-5828-4FFE-9226-1BC14884F180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D52C2D5B-E3C4-4DA9-B949-16B8B7A3A79C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D52C2D5B-E3C4-4DA9-B949-16B8B7A3A79C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D52C2D5B-E3C4-4DA9-B949-16B8B7A3A79C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D52C2D5B-E3C4-4DA9-B949-16B8B7A3A79C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

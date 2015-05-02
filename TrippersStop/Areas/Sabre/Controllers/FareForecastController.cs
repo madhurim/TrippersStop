@@ -4,14 +4,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using TrippersStop.TraveLayer;
-using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
-using TraveLayer.APIServices;
-using AutoMapper;
+using Trippism.TraveLayer;
+using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre;
+using AutoMapper;
+using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre.Response;
 
-namespace TrippersStop.Areas.Sabre.Controllers
+
+namespace Trippism.Areas.Sabre.Controllers
 {
     public class FareForecastController : ApiController
     {
@@ -20,12 +21,12 @@ namespace TrippersStop.Areas.Sabre.Controllers
         public FareForecastController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
-            _cacheService = cacheService;         
+            _cacheService = cacheService;
         }
         // GET api/lowfareforecast
-        public HttpResponseMessage Get([FromUri]VM.FareForecast  fareForecastRequest)
+        public HttpResponseMessage Get([FromUri]TravelInfo lowFareForecastRequest)
         {
-            string url = string.Format("v1/historical/flights/fares?origin={0}&destination={1}&earliestdeparturedate={2}&latestdeparturedate={3}&lengthofstay={4}", fareForecastRequest.Origin, fareForecastRequest.Destination, fareForecastRequest.EarliestDepartureDate, fareForecastRequest.LatestDepartureDate, fareForecastRequest.LengthOfStay);
+            string url = string.Format("v1/forecast/flights/fares?origin={0}&destination={1}&departuredate={2}&returndate={3}", lowFareForecastRequest.Origin, lowFareForecastRequest.Destination, lowFareForecastRequest.DepartureDate, lowFareForecastRequest.ReturnDate);
             return GetResponse(url);
         }
         private HttpResponseMessage GetResponse(string url)
@@ -39,11 +40,11 @@ namespace TrippersStop.Areas.Sabre.Controllers
             }
             if (result.StatusCode == HttpStatusCode.OK)
             {
-                OTA_FareRange fares = new OTA_FareRange();
-                fares = ServiceStackSerializer.DeSerialize<OTA_FareRange>(result.Response);
-                Mapper.CreateMap<OTA_FareRange, VM.FareRange>();
-                VM.FareRange fareRange = Mapper.Map<OTA_FareRange, VM.FareRange>(fares);
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fareRange);
+                OTA_LowFareForecast fares = new OTA_LowFareForecast();
+                fares = ServiceStackSerializer.DeSerialize<OTA_LowFareForecast>(result.Response);
+                Mapper.CreateMap<OTA_LowFareForecast, LowFareForecast>();
+                LowFareForecast lowFareForecast = Mapper.Map<OTA_LowFareForecast, LowFareForecast>(fares);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lowFareForecast);
                 return response;
             }
             return Request.CreateResponse(result.StatusCode, result.Response);

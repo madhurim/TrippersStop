@@ -9,8 +9,8 @@
     <ProjectGuid>{433A9777-2DE8-446B-A944-233993DA4833}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TrippersStop.Tests</RootNamespace>
-    <AssemblyName>TrippersStop.Tests</AssemblyName>
+    <RootNamespace>Trippism.Tests</RootNamespace>
+    <AssemblyName>Trippism.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -143,9 +143,9 @@
       <Project>{c5baab69-8d1d-4402-9573-4b6f2939b7ef}</Project>
       <Name>TraveLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TrippersStop\TrippersStop.csproj">
+    <ProjectReference Include="..\TrippersStop\Trippism.csproj">
       <Project>{0B9A31F4-4AD2-4BA0-A265-F24F97F1159D}</Project>
-      <Name>TrippersStop</Name>
+      <Name>Trippism</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

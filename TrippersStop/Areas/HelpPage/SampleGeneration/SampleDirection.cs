@@ -1,4 +1,4 @@
-namespace TrippersStop.Areas.HelpPage
+namespace Trippism.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response
