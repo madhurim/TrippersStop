@@ -22,6 +22,9 @@
     <Content Include="app\Controllers\DestinationController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
     <Content Include="app\Factory\DestinationFactory.js" />
+    <Content Include="app\Scripts\libs\event.js" />
+    <Content Include="app\Scripts\libs\ui-map.js" />
+    <Content Include="app\Scripts\libs\ui-map.min.js" />
     <Content Include="app\Styles\bootstrap.css" />
     <Content Include="app\Styles\bootstrap.min.css" />
     <Content Include="app\Views\default.html" />

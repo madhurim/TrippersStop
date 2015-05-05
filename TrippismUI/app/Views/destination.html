@@ -1,24 +1,28 @@
 ﻿<div block-ui="main" class="block-ui-main" ng-controller="DestinationController">
-
     <div style="margin-top:10px;">
         <div class="col-md-4">
             <div class="panel panel-default">
-                <!-- Default panel contents -->
                 <div class="panel-heading">Search Destinations</div>
                 <div class="panel-body">
-                    <form>
+                    <div ng-show="hasError && frmdestfinder.$invalid">
+                        <alert ng-repeat="alert in errors" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+                     </div>
+                    
+                    <form name="frmdestfinder" novalidate>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enter Your Origin</label>
-                            <input type="text" class="form-control" ng-model="Origin" placeholder="Enter Origin">
+                            <input type="text" required class="form-control" ng-model="Origin" placeholder="Enter Origin">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">From Date</label>
-                            <!--<input type="text" class="form-control" ng-model="FromDate" placeholder="From Date">-->
                             <p class="input-group">
                                 <input type="text"
+                                       required="required"
                                        class="form-control"
                                        datepicker-popup="{{format}}"
-                                       ng-model="FromDate" is-open="openedFromDate"
+                                       min-date="minTodayDate"
+                                       ng-model="FromDate"
+                                       is-open="openedFromDate"
                                        datepicker-options="dateOptions"
                                        ng-required="true" close-text="Close" />
                                 <span class="input-group-btn">
@@ -28,12 +32,13 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">To Date</label>
-                            <!--<input type="text" class="form-control" ng-model="ToDate" placeholder="To Date">-->
                             <p class="input-group">
                                 <input type="text"
                                        class="form-control"
                                        datepicker-popup="{{format}}"
-                                       ng-model="ToDate" is-open="opened"
+                                       min-date="minFromDate"
+                                       ng-model="ToDate" 
+                                       is-open="opened"
                                        datepicker-options="dateOptions"
                                        date-disabled="disabled(date, mode)"
                                        ng-required="true" close-text="Close" />
@@ -42,7 +47,10 @@
                                 </span>
                             </p>
                         </div>
-
+                        <div class="form-group">
+                            <label for="lengthofstay">Lenght of Stay(days)</label>
+                            <input type="number" ng-model="datedifff" value="" ng-disabled="true" class="form-control" min="1">
+                        </div>
                         <button ng-disabled="SearchbuttonIsLoading" class="btn btn-primary" ng-click="getDestinations('All')">{{SearchbuttonText}}</button>
                         <button ng-disabled="SearchbuttonTop10IsLoading" class="btn btn-primary" ng-click="getDestinations('Top10')">{{SearchbuttonTo10Text}}</button>
                         <button ng-disabled="SearchbuttonChepestIsLoading" class="btn btn-primary" ng-click="getDestinations('Cheapest')">{{SearchbuttonCheapestText}}</button>
@@ -133,6 +141,22 @@
         </div>
     </script>
 
+    <div class="col-lg-12">
+        <div class="row" style="margin-left:10px;margin-right:10px;">
+            <div id="map_canvas" ui-map="model.destinationMap" class="map" ui-options="mapOptions">
+            </div>
+         
+        </div>
+    </div>
+
+
+
+
 
 </div>
-        
+
+<style>
+    .map {
+        height: 400px;
+    }
+</style>

@@ -1,16 +1,15 @@
 ﻿<!DOCTYPE html>
-<html ng-app="TrippismUIApp">  <!--ng-controller="LandingPageController"-->
+<html ng-app="TrippismUIApp">
+  <!--ng-controller="LandingPageController"-->
 
 <head>
-      
+
 </head>
 <body>
-   
+
     <div ui-view>
 
     </div>
-
-    
 
     <link href="Styles/bootstrap.css" rel="stylesheet" />
     <link href="Styles/css/angular-block-ui.css" rel="stylesheet" />
@@ -18,8 +17,10 @@
     <!--<script src="~/Scripts/angular/angular-route.min.js"></script>-->
 
     <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="Scripts/libs/event.js"></script>
+    <script src="Scripts/libs/ui-map.min.js"></script>
     <!--<script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>-->
-    
+
     <script src="Scripts/angular-ui-router.min.js"></script>
     <script src="Scripts/libs/angular-block-ui.js"></script>
     <script src="/app/app.js"></script>
@@ -28,6 +29,6 @@
     <script src="/app/Controllers/LandingPageController.js"></script>
     <script src="/app/Controllers/DefaultController.js"></script>
     <script src="/app/Controllers/DestinationController.js"></script>
-   
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp?"></script>
 </body>
 </html>
