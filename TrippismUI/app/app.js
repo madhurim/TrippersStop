@@ -16,9 +16,10 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
              url: '/destination',
              templateUrl: '/app/Views/destination.html'
          })
-        .state('default', {
-            url: '/default',
-            templateUrl: '/app/Views/default.html'
+        .state('fareforecast', {
+            url: '/fareforecast',
+            templateUrl: '/app/Views/fareforecast.html'
         })
+        
 });
 

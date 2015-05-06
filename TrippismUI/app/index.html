@@ -1,18 +1,36 @@
 ﻿<!DOCTYPE html>
 <html ng-app="TrippismUIApp">
-  <!--ng-controller="LandingPageController"-->
+<!--ng-controller="LandingPageController"-->
 
 <head>
 
 </head>
-<body>
+<body ng-controller="LandingPageController">
 
-    <div ui-view>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/destination">Trippism</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ng-class="getClass('/destination')" class=""><a href="#/destination">Destination</a></li>
+                    <li ng-class="getClass('/fareforecast')"><a href="#/fareforecast">Fareforecast</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    
+    <div role="main" style="margin-top:50px;">
+        <div ui-view style="" class="container-fluid">
+        </div>
     </div>
+
 
     <link href="Styles/bootstrap.css" rel="stylesheet" />
     <link href="Styles/css/angular-block-ui.css" rel="stylesheet" />
+    <link href="Styles/css/trippismapp.css" rel="stylesheet" />
     <script src="Scripts/angular.min.js"></script>
     <!--<script src="~/Scripts/angular/angular-route.min.js"></script>-->
 
@@ -27,8 +45,9 @@
     <script src="Scripts/libs/underscore.js"></script>
     <script src="/app/Factory/DestinationFactory.js"></script>
     <script src="/app/Controllers/LandingPageController.js"></script>
-    <script src="/app/Controllers/DefaultController.js"></script>
     <script src="/app/Controllers/DestinationController.js"></script>
+    <script src="Factory/FareforecastFactory.js"></script>
+    <script src="Controllers/FareforecastController.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp?"></script>
 </body>
 </html>

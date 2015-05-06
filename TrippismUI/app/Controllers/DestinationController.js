@@ -8,11 +8,11 @@
     function DestinationController($scope, $rootScope, $modal, $http, DestinationFactory) {
 
         $scope.hasError = false;
-        //$scope.closeAlert = closeAlert;
+        $scope.Location = "";
         $scope.lat = "0";
         $scope.lng = "0";
         $scope.accuracy = "0";
-        $scope.error = "";
+
         $scope.model = { destinationMap: undefined };
         $scope.myMarkers = [];
 
@@ -61,10 +61,10 @@
         $scope.formats = ['yyyy-MM-dd', 'dd-MM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
         $scope.format = $scope.formats[0];
         var dt = new Date();
-        dt.setHours(0,0,0,0)
+        dt.setHours(0, 0, 0, 0)
         var Todt = new Date();
         Todt.setDate(Todt.getDate() + 5); // add default from 5 days
-        Todt.setHours(0,0,0,0)
+        Todt.setHours(0, 0, 0, 0)
 
         $scope.ToDate = ConvertToRequiredDate(Todt);
         $scope.FromDate = ConvertToRequiredDate(dt);
@@ -75,8 +75,6 @@
 
 
         function daydiff(first, second) {
-            //var oneDay = 24 * 60 * 60 * 1000;
-            //return Math.round(Math.abs((second.getTime() - first.getTime()) / (oneDay)));
             return Math.round((second - first) / (1000 * 60 * 60 * 24));
         }
 
@@ -87,7 +85,7 @@
 
         $scope.$watch(function (scope) { return scope.FromDate },
               function (newValue, oldValue) {
-                  
+
                   /* If from date is greater than to date */
                   var newDt = new Date(newValue);
                   newDt.setHours(0, 0, 0, 0);
@@ -95,7 +93,7 @@
                   todate.setHours(0, 0, 0, 0);
 
                   if (newDt >= todate) {
-                      $scope.ToDate = newDt.setDate(newDt.getDate() + 1)
+                      $scope.ToDate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1))
                   }
                   /**/
 
@@ -104,25 +102,36 @@
                   $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
 
                   // Calculate datediff
-                  $scope.datedifff = daydiff(new Date(newValue).setHours(0,0,0,0), new Date($scope.ToDate).setHours(0,0,0,0));
+                  $scope.datedifff = daydiff(new Date(newValue).setHours(0, 0, 0, 0), new Date($scope.ToDate).setHours(0, 0, 0, 0));
 
               }
        );
         $scope.$watch(function (scope) { return scope.ToDate },
               function (newValue, oldValue) {
-                  $scope.datedifff = daydiff(new Date($scope.FromDate).setHours(0,0,0,0), new Date(newValue).setHours(0,0,0,0));
+                  $scope.datedifff = daydiff(new Date($scope.FromDate).setHours(0, 0, 0, 0), new Date(newValue).setHours(0, 0, 0, 0));
               }
        );
 
         $scope.Origin = '';
 
+        function getIpinfo() {
+            var url = "http://ipinfo.io?callback=JSON_CALLBACK";
+            $http.jsonp(url)
+           .success(function (data) {
+               $scope.Origin = data.country;
+               $scope.CalledOnPageLoad = true;
+               $scope.findDestinations('Top10');
+           });
+        }
+        getIpinfo();
+        
+
         $scope.faresList = [];
         $scope.forecastfareList = [];
         $rootScope.apiURL = 'http://localhost:14606';
 
-        $scope.getDestinations = findDestinations;
+        $scope.findDestinations = findDestinations;
         $scope.fareforecast = fareforecast;
-        //$scope.lowfareforecast = lowfareforecast;
 
         function fareforecast(rate) {
             rate.Origin = $scope.Origin;
@@ -175,25 +184,15 @@
         $scope.SearchbuttonTop10IsLoading = false;
         $scope.SearchbuttonChepestIsLoading = false;
 
-        $scope.closeAlert = function (index) {
-            $scope.errors.splice(index, 1);
-        };
-
-        //var closeAlert = function (index) {
-        //    debugger;
-        //    $scope.errors.splice(index, 1);
-        //};
-
         function findDestinations(buttnText) {
             
-            if ($scope.Origin == undefined || $scope.Origin == "") {
-                $scope.hasError = true;
-                $scope.errors = [
-                   { type: 'warning', msg: 'Please enter origin.' } 
-                ];
-                return;
+            if ($scope.CalledOnPageLoad != true) {
+                if ($scope.frmdestfinder.$invalid) {
+                    $scope.hasError = true;
+                    return;
+                }
             }
-            
+
             $scope.faresList = [];
             if (buttnText == 'All') { $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; }
             else if (buttnText == 'Top10') { $scope.SearchbuttonTop10IsLoading = true; $scope.SearchbuttonTo10Text = $scope.LoadingText; }
@@ -202,7 +201,17 @@
                 "Origin": $scope.Origin,
                 "DepartureDate": ConvertToRequiredDate($scope.FromDate),
                 "ReturnDate": ConvertToRequiredDate($scope.ToDate),
-                "Lengthofstay": $scope.datedifff
+                "Lengthofstay": $scope.datedifff,
+                "Earliestdeparturedate": ConvertToRequiredDate($scope.FromDate),
+                "Latestdeparturedate" : ConvertToRequiredDate($scope.ToDate),
+                "Theme": $scope.Theme,
+                "Location": $scope.Location,
+                "Minfare": $scope.Minfare,
+                "Maxfare": $scope.Maxfare,
+                "PointOfSaleCountry": $scope.PointOfSaleCountry,
+                "Region": $scope.Region,
+                "TopDestinations": $scope.TopDestinations
+
             };
             DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.SearchbuttonText = "Get Destinations (All)";
@@ -212,9 +221,12 @@
                 $scope.SearchbuttonTop10IsLoading = false;
                 $scope.SearchbuttonChepestIsLoading = false;
                 displayDestinations(buttnText, data.FareInfo);
-                console.log(data.FareInfo)
+                console.log(data.FareInfo);
+                
             });
-
+            if ($scope.CalledOnPageLoad)
+                $scope.CalledOnPageLoad = false;
+           
 
         }
         var GetUniqueDestinations = function (destinations) {

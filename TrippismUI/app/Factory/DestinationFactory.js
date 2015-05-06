@@ -13,9 +13,61 @@
         return service;
 
         function findDestinations(data) {
-            
-            var url = $rootScope.apiURL + '/api/Destinations/Get?Origin=' + data.Origin + '&DepartureDate='
-                + data.DepartureDate + '&ReturnDate=' + data.ReturnDate + '&Lengthofstay=' + data.Lengthofstay;
+                if(data.Origin == undefined) 
+                    data.Origin ="";
+
+                if(data.DepartureDate == undefined) 
+                    data.DepartureDate ="";
+               
+                if(data.ReturnDate == undefined) 
+                    data.ReturnDate ="";
+
+                if(data.Lengthofstay == undefined) 
+                    data.Lengthofstay ="";
+               
+                if(data.Earliestdeparturedate == undefined) 
+                    data.Earliestdeparturedate ="";
+               
+                if(data.Latestdeparturedate == undefined) 
+                    data.Latestdeparturedate ="";
+
+                if(data.Theme == undefined) 
+                    data.Theme ="";
+
+                if(data.Location == undefined) 
+                    data.Location ="";
+
+                if(data.Minfare == undefined) 
+                    data.Minfare ="";
+               
+                if(data.Maxfare == undefined) 
+                    data.Maxfare ="";
+               
+                if(data.PointOfSaleCountry == undefined) 
+                    data.PointOfSaleCountry ="";
+   
+                if(data.Region == undefined) 
+                    data.Region ="";
+               
+                if(data.TopDestinations == undefined) 
+                    data.TopDestinations ="";
+   
+
+                var url = $rootScope.apiURL + '/api/Destinations?' +
+                 'Origin=' + data.Origin +
+                 '&DepartureDate=' + data.DepartureDate +
+                 '&ReturnDate=' + data.ReturnDate +
+                 '&Lengthofstay=' + data.Lengthofstay +
+                 //'&Latestdeparturedate=' + data.Latestdeparturedate +
+                 '&Theme=' + data.Theme +
+                 '&Location=' + data.Location +
+                 '&Minfare=' + data.Minfare +
+                 '&Maxfare=' + data.Maxfare +
+                 '&PointOfSaleCountry=' + data.PointOfSaleCountry +
+                 '&Region=' + data.Region +
+                 '&TopDestinations=' + data.TopDestinations;
+                 //'&Earliestdeparturedate=' + data.Earliestdeparturedate;
+                
             return $http.get(url)
                 .then(function (data) {
                     return data.data;

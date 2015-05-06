@@ -1,0 +1,5 @@
+﻿.triperror {padding:5px;margin-bottom:5px;}
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}

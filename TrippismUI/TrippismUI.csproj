@@ -18,15 +18,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="app\Controllers\DefaultController.js" />
     <Content Include="app\Controllers\DestinationController.js" />
+    <Content Include="app\Controllers\FareforecastController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
     <Content Include="app\Factory\DestinationFactory.js" />
+    <Content Include="app\Factory\FareforecastFactory.js" />
     <Content Include="app\Scripts\libs\event.js" />
     <Content Include="app\Scripts\libs\ui-map.js" />
     <Content Include="app\Scripts\libs\ui-map.min.js" />
     <Content Include="app\Styles\bootstrap.css" />
     <Content Include="app\Styles\bootstrap.min.css" />
+    <Content Include="app\Styles\css\trippismapp.css" />
     <Content Include="app\Views\default.html" />
     <Content Include="app\Views\destination.html" />
     <Content Include="app\index.html" />
@@ -45,6 +47,7 @@
     <Content Include="app\Styles\css\angular-block-ui.min.css" />
     <Content Include="app\Scripts\libs\angular-block-ui.js" />
     <Content Include="app\Scripts\libs\angular-block-ui.min.js" />
+    <Content Include="app\Views\fareforecast.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
