@@ -15,7 +15,7 @@
         $scope.error = "";
         $scope.model = { destinationMap: undefined };
         $scope.myMarkers = [];
-
+        
         $scope.mapOptions = {
             center: new google.maps.LatLng($scope.lat, $scope.lng),
             zoom: 3,
@@ -59,6 +59,7 @@
 
         $scope.formats = ['yyyy-MM-dd', 'dd-MM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
         $scope.format = $scope.formats[0];
+        
         var dt = new Date();
         dt.setHours(0, 0, 0, 0)
         var Todt = new Date();
@@ -115,16 +116,13 @@
 
         $scope.Origin = '';
         $scope.Destination = '';
-
+        $scope.IsSearched = false;
         $scope.faresList = [];
         $scope.forecastfareList = [];
         $rootScope.apiURL = 'http://localhost:14606';
 
         $scope.findfares  = findfares ;
         
-
-       
-
         $scope.open = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -159,10 +157,9 @@
                 return;
             }
             $scope.SearchedfareInfo = undefined;
-           
+            $scope.IsSearched = true;
             $scope.faresList = [];
             $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; 
-                
             var data = {
                 "Origin": $scope.Origin,
                 "DepartureDate": ConvertToRequiredDate($scope.FromDate),

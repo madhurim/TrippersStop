@@ -1,4 +1,4 @@
-﻿<div block-ui="main" class="block-ui-main" ng-controller="FareforecastController">
+﻿<div  ng-controller="FareforecastController">
     <div style="margin-top:10px;">
         <div class="col-md-4">
             <div class="panel panel-default">
@@ -10,18 +10,27 @@
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                             Please enter Origin
                         </div>
-
                         <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Destination.$error.required">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                             Please enter Destination
                         </div>
-                       
-
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.FromDate.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please select from date
+                        </div>
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.FromDate.$invalid && !frmdestfinder.FromDate.$error.required" >
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please select valid from date
+                        </div>
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.ToDate.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please select to date
+                        </div>
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.ToDate.$invalid && !frmdestfinder.ToDate.$error.required" >
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please select valid to date
+                        </div>
                     </div>
-                    <!--<div ng-show="hasError && frmdestfinder.$invalid">
-                        <alert ng-repeat="alert in errors" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
-                    </div>-->
-
                     <form name="frmdestfinder" novalidate>
                         <div class="form-group">
                             <label for="origin">Enter Your Origin</label>
@@ -35,10 +44,12 @@
                             <label for="exampleInputPassword1">From Date</label>
                             <p class="input-group">
                                 <input type="text"
+                                       disabled="disabled"
                                        required="required"
                                        class="form-control"
                                        datepicker-popup="{{format}}"
                                        min-date="minTodayDate"
+                                       name="FromDate"
                                        ng-model="FromDate"
                                        is-open="openedFromDate"
                                        datepicker-options="dateOptions"
@@ -52,10 +63,12 @@
                             <label for="exampleInputPassword1">To Date</label>
                             <p class="input-group">
                                 <input type="text"
+                                       disabled="disabled"
                                        class="form-control"
                                        datepicker-popup="{{format}}"
                                        min-date="minFromDate"
                                        ng-model="ToDate"
+                                       name="ToDate"
                                        is-open="opened"
                                        datepicker-options="dateOptions"
                                        date-disabled="disabled(date, mode)"
@@ -65,16 +78,9 @@
                                 </span>
                             </p>
                         </div>
-                        
-                        <button ng-disabled="SearchbuttonIsLoading" class="btn btn-primary" ng-click="findfares()">{{SearchbuttonText}}</button>
-                        <!--<button ng-disabled="SearchbuttonTop10IsLoading" class="btn btn-primary" ng-click="getDestinations('Top10')">{{SearchbuttonTo10Text}}</button>
-                        <button ng-disabled="SearchbuttonChepestIsLoading" class="btn btn-primary" ng-click="getDestinations('Cheapest')">{{SearchbuttonCheapestText}}</button>-->
-
+                        <button ng-disabled="SearchbuttonIsLoading" class="btn btn-primary btn-sm" ng-click="findfares()">{{SearchbuttonText}}</button>
                     </form>
                 </div>
-
-                <!-- Table -->
-
             </div>
         </div>
 
@@ -82,98 +88,35 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Available Fares</div>
                 <div class="panel-body">
+                    <div ng-show="IsSearched && isUndefined(SearchedfareInfo)">No fare found</div>
                     <div class="col-sm-6 col-md-5" ng-show="!isUndefined(SearchedfareInfo)">
                         <div class="thumbnail">
                             <div class="panel panel-default" style="border:none;">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Fare Info</h3>
                                 </div>
-
                                 <table class="table">
                                     <tr><td>Origin</td><td>{{SearchedfareInfo.OriginLocation}}</td></tr>
                                     <tr><td>Destination</td><td>{{SearchedfareInfo.DestinationLocation}}</td></tr>
-
-
                                     <tr><td>Departure Date</td><td>{{SearchedfareInfo.DepartureDateTime | date:"MM/dd/yyyy"}}</td></tr>
-
                                     <tr><td>Return Date</td><td>{{SearchedfareInfo.ReturnDateTime | date:"yyyy-MM-dd"}}</td></tr>
-
+                                    <tr><td>Currency Code</td><td>{{SearchedfareInfo.CurrencyCode}}</td></tr>
                                     <tr><td>Highest Predicted Fare</td><td>{{SearchedfareInfo.Forecast.HighestPredictedFare}}</td></tr>
-
                                     <tr><td>Lowest Predicted Fare</td><td>{{SearchedfareInfo.Forecast.LowestPredictedFare}}</td></tr>
-
                                     <tr><td>Lowest Fare</td><td>{{SearchedfareInfo.LowestFare}}</td></tr>
-
                                 </table>
                             </div>
-                            <!--<div class="caption">
-
-                <h3 id="thumbnail-label">
-                    Fare Details
-                    <a class="anchorjs-link" href="#thumbnail-label"><span class="anchorjs-icon"></span></a>
-                </h3>
-                <p>
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label padlef0">Origin</label>
-                            <div class="col-sm-8"><span style="text-align:left;padding-left:0px;" class="col-sm-2 control-label">{{SearchedfareInfo.OriginLocation}}</span></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label padlef0">Destination</label>
-                            <div class="col-sm-8"><span style="text-align:left;padding-left:0px;" class="col-sm-2 control-label">{{SearchedfareInfo.DestinationLocation}}</span></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-4 control-label padlef0">Departure Date</label>
-                            <div class="col-sm-8"><span style="text-align:left;padding-left:0px;" class="col-sm-2 control-label">{{SearchedfareInfo.DepartureDateTime | date:"MM/dd/yyyy"}}</span></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label padlef0">Return Date</label>
-                            <div class="col-sm-8"><span style="text-align:left;padding-left:0px;" class="col-sm-2 control-label">{{SearchedfareInfo.ReturnDateTime | date:"MM/dd/yyyy"}}</span></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label padlef0">Highest Predicted Fare</label>
-                            <div class="col-sm-8"><span style="text-align:left;padding-left:0px;" class="col-sm-2 control-label">{{SearchedfareInfo.Forecast.HighestPredictedFare}}</span></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label padlef0">Lowest Predicted Fare</label>
-                            <div class="col-sm-8"><span style="text-align:left;padding-left:0px;" class="col-sm-2 control-label">{{SearchedfareInfo.Forecast.LowestPredictedFare}}</span></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label padlef0">Lowest Fare</label>
-                            <div class="col-sm-8"><span style="text-align:left;padding-left:0px;" class="col-sm-2 control-label">{{SearchedfareInfo.LowestFare}}</span></div>
-                        </div>
-
-
-                    </form>
-                </p>
-
-            </div>-->
+                            
                         </div>
                     </div>
                 </div>
-
-                
             </div>
-
         </div>
     </div>
-
     <div class="col-lg-12">
         <div class="row" style="margin-left:10px;margin-right:10px;">
             <div id="map_canvas" ui-map="model.destinationMap" class="map" ui-options="mapOptions">
             </div>
-
         </div>
     </div>
 </div>
-
-<style>
-    .map {
-        height: 400px;
-    }
-    .padlef0 {padding-left:0px !important;
-    }
-</style>

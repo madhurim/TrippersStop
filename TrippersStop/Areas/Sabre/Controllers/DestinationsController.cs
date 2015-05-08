@@ -37,6 +37,7 @@ namespace Trippism.Areas.Sabre.Controllers
         {
             StringBuilder url = new StringBuilder();
             url.Append("v1/shop/flights/fares?");
+            //url.Append("v1/shop/flights?");
             Type type = destinationsRequest.GetType();
             PropertyInfo[] properties = type.GetProperties();
             string propertyName = string.Empty;
@@ -52,7 +53,8 @@ namespace Trippism.Areas.Sabre.Controllers
                     if (!string.IsNullOrWhiteSpace(propertyValue))
                     {
                         url.Append(separator);
-                        url.Append(string.Join("=", propertyName, propertyValue));
+                        url.Append(string.Join("=", propertyName.ToLower(), propertyValue));
+                        //url.Append(string.Join("=", propertyName, propertyValue));
                         separator = "&";
                     }
                 }
@@ -68,15 +70,26 @@ namespace Trippism.Areas.Sabre.Controllers
                 APIHelper.RefreshApiToken(_cacheService, _apiCaller);
                 result = _apiCaller.Get(url).Result;
             }
+
+            
+
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 OTA_DestinationFinder cities = new OTA_DestinationFinder();
                 cities = ServiceStackSerializer.DeSerialize<OTA_DestinationFinder>(result.Response);
                 Mapper.CreateMap<OTA_DestinationFinder, Fares>();
                 Fares fares = Mapper.Map<OTA_DestinationFinder, Fares>(cities);
+
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
                 return response;
+
+                //var s = Newtonsoft.Json.JsonConvert.SerializeObject(new { result.Response });
+                //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, s);
+                //return response;
             }
+            
+           
+            
             return Request.CreateResponse(result.StatusCode, result.Response);
         }
     }

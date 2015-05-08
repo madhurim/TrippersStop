@@ -56,7 +56,8 @@ body.block-ui > .block-ui-container,
 
 .block-ui-message-container {
   position: absolute;
-  top: 35%;
+  /*top: 35%;*/
+  top: 42%;
   left: 0;
   right: 0;
   height: 0;

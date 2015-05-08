@@ -62,6 +62,7 @@
     <Content Include="app\Scripts\libs\angular-block-ui.min.js.map" />
     <Content Include="app\Scripts\libs\angular-block-ui.js.map" />
     <Content Include="app\Styles\css\angular-block-ui.css.map" />
+    <Content Include="app\Constants\airports.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -70,7 +71,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\Constants\" />
     <Folder Include="app\Directives\" />
     <Folder Include="app\Module\" />
     <Folder Include="app\Views\Home\" />

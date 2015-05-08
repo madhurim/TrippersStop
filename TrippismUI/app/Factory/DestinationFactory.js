@@ -52,22 +52,23 @@
                 if(data.TopDestinations == undefined) 
                     data.TopDestinations ="";
    
-
+                var salescountry = 'US';
                 var url = $rootScope.apiURL + '/api/Destinations?' +
                  'Origin=' + data.Origin +
-                 '&DepartureDate=' + data.DepartureDate +
+                 //'&Destination=' + data.Destination +
+                 '&departuredate=' + data.DepartureDate +
                  '&ReturnDate=' + data.ReturnDate +
                  '&Lengthofstay=' + data.Lengthofstay +
-                 //'&Latestdeparturedate=' + data.Latestdeparturedate +
+                 '&Latestdeparturedate=' + data.Latestdeparturedate +
                  '&Theme=' + data.Theme +
                  '&Location=' + data.Location +
                  '&Minfare=' + data.Minfare +
                  '&Maxfare=' + data.Maxfare +
-                 '&PointOfSaleCountry=' + data.PointOfSaleCountry +
+                 
                  '&Region=' + data.Region +
-                 '&TopDestinations=' + data.TopDestinations;
-                 //'&Earliestdeparturedate=' + data.Earliestdeparturedate;
-                
+                 '&TopDestinations=' + data.TopDestinations +
+                 '&Earliestdeparturedate=' + data.Earliestdeparturedate + '&PointOfSaleCountry=US&ac2lonlat=1';
+                //'&PointOfSaleCountry=' + data.PointOfSaleCountry +
             return $http.get(url)
                 .then(function (data) {
                     return data.data;
