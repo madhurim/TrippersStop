@@ -14,9 +14,7 @@ namespace DataLayer
     public class MongoService : IDBService
     {
         MongoServer server;
-        //MongoDatabase database;
         MongoCollection collection;
-       // NoSqlConnector connection = new NoSqlConnector();
         MongoDatabase database = MongoDBProperty.MongoDB;  //Using MongoDatabase properties 
 
         public string MongoHost
@@ -26,11 +24,18 @@ namespace DataLayer
                 return WebConfigurationManager.AppSettings["MongoDBServer"];
             }
         }
+        public string MongoDBName
+        {
+            get
+            {
+                return WebConfigurationManager.AppSettings["MongoDBName"];
+            }
+        }
         public  MongoService()
         {
             MongoClient client = new MongoClient(MongoHost);
             server = client.GetServer();
-            database = server.GetDatabase("test");
+            database = server.GetDatabase(MongoDBName);
             MongoDBProperty.MongoDB = database;
         }
         public List<T> Get<T>(string collectionName)
