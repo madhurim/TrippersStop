@@ -3,10 +3,6 @@
 
 
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
 
 @Styles.Render("~/Content/themes/base/css")
 
@@ -29,83 +25,6 @@
     
     <section class="content-wrapper main-content clear-fix">
         <h3>Narrow down your destination based on price , theme , seasonality </h3>
-        <div>
-            <!--Let's put our input parameters here-->
-            <!--Origin , StartDate , EndDate , Length Of Stay-->
-            @Html.Label("Enter Your Destination")
-            @Html.TextBox("DesId")
-            @Html.Label("From Date")
-             <input type="text" id="fromdate">
-            @Html.Label("To Date")
-             <input type="text" id="todate">
-            
-            <input type="button" value="Submit" id="submit" onclick="ShowSearch();"/>
-        </div>
-            <!--Let's show some destinations based on home airport calculated with ip address / home airport-->
-        <div id="divSearch">
-
-
-        </div>
+        
     </section>
 </div>
-<script>
-    $(function () {
-        $('#fromdate').datepicker({ dateFormat: 'yy-mm-dd' }).val();;
-        $('#todate').datepicker({ dateFormat: 'yy-mm-dd' }).val();;
-    });
-</script>
-<script>
-    function ShowSearch() {
-       
-        var divSearch = $("#divSearch");
-        var fdate = $('#fromdate').val();
-        var tdate = $('#todate').val();
-        var origin = $("#DesId").val();
-      
-        $.ajax({
-            async: false,
-            cache: false,
-            type: "POST",
-            url: "@(Url.Action("SearchResult", "Home"))",
-            data: { "org": origin ,"fdate":fdate,"tdate":tdate},
-        success: function (data) {
-            var result = "";
-            divSearch.html('');
-            $.each(data, function (id, search) {
-                result += '<b>DestinationLocation : </b>' + search.DestinationLocation + '<br/>' +
-                            '<b> LowestFare :</b>' + search.LowestFare + '<br/>' +
-                             '<b> LowestNonStopFare :</b>' + search.LowestNonStopFare + '<br/>' +
-                              '<b> DepartureDateTime :</b>' + search.DepartureDateTime + '<hr/>' +
-                    '<b> ReturnDateTime :</b>' + search.ReturnDateTime + '<hr/>';
-            });
-            divSearch.html(result);
-        }
-    });
-    }
-</script>
-
-<script type="text/javascript">
-
-              $("#DesId").autocomplete({
-
-              source: function (request, response) {
-                  var destination = new Array();
-                  $.ajax({
-                      async: false,
-                      cache: false,
-                      type: "POST",
-                      url: "@(Url.Action("Autocomplete", "Home"))",
-                      data: { "term": request.term },
-                      success: function (data) {
-                          for (var i = 0; i < data.length ; i++) {
-                              destination[i] = { label: data[i].Value, Id: data[i].Key };
-                          }
-                      }
-                  });
-                  response(destination);
-              }
-          });
-
-
-</script>
-
