@@ -23,3 +23,13 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
         
 });
 
+//TrippismUIApp.directive("otcDynamic", function ($compile) {
+//    return {
+//        link: function (scope, element) {
+//            var template = "<button ng-click='doSomething()'>{{label}}</button>";
+//            var linkFn = $compile(template);
+//            var content = linkFn(scope);
+//            element.append(content);
+//        }
+//    }
+//});

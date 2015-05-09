@@ -80,12 +80,12 @@ namespace Trippism.Areas.Sabre.Controllers
                 Mapper.CreateMap<OTA_DestinationFinder, Fares>();
                 Fares fares = Mapper.Map<OTA_DestinationFinder, Fares>(cities);
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
-                return response;
-
-                //var s = Newtonsoft.Json.JsonConvert.SerializeObject(new { result.Response });
-                //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, s);
+                //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
                 //return response;
+
+                var s = Newtonsoft.Json.JsonConvert.SerializeObject(new { result.Response });
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, s);
+                return response;
             }
             
            

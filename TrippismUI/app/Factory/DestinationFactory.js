@@ -9,6 +9,7 @@
         var service = {
             findDestinations: findDestinations,
             fareforecast: fareforecast,
+            SeasonalityHistorySearch: SeasonalityHistorySearch,
         };
         return service;
 
@@ -69,6 +70,18 @@
                  '&TopDestinations=' + data.TopDestinations +
                  '&Earliestdeparturedate=' + data.Earliestdeparturedate + '&PointOfSaleCountry=US&ac2lonlat=1';
                 //'&PointOfSaleCountry=' + data.PointOfSaleCountry +
+            return $http.get(url)
+                .then(function (data) {
+                    return data.data;
+                }, function (e) {
+                    return e;
+                });
+        }
+        function SeasonalityHistorySearch(searchdata) {
+            
+
+            var url = $rootScope.apiURL + '/api/Seasonality?' +
+             'Destination=' + searchdata.Destination;
             return $http.get(url)
                 .then(function (data) {
                     return data.data;

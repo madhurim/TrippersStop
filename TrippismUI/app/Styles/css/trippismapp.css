@@ -4,4 +4,5 @@
   color:red;
 }
 .map {height: 500px;}
-.padlef0 {padding-left:0px !important;}
+.padleft0 {padding-left:0px !important;}
+.padlr0 {padding-left:0px !important; padding-right:0px !important;}

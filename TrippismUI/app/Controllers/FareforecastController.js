@@ -7,7 +7,8 @@
     function FareforecastController($scope, $rootScope, $modal, $http, FareforecastFactory) {
 
         $scope.hasError = false;
-        
+        $scope.testing = testing;
+        function testing() { alert('fd');}
         //$scope.closeAlert = closeAlert;
         $scope.lat = "0";
         $scope.lng = "0";

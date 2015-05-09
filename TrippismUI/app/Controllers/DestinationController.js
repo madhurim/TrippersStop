@@ -3,13 +3,43 @@
     'use strict';
     var controllerId = 'DestinationController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$rootScope', '$modal', '$http', 'DestinationFactory', DestinationController]);
+        ['$scope', '$rootScope', '$modal', '$http', '$q', '$compile', 'DestinationFactory', DestinationController]);
 
-    function DestinationController($scope, $rootScope, $modal, $http, DestinationFactory) {
+    function DestinationController($scope, $rootScope, $modal, $http, $q, $compile, DestinationFactory) {
 
+        var getMapUrlData = function (airportCode) {
+            var d = $q.defer();
+            $http({ method: 'GET', url: 'http://maps.googleapis.com/maps/api/geocode/json?address=' + airportCode.DestinationLocation + ' airport&sensor=false' }).
+                    success(function (data, status) {
+                        if (data.results[0] != undefined) {
+                            if (_.contains(data.results[0].types, "airport")) {
+                                var latlong = data.results[0].geometry.location;
+                                airportCode.lat = latlong.lat;
+                                airportCode.lng = latlong.lng;
+                                d.resolve(airportCode); // return the original object, so you can access it's other properties
+                            }
+                        } else {
+                            d.resolve();
+                        }
+                    });
+            return d.promise;
+        }
 
         $scope.hasError = false;
         $scope.Location = "";
+        
+        $scope.SeasonalityHistorySearch = SeasonalityHistorySearch;
+       
+        function SeasonalityHistorySearch(dest) {
+            var data = { "Destination" : dest};
+            DestinationFactory.SeasonalityHistorySearch(data).then(function (data) {
+                if (data != undefined) {
+                    var result = JSON.parse(data);
+                    var objects = JSON.parse(result.Response);
+                }
+            });
+        };
+
         $scope.lat = "0";
         $scope.lng = "0";
         $scope.accuracy = "0";
@@ -23,49 +53,57 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
-    
-        $http.get('../app/Constants/airports.json').success(function (_arrairports) {
-            
-            $scope.Listairports = _arrairports;
-            //var originairport = _.find(_arrairports, function (airport) { return airport.iso == data.country && airport.status == 1 && airport.size == "medium"; });
-
-        });
-
-        $scope.showPosition = function (position, destinations) {
-
+        $scope.markerClicked = function (marker) {
+            $scope.model.destinationMap.panTo(marker.getPosition());
+            $scope.IsHistoricalInfo = true;
+            $scope.MarkerInfo = marker.CustomMarkerInfo;
+            //SeasonalityHistorySearch(marker.title);
+        };
+        
+        var RenderMap = function (maps) {
+            $scope.InfoWindow;
             var latlng = new google.maps.LatLng($scope.lat, $scope.lng);
             $scope.model.destinationMap.setCenter(latlng);
+            for (var x = 0; x < maps.length; x++) {
+                var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
+                var marker = new google.maps.Marker({
+                    position: latlng1,
+                    map: $scope.model.destinationMap,
+                    title: maps[x].DestinationLocation,
+                    animation: google.maps.Animation.DROP,
+                    CustomMarkerInfo : maps[x]
+                });
+                var contentString = '<div ng-controller="FareforecastController" style="min-width:200px;padding-top:5px;" id="content">' +
+                                        '<div class="col-sm-6 padleft0"><span>Airport Code:</span><br /><strong>'
+                                            + maps[x].DestinationLocation+ '</strong></div>' +
+                                        '<div class="col-sm-6 padlr0 text-right">' + maps[x].LowestFare + ' ' + maps[x].CurrencyCode + '</div>' +
+                                     '</div>';
 
-            for (var x = 0; x < destinations.length; x++) {
-                var dest = destinations[x];
-                // By Using Google API for getting Airport may not be accurate
-                $http({ method: 'GET', url: 'http://maps.googleapis.com/maps/api/geocode/json?address=' + destinations[x] + ' airport&sensor=false' }).
-                    success(function (data, status) {
+                //var contentString = ($compile("<input type='text' ng-model='Origin' />")($scope));
 
-                        if (data.results[0] != undefined) {
-                            if (_.contains(data.results[0].types, "airport")) {
-                                var p = data.results[0].geometry.location;
-                                console.log(p);
-                                var latlng = new google.maps.LatLng(p.lat, p.lng);
-                                var contentString = '<div id="content">' + data.results[0].address_components[0].short_name + '</div>';
-                                var infowindow = new google.maps.InfoWindow({
-                                    content: contentString,
-                                    maxWidth: 200
-                                });
-                                var marker = new google.maps.Marker({
-                                    position: latlng,
-                                    map: $scope.model.destinationMap,
-                                    title: data.results[0].address_components[0].short_name,
-                                    animation: google.maps.Animation.DROP,
-                                });
-                                google.maps.event.addListener(marker, 'click', function () {
-                                    infowindow.open($scope.model.destinationMap, marker);
-                                });
-                                $scope.myMarkers.push(new google.maps.Marker(marker));
-                            }
-                        }
-                    });
+                $scope.InfoWindow = new google.maps.InfoWindow()
+                google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
+                    return function () {
+                        debugger;
+                        if ($scope.InfoWindow) $scope.InfoWindow.close();
+                        
+                        $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
+                        $scope.InfoWindow.open($scope.model.destinationMap, marker);
+                    };
+                })(marker, contentString, $scope.InfoWindow));
+                $scope.myMarkers.push(new google.maps.Marker(marker));
             }
+        };
+
+        $scope.showPosition = function (destinations) {
+            $scope.destinations = destinations;
+            var promises = [];
+            for (var i = 0; i < $scope.destinations.length; i++) {
+                promises.push(getMapUrlData($scope.destinations[i]));
+            }
+            $q.all(promises).then(function (maps) {
+                RenderMap(maps);
+            }.bind(this));
         }
 
         function ConvertToRequiredDate(dt) {
@@ -131,38 +169,36 @@
               }
        );
 
-        $scope.Origin = '';
+        $scope.Origin = 'BOS';
         $scope.Destination = '';
-        $scope.AvailableThemes =
-                [
-                    { id: "BEACH", value: "BEACH" },
-                    { id: "CARIBBEAN", value: "CARIBBEAN" },
-                    { id: "DISNEY", value: "DISNEY" },
-                    { id: "GAMBLING", value: "GAMBLING" },
-                    { id: "HISTORIC", value: "HISTORIC" },
-                    { id: "MOUNTAINS", value: "MOUNTAINS" },
-                    { id: "NATIONAL-PARKS", value: "NATIONAL-PARKS" },
-                    { id: "OUTDOORS", value: "OUTDOORS" },
-                    { id: "ROMANTIC", value: "ROMANTIC" },
-                    { id: "SHOPPING", value: "SHOPPING" },
-                    { id: "SKIING", value: "SKIING" },
-                    { id: "THEME-PARK", value: "THEME-PARK" }
-                ];
+        $scope.AvailableThemes = [
+                                    { id: "BEACH", value: "BEACH" },
+                                    { id: "CARIBBEAN", value: "CARIBBEAN" },
+                                    { id: "DISNEY", value: "DISNEY" },
+                                    { id: "GAMBLING", value: "GAMBLING" },
+                                    { id: "HISTORIC", value: "HISTORIC" },
+                                    { id: "MOUNTAINS", value: "MOUNTAINS" },
+                                    { id: "NATIONAL-PARKS", value: "NATIONAL-PARKS" },
+                                    { id: "OUTDOORS", value: "OUTDOORS" },
+                                    { id: "ROMANTIC", value: "ROMANTIC" },
+                                    { id: "SHOPPING", value: "SHOPPING" },
+                                    { id: "SKIING", value: "SKIING" },
+                                    { id: "THEME-PARK", value: "THEME-PARK" }
+                                ];
         $scope.AvailableRegions = [
-                {id : 'Africa', value :'Africa'},
-                {id : 'Asia Pacific', value :'Asia Pacific'},
-                {id : 'Europe', value :'Europe'},
-                {id : 'Latin America', value :'Latin America'},
-                {id : 'Middle East', value :'Middle East'},
-                { id: 'North America', value: 'North America' },
-        ];
-        
+                                    { id: 'Africa', value: 'Africa' },
+                                    { id: 'Asia Pacific', value: 'Asia Pacific' },
+                                    { id: 'Europe', value: 'Europe' },
+                                    { id: 'Latin America', value: 'Latin America' },
+                                    { id: 'Middle East', value: 'Middle East' },
+                                    { id: 'North America', value: 'North America' },
+                                ];
+
 
         function getIpinfo() {
             var url = "http://ipinfo.io?callback=JSON_CALLBACK";
             $http.jsonp(url)
            .success(function (data) {
-
                $http.get('../app/Constants/airports.json').success(function (_arrairports) {
                    var originairport = _.find(_arrairports, function (airport) { return airport.iso == data.country && airport.status == 1 && airport.size == "medium"; });
                    $scope.Origin = originairport.iata;
@@ -171,7 +207,7 @@
                });
            });
         }
-        getIpinfo();
+        // getIpinfo();
 
 
         $scope.faresList = [];
@@ -234,12 +270,12 @@
 
         function findDestinations(buttnText) {
 
-             if ($scope.CalledOnPageLoad != true) {
+            //  if ($scope.CalledOnPageLoad != true) {
             if ($scope.frmdestfinder.$invalid) {
                 $scope.hasError = true;
                 return;
             }
-             }
+            //    }
 
             $scope.faresList = [];
             if (buttnText == 'All') { $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; }
@@ -252,12 +288,12 @@
                 "Lengthofstay": $scope.datedifff,
                 "Earliestdeparturedate": ConvertToRequiredDate($scope.FromDate),
                 "Latestdeparturedate": ConvertToRequiredDate($scope.ToDate),
-                "Theme": ($scope.Theme != undefined ) ? $scope.Theme.id  : "",
+                "Theme": ($scope.Theme != undefined) ? $scope.Theme.id : "",
                 "Location": $scope.Location,
                 "Minfare": $scope.Minfare,
                 "Maxfare": $scope.Maxfare,
                 "PointOfSaleCountry": $scope.PointOfSaleCountry,
-                "Region": ($scope.Region != undefined ) ? $scope.Region.id  : "",
+                "Region": ($scope.Region != undefined) ? $scope.Region.id : "",
                 "TopDestinations": $scope.TopDestinations,
                 "Destination": $scope.Destination
 
@@ -271,16 +307,16 @@
                 $scope.SearchbuttonChepestIsLoading = false;
 
                 if (data != null) {
-                    displayDestinations(buttnText, data.FareInfo);
-                    
+                    //displayDestinations(buttnText, data.FareInfo);
 
-                    //var result = JSON.parse(data);
-                    //var objects = JSON.parse(result.Response);
-                    //if (objects.FareInfo != undefined) {
-                    //    console.log(objects);
-                    //    displayDestinations(buttnText, objects.FareInfo);
-                    //    console.log(objects.FareInfo);
-                    //}
+
+                    var result = JSON.parse(data);
+                    var objects = JSON.parse(result.Response);
+                    if (objects.FareInfo != undefined) {
+                        console.log(objects);
+                        displayDestinations(buttnText, objects.FareInfo);
+                        console.log(objects.FareInfo);
+                    }
                 }
             });
             if ($scope.CalledOnPageLoad)
@@ -289,12 +325,19 @@
 
         }
         var GetUniqueDestinations = function (destinations) {
-            return _.pluck(destinations, "DestinationLocation");
+            //return _.pluck(destinations, "DestinationLocation");
+            var result = _.map(destinations, function (currentObject) {
+                
+                return _.omit(currentObject, "Links");
+                //return _.pick(currentObject, "DestinationLocation", "LowestFare", "CurrencyCode");
+            });
+            return result;
         }
 
         function DrawMaps(pdestinations) {
             var destinations = GetUniqueDestinations(pdestinations);
-            $scope.showPosition('', destinations);
+            debugger;
+            $scope.showPosition(destinations);
         }
 
         function displayDestinations(buttnText, destinations) {
