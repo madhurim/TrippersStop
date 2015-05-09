@@ -27,25 +27,19 @@ namespace Trippism.Areas.IATA.Controllers
         // GET api/DestinationFinder
         public HttpResponseMessage Get()
         {
-            string url = GetURL();
             return GetResponse();
         }
-        private string GetURL()
-        {
-            StringBuilder url = new StringBuilder();
-            url.Append("v1/IATA/Codes?");
-            return url.ToString();
-        }
+
         private HttpResponseMessage GetResponse()
         {
             List<IATACode> AirPortCodes;
             MongoDatabase database = MongoDBProperty.MongoDB;
-            MongoService service = new MongoService();
-            MongoCollection collection = database.GetCollection<Entity>("TestIATA");
+            
+            MongoCollection collection = database.GetCollection<Entity>("IATA");
 
-            var entity = new Entity { Name = "test" };
-            collection.Insert(entity);
-            var id = entity.Id;
+            var entity = new Entity { Name = "IATA" };
+            //collection.Insert(entity);
+            //var id = entity.Id;
 
             var collection1 = service.Get<IATACode>("IATA");// Get11();
             AirPortCodes = collection1.ToList();
