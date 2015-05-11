@@ -1,0 +1,8 @@
+﻿.triperror {padding:5px;margin-bottom:5px;}
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}
+.map {height: 500px;}
+.padleft0 {padding-left:0px !important;}
+.padlr0 {padding-left:0px !important; padding-right:0px !important;}
