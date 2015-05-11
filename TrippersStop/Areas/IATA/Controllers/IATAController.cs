@@ -22,7 +22,13 @@ namespace Trippism.Areas.IATA.Controllers
         //
         // GET: /IATA/IATA/
         MongoService service = new MongoService();
+        IDBService _dbService;
 
+
+        public IATAController(IDBService dbService)
+        {
+            _dbService = dbService;
+        }
 
         // GET api/DestinationFinder
         public HttpResponseMessage Get()
@@ -34,15 +40,9 @@ namespace Trippism.Areas.IATA.Controllers
         {
             List<IATACode> AirPortCodes;
             MongoDatabase database = MongoDBProperty.MongoDB;
-            
-            MongoCollection collection = database.GetCollection<Entity>("IATA");
 
-            var entity = new Entity { Name = "IATA" };
-            //collection.Insert(entity);
-            //var id = entity.Id;
-
-            var collection1 = service.Get<IATACode>("IATA");// Get11();
-            AirPortCodes = collection1.ToList();
+            var collection = _dbService.Get<IATACode>("IATA");
+            AirPortCodes = collection.ToList();
           
             return Request.CreateResponse(HttpStatusCode.OK, AirPortCodes);
         }

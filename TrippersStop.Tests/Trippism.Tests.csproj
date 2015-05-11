@@ -144,6 +144,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{d52c2d5b-e3c4-4da9-b949-16b8b7a3a79c}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TraveLayer\TraveLayer.csproj">
       <Project>{c5baab69-8d1d-4402-9573-4b6f2939b7ef}</Project>
       <Name>TraveLayer</Name>
