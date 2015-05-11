@@ -1,0 +1,358 @@
+﻿<div ng-controller="DestinationController">
+    <div style="margin-top:10px;">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Search Destinations</div>
+                <div class="panel-body">
+                    <div ng-show="hasError && frmdestfinder.$invalid">
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Origin.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please enter Origin
+                        </div>
+                        <!--<div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Destination.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please enter Destination
+                        </div>-->
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.LenghtOfStay.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please enter lenght of stay
+                        </div>
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.LenghtOfStay.$invalid && !frmdestfinder.LenghtOfStay.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please enter valid lenght of stay
+                        </div>
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.FromDate.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please select from date
+                        </div>
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Earliestdeparturedate.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please select earliest departure date
+                        </div>
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Latestdeparturedate.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please select earliest latest departure date
+                        </div>
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.FromDate.$invalid && !frmdestfinder.FromDate.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please select valid from date
+                        </div>
+
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.ToDate.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please select to date
+                        </div>
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.ToDate.$invalid && !frmdestfinder.ToDate.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please select valid to date
+                        </div>
+
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Minfare.$invalid">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please enter valid Minimun fare
+                        </div>
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.TopDestinations.$invalid">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please enter valid Top Destinations
+                        </div>
+
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Maxfare.$invalid">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please enter valid Maximum fare
+                        </div>
+                    </div>
+
+                    <form name="frmdestfinder" class="" novalidate>
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div class="col-xs-2">
+                                    <div class="form-group">
+                                        <label class="control-label">Origin Airport</label>
+                                        <input tabindex="1" type="text" required class="form-control" name="Origin" ng-model="Origin" placeholder="Enter Origin">
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input ng-model="IsAdvancedSearch" type="checkbox"> Advanced Search
+                                        </label>
+                                    </div>
+
+
+                                    <!--<div class="form-group">
+                                        <label class="control-label">Enter Your Destination </label>
+                                        <input type="text" required class="form-control" name="Destination" ng-model="Destination" placeholder="Enter Destination">
+                                    </div>-->
+
+
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="form-group">
+                                        <label for="lengthofstay">Lenght of Stay(days)</label>
+                                        <input type="number" name="LenghtOfStay" ng-model="LenghtOfStay" value="" class="form-control" min="0" max="16">
+                                    </div>
+
+                                    <!--<div class="form-group">
+                                         <label >Location</label>
+                                         <input tabindex="5" type="text" class="form-control" ng-model="Location" name="Location" placeholder="Enter Location">
+                                     </div>
+
+                                    -->
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">From Date</label>
+                                        <p class="input-group">
+                                            <input type="text"
+                                                   ng-disabled="true"
+                                                   class="form-control"
+                                                   datepicker-popup="{{format}}"
+                                                   min-date="minTodayDate"
+                                                   max-date="MaximumFromDate"
+                                                   ng-model="FromDate"
+                                                   name="FromDate"
+                                                   is-open="openedFromDate"
+                                                   datepicker-options="dateOptions"
+                                                   ng-required="!LenghtOfStay || ToDate"
+                                                   close-text="Close" />
+                                            <span class="input-group-btn">
+                                                <button type="button" tabindex="2" class="btn btn-default" ng-click="openFromDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">To Date</label>
+                                        <p class="input-group">
+                                            <input type="text"
+                                                   ng-disabled="true"
+                                                   class="form-control"
+                                                   datepicker-popup="{{format}}"
+                                                   min-date="minFromDate"
+                                                   max-date="MaximumToDate"
+                                                   ng-model="ToDate"
+                                                   name="ToDate"
+                                                   is-open="opened"
+                                                   datepicker-options="dateOptions"
+                                                   ng-required="!LenghtOfStay || FromDate" close-text="Close" />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" tabindex="3" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-1">
+                                    <div class="form-group">
+                                        <label>&nbsp;</label>
+                                        <button tabindex="11" ng-disabled="SearchbuttonIsLoading" class="btn btn-primary btn-sm" ng-click="findDestinations('All')">{{SearchbuttonText}}</button>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12" ng-show="IsAdvancedSearch">
+                                <div class="col-lg-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Minfare</label>
+                                            <input tabindex="6" min="1" type="number" name="Minfare" class="form-control" ng-model="Minfare" placeholder="Enter Minfare">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Maxfare</label>
+                                            <input tabindex="7" type="number" class="form-control" name="Maxfare" ng-model="Maxfare" placeholder="Enter Maxfare">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Region</label>
+
+                                            <select class="form-control" ng-model="Region" ng-options="color.value for color in AvailableRegions">
+                                                <option value="">-- choose Regions --</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Point Of Sale Country</label>
+                                            <input tabindex="8" type="text" class="form-control" ng-model="PointOfSaleCountry" placeholder="Point Of Sale Country">
+                                        </div>
+                                    </div>-->
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Theme</label>
+                                            <select class="form-control" ng-model="Theme" ng-options="color.value for color in AvailableThemes">
+                                                <option value="">-- choose Theme --</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Top Destinations</label>
+                                            <input tabindex="10" type="number" min="1" class="form-control" name="TopDestinations" ng-model="TopDestinations" placeholder="TopDestinations">
+                                        </div>
+
+                                    </div>
+                                     <div class="col-xs-2">
+                                    <div class="form-group">
+                                        <label for="">Earliest departure</label>
+                                        <p class="input-group">
+                                            <input type="text"
+                                                   ng-disabled="true"
+                                                   class="form-control"
+                                                   datepicker-popup="{{format}}"
+                                                   min-date="minFromDate"
+                                                   ng-model="Earliestdeparturedate"
+                                                   name="Earliestdeparturedate"
+                                                   is-open="openedEarliestdeparturedate"
+                                                   ng-required="Latestdeparturedate"
+                                                   datepicker-options="dateOptions"
+                                                   close-text="Close" />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" tabindex="3" ng-click="openEarliestdeparturedate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                        </p>
+                                    </div>
+                                         </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label for="">Latest departure</label>
+                                            <p class="input-group">
+                                                <input type="text"
+                                                       ng-disabled="true"
+                                                       class="form-control"
+                                                       datepicker-popup="{{format}}"
+                                                       min-date="Earliestdeparturedate"
+                                                       max-date="MaximumLatestdeparturedate"
+                                                       ng-model="Latestdeparturedate"
+                                                       name="Latestdeparturedate"
+                                                       is-open="openedLatestdeparturedate"
+                                                       ng-required="Earliestdeparturedate"
+                                                       datepicker-options="dateOptions"
+                                                       close-text="Close" />
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" tabindex="3" ng-click="openLatestdeparturedate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--<div ui-map-info-window="myInfoWindow">
+        <div style="min-width:200px;padding-top:5px;" id="content">
+            <div class="col-sm-6 padleft0">
+                <span>Airport Code:</span><br /><strong>
+                </strong></div><div class="col-sm-6 padlr0 text-right">
+            </div>
+            <div><input type="button" ng-click="testing();" value="Click" /></div>'
+        </div>;
+        <h1>Marker</h1>
+        Lat: <input ng-model="currentMarkerLat">, Lng: <input ng-model="currentMarkerLng">
+        <a ng-click="setMarkerPosition(currentMarker, currentMarkerLat, currentMarkerLng)">Set Position</a>
+    </div>-->
+
+    
+
+    <div class="col-lg-12">
+        <div class="row" style="margin-left:0px;margin-right:0px;">
+            <div id="wrapper">
+
+                <div id="map_canvas" ui-map="model.destinationMap" class="map" ui-options="mapOptions">
+
+                </div>
+
+                <div id="over_map" ng-show="IsHistoricalInfo">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4><i class="fa fa-fw fa-compass"></i>Destination Information</h4>
+                            </div>
+                            <div class="panel-body">
+
+                                <p>
+                                    <div class="form-group">
+                                        <label>Destination:</label>
+                                        <span>{{MarkerInfo.DestinationLocation}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Currency:</label>
+                                        <span>{{MarkerInfo.CurrencyCode}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Lowest Fare:</label>
+                                        <span>{{MarkerInfo.LowestFare}}</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Lowest Non Stop Fare:</label>
+                                        <span>{{MarkerInfo.LowestNonStopFare}}</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>DepartureDateTime:</label>
+                                        <span>{{MarkerInfo.DepartureDateTime  | date:"MM/dd/yyyy"}}</span>
+                                    </div>
+
+                                    
+                                    <div class="form-group">
+                                        <label>Return Date:</label>
+                                        <span>{{MarkerInfo.ReturnDateTime  | date:"MM/dd/yyyy"}}</span>
+                                    </div>
+
+                                    
+                                </p>
+                                <a href="#" ng-click="IsHistoricalInfo = false" class="btn btn-default pull-right">Close</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!--<div id="map_canvas" ui-event="{'map-click': 'openMarkerInfo(marker)'}" ui-map="model.destinationMap" class="map" ui-options="mapOptions">
+            </div>-->
+
+
+            <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
+                 ui-event="{'map-click': 'markerClicked(marker)'}">
+            </div>
+
+
+        </div>
+    </div>
+
+    <style>
+        #wrapper {
+            position: relative;
+        }
+
+        #over_map {
+            position: absolute;
+            width: 360px;
+            top: 10px;
+            left: 10px;
+            z-index: 99;
+            filter: alpha(opacity=50);
+            opacity: .92;
+        }
+    </style>
+
+
