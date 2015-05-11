@@ -23,6 +23,7 @@
     <Content Include="app\Controllers\LandingPageController.js" />
     <Content Include="app\Factory\DestinationFactory.js" />
     <Content Include="app\Factory\FareforecastFactory.js" />
+    <Content Include="app\Scripts\common.js" />
     <Content Include="app\Scripts\libs\event.js" />
     <Content Include="app\Scripts\libs\ui-map.js" />
     <Content Include="app\Scripts\libs\ui-map.min.js" />

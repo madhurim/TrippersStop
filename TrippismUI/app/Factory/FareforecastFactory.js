@@ -11,7 +11,7 @@
         return service;
 
         function fareforecast(data) {
-            var url = $rootScope.apiURL + '/api/FareForecast?Origin=' + data.Origin + '&DepartureDate='
+            var url = $rootScope.apiURL + 'FareForecast?Origin=' + data.Origin + '&DepartureDate='
              + data.DepartureDate + '&ReturnDate=' + data.ReturnDate + '&Destination=' + data.Destination;
             return $http.get(url)
                 .then(function (data) {

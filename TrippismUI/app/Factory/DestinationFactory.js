@@ -13,50 +13,47 @@
         };
         return service;
 
+        function serialize(obj) {
+            var str = [];
+            for (var p in obj)
+                if (obj.hasOwnProperty(p)) {
+                    var propval = encodeURIComponent(obj[p]);
+                    if (propval != "undefined"  && propval != "null" &&  propval != '') 
+                        str.push(encodeURIComponent(p) + "=" + propval);
+                }
+            return str.join("&");
+        }
         function findDestinations(data) {
-                if(data.Origin == undefined) 
-                    data.Origin ="";
+            var testURL = 'Destinations?' + serialize(data);
+            debugger;
+            var buildURL = 'Destinations?';
+            if (data.Origin == undefined) {
+                buildURL = buildURL + 'Origin=' + data.Origin;
+                data.Origin = "";
+            }
+                    
 
-                if(data.DepartureDate == undefined) 
-                    data.DepartureDate ="";
-               
-                if(data.ReturnDate == undefined) 
-                    data.ReturnDate ="";
+            if (data.DepartureDate == undefined) {
+                buildURL = buildURL + '&departuredate=' + data.DepartureDate;
+                data.DepartureDate = "";
+            }  
+            if (data.ReturnDate == undefined) {
+                buildURL = buildURL + '&ReturnDate=' + data.ReturnDate;
+                data.ReturnDate = "";
+            }
+            if (data.Lengthofstay == undefined) {data.Lengthofstay = "";}
+            if (data.Earliestdeparturedate == undefined) {data.Earliestdeparturedate = "";}
+            if (data.Latestdeparturedate == undefined) {data.Latestdeparturedate = "";}
+            if (data.Theme == undefined) {data.Theme = "";}
+            if (data.Location == undefined) { data.Location = ""; }
+            if (data.Minfare == undefined) { data.Minfare = ""; }
+            if (data.Maxfare == undefined) { data.Maxfare = ""; }
+            if (data.PointOfSaleCountry == undefined) { data.PointOfSaleCountry = ""; }
+            if (data.Region == undefined) { data.Region = ""; }
+            if (data.TopDestinations == undefined) { data.TopDestinations = ""; }
 
-                if(data.Lengthofstay == undefined) 
-                    data.Lengthofstay ="";
-               
-                if(data.Earliestdeparturedate == undefined) 
-                    data.Earliestdeparturedate ="";
-               
-                if(data.Latestdeparturedate == undefined) 
-                    data.Latestdeparturedate ="";
-
-                if(data.Theme == undefined) 
-                    data.Theme ="";
-
-                if(data.Location == undefined) 
-                    data.Location ="";
-
-                if(data.Minfare == undefined) 
-                    data.Minfare ="";
-               
-                if(data.Maxfare == undefined) 
-                    data.Maxfare ="";
-               
-                if(data.PointOfSaleCountry == undefined) 
-                    data.PointOfSaleCountry ="";
-   
-                if(data.Region == undefined) 
-                    data.Region ="";
-               
-                if(data.TopDestinations == undefined) 
-                    data.TopDestinations ="";
-   
-                var salescountry = 'US';
-                var url = $rootScope.apiURL + '/api/Destinations?' +
+            var url = $rootScope.apiURL + 'Destinations?' +
                  'Origin=' + data.Origin +
-                 //'&Destination=' + data.Destination +
                  '&departuredate=' + data.DepartureDate +
                  '&ReturnDate=' + data.ReturnDate +
                  '&Lengthofstay=' + data.Lengthofstay +
@@ -65,12 +62,12 @@
                  '&Location=' + data.Location +
                  '&Minfare=' + data.Minfare +
                  '&Maxfare=' + data.Maxfare +
-                 
                  '&Region=' + data.Region +
                  '&TopDestinations=' + data.TopDestinations +
-                 '&Earliestdeparturedate=' + data.Earliestdeparturedate + '&PointOfSaleCountry=US&ac2lonlat=1';
-                //'&PointOfSaleCountry=' + data.PointOfSaleCountry +
-            return $http.get(url)
+                 '&Earliestdeparturedate=' + data.Earliestdeparturedate;
+                
+                var RequestedURL = $rootScope.apiURL + testURL;
+                return $http.get(RequestedURL)
                 .then(function (data) {
                     return data.data;
                 }, function (e) {
@@ -80,7 +77,7 @@
         function SeasonalityHistorySearch(searchdata) {
             
 
-            var url = $rootScope.apiURL + '/api/Seasonality?' +
+            var url = $rootScope.apiURL + 'Seasonality?' +
              'Destination=' + searchdata.Destination;
             return $http.get(url)
                 .then(function (data) {
@@ -93,7 +90,7 @@
         function fareforecast(data) {
             //var url = $rootScope.apiURL + '/api/FareForecast/Get?Origin=' + data.Origin + '&EarliestDepartureDate='
             // + data.EarliestDepartureDate + '&LatestDepartureDate=' + data.LatestDepartureDate + '&Destination=' + data.Destination + '&lengthofstay=' + data.LengthOfStay ;
-            var url = $rootScope.apiURL + '/api/FareForecast/Get?Origin=' + data.Origin + '&DepartureDate='
+            var url = $rootScope.apiURL + 'FareForecast/Get?Origin=' + data.Origin + '&DepartureDate='
              + data.EarliestDepartureDate + '&ReturnDate=' + data.LatestDepartureDate + '&Destination=' + data.Destination ;
             return $http.get(url)
                 .then(function (data) {

@@ -7,8 +7,8 @@
     function FareforecastController($scope, $rootScope, $modal, $http, FareforecastFactory) {
 
         $scope.hasError = false;
-        $scope.testing = testing;
-        function testing() { alert('fd');}
+        
+        
         //$scope.closeAlert = closeAlert;
         $scope.lat = "0";
         $scope.lng = "0";
@@ -76,8 +76,6 @@
 
 
         function daydiff(first, second) {
-            //var oneDay = 24 * 60 * 60 * 1000;
-            //return Math.round(Math.abs((second.getTime() - first.getTime()) / (oneDay)));
             return Math.round((second - first) / (1000 * 60 * 60 * 24));
         }
 
@@ -120,7 +118,7 @@
         $scope.IsSearched = false;
         $scope.faresList = [];
         $scope.forecastfareList = [];
-        $rootScope.apiURL = 'http://localhost:14606';
+        $rootScope.apiURL = 'http://localhost:14606/sabre/api/';
 
         $scope.findfares  = findfares ;
         
