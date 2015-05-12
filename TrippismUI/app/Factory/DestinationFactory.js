@@ -25,7 +25,7 @@
         }
         function findDestinations(data) {
             var testURL = 'Destinations?' + serialize(data);
-            debugger;
+            
             var buildURL = 'Destinations?';
             if (data.Origin == undefined) {
                 buildURL = buildURL + 'Origin=' + data.Origin;

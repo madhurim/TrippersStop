@@ -7,46 +7,51 @@
 
     function DestinationController($scope, $rootScope, $modal, $http, $q, $compile, DestinationFactory) {
 
-        
 
         var getMapUrlData = function (airportCode) {
+            //var d = $q.defer();
+            //$http({ method: 'GET', url: 'http://maps.googleapis.com/maps/api/geocode/json?address=' + airportCode.DestinationLocation + ' airport&sensor=false' }).
+            //        success(function (data, status) {
+            //            if (data.results[0] != undefined) {
+            //                if (_.contains(data.results[0].types, "airport")) {
+            //                    var latlong = data.results[0].geometry.location;
+            //                    airportCode.lat = latlong.lat;
+            //                    airportCode.lng = latlong.lng;
+            //                    d.resolve(airportCode); // return the original object, so you can access it's other properties
+            //                }
+            //            } else {
+            //                d.resolve();
+            //            }
+            //        });
+            //return d.promise;
+
             var d = $q.defer();
-            $http({ method: 'GET', url: 'http://maps.googleapis.com/maps/api/geocode/json?address=' + airportCode.DestinationLocation + ' airport&sensor=false' }).
-                    success(function (data, status) {
-                        if (data.results[0] != undefined) {
-                            if (_.contains(data.results[0].types, "airport")) {
-                                var latlong = data.results[0].geometry.location;
-                                airportCode.lat = latlong.lat;
-                                airportCode.lng = latlong.lng;
-                                d.resolve(airportCode); // return the original object, so you can access it's other properties
-                            }
-                        } else {
-                            d.resolve();
-                        }
-                    });
+
+            var originairport = _.find($scope.AvailableAirports , function (airport) { return airport.code == airportCode.DestinationLocation });
+            
+            if (originairport != undefined) {
+                    airportCode.lat = originairport.lat;
+                    airportCode.lng = originairport.lng;
+                    d.resolve(airportCode); // return the original object, so you can access it's other properties
+               
+            } else {
+                d.resolve();
+            }
+
             return d.promise;
+
         }
 
         $scope.hasError = false;
         $scope.Location = "";
-        
+
         $scope.SeasonalityHistorySearch = SeasonalityHistorySearch;
-       
-        function SeasonalityHistorySearch(dest) {
-            var data = { "Destination" : dest};
-            DestinationFactory.SeasonalityHistorySearch(data).then(function (data) {
-                if (data != undefined) {
-                    var result = JSON.parse(data);
-                    var objects = JSON.parse(result.Response);
-                }
-            });
-        };
 
         $scope.lat = "0";
         $scope.lng = "0";
         $scope.accuracy = "0";
 
-        $scope.model = { destinationMap: undefined };
+        $scope.destinationMap = undefined;
         $scope.myMarkers = [];
 
         $scope.mapOptions = {
@@ -56,43 +61,58 @@
         };
 
         $scope.markerClicked = function (marker) {
-            $scope.model.destinationMap.panTo(marker.getPosition());
+            $scope.destinationMap.panTo(marker.getPosition());
             $scope.IsHistoricalInfo = true;
             $scope.MarkerInfo = marker.CustomMarkerInfo;
             //SeasonalityHistorySearch(marker.title);
         };
-        
+
+        //Set Map Location to Origin
+        var SetMaptoCurrentLocation = function () {
+            var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.code == $scope.Origin });
+            if (originairport != undefined) {
+                var latlng = new google.maps.LatLng(originairport.lat, originairport.lng);
+                $scope.destinationMap.setCenter(latlng);
+                $scope.destinationMap.panTo(latlng);
+                $scope.destinationMap.setZoom(5);
+            }
+        }
+
         var RenderMap = function (maps) {
             $scope.InfoWindow;
-            var latlng = new google.maps.LatLng($scope.lat, $scope.lng);
-            $scope.model.destinationMap.setCenter(latlng);
+            
+            var bounds = new google.maps.LatLngBounds();
+
             for (var x = 0; x < maps.length; x++) {
                 var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
                 var marker = new google.maps.Marker({
                     position: latlng1,
-                    map: $scope.model.destinationMap,
+                    map: $scope.destinationMap,
                     title: maps[x].DestinationLocation,
                     animation: google.maps.Animation.DROP,
-                    CustomMarkerInfo : maps[x]
+                    CustomMarkerInfo: maps[x]
                 });
+                bounds.extend(marker.position);
                 var contentString = '<div ng-controller="FareforecastController" style="min-width:200px;padding-top:5px;" id="content">' +
                                         '<div class="col-sm-6 padleft0"><span>Airport Code:</span><br /><strong>'
-                                            + maps[x].DestinationLocation+ '</strong></div>' +
+                                            + maps[x].DestinationLocation + '</strong></div>' +
                                         '<div class="col-sm-6 padlr0 text-right">' + maps[x].LowestFare + ' ' + maps[x].CurrencyCode + '</div>' +
                                      '</div>';
-
-                //var contentString = ($compile("<input type='text' ng-model='Origin' />")($scope));
 
                 $scope.InfoWindow = new google.maps.InfoWindow()
                 google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
                     return function () {
                         if ($scope.InfoWindow) $scope.InfoWindow.close();
                         $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
-                        $scope.InfoWindow.open($scope.model.destinationMap, marker);
+                        $scope.InfoWindow.open($scope.destinationMap, marker);
                     };
                 })(marker, contentString, $scope.InfoWindow));
-                $scope.myMarkers.push(new google.maps.Marker(marker));
+                //$scope.myMarkers.push(new google.maps.Marker(marker));
+                $scope.myMarkers.push(marker);
             }
+            //now fit the map to the newly inclusive bounds
+            if($scope.myMarkers.length > 0)
+                $scope.destinationMap.fitBounds(bounds);
         };
 
         $scope.showPosition = function (destinations) {
@@ -102,6 +122,9 @@
                 promises.push(getMapUrlData($scope.destinations[i]));
             }
             $q.all(promises).then(function (maps) {
+                
+                if (maps.length > 0)
+                    maps = _.compact(maps);
                 RenderMap(maps);
             }.bind(this));
         }
@@ -140,8 +163,8 @@
         $scope.ToDate = ConvertToRequiredDate(Todt);
         $scope.FromDate = ConvertToRequiredDate(dt);
 
-        
-        
+
+
 
         $scope.$watch(function (scope) { return scope.Earliestdeparturedate },
            function (newValue, oldValue) {
@@ -160,8 +183,8 @@
                /**/
 
                // Calculate datediff
-               var diff =  daydiff(new Date(newValue).setHours(0, 0, 0, 0), new Date($scope.Latestdeparturedate).setHours(0, 0, 0, 0));
-               if (diff > 30) 
+               var diff = daydiff(new Date(newValue).setHours(0, 0, 0, 0), new Date($scope.Latestdeparturedate).setHours(0, 0, 0, 0));
+               if (diff > 30)
                    $scope.Latestdeparturedate = ConvertToRequiredDate(common.addDays(newDt, 30));
 
                $scope.MaximumLatestdeparturedate = common.addDays(newDt, 30);
@@ -171,7 +194,7 @@
 
         $scope.$watch(function (scope) { return scope.FromDate },
               function (newValue, oldValue) {
-                  
+
                   if (newValue == null)
                       return;
 
@@ -201,11 +224,11 @@
        );
         $scope.$watch(function (scope) { return scope.ToDate },
               function (newValue, oldValue) {
-                 // $scope.LenghtOfStay = daydiff(new Date($scope.FromDate).setHours(0, 0, 0, 0), new Date(newValue).setHours(0, 0, 0, 0));
+                  // $scope.LenghtOfStay = daydiff(new Date($scope.FromDate).setHours(0, 0, 0, 0), new Date(newValue).setHours(0, 0, 0, 0));
               }
        );
 
-        $scope.Origin = 'BOS';
+        $scope.Origin = '';
         $scope.Destination = '';
         $scope.AvailableThemes = [
                                     { id: "BEACH", value: "BEACH" },
@@ -220,7 +243,7 @@
                                     { id: "SHOPPING", value: "SHOPPING" },
                                     { id: "SKIING", value: "SKIING" },
                                     { id: "THEME-PARK", value: "THEME-PARK" }
-                                ];
+        ];
         $scope.AvailableRegions = [
                                     { id: 'Africa', value: 'Africa' },
                                     { id: 'Asia Pacific', value: 'Asia Pacific' },
@@ -230,30 +253,54 @@
                                     { id: 'North America', value: 'North America' },
         ];
 
+
+
         $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 192));
 
+        function SeasonalityHistorySearch(dest) {
+            var data = { "Destination": dest };
+            DestinationFactory.SeasonalityHistorySearch(data).then(function (data) {
+                if (data != undefined) {
+                    var result = JSON.parse(data);
+                    var objects = JSON.parse(result.Response);
+                }
+            });
+        };
+
+        $http.get('../app/Constants/iataairports.json').success(function (_arrairports) {
+            $scope.AvailableAirports = angular.copy(_arrairports.response);
+            getIpinfo();
+            $scope.AvailableCodes = $scope.AvailableAirports; //_.pluck($scope.AvailableAirports, "code");
+        });
+
+        $scope.onSelect = function ($item, $model, $label) {
+            $scope.Origin = $item.code;
+
+        };
+
+        $scope.formatInput = function ($model) {
+
+            if ($model == "" || $model == undefined) return "";
+            var originairport = _.find($scope.AvailableCodes, function (airport) { return airport.code == $model });
+            return originairport.code + " , " + originairport.name;
+        }
 
         function getIpinfo() {
             var url = "http://ipinfo.io?callback=JSON_CALLBACK";
             $http.jsonp(url)
            .success(function (data) {
-               $http.get('../app/Constants/airports.json').success(function (_arrairports) {
-                   var originairport = _.find(_arrairports, function (airport) { return airport.iso == data.country && airport.status == 1 && airport.size == "medium"; });
-                   $scope.Origin = originairport.iata;
-                   $scope.CalledOnPageLoad = true;
-                   $scope.findDestinations('Top10');
-               });
+               var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.name == data.city && airport.country_code == data.country });
+               $scope.Origin = originairport.code;
+               $scope.CalledOnPageLoad = true;
+               $scope.findDestinations('Cheapest');
            });
         }
-        // getIpinfo();
-
 
         $scope.faresList = [];
-        $scope.forecastfareList = [];
+
         $rootScope.apiURL = 'http://localhost:14606/sabre/api/';
 
         $scope.findDestinations = findDestinations;
-        
 
         $scope.open = function ($event) {
             $event.preventDefault();
@@ -266,7 +313,7 @@
             $event.stopPropagation();
             $scope.openedEarliestdeparturedate = true;
         };
-        
+
         $scope.openLatestdeparturedate = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -284,24 +331,33 @@
             startingDay: 1
         };
 
-        
-
         $scope.LoadingText = "Loading..";
-        $scope.SearchbuttonText = "Get Destinations (All)";
+        $scope.SearchbuttonText = "Get Destinations";
         $scope.SearchbuttonTo10Text = "Top 10";
         $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
         $scope.SearchbuttonIsLoading = false;
         $scope.SearchbuttonTop10IsLoading = false;
         $scope.SearchbuttonChepestIsLoading = false;
 
-        function findDestinations(buttnText) {
-            console.log($scope.frmdestfinder);  
-            //  if ($scope.CalledOnPageLoad != true) {
-            if ($scope.frmdestfinder.$invalid) {
-                $scope.hasError = true;
-                return;
+
+        function RemoveMarkers() {
+            if ($scope.myMarkers.length > 0) {
+                for (var i = 0; i < $scope.myMarkers.length; i++)
+                    $scope.myMarkers[i].setMap(null);
+                $scope.myMarkers.length = 0;
             }
-            //    }
+            $scope.myMarkers = [];
+        }
+
+        function findDestinations(buttnText) {
+            if ($scope.CalledOnPageLoad != true) {
+                if ($scope.frmdestfinder.$invalid) {
+                    $scope.hasError = true;
+                    return;
+                }
+            }
+
+            RemoveMarkers();
 
             $scope.faresList = [];
             $scope.IsHistoricalInfo = false;
@@ -311,7 +367,7 @@
             var data = {
 
                 "Origin": $scope.Origin,
-                "DepartureDate": ($scope.FromDate == '' || $scope.FromDate == undefined ) ? null : ConvertToRequiredDate($scope.FromDate),
+                "DepartureDate": ($scope.FromDate == '' || $scope.FromDate == undefined) ? null : ConvertToRequiredDate($scope.FromDate),
                 "ReturnDate": ($scope.ToDate == '' || $scope.ToDate == undefined) ? null : ConvertToRequiredDate($scope.ToDate),
                 "Lengthofstay": $scope.LenghtOfStay,
                 "Earliestdeparturedate": ($scope.Earliestdeparturedate == '' || $scope.Earliestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Earliestdeparturedate),
@@ -327,23 +383,27 @@
 
             };
             DestinationFactory.findDestinations(data).then(function (data) {
-                
-                $scope.SearchbuttonText = "Get Destinations (All)";
+
+                $scope.SearchbuttonText = "Get Destinations";
                 $scope.SearchbuttonTo10Text = "Top 10";
                 $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
                 $scope.SearchbuttonIsLoading = false;
                 $scope.SearchbuttonTop10IsLoading = false;
                 $scope.SearchbuttonChepestIsLoading = false;
-
+                SetMaptoCurrentLocation();
                 if (data != null) {
-                    if (data.FareInfo != null) 
+                    if (data.FareInfo != null)
                         displayDestinations(buttnText, data.FareInfo);
-                    
+
                     //var result = JSON.parse(data);
                     //var objects = JSON.parse(result.Response);
                     //if (objects.FareInfo != undefined) 
                     //    displayDestinations(buttnText, objects.FareInfo);
-                    
+
+                }
+                else {
+                    alertify.alert("Destination Finder", "");
+                    alertify.alert('Sorry! There are no destinations, match your search request!').set('onok', function (closeEvent) { });
                 }
             });
             if ($scope.CalledOnPageLoad)
@@ -351,10 +411,10 @@
 
 
         }
+
         var GetUniqueDestinations = function (destinations) {
             //return _.pluck(destinations, "DestinationLocation");
             var result = _.map(destinations, function (currentObject) {
-                
                 return _.omit(currentObject, "Links");
                 //return _.pick(currentObject, "DestinationLocation", "LowestFare", "CurrencyCode");
             });
@@ -372,14 +432,15 @@
                 DrawMaps(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
             }
 
-            else if (buttnText == 'Top10') {
-                if (destinations.length > 0) {
-                    for (var i = 0; i < 10; i++)
-                        if (destinations[i] != undefined) { $scope.faresList.push(destinations[i]); }
-                }
-                DrawMaps(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
-            }
+                //else if (buttnText == 'Top10') {
+                //    if (destinations.length > 0) {
+                //        for (var i = 0; i < 10; i++)
+                //            if (destinations[i] != undefined) { $scope.faresList.push(destinations[i]); }
+                //    }
+                //    DrawMaps(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
+                //}
             else if (buttnText == 'Cheapest') {
+                
                 if (destinations.length > 0) {
                     var sortedObjs = _.filter(destinations, function (item) {
                         return item.LowestFare !== 'N/A';
@@ -394,7 +455,7 @@
         }
     }
 
-   
+
 
 
 })();

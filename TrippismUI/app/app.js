@@ -20,6 +20,12 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/fareforecast',
             templateUrl: '/app/Views/fareforecast.html'
         })
+     .state('/', {
+         url: '/fareforecast',
+         templateUrl: '/app/Views/fareforecast.html'
+     })
+
+  
         
 });
 

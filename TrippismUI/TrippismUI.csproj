@@ -49,6 +49,25 @@
     <Content Include="app\Scripts\libs\angular-block-ui.js" />
     <Content Include="app\Scripts\libs\angular-block-ui.min.js" />
     <Content Include="app\Views\fareforecast.html" />
+    <Content Include="app\Styles\alertifyjs\alertify.css" />
+    <Content Include="app\Styles\alertifyjs\alertify.min.css" />
+    <Content Include="app\Styles\alertifyjs\alertify.rtl.css" />
+    <Content Include="app\Styles\alertifyjs\alertify.rtl.min.css" />
+    <Content Include="app\Styles\alertifyjs\themes\bootstrap.css" />
+    <Content Include="app\Styles\alertifyjs\themes\bootstrap.min.css" />
+    <Content Include="app\Styles\alertifyjs\themes\bootstrap.rtl.css" />
+    <Content Include="app\Styles\alertifyjs\themes\bootstrap.rtl.min.css" />
+    <Content Include="app\Styles\alertifyjs\themes\default.css" />
+    <Content Include="app\Styles\alertifyjs\themes\default.min.css" />
+    <Content Include="app\Styles\alertifyjs\themes\default.rtl.css" />
+    <Content Include="app\Styles\alertifyjs\themes\default.rtl.min.css" />
+    <Content Include="app\Styles\alertifyjs\themes\semantic.css" />
+    <Content Include="app\Styles\alertifyjs\themes\semantic.min.css" />
+    <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.css" />
+    <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.min.css" />
+    <Content Include="index.html" />
+    <Content Include="app\Scripts\alertify\alertify.js" />
+    <Content Include="app\Scripts\alertify\alertify.min.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -63,7 +82,7 @@
     <Content Include="app\Scripts\libs\angular-block-ui.min.js.map" />
     <Content Include="app\Scripts\libs\angular-block-ui.js.map" />
     <Content Include="app\Styles\css\angular-block-ui.css.map" />
-    <Content Include="app\Constants\airports.json" />
+    <Content Include="app\Constants\iataairports.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
