@@ -19,11 +19,7 @@ namespace Trippism.Areas.IATA.Controllers
 {
     public class IATAController : ApiController
     {
-        //
-        // GET: /IATA/IATA/
-        MongoService service = new MongoService();
         IDBService _dbService;
-
 
         public IATAController(IDBService dbService)
         {
