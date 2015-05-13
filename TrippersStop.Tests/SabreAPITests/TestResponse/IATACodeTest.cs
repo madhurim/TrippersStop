@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Hosting;
 using System.Net;
+using TraveLayer.CustomTypes.IATA.ViewModels;
+using DataLayer;
 
 namespace Trippism.Tests.SabreAPITests.TestResponse
 {
@@ -14,7 +16,10 @@ namespace Trippism.Tests.SabreAPITests.TestResponse
         [TestMethod]
         public void GetTest()
         {
-            var controller = new IATAController();
+
+
+            IDBService apiCaller = new MongoService();
+            var controller = new IATAController(apiCaller);
             controller.Request = new HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             

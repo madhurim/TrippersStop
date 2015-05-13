@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Trippism.TraveLayer;
+using DataLayer;
 
 namespace Trippism
 {
@@ -30,6 +31,8 @@ namespace Trippism
             var container = new Container();
             container.RegisterWebApiRequest<IAsyncSabreAPICaller, SabreAPICaller>();
             container.RegisterWebApiRequest<ICacheService, RedisService>();
+            container.RegisterWebApiRequest<IDBService, MongoService>();
+           
             
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);

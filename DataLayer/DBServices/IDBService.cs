@@ -7,7 +7,7 @@ using MongoDB.Driver;
 
 namespace DataLayer
 {
-    interface IDBService
+    public interface IDBService
     {
         //void connect();
 
