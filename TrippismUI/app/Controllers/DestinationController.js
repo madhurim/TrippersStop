@@ -3,11 +3,10 @@
     'use strict';
     var controllerId = 'DestinationController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$rootScope', '$modal', '$http', '$q', '$compile', 'DestinationFactory', DestinationController]);
+        ['$scope', '$rootScope', '$modal', '$http', '$q', '$compile',  'blockUIConfig', 'DestinationFactory', DestinationController]);
 
-    function DestinationController($scope, $rootScope, $modal, $http, $q, $compile, DestinationFactory) {
-
-
+    function DestinationController($scope, $rootScope, $modal, $http, $q, $compile,  blockUIConfig, DestinationFactory) {
+        
         var getMapUrlData = function (airportCode) {
             //var d = $q.defer();
             //$http({ method: 'GET', url: 'http://maps.googleapis.com/maps/api/geocode/json?address=' + airportCode.DestinationLocation + ' airport&sensor=false' }).
@@ -27,13 +26,13 @@
 
             var d = $q.defer();
 
-            var originairport = _.find($scope.AvailableAirports , function (airport) { return airport.code == airportCode.DestinationLocation });
-            
+            var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.code == airportCode.DestinationLocation });
+
             if (originairport != undefined) {
-                    airportCode.lat = originairport.lat;
-                    airportCode.lng = originairport.lng;
-                    d.resolve(airportCode); // return the original object, so you can access it's other properties
-               
+                airportCode.lat = originairport.lat;
+                airportCode.lng = originairport.lng;
+                d.resolve(airportCode); // return the original object, so you can access it's other properties
+
             } else {
                 d.resolve();
             }
@@ -78,9 +77,11 @@
             }
         }
 
+
+
         var RenderMap = function (maps) {
             $scope.InfoWindow;
-            
+
             var bounds = new google.maps.LatLngBounds();
 
             for (var x = 0; x < maps.length; x++) {
@@ -111,8 +112,10 @@
                 $scope.myMarkers.push(marker);
             }
             //now fit the map to the newly inclusive bounds
-            if($scope.myMarkers.length > 0)
+            if ($scope.myMarkers.length > 0) {
                 $scope.destinationMap.fitBounds(bounds);
+                $scope.markerCluster = new MarkerClusterer($scope.destinationMap, $scope.myMarkers);
+            }
         };
 
         $scope.showPosition = function (destinations) {
@@ -122,7 +125,7 @@
                 promises.push(getMapUrlData($scope.destinations[i]));
             }
             $q.all(promises).then(function (maps) {
-                
+
                 if (maps.length > 0)
                     maps = _.compact(maps);
                 RenderMap(maps);
@@ -266,26 +269,70 @@
                 }
             });
         };
+    
+        $scope.CustomAirportsData = [];
+        
+        $scope.activate = activate;
+        function activate() {
+            blockUIConfig.autoBlock = true;
+            $http.get('../app/Constants/iataairports.json').success(function (_arrairports) {
 
-        $http.get('../app/Constants/iataairports.json').success(function (_arrairports) {
-            $scope.AvailableAirports = angular.copy(_arrairports.response);
-            getIpinfo();
-            $scope.AvailableCodes = $scope.AvailableAirports; //_.pluck($scope.AvailableAirports, "code");
-        });
+                $http.get('../app/Constants/cities.json').success(function (_cities) {
+
+                    $http.get('../app/Constants/countries.json').success(function (_countries) {
+                        $scope.AvailableCountries = angular.copy(_countries.response);
+
+                        for (var i = 0; i < $scope.AvailableAirports.length; i++) {
+                            debugger;
+                            var citycode = $scope.AvailableAirports[i].city_code;
+                            var country_code = $scope.AvailableAirports[i].country_code;
+                            var city = _.find($scope.AvailableCities, function (airport) { return airport.code == citycode });
+
+                            var county = _.find($scope.AvailableCountries, function (county) { return county.code == country_code })
+                            $scope.AvailableAirports[i].CityName = city.name;
+                            $scope.AvailableAirports[i].FullName = county.name;
+                            delete $scope.AvailableAirports[i]['timezone'];
+                        }
+                        $scope.AvailableCodes = $scope.AvailableAirports; //_.pluck($scope.AvailableAirports, "code");
+                        
+                    });
+                   
+                    $scope.AvailableCities = angular.copy(_cities.response);
+
+                });
+                $scope.AvailableAirports = angular.copy(_arrairports.response);
+                getIpinfo();
+                //$scope.AvailableCodes = $scope.AvailableAirports; //_.pluck($scope.AvailableAirports, "code");
+            });
+        }
+        activate();
 
         $scope.onSelect = function ($item, $model, $label) {
             $scope.Origin = $item.code;
-
         };
 
         $scope.formatInput = function ($model) {
-
+            debugger;
             if ($model == "" || $model == undefined) return "";
-            var originairport = _.find($scope.AvailableCodes, function (airport) { return airport.code == $model });
-            return originairport.code + " , " + originairport.name;
+            //var originairport = _.find($scope.AvailableCodes, function (airport) { return airport.code == $model });
+            var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.code == $model });
+            return originairport.code + ", " + originairport.name + ", " + originairport.CityName;
+        }
+        function getnearByAirport() {
+            $http({
+                method: 'GET',
+                url: 'https://airport.api.aero/airport/ORK?user_key=80d9c3bb86b16e397e4bd94875a34552?callback=JSON_CALLBACK',
+                headers: { 'Content-type': 'application/xml' }
+            }).success(function (d) {
+                debugger;
+            });
+            
         }
 
+        //getnearByAirport();
+
         function getIpinfo() {
+            blockUIConfig.autoBlock = true;
             var url = "http://ipinfo.io?callback=JSON_CALLBACK";
             $http.jsonp(url)
            .success(function (data) {
@@ -293,7 +340,9 @@
                $scope.Origin = originairport.code;
                $scope.CalledOnPageLoad = true;
                $scope.findDestinations('Cheapest');
+               
            });
+            
         }
 
         $scope.faresList = [];
@@ -345,7 +394,11 @@
                 for (var i = 0; i < $scope.myMarkers.length; i++)
                     $scope.myMarkers[i].setMap(null);
                 $scope.myMarkers.length = 0;
+                debugger;
+                //markerClusterer.clearMarkers();
+                $scope.markerCluster.clearMarkers();
             }
+            
             $scope.myMarkers = [];
         }
 
@@ -440,7 +493,7 @@
                 //    DrawMaps(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
                 //}
             else if (buttnText == 'Cheapest') {
-                
+
                 if (destinations.length > 0) {
                     var sortedObjs = _.filter(destinations, function (item) {
                         return item.LowestFare !== 'N/A';

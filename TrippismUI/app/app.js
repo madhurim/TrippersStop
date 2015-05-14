@@ -29,13 +29,12 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
         
 });
 
-//TrippismUIApp.directive("otcDynamic", function ($compile) {
-//    return {
-//        link: function (scope, element) {
-//            var template = "<button ng-click='doSomething()'>{{label}}</button>";
-//            var linkFn = $compile(template);
-//            var content = linkFn(scope);
-//            element.append(content);
-//        }
-//    }
-//});
+TrippismUIApp.config(function (blockUIConfig) {
+    // Change the default overlay message
+    //blockUIConfig.message = 'Please stop clicking!';
+    // Change the default delay to 100ms before the blocking is visible
+    //blockUIConfig.delay = 100;
+});
+
+
+

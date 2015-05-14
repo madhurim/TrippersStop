@@ -83,6 +83,9 @@
     <Content Include="app\Scripts\libs\angular-block-ui.js.map" />
     <Content Include="app\Styles\css\angular-block-ui.css.map" />
     <Content Include="app\Constants\iataairports.json" />
+    <Content Include="app\Constants\countries.json" />
+    <Content Include="app\Constants\cities.json" />
+    <None Include="Trippism.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
