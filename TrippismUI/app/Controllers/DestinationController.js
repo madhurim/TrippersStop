@@ -283,7 +283,7 @@
                         $scope.AvailableCountries = angular.copy(_countries.response);
 
                         for (var i = 0; i < $scope.AvailableAirports.length; i++) {
-                            debugger;
+                            
                             var citycode = $scope.AvailableAirports[i].city_code;
                             var country_code = $scope.AvailableAirports[i].country_code;
                             var city = _.find($scope.AvailableCities, function (airport) { return airport.code == citycode });
@@ -312,7 +312,7 @@
         };
 
         $scope.formatInput = function ($model) {
-            debugger;
+            
             if ($model == "" || $model == undefined) return "";
             //var originairport = _.find($scope.AvailableCodes, function (airport) { return airport.code == $model });
             var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.code == $model });
@@ -324,7 +324,7 @@
                 url: 'https://airport.api.aero/airport/ORK?user_key=80d9c3bb86b16e397e4bd94875a34552?callback=JSON_CALLBACK',
                 headers: { 'Content-type': 'application/xml' }
             }).success(function (d) {
-                debugger;
+                
             });
             
         }
@@ -394,7 +394,7 @@
                 for (var i = 0; i < $scope.myMarkers.length; i++)
                     $scope.myMarkers[i].setMap(null);
                 $scope.myMarkers.length = 0;
-                debugger;
+                
                 //markerClusterer.clearMarkers();
                 $scope.markerCluster.clearMarkers();
             }
