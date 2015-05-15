@@ -65,12 +65,15 @@
 
                     <script type="text/ng-template" id="customTemplate.html">
                         <a style="padding-left:10px;" tabindex="-1" class="row-even1">
+                            <!--<i ng-class="match.model.Airports.length > 1  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>-->
                             <i class="glyphicon glyphicon-plane"></i>
                             
                             <span>{{match.model.code}}</span>,
                             <span>{{match.model.name.toLowerCase().indexOf("airport") >= 0 ? match.model.name : match.model.name + " Airport"}}</span>,
-                            <!--<span > {{  (match.model.name.toLowerCase().indexOf("s") >= 0) match.model.name }}{{match.model.name + ', ' }}</span>,-->
-                            <span>{{match.model.CityName}} </span> 
+                            
+                            <span>{{match.model.CityName}}</span>,
+                            <span>{{match.model.CountryFullName}}</span>
+                            
                             
                             
                             
@@ -112,8 +115,10 @@
                                                name="Origin"
                                                tabindex="1"
                                                placeholder="Enter Origin"
+                                               
                                                typeahead="state for state in AvailableCodes | filter:$viewValue | limitTo: 15"
                                                class="form-control">
+                                        <!--typeahead="state for state in CityAirports | filter:$viewValue | limitTo: 15"-->
                                         
                                     </div>
 
