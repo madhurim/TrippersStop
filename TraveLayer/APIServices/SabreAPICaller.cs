@@ -228,8 +228,8 @@ namespace Trippism.TraveLayer
                     string status = error.Get<string>("status");
                     string errorMessage = error.Get<string>("message");
                     string responseMessage = string.Join(" ", errorType, errorDescription, errorMessage).Trim();
-                    if (status == statusComplete && message == statusMessage)
-                        return new APIResponse { StatusCode = HttpStatusCode.OK, Response =string.Empty};
+                    //if (status == statusComplete && message == statusMessage)
+                    //    return new APIResponse { StatusCode = HttpStatusCode.OK, Response =string.Empty};
                     return new APIResponse { StatusCode = sabreResponse.StatusCode, Response = responseMessage };
                 }
                

@@ -37,20 +37,12 @@ namespace Trippism.Areas.Sabre.Controllers
             string url = GetURL(destinationsRequest);
             return GetResponse(url);
         }
-        [Route("destinations/theme/{theme}")]
+        [Route("api/destinations/theme/{theme}")]
         [HttpGet]
-        public HttpResponseMessage GetDestinationsByTheme(string origin,string departuredate,string returndate,string lengthofstay,string theme)
+        public HttpResponseMessage GetDestinationsByTheme(string theme,string origin,string departuredate,string returndate,string lengthofstay)
         {
-          // if (destinations != null)
-           {
-              // destinations.FareInfo.Where(f=>f.t)
-           }
-         //  else
-           {
-
-               //_cacheService.Save<OTA_DestinationFinder>(_destinationKey, destinations, Convert.ToDouble( _expireTime));
-           }
-           return new HttpResponseMessage();
+            string url = string.Format("v1/shop/flights/fares?origin={1}&departuredate={2}&returndate={3}&lengthofstay={4}&theme={0}", theme, origin, departuredate,returndate,lengthofstay);
+            return GetResponse(url);
         }
         private string GetURL(Destinations destinationsRequest)
         {
