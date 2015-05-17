@@ -6,7 +6,7 @@ using Trippism.TraveLayer;
 
 namespace Trippism
 {
-    public static class APIHelper
+    public static class SabreApiTokenHelper
     {
         public static void SetApiToken(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
@@ -33,7 +33,7 @@ namespace Trippism
         {
             _cacheService.Expire(_apiCaller.SabreTokenKey);
             _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
-             APIHelper.SetApiToken(_apiCaller, _cacheService);
+             SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
         }
     }
 }
