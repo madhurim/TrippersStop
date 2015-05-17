@@ -13,6 +13,8 @@ using System.Text;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.Response;
+using System.Configuration;
+
 
 namespace Trippism.Areas.Sabre.Controllers
 {
@@ -21,6 +23,8 @@ namespace Trippism.Areas.Sabre.Controllers
 
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        const string _destinationKey = "Trippism.Destinations.All";
+        string _expireTime = ConfigurationManager.AppSettings["RedisExpireInMin"].ToString();
         public DestinationsController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
@@ -32,6 +36,21 @@ namespace Trippism.Areas.Sabre.Controllers
         {
             string url = GetURL(destinationsRequest);
             return GetResponse(url);
+        }
+        [Route("destinations/theme/{theme}")]
+        [HttpGet]
+        public HttpResponseMessage GetDestinationsByTheme(string origin,string departuredate,string returndate,string lengthofstay,string theme)
+        {
+          // if (destinations != null)
+           {
+              // destinations.FareInfo.Where(f=>f.t)
+           }
+         //  else
+           {
+
+               //_cacheService.Save<OTA_DestinationFinder>(_destinationKey, destinations, Convert.ToDouble( _expireTime));
+           }
+           return new HttpResponseMessage();
         }
         private string GetURL(Destinations destinationsRequest)
         {
