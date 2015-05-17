@@ -23,7 +23,7 @@ namespace TraveLayer.CustomTypes.Sabre
     // Move to bargain finder response
     public class FareInfo
     {
-        public object LowestFare { get; set; }
+        public double LowestFare { get; set; }
         public string CurrencyCode { get; set; }
         public object LowestNonStopFare { get; set; }
         public string DepartureDateTime { get; set; }
