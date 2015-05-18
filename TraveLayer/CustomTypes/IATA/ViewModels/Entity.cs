@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Trippism.Areas.IATA.Models
+namespace TraveLayer.CustomTypes.IATA.ViewModels
 {
     public class Entity
     {
