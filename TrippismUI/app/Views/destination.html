@@ -66,8 +66,10 @@
                     <script type="text/ng-template" id="customTemplate.html">
                         <a style="padding-left:10px;" tabindex="-1" class="row-even1">
                             <!--<i ng-class="match.model.Airports.length > 1  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>-->
-                            <i class="glyphicon glyphicon-plane"></i>
+                            <i ng-class="match.model.IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
                             
+                            <!--<i class="glyphicon glyphicon-plane"></i>-->
+                            <!--{{match.model}}-->
                             <span>{{match.model.code}}</span>,
                             <span>{{match.model.name.toLowerCase().indexOf("airport") >= 0 ? match.model.name : match.model.name + " Airport"}}</span>,
                             
@@ -115,10 +117,10 @@
                                                name="Origin"
                                                tabindex="1"
                                                placeholder="Enter Origin"
-                                               
-                                               typeahead="state for state in AvailableCodes | filter:$viewValue | limitTo: 15"
+                                               typeahead="state for state in AvailableCodes |  filter: $viewValue  | limitTo: 150"
                                                class="form-control">
-                                        <!--typeahead="state for state in CityAirports | filter:$viewValue | limitTo: 15"-->
+                                        <!--typeahead="state as state for state in CityAirports | filter:$viewValue | limitTo: 15"-->       
+                                        
                                         
                                     </div>
 
@@ -248,7 +250,7 @@
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Top Destinations</label>
-                                            <input tabindex="10" type="number" min="1" class="form-control" name="TopDestinations" ng-model="TopDestinations" placeholder="TopDestinations">
+                                            <input tabindex="10" type="number" min="1" class="form-control" name="TopDestinations" ng-model="TopDestinations" placeholder="Top Destinations">
                                         </div>
 
                                     </div>

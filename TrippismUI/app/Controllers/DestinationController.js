@@ -3,10 +3,10 @@
     'use strict';
     var controllerId = 'DestinationController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$rootScope', '$modal', '$http', '$q', '$compile',  'blockUIConfig', 'DestinationFactory', DestinationController]);
+        ['$scope', '$rootScope', '$modal', '$http', '$q', '$compile', 'blockUIConfig', 'DestinationFactory', DestinationController]);
 
-    function DestinationController($scope, $rootScope, $modal, $http, $q, $compile,  blockUIConfig, DestinationFactory) {
-        
+    function DestinationController($scope, $rootScope, $modal, $http, $q, $compile, blockUIConfig, DestinationFactory) {
+
         var getMapUrlData = function (airportCode) {
             //var d = $q.defer();
             //$http({ method: 'GET', url: 'http://maps.googleapis.com/maps/api/geocode/json?address=' + airportCode.DestinationLocation + ' airport&sensor=false' }).
@@ -269,10 +269,11 @@
                 }
             });
         };
-    
+
         $scope.CustomAirportsData = [];
-        
+
         $scope.activate = activate;
+        
         function activate() {
             blockUIConfig.autoBlock = true;
             $http.get('../app/Constants/iataairports.json').success(function (_arrairports) {
@@ -282,36 +283,53 @@
                     $http.get('../app/Constants/countries.json').success(function (_countries) {
                         $scope.AvailableCountries = angular.copy(_countries.response);
 
-                        /*for MAC */
+                        ///*for MAC */
                         //$scope.CityAirports ;
-                        //var evens = _.filter($scope.AvailableAirports, function (airport) { return _.contains(['PAR', 'LON', 'NYC', 'QSF', 'MOW', 'CHI' ,'SHA','BOM'], airport.city_code) });
-                        //if (evens != undefined && evens.length > 1) 
-                        //        $scope.CityAirports = _.chain(evens).groupBy('city_code').map(function (value, key)
-                        //        {   
-                        //            var cityinfo = _.find($scope.AvailableCities, function (airport) { return airport.code == key });
-                        //            var countryinfo = _.find($scope.AvailableCountries, function (airport) { return airport.code == cityinfo.country_code });
-                        //            var Airports = [];
-                        //            for (var airptcnt = 0; airptcnt < value.length; airptcnt++) {
-                        //                var obj = _.pick(value[airptcnt], "code", "name", "lat", "lng");
-                        //                obj['fullname'] = obj.name;
-                        //                delete obj['name'];
-                        //                Airports.push(obj);
-                        //            }
-                        //            return {
-                        //                    "code": key,
-                        //                    "name": cityinfo.name,
-                        //                    "countryCode": countryinfo.code,
-                        //                    "countryName": countryinfo.name,
-                        //                    "regionName": cityinfo.timezone,
-                        //                    Airports: Airports,
-                                            
-                        //                    }
-                        //        }).value();
-                        
-                        /*Ends Moc*/
+                        //var evens = _.filter($scope.AvailableAirports, function (airport) { return _.contains(['PAR', 'LON', 'NYC', 'QSF', 'MOW', 'CHI', 'SHA', 'BOM'], airport.city_code) });
+                        //if (evens != undefined && evens.length > 1)
+                        //    $scope.CityAirports = _.chain(evens).groupBy('city_code').map(function (value, key) {
+                        //        var cityinfo = _.find($scope.AvailableCities, function (airport) { return airport.code == key });
+                        //        var countryinfo = _.find($scope.AvailableCountries, function (airport) { return airport.code == cityinfo.country_code });
+                        //        var Airports = [];
+                        //        var MainObj = {};
+                        //        for (var airptcnt = 0; airptcnt < value.length; airptcnt++) {
+                        //            var obj = _.pick(value[airptcnt], "code", "name", "lat", "lng");
+                        //            obj['fullname'] = obj.name;
+                        //            delete obj['name'];
+                        //            Airports.push(obj);
+                        //        }
+                        //        MainObj = {
+                        //            "code": key,
+                        //            "name": cityinfo.name,
+                        //            "countryCode": countryinfo.code,
+                        //            "countryName": countryinfo.name,
+                        //            "regionName": cityinfo.timezone,
+                        //        };
+                        //        MainObj["Airports"] = Airports;
+                        //        return MainObj;
+                        //    }).value();
 
-                        for (var i = 0; i < $scope.AvailableAirports.length; i++) {
+                        ///* Add new records for MAC*/
+                        //_.each($scope.CityAirports, function (cities) {
                             
+                        //    if (cities.Airports.length > 1) {
+                        //       var MainObj = {
+                        //           "code": cities.code,
+                        //           "name": cities.name + "All Airports",
+                        //           "countryCode": cities.countryCode,
+                        //           "countryName": cities.countryName,
+                        //           "regionName": cities.regionName,
+                        //       };
+                        //       $scope.CityAirports.push(MainObj);
+                        //    }
+                        //})
+                        ///* Ends Add new records for MAC*/ 
+                       
+                        ///*Ends Moc*/
+
+                        
+                        for (var i = 0; i < $scope.AvailableAirports.length; i++) {
+
                             var citycode = $scope.AvailableAirports[i].city_code;
                             var country_code = $scope.AvailableAirports[i].country_code;
                             var city = _.find($scope.AvailableCities, function (airport) { return airport.code == citycode });
@@ -320,17 +338,38 @@
                             $scope.AvailableAirports[i].CountryFullName = county.name;
                             delete $scope.AvailableAirports[i]['timezone'];
                         }
+
+                         var Listcities = _.filter($scope.AvailableCities, function (airport) { return _.contains(['PAR', 'LON', 'NYC', 'QSF', 'MOW', 'CHI', 'SHA', 'BOM'], airport.code) });
+                        
+
+                        for (var icities = 0; icities < Listcities.length; icities++) {
+                            var _airportsatcity = _.filter($scope.AvailableAirports, function (airport) { return airport.city_code == Listcities[icities].code });
+                            if (_airportsatcity.length > 1) {
+                                var county = _.find($scope.AvailableCountries, function (county) { return county.code == Listcities[icities].country_code })
+                                var ObjtoPush = {
+                                    CityName: Listcities[icities].name,
+                                    CountryFullName: county.name,
+                                    alternatenames: "",
+                                    city_code: Listcities[icities].code,
+                                    code: Listcities[icities].code,
+                                    country_code: Listcities[icities].country_code,
+                                    is_bus_station: null,
+                                    is_rail_road: null,
+                                    lat: null,
+                                    lng: null,
+                                    name: Listcities[icities].name + ", All Airports",
+                                    IsMAC : true
+                                };
+                                $scope.AvailableAirports.push(ObjtoPush);
+                            }
+                        }
                         $scope.AvailableCodes = $scope.AvailableAirports; //_.pluck($scope.AvailableAirports, "code");
                         getIpinfo();
-                        //console.log($scope.AvailableAirports);
+                        //console.log(JSON.stringify($scope.AvailableCodes));
                     });
-                   
                     $scope.AvailableCities = angular.copy(_cities.response);
-
                 });
                 $scope.AvailableAirports = angular.copy(_arrairports.response);
-               
-                //$scope.AvailableCodes = $scope.AvailableAirports; //_.pluck($scope.AvailableAirports, "code");
             });
         }
         activate();
@@ -353,9 +392,8 @@
                 url: 'https://airport.api.aero/airport/ORK?user_key=80d9c3bb86b16e397e4bd94875a34552?callback=JSON_CALLBACK',
                 headers: { 'Content-type': 'application/xml' }
             }).success(function (d) {
-                
+
             });
-            
         }
 
         //getnearByAirport();
@@ -365,13 +403,14 @@
             var url = "http://ipinfo.io?callback=JSON_CALLBACK";
             $http.jsonp(url)
            .success(function (data) {
+               debugger;
                var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.name == data.city && airport.country_code == data.country });
                $scope.Origin = originairport.code;
                $scope.CalledOnPageLoad = true;
                $scope.findDestinations('Cheapest');
-               
+
            });
-            
+
         }
 
         $scope.faresList = [];
@@ -423,11 +462,11 @@
                 for (var i = 0; i < $scope.myMarkers.length; i++)
                     $scope.myMarkers[i].setMap(null);
                 $scope.myMarkers.length = 0;
-                
+
                 //markerClusterer.clearMarkers();
                 $scope.markerCluster.clearMarkers();
             }
-            
+
             $scope.myMarkers = [];
         }
 
@@ -468,7 +507,7 @@
                 $scope.SearchbuttonIsLoading = false;
                 $scope.SearchbuttonTop10IsLoading = false;
                 $scope.SearchbuttonChepestIsLoading = false;
-               // SetMaptoCurrentLocation();
+                // SetMaptoCurrentLocation();
                 if (data != null) {
                     if (data.FareInfo != null) {
                         $scope.IsAdvancedSearch = true;
