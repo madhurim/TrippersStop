@@ -66,38 +66,18 @@
                     <script type="text/ng-template" id="customTemplate.html">
                         <a style="padding-left:10px;" tabindex="-1" class="row-even1">
                             <!--<i ng-class="match.model.Airports.length > 1  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>-->
-                            <i ng-class="match.model.IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
+                            <i ng-class="match.model.isMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
                             
                             <!--<i class="glyphicon glyphicon-plane"></i>-->
                             <!--{{match.model}}-->
                             <span>{{match.model.code}}</span>,
-                            <span>{{match.model.name.toLowerCase().indexOf("airport") >= 0 ? match.model.name : match.model.name + " Airport"}}</span>,
+                            <span>{{match.model.fullname.toLowerCase().indexOf("airport") >= 0 ? match.model.fullname : match.model.fullname + " Airport"}}</span>,
                             
-                            <span>{{match.model.CityName}}</span>,
-                            <span>{{match.model.CountryFullName}}</span>
-                            
-                            
-                            
-                            
-                            <!--<span ng-bind-html="match.model.code | typeaheadHighlight:to_trusted"></span>-->
-                            <!--<span ng-bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span>-->
-
-                            <!--<div class="row">
-                                <div ng-bind-html-unsafe="match.model.code | typeaheadHighlight:query">
-                                    {{match.model.code}}
-                                </div>
-                                <div class="col-md-4">
-                                    <div ng-bind-html-unsafe="match.model.name | typeaheadHighlight:query"></div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div ng-bind-html-unsafe="match.model. name | typeaheadHighlight:query"></div>
-                                </div>
-                                <div class="col-md-4"></div>
-                            </div>-->
+                            <span>{{match.model.name}}</span>,
+                            <span>{{match.model.countryName}}</span>
+                    
                         </a>
                     </script>
-
-
                     <form name="frmdestfinder" class="" novalidate>
                         <div class="row">
                             <div class="col-lg-12">
@@ -116,11 +96,11 @@
                                                typeahead-template-url="customTemplate.html"
                                                name="Origin"
                                                tabindex="1"
-                                               placeholder="Enter Origin"
-                                               typeahead="state for state in AvailableCodes |  filter: $viewValue  | limitTo: 150"
+                                               placeholder="Enter Origin"                                               
+                                                typeahead="state for state in AvailableCodes |  filter: $viewValue  | limitTo: 150"
                                                class="form-control">
-                                        <!--typeahead="state as state for state in CityAirports | filter:$viewValue | limitTo: 15"-->       
-                                        
+                                        <!--typeahead="state for state in AvailableCodes |  filter: $viewValue  | limitTo: 150"-->
+                                        <!--typeahead="state as state for state in CityAirports | filter:$viewValue | limitTo: 15"-->
                                         
                                     </div>
 

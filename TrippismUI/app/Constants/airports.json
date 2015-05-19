@@ -1,0 +1,440 @@
+[
+  {
+    "code": "BOM",
+    "name": "Mumbai",
+    "countryCode": "IN",
+    "countryName": "India",
+    "regionName": "Asia/Kolkata",
+    "Airports": [
+      {
+        "code": "BOM",
+        "fullname": "Chhatrapati Shivaji International (Sahar International)",
+        "lat": "19.095509",
+        "lng": "72.87497"
+      }
+    ]
+  },
+  {
+    "code": "CHI",
+    "name": "Chicago",
+    "countryCode": "US",
+    "countryName": "United States",
+    "regionName": "America/Chicago",
+    "Airports": [
+      {
+        "code": "CGX",
+        "fullname": "Merrill C Meigs",
+        "lat": "41.85889",
+        "lng": "-87.60833"
+      },
+      {
+        "code": "CHI",
+        "fullname": "Chicago FSS",
+        "lat": "41.8781136",
+        "lng": "-87.6297982"
+      },
+      {
+        "code": "DPA",
+        "fullname": "Dupage County",
+        "lat": "41.914444",
+        "lng": "-88.24639"
+      },
+      {
+        "code": "MDW",
+        "fullname": "Midway",
+        "lat": "41.788136",
+        "lng": "-87.74087"
+      },
+      {
+        "code": "NOH",
+        "fullname": "Chicago NAS",
+        "lat": "41.880554",
+        "lng": "-87.61667"
+      },
+      {
+        "code": "ORD",
+        "fullname": "Chicago O'hare International",
+        "lat": "41.976913",
+        "lng": "-87.90488"
+      },
+      {
+        "code": "PWK",
+        "fullname": "Pal-Waukee",
+        "lat": "42.114166",
+        "lng": "-87.901665"
+      },
+      {
+        "code": "RFD",
+        "fullname": "Greater Rockford Airport",
+        "lat": "42.30364",
+        "lng": "-89.222115"
+      }
+    ]
+  },
+  {
+    "code": "LON",
+    "name": "London",
+    "countryCode": "GB",
+    "countryName": "United Kingdom",
+    "regionName": "Europe/London",
+    "Airports": [
+      {
+        "code": "BQH",
+        "fullname": "Biggin Hill",
+        "lat": "51.333332",
+        "lng": "0.033333"
+      },
+      {
+        "code": "LCY",
+        "fullname": "London City Airport",
+        "lat": "51.5",
+        "lng": "0.05"
+      },
+      {
+        "code": "LGW",
+        "fullname": "Gatwick",
+        "lat": "51.156807",
+        "lng": "-0.161863"
+      },
+      {
+        "code": "LHR",
+        "fullname": "Heathrow",
+        "lat": "51.469604",
+        "lng": "-0.453566"
+      },
+      {
+        "code": "LTN",
+        "fullname": "Luton Airport",
+        "lat": "51.87977",
+        "lng": "-0.376232"
+      },
+      {
+        "code": "QQK",
+        "fullname": "Kings Cross Rail Station",
+        "lat": "51.51",
+        "lng": "0.06"
+      },
+      {
+        "code": "QQS",
+        "fullname": "St Pancras International RailSt",
+        "lat": "51.51",
+        "lng": "0.06"
+      },
+      {
+        "code": "QQW",
+        "fullname": "London-Waterloo",
+        "lat": "51.51",
+        "lng": "0.06"
+      },
+      {
+        "code": "SEN",
+        "fullname": "Southend",
+        "lat": "51.572777",
+        "lng": "0.701389"
+      },
+      {
+        "code": "STN",
+        "fullname": "Stansted",
+        "lat": "51.889267",
+        "lng": "0.262703"
+      },
+      {
+        "code": "XOF",
+        "fullname": "Stratford International Rail Station",
+        "lat": "51.51",
+        "lng": "0.06"
+      },
+      {
+        "code": "XQE",
+        "fullname": "Ebbsfleet International Rail Station",
+        "lat": "51.51",
+        "lng": "0.06"
+      },
+      {
+        "code": "ZEP",
+        "fullname": "Victoria Railway",
+        "lat": "51.51",
+        "lng": "0.06"
+      },
+      {
+        "code": "ZLS",
+        "fullname": "Liverpool St Rail Station",
+        "lat": "51.51",
+        "lng": "0.06"
+      }
+    ]
+  },
+  {
+    "code": "MOW",
+    "name": "Moscow",
+    "countryCode": "RU",
+    "countryName": "Russia",
+    "regionName": "Europe/Moscow",
+    "Airports": [
+      {
+        "code": "BKA",
+        "fullname": "Bykovo",
+        "lat": "55.433334",
+        "lng": "37.966667"
+      },
+      {
+        "code": "DME",
+        "fullname": "Domodedovo",
+        "lat": "55.414566",
+        "lng": "37.899494"
+      },
+      {
+        "code": "SVO",
+        "fullname": "Sheremetyevo International",
+        "lat": "55.966324",
+        "lng": "37.416573"
+      },
+      {
+        "code": "VKO",
+        "fullname": "Vnukovo",
+        "lat": "55.60315",
+        "lng": "37.2921"
+      },
+      {
+        "code": "XRK",
+        "fullname": "Paveletskiy Railway.",
+        "lat": "55.755786",
+        "lng": "37.617633"
+      },
+      {
+        "code": "ZKD",
+        "fullname": "Leningradskiy Railway",
+        "lat": "55.755786",
+        "lng": "37.617633"
+      }
+    ]
+  },
+  {
+    "code": "NYC",
+    "name": "New York",
+    "countryCode": "US",
+    "countryName": "United States",
+    "regionName": "America/New_York",
+    "Airports": [
+      {
+        "code": "EWR",
+        "fullname": "Newark Liberty International",
+        "lat": "40.68907",
+        "lng": "-74.17876"
+      },
+      {
+        "code": "FLU",
+        "fullname": "Flushing",
+        "lat": "40.775555",
+        "lng": "-73.83444"
+      },
+      {
+        "code": "JFK",
+        "fullname": "John F Kennedy International",
+        "lat": "40.642334",
+        "lng": "-73.78817"
+      },
+      {
+        "code": "JRA",
+        "fullname": "West 30th St Heliport",
+        "lat": "40.75",
+        "lng": "-74.0075"
+      },
+      {
+        "code": "JRB",
+        "fullname": "Downtown Manhattan Heliport",
+        "lat": "40.704166",
+        "lng": "-74.00833"
+      },
+      {
+        "code": "JRE",
+        "fullname": "East 60th Street Heliport",
+        "lat": "40.754166",
+        "lng": "-73.97083"
+      },
+      {
+        "code": "LGA",
+        "fullname": "La Guardia",
+        "lat": "40.774254",
+        "lng": "-73.87162"
+      },
+      {
+        "code": "NBP",
+        "fullname": "Battery Pk City/N. Cov",
+        "lat": "40.706112",
+        "lng": "-74.02167"
+      },
+      {
+        "code": "NES",
+        "fullname": "East 34th St Landing",
+        "lat": "40.743332",
+        "lng": "-73.975"
+      },
+      {
+        "code": "NWS",
+        "fullname": "Pier 11/Wall St. SPB",
+        "lat": "40.703056",
+        "lng": "-74.01056"
+      },
+      {
+        "code": "QNY",
+        "fullname": "Marine Air Terminal",
+        "lat": "40.75",
+        "lng": "-74"
+      },
+      {
+        "code": "TSS",
+        "fullname": "East 34th St Heliport",
+        "lat": "40.766666",
+        "lng": "-74.166664"
+      },
+      {
+        "code": "WTC",
+        "fullname": "World Trade Center",
+        "lat": "40.7",
+        "lng": "-74.01667"
+      },
+      {
+        "code": "XNY",
+        "fullname": "39th Street Ferry",
+        "lat": "40.76",
+        "lng": "-74.003"
+      }
+    ]
+  },
+  {
+    "code": "PAR",
+    "name": "Paris",
+    "countryCode": "FR",
+    "countryName": "France",
+    "regionName": "Europe/Paris",
+    "Airports": [
+      {
+        "code": "BVA",
+        "fullname": "Beauvais-Tille",
+        "lat": "49.459488",
+        "lng": "2.110815"
+      },
+      {
+        "code": "CDG",
+        "fullname": "Charles De Gaulle",
+        "lat": "49.003197",
+        "lng": "2.567023"
+      },
+      {
+        "code": "JDP",
+        "fullname": "Heliport De Paris",
+        "lat": "48.816666",
+        "lng": "2.283333"
+      },
+      {
+        "code": "JPU",
+        "fullname": "La Defense Heliport",
+        "lat": "48.86667",
+        "lng": "2.333333"
+      },
+      {
+        "code": "LBG",
+        "fullname": "Le Bourget",
+        "lat": "48.971943",
+        "lng": "2.4425"
+      },
+      {
+        "code": "ORY",
+        "fullname": "Orly",
+        "lat": "48.728283",
+        "lng": "2.3597"
+      },
+      {
+        "code": "POX",
+        "fullname": "Paris Cergy Pontoise",
+        "lat": "49.05",
+        "lng": "2.1"
+      },
+      {
+        "code": "VIY",
+        "fullname": "Villa Coublay",
+        "lat": "48.774166",
+        "lng": "2.191667"
+      },
+      {
+        "code": "XCR",
+        "fullname": "Vatry International",
+        "lat": "48.767776",
+        "lng": "4.201111"
+      },
+      {
+        "code": "XEX",
+        "fullname": "Aerogare",
+        "lat": "48.833332",
+        "lng": "2.65"
+      },
+      {
+        "code": "XGB",
+        "fullname": "Gare Montparnasse",
+        "lat": "49.016666",
+        "lng": "2.565278"
+      },
+      {
+        "code": "XHP",
+        "fullname": "Gare de l'Est Rail Station",
+        "lat": "48.856614",
+        "lng": "2.3522219"
+      },
+      {
+        "code": "XJY",
+        "fullname": "Massy TGV Rail Station",
+        "lat": "48.856614",
+        "lng": "2.3522219"
+      },
+      {
+        "code": "XPG",
+        "fullname": "Gare du Nord Railway",
+        "lat": "48.856614",
+        "lng": "2.3522219"
+      },
+      {
+        "code": "XTT",
+        "fullname": "Etoile",
+        "lat": "48.856614",
+        "lng": "2.3522219"
+      }
+    ]
+  },
+  {
+    "code": "QSF",
+    "name": "Sétif",
+    "countryCode": "DZ",
+    "countryName": "Algeria",
+    "regionName": "Africa/Algiers",
+    "Airports": [
+      {
+        "code": "QSF",
+        "fullname": "Setif",
+        "lat": "36.18139",
+        "lng": "5.331111"
+      }
+    ]
+  },
+  {
+    "code": "SHA",
+    "name": "Shanghai",
+    "countryCode": "CN",
+    "countryName": "China",
+    "regionName": "Asia/Shanghai",
+    "Airports": [
+      {
+        "code": "PVG",
+        "fullname": "Shanghai Pudong International",
+        "lat": "31.151825",
+        "lng": "121.799805"
+      },
+      {
+        "code": "SHA",
+        "fullname": "Shanghai Hongqiao International",
+        "lat": "31.196815",
+        "lng": "121.34197"
+      }
+    ]
+  }
+]

@@ -85,6 +85,7 @@
     <Content Include="app\Constants\iataairports.json" />
     <Content Include="app\Constants\countries.json" />
     <Content Include="app\Constants\cities.json" />
+    <Content Include="app\Constants\airports.json" />
     <None Include="Trippism.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
