@@ -26,7 +26,10 @@
 
             var d = $q.defer();
 
-            var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.code == airportCode.DestinationLocation });
+            var originairport = _.find($scope.AvailableAirports, function (airport) {
+                //return airport.code == airportCode.DestinationLocation
+                return airport.airport_code == airportCode.DestinationLocation
+            });
 
             if (originairport != undefined) {
                 airportCode.lat = originairport.lat;
@@ -277,35 +280,35 @@
         function activate() {
             blockUIConfig.autoBlock = true;
             $http.get('../app/Constants/airports.json').success(function (_arrairports) {
-                debugger;
                 for (var i = 0; i < _arrairports.length; i++) {
-                    for (var cntAirport = 0; cntAirport < _arrairports[i].Airports.length ; cntAirport++) {
-                        var objtopush = _.omit(_arrairports[i], "Airports");
-                        objtopush['airport_code'] = _arrairports[i].Airports[cntAirport].code;
-                        objtopush['fullname'] = _arrairports[i].Airports[cntAirport].fullname;
-                        objtopush['lat'] = _arrairports[i].Airports[cntAirport].lat;
-                        objtopush['lng'] = _arrairports[i].Airports[cntAirport].lng;
-                        objtopush['isMAC'] = false;
-                        $scope.AvailableAirports.push(objtopush);
+                    if (_arrairports[i].Airports != undefined) {
+                        for (var cntAirport = 0; cntAirport < _arrairports[i].Airports.length ; cntAirport++) {
+                            var objtopush = _.omit(_arrairports[i], "Airports");
+                            objtopush['airport_code'] = _arrairports[i].Airports[cntAirport].code;
+                            objtopush['fullname'] = _arrairports[i].Airports[cntAirport].fullname;
+                            objtopush['lat'] = _arrairports[i].Airports[cntAirport].lat;
+                            objtopush['lng'] = _arrairports[i].Airports[cntAirport].lng;
+                            objtopush['isMAC'] = false;
+                            $scope.AvailableAirports.push(objtopush);
+                        }
                     }
                 }
 
                 for (var i = 0; i < _arrairports.length; i++) {
-                    if (_arrairports[i].Airports.length > 1) {
-                        console.log(_arrairports[i].name);
+                    if (_arrairports[i].Airports != undefined &&_arrairports[i].Airports.length > 1) {
                         var objtopush = _.omit(_arrairports[i], "Airports");
                         objtopush['airport_code'] = "";
                         objtopush['fullname'] = _arrairports[i].name + ", All Airports";
                         objtopush['lat'] = null;
                         objtopush['lng'] = null;
-                        objtopush['isMAC'] = true ;
+                        objtopush['isMAC'] = true;
                         $scope.AvailableAirports.push(objtopush);
                     }
                 }
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
-                console.log($scope.AvailableAirports)
+                getIpinfo();
             });
-            
+
             //$http.get('../app/Constants/iataairports.json').success(function (_arrairports) {
 
             //    $http.get('../app/Constants/cities.json').success(function (_cities) {
@@ -354,10 +357,10 @@
             //            })
             //            console.log($scope.CityAirports);
             //            ///* Ends Add new records for MAC*/ 
-                       
+
             //            ///*Ends Moc*/
 
-                        
+
             //            //for (var i = 0; i < $scope.AvailableAirports.length; i++) {
 
             //            //    var citycode = $scope.AvailableAirports[i].city_code;
@@ -370,7 +373,7 @@
             //            //}
 
             //            // var Listcities = _.filter($scope.AvailableCities, function (airport) { return _.contains(['PAR', 'LON', 'NYC', 'QSF', 'MOW', 'CHI', 'SHA', 'BOM'], airport.code) });
-                        
+
 
             //            //for (var icities = 0; icities < Listcities.length; icities++) {
             //            //    var _airportsatcity = _.filter($scope.AvailableAirports, function (airport) { return airport.city_code == Listcities[icities].code });
@@ -410,9 +413,8 @@
         };
 
         $scope.formatInput = function ($model) {
-            debugger;
             if ($model == "" || $model == undefined) return "";
-            
+
             var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.code == $model });
             var airportname = (originairport.fullname.toLowerCase().indexOf("airport") > 0) ? originairport.fullname : originairport.fullname + " Airport";
             var CountryName = (originairport.countryName != undefined) ? originairport.countryName : "";
@@ -436,11 +438,14 @@
             var url = "http://ipinfo.io?callback=JSON_CALLBACK";
             $http.jsonp(url)
            .success(function (data) {
-               var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.name == data.city && airport.country_code == data.country });
-               $scope.Origin = originairport.code;
-               $scope.CalledOnPageLoad = true;
-               $scope.findDestinations('Cheapest');
-
+               //data.city = 'London';
+               //data.country = 'GB';
+               var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.name == data.city && airport.countryCode == data.country });
+               if (originairport != null) {
+                   $scope.Origin = originairport.code;
+                   $scope.CalledOnPageLoad = true;
+                   $scope.findDestinations('Cheapest');
+               }
            });
 
         }
@@ -532,6 +537,7 @@
                 "Destination": $scope.Destination
 
             };
+            
             DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.SearchbuttonText = "Get Destinations";
                 $scope.SearchbuttonTo10Text = "Top 10";
@@ -542,8 +548,8 @@
                 // SetMaptoCurrentLocation();
                 if (data != null) {
                     if (data.FareInfo != null) {
-                        $scope.IsAdvancedSearch = true;
-                        buttnText = "Cheapest";
+                        //$scope.IsAdvancedSearch = true;
+                        buttnText = "Cheapest";         
                         displayDestinations(buttnText, data.FareInfo);
                     }
                     //var result = JSON.parse(data);

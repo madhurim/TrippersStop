@@ -36,8 +36,10 @@ namespace Trippism.Controllers
 
             List<CityWithAirports> _objCitywithairports = new List<CityWithAirports>();
 
-            var requiredCities = new string[] {"PAR", "LON", "NYC", "QSF", "MOW", "CHI", "SHA", "BOM"};
-            foreach (var grps in _allcities.response.Where(i=> requiredCities.Contains(i.code)).GroupBy(i => i.code))
+            //To be uncomment later
+            //var requiredCities = new string[] {"PAR", "LON", "NYC", "QSF", "MOW", "CHI", "SHA", "BOM"};
+            //foreach (var grps in _allcities.response.Where(i=> requiredCities.Contains(i.code)).GroupBy(i => i.code))
+            foreach (var grps in _allcities.response.GroupBy(i => i.code))
             {
                 var airportsinCity = _allAirports.response.Find(x => x.city_code == grps.Key);
                 CityWithAirports _obj = new CityWithAirports();
