@@ -46,12 +46,12 @@ namespace Trippism.Areas.Sabre.Controllers
             return GetResponse(url);
         }
 
-        [Route("api/destinations/topcheapest/{topcheapest}")]
+        [Route("api/destinations/cheapestprice/{count}")]
         [HttpGet]
-        public HttpResponseMessage GetTopCheapestDestinations(int topcheapest, string origin, string departuredate, string returndate, string lengthofstay)
+        public HttpResponseMessage GetTopCheapestDestinations(int count, string origin, string departuredate, string returndate, string lengthofstay)
         {
             string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", origin, departuredate, returndate, lengthofstay);
-            return GetResponse(url, topcheapest);
+            return GetResponse(url, count);
         }
 
         private string GetURL(Destinations destinationsRequest)
@@ -82,7 +82,7 @@ namespace Trippism.Areas.Sabre.Controllers
             }
             return url.ToString();
         }
-        private HttpResponseMessage GetResponse(string url,int topcheapest=0)
+        private HttpResponseMessage GetResponse(string url, int count = 0)
         {
             SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
             APIResponse result = _apiCaller.Get(url).Result;
@@ -97,9 +97,9 @@ namespace Trippism.Areas.Sabre.Controllers
                 cities = ServiceStackSerializer.DeSerialize<OTA_DestinationFinder>(result.Response);
                 Mapper.CreateMap<OTA_DestinationFinder, Fares>();
                 Fares fares = Mapper.Map<OTA_DestinationFinder, Fares>(cities);
-                if (topcheapest != 0)
+                if (count != 0)
                 {
-                    fares.FareInfo = fares.FareInfo.OrderBy(f => f.LowestFare).Take(topcheapest).ToList();
+                    fares.FareInfo = fares.FareInfo.OrderBy(f => f.LowestFare).Take(count).ToList();
                 }
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
                 return response;
