@@ -5,9 +5,9 @@
     'use strict';
     var controllerId = 'LandingPageController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$location', LandingPageController]);
+        ['$scope', '$location','$anchorScroll', LandingPageController]);
 
-    function LandingPageController($scope, $location) {
+    function LandingPageController($scope, $location, $anchorScroll) {
         
         $scope.getClass = function (path) {
             if ($location.path().substr(0, path.length) == path) {
@@ -17,6 +17,10 @@
             }
         }
 
+        $scope.GoToTop = function () {
+            $location.hash('top');
+            $anchorScroll();
+        }
     }
 })();
 

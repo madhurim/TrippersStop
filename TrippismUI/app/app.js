@@ -29,6 +29,19 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
         
 });
 
+TrippismUIApp.directive("scroll", function ($window) {
+    return function (scope, element, attrs) {
+        angular.element($window).bind("scroll", function () {
+            if (this.pageYOffset >= 5) {
+                scope.EnableScroll = true;
+            } else {
+                scope.EnableScroll = false;
+            }
+            scope.$apply();
+        });
+    };
+});
+
 TrippismUIApp.config(function (blockUIConfig) {
     // Change the default overlay message
     //blockUIConfig.message = 'Please stop clicking!';

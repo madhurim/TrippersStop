@@ -5,8 +5,8 @@
 <head>
 
 </head>
-<body ng-controller="LandingPageController">
-    <!--block-ui="main" class="block-ui-main"--> 
+<body scroll ng-controller="LandingPageController">
+    <!--block-ui="main" class="block-ui-main"-->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -22,7 +22,7 @@
     </nav>
 
 
-    <div  style="margin-top:50px;">
+    <div style="margin-top:50px;">
         <!--role="main"-->
         <div ui-view style="" class="container-fluid">
         </div>
@@ -68,5 +68,31 @@
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp?"></script>
+    <div id="elevator_item" ng-show="EnableScroll">
+        <a id="elevator" ng-click="GoToTop()" title="Back To Top"></a>
+        <div class="qr-popup">
+            <div class="arr"></div>
+        </div>
+    </div>
+    <!--<script>
+
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            var scrolltop = $(this).scrollTop();
+            if (scrolltop >= 70) {
+                $("#elevator_item").show();
+            } else {
+                $("#elevator_item").hide();
+            }
+        });
+        $("#elevator").click(function () {
+            $("html,body").animate({ scrollTop: 0 }, 500);
+        });
+        $(".qr").hover(function () {
+            $(".qr-popup").show();
+        }, function () {
+            $(".qr-popup").hide();
+        });});
+    </script>-->
 </body>
 </html>

@@ -30,6 +30,7 @@
     <Content Include="app\Styles\bootstrap.css" />
     <Content Include="app\Styles\bootstrap.min.css" />
     <Content Include="app\Styles\css\trippismapp.css" />
+    <Content Include="app\Styles\css\icon_top.png" />
     <Content Include="app\Views\default.html" />
     <Content Include="app\Views\destination.html" />
     <Content Include="app\index.html" />
