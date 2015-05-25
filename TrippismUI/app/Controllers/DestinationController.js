@@ -3,9 +3,9 @@
     'use strict';
     var controllerId = 'DestinationController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$rootScope', '$modal', '$http', '$q', '$compile', 'blockUIConfig', '$location', '$anchorScroll','DestinationFactory', DestinationController]);
+        ['$scope', '$rootScope', '$modal', '$http', '$q', '$compile', 'blockUIConfig', '$location', '$anchorScroll','DestinationFactory','$filter', DestinationController]);
 
-    function DestinationController($scope, $rootScope, $modal, $http, $q, $compile, blockUIConfig, $location,$anchorScroll, DestinationFactory) {
+    function DestinationController($scope, $rootScope, $modal, $http, $q, $compile, blockUIConfig, $location,$anchorScroll, DestinationFactory,$filter) {
 
         var getMapUrlData = function (airportCode) {
             var d = $q.defer();
@@ -34,7 +34,8 @@
         $scope.Location = "";
         $scope.AvailableCodes = [];
         $scope.SeasonalityHistorySearch = SeasonalityHistorySearch;
-
+        $scope.formats = ['yyyy-MM-dd', 'dd-MM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate','MM/dd/yyyy'];
+        $scope.format = $scope.formats[5];
         //$scope.lat = "43.09024";
         //$scope.lng = "-30.712891";
         $scope.lat = "20";
@@ -71,7 +72,7 @@
 
         $scope.markerClicked = function (marker) {
             $scope.destinationMap.panTo(marker.getPosition());
-            $scope.IsHistoricalInfo = true;
+            $scope.IsHistoricalInfo = false;
             $scope.MarkerInfo = marker.CustomMarkerInfo;
         };
 
@@ -97,15 +98,30 @@
                     position: latlng1,
                     map: $scope.destinationMap,
                     title: maps[x].DestinationLocation,
+                    icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (x+ 1) + '|ff776b|000000',
                     animation: google.maps.Animation.DROP,
                     CustomMarkerInfo: maps[x]
                 });
                 bounds.extend(marker.position);
+                //var contentString = '<div ng-controller="FareforecastController" style="min-width:200px;padding-top:5px;" id="content">' +
+                //                        '<div class="col-sm-6 padleft0"><span>Airport Code:</span><br /><strong>'
+                //                            + maps[x].DestinationLocation + '</strong></div>' +
+                //                        '<div class="col-sm-6 padlr0 text-right">' + maps[x].LowestFare + ' ' + maps[x].CurrencyCode + '</div>' +
+                //                     '</div>';
                 var contentString = '<div ng-controller="FareforecastController" style="min-width:200px;padding-top:5px;" id="content">' +
-                                        '<div class="col-sm-6 padleft0"><span>Airport Code:</span><br /><strong>'
-                                            + maps[x].DestinationLocation + '</strong></div>' +
-                                        '<div class="col-sm-6 padlr0 text-right">' + maps[x].LowestFare + ' ' + maps[x].CurrencyCode + '</div>' +
-                                     '</div>';
+                                        '<div class="col-sm-6 padleft0"><span>Destination: </span><br /><strong>'
+                                          + maps[x].DestinationLocation + '</strong></div>' +
+                                          '<div class="col-sm-6 padleft0"><span>Currency: </span><br /><strong>'
+                                          + maps[x].CurrencyCode + '</strong></div>' +
+                                          '<div class="col-sm-6 padleft0"><span>Lowest Fare: </span><br /><strong>'
+                                          + maps[x].LowestFare + '</strong></div>' +
+                                          '<div class="col-sm-6 padleft0"><span>Lowest Non Stop Fare: </span><br /><strong>'
+                                          + maps[x].LowestNonStopFare + '</strong></div>' +
+                                          '<div class="col-sm-6 padleft0"><span>Departure Date: </span><br /><strong>'
+                                          + $filter('date')(maps[x].DepartureDateTime, $scope.format, null) + '</strong></div>' +
+                                          '<div class="col-sm-6 padleft0"><span>Return Date: </span><br /><strong>'
+                                          + $filter('date')(maps[x].ReturnDateTime, $scope.format, null) + '</strong></div>' +
+                                   '</div>';
 
                 $scope.InfoWindow = new google.maps.InfoWindow()
                 google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
@@ -119,10 +135,10 @@
                 $scope.myMarkers.push(marker);
             }
             //now fit the map to the newly inclusive bounds
-            if ($scope.myMarkers.length > 0) {
-                //$scope.destinationMap.fitBounds(bounds);
-                $scope.markerCluster = new MarkerClusterer($scope.destinationMap, $scope.myMarkers);
-            }
+            //if ($scope.myMarkers.length > 0) {
+            //    //$scope.destinationMap.fitBounds(bounds);
+            //    //$scope.markerCluster = new MarkerClusterer($scope.destinationMap, $scope.myMarkers);
+            //}
         };
 
         $scope.showPosition = function (destinations) {
@@ -148,8 +164,7 @@
             return _date;
         }
 
-        $scope.formats = ['yyyy-MM-dd', 'dd-MM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
+        
         var dt = new Date();
         dt.setHours(0, 0, 0, 0)
         var Todt = new Date();
