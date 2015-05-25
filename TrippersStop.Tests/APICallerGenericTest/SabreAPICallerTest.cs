@@ -1,15 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Trippism.TraveLayer;
+using TrippismApi.TraveLayer;
 using System.Threading.Tasks;
 using TraveLayer.CustomTypes.Sabre;
 using System.Collections.Generic;
 using Moq;
-using TraveLayer.APIServices;
 using TraveLayer.CustomTypes;
 using TraveLayer.CustomTypes.Sabre.Response;
 
-namespace Trippism.Tests.Controllers
+namespace TrippismApi.Tests.Controllers
 {
     [TestClass]
     public class SabreAPICallerTest
@@ -174,7 +173,7 @@ namespace Trippism.Tests.Controllers
             FareInfo fareInfo_ = new FareInfo();
             fareInfo_.CurrencyCode = "USD";
             fareInfo_.DepartureDateTime = "2015-03-05";
-            fareInfo_.LowestFare = "342.0";
+            fareInfo_.LowestFare = 342.0;
             fareInfo_.ReturnDateTime = "2013-04-08";
             fareInfo_.LowestNonStopFare = "349.8";
 

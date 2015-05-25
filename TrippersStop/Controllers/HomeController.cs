@@ -8,7 +8,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using ServiceStack.Text;
 
-namespace Trippism.Controllers
+namespace TrippismApi.Controllers
 {
     public class HomeController : Controller
     {

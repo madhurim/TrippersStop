@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace Trippism.Areas.HelpPage
+namespace TrippismApi.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace Trippism.Areas.HelpPage
+namespace TrippismApi.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {
@@ -31,7 +31,7 @@ namespace Trippism.Areas.HelpPage
                 localPath.Replace("/", "-").Replace("{", String.Empty).Replace("}", String.Empty));
             if (queryKeyString != null)
             {
-                friendlyPath.AppendFormat("_{0}", queryKeyString);
+                friendlyPath.AppendFormat("_{0}", queryKeyString.Replace('.', '-'));
             }
             return friendlyPath.ToString();
         }

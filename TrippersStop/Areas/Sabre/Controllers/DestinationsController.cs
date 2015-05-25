@@ -5,22 +5,25 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre;
-using Trippism.TraveLayer;
-using TraveLayer.APIServices;
+using TrippismApi.TraveLayer;
 using ServiceStack;
 using System.Reflection;
 using System.Text;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.Response;
+using System.Configuration;
 
-namespace Trippism.Areas.Sabre.Controllers
+
+namespace TrippismApi.Areas.Sabre.Controllers
 {
     public class DestinationsController : ApiController
     {
 
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        const string _destinationKey = "TrippismApi.Destinations.All";
+        string _expireTime = ConfigurationManager.AppSettings["RedisExpireInMin"].ToString();
         public DestinationsController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
@@ -33,6 +36,40 @@ namespace Trippism.Areas.Sabre.Controllers
             string url = GetURL(destinationsRequest);
             return GetResponse(url);
         }
+
+        [Route("api/destinations/theme/{theme}")]
+        [HttpGet]
+        public HttpResponseMessage GetDestinationsByTheme(string theme,string origin,string departuredate,string returndate,string lengthofstay)
+        {
+            string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}&theme={4}", origin, departuredate, returndate, lengthofstay, theme);
+            return GetResponse(url);
+        }
+
+        [Route("api/destinations/cheapest/{count}")]
+        [HttpGet]
+        public HttpResponseMessage GetTopCheapestDestinations(int count, string origin, string departuredate, string returndate, string lengthofstay)
+        {
+            string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", origin, departuredate, returndate, lengthofstay);
+            return GetResponse(url, count);
+        }
+
+        [Route("api/destinations/maxfare/{maxfare}")]
+        [HttpGet]
+        public HttpResponseMessage GetDestinationsByMaxFare(double maxfare, string origin, string departuredate, string returndate, string lengthofstay)
+        {
+            string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&maxfare={3}&lengthofstay={4}", origin, departuredate, returndate,maxfare, lengthofstay);
+            return GetResponse(url);
+        }
+
+        [Route("api/destinations/country/{country}")]
+        [HttpGet]
+        public HttpResponseMessage GetDestinationsByCountry(string country, string origin, string departuredate, string returndate, string lengthofstay)
+        {
+            string url = string.Format("v1/shop/flights/fares?origin={0}&departuredate={1}&returndate={2}&maxfare={3}&lengthofstay={4}&location={4}", origin, departuredate, returndate, lengthofstay, country);
+            return GetResponse(url);
+        }
+
+
         private string GetURL(Destinations destinationsRequest)
         {
             StringBuilder url = new StringBuilder();
@@ -61,34 +98,28 @@ namespace Trippism.Areas.Sabre.Controllers
             }
             return url.ToString();
         }
-        private HttpResponseMessage GetResponse(string url)
+        private HttpResponseMessage GetResponse(string url, int count = 0)
         {
-            APIHelper.SetApiToken(_apiCaller, _cacheService);
+            SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
             APIResponse result = _apiCaller.Get(url).Result;
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                APIHelper.RefreshApiToken(_cacheService, _apiCaller);
+                SabreApiTokenHelper.RefreshApiToken(_cacheService, _apiCaller);
                 result = _apiCaller.Get(url).Result;
             }
-
-            
-
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 OTA_DestinationFinder cities = new OTA_DestinationFinder();
                 cities = ServiceStackSerializer.DeSerialize<OTA_DestinationFinder>(result.Response);
                 Mapper.CreateMap<OTA_DestinationFinder, Fares>();
                 Fares fares = Mapper.Map<OTA_DestinationFinder, Fares>(cities);
-
+                if (count != 0)
+                {
+                    fares.FareInfo = fares.FareInfo.OrderBy(f => f.LowestFare).Take(count).ToList();
+                }
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
                 return response;
-                //var s = Newtonsoft.Json.JsonConvert.SerializeObject(new { result.Response });
-                //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, s);
-                //return response;
-            }
-            
-           
-            
+            }         
             return Request.CreateResponse(result.StatusCode, result.Response);
         }
     }

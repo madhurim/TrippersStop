@@ -4,15 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Trippism.TraveLayer;
+using TrippismApi.TraveLayer;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre;
 using AutoMapper;
-using TraveLayer.APIServices;
 using TraveLayer.CustomTypes.Sabre.Response;
 
 
-namespace Trippism.Areas.Sabre.Controllers
+namespace TrippismApi.Areas.Sabre.Controllers
 {
     public class FareForecastController : ApiController
     {
@@ -31,11 +30,11 @@ namespace Trippism.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetResponse(string url)
         {
-            APIHelper.SetApiToken(_apiCaller, _cacheService);
+            SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
             APIResponse result = _apiCaller.Get(url).Result;
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                APIHelper.RefreshApiToken(_cacheService, _apiCaller);
+                SabreApiTokenHelper.RefreshApiToken(_cacheService, _apiCaller);
                 result = _apiCaller.Get(url).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)

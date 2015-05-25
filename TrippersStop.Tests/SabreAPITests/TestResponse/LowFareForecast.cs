@@ -4,18 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TraveLayer.APIServices;
 using TraveLayer.CustomTypes;
 using TraveLayer.CustomTypes.Sabre;
-using Trippism.TraveLayer;
-using Trippism.Areas.Sabre.Controllers;
+using TrippismApi.TraveLayer;
+using TrippismApi.Areas.Sabre.Controllers;
 using System.Net.Http;
 using System.Web.Http.Hosting;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using System.Web.Http;
 using System.Net;
 
-namespace Trippism.Tests.SabreAPITests
+namespace TrippismApi.Tests.SabreAPITests
 {
     [TestClass]
     public class LowFareForecast

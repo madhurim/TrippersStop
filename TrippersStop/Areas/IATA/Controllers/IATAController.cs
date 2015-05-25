@@ -12,10 +12,10 @@ using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.IATA.ViewModels;
 using System.Text;
 using MongoDB.Driver;
-using Trippism.Areas.IATA.Models;
 
 
-namespace Trippism.Areas.IATA.Controllers
+
+namespace TrippismApi.Areas.IATA.Controllers
 {
     public class IATAController : ApiController
     {

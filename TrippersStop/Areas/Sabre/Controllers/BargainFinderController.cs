@@ -5,8 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre;
-using Trippism.TraveLayer;
-using TraveLayer.APIServices;
+using TrippismApi.TraveLayer;
 using ServiceStack;
 using AutoMapper;
 using Newtonsoft.Json;
@@ -17,7 +16,7 @@ using System.Xml.Linq;
 using System.Web.Hosting;
 using TraveLayer.CustomTypes.Sabre.Response;
 
-namespace Trippism.Areas.Sabre.Controllers
+namespace TrippismApi.Areas.Sabre.Controllers
 {
     public class BargainFinderController : ApiController
     {
@@ -35,12 +34,12 @@ namespace Trippism.Areas.Sabre.Controllers
             if (bargainFinder != null && bargainFinder.OTA_AirLowFareSearchRQ!=null && pos != null)
             bargainFinder.OTA_AirLowFareSearchRQ.POS = pos;
             //TBD : URL configurable using XML
-            APIHelper.SetApiToken(_apiCaller, _cacheService);
+            SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
             
             APIResponse result = _apiCaller.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                APIHelper.RefreshApiToken(_cacheService, _apiCaller);
+                SabreApiTokenHelper.RefreshApiToken(_cacheService, _apiCaller);
                 result = _apiCaller.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)
@@ -54,7 +53,7 @@ namespace Trippism.Areas.Sabre.Controllers
 
         private POS GetPOS()
         {
-            XElement xelement = XElement.Load(HostingEnvironment.MapPath("/POS/PointOfSales.xml"));
+            XElement xelement = XElement.Load(HostingEnvironment.MapPath("/Areas/Sabre/POS/PointOfSales.xml"));
 
             IEnumerable<XElement> ps = xelement.Elements("POS")
                    .Where(x => x.Attribute("IsActive").Value == "true" && x.Attribute("RequestType").Value == "BargainFinder"); 

@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 
 
-namespace Trippism
+namespace TrippismApi
 {
     public static class AreaRegistrationContextExtensions
     {
