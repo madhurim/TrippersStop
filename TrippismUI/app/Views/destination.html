@@ -264,9 +264,10 @@
         <div class="row" style="margin-left:0px;margin-right:0px;">
             <div id="wrapper">
 
-                <div id="map_canvas" ui-map="destinationMap" class="map" ui-options="mapOptions">
+                <!--<div id="map_canvas" ui-map="destinationMap" class="map" ui-options="mapOptions">
 
-                </div>
+                </div>-->
+                <div google-map btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
 
                 <div id="over_map" ng-show="IsHistoricalInfo">
                     <div class="col-md-12">
@@ -317,9 +318,9 @@
                 </div>
             </div>
 
-            <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
+            <!--<div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
                  ui-event="{'map-click': 'markerClicked(marker)'}">
-            </div>
+            </div>-->
 
 
         </div>
