@@ -3,9 +3,9 @@
     'use strict';
     var controllerId = 'DestinationController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$rootScope', '$modal', '$http', '$q', '$compile', 'blockUIConfig', '$location', '$anchorScroll','DestinationFactory','$filter', DestinationController]);
+        ['$scope', '$rootScope', '$http', '$q', 'blockUIConfig', '$location', '$anchorScroll','DestinationFactory', DestinationController]);
 
-    function DestinationController($scope, $rootScope, $modal, $http, $q, $compile, blockUIConfig, $location,$anchorScroll, DestinationFactory,$filter) {
+    function DestinationController($scope, $rootScope, $http, $q, blockUIConfig, $location,$anchorScroll, DestinationFactory) {
        
         function MapscrollTo(id) {
             var old = $location.hash();
@@ -20,25 +20,6 @@
         $scope.formats = ['yyyy-MM-dd', 'dd-MM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate','MM/dd/yyyy'];
         $scope.format = $scope.formats[5];       
         $scope.accuracy = "0";
-
-        $scope.destinationMap = undefined;
-        
-        //$scope.markerClicked = function (marker) {
-        //    $scope.destinationMap.panTo(marker.getPosition());
-        //    $scope.IsHistoricalInfo = false;
-        //    $scope.MarkerInfo = marker.CustomMarkerInfo;
-        //};
-
-        //Set Map Location to Origin
-        var SetMaptoCurrentLocation = function () {
-            var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin });
-            if (originairport != undefined) {
-                var latlng = new google.maps.LatLng(originairport.airport_Lat, originairport.airport_Lng);
-                $scope.destinationMap.setCenter(latlng);
-                $scope.destinationMap.panTo(latlng);
-                $scope.destinationMap.setZoom(5);
-            }
-        }
 
         function ConvertToRequiredDate(dt) {
             dt = new Date(dt);
@@ -211,16 +192,6 @@
             return originairport.airport_Code + ", " + airportname + ", " + originairport.airport_CityName + ", " + CountryName;
         }
 
-        function getnearByAirport() {
-            $http({
-                method: 'GET',
-                url: 'https://airport.api.aero/airport/ORK?user_key=80d9c3bb86b16e397e4bd94875a34552?callback=JSON_CALLBACK',
-                headers: { 'Content-type': 'application/xml' }
-            }).success(function (d) {
-
-            });
-        }
-
         function getIpinfo() {
             blockUIConfig.autoBlock = true;
             var url = "http://ipinfo.io?callback=JSON_CALLBACK";
@@ -287,8 +258,7 @@
             $scope.destinationlist = "";           
             $scope.faresList = [];
             $scope.IsHistoricalInfo = false;
-            if (buttnText == 'All') { $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; }
-            //else if (buttnText == 'Top10') { $scope.SearchbuttonTop10IsLoading = true; $scope.SearchbuttonTo10Text = $scope.LoadingText; }
+            if (buttnText == 'All') { $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; }           
             else if (buttnText == 'Cheapest') { $scope.SearchbuttonChepestIsLoading = true; $scope.SearchbuttonCheapestText = $scope.LoadingText; }
             var data = {
                 "Origin": $scope.Origin,
@@ -307,21 +277,17 @@
                 "Destination": $scope.Destination
 
             };
-
+            debugger;
             DestinationFactory.findDestinations(data).then(function (data) {
-                $scope.SearchbuttonText = "Get Destinations";
-                //$scope.SearchbuttonTo10Text = "Top 10";
+                $scope.SearchbuttonText = "Get Destinations";               
                 $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
-                $scope.SearchbuttonIsLoading = false;
-                //$scope.SearchbuttonTop10IsLoading = false;
+                $scope.SearchbuttonIsLoading = false;              
                 $scope.SearchbuttonChepestIsLoading = false;
 
-                if (data != null) {           
-                    if (data.FareInfo != null) {
+                if (data.FareInfo != null) {                   
                         $scope.destinationlist = data.FareInfo;
                         $scope.buttontext = "Cheapest";                        
                         MapscrollTo('wrapper')
-                    }
                 }
                 else {
                     alertify.alert("Destination Finder", "");

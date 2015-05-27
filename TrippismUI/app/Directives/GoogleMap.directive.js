@@ -11,7 +11,7 @@ angular.module('TrippismUIApp')
           defaultlng: "@"
       }
 
-      directive.controller = function ($scope, $rootScope, $modal, $http, $q, $compile, blockUIConfig, $location, $anchorScroll, DestinationFactory, $filter, $timeout) {
+      directive.controller = function ($scope, $rootScope, $http, $q, $compile, blockUIConfig, $location, DestinationFactory, $filter, $timeout) {
           $scope.destinationMap = undefined;
           $scope.faresList = [];
           $scope.myMarkers = [];
@@ -29,7 +29,7 @@ angular.module('TrippismUIApp')
                           { featureType: "transit.line", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
                           { featureType: "transit.station", elementType: "labels.text", stylers: [{ visibility: "off" }] },
                           { featureType: "transit.station", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
-                          { featureType: "water", elementType: "all", stylers: [{ color: "#BCCFDE" }] }];
+                          { featureType: "water", elementType: "all", stylers: [{ color: "#BCCFDE" }] }];                         
 
           $scope.mapOptions = {
               center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng),
@@ -154,16 +154,17 @@ angular.module('TrippismUIApp')
               return d.promise;
           }
 
-          $scope.resetMarker = function () {
-              $scope.destinationMap.setZoom(2);
-              var latlng = new google.maps.LatLng($scope.defaultlat, $scope.defaultlng);
-              $scope.destinationMap.setCenter(latlng);
+          $scope.resetMarker = function () {            
+              $timeout(function () {              
+                  $scope.destinationMap.setZoom(2);
+                  var latlng = new google.maps.LatLng($scope.defaultlat, $scope.defaultlng);
+                  $scope.destinationMap.setCenter(latlng);
+              }, 0,false);             
               if ($scope.myMarkers.length > 0) {
                   for (var i = 0; i < $scope.myMarkers.length; i++)
                       $scope.myMarkers[i].setMap(null);
                   $scope.myMarkers.length = 0;
               }
-
               $scope.myMarkers = [];
           }
           
@@ -172,9 +173,7 @@ angular.module('TrippismUIApp')
       directive.link = function (scope, elm, attrs) {
           scope.$watchGroup(['btntext', 'destinations', 'airportlist'], function (newValues, oldValues, scope) {
               if (scope.destinations == "") {
-                  $timeout(function() {
-                      scope.resetMarker();
-                  }, 0, false);
+                      scope.resetMarker();                
               }
               else {
                   scope.displayDestinations(scope.btntext, scope.destinations);
