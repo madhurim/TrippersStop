@@ -23,36 +23,16 @@
             formatYear: 'yy',
             startingDay: 1
         };
-        $scope.AvailableThemes = [
-                                    { id: "BEACH", value: "BEACH" },
-                                    { id: "CARIBBEAN", value: "CARIBBEAN" },
-                                    { id: "DISNEY", value: "DISNEY" },
-                                    { id: "GAMBLING", value: "GAMBLING" },
-                                    { id: "HISTORIC", value: "HISTORIC" },
-                                    { id: "MOUNTAINS", value: "MOUNTAINS" },
-                                    { id: "NATIONAL-PARKS", value: "NATIONAL-PARKS" },
-                                    { id: "OUTDOORS", value: "OUTDOORS" },
-                                    { id: "ROMANTIC", value: "ROMANTIC" },
-                                    { id: "SHOPPING", value: "SHOPPING" },
-                                    { id: "SKIING", value: "SKIING" },
-                                    { id: "THEME-PARK", value: "THEME-PARK" }
-        ];
-        $scope.AvailableRegions = [
-                                    { id: 'Africa', value: 'Africa' },
-                                    { id: 'Asia Pacific', value: 'Asia Pacific' },
-                                    { id: 'Europe', value: 'Europe' },
-                                    { id: 'Latin America', value: 'Latin America' },
-                                    { id: 'Middle East', value: 'Middle East' },
-                                    { id: 'North America', value: 'North America' },
-        ];
+        $scope.AvailableThemes = AvailableTheme();
+        $scope.AvailableRegions = AvailableRegions();
 
         $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 192));
         $scope.LoadingText = "Loading..";
         $scope.SearchbuttonText = "Get Destinations";
-        $scope.SearchbuttonTo10Text = "Top 10";
+       // $scope.SearchbuttonTo10Text = "Top 10";
         $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
         $scope.SearchbuttonIsLoading = false;
-        $scope.SearchbuttonTop10IsLoading = false;
+       // $scope.SearchbuttonTop10IsLoading = false;
         $scope.SearchbuttonChepestIsLoading = false;
 
         var dt = new Date();
