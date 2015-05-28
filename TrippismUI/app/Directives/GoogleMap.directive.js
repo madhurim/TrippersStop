@@ -40,41 +40,6 @@ angular.module('TrippismUIApp')
               mapTypeId: google.maps.MapTypeId.ROADMAP
           };
 
-          $scope.displayDestinations = function (buttnText, destinations) {
-              $scope.faresList = [];
-              if (buttnText == 'All') {
-                  $scope.faresList = angular.copy(destinations);
-                  DrawMaps(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
-              }
-
-              if (buttnText == 'Cheapest') {
-                  if (destinations.length > 0) {
-                      var sortedObjs = _.filter(destinations, function (item) {
-                          return item.LowestFare !== 'N/A';
-                      });
-                      sortedObjs = _(sortedObjs).sortBy(function (obj) { return parseInt(obj.LowestFare, 10) })
-                      for (var i = 0; i < 10; i++)
-                          if (sortedObjs[i] != undefined)
-                              $scope.faresList.push(sortedObjs[i]);
-                    
-                  }
-                  DrawMaps(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
-              }
-          }
-
-          function DrawMaps(pdestinations) {             
-              var destinations = GetUniqueDestinations(pdestinations);
-              $scope.showPosition(destinations);
-          }
-
-          var GetUniqueDestinations = function (destinations) {
-
-              var result = _.map(destinations, function (currentObject) {
-                  return _.omit(currentObject, "Links");
-              });
-              return result;
-          }
-
           $scope.showPosition = function (destinations) {
               $scope.destinationslist = destinations;
               var promises = [];
@@ -89,7 +54,27 @@ angular.module('TrippismUIApp')
               }.bind(this));
           }
 
+          $scope.displayDestinations = function (buttnText, destinations) {
+              $scope.faresList = [];
+              if (buttnText == 'All') {
+                  $scope.faresList = angular.copy(destinations);
+                  $scope.showPosition(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
+              }
 
+              if (buttnText == 'Cheapest') {
+                  if (destinations.length > 0) {
+                      var sortedObjs = _.filter(destinations, function (item) {
+                          return item.LowestFare !== 'N/A';
+                      });
+                      sortedObjs = _(sortedObjs).sortBy(function (obj) { return parseInt(obj.LowestFare, 10) })
+                      for (var i = 0; i < 10; i++)
+                          if (sortedObjs[i] != undefined)
+                              $scope.faresList.push(sortedObjs[i]);
+                    
+                  }
+                  $scope.showPosition(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
+              }
+          }
 
           var RenderMap = function (maps) {
               $scope.InfoWindow;
@@ -172,10 +157,8 @@ angular.module('TrippismUIApp')
 
       directive.link = function (scope, elm, attrs) {
           scope.$watchGroup(['btntext', 'destinations', 'airportlist'], function (newValues, oldValues, scope) {
-              if (scope.destinations == "") {
-                      scope.resetMarker();                
-              }
-              else {
+              scope.resetMarker();
+              if (scope.destinations!=undefined && scope.destinations.length > 0) {
                   scope.displayDestinations(scope.btntext, scope.destinations);
                   scope.airportlist;
               }

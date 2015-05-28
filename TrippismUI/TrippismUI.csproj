@@ -24,6 +24,7 @@
     <Content Include="app\Directives\GoogleMap.directive.js" />
     <Content Include="app\Factory\DestinationFactory.js" />
     <Content Include="app\Factory\FareforecastFactory.js" />
+    <Content Include="app\Factory\UtilFactory.js" />
     <Content Include="app\Scripts\common.js" />
     <Content Include="app\Scripts\libs\event.js" />
     <Content Include="app\Scripts\libs\ui-map.js" />
@@ -32,6 +33,7 @@
     <Content Include="app\Styles\bootstrap.min.css" />
     <Content Include="app\Styles\css\trippismapp.css" />
     <Content Include="app\Styles\css\icon_top.png" />
+    <Content Include="app\Utility.js" />
     <Content Include="app\Views\GoogleMap.html" />
     <Content Include="app\Views\default.html" />
     <Content Include="app\Views\destination.html" />

@@ -18,8 +18,10 @@
         }
 
         $scope.GoToTop = function () {
+            var old = $location.hash();
             $location.hash('top');
             $anchorScroll();
+            $location.hash(old);
         }
     }
 })();

@@ -9,7 +9,7 @@
                         <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Origin.$error.required">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                             Please enter Origin
-                        </div>            
+                        </div>
                         <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.LenghtOfStay.$error.required">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                             Please enter lenght of stay
@@ -60,7 +60,7 @@
                     </div>
 
                     <script type="text/ng-template" id="customTemplate.html">
-                        <a style="padding-left:10px;" tabindex="-1" class="row-even1">                           
+                        <a style="padding-left:10px;" tabindex="-1" class="row-even1">
                             <i ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
 
                             <span>{{match.model.airport_CityCode}}</span>,
@@ -91,8 +91,8 @@
                                                tabindex="1"
                                                placeholder="Enter Origin"
                                                typeahead="state for state in AvailableCodes |  filter: $viewValue  | limitTo: 150"
-                                               class="form-control">     
-                                      
+                                               class="form-control">
+
                                     </div>
 
                                     <div class="checkbox">
@@ -180,7 +180,7 @@
                                             </select>
 
                                         </div>
-                                    </div>                                  
+                                    </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Theme</label>
