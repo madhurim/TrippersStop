@@ -3,17 +3,16 @@
     'use strict';
     var controllerId = 'DestinationController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$rootScope', '$http', '$q', 'blockUIConfig', '$location', '$anchorScroll', 'DestinationFactory', 'UtilFactory', DestinationController]);
+        ['$scope', 'DestinationFactory', 'UtilFactory', DestinationController]);
 
-    function DestinationController($scope, $rootScope, $http, $q, blockUIConfig, $location, $anchorScroll, DestinationFactory, UtilFactory) {
+    function DestinationController($scope, DestinationFactory, UtilFactory) {
 
         $scope.hasError = false;
         $scope.Location = "";
         $scope.AvailableCodes = [];
         $scope.formats = Dateformat();
         $scope.format = $scope.formats[5];
-        $scope.activate = activate;
-        $rootScope.apiURL = 'http://localhost:14606/sabre/api/';
+        $scope.activate = activate;      
         $scope.findDestinations = findDestinations;
         $scope.Origin = '';
         $scope.Destination = '';
@@ -28,11 +27,9 @@
 
         $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 192));
         $scope.LoadingText = "Loading..";
-        $scope.SearchbuttonText = "Get Destinations";
-       // $scope.SearchbuttonTo10Text = "Top 10";
+        $scope.SearchbuttonText = "Get Destinations";       
         $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
-        $scope.SearchbuttonIsLoading = false;
-       // $scope.SearchbuttonTop10IsLoading = false;
+        $scope.SearchbuttonIsLoading = false;       
         $scope.SearchbuttonChepestIsLoading = false;
 
         var dt = new Date();

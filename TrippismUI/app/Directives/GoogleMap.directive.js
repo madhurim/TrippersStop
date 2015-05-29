@@ -11,7 +11,7 @@ angular.module('TrippismUIApp')
           defaultlng: "@"
       }
 
-      directive.controller = function ($scope, $rootScope, $http, $q, $compile, blockUIConfig, $location, DestinationFactory, $filter, $timeout) {
+      directive.controller = function ($scope, $q, $compile, DestinationFactory, $filter, $timeout) {
           $scope.destinationMap = undefined;
           $scope.faresList = [];
           $scope.myMarkers = [];
