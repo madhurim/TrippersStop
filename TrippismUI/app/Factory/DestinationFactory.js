@@ -8,8 +8,8 @@
         // Define the functions and properties to reveal.
         var service = {
             findDestinations: findDestinations,
-            fareforecast: fareforecast,
-            SeasonalityHistorySearch: SeasonalityHistorySearch,
+         //   fareforecast: fareforecast,
+           // SeasonalityHistorySearch: SeasonalityHistorySearch,
         };
         return service;
 
@@ -34,30 +34,30 @@
                 return e;
             });
         }
-        function SeasonalityHistorySearch(searchdata) {
+        //function SeasonalityHistorySearch(searchdata) {
 
 
-            var url = $rootScope.apiURL + 'Seasonality?' +
-             'Destination=' + searchdata.Destination;
-            return $http.get(url)
-                .then(function (data) {
-                    return data.data;
-                }, function (e) {
-                    return e;
-                });
-        }
+        //    var url = $rootScope.apiURL + 'Seasonality?' +
+        //     'Destination=' + searchdata.Destination;
+        //    return $http.get(url)
+        //        .then(function (data) {
+        //            return data.data;
+        //        }, function (e) {
+        //            return e;
+        //        });
+        //}
 
-        function fareforecast(data) {
-            //var url = $rootScope.apiURL + '/api/FareForecast/Get?Origin=' + data.Origin + '&EarliestDepartureDate='
-            // + data.EarliestDepartureDate + '&LatestDepartureDate=' + data.LatestDepartureDate + '&Destination=' + data.Destination + '&lengthofstay=' + data.LengthOfStay ;
-            var url = $rootScope.apiURL + 'FareForecast/Get?Origin=' + data.Origin + '&DepartureDate='
-             + data.EarliestDepartureDate + '&ReturnDate=' + data.LatestDepartureDate + '&Destination=' + data.Destination;
-            return $http.get(url)
-                .then(function (data) {
-                    return data.data;
-                }, function (e) {
-                    return e;
-                });
-        }
+        //function fareforecast(data) {
+        //    //var url = $rootScope.apiURL + '/api/FareForecast/Get?Origin=' + data.Origin + '&EarliestDepartureDate='
+        //    // + data.EarliestDepartureDate + '&LatestDepartureDate=' + data.LatestDepartureDate + '&Destination=' + data.Destination + '&lengthofstay=' + data.LengthOfStay ;
+        //    var url = $rootScope.apiURL + 'FareForecast/Get?Origin=' + data.Origin + '&DepartureDate='
+        //     + data.EarliestDepartureDate + '&ReturnDate=' + data.LatestDepartureDate + '&Destination=' + data.Destination;
+        //    return $http.get(url)
+        //        .then(function (data) {
+        //            return data.data;
+        //        }, function (e) {
+        //            return e;
+        //        });
+        //}
     }
 })();
