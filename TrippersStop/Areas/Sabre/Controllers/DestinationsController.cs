@@ -17,6 +17,9 @@ using System.Configuration;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
+    /// <summary>
+    /// Return the current nonstop lead fare and an overall lead fare available to destinations
+    /// </summary>
     public class DestinationsController : ApiController
     {
 
@@ -24,6 +27,10 @@ namespace TrippismApi.Areas.Sabre.Controllers
         ICacheService _cacheService;
         const string _destinationKey = "TrippismApi.Destinations.All";
         string _expireTime = ConfigurationManager.AppSettings["RedisExpireInMin"].ToString();
+
+        /// <summary>
+        /// Set api class and cache service.
+        /// </summary>
         public DestinationsController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
@@ -87,7 +94,9 @@ namespace TrippismApi.Areas.Sabre.Controllers
             return GetResponse(url);
         }
 
-
+        /// <summary>
+        /// Format url based on request.
+        /// </summary>
         private string GetURL(Destinations destinationsRequest)
         {
             StringBuilder url = new StringBuilder();
@@ -116,6 +125,9 @@ namespace TrippismApi.Areas.Sabre.Controllers
             }
             return url.ToString();
         }
+        /// <summary>
+        /// Get response from api based on url.
+        /// </summary>
         private HttpResponseMessage GetResponse(string url, int count = 0)
         {
             SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);

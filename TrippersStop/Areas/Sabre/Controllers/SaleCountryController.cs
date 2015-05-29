@@ -12,20 +12,33 @@ using TrippismApi.TraveLayer;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
+    /// <summary>
+    /// To retrieve a list of supported point of sale country codes. 
+    /// To obtain country codes to use as a request parameter for other REST APIs.
+    /// </summary>
     public class SaleCountryController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        /// <summary>
+        /// Set api class and cache service.
+        /// </summary>
         public SaleCountryController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;   
         }
+        /// <summary>
+        /// Retrieves a list of supported point of sale country codes and associated country names
+        /// </summary>
         public HttpResponseMessage Get()
         {
             string url = "v1/lists/supported/pointofsalecountries";
             return GetResponse(url);
         }
+        /// <summary>
+        /// Get response from api based on url.
+        /// </summary>
         private HttpResponseMessage GetResponse(string url)
         {
             SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);

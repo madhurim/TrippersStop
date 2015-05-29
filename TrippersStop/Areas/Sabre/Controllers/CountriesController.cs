@@ -13,27 +13,41 @@ using TrippismApi.TraveLayer;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
-    
+    /// <summary>
+    /// Retrieves a list of origin and destination countries.
+    /// </summary>
     public class CountriesController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        /// <summary>
+        /// Set api class and cache service.
+        /// </summary>
         public CountriesController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;        
         }
         // GET api/countries
+        /// <summary>
+        /// Retrieves a list of origin and destination countries.
+        /// </summary>
         public HttpResponseMessage Get()
         {
             string url = "v1/lists/supported/countries";
             return GetResponse(url);
         }
+        /// <summary>
+        /// Retrieves a list of origin and destination countries based on point of sale country.
+        /// </summary>
         public HttpResponseMessage Get(string pointofsalecountry)
         {
             string url = string.Format("v1/lists/supported/countries?pointofsalecountry={0}", pointofsalecountry);
             return GetResponse(url);
         }
+        /// <summary>
+        /// Get response from api based on url.
+        /// </summary>
         private HttpResponseMessage GetResponse(string url)
         {
             SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);

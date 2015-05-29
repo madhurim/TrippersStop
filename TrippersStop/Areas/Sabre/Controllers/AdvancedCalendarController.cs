@@ -13,15 +13,27 @@ using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
+    /// <summary>
+    /// AdvancedCalendar is used for -
+    /// Consumers who want to shop across a large set of travel dates. 
+    /// Consumers who know their destination, but are flexible on their travel dates and want to search flight options across a large set or range of travel dates, or lengths of stay.
+    /// Consumers who want to shop across several specific shopping parameters.
+    /// </summary>
     public class AdvancedCalendarController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        /// <summary>
+        /// Set api class and cache service.
+        /// </summary>
         public AdvancedCalendarController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;
         }
+        /// <summary>
+        /// To get priced air itineraries to a destination airport on specific roundtrip travel dates.
+        /// </summary>
         public HttpResponseMessage Post(OTA_AdvancedCalendar advancedCalendar)
         {
             SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
@@ -41,6 +53,9 @@ namespace TrippismApi.Areas.Sabre.Controllers
             }
             return Request.CreateResponse(result.StatusCode,result.Response);
         }
+        /// <summary>
+        /// Serialize the json reponse
+        /// </summary>
         private LowFareSearch DeSerializeResponse(string result)
         {
             BargainFinderReponse reponse = new BargainFinderReponse();
