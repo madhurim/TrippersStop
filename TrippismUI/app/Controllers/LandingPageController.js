@@ -9,8 +9,18 @@
    
     function LandingPageController($scope, $rootScope, $location, $anchorScroll) {
 
-        $rootScope.apiURL = 'http://localhost:14606/sabre/api/';
+        if (angular.lowercase($location.host()) == "localhost")
+        {
+            //devlopment url
+            $rootScope.apiURL = 'http://localhost:14606/sabre/api/';
+        }
+        else
+        {
+            //live url
+            $rootScope.apiURL = '';
+        }
 
+     
         $scope.getClass = function (path) {
             if ($location.path().substr(0, path.length) == path) {
                 return "active"

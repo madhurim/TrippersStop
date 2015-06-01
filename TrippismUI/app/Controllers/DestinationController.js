@@ -116,10 +116,10 @@
         function activate() {
             UtilFactory.ReadAirportJson().then(function (data) {
                 $scope.AvailableAirports = data;
+                $scope.CalledOnPageLoad = true;
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
                 UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
-                    $scope.Origin = data.airport_Code;
-                    $scope.CalledOnPageLoad = true;
+                    $scope.Origin = data.airport_Code;                  
                     $scope.findDestinations('Cheapest');
                 });
                 UtilFactory.MapscrollTo('wrapper');
@@ -179,7 +179,7 @@
         $scope.SearchbuttonChepestIsLoading = false;
 
         function findDestinations(buttnText) {
-            if ($scope.CalledOnPageLoad != true) {
+            if ($scope.CalledOnPageLoad == false) {
                 if ($scope.frmdestfinder.$invalid) {
                     $scope.hasError = true;
                     return;
