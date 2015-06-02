@@ -45,10 +45,6 @@
         $scope.minFromDate = new Date();
         $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
 
-        $scope.ToDate = ConvertToRequiredDate(Todt);
-        $scope.FromDate = ConvertToRequiredDate(dt);
-
-
         $scope.$watch(function (scope) { return scope.Earliestdeparturedate },
            function (newValue, oldValue) {
                if (newValue == null)

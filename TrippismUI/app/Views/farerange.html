@@ -1,34 +1,42 @@
-﻿<div  ng-controller="FareforecastController">
+﻿<div ng-controller="FareRangeController">
     <div style="margin-top:10px;">
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">Search Fare</div>
                 <div class="panel-body">
-                    <div ng-show="hasError && frmforecastfinder.$invalid">
+                    <div ng-show="hasError && frmrangefinder.$invalid">
 
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmforecastfinder.Origin.$error.required">
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmrangefinder.Origin.$error.required">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                             Please enter Origin.
                         </div>
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmforecastfinder.Destination.$error.required">
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmrangefinder.Destination.$error.required">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                             Please enter Destination.
                         </div>
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmforecastfinder.FromDate.$error.required">
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmrangefinder.EarliestDepartureDate.$error.required">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please select from date.
+                            Please select Earliest Departure Date.
                         </div>
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmforecastfinder.FromDate.$invalid && !frmforecastfinder.FromDate.$error.required" >
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmrangefinder.EarliestDepartureDate.$invalid && !frmrangefinder.EarliestDepartureDate.$error.required">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please select valid from date.
+                            Please select valid Earliest Departure Date.
                         </div>
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmforecastfinder.ToDate.$error.required">
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmrangefinder.LatestDepartureDate.$error.required">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please select to date.
+                            Please select Latest Departure Date.
                         </div>
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmforecastfinder.ToDate.$invalid && !frmforecastfinder.ToDate.$error.required" >
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmrangefinder.LatestDepartureDate.$invalid && !frmrangefinder.LatestDepartureDate.$error.required">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please select valid to date.
+                            Please select valid Latest Departure Date.
+                        </div>
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmrangefinder.LenghtOfStay.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please enter Lenght Of Stay.
+                        </div>
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmrangefinder.LenghtOfStay.$invalid && !frmrangefinder.LenghtOfStay.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please enter valid Lenght Of Stay.Length Of Stay Must Be between 0-16.
                         </div>
                     </div>
                     <script type="text/ng-template" id="customTemplate.html">
@@ -43,9 +51,9 @@
 
                         </a>
                     </script>
-                    <form name="frmforecastfinder" novalidate>
+                    <form name="frmrangefinder" novalidate>
                         <div class="form-group">
-                            <label for="origin">Enter Your Origin</label>                          
+                            <label for="origin">Enter Your Origin</label>                            
                             <input type="text"
                                    ng-model="Origin"
                                    typeahead-min-length="2"
@@ -61,7 +69,7 @@
                                    class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="destination">Enter Your Destination</label>                           
+                            <label for="destination">Enter Your Destination</label>                         
                             <input type="text"
                                    ng-model="Destination"
                                    typeahead-min-length="2"
@@ -77,7 +85,7 @@
                                    class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">From Date</label>
+                            <label for="exampleInputPassword1">Earliest Departure Date</label>
                             <p class="input-group">
                                 <input type="text"
                                        disabled="disabled"
@@ -85,28 +93,28 @@
                                        class="form-control"
                                        datepicker-popup="{{format}}"
                                        min-date="minTodayDate"
-                                       max-date="MaximumFromDate"
-                                       name="FromDate"
-                                       ng-model="FromDate"
-                                       is-open="openedFromDate"
+                                       max-date="MaximumEarliestDepartureDate"
+                                       name="EarliestDepartureDate"
+                                       ng-model="EarliestDepartureDate"
+                                       is-open="openedEarliestDepartureDate"
                                        datepicker-options="dateOptions"
                                        ng-required="true" close-text="Close" />
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" ng-click="openFromDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    <button type="button" class="btn btn-default" ng-click="openEarliestDepartureDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
                             </p>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">To Date</label>
+                            <label for="exampleInputPassword1">Latest Departure Date</label>
                             <p class="input-group">
                                 <input type="text"
                                        disabled="disabled"
                                        class="form-control"
                                        datepicker-popup="{{format}}"
-                                       min-date="minFromDate"
-                                       max-date="MaximumToDate"
-                                       ng-model="ToDate"
-                                       name="ToDate"
+                                       min-date="minEarliestDepartureDate"
+                                       max-date="MaximumLatestDepartureDate"
+                                       ng-model="LatestDepartureDate"
+                                       name="LatestDepartureDate"
                                        is-open="opened"
                                        datepicker-options="dateOptions"
                                        date-disabled="disabled(date, mode)"
@@ -115,8 +123,12 @@
                                     <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
                             </p>
-                        </div>
-                        <button ng-disabled="SearchbuttonIsLoading" class="btn btn-primary btn-sm" ng-click="findfares()">{{SearchbuttonText}}</button>
+                        </div>                     
+                            <div class="form-group">
+                                <label for="lengthofstay">Lenght of Stay(days)</label>
+                                <input type="number" name="LenghtOfStay" ng-model="LenghtOfStay" value="" class="form-control" min="0" max="16" required>
+                            </div>
+                        <button ng-disabled="SearchbuttonIsLoading" class="btn btn-primary btn-sm" ng-click="findfarerRange()">{{SearchbuttonText}}</button>
                     </form>
                 </div>
             </div>
@@ -124,33 +136,42 @@
 
         <div class="col-md-8">
             <div class="panel panel-default">
-                <div class="panel-heading">Available Fares</div>
-                <div class="panel-body">
-                    <div ng-show="IsSearched && isUndefined(SearchedfareInfo)">No fare found</div>
-                    <div class="col-md-12" ng-show="!isUndefined(SearchedfareInfo)">
+                <div class="panel-heading">Available Fare Range</div>
+                <div class="panel-body" style="padding:3px;padding-top:16px;">
+                    <div ng-show="IsSearched && isUndefined(SearchedfarerangeInfo)">No fare range found</div>
+                    <div class="col-md-12" ng-show="!isUndefined(SearchedfarerangeInfo)">
                         <div class="thumbnail">
                             <div class="panel panel-default" style="border:none;">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Fare Info</h3>
+                                    <h3 class="panel-title">Fare Range Info</h3>
                                 </div>
                                 <table class="table">
-                                    <tr><th class="col-md-3">Origin</th><td class="col-md-9 word-wrap">{{SearchedfareInfo.OriginLocation}}</td></tr>
-                                    <tr><th class="col-md-3">Destination</th><td class="col-md-9 word-wrap">{{SearchedfareInfo.DestinationLocation}}</td></tr>
-                                    <tr><th class="col-md-3">Departure Date</th><td class="col-md-9 word-wrap">{{SearchedfareInfo.DepartureDateTime | date:"yyyy-MM-dd"}}</td></tr>
-                                    <tr><th class="col-md-3">Return Date</th><td class="col-md-9 word-wrap">{{SearchedfareInfo.ReturnDateTime | date:"yyyy-MM-dd"}}</td></tr>
-                                    <tr><th class="col-md-3">Currency Code</th><td class="col-md-9 word-wrap">{{SearchedfareInfo.CurrencyCode}}</td></tr>
-                                    <tr><th class="col-md-3">Highest Predicted Fare</th><td class="col-md-9 word-wrap">{{SearchedfareInfo.Forecast.HighestPredictedFare}}</td></tr>
-                                    <tr><th class="col-md-3">Lowest Predicted Fare</th><td class="col-md-9 word-wrap">{{SearchedfareInfo.Forecast.LowestPredictedFare}}</td></tr>
-                                    <tr><th class="col-md-3">Lowest Fare</th><td class="col-md-9 word-wrap">{{SearchedfareInfo.LowestFare}}</td></tr>
-                                    <tr><th class="col-md-3">Recommendation</th><td class="col-md-9 word-wrap">{{SearchedfareInfo.Recommendation}}</td></tr>
+                                    <tr>
+                                        <th>Currency Code</th>
+                                        <th>Maximum Fare</th>
+                                        <th>Minimum Fare</th>
+                                        <th>Median Fare</th>                                      
+                                        <th>Count</th>
+                                        <th>Departure Date Time</th>
+                                        <th>Return Date Time</th>
+                                    </tr>                                
+                                    <tr ng-repeat="range in SearchedfarerangeInfo.FareData">
+                                        <td class="word-wrap text-center">{{range.CurrencyCode}}</td>
+                                        <td class="word-wrap text-right">{{range.MaximumFare | currency}}</td>
+                                        <td class="word-wrap text-right">{{range.MinimumFare | currency}}</td>
+                                        <td class="word-wrap text-right">{{range.MedianFare | currency}}</td>                                       
+                                        <td class="word-wrap text-center">{{range.Count}}</td>
+                                        <td class="word-wrap text-center">{{range.DepartureDateTime | date:"yyyy-MM-dd"}}</td>
+                                        <td class="word-wrap text-center">{{range.ReturnDateTime | date:"yyyy-MM-dd"}}</td>
+                                    </tr>                                
                                 </table>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
+
+    </div>    
 </div>

@@ -105,3 +105,13 @@ position: absolute;
 right: -6px;
         bottom: 14px;
     }
+
+.word-wrap {
+  word-break: break-word;
+}
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width: 400px; 
+    height: 300px
+}

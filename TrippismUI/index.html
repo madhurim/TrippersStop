@@ -15,7 +15,9 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li ng-class="getClass('/destination')" class=""><a href="#/destination">Destination</a></li>
-                    <li ng-class="getClass('/fareforecast')"><a href="#/fareforecast">Fareforecast</a></li>
+                    <li ng-class="getClass('/fareforecast')"><a href="#/fareforecast">FareForecast</a></li>
+                    <li ng-class="getClass('/farerange')"><a href="#/farerange">FareRange</a></li>
+                    <li ng-class="getClass('/seasonality')"><a href="#/seasonality">Seasonality</a></li>
                 </ul>
             </div>
         </div>
@@ -51,8 +53,11 @@
     <script src="app/Directives/GoogleMap.directive.js"></script>
     <script src="app/Utility.js"></script>
     <script src="app/Factory/UtilFactory.js"></script>
-
-
+    <script src="app/Controllers/FareRangeController.js"></script>
+    <script src="app/Factory/FareRangeFactory.js"></script>
+    <script src="app/Controllers/SeasonalityController.js"></script>
+    <script src="app/Factory/SeasonalityFactory.js"></script>
+   
     <link href="app/Styles/alertifyjs/alertify.css" rel="stylesheet" />
     <!-- include semantic ui theme  -->
 
