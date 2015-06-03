@@ -17,7 +17,7 @@
         else
         {
             //live url
-            $rootScope.apiURL = '';
+            $rootScope.apiURL = 'http://' + $location.host() + '/sabre/api/';
         }
 
      
