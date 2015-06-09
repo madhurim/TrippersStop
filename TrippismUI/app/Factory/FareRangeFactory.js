@@ -1,12 +1,12 @@
 ﻿(function () {
     'use strict';
-    var serviceId = 'FareforecastFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope', FareforecastFactory]);
+    var serviceId = 'FareRangeFactory';
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope', FareRangeFactory]);
 
-    function FareforecastFactory($http, $rootScope) {
+    function FareRangeFactory($http, $rootScope) {
         // Define the functions and properties to reveal.
         var service = {
-            fareforecast: fareforecast,
+            fareRange: fareRange,
         };
         return service;
 
@@ -21,8 +21,8 @@
             return str.join("&");
         }
 
-        function fareforecast(data) {
-            var testURL = 'FareForecast?' + serialize(data);
+        function fareRange(data) {
+            var testURL = 'FareRange?' + serialize(data);
 
             var url = $rootScope.apiURL + testURL;
             return $http.get(url)

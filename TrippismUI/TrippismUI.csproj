@@ -20,10 +20,15 @@
     <Content Include="app\app.js" />
     <Content Include="app\Controllers\DestinationController.js" />
     <Content Include="app\Controllers\FareforecastController.js" />
+    <Content Include="app\Controllers\FareRangeController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
+    <Content Include="app\Controllers\SeasonalityController.js" />
+    <Content Include="app\Controllers\ShareDestinationInformationController.js" />
     <Content Include="app\Directives\GoogleMap.directive.js" />
     <Content Include="app\Factory\DestinationFactory.js" />
     <Content Include="app\Factory\FareforecastFactory.js" />
+    <Content Include="app\Factory\FareRangeFactory.js" />
+    <Content Include="app\Factory\SeasonalityFactory.js" />
     <Content Include="app\Factory\UtilFactory.js" />
     <Content Include="app\Scripts\common.js" />
     <Content Include="app\Scripts\libs\event.js" />
@@ -34,10 +39,9 @@
     <Content Include="app\Styles\css\trippismapp.css" />
     <Content Include="app\Styles\css\icon_top.png" />
     <Content Include="app\Utility.js" />
+    <Content Include="app\Views\farerange.html" />
     <Content Include="app\Views\GoogleMap.html" />
-    <Content Include="app\Views\default.html" />
     <Content Include="app\Views\destination.html" />
-    <Content Include="app\index.html" />
     <Content Include="app\Scripts\angular-mocks.js" />
     <Content Include="app\Scripts\angular-ui-router.js" />
     <Content Include="app\Scripts\angular-ui-router.min.js" />
@@ -70,6 +74,7 @@
     <Content Include="app\Styles\alertifyjs\themes\semantic.min.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.min.css" />
+    <Content Include="app\Views\seasonality.html" />
     <Content Include="index.html" />
     <Content Include="app\Scripts\alertify\alertify.js" />
     <Content Include="app\Scripts\alertify\alertify.min.js" />
@@ -101,7 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\Module\" />
-    <Folder Include="app\Views\Home\" />
     <Folder Include="Content\" />
     <Folder Include="Scripts\" />
   </ItemGroup>

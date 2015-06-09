@@ -5,7 +5,7 @@
                           'ui.bootstrap',
                           'blockUI',
                           'ui.map',
-                          'ui.event'
+                          'ui.event'                         
                         ]);
 
 TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
@@ -20,6 +20,14 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/fareforecast',
             templateUrl: '/app/Views/fareforecast.html'
         })
+         .state('farerange', {
+             url: '/farerange',
+             templateUrl: '/app/Views/farerange.html'
+         })
+         .state('seasonality', {
+             url: '/seasonality',
+             templateUrl: '/app/Views/seasonality.html'
+         })
      .state('/', {
          url: '/destination',
          templateUrl: '/app/Views/destination.html'

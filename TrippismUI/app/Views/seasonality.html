@@ -1,0 +1,84 @@
+﻿<div ng-controller="SeasonalityController">
+    <div style="margin-top:10px;">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Search Seasonality</div>
+                <div class="panel-body">
+                    <div ng-show="hasError && frmrangefinder.$invalid">
+                        <div class="alert alert-danger triperror" role="alert" ng-show="frmrangefinder.Destination.$error.required">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Please enter Destination.
+                        </div>
+                    </div>
+                    <script type="text/ng-template" id="customTemplate.html">
+                        <a style="padding-left:10px;" tabindex="-1" class="row-even1">
+                            <i ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
+
+                            <span>{{match.model.airport_CityCode}}</span>,
+                            <span>{{match.model.airport_FullName.toLowerCase().indexOf("airport") >= 0 ? match.model.airport_FullName : match.model.airport_FullName + " Airport"}}</span>,
+
+                            <span>{{match.model.airport_CityName}}</span>,
+                            <span>{{match.model.airport_CountryName}}</span>
+
+                        </a>
+                    </script>
+                    <form name="frmrangefinder" novalidate>
+                        <div class="form-group">
+                            <label for="destination">Enter Your Destination</label>
+                            <input type="text"
+                                   ng-model="Destination"
+                                   typeahead-min-length="2"
+                                   required
+                                   typeahead-input-formatter="formatInput($model)"
+                                   typeahead-editable="true"
+                                   typeahead-on-select="onDestinationSelect($item, $model, $label)"
+                                   typeahead-template-url="customTemplate.html"
+                                   name="Destination"
+                                   tabindex="1"
+                                   placeholder="Enter Destination"
+                                   typeahead="state for state in AvailableCodes |  filter: $viewValue  | limitTo: 150"
+                                   class="form-control">
+                        </div>
+                        <button ng-disabled="SearchbuttonIsLoading" class="btn btn-primary btn-sm" ng-click="findseasonality()">{{SearchbuttonText}}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">Available Seasonality</div>
+                <div class="panel-body" style="padding:3px;padding-top:16px;">
+                    <div ng-show="IsSearched && isUndefined(SearchedseasonalityInfo)">No Seasonality found</div>
+                    <div class="col-md-12" ng-show="!isUndefined(SearchedseasonalityInfo)">
+                        <div class="thumbnail">
+                            <div class="panel panel-default" style="border:none;">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Seasonality Info</h3>
+                                </div>
+                                <table class="table">
+                                    <tr>
+                                        <th class="text-center">Week#</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th class="text-center">Traffic Volume</th>
+                                        <th>Booking Quantities</th>
+                                    </tr>
+                                    <tr ng-repeat="range in SearchedseasonalityInfo.Seasonality">
+                                        <td class="word-wrap text-center">{{range.YearWeekNumber}}</td>
+                                        <td class="word-wrap">{{range.WeekStartDate | date:"yyyy-MM-dd"}}</td>
+                                        <td class="word-wrap">{{range.WeekEndDate | date:"yyyy-MM-dd"}}</td>
+                                        <td class="word-wrap text-center">{{range.SeasonalityIndicator}}</td>
+                                        <td class="word-wrap">{{range.NumberOfObservations}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>    
+</div>

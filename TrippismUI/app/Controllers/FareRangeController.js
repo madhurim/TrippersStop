@@ -1,41 +1,40 @@
 ﻿(function () {
     'use strict';
-    var controllerId = 'FareforecastController';
+    var controllerId = 'FareRangeController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope','$modal', 'FareforecastFactory', 'UtilFactory', FareforecastController]);
+        ['$scope', '$modal', 'FareRangeFactory', 'UtilFactory', FareRangeController]);
 
-    function FareforecastController($scope, $modal, FareforecastFactory, UtilFactory) {
+    function FareRangeController($scope, $modal, FareRangeFactory, UtilFactory) {
 
-        $scope.hasError = false;                                
+        $scope.hasError = false;
         $scope.activate = activate;
         $scope.Origin = '';
         $scope.Destination = '';
         $scope.IsSearched = false;
-        $scope.AvailableAirports = [];
-        $scope.forecastfareList = [];
-        $scope.findfares = findfares;
+        $scope.AvailableAirports = [];   
+        $scope.findfarerRange = findfarerRange;
         $scope.formats = Dateformat();
         $scope.format = $scope.formats[0];
         $scope.LoadingText = "Loading..";
-        $scope.SearchbuttonText = "Get Fares";
-        $scope.SearchbuttonIsLoading = false;      
-
+        $scope.SearchbuttonText = "Get Fare Range";
+        $scope.SearchbuttonIsLoading = false;
+        
         var dt = new Date();
         dt.setHours(0, 0, 0, 0)
         var Todt = new Date();
         Todt.setDate(Todt.getDate() + 5); // add default from 5 days
         Todt.setHours(0, 0, 0, 0)
 
-        $scope.ToDate = ConvertToRequiredDate(Todt);
-        $scope.FromDate = ConvertToRequiredDate(dt);
+        $scope.LatestDepartureDate = ConvertToRequiredDate(Todt);
+        $scope.EarliestDepartureDate = ConvertToRequiredDate(dt);
 
         $scope.minTodayDate = new Date();
-        $scope.minFromDate = new Date();
-        $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
+        $scope.minEarliestDepartureDate = new Date();
+        $scope.minEarliestDepartureDate = $scope.minEarliestDepartureDate.setDate($scope.minEarliestDepartureDate.getDate() + 1);
 
-        $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 60));
+        $scope.MaximumEarliestDepartureDate = ConvertToRequiredDate(common.addDays(new Date(), 90));
       
-        $scope.$watch(function (scope) { return scope.FromDate },
+        $scope.$watch(function (scope) { return scope.EarliestDepartureDate },
               function (newValue, oldValue) {
 
                   if (newValue == null)
@@ -44,52 +43,53 @@
                   /* If from date is greater than to date */
                   var newDt = new Date(newValue);
                   newDt.setHours(0, 0, 0, 0);
-                  var todate = new Date($scope.ToDate);
+                  var todate = new Date($scope.LatestDepartureDate);
                   todate.setHours(0, 0, 0, 0);
 
                   if (newDt >= todate) {
-                      $scope.ToDate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1))
+                      $scope.LatestDepartureDate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1))
                   }
                   /**/
 
                   //SET MINIMUN SELECTED DATE for TODATE
-                  $scope.minFromDate = new Date(newValue);
-                  $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
-                  $scope.MaximumToDate = common.addDays(new Date(), 60);
-
+                  $scope.minEarliestDepartureDate = new Date(newValue);
+                  $scope.minEarliestDepartureDate = $scope.minEarliestDepartureDate.setDate($scope.minEarliestDepartureDate.getDate() + 1);
+                  $scope.MaximumEarliestDepartureDate = common.addDays(new Date(), 90);
+             
               }
        );
-     
+
         $scope.open = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
-            if ($scope.openedFromDate) {
-                $scope.openedFromDate = false;
+            if ($scope.openedEarliestDepartureDate)
+            {
+                $scope.openedEarliestDepartureDate = false;
             }
             $scope.opened = true;
         };
 
-        $scope.openFromDate = function ($event) {
+        $scope.openEarliestDepartureDate = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
             if ($scope.opened) {
                 $scope.opened = false;
             }
-            $scope.openedFromDate = true;
+            $scope.openedEarliestDepartureDate = true;
         };
 
         $scope.dateOptions = {
             formatYear: 'yy',
             startingDay: 1
         };
-  
+
         function activate() {
             UtilFactory.ReadAirportJson().then(function (data) {
-                $scope.AvailableAirports = data;               
+                $scope.AvailableAirports = data;
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
                 UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
                     $scope.Origin = data.airport_Code;
-                    $scope.findfares();
+                    $scope.findfarerRange();
                 });             
             });
         }
@@ -97,11 +97,10 @@
         activate();
 
         $scope.onSelect = function ($item, $model, $label) {
-            $scope.Origin = $item.airport_Code;         
+            $scope.Origin = $item.airport_Code;
         };
 
-        $scope.onDestinationSelect=function ($item, $model, $label)
-        {
+        $scope.onDestinationSelect = function ($item, $model, $label) {
             $scope.Destination = $item.airport_Code;
         }
 
@@ -118,31 +117,32 @@
             return (typeof thing === "undefined");
         }
 
-        function findfares() {
+        function findfarerRange() {
 
-                if ($scope.frmforecastfinder.$invalid) {
-                    $scope.hasError = true;
-                    return;
-                }
-           
-            $scope.SearchedfareInfo = undefined;
-            $scope.IsSearched = true;          
-            $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; 
+            if ($scope.frmrangefinder.$invalid) {
+                $scope.hasError = true;
+                return;
+            }
+            
+            $scope.SearchedfarerangeInfo = undefined;
+            $scope.IsSearched = true;
+            $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText;
             var data = {
                 "Origin": $scope.Origin,
-                "DepartureDate": ConvertToRequiredDate($scope.FromDate),
-                "ReturnDate": ConvertToRequiredDate($scope.ToDate),
-                "Destination": $scope.Destination
+                "EarliestDepartureDate": ConvertToRequiredDate($scope.EarliestDepartureDate),
+                "LatestDepartureDate": ConvertToRequiredDate($scope.LatestDepartureDate),
+                "Destination": $scope.Destination,
+                "Lengthofstay": $scope.LenghtOfStay,
             };
-            FareforecastFactory.fareforecast(data).then(function (data) {
-                    $scope.SearchbuttonText = "Get Fares";
-                    $scope.SearchbuttonIsLoading = false;                  
-                    if (data != null || data != undefined) {                    
-                        $scope.SearchedfareInfo = data;                                             
-                    }
+            FareRangeFactory.fareRange(data).then(function (data) {
+                $scope.SearchbuttonText = "Get Fare Range";
+                $scope.SearchbuttonIsLoading = false;
+                if (data != null || data != undefined) {      
+                    $scope.SearchedfarerangeInfo = data;                  
+                }
             });
-        
-        }      
+
+        }
     }
 
 })();

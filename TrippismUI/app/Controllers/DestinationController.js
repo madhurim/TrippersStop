@@ -18,6 +18,7 @@
         $scope.Destination = '';
         $scope.buttontext = "All";
         $scope.AvailableAirports = [];
+        $scope.destinationlist = "";
         $scope.dateOptions = {
             formatYear: 'yy',
             startingDay: 1
@@ -44,10 +45,6 @@
         $scope.minTodayDate = new Date();
         $scope.minFromDate = new Date();
         $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
-
-        $scope.ToDate = ConvertToRequiredDate(Todt);
-        $scope.FromDate = ConvertToRequiredDate(dt);
-
 
         $scope.$watch(function (scope) { return scope.Earliestdeparturedate },
            function (newValue, oldValue) {
