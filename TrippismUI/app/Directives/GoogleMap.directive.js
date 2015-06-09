@@ -93,9 +93,13 @@ angular.module('TrippismUIApp')
                   });
                   bounds.extend(marker.position);
                  
+                  var airportName = _.find($scope.airportlist, function (airport) {
+                      return airport.airport_Code == maps[x].DestinationLocation
+                  });
+
                   var contentString = '<div ng-controller="FareforecastController" style="min-width:200px;padding-top:5px;" id="content">' +
                                           '<div class="col-sm-6 padleft0"><span>Destination: </span><br /><strong>'
-                                            + maps[x].DestinationLocation + '</strong></div>' +
+                                            + airportName.airport_CityName + '</strong></div>' +
                                             '<div class="col-sm-6 padleft0"><span>Currency: </span><br /><strong>'
                                             + maps[x].CurrencyCode + '</strong></div>' +
                                             '<div class="col-sm-6 padleft0"><span>Lowest Fare: </span><br /><strong>'

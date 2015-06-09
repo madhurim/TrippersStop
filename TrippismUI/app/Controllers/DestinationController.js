@@ -18,6 +18,7 @@
         $scope.Destination = '';
         $scope.buttontext = "All";
         $scope.AvailableAirports = [];
+        $scope.destinationlist = "";
         $scope.dateOptions = {
             formatYear: 'yy',
             startingDay: 1

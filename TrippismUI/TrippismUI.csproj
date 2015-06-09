@@ -23,6 +23,7 @@
     <Content Include="app\Controllers\FareRangeController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
     <Content Include="app\Controllers\SeasonalityController.js" />
+    <Content Include="app\Controllers\ShareDestinationInformationController.js" />
     <Content Include="app\Directives\GoogleMap.directive.js" />
     <Content Include="app\Factory\DestinationFactory.js" />
     <Content Include="app\Factory\FareforecastFactory.js" />
