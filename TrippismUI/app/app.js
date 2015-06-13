@@ -8,6 +8,7 @@
                           'ui.event'                         
                         ]);
 
+
 TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.when('', '/destination').otherwise('/destination');
     $stateProvider
@@ -27,7 +28,7 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
          .state('seasonality', {
              url: '/seasonality',
              templateUrl: '/app/Views/seasonality.html'
-         })
+         })         
      .state('/', {
          url: '/destination',
          templateUrl: '/app/Views/destination.html'
@@ -47,12 +48,13 @@ TrippismUIApp.directive("scroll", function ($window) {
     };
 });
 
-TrippismUIApp.config(function (blockUIConfig) {
-    // Change the default overlay message
-    //blockUIConfig.message = 'Please stop clicking!';
-    // Change the default delay to 100ms before the blocking is visible
-    //blockUIConfig.delay = 100;
-});
+//TrippismUIApp.config(function (blockUIConfig) {
+//    // Change the default overlay message
+//    //blockUIConfig.message = 'Please stop clicking!';
+//    // Change the default delay to 100ms before the blocking is visible
+//   // blockUIConfig.delay = 0;
+//});
+
 
 
 

@@ -11,11 +11,11 @@ angular.module('TrippismUIApp')
           defaultlng: "@"
       }
 
-      directive.controller = function ($scope, $q, $compile, $filter, $timeout) {
+      directive.controller = function ($scope, $q, $compile, $filter, $timeout, $rootScope, $http) {
           $scope.destinationMap = undefined;
           $scope.faresList = [];
           $scope.myMarkers = [];
-
+         
           var styleArray = [{ featureType: "landscape.natural", elementType: "geometry.fill", stylers: [{ visibility: "on" }, { color: "#FFFFFF" }] },
                           { featureType: "poi", elementType: "geometry.fill", stylers: [{ visibility: "on" }, { hue: "#1900ff" }, { color: "#c0e8e8" }] },
                           { featureType: "poi", elementType: "labels.text", stylers: [{ visibility: "off" }] },
@@ -78,7 +78,7 @@ angular.module('TrippismUIApp')
 
           var RenderMap = function (maps) {
               $scope.InfoWindow;
-
+            
               var bounds = new google.maps.LatLngBounds();
 
               for (var x = 0; x < maps.length; x++) {
@@ -109,16 +109,40 @@ angular.module('TrippismUIApp')
                                             '<div class="col-sm-6 padleft0"><span>Departure Date: </span><br /><strong>'
                                             + $filter('date')(maps[x].DepartureDateTime, $scope.format, null) + '</strong></div>' +
                                             '<div class="col-sm-6 padleft0"><span>Return Date: </span><br /><strong>'
-                                            + $filter('date')(maps[x].ReturnDateTime, $scope.format, null) + '</strong></div>' +
-                                     '</div>';
+                                            + $filter('date')(maps[x].ReturnDateTime, $scope.format, null) + '</strong></div>'+
+                 '</div>';
 
-                  $scope.InfoWindow = new google.maps.InfoWindow()
+                  $scope.InfoWindow = new google.maps.InfoWindow();
+              
                   google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
                       return function () {
-                          if ($scope.InfoWindow) $scope.InfoWindow.close();
+                          if ($scope.InfoWindow) $scope.InfoWindow.close(); 
                           $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
+
+                          google.maps.event.addListener($scope.InfoWindow, 'closeclick', function () {                           
+                              $rootScope.$broadcast('CloseFareForcastInfo');
+                          });
+
                           $scope.InfoWindow.open($scope.destinationMap, marker);
-                      };
+
+                          var OriginairportName = _.find($scope.airportlist, function (airport) {
+                              return airport.airport_Code == $scope.$parent.Origin
+                          });
+
+                          var DestinationairportName = _.find($scope.airportlist, function (airport) {
+                              return airport.airport_Code == marker.CustomMarkerInfo.DestinationLocation
+                          });
+
+                          var dataForecast = {
+                              "Origin": $scope.$parent.Origin,
+                              "DepartureDate": ConvertToRequiredDate(marker.CustomMarkerInfo.DepartureDateTime),
+                              "ReturnDate": ConvertToRequiredDate(marker.CustomMarkerInfo.ReturnDateTime),
+                              "Destination": marker.CustomMarkerInfo.DestinationLocation
+                          };
+
+                          $rootScope.$broadcast('EmptyFareForcastInfo', { Origin: OriginairportName.airport_CityName, Destinatrion: DestinationairportName.airport_CityName, Fareforecastdata: dataForecast });
+                     
+                     };
                   })(marker, contentString, $scope.InfoWindow));
 
                   $scope.myMarkers.push(marker);
@@ -156,7 +180,18 @@ angular.module('TrippismUIApp')
               }
               $scope.myMarkers = [];
           }
-          
+
+          function serialize(obj) {
+              var str = [];
+              for (var p in obj)
+                  if (obj.hasOwnProperty(p)) {
+                      var propval = encodeURIComponent(obj[p]);
+                      if (propval != "undefined" && propval != "null" && propval != '')
+                          str.push(encodeURIComponent(p) + "=" + propval);
+                  }
+              return str.join("&");
+          }
+
       }
 
       directive.link = function (scope, elm, attrs) {

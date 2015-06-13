@@ -3,9 +3,9 @@
     'use strict';
     var controllerId = 'DestinationController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', 'DestinationFactory', 'UtilFactory', DestinationController]);
+        ['$scope', '$rootScope', '$timeout', 'DestinationFactory', 'UtilFactory', 'FareforecastFactory', 'SeasonalityFactory', DestinationController]);
 
-    function DestinationController($scope, DestinationFactory, UtilFactory) {
+    function DestinationController($scope, $rootScope, $timeout, DestinationFactory, UtilFactory, FareforecastFactory, SeasonalityFactory) {
 
         $scope.hasError = false;
         $scope.Location = "";
@@ -25,14 +25,21 @@
         };
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
-
+        $scope.IsHistoricalInfo = false;
         $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 192));
         $scope.LoadingText = "Loading..";
         $scope.SearchbuttonText = "Get Destinations";       
         $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
         $scope.SearchbuttonIsLoading = false;       
         $scope.SearchbuttonChepestIsLoading = false;
-
+        $scope.oneAtATime = true;
+        $scope.status = {
+            isFirstOpen: true,        
+            Seasonalitystatus: false          
+        };
+        $scope.loadFareForecastInfo = loadFareForecastInfo;
+       
+        $scope.ISloader = false;
         var dt = new Date();
         dt.setHours(0, 0, 0, 0)
         var Todt = new Date();
@@ -45,6 +52,8 @@
         $scope.minTodayDate = new Date();
         $scope.minFromDate = new Date();
         $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
+        $scope.Destinationfortab = "";
+        
 
         $scope.$watch(function (scope) { return scope.Earliestdeparturedate },
            function (newValue, oldValue) {
@@ -110,6 +119,60 @@
             }
         });
 
+        $scope.$on('CloseFareForcastInfo', function (event, args) {
+            $scope.IsHistoricalInfo = false;
+            $scope.ISloader = false;
+            $scope.status = {
+                isFirstOpen: true,              
+                Seasonalitystatus: false               
+            };
+        });
+
+        $scope.$on('EmptyFareForcastInfo', function (event, args) {
+            $scope.IsHistoricalInfo = true;
+            $scope.MarkerInfo = "";
+            $scope.MarkerSeasonalityInfo = "";
+            $scope.OriginFullName = args.Origin;
+            $scope.DestinationFullName = args.Destinatrion;
+            $scope.fareData = args.Fareforecastdata;
+            $scope.Destinationfortab = args.Destinatrion;
+
+            loadFareForecastInfo();           
+        });
+
+        function loadFareForecastInfo()
+        {
+            $scope.MarkerInfo = "";
+            $scope.status = {
+                isFirstOpen: true,            
+                Seasonalitystatus: false             
+            };
+                     
+            FareforecastFactory.fareforecast($scope.fareData).then(function (data) {              
+             $scope.MarkerInfo = data;                
+            });          
+        }
+
+        $scope.loadSeasonalityInfo = function ($event) {           
+            if ($scope.MarkerSeasonalityInfo == "")
+            {
+                var Seasonalitydata = {
+                    "Destination": $scope.Destinationfortab                    
+                };
+               
+                $timeout(function () {                 
+                    $scope.status = {
+                        isFirstOpen: false,                      
+                        Seasonalitystatus: true                        
+                    };
+                    SeasonalityFactory.Seasonality(Seasonalitydata).then(function (data) {
+                        $scope.MarkerSeasonalityInfo = data;                      
+                    });
+                   
+                }, 0, false);
+            }
+        };
+
         function activate() {
             UtilFactory.ReadAirportJson().then(function (data) {
                 $scope.AvailableAirports = data;
@@ -144,6 +207,17 @@
             $scope.opened = true;
         };
 
+        $scope.CloseDetailInfo = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.IsHistoricalInfo = false;
+            $scope.ISloader = false;
+            $scope.status = {
+                isFirstOpen: true,               
+                Seasonalitystatus: false             
+            };
+        };
+        
         $scope.openEarliestdeparturedate = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();

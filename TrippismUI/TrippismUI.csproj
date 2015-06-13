@@ -74,7 +74,9 @@
     <Content Include="app\Styles\alertifyjs\themes\semantic.min.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.min.css" />
+    <Content Include="app\Views\MarkerInfo.html" />
     <Content Include="app\Views\seasonality.html" />
+    <Content Include="app\Views\Test.html" />
     <Content Include="index.html" />
     <Content Include="app\Scripts\alertify\alertify.js" />
     <Content Include="app\Scripts\alertify\alertify.min.js" />

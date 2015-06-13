@@ -258,13 +258,69 @@
                 </div>
             </div>
         </div>
-
-    </div>
+        
+        </div>
 
     <div class="col-lg-12">
         <div class="row" style="margin-left:0px;margin-right:0px;">
             <div id="wrapper">
-                <div google-map btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>             
+                <div google-map btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div> 
+                
+                <div id="over_map" ng-show="IsHistoricalInfo">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="height:55px;">
+                                <div style="margin-left: 97%;margin-top: -6px;">
+                                    <i class="glyphicon glyphicon-remove" ng-click="CloseDetailInfo($event)" style="color: gray;font-size: 11px;"></i>
+                                </div>
+                                <div>
+                                    <div style="float:left;"><span style="font-size:13px;font-weight:bold;">Origin : </span><span style="font-size:13px;font-weight:300;">{{OriginFullName}}</span></div><div style="float:right;"><span style="font-size:13px;font-weight:bold;">Destinatrion : </span><span style="font-size:13px;font-weight:300;">{{DestinationFullName}}</span></div>
+                                </div>
+                            </div>
+
+                            <accordion close-others="oneAtATime">
+                                <accordion-group heading="Fare Info" is-open="status.isFirstOpen">
+                                    <div class="thumbnail" style="padding:0px;">                            
+                                        <table class="table" style="font-size:13px;font-weight:300;">
+                                            <tr><th class="col-md-3">Origin</th><td class="col-md-9 word-wrap">{{MarkerInfo.OriginLocation}}</td></tr>
+                                            <tr><th class="col-md-3">Destination</th><td class="col-md-9 word-wrap">{{MarkerInfo.DestinationLocation}}</td></tr>
+                                            <tr><th class="col-md-3">Departure Date</th><td class="col-md-9 word-wrap">{{MarkerInfo.DepartureDateTime | date:"yyyy-MM-dd"}}</td></tr>
+                                            <tr><th class="col-md-3">Return Date</th><td class="col-md-9 word-wrap">{{MarkerInfo.ReturnDateTime | date:"yyyy-MM-dd"}}</td></tr>
+                                            <tr><th class="col-md-3">Currency Code</th><td class="col-md-9 word-wrap">{{MarkerInfo.CurrencyCode}}</td></tr>
+                                            <tr><th class="col-md-3">Highest Predicted Fare</th><td class="col-md-9 word-wrap">{{MarkerInfo.Forecast.HighestPredictedFare}}</td></tr>
+                                            <tr><th class="col-md-3">Lowest Predicted Fare</th><td class="col-md-9 word-wrap">{{MarkerInfo.Forecast.LowestPredictedFare}}</td></tr>
+                                            <tr><th class="col-md-3">Lowest Fare</th><td class="col-md-9 word-wrap">{{MarkerInfo.LowestFare}}</td></tr>
+                                            <tr><th class="col-md-3">Recommendation</th><td class="col-md-9 word-wrap">{{MarkerInfo.Recommendation}}</td></tr>
+                                        </table>
+                                    </div>
+                                </accordion-group>
+                                <accordion-group is-open="status.Seasonalitystatus">
+                                    <accordion-heading>
+                                        <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
+                                    </accordion-heading>
+                                    <div class="thumbnail" style="padding:0px;height: 350px;overflow: auto;">                                     
+                                        <table class="table" style="font-size:13px;font-weight:300;">
+                                            <tr>
+                                                <th class="text-center">Week#</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th class="text-center">Traffic Volume</th>
+                                                <th>Booking Quantities</th>
+                                            </tr>
+                                            <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality">
+                                                <td class="word-wrap text-center">{{range.YearWeekNumber}}</td>
+                                                <td class="word-wrap">{{range.WeekStartDate | date:"yyyy-MM-dd"}}</td>
+                                                <td class="word-wrap">{{range.WeekEndDate | date:"yyyy-MM-dd"}}</td>
+                                                <td class="word-wrap text-center">{{range.SeasonalityIndicator}}</td>
+                                                <td class="word-wrap">{{range.NumberOfObservations}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </accordion-group>
+                            </accordion>
+                        </div>
+                    </div>
+                </div>            
             </div>         
         </div>
     </div>
@@ -274,7 +330,20 @@
     <style>
         #wrapper {
             position: relative;
-        }      
+        }  
+        #over_map {
+            position: absolute;
+            width: 400px;
+            top: 10px;
+            right: 10px;
+            z-index: 99;
+            filter: alpha(opacity=50);
+            opacity: .80;
+        }   
+        .fontsize{
+            font-size:13px;
+            font-weight:300;
+        } 
     </style>
 
 

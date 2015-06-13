@@ -21,16 +21,19 @@
             return str.join("&");
         }
 
+
         function fareforecast(data) {
+          
             var testURL = 'FareForecast?' + serialize(data);
 
             var url = $rootScope.apiURL + testURL;
+            
             return $http.get(url)
-                .then(function (data) {
-                    return data.data;
-                }, function (e) {
-                    return e;
-                });
+             .then(function (data) {
+                 return data.data;
+             }, function (e) {
+                 return e;
+             });            
         }
     }
 })();
