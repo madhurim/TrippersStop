@@ -13,11 +13,13 @@
         {
             //devlopment url
             $rootScope.apiURL = 'http://localhost:14606/sabre/api/';
+            $rootScope.apiURLForEmail = 'http://localhost:14606/api/Email/SendEmailtoUser';
         }
         else
         {
             //live url
             $rootScope.apiURL = 'http://' + $location.host() + '/sabre/api/';
+            $rootScope.apiURLForEmail = 'http://' + $location.host() + '/api/Email/SendEmailtoUser';
         }
 
      

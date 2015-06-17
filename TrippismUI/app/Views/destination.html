@@ -150,10 +150,7 @@
                                     <div class="form-group">
                                         <label>&nbsp;</label>
                                         <button tabindex="11" ng-disabled="SearchbuttonIsLoading" class="btn btn-primary btn-sm" ng-click="findDestinations('All')">{{SearchbuttonText}}</button>
-                                    </div>
-                                    <!--<div class="form-group" ng-controller="ShareDestinationInformation">
-                                        <button class="btn btn-primary btn-sm" ng-click="GetDestinations()">{{SharedbuttonText}}</button>
-                                    </div>-->
+                                    </div>                                
                                 </div>
                             </div>
                            
@@ -269,19 +266,58 @@
                 <div id="over_map" ng-show="IsHistoricalInfo">
                     <div class="col-md-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading" style="height:55px;">
-                                <div style="margin-left: 97%;margin-top: -6px;">
-                                    <i class="glyphicon glyphicon-remove" ng-click="CloseDetailInfo($event)" style="color: gray;font-size: 11px;"></i>
+                            <div class="panel-heading" style="height:60px;">
+                                <div class="col-md-12" style="padding:0px;">
+                                    <div class="form-group col-md-6" ng-controller="EmailForDestinationDet" style="padding: 0px;margin-bottom:3px;">
+                                        <button class="btn btn-primary btn-sm" ng-click="SendEmailToUser()" style="padding: 2px;width: 28%;">Share</button>
+                                    </div>
+                                    <script type="text/ng-template" id="EmailDetForm.html">
+                                        <div ng-controller="EmailForDestinationDet" style="padding: 20px;">
+
+                                            <div ng-show="hasError && FormGetEmailDet.$invalid">
+                                                <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.email.$error.required">
+                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                    Please enter Email Address.
+                                                </div>
+                                                <div class="alert alert-danger triperror" role="alert" ng-show="emailvalidate">
+                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                    Please enter Valid Email Address.
+                                                </div>                                             
+                                                <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.Subject.$error.required">
+                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                    Please enter Subject.
+                                                </div>
+                                            </div>
+
+                                            <form name="FormGetEmailDet" novalidate="novalidate">
+                                                <div class="form-group">
+                                                    <label for="email">Email address</label>
+                                                    <input type="text" ng-model="email" class="form-control" id="email" name="email" placeholder="Enter email" required />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Subject">Subject</label>
+                                                    <input type="text" ng-model="Subject" class="form-control" id="Subject" name="Subject" placeholder="Subject" required />
+                                                </div>
+                                                <button type="submit" class="btn btn-default" ng-click="submitModal()">Share Now</button>
+                                                <button class="btn btn-info" ng-click="dismiss()"><i class="fa fa-times"></i>Close</button>
+                                            </form>
+                                        </div>
+                                    </script>
+                                 
+                                    <div class="col-md-6">
+                                        <i class="glyphicon glyphicon-remove removeicon" ng-click="CloseDetailInfo($event)"></i>
+                                    </div>
                                 </div>
-                                <div>
-                                    <div style="float:left;"><span style="font-size:13px;font-weight:bold;">Origin : </span><span style="font-size:13px;font-weight:300;">{{OriginFullName}}</span></div><div style="float:right;"><span style="font-size:13px;font-weight:bold;">Destinatrion : </span><span style="font-size:13px;font-weight:300;">{{DestinationFullName}}</span></div>
+                                <div class="col-md-12">
+                                    <div style="float:left;"><span class="fontsize" style="font-weight:bold;">Origin : </span><span class="fontsize">{{OriginFullName}}</span></div><div style="float:right;"><span class="fontsize" style="font-weight:bold;">Destinatrion : </span><span class="fontsize">{{DestinationFullName}}</span></div>
                                 </div>
+                              
                             </div>
 
                             <accordion close-others="oneAtATime">
                                 <accordion-group heading="Fare Info" is-open="status.isFirstOpen">
                                     <div class="thumbnail" style="padding:0px;">                            
-                                        <table class="table" style="font-size:13px;font-weight:300;">
+                                        <table class="table fontsize">
                                             <tr><th class="col-md-3">Origin</th><td class="col-md-9 word-wrap">{{MarkerInfo.OriginLocation}}</td></tr>
                                             <tr><th class="col-md-3">Destination</th><td class="col-md-9 word-wrap">{{MarkerInfo.DestinationLocation}}</td></tr>
                                             <tr><th class="col-md-3">Departure Date</th><td class="col-md-9 word-wrap">{{MarkerInfo.DepartureDateTime | date:"yyyy-MM-dd"}}</td></tr>
@@ -298,8 +334,8 @@
                                     <accordion-heading>
                                         <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
                                     </accordion-heading>
-                                    <div class="thumbnail" style="padding:0px;height: 350px;overflow: auto;">                                     
-                                        <table class="table" style="font-size:13px;font-weight:300;">
+                                    <div class="thumbnail thumbnailstyle">
+                                        <table class="table fontsize">
                                             <tr>
                                                 <th class="text-center">Week#</th>
                                                 <th>Start Date</th>
@@ -344,6 +380,12 @@
             font-size:13px;
             font-weight:300;
         } 
+        .thumbnailstyle{
+            padding:0px;height: 350px;overflow: auto;
+        }
+        .removeicon{
+           color: gray;font-size: 11px;margin-left:140px;
+        }
     </style>
 
 
