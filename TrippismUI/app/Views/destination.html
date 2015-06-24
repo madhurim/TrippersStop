@@ -255,10 +255,8 @@
                 </div>
             </div>
         </div>
-        
-        </div>
-
-    <div class="col-lg-12">
+    </div>
+    <div class="col-lg-10">
         <div class="row" style="margin-left:0px;margin-right:0px;">
             <div id="wrapper">
                 <div google-map btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div> 
@@ -322,11 +320,21 @@
                                             <tr><th class="col-md-3">Destination</th><td class="col-md-9 word-wrap">{{MarkerInfo.DestinationLocation}}</td></tr>
                                             <tr><th class="col-md-3">Departure Date</th><td class="col-md-9 word-wrap">{{MarkerInfo.DepartureDateTime | date:"yyyy-MM-dd"}}</td></tr>
                                             <tr><th class="col-md-3">Return Date</th><td class="col-md-9 word-wrap">{{MarkerInfo.ReturnDateTime | date:"yyyy-MM-dd"}}</td></tr>
-                                            <tr><th class="col-md-3">Currency Code</th><td class="col-md-9 word-wrap">{{MarkerInfo.CurrencyCode}}</td></tr>
+                                            
                                             <tr><th class="col-md-3">Highest Predicted Fare</th><td class="col-md-9 word-wrap">{{MarkerInfo.Forecast.HighestPredictedFare}}</td></tr>
                                             <tr><th class="col-md-3">Lowest Predicted Fare</th><td class="col-md-9 word-wrap">{{MarkerInfo.Forecast.LowestPredictedFare}}</td></tr>
                                             <tr><th class="col-md-3">Lowest Fare</th><td class="col-md-9 word-wrap">{{MarkerInfo.LowestFare}}</td></tr>
-                                            <tr><th class="col-md-3">Recommendation</th><td class="col-md-9 word-wrap">{{MarkerInfo.Recommendation}}</td></tr>
+                                            <tr>
+
+                                                <th class="col-md-3">Recommendation</th>
+                                                <td class="col-md-9 word-wrap">
+                                                    <!--{{MarkerInfo.Recommendation}}-->
+                                                    <i class="glyphicon glyphicon-thumbs-up text-success" title="Buy" ng-if="MarkerInfo.Recommendation == 'buy'"></i>
+                                                    <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="MarkerInfo.Recommendation == 'wait'"></i>
+                                                    <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="MarkerInfo.Recommendation == 'watch'"></i>
+                                                </td>
+                                            </tr>
+                                            <tr><th class="col-md-3">Currency Code</th><td class="col-md-9 word-wrap">{{MarkerInfo.CurrencyCode}}</td></tr>
                                         </table>
                                     </div>
                                 </accordion-group>
@@ -360,32 +368,18 @@
             </div>         
         </div>
     </div>
-
-    
-
+    <div class="col-lg-2" >
+        <youtube-video video-id="YoutubeSelectedVideo" player="YouTubePlayer" player-width="'100%'" player-height="'300px'"></youtube-video>
+        <!--<button ng-click="YouTubePlayer.playVideo()">Play</button>
+        <button ng-click="YouTubePlayer.stopVideo()">Stop</button>-->
+        
+    </div>
     <style>
-        #wrapper {
-            position: relative;
-        }  
-        #over_map {
-            position: absolute;
-            width: 400px;
-            top: 10px;
-            right: 10px;
-            z-index: 99;
-            filter: alpha(opacity=50);
-            opacity: .80;
-        }   
-        .fontsize{
-            font-size:13px;
-            font-weight:300;
-        } 
-        .thumbnailstyle{
-            padding:0px;height: 350px;overflow: auto;
-        }
-        .removeicon{
-           color: gray;font-size: 11px;margin-left:140px;
-        }
+        #wrapper {position: relative;}  
+        #over_map {position: absolute;width: 400px;top: 10px;right: 10px;z-index: 99;filter: alpha(opacity=50);opacity: .80;}   
+        .fontsize{font-size:13px;font-weight:300;} 
+        .thumbnailstyle{padding:0px;height: 350px;overflow: auto;}
+        .removeicon{color: gray;font-size: 11px;margin-left:140px;}
     </style>
 
 

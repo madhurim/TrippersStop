@@ -7,6 +7,8 @@
 
     function DestinationController($scope, $rootScope, $timeout, DestinationFactory, UtilFactory, FareforecastFactory, SeasonalityFactory) {
 
+        $scope.YoutubeSelectedVideo = 'HCtDPjVk5gc';
+
         $scope.hasError = false;
         $scope.Location = "";
         $scope.AvailableCodes = [];
@@ -147,7 +149,7 @@
                 isFirstOpen: true,            
                 Seasonalitystatus: false             
             };
-                     
+            debugger;
             FareforecastFactory.fareforecast($scope.fareData).then(function (data) {              
              $scope.MarkerInfo = data;                
             });          

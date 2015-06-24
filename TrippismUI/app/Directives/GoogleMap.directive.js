@@ -12,6 +12,7 @@ angular.module('TrippismUIApp')
       }
 
       directive.controller = function ($scope, $q, $compile, $filter, $timeout, $rootScope, $http) {
+          
           $scope.destinationMap = undefined;
           $scope.faresList = [];
           $scope.myMarkers = [];
@@ -33,7 +34,7 @@ angular.module('TrippismUIApp')
 
           $scope.mapOptions = {
               center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng),
-              zoom: 0,
+              zoom: 2,
               minZoom: 2,
               backgroundColor: "#BCCFDE",
               styles: styleArray,
@@ -83,23 +84,31 @@ angular.module('TrippismUIApp')
 
               for (var x = 0; x < maps.length; x++) {
                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
+
+
                   var marker = new google.maps.Marker({
                       position: latlng1,
                       map: $scope.destinationMap,
                       title: maps[x].DestinationLocation,
                       icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (x + 1) + '|ff776b|000000',
                       animation: google.maps.Animation.DROP,
-                      CustomMarkerInfo: maps[x]
+                      CustomMarkerInfo: maps[x],
+
+                      //labelContent: "$425K",
+                      //labelAnchor: new google.maps.Point(22, 0),
+                      //labelClass: "labels", 
+                      //labelStyle: { opacity: 0.75 }
+
                   });
                   bounds.extend(marker.position);
                  
                   var airportName = _.find($scope.airportlist, function (airport) {
                       return airport.airport_Code == maps[x].DestinationLocation
                   });
-
+                  
                   var contentString = '<div ng-controller="FareforecastController" style="min-width:200px;padding-top:5px;" id="content">' +
                                           '<div class="col-sm-6 padleft0"><span>Destination: </span><br /><strong>'
-                                            + airportName.airport_CityName + '</strong></div>' +
+                                            + airportName.airport_FullName + ', ' + airportName.airport_CityName + '</strong></div>' +
                                             '<div class="col-sm-6 padleft0"><span>Currency: </span><br /><strong>'
                                             + maps[x].CurrencyCode + '</strong></div>' +
                                             '<div class="col-sm-6 padleft0"><span>Lowest Fare: </span><br /><strong>'
@@ -115,7 +124,11 @@ angular.module('TrippismUIApp')
                   $scope.InfoWindow = new google.maps.InfoWindow();
               
                   google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
+                      
                       return function () {
+                          // Play Video on MArker click
+                          $scope.$parent.YouTubePlayer.playVideo();
+
                           if ($scope.InfoWindow) $scope.InfoWindow.close(); 
                           $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
 

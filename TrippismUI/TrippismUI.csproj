@@ -32,6 +32,7 @@
     <Content Include="app\Factory\FareRangeFactory.js" />
     <Content Include="app\Factory\SeasonalityFactory.js" />
     <Content Include="app\Factory\UtilFactory.js" />
+    <Content Include="app\Module\angular-youtube-embed.js" />
     <Content Include="app\Scripts\common.js" />
     <Content Include="app\Scripts\libs\event.js" />
     <Content Include="app\Scripts\libs\ui-map.js" />
@@ -108,7 +109,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\Module\" />
     <Folder Include="Content\" />
     <Folder Include="Scripts\" />
   </ItemGroup>

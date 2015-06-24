@@ -5,7 +5,8 @@
                           'ui.bootstrap',
                           'blockUI',
                           'ui.map',
-                          'ui.event'                         
+                          'ui.event',
+                          'youtube-embed'
                         ]);
 
 
@@ -47,6 +48,7 @@ TrippismUIApp.directive("scroll", function ($window) {
         });
     };
 });
+
 
 //TrippismUIApp.config(function (blockUIConfig) {
 //    // Change the default overlay message
