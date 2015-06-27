@@ -3,9 +3,9 @@
     'use strict';
     var controllerId = 'DestinationController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$rootScope', '$timeout', 'DestinationFactory', 'UtilFactory', 'FareforecastFactory', 'SeasonalityFactory', DestinationController]);
+        ['$scope', 'blockUIConfig', '$modal', '$rootScope', '$timeout', 'DestinationFactory', 'UtilFactory', 'FareforecastFactory', 'SeasonalityFactory', DestinationController]);
 
-    function DestinationController($scope, $rootScope, $timeout, DestinationFactory, UtilFactory, FareforecastFactory, SeasonalityFactory) {
+    function DestinationController($scope, blockUIConfig, $modal, $rootScope, $timeout, DestinationFactory, UtilFactory, FareforecastFactory, SeasonalityFactory) {
 
         $scope.YoutubeSelectedVideo = 'HCtDPjVk5gc';
 
@@ -131,15 +131,19 @@
         });
 
         $scope.$on('EmptyFareForcastInfo', function (event, args) {
-            $scope.IsHistoricalInfo = true;
+            $scope.IsHistoricalInfo = false;
             $scope.MarkerInfo = "";
             $scope.MarkerSeasonalityInfo = "";
             $scope.OriginFullName = args.Origin;
             $scope.DestinationFullName = args.Destinatrion;
             $scope.fareData = args.Fareforecastdata;
             $scope.Destinationfortab = args.Destinatrion;
+            
+            
+            $scope.open('lg',args);
+           // loadFareForecastInfo(); 
+            
 
-            loadFareForecastInfo();           
         });
 
         function loadFareForecastInfo()
@@ -149,7 +153,6 @@
                 isFirstOpen: true,            
                 Seasonalitystatus: false             
             };
-            debugger;
             FareforecastFactory.fareforecast($scope.fareData).then(function (data) {              
              $scope.MarkerInfo = data;                
             });          
@@ -159,7 +162,7 @@
             if ($scope.MarkerSeasonalityInfo == "")
             {
                 var Seasonalitydata = {
-                    "Destination": $scope.Destinationfortab                    
+                    "Destination":  $scope.Destinationfortab                    
                 };
                
                 $timeout(function () {                 
@@ -175,6 +178,8 @@
             }
         };
 
+     
+
         function activate() {
             UtilFactory.ReadAirportJson().then(function (data) {
                 $scope.AvailableAirports = data;
@@ -182,6 +187,7 @@
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
                 UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
                     $scope.Origin = data.airport_Code;                  
+                    //$scope.Origin = 'ATL';
                     $scope.findDestinations('Cheapest');
                 });
                 UtilFactory.MapscrollTo('wrapper');
@@ -280,7 +286,7 @@
                 "Destination": $scope.Destination
 
             };
-
+            blockUIConfig.message = "Loading destinations..."
             DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.SearchbuttonText = "Get Destinations";
                 $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
@@ -297,10 +303,112 @@
                     alertify.alert("Destination Finder", "");
                     alertify.alert('Sorry! There are no destinations, match your search request!').set('onok', function (closeEvent) { });
                 }
+                blockUIConfig.message = "Loading..."
             });
+            
             if ($scope.CalledOnPageLoad)
                 $scope.CalledOnPageLoad = false;
         }
-    }
 
+        
+        $scope.open = function (size, obj) {
+            
+            $scope.mapOptions = obj.mapOptions;
+
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'DestinationDetails.html',
+                controller: 'DestinationDetailsCtrl',
+                size: size,
+                resolve: {
+                    mapDetails: function () {
+                        return $scope.mapOptions;
+                    },
+                    OriginairportName: function () {
+                        return obj.OriginairportName;
+                    },
+                    DestinationairportName: function () { return obj.DestinationairportName; },
+                    Fareforecastdata: function () { return obj.Fareforecastdata; },
+                    Destination: function () { return obj.Destinatrion; },
+                    destinationScope: function () { return $scope; }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {},
+            function () {
+
+            });
+        };
+    }
 })();
+
+
+var controllerId = 'DestinationDetailsCtrl'; //DestinationDetailsCtrl
+angular.module('TrippismUIApp').controller(controllerId,
+    ['$scope', 'blockUIConfig', '$timeout', '$modalInstance', 'mapDetails', 'OriginairportName', 'DestinationairportName', 'Fareforecastdata', 'Destination', 'destinationScope', 'FareforecastFactory', 'SeasonalityFactory', DestinationDetailsCtrl]);
+
+function DestinationDetailsCtrl($scope, blockUIConfig, $timeout, $modalInstance, mapDetails, OriginairportName, DestinationairportName, Fareforecastdata, Destination, destinationScope, FareforecastFactory, SeasonalityFactory) {
+    //$scope.loadFareForecastInfo = loadFareForecastInfo;
+    $scope.mapDetails = mapDetails;
+    
+    $scope.OriginairportName = OriginairportName;
+    $scope.DestinationairportName = DestinationairportName;
+    $scope.fareData = Fareforecastdata;
+    $scope.Destinationfortab = Destination;
+    //$scope.$apply();
+    $scope.destinationScope = destinationScope;
+    
+    
+    $scope.ok = function () { $modalInstance.close($scope.selected.item);};
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+
+    $scope.oneAtATime = true;
+    $scope.status = {
+        isFirstOpen: true,
+        isFirstDisabled: false
+    };
+    
+    $scope.FareForecastInfoLoaded = false;
+    $scope.loadFareForecastInfo = function ($event) {
+        if ($scope.FareForecastInfoLoaded == false) {
+            $scope.FareforecastData = "";
+            $scope.status = {
+                isFirstOpen: true,
+                Seasonalitystatus: false
+            };
+            blockUIConfig.message = 'Please wait! Fare Details are loading...!';
+            FareforecastFactory.fareforecast($scope.fareData).then(function (data) {
+                $scope.FareforecastData = data;
+                blockUIConfig.message = 'Loading...';
+            });
+        }
+        $scope.FareForecastInfoLoaded = true;
+    };
+
+    $scope.MarkerSeasonalityInfo = "";
+
+    $scope.loadSeasonalityInfoLoaded = false;
+    $scope.loadSeasonalityInfo = function ($event) {
+        $scope.SeasonalityInfoaccordion = true;
+        
+        if ($scope.loadSeasonalityInfoLoaded == false) {
+            if ($scope.MarkerSeasonalityInfo == "") {
+                var Seasonalitydata = {
+                    "Destination": $scope.Destinationfortab,
+                };
+
+                $timeout(function () {
+                    blockUIConfig.message = 'Please wait! Seasonality info are loading...!';
+                    SeasonalityFactory.Seasonality(Seasonalitydata).then(function (data) {
+                        $scope.MarkerSeasonalityInfo = data;
+                        blockUIConfig.message = 'Loading...';
+                    });
+
+                }, 0, false);
+            }
+        }
+        $scope.loadSeasonalityInfoLoaded = true;
+    };
+};

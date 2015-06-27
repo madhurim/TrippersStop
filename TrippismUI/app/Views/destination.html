@@ -150,10 +150,10 @@
                                     <div class="form-group">
                                         <label>&nbsp;</label>
                                         <button tabindex="11" ng-disabled="SearchbuttonIsLoading" class="btn btn-primary btn-sm" ng-click="findDestinations('All')">{{SearchbuttonText}}</button>
-                                    </div>                                
+                                    </div>
                                 </div>
                             </div>
-                           
+
                             <div class="col-lg-12" ng-show="IsAdvancedSearch">
                                 <div class="col-lg-12" style="padding-left:0px; padding-right:0px;">
                                     <div class="col-xs-2">
@@ -259,8 +259,7 @@
     <div class="col-lg-10">
         <div class="row" style="margin-left:0px;margin-right:0px;">
             <div id="wrapper">
-                <div google-map btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div> 
-                
+                <div google-map btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
                 <div id="over_map" ng-show="IsHistoricalInfo">
                     <div class="col-md-12">
                         <div class="panel panel-default">
@@ -280,7 +279,7 @@
                                                 <div class="alert alert-danger triperror" role="alert" ng-show="emailvalidate">
                                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                                     Please enter Valid Email Address.
-                                                </div>                                             
+                                                </div>
                                                 <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.Subject.$error.required">
                                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                                     Please enter Subject.
@@ -301,26 +300,32 @@
                                             </form>
                                         </div>
                                     </script>
-                                 
+
                                     <div class="col-md-6">
                                         <i class="glyphicon glyphicon-remove removeicon" ng-click="CloseDetailInfo($event)"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div style="float:left;"><span class="fontsize" style="font-weight:bold;">Origin : </span><span class="fontsize">{{OriginFullName}}</span></div><div style="float:right;"><span class="fontsize" style="font-weight:bold;">Destinatrion : </span><span class="fontsize">{{DestinationFullName}}</span></div>
+                                    <div style="float:left;">
+                                        <span class="fontsize" style="font-weight:bold;">Origin : </span>
+                                        <span class="fontsize">{{OriginFullName}}</span>
+                                    </div>
+                                    <div style="float:right;">
+                                        <span class="fontsize" style="font-weight:bold;">Destinatrion : </span>
+                                        <span class="fontsize">{{DestinationFullName}}</span>
+                                    </div>
                                 </div>
-                              
                             </div>
 
                             <accordion close-others="oneAtATime">
-                                <accordion-group heading="Fare Info" is-open="status.isFirstOpen">
-                                    <div class="thumbnail" style="padding:0px;">                            
-                                        <table class="table fontsize">
+                                <accordion-group heading="Fare Info" >
+                                    <div class="thumbnail" style="padding:0px;">
+                                        <table class="table fontsize" style="margin-bottom:0px;">
                                             <tr><th class="col-md-3">Origin</th><td class="col-md-9 word-wrap">{{MarkerInfo.OriginLocation}}</td></tr>
                                             <tr><th class="col-md-3">Destination</th><td class="col-md-9 word-wrap">{{MarkerInfo.DestinationLocation}}</td></tr>
                                             <tr><th class="col-md-3">Departure Date</th><td class="col-md-9 word-wrap">{{MarkerInfo.DepartureDateTime | date:"yyyy-MM-dd"}}</td></tr>
                                             <tr><th class="col-md-3">Return Date</th><td class="col-md-9 word-wrap">{{MarkerInfo.ReturnDateTime | date:"yyyy-MM-dd"}}</td></tr>
-                                            
+
                                             <tr><th class="col-md-3">Highest Predicted Fare</th><td class="col-md-9 word-wrap">{{MarkerInfo.Forecast.HighestPredictedFare}}</td></tr>
                                             <tr><th class="col-md-3">Lowest Predicted Fare</th><td class="col-md-9 word-wrap">{{MarkerInfo.Forecast.LowestPredictedFare}}</td></tr>
                                             <tr><th class="col-md-3">Lowest Fare</th><td class="col-md-9 word-wrap">{{MarkerInfo.LowestFare}}</td></tr>
@@ -329,7 +334,9 @@
                                                 <th class="col-md-3">Recommendation</th>
                                                 <td class="col-md-9 word-wrap">
                                                     <!--{{MarkerInfo.Recommendation}}-->
-                                                    <i class="glyphicon glyphicon-thumbs-up text-success" title="Buy" ng-if="MarkerInfo.Recommendation == 'buy'"></i>
+                                                    <!--<i class="glyphicon glyphicon-thumbs-up text-success" title="Buy" ng-if="MarkerInfo.Recommendation == 'buy'"></i>-->
+                                                    <i class="recommended text-success" title="Buy" ng-if="MarkerInfo.Recommendation == 'buy'"></i>
+                                                    
                                                     <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="MarkerInfo.Recommendation == 'wait'"></i>
                                                     <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="MarkerInfo.Recommendation == 'watch'"></i>
                                                 </td>
@@ -338,7 +345,7 @@
                                         </table>
                                     </div>
                                 </accordion-group>
-                                <accordion-group is-open="status.Seasonalitystatus">
+                                <accordion-group  >
                                     <accordion-heading>
                                         <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
                                     </accordion-heading>
@@ -364,22 +371,161 @@
                             </accordion>
                         </div>
                     </div>
-                </div>            
-            </div>         
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-lg-2" >
-        <youtube-video video-id="YoutubeSelectedVideo" player="YouTubePlayer" player-width="'100%'" player-height="'300px'"></youtube-video>
-        <!--<button ng-click="YouTubePlayer.playVideo()">Play</button>
-        <button ng-click="YouTubePlayer.stopVideo()">Stop</button>-->
-        
+    <div class="col-lg-2" style="padding-left:0px;">
+        <img src="../app/Styles/images/adsection_1.png" style="max-width:100%;height:290px;" />
+        <div style="height:20px">&nbsp;</div>
+        <img src="../app/Styles/images/adsection_2.png" style="max-width:100%;height:290px;" />
+        <!--<youtube-video video-id="YoutubeSelectedVideo" player="YouTubePlayer" player-width="'100%'" player-height="'300px'"></youtube-video>-->
     </div>
+
+    <style>.modal-content{opacity:0.8 !important;border-radius:1px;}</style>
+
+    <script type="text/ng-template" id="DestinationDetails.html">
+        
+        <div class="modal-body">
+            
+          
+
+            <accordion style="clear:both;"  >
+                <accordion-group is-disabled="true" is-open="true" >
+                    <accordion-heading>
+                        <span >Destination from my Origin <b> {{OriginairportName.airport_FullName +', ' + OriginairportName.airport_CityName}} </b> </span> 
+                        <div class="pull-right">
+                            <i class="glyphicon glyphicon-remove" ng-click="cancel()"></i>
+                        </div>
+                    </accordion-heading>
+                    
+                    <div style="min-width:200px;margin-bottom:5px;" class="fontsize" id="content">
+                        <div class="col-sm-4 padleft0">
+                            <span>Destination : </span><br /><strong>
+                                {{DestinationairportName.airport_FullName + ', ' + DestinationairportName.airport_CityName}}
+                            </strong>
+                        </div>
+
+                        <div class="col-sm-2 padleft0" style="width:13%;">
+                            <span>Lowest Fare: </span><br /><strong>{{mapDetails.CurrencyCode}} {{mapDetails.LowestFare | number : 2}} </strong><br />
+
+                        </div>
+                        <div class="col-md-2" style="width:20%;">
+                            <span>Lowest Non Stop Fare: </span><br /><strong> {{mapDetails.CurrencyCode}} {{mapDetails.LowestNonStopFare | number :2}} </strong>
+                        </div>
+                        <div class="col-sm-2" style="width:15%;">
+                            <span>Departure Date: </span><br /><strong>{{mapDetails.DepartureDateTime | date:"yyyy-MM-dd"}}</strong>
+                        </div>
+                        <div class="col-sm-1" style="width:10%;padding:0px;">
+                            <span>Return Date: </span><br /><strong>{{mapDetails.ReturnDateTime | date:"yyyy-MM-dd"}}</strong>
+                            
+                        </div>
+
+                        <div class="col-sm-1" style="padding:0px;">
+                            
+                            <div class="pull-right" ng-controller="EmailForDestinationDet" style="margin-top:5px;">
+                                <button class="btn btn-primary btn-sm pull-right" ng-click="SendEmailToUser()">Share</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div style="clear:both;padding-top:10px;">
+                        <accordion style="clear:both;">
+                            <accordion-group is-open="FareForecastaccordion">
+                                <accordion-heading>
+                                    <span ng-click="loadFareForecastInfo($event)">Fare Info</span>
+                                </accordion-heading>
+                                <div class="thumbnail" style="padding:0px;">
+                                    <table class="table fontsize" style="margin-bottom:0px;">
+                                        <tr><th class="col-md-3">Departure Date</th><td class="col-md-9 word-wrap">{{FareforecastData.DepartureDateTime | date:"yyyy-MM-dd"}}</td></tr>
+                                        <tr><th class="col-md-3">Return Date</th><td class="col-md-9 word-wrap">{{FareforecastData.ReturnDateTime | date:"yyyy-MM-dd"}}</td></tr>
+                                        <tr><th class="col-md-3">Highest Predicted Fare</th><td class="col-md-9 word-wrap">{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.HighestPredictedFare | number:2}}</td></tr>
+                                        <tr><th class="col-md-3">Lowest Predicted Fare</th><td class="col-md-9 word-wrap">{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.LowestPredictedFare | number:2}}</td></tr>
+                                        <tr><th class="col-md-3">Lowest Fare</th><td class="col-md-9 word-wrap">{{FareforecastData.LowestFare}}</td></tr>
+                                        <tr>
+                                            <th class="col-md-3">Recommendation</th>
+                                            <td class="col-md-9 word-wrap">
+                                                <img ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
+                                                <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
+                                                <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </accordion-group>
+                            <accordion-group is-open="SeasonalityInfoaccordion">
+                                <accordion-heading>
+                                    <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
+                                </accordion-heading>
+                                <div class="thumbnail thumbnailstyle">
+                                    <table class="table fontsize">
+                                        <tr>
+                                            <th class="text-center">Week#</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th class="text-center">Traffic Volume</th>
+                                            <th>Booking Quantities</th>
+                                        </tr>
+                                        <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality">
+                                            <td class="word-wrap text-center">{{range.YearWeekNumber}}</td>
+                                            <td class="word-wrap">{{range.WeekStartDate | date:"yyyy-MM-dd"}}</td>
+                                            <td class="word-wrap">{{range.WeekEndDate | date:"yyyy-MM-dd"}}</td>
+                                            <td class="word-wrap text-center">
+                                                <span ng-if="range.SeasonalityIndicator == 'High'" class="highrange">{{range.SeasonalityIndicator}}</span>
+                                                <span ng-if="range.SeasonalityIndicator == 'Medium'" class="mediumrange">{{range.SeasonalityIndicator}}</span>
+                                                <span ng-if="range.SeasonalityIndicator == 'Low'" class="lowrange">{{range.SeasonalityIndicator}}</span>
+                                            </td>
+                                            <td class="word-wrap">
+                                                <span ng-if="range.NumberOfObservations == 'GreaterThan10000'">Greater than 10000</span>
+                                                <span ng-if="range.NumberOfObservations == 'LessThan10000'">Less than 10000</span>
+                                                <span ng-if="range.NumberOfObservations == 'LessThan1000'">Less than 1000</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </accordion-group>
+                            <accordion-group >
+                                <accordion-heading>
+                                    <span >Fare Range</span>
+                                </accordion-heading>
+                                <div >
+                                    Coming soon
+                                </div>
+                            </accordion-group>
+                        </accordion>
+                    </div>
+                </accordion-group>
+                
+            </accordion>
+        </div>
+    </script>
+
+    
+
     <style>
-        #wrapper {position: relative;}  
-        #over_map {position: absolute;width: 400px;top: 10px;right: 10px;z-index: 99;filter: alpha(opacity=50);opacity: .80;}   
-        .fontsize{font-size:13px;font-weight:300;} 
-        .thumbnailstyle{padding:0px;height: 350px;overflow: auto;}
-        .removeicon{color: gray;font-size: 11px;margin-left:140px;}
+        #wrapper {
+            position: relative;
+        }
+        
+        #over_map {
+            position: absolute;
+            width: 400px;
+            top: 10px;
+            right: 10px;
+            z-index: 99;
+            filter: alpha(opacity=50);
+            opacity: .80;
+        }
+
+        .fontsize {
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+      
+
+        .thumbnail,.panel-group  {margin-bottom:0px !important;
+        } 
+         
     </style>
-
-

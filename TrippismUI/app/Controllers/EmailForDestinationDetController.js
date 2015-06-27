@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'EmailForDestinationDet';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$filter', '$modal', 'EmailForDestinationDetFactory', EmailForDestinationDet]);
+        ['$scope', 'blockUIConfig', '$filter', '$modal', 'EmailForDestinationDetFactory', EmailForDestinationDet]);
 
-    function EmailForDestinationDet($scope, $filter, $modal, EmailForDestinationDetFactory) {
+    function EmailForDestinationDet($scope,blockUIConfig, $filter, $modal, EmailForDestinationDetFactory) {
         $scope.SharedbuttonText = "Share";
         $scope.SendEmailToUser = SendEmailToUser;   
         $scope.Toemailaddress = "";
@@ -48,20 +48,23 @@
 
         function activate()
         {
-            var basicDetinationDetlist = $scope.$parent.destinationlist;
-            var airportlist = $scope.$parent.AvailableAirports;
-
+            
+            
+            var basicDetinationDetlist = $scope.destinationScope.destinationlist;
+            //var airportlist = $scope.$parent.AvailableAirports;
+            var airportlist = $scope.destinationScope.AvailableAirports;
+            
             var OriginairportName = _.find(airportlist, function (airport) {
-                return airport.airport_Code == $scope.$parent.Origin
+                return airport.airport_Code == $scope.destinationScope.Origin
             });
-
+            
             var sortedObjs = _.filter(basicDetinationDetlist, function (item) {
                 return item.LowestFare !== 'N/A';
             });
             sortedObjs = _(sortedObjs).sortBy(function (obj) { return parseInt(obj.LowestFare, 10) })
 
             var contentString = '<div style="font-family: arial,sans-serif;color: black;">' +
-                           '<p>Hi,</p><p>I got following from <a href="www.trippism.com">www.trippism.com</a></p><p>From our orgin <strong>' + OriginairportName.airport_CityName + '</strong> during ' + $filter('date')(sortedObjs[0].DepartureDateTime, $scope.$parent.format, null) + ' to ' + $filter('date')(sortedObjs[0].ReturnDateTime, $scope.$parent.format, null) + ' , we have following option to fly.</p>' +
+                           '<p>Hi,</p><p>I got following from <a href="www.trippism.com">www.trippism.com</a></p><p>From our orgin <strong>' + OriginairportName.airport_CityName + '</strong> during ' + $filter('date')(sortedObjs[0].DepartureDateTime, $scope.destinationScope.format, null) + ' to ' + $filter('date')(sortedObjs[0].ReturnDateTime, $scope.destinationScope.format, null) + ' , we have following option to fly.</p>' +
                           '<table class="table" style="color: #333;font-family: Helvetica, Arial, sans-serif;width:90%%; border-collapse:collapse; border-spacing: 0;"><tr><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Destination</th><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Lowest Fare (' + sortedObjs[0].CurrencyCode + ')</th><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Lowest Non Stop Fare (' + sortedObjs[0].CurrencyCode + ')</th></tr>';
 
             for (var x = 0; x < 10; x++) {
@@ -83,6 +86,7 @@
 
             var emaildet = { From: "test@gmail.com", To: $scope.Toemailaddress, subject: $scope.subject, body: contentString };
 
+            blockUIConfig.message = "Please Wait! Destination Information Sharing...";
             EmailForDestinationDetFactory.SendEmail(emaildet).then(function (data) {
                 if (data.Data.status == "ok") {
                     alertify.alert("Sucess", "");
@@ -92,11 +96,13 @@
                     alertify.alert("Error", "");
                     alertify.alert(data.Data.status).set('onok', function (closeEvent) { });
                 }
+                blockUIConfig.message = "Loading...";
             });
         }
 
         function SendEmailToUser() {
-            $scope.Defaultsubject = $scope.$parent.OriginFullName;      
+            
+            $scope.Defaultsubject = $scope.destinationScope.OriginFullName;
             var GetEmailDetPopupInstance = $modal.open({
                 templateUrl: 'EmailDetForm.html',
                 scope: $scope

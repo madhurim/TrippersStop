@@ -41,6 +41,9 @@
     <Content Include="app\Styles\bootstrap.min.css" />
     <Content Include="app\Styles\css\trippismapp.css" />
     <Content Include="app\Styles\css\icon_top.png" />
+    <Content Include="app\Styles\images\adsection_1.png" />
+    <Content Include="app\Styles\images\adsection_2.png" />
+    <Content Include="app\Styles\images\thumbs_up.png" />
     <Content Include="app\Utility.js" />
     <Content Include="app\Views\EmailDetForm.html" />
     <Content Include="app\Views\farerange.html" />

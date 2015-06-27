@@ -12,11 +12,20 @@
 
 TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.when('', '/destination').otherwise('/destination');
+
+  
     $stateProvider
         // HOME STATES AND NESTED VIEWS ========================================
          .state('destination', {
              url: '/destination',
-             templateUrl: '/app/Views/destination.html'
+             templateUrl: '/app/Views/destination.html',
+             views: {
+                 "": {
+                     templateUrl: '/app/Views/destination.html',
+                     
+                 }
+                 
+             }
          })
         .state('fareforecast', {
             url: '/fareforecast',
@@ -33,6 +42,7 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
      .state('/', {
          url: '/destination',
          templateUrl: '/app/Views/destination.html'
+        
      })
 });
 
