@@ -461,11 +461,11 @@
                                 <div class="thumbnail thumbnailstyle">
                                     <table class="table fontsize">
                                         <tr>
-                                            <th class="text-center">Week#</th>
-                                            <th>Start Date</th>
-                                            <th>End Date</th>
-                                            <th class="text-center">Traffic Volume</th>
-                                            <th>Booking Quantities</th>
+                                            <th class="text-center underline">Week#</th>
+                                            <th class="underline">Start Date</th>
+                                            <th class="underline">End Date</th>
+                                            <th class="text-center underline">Traffic Volume</th>
+                                            <th class="underline">Booking Quantities</th>
                                         </tr>
                                         <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality">
                                             <td class="word-wrap text-center">{{range.YearWeekNumber}}</td>
@@ -482,6 +482,10 @@
                                                 <span ng-if="range.NumberOfObservations == 'LessThan1000'">Less than 1000</span>
                                             </td>
                                         </tr>
+                                        <!--<tr ng-if="MarkerSeasonalityInfo == null">
+                                            <td colspan="5" style="text-align:center">We are sorry, no data available</td>
+                                        </tr>-->
+
                                     </table>
                                 </div>
                             </accordion-group>
@@ -507,6 +511,7 @@
         #wrapper {
             position: relative;
         }
+        
         
         #over_map {
             position: absolute;

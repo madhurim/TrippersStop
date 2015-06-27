@@ -129,3 +129,5 @@ right: -6px;
             font-size: 11px;
             margin-left: 140px;
         }
+        .underline {  text-decoration: underline;
+        }
