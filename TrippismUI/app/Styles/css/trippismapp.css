@@ -131,3 +131,10 @@ right: -6px;
         }
         .underline {  text-decoration: underline;
         }
+        .tooltip{
+border:thin 1px #eee;
+background-color:#FFFBF0;
+padding:5px;
+width:200px;
+}
+ #map_canvas { height: 100% }

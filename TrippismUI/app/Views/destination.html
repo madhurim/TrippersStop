@@ -259,7 +259,7 @@
     <div class="col-lg-10">
         <div class="row" style="margin-left:0px;margin-right:0px;">
             <div id="wrapper">
-                <div google-map btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
+                <div google-map id="map_canvas" btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
                 <div id="over_map" ng-show="IsHistoricalInfo">
                     <div class="col-md-12">
                         <div class="panel panel-default">
@@ -388,8 +388,6 @@
         
         <div class="modal-body">
             
-          
-
             <accordion style="clear:both;"  >
                 <accordion-group is-disabled="true" is-open="true" >
                     <accordion-heading>
@@ -528,7 +526,16 @@
             font-weight: 300;
         }
 
-      
+      #map_canvas { height: 100% }
+/* This class is used to style the tooltip */
+.tooltip{
+	border:thin 1px #eee;
+	background-color:#FFFBF0;
+	padding:5px;
+	width:200px;
+}
+
+
 
         .thumbnail,.panel-group  {margin-bottom:0px !important;
         } 

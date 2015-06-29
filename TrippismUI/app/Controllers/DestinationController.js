@@ -164,7 +164,6 @@
                 var Seasonalitydata = {
                     "Destination":  $scope.Destinationfortab                    
                 };
-               
                 $timeout(function () {                 
                     $scope.status = {
                         isFirstOpen: false,                      
@@ -173,7 +172,6 @@
                     SeasonalityFactory.Seasonality(Seasonalitydata).then(function (data) {
                         $scope.MarkerSeasonalityInfo = data;                      
                     });
-                   
                 }, 0, false);
             }
         };
@@ -186,8 +184,8 @@
                 $scope.CalledOnPageLoad = true;
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
                 UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
-                    $scope.Origin = data.airport_Code;                  
-                    //$scope.Origin = 'ATL';
+                    //$scope.Origin = data.airport_Code;                  
+                    $scope.Origin = 'ATL';
                     $scope.findDestinations('Cheapest');
                 });
                 UtilFactory.MapscrollTo('wrapper');

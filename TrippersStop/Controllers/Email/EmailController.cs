@@ -45,6 +45,7 @@ namespace Trippism.Controllers.Email
 
                 using (var smtpclient = new SmtpClient())
                 {
+                    
                     smtpclient.Send(email);
                     email.Dispose();
                 }              
@@ -72,11 +73,10 @@ namespace Trippism.Controllers.Email
         public class EmailDet
         {
             public string From { get; set; }
-
             public string To { get; set; }
-
             public string subject { get; set; }
             public string body { get; set; }
+            public string mapImage { get; set; }
         }
       
 }
