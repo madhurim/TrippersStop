@@ -19,7 +19,6 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\Controllers\DestinationController.js" />
-    <Content Include="app\Controllers\EmailDetController.js" />
     <Content Include="app\Controllers\EmailForDestinationDetController.js" />
     <Content Include="app\Controllers\FareforecastController.js" />
     <Content Include="app\Controllers\FareRangeController.js" />
@@ -41,11 +40,10 @@
     <Content Include="app\Styles\bootstrap.min.css" />
     <Content Include="app\Styles\css\trippismapp.css" />
     <Content Include="app\Styles\css\icon_top.png" />
-    <Content Include="app\Styles\images\adsection_1.png" />
-    <Content Include="app\Styles\images\adsection_2.png" />
+    <Content Include="app\Styles\images\adsection_1.jpg" />
+    <Content Include="app\Styles\images\adsection_2.jpg" />
     <Content Include="app\Styles\images\thumbs_up.png" />
     <Content Include="app\Utility.js" />
-    <Content Include="app\Views\EmailDetForm.html" />
     <Content Include="app\Views\farerange.html" />
     <Content Include="app\Views\GoogleMap.html" />
     <Content Include="app\Views\destination.html" />

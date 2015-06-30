@@ -3,12 +3,9 @@
     'use strict';
     var controllerId = 'DestinationController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', 'blockUIConfig', '$modal', '$rootScope', '$timeout', 'DestinationFactory', 'UtilFactory', 'FareforecastFactory', 'SeasonalityFactory', DestinationController]);
+        ['$scope', '$location', 'blockUIConfig', '$modal', '$rootScope', '$timeout', 'DestinationFactory', 'UtilFactory', 'FareforecastFactory', 'SeasonalityFactory', DestinationController]);
 
-    function DestinationController($scope, blockUIConfig, $modal, $rootScope, $timeout, DestinationFactory, UtilFactory, FareforecastFactory, SeasonalityFactory) {
-
-        $scope.YoutubeSelectedVideo = 'HCtDPjVk5gc';
-
+    function DestinationController($scope,$location, blockUIConfig, $modal, $rootScope, $timeout, DestinationFactory, UtilFactory, FareforecastFactory, SeasonalityFactory) {
         $scope.hasError = false;
         $scope.Location = "";
         $scope.AvailableCodes = [];
@@ -104,7 +101,6 @@
                   $scope.minFromDate = new Date(newValue);
                   $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
                   $scope.MaximumToDate = common.addDays($scope.minFromDate, 16);
-
               }
        );
 
@@ -138,12 +134,7 @@
             $scope.DestinationFullName = args.Destinatrion;
             $scope.fareData = args.Fareforecastdata;
             $scope.Destinationfortab = args.Destinatrion;
-            
-            
             $scope.open('lg',args);
-           // loadFareForecastInfo(); 
-            
-
         });
 
         function loadFareForecastInfo()
@@ -176,18 +167,33 @@
             }
         };
 
-     
-
         function activate() {
+            var search = $location.search();
+            var org = search.org;
+            var _qFromDate = search.fromdate;
+            var _qToDate = search.todate;
+            
             UtilFactory.ReadAirportJson().then(function (data) {
                 $scope.AvailableAirports = data;
                 $scope.CalledOnPageLoad = true;
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
-                UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
-                    //$scope.Origin = data.airport_Code;                  
-                    $scope.Origin = 'ATL';
+                if (org == undefined || org == '') {
+                    UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
+                        $scope.Origin = data.airport_Code;                  
+                        $scope.Origin = 'ATL';
+                        $scope.findDestinations('Cheapest');
+                    });
+                }
+                else {
+                    if (_qFromDate != undefined && _qFromDate != '')
+                        $scope.FromDate = _qFromDate;
+
+                    if (_qToDate != undefined && _qToDate != '')
+                        $scope.ToDate = _qToDate;
+                    
+                    $scope.Origin = org;
                     $scope.findDestinations('Cheapest');
-                });
+                }
                 UtilFactory.MapscrollTo('wrapper');
             });
         }
@@ -200,7 +206,6 @@
 
         $scope.formatInput = function ($model) {
             if ($model == "" || $model == undefined) return "";
-
             var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $model });
             var airportname = (originairport.airport_FullName.toLowerCase().indexOf("airport") > 0) ? originairport.airport_FullName : originairport.airport_FullName + " Airport";
             var CountryName = (originairport.airport_CountryName != undefined) ? originairport.airport_CountryName : "";
@@ -282,8 +287,8 @@
                 "Region": ($scope.Region != undefined) ? $scope.Region.id : "",
                 "TopDestinations": $scope.TopDestinations,
                 "Destination": $scope.Destination
-
             };
+
             blockUIConfig.message = "Loading destinations..."
             DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.SearchbuttonText = "Get Destinations";
@@ -307,12 +312,9 @@
             if ($scope.CalledOnPageLoad)
                 $scope.CalledOnPageLoad = false;
         }
-
-        
+                
         $scope.open = function (size, obj) {
-            
             $scope.mapOptions = obj.mapOptions;
-
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'DestinationDetails.html',

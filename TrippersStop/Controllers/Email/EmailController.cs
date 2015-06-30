@@ -21,33 +21,33 @@ namespace Trippism.Controllers.Email
     {
         
         [HttpPost]
-        public System.Web.Mvc.JsonResult SendEmailtoUser(EmailDet emaildet)
+        public System.Web.Mvc.JsonResult SendEmailtoUser(Email email)
         {
             var result = new JsonResult();
             try
             {
-                var email = new MailMessage()
+                var emailMsg = new MailMessage()
                 {
-                    Body = emaildet.body,
+                    Body = email.body,
                     IsBodyHtml = true,
-                    Subject = emaildet.subject,
+                    Subject = email.subject,
                 };
 
-                MailAddress fromaddress = new MailAddress(emaildet.From);
-                email.From = fromaddress;
+                MailAddress fromaddress = new MailAddress(email.From);
+                emailMsg.From = fromaddress;
 
-                var toemail = emaildet.To.Split(',');
+                var toemail = email.To.Split(',');
 
                 foreach (var toaddress in toemail)
                 {
-                    email.To.Add(toaddress);
+                    emailMsg.To.Add(toaddress);
                 }
 
                 using (var smtpclient = new SmtpClient())
                 {
                     
-                    smtpclient.Send(email);
-                    email.Dispose();
+                    smtpclient.Send(emailMsg);
+                    emailMsg.Dispose();
                 }              
 
                 result.Data = new
@@ -70,7 +70,7 @@ namespace Trippism.Controllers.Email
 
     }
 
-        public class EmailDet
+        public class Email
         {
             public string From { get; set; }
             public string To { get; set; }

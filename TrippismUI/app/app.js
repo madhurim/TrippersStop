@@ -6,7 +6,7 @@
                           'blockUI',
                           'ui.map',
                           'ui.event',
-                          'youtube-embed'
+                          
                         ]);
 
 
@@ -22,7 +22,6 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
              views: {
                  "": {
                      templateUrl: '/app/Views/destination.html',
-                     
                  }
                  
              }

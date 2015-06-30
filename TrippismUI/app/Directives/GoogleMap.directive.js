@@ -88,29 +88,17 @@ angular.module('TrippismUIApp')
               for (var x = 0; x < maps.length; x++) {
                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
 
-
-                  //var marker = new google.maps.Marker({
-                  //    position: latlng1,
-                  //    map: $scope.destinationMap,
-                  //    title: maps[x].DestinationLocation,
-                  //    icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + (x + 1) + '|ff776b|000000',
-                  //    animation: google.maps.Animation.DROP,
-                  //    CustomMarkerInfo: maps[x],
-                  //});
-                  //createTooltip(marker);
-                  
                   var marker = new MarkerWithLabel({
                       position: latlng1,
                       map: $scope.destinationMap,
-                      title: maps[x].DestinationLocation,
+                      //title: maps[x].DestinationLocation,
                       //labelContent: maps[x].DestinationLocation,
                       labelAnchor: new google.maps.Point(12, 35),
                       labelClass: "labels", // the CSS class for the label
                       labelInBackground: false,
                       animation: google.maps.Animation.DROP,
                       CustomMarkerInfo: maps[x],
-                      //labelStyle: { opacity: 0.75 },
-                      //icon: 'https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-a.png&text=' + maps[x].DestinationLocation + '&psize=11&font=fonts/Roboto-Regular.ttf&color=ff333333&ax=44&ay=48&scale=1',
+                      labelStyle: { opacity: 0.75 },
                       icon: 'https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-b.png&text=' + maps[x].DestinationLocation + '&psize=11&font=fonts/Roboto-Regular.ttf&color=ff000033&ax=44&ay=48&scale=1',
                   });
                   
@@ -123,12 +111,10 @@ angular.module('TrippismUIApp')
                
                   var contentString = '<div style="min-width:100px;padding-top:5px;" id="content">' +
                                           '<div class="col-sm-12 padleft0"><strong>'
-                                            + airportName.airport_FullName + ', ' + airportName.airport_CityName + '</strong></div>' +
-                                            '<br /><div class="col-sm-6 padleft0">'+
-                                            '<strong>'
-                                            + maps[x].CurrencyCode  +' '+ maps[x].LowestFare + '</strong>' +
-                                            
-                 '</div> ';
+                                            + "(" + maps[x].DestinationLocation + ") " + airportName.airport_FullName + ', ' + airportName.airport_CityName + '</strong></div>' +
+                                            '<br /><div class="col-sm-12 padleft0">'+
+                                            '<label>Lowest fare: </label><strong class="text-success"> ' + maps[x].CurrencyCode + ' ' + maps[x].LowestFare + '</strong>' +
+                                    '</div> ';
 
                   $scope.InfoWindow = new google.maps.InfoWindow();
                   var mapsdetails = maps[x];
@@ -147,11 +133,7 @@ angular.module('TrippismUIApp')
                   });
 
                   google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
-                      
                       return function () {
-                          // Play Video on MArker click
-                         // $scope.$parent.YouTubePlayer.playVideo();
-
                           if ($scope.InfoWindow) $scope.InfoWindow.close(); 
                           $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
 
@@ -182,12 +164,10 @@ angular.module('TrippismUIApp')
                               Fareforecastdata: dataForecast,
                               mapOptions: marker.CustomMarkerInfo, //mapsdetails,
                               OriginairportName : OriginairportName,
-                              DestinationairportName: DestinationairportName,
-
+                              DestinationairportName: DestinationairportName
                           });
                      };
                   })(marker, contentString, $scope.InfoWindow));
-
                   $scope.myMarkers.push(marker);
               }         
           };
@@ -206,7 +186,6 @@ angular.module('TrippismUIApp')
               } else {
                   d.resolve();
               }
-
               return d.promise;
           }
 
@@ -244,9 +223,7 @@ angular.module('TrippismUIApp')
                   scope.displayDestinations(scope.btntext, scope.destinations);
                   scope.airportlist;
               }
-              
           });
       }
-
       return directive;
   });
