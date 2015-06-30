@@ -26,6 +26,9 @@ namespace Trippism.Controllers.Email
             var result = new JsonResult();
             try
             {
+
+              
+
                 var emailMsg = new MailMessage()
                 {
                     Body = email.body,
@@ -37,18 +40,21 @@ namespace Trippism.Controllers.Email
                 emailMsg.From = fromaddress;
 
                 var toemail = email.To.Split(',');
-
+                List<string> listToaddress = new List<string>();
                 foreach (var toaddress in toemail)
                 {
+                    listToaddress.Add(toaddress);
                     emailMsg.To.Add(toaddress);
                 }
 
-                using (var smtpclient = new SmtpClient())
-                {
+                //using (var smtpclient = new SmtpClient())
+                //{
                     
-                    smtpclient.Send(emailMsg);
-                    emailMsg.Dispose();
-                }              
+                //    smtpclient.Send(emailMsg);
+                //    emailMsg.Dispose();
+                //}
+
+                APIHelper.MailgunEmail.SendComplexMessage(email.From, email.subject, listToaddress, email.body);
 
                 result.Data = new
                 {
@@ -76,7 +82,7 @@ namespace Trippism.Controllers.Email
             public string To { get; set; }
             public string subject { get; set; }
             public string body { get; set; }
-            public string mapImage { get; set; }
+            
         }
       
 }

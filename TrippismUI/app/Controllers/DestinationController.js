@@ -393,8 +393,6 @@ function DestinationDetailsCtrl($scope, blockUIConfig, $timeout, $modalInstance,
     $scope.loadSeasonalityInfoLoaded = false;
     $scope.loadSeasonalityInfo = function ($event) {
         
-        
-        
         if ($scope.loadSeasonalityInfoLoaded == false) {
             if ($scope.MarkerSeasonalityInfo == "") {
                 var Seasonalitydata = {

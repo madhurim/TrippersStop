@@ -10,12 +10,13 @@
         $scope.Toemailaddress = "";
         $scope.subject = "";
         $scope.hasError = false;
-        $scope.email = "anand@trivenitechnologies.in";
+        //$scope.email = "anand@trivenitechnologies.in";
+        $scope.email = "";
         $scope.Subject = "Destination Locations from Origin " + $scope.Defaultsubject + " via [Trippism]";
         $scope.emailvalidate = false;
    
-        $scope.submitModal = function () {           
-             validateEmail();
+        $scope.submitModal = function () {
+            validateEmail();
             if ($scope.FormGetEmailDet.$invalid) {
                 $scope.hasError = true;
                 return;
@@ -32,7 +33,11 @@
         };
 
         function validateEmail()
-        {           
+        {
+            if ($scope.email.length < 1) {
+                $scope.hasError = true;
+                return;
+            }
             var emails = $scope.email.split(',');
            
             var isValid = true;
@@ -50,7 +55,6 @@
         {   
             var basicDetinationDetlist = $scope.destinationScope.destinationlist;
             var airportlist = $scope.destinationScope.AvailableAirports;
-            
             var OriginairportName = _.find(airportlist, function (airport) {
                 return airport.airport_Code == $scope.destinationScope.Origin
             });
@@ -87,12 +91,11 @@
             var FromDate = ConvertToRequiredDate($scope.destinationScope.FromDate);
             var ToDate = ConvertToRequiredDate($scope.destinationScope.ToDate);
 
-            var rdrURL = '<a href="http://localhost:1299/#/destination?org=' + $scope.destinationScope.Origin + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
-            //var rdrURL = '<a href="http://www.trippism.com/#/destination?org=' + $scope.destinationScope.Origin + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
+            //var rdrURL = '<a href="http://localhost:1299/#/destination?org=' + $scope.destinationScope.Origin + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
+            var rdrURL = '<a href="http://www.trippism.com/#/destination?org=' + $scope.destinationScope.Origin + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
             
             contentString += rdrURL + '<img src="https://maps.googleapis.com/maps/api/staticmap?zoom=2&size=800x500&maptype=roadmap&'+ MarkersString +'" /></a>';
                                 //'<img src="https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=800x500&maptype=roadmap&markers=color:blue%7SSlabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:A%7C40.718217,-73.998284" /></a>';
-            
             
             var email = {
                 From: "test@gmail.com",
