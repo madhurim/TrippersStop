@@ -180,7 +180,7 @@
                 if (org == undefined || org == '') {
                     UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
                         $scope.Origin = data.airport_Code;                  
-                        $scope.Origin = 'ATL';
+                        //$scope.Origin = 'ATL';
                         $scope.findDestinations('Cheapest');
                     });
                 }

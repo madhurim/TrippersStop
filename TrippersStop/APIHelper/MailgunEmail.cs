@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using RestSharp;
 using System.Configuration;
-
+using RestSharp;
 
 namespace Trippism.APIHelper
 {
@@ -21,7 +20,7 @@ namespace Trippism.APIHelper
             
 
             RestRequest request = new RestRequest();
-            //request.AddParameter("domain", "sandboxd21b1c47661845f288d674d57918a443.mailgun.org", ParameterType.UrlSegment);
+            //request.AddParameter("domain","sandboxd21b1c47661845f288d674d57918a443.mailgun.org", ParameterType.UrlSegment);
             request.AddParameter("domain", ConfigurationManager.AppSettings["MailGundomain"].ToString(), ParameterType.UrlSegment);
 
             request.Resource = "{domain}/messages";
