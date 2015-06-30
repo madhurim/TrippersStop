@@ -61,7 +61,7 @@
             sortedObjs = _(sortedObjs).sortBy(function (obj) { return parseInt(obj.LowestFare, 10) })
 
             var contentString = '<div style="font-family: arial,sans-serif;color: black;">' +
-                           '<p>Hi,</p><p>I got following from <a href="www.trippism.com">www.trippism.com</a></p><p>From our orgin <strong>' + OriginairportName.airport_CityName + '</strong> during ' + $filter('date')(sortedObjs[0].DepartureDateTime, $scope.destinationScope.format, null) + ' to ' + $filter('date')(sortedObjs[0].ReturnDateTime, $scope.destinationScope.format, null) + ' , we have following option to fly.</p>' +
+                           '<p>Hi,</p><p>I got following from <a href="www.trippism.com">www.trippism.com</a></p><p>From our orgin <strong>' + OriginairportName.airport_CityName + '</strong> during ' + $filter('date')(sortedObjs[0].DepartureDateTime, $scope.destinationScope.format, null) + ' to ' + $filter('date')(sortedObjs[0].ReturnDateTime, $scope.destinationScope.format, null) + ' , we have following options to fly.</p>' +
                           '<table class="table" style="color: #333;font-family: Helvetica, Arial, sans-serif;width:90%%; border-collapse:collapse; border-spacing: 0;"><tr><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Destination</th><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Lowest Fare</th><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Lowest Non Stop Fare</th></tr>';
 
             var MarkersString = '';
@@ -87,8 +87,8 @@
             var FromDate = ConvertToRequiredDate($scope.destinationScope.FromDate);
             var ToDate = ConvertToRequiredDate($scope.destinationScope.ToDate);
 
-            //var rdrURL = '<a href="http://localhost:1299/#/destination?org=' + $scope.destinationScope.Origin + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
-            var rdrURL = '<a href="http://www.trippism.com/#/destination?org=' + $scope.destinationScope.Origin + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
+            var rdrURL = '<a href="http://localhost:1299/#/destination?org=' + $scope.destinationScope.Origin + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
+            //var rdrURL = '<a href="http://www.trippism.com/#/destination?org=' + $scope.destinationScope.Origin + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
             
             contentString += rdrURL + '<img src="https://maps.googleapis.com/maps/api/staticmap?zoom=2&size=800x500&maptype=roadmap&'+ MarkersString +'" /></a>';
                                 //'<img src="https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=800x500&maptype=roadmap&markers=color:blue%7SSlabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:A%7C40.718217,-73.998284" /></a>';
@@ -105,7 +105,7 @@
             EmailForDestinationDetFactory.SendEmail(email).then(function (data) {
                 if (data.Data.status == "ok") {
                     alertify.alert("Sucess", "");
-                    alertify.alert('Destination Information send sucessfully.').set('onok', function (closeEvent) { });
+                    alertify.alert('Shared via Email sucessfully.').set('onok', function (closeEvent) { });
                 }
                 else {
                     alertify.alert("Error", "");

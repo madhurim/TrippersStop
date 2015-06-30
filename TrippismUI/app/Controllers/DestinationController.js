@@ -357,6 +357,7 @@ function DestinationDetailsCtrl($scope, blockUIConfig, $timeout, $modalInstance,
     //$scope.$apply();
     $scope.destinationScope = destinationScope;
     
+    $scope.oneAtATime = true;
     
     $scope.ok = function () { $modalInstance.close($scope.selected.item);};
 
@@ -391,7 +392,8 @@ function DestinationDetailsCtrl($scope, blockUIConfig, $timeout, $modalInstance,
 
     $scope.loadSeasonalityInfoLoaded = false;
     $scope.loadSeasonalityInfo = function ($event) {
-        $scope.SeasonalityInfoaccordion = true;
+        
+        
         
         if ($scope.loadSeasonalityInfoLoaded == false) {
             if ($scope.MarkerSeasonalityInfo == "") {

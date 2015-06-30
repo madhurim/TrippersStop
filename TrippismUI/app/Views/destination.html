@@ -391,7 +391,7 @@
             <accordion style="clear:both;"  >
                 <accordion-group is-disabled="true" is-open="true" >
                     <accordion-heading>
-                        <span >Destination from my Origin <b> {{OriginairportName.airport_FullName +', ' + OriginairportName.airport_CityName}} </b> </span> 
+                        <span >Destination from Origin <b> {{OriginairportName.airport_FullName +', ' + OriginairportName.airport_CityName}} </b> </span> 
                         <div class="pull-right">
                             <i class="glyphicon glyphicon-remove" ng-click="cancel()"></i>
                         </div>
@@ -429,8 +429,8 @@
                     </div>
                     
                     <div style="clear:both;padding-top:10px;">
-                        <accordion style="clear:both;">
-                            <accordion-group is-open="FareForecastaccordion">
+                        <accordion close-others="oneAtATime" style="clear:both;">
+                            <accordion-group >
                                 <accordion-heading>
                                     <span ng-click="loadFareForecastInfo($event)">Fare Info</span>
                                 </accordion-heading>
@@ -452,7 +452,7 @@
                                     </table>
                                 </div>
                             </accordion-group>
-                            <accordion-group is-open="SeasonalityInfoaccordion">
+                            <accordion-group>
                                 <accordion-heading>
                                     <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
                                 </accordion-heading>
@@ -481,17 +481,17 @@
                                             </td>
                                         </tr>
                                         <!--<tr ng-if="MarkerSeasonalityInfo == null">
-                                            <td colspan="5" style="text-align:center">We are sorry, no data available</td>
-                                        </tr>-->
+                        <td colspan="5" style="text-align:center">We are sorry, no data available</td>
+                    </tr>-->
 
                                     </table>
                                 </div>
                             </accordion-group>
-                            <accordion-group >
+                            <accordion-group>
                                 <accordion-heading>
-                                    <span >Fare Range</span>
+                                    <span>Fare Range</span>
                                 </accordion-heading>
-                                <div >
+                                <div>
                                     Coming soon
                                 </div>
                             </accordion-group>
@@ -506,24 +506,6 @@
     
 
     <style>
-        #wrapper {
-            position: relative;
-        }
-        
-        
-        #over_map {
-            position: absolute;
-            width: 400px;
-            top: 10px;
-            right: 10px;
-            z-index: 99;
-            filter: alpha(opacity=50);
-            opacity: .80;
-        }
-
-        .fontsize {
-            font-size: 13px;
-            font-weight: 300;
-        }
+     
          
     </style>
