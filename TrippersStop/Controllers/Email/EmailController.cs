@@ -25,51 +25,20 @@ namespace Trippism.Controllers.Email
         {
             var result = new JsonResult();
             try
-            {
-
-              
-
-                var emailMsg = new MailMessage()
-                {
-                    Body = email.body,
-                    IsBodyHtml = true,
-                    Subject = email.subject,
-                };
-
-                MailAddress fromaddress = new MailAddress(email.From);
-                emailMsg.From = fromaddress;
-
+            {   
                 var toemail = email.To.Split(',');
                 List<string> listToaddress = new List<string>();
                 foreach (var toaddress in toemail)
-                {
                     listToaddress.Add(toaddress);
-                    emailMsg.To.Add(toaddress);
-                }
-
-                //using (var smtpclient = new SmtpClient())
-                //{
-                    
-                //    smtpclient.Send(emailMsg);
-                //    emailMsg.Dispose();
-                //}
-
+                
                 APIHelper.MailgunEmail.SendComplexMessage(email.From, email.subject, listToaddress, email.body);
-
-                result.Data = new
-                {
-                    status = "ok",
-                };
+                result.Data = new{status = "ok"};
 
                 return result;
             }
             catch(Exception ex)
             {
-                result.Data = new
-                {
-                    status = ex.Message,
-                };
-
+                result.Data = new{ status = ex.Message,};
                 return result;
             }
         }

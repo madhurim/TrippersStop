@@ -62,8 +62,9 @@
                     <script type="text/ng-template" id="customTemplate.html">
                         <a style="padding-left:10px;" tabindex="-1" class="row-even1">
                             <i ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
-
-                            <span>{{match.model.airport_CityCode}}</span>,
+                            
+                            <!--<span>{{match.model.airport_CityCode}}</span>,-->
+                            <span>{{match.model.airport_Code}}</span>,
                             <span>{{match.model.airport_FullName.toLowerCase().indexOf("airport") >= 0 ? match.model.airport_FullName : match.model.airport_FullName + " Airport"}}</span>,
 
                             <span>{{match.model.airport_CityName}}</span>,
@@ -379,7 +380,6 @@
         <img src="../app/Styles/images/adsection_1.jpg" style="max-width:100%;height:290px;" />
         <div style="height:20px">&nbsp;</div>
         <img src="../app/Styles/images/adsection_2.jpg" style="max-width:100%;height:290px;" />
-        
     </div>-->
 
     <style>.modal-content{opacity:0.8 !important;border-radius:1px;}</style>
@@ -391,7 +391,7 @@
             <accordion style="clear:both;"  >
                 <accordion-group is-disabled="true" is-open="true" >
                     <accordion-heading>
-                        <span >Destination from Origin <b> {{OriginairportName.airport_FullName +', ' + OriginairportName.airport_CityName}} </b> </span> 
+                        <span >Destination from Origin <b> {{DestinationName}} </b> </span> 
                         <div class="pull-right">
                             <i class="glyphicon glyphicon-remove" ng-click="cancel()"></i>
                         </div>
@@ -434,8 +434,9 @@
                                 <accordion-heading>
                                     <span ng-click="loadFareForecastInfo($event)">Fare Info</span>
                                 </accordion-heading>
-                                <div class="thumbnail" style="padding:0px;">
-                                    <table class="table fontsize" style="margin-bottom:0px;">
+                                <div class="thumbnail" style="padding:0px;margin-bottom:0px;">
+                                    <div style="padding:8px;" ng-if="FareNoDataFound"><label class="text-danger">Ooops! We are sorry, no information is available.</label> </div>
+                                    <table ng-if="!FareNoDataFound" class="table fontsize" style="margin-bottom:0px;">
                                         <tr><th class="col-md-3">Departure Date</th><td class="col-md-9 word-wrap">{{FareforecastData.DepartureDateTime | date:"yyyy-MM-dd"}}</td></tr>
                                         <tr><th class="col-md-3">Return Date</th><td class="col-md-9 word-wrap">{{FareforecastData.ReturnDateTime | date:"yyyy-MM-dd"}}</td></tr>
                                         <tr><th class="col-md-3">Highest Predicted Fare</th><td class="col-md-9 word-wrap">{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.HighestPredictedFare | number:2}}</td></tr>
@@ -456,7 +457,8 @@
                                 <accordion-heading>
                                     <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
                                 </accordion-heading>
-                                <div class="thumbnail thumbnailstyle">
+                                <div style="padding:8px;" ng-if="SeasonalityNoDataFound"><label class="text-danger">Ooops! We are sorry, no information is available.</label> </div>
+                                <div ng-if="!SeasonalityNoDataFound" class="thumbnail thumbnailstyle">
                                     <table class="table fontsize">
                                         <tr>
                                             <th class="text-center underline">Week#</th>
@@ -481,8 +483,8 @@
                                             </td>
                                         </tr>
                                         <!--<tr ng-if="MarkerSeasonalityInfo == null">
-                        <td colspan="5" style="text-align:center">We are sorry, no data available</td>
-                    </tr>-->
+                <td colspan="5" style="text-align:center">We are sorry, no data available</td>
+            </tr>-->
 
                                     </table>
                                 </div>
@@ -498,14 +500,6 @@
                         </accordion>
                     </div>
                 </accordion-group>
-                
             </accordion>
         </div>
     </script>
-
-    
-
-    <style>
-     
-         
-    </style>

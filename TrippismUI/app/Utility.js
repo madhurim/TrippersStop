@@ -14,19 +14,9 @@ function ConvertToRequiredDate(dt, calledFrom) {
     return _date;
 }
 
-//function ConverttoApiDate(dt) {
-//    dt = new Date(dt);
-//    var curr_date = ('0' + dt.getDate()).slice(-2);
-//    var curr_month = ('0' + (dt.getMonth() + 1)).slice(-2);
-//    var curr_year = dt.getFullYear();
-//    var _date = curr_year + "-" + curr_month + "-" + curr_date;
-//    return _date;
-//}
-
 function daydiff(first, second) {
     return Math.round((second - first) / (1000 * 60 * 60 * 24));
 }
-
 
 function Dateformat()
 {

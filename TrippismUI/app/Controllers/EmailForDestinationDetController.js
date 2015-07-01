@@ -10,7 +10,6 @@
         $scope.Toemailaddress = "";
         $scope.subject = "";
         $scope.hasError = false;
-        //$scope.email = "anand@trivenitechnologies.in";
         $scope.email = "";
         $scope.Subject = "Destination Locations from Origin " + $scope.Defaultsubject + " via [Trippism]";
         $scope.emailvalidate = false;
@@ -21,7 +20,6 @@
                 $scope.hasError = true;
                 return;
             }
-
             if ($scope.FormGetEmailDet.$valid) {
                 var data = { To: $scope.email, subject: $scope.Subject }
                 $scope.$close(data);
