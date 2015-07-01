@@ -88,11 +88,11 @@
 
             contentString += '</table><p>Please explore <a href="www.trippism.com">www.trippism.com</a> for more details to plan vacation, trip.</p><p>Thanks,</p><p>via Trippism - new generation trip planner!</p></div>';
 
-            var FromDate = ConvertToRequiredDate($scope.destinationScope.FromDate,'UI');
-            var ToDate = ConvertToRequiredDate($scope.destinationScope.ToDate,'UI');
-
-            //var rdrURL = '<a href="http://localhost:1299/#/destination?org=' + $scope.destinationScope.Origin + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
-            var rdrURL = '<a href="http://www.trippism.com/#/destination?org=' + $scope.destinationScope.Origin + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
+            var FromDate = ConvertToRequiredDate($scope.destinationScope.FromDate,'API');
+            var ToDate = ConvertToRequiredDate($scope.destinationScope.ToDate,'API');
+            var OriginName = $scope.destinationScope.Origin.toUpperCase();
+            //var rdrURL = '<a href="http://localhost:1299/#/destination?org=' + OriginName + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
+            var rdrURL = '<a href="http://www.trippism.com/#/destination?org=' + OriginName + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
             
             contentString += rdrURL + '<img src="https://maps.googleapis.com/maps/api/staticmap?zoom=2&size=800x500&maptype=roadmap&'+ MarkersString +'" /></a>';
                                 //'<img src="https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=800x500&maptype=roadmap&markers=color:blue%7SSlabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:A%7C40.718217,-73.998284" /></a>';

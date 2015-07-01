@@ -174,10 +174,12 @@
             var _qFromDate = search.fromdate;
             var _qToDate = search.todate;
             
+
             UtilFactory.ReadAirportJson().then(function (data) {
                 $scope.AvailableAirports = data;
                 $scope.CalledOnPageLoad = true;
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
+                debugger;
                 if (org == undefined || org == '') {
                     UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
                         if (data == undefined) {
