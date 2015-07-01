@@ -441,13 +441,14 @@
                                         <tr><th class="col-md-3">Return Date</th><td class="col-md-9 word-wrap">{{FareforecastData.ReturnDateTime | date:"yyyy-MM-dd"}}</td></tr>
                                         <tr><th class="col-md-3">Highest Predicted Fare</th><td class="col-md-9 word-wrap">{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.HighestPredictedFare | number:2}}</td></tr>
                                         <tr><th class="col-md-3">Lowest Predicted Fare</th><td class="col-md-9 word-wrap">{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.LowestPredictedFare | number:2}}</td></tr>
-                                        <tr><th class="col-md-3">Lowest Fare</th><td class="col-md-9 word-wrap">{{FareforecastData.LowestFare}}</td></tr>
+                                        <tr><th class="col-md-3">Lowest Fare</th><td class="col-md-9 word-wrap">{{FareforecastData.CurrencyCode}} {{FareforecastData.LowestFare}}</td></tr>
                                         <tr>
                                             <th class="col-md-3">Recommendation</th>
                                             <td class="col-md-9 word-wrap">
                                                 <img ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
                                                 <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
                                                 <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
+                                                <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
                                             </td>
                                         </tr>
                                     </table>

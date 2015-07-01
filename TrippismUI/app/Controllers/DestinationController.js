@@ -310,7 +310,7 @@
                 else {
                     $scope.buttontext = $scope.buttontext == "All" ? "Cheapest" : "All";
                     alertify.alert("Destination Finder", "");
-                    alertify.alert('Sorry! There are no destinations, match your search request!').set('onok', function (closeEvent) { });
+                    alertify.alert('Opps! Sorry, no suggestions are available from your origin on various destinations!').set('onok', function (closeEvent) { });
                 }
                 blockUIConfig.message = "Loading..."
             });
