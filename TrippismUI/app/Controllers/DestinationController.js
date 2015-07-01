@@ -25,7 +25,7 @@
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
         $scope.IsHistoricalInfo = false;
-        $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 192));
+        $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 192),'UI');
         $scope.LoadingText = "Loading..";
         $scope.SearchbuttonText = "Get Destinations";       
         $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
@@ -37,17 +37,18 @@
             Seasonalitystatus: false          
         };
         $scope.loadFareForecastInfo = loadFareForecastInfo;
-       
         $scope.ISloader = false;
         var dt = new Date();
-        dt.setHours(0, 0, 0, 0)
+        
+        dt.setHours(0, 0, 0, 0);
+        
         var Todt = new Date();
         Todt.setDate(Todt.getDate() + 5); // add default from 5 days
         Todt.setHours(0, 0, 0, 0)
 
-        $scope.ToDate = ConvertToRequiredDate(Todt);
-        $scope.FromDate = ConvertToRequiredDate(dt);
-
+        $scope.ToDate = ConvertToRequiredDate(Todt,'UI');
+        $scope.FromDate = ConvertToRequiredDate(dt,'UI');
+        
         $scope.minTodayDate = new Date();
         $scope.minFromDate = new Date();
         $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
@@ -66,14 +67,14 @@
                todate.setHours(0, 0, 0, 0);
 
                if (newDt >= todate) {
-                   $scope.Latestdeparturedate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1))
+                   $scope.Latestdeparturedate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1),'UI')
                }
                /**/
 
                // Calculate datediff
                var diff = daydiff(new Date(newValue).setHours(0, 0, 0, 0), new Date($scope.Latestdeparturedate).setHours(0, 0, 0, 0));
                if (diff > 30)
-                   $scope.Latestdeparturedate = ConvertToRequiredDate(common.addDays(newDt, 30));
+                   $scope.Latestdeparturedate = ConvertToRequiredDate(common.addDays(newDt, 30),'UI');
 
                $scope.MaximumLatestdeparturedate = common.addDays(newDt, 30);
            }
@@ -93,7 +94,7 @@
                   todate.setHours(0, 0, 0, 0);
 
                   if (newDt >= todate) {
-                      $scope.ToDate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1))
+                      $scope.ToDate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1),'UI')
                   }
                   /**/
 
@@ -179,9 +180,14 @@
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
                 if (org == undefined || org == '') {
                     UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
-                        $scope.Origin = data.airport_Code;                  
-                        //$scope.Origin = 'ATL';
-                        $scope.findDestinations('Cheapest');
+                        if (data == undefined) {
+                            alertify.alert('Trippism', 'No nearest airport not found.');
+                            return;
+                        }
+                        else {
+                            $scope.Origin = data.airport_Code;
+                            $scope.findDestinations('Cheapest');
+                        }
                     });
                 }
                 else {
@@ -194,7 +200,6 @@
                     $scope.Origin = org;
                     $scope.findDestinations('Cheapest');
                 }
-                UtilFactory.MapscrollTo('wrapper');
             });
         }
 
@@ -205,6 +210,7 @@
         };
 
         $scope.formatInput = function ($model) {
+            
             if ($model == "" || $model == undefined) return "";
             var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $model });
             var airportname = (originairport.airport_FullName.toLowerCase().indexOf("airport") > 0) ? originairport.airport_FullName : originairport.airport_FullName + " Airport";
@@ -212,7 +218,7 @@
             return originairport.airport_Code + ", " + airportname + ", " + originairport.airport_CityName + ", " + CountryName;
         }
 
-        $scope.open = function ($event) {
+        $scope.openToDate = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
             $scope.opened = true;
@@ -274,11 +280,11 @@
             else if (buttnText == 'Cheapest') { $scope.SearchbuttonChepestIsLoading = true; $scope.SearchbuttonCheapestText = $scope.LoadingText; }
             var data = {
                 "Origin": $scope.Origin,
-                "DepartureDate": ($scope.FromDate == '' || $scope.FromDate == undefined) ? null : ConvertToRequiredDate($scope.FromDate),
-                "ReturnDate": ($scope.ToDate == '' || $scope.ToDate == undefined) ? null : ConvertToRequiredDate($scope.ToDate),
+                "DepartureDate": ($scope.FromDate == '' || $scope.FromDate == undefined) ? null : ConvertToRequiredDate($scope.FromDate ,'API'),
+                "ReturnDate": ($scope.ToDate == '' || $scope.ToDate == undefined) ? null : ConvertToRequiredDate($scope.ToDate,'API'),
                 "Lengthofstay": $scope.LenghtOfStay,
-                "Earliestdeparturedate": ($scope.Earliestdeparturedate == '' || $scope.Earliestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Earliestdeparturedate),
-                "Latestdeparturedate": ($scope.Latestdeparturedate == '' || $scope.Latestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Latestdeparturedate),
+                "Earliestdeparturedate": ($scope.Earliestdeparturedate == '' || $scope.Earliestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Earliestdeparturedate,'API'),
+                "Latestdeparturedate": ($scope.Latestdeparturedate == '' || $scope.Latestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Latestdeparturedate,'API'),
                 "Theme": ($scope.Theme != undefined) ? $scope.Theme.id : "",
                 "Location": $scope.Location,
                 "Minfare": $scope.Minfare,

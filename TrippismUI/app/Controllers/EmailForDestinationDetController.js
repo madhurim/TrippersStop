@@ -56,7 +56,7 @@
             var basicDetinationDetlist = $scope.destinationScope.destinationlist;
             var airportlist = $scope.destinationScope.AvailableAirports;
             var OriginairportName = _.find(airportlist, function (airport) {
-                return airport.airport_Code == $scope.destinationScope.Origin
+                return airport.airport_Code == $scope.destinationScope.Origin.toUpperCase()
             });
             
             var sortedObjs = _.filter(basicDetinationDetlist, function (item) {
@@ -88,8 +88,8 @@
 
             contentString += '</table><p>Please explore <a href="www.trippism.com">www.trippism.com</a> for more details to plan vacation, trip.</p><p>Thanks,</p><p>via Trippism - new generation trip planner!</p></div>';
 
-            var FromDate = ConvertToRequiredDate($scope.destinationScope.FromDate);
-            var ToDate = ConvertToRequiredDate($scope.destinationScope.ToDate);
+            var FromDate = ConvertToRequiredDate($scope.destinationScope.FromDate,'UI');
+            var ToDate = ConvertToRequiredDate($scope.destinationScope.ToDate,'UI');
 
             //var rdrURL = '<a href="http://localhost:1299/#/destination?org=' + $scope.destinationScope.Origin + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
             var rdrURL = '<a href="http://www.trippism.com/#/destination?org=' + $scope.destinationScope.Origin + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';

@@ -26,14 +26,14 @@
         Todt.setDate(Todt.getDate() + 5); // add default from 5 days
         Todt.setHours(0, 0, 0, 0)
 
-        $scope.ToDate = ConvertToRequiredDate(Todt);
-        $scope.FromDate = ConvertToRequiredDate(dt);
+        $scope.ToDate = ConvertToRequiredDate(Todt,'UI');
+        $scope.FromDate = ConvertToRequiredDate(dt,'UI');
 
         $scope.minTodayDate = new Date();
         $scope.minFromDate = new Date();
         $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
 
-        $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 60));
+        $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 60),'UI');
       
         $scope.$watch(function (scope) { return scope.FromDate },
               function (newValue, oldValue) {
@@ -48,7 +48,7 @@
                   todate.setHours(0, 0, 0, 0);
 
                   if (newDt >= todate) {
-                      $scope.ToDate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1))
+                      $scope.ToDate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1),'UI')
                   }
                   /**/
 
@@ -130,8 +130,8 @@
             $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; 
             var data = {
                 "Origin": $scope.Origin,
-                "DepartureDate": ConvertToRequiredDate($scope.FromDate),
-                "ReturnDate": ConvertToRequiredDate($scope.ToDate),
+                "DepartureDate": ConvertToRequiredDate($scope.FromDate,'API'),
+                "ReturnDate": ConvertToRequiredDate($scope.ToDate,'API'),
                 "Destination": $scope.Destination
             };
             FareforecastFactory.fareforecast(data).then(function (data) {

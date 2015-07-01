@@ -1,16 +1,32 @@
-﻿function ConvertToRequiredDate(dt) {
+﻿
+function ConvertToRequiredDate(dt, calledFrom) {
     dt = new Date(dt);
     var curr_date = ('0' + dt.getDate()).slice(-2);
     var curr_month = ('0' + (dt.getMonth() + 1)).slice(-2);
     var curr_year = dt.getFullYear();
-    var _date = curr_year + "-" + curr_month + "-" + curr_date;
+    var _date;
+    if (calledFrom == 'UI')
+        _date = curr_month + "/" + curr_date + '/' + curr_year;
+    else if (calledFrom == 'API')
+        _date = curr_year + "-" + curr_month + "-" + curr_date;
+    else
+        _date = curr_month + "/" + curr_date + '/' + curr_year;
     return _date;
 }
 
+//function ConverttoApiDate(dt) {
+//    dt = new Date(dt);
+//    var curr_date = ('0' + dt.getDate()).slice(-2);
+//    var curr_month = ('0' + (dt.getMonth() + 1)).slice(-2);
+//    var curr_year = dt.getFullYear();
+//    var _date = curr_year + "-" + curr_month + "-" + curr_date;
+//    return _date;
+//}
 
 function daydiff(first, second) {
     return Math.round((second - first) / (1000 * 60 * 60 * 24));
 }
+
 
 function Dateformat()
 {

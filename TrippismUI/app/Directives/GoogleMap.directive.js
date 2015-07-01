@@ -142,9 +142,8 @@ angular.module('TrippismUIApp')
                           //});
 
                           $scope.InfoWindow.open($scope.destinationMap, marker);
-
                           var OriginairportName = _.find($scope.airportlist, function (airport) {
-                              return airport.airport_Code == $scope.$parent.Origin
+                              return airport.airport_Code == $scope.$parent.Origin.toUpperCase()
                           });
 
                           var DestinationairportName = _.find($scope.airportlist, function (airport) {
@@ -153,8 +152,11 @@ angular.module('TrippismUIApp')
                           
                           var dataForecast = {
                               "Origin": $scope.$parent.Origin,
-                              "DepartureDate": ConvertToRequiredDate(marker.CustomMarkerInfo.DepartureDateTime),
-                              "ReturnDate": ConvertToRequiredDate(marker.CustomMarkerInfo.ReturnDateTime),
+                              //"DepartureDate": ConvertToRequiredDate(marker.CustomMarkerInfo.DepartureDateTime),
+                              //"ReturnDate": ConvertToRequiredDate(marker.CustomMarkerInfo.ReturnDateTime),
+                              "DepartureDate": ConvertToRequiredDate(marker.CustomMarkerInfo.DepartureDateTime, 'API'),
+                              "ReturnDate": ConvertToRequiredDate(marker.CustomMarkerInfo.ReturnDateTime, 'API'),
+                              
                               "Destination": marker.CustomMarkerInfo.DestinationLocation
                           };
 

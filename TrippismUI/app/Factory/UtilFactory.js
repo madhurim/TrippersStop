@@ -48,6 +48,7 @@
             var url = "http://ipinfo.io?callback=JSON_CALLBACK";
            return $http.jsonp(url)
            .then(function (data) {
+               
                data = data.data;
                var originairport = _.find(AvailableCodes, function (airport) { return airport.airport_CityName == data.city && airport.airport_CountryCode == data.country });
                if (originairport != null) {
