@@ -181,7 +181,7 @@
                 if (org == undefined || org == '') {
                     UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
                         if (data == undefined) {
-                            alertify.alert('Trippism', 'No nearest airport found.');
+                            alertify.alert('Trippism', 'Oops! Sorry, we are unable to detect your home location automatically.');
                             return;
                         }
                         else {
