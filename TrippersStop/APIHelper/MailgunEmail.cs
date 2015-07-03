@@ -25,7 +25,11 @@ namespace Trippism.APIHelper
 
             request.Resource = "{domain}/messages";
             //request.AddParameter("from", "Excited User <shaileshsakaria@gmail.com>");
-            request.AddParameter("from", ConfigurationManager.AppSettings["MailGunFromemail"].ToString());
+            
+            if(!string.IsNullOrEmpty(From))
+                request.AddParameter("from", From);
+            else
+                request.AddParameter("from", ConfigurationManager.AppSettings["MailGunFromemail"].ToString());
             
 
             foreach (var emailaddr in useremails)

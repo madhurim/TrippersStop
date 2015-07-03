@@ -42,7 +42,10 @@
     <Content Include="app\Styles\css\icon_top.png" />
     <Content Include="app\Styles\images\adsection_1.jpg" />
     <Content Include="app\Styles\images\adsection_2.jpg" />
+    <Content Include="app\Styles\images\circle-info.png" />
+    <Content Include="app\Styles\images\hor-loading.png" />
     <Content Include="app\Styles\images\thumbs_up.png" />
+    <Content Include="app\Styles\images\time.png" />
     <Content Include="app\Utility.js" />
     <Content Include="app\Views\farerange.html" />
     <Content Include="app\Views\GoogleMap.html" />

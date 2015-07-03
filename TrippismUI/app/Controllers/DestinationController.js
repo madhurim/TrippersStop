@@ -181,7 +181,7 @@
                 if (org == undefined || org == '') {
                     UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
                         if (data == undefined) {
-                            alertify.alert('Trippism', 'Oops! Sorry, we are unable to detect your home location automatically.');
+                            //  alertify.alert('Trippism', 'Oops! Sorry, we are unable to detect your home location automatically.');
                             return;
                         }
                         else {
@@ -278,6 +278,7 @@
             $scope.IsHistoricalInfo = false;
             if (buttnText == 'All') { $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; }
             else if (buttnText == 'Cheapest') { $scope.SearchbuttonChepestIsLoading = true; $scope.SearchbuttonCheapestText = $scope.LoadingText; }
+            
             var data = {
                 "Origin": $scope.Origin,
                 "DepartureDate": ($scope.FromDate == '' || $scope.FromDate == undefined) ? null : ConvertToRequiredDate($scope.FromDate ,'API'),
@@ -318,7 +319,7 @@
             if ($scope.CalledOnPageLoad)
                 $scope.CalledOnPageLoad = false;
         }
-                
+        
         $scope.open = function (size, obj) {
             $scope.mapOptions = obj.mapOptions;
             var modalInstance = $modal.open({
@@ -350,9 +351,9 @@
 
 var controllerId = 'DestinationDetailsCtrl'; //DestinationDetailsCtrl
 angular.module('TrippismUIApp').controller(controllerId,
-    ['$scope', 'blockUIConfig', '$timeout', '$modalInstance', 'mapDetails', 'OriginairportName', 'DestinationairportName', 'Fareforecastdata', 'Destination', 'destinationScope', 'FareforecastFactory', 'SeasonalityFactory', DestinationDetailsCtrl]);
+    ['$scope', 'blockUIConfig', '$timeout', '$modalInstance', 'mapDetails', 'OriginairportName', 'DestinationairportName', 'Fareforecastdata', 'Destination', 'destinationScope', 'FareforecastFactory', 'SeasonalityFactory', 'FareRangeFactory', DestinationDetailsCtrl]);
 
-function DestinationDetailsCtrl($scope, blockUIConfig, $timeout, $modalInstance, mapDetails, OriginairportName, DestinationairportName, Fareforecastdata, Destination, destinationScope, FareforecastFactory, SeasonalityFactory) {
+function DestinationDetailsCtrl($scope, blockUIConfig, $timeout, $modalInstance, mapDetails, OriginairportName, DestinationairportName, Fareforecastdata, Destination, destinationScope, FareforecastFactory, SeasonalityFactory, FareRangeFactory) {
     //$scope.loadFareForecastInfo = loadFareForecastInfo;
     $scope.mapDetails = mapDetails;
     
@@ -399,7 +400,7 @@ function DestinationDetailsCtrl($scope, blockUIConfig, $timeout, $modalInstance,
         }
         $scope.FareForecastInfoLoaded = true;
     };
-
+    $scope.loadFareForecastInfo();
     $scope.MarkerSeasonalityInfo = "";
 
     $scope.loadSeasonalityInfoLoaded = false;
@@ -409,7 +410,7 @@ function DestinationDetailsCtrl($scope, blockUIConfig, $timeout, $modalInstance,
         if ($scope.loadSeasonalityInfoLoaded == false) {
             if ($scope.MarkerSeasonalityInfo == "") {
                 var Seasonalitydata = {
-                    "Destination": $scope.Destinationfortab,
+                    "Destination": $scope.Destinationfortab, // JFK
                 };
 
                 $timeout(function () {
@@ -425,5 +426,30 @@ function DestinationDetailsCtrl($scope, blockUIConfig, $timeout, $modalInstance,
             }
         }
         $scope.loadSeasonalityInfoLoaded = true;
+    };
+
+    $scope.fareRangeInfoLoaded = false;
+    $scope.fareRangeInfoNoDataFound = false;
+    $scope.fareRangeData = "";
+    $scope.loadfareRangeInfo = function ($event) {
+        var data = {
+            "Origin" :  $scope.fareData.Origin,
+            "Destination": $scope.fareData.Destination,
+            "EarliestDepartureDate": $scope.fareData.DepartureDate,
+            "LatestDepartureDate": $scope.fareData.ReturnDate,
+            "Lengthofstay" : 4
+        }; 
+        if ($scope.fareRangeInfoLoaded == false) {
+            if ($scope.fareRangeData == "") {
+                    blockUIConfig.message = 'Please wait! fare range info are loading...!';
+                    FareRangeFactory.fareRange(data).then(function (data) {
+                        if (data.status == 404)
+                            $scope.fareRangeInfoNoDataFound = true;
+                        $scope.fareRangeData = data;
+                        blockUIConfig.message = 'Loading...';
+                    });
+            }
+        }
+        $scope.fareRangeInfoLoaded = true;
     };
 };

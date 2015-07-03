@@ -119,29 +119,30 @@ angular.module('TrippismUIApp')
                   $scope.InfoWindow = new google.maps.InfoWindow();
                   var mapsdetails = maps[x];
 
-                  google.maps.event.addListener(marker, 'mouseover', (function (marker, contentString, infowindow) {
-                      return function () {
-                          if ($scope.InfoWindow) $scope.InfoWindow.close();
-                          $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
-                          $scope.InfoWindow.open($scope.destinationMap, marker);
-                      };
-                  })(marker, contentString, $scope.InfoWindow));
+                  //google.maps.event.addListener(marker, 'mouseover', (function (marker, contentString, infowindow) {
+                  //    return function () {
+                  //        if ($scope.InfoWindow) $scope.InfoWindow.close();
+                  //        $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
+                  //        $scope.InfoWindow.open($scope.destinationMap, marker);
+                  //    };
+                  //})(marker, contentString, $scope.InfoWindow));
                   
 
-                  google.maps.event.addListener(marker, 'mouseout', function () {
+                  //google.maps.event.addListener(marker, 'mouseout', function () {
                       
-                  });
+                  //});
 
                   google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
                       return function () {
-                          if ($scope.InfoWindow) $scope.InfoWindow.close(); 
-                          $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
+                          //if ($scope.InfoWindow) $scope.InfoWindow.close(); 
+                          //$scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
 
                           //google.maps.event.addListener($scope.InfoWindow, 'closeclick', function () {                           
                           //    $rootScope.$broadcast('CloseFareForcastInfo');
                           //});
 
-                          $scope.InfoWindow.open($scope.destinationMap, marker);
+                          //$scope.InfoWindow.open($scope.destinationMap, marker);
+
                           var OriginairportName = _.find($scope.airportlist, function (airport) {
                               return airport.airport_Code == $scope.$parent.Origin.toUpperCase()
                           });
@@ -152,17 +153,14 @@ angular.module('TrippismUIApp')
                           
                           var dataForecast = {
                               "Origin": $scope.$parent.Origin,
-                              //"DepartureDate": ConvertToRequiredDate(marker.CustomMarkerInfo.DepartureDateTime),
-                              //"ReturnDate": ConvertToRequiredDate(marker.CustomMarkerInfo.ReturnDateTime),
-                              "DepartureDate": ConvertToRequiredDate(marker.CustomMarkerInfo.DepartureDateTime, 'API'),
-                              "ReturnDate": ConvertToRequiredDate(marker.CustomMarkerInfo.ReturnDateTime, 'API'),
-                              
+                              "DepartureDate": $filter('date')(marker.CustomMarkerInfo.DepartureDateTime, 'yyyy-MM-dd'),
+                              "ReturnDate": $filter('date')(marker.CustomMarkerInfo.ReturnDateTime, 'yyyy-MM-dd'),
                               "Destination": marker.CustomMarkerInfo.DestinationLocation
                           };
 
                           $rootScope.$broadcast('EmptyFareForcastInfo', {
                               Origin: OriginairportName.airport_CityName,
-                              Destinatrion: DestinationairportName.airport_CityName,
+                              Destinatrion: DestinationairportName.airport_Code,
                               Fareforecastdata: dataForecast,
                               mapOptions: marker.CustomMarkerInfo, //mapsdetails,
                               OriginairportName : OriginairportName,
@@ -184,10 +182,7 @@ angular.module('TrippismUIApp')
                   airportCode.lat = originairport.airport_Lat;
                   airportCode.lng = originairport.airport_Lng;
                   d.resolve(airportCode); // return the original object, so you can access it's other properties
-
-              } else {
-                  d.resolve();
-              }
+              } else {d.resolve();}
               return d.promise;
           }
 

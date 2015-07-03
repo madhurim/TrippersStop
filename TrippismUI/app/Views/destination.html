@@ -271,7 +271,7 @@
                                     </div>
                                     <script type="text/ng-template" id="EmailDetForm.html">
                                         <div ng-controller="EmailForDestinationDet" style="padding: 20px;">
-
+                                            
                                             <div ng-show="hasError && FormGetEmailDet.$invalid">
                                                 <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.email.$error.required">
                                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -281,6 +281,12 @@
                                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                                     Please enter Valid Email Address.
                                                 </div>
+                                                
+                                                <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.fromemail.$error.email">
+                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                    Please enter Valid From email Address.
+                                                </div>
+
                                                 <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.Subject.$error.required">
                                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                                     Please enter Subject.
@@ -288,8 +294,15 @@
                                             </div>
 
                                             <form name="FormGetEmailDet" novalidate="novalidate">
+
                                                 <div class="form-group">
-                                                    <label for="email">Email address</label>
+                                                    <label for="email">From email address</label>
+                                                    <input type="email" ng-model="fromemail" class="form-control" id="fromemail" name="fromemail" placeholder="Enter email" />
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="email">To email address</label>
                                                     <input type="text" ng-model="email" class="form-control" id="email" name="email" placeholder="Enter email" required />
                                                 </div>
                                                 <div class="form-group">
@@ -388,7 +401,7 @@
         
         <div class="modal-body">
             
-            <accordion style="clear:both;"  >
+            <accordion style="clear:both;">
                 <accordion-group is-disabled="true" is-open="true" >
                     <accordion-heading>
                         <span >Destination from Origin <b> {{DestinationName}} </b> </span> 
@@ -398,6 +411,7 @@
                     </accordion-heading>
                     
                     <div style="min-width:200px;margin-bottom:5px;" class="fontsize" id="content">
+
                         <div class="col-sm-4 padleft0">
                             <span>Destination : </span><br /><strong>
                                 {{DestinationairportName.airport_FullName + ', ' + DestinationairportName.airport_CityName}}
@@ -408,99 +422,119 @@
                             <span>Lowest Fare: </span><br /><strong>{{mapDetails.CurrencyCode}} {{mapDetails.LowestFare | number : 2}} </strong><br />
 
                         </div>
+                        
                         <div class="col-md-2" style="width:20%;">
                             <span>Lowest Non Stop Fare: </span><br /><strong> {{mapDetails.CurrencyCode}} {{mapDetails.LowestNonStopFare | number :2}} </strong>
                         </div>
+                        
                         <div class="col-sm-2" style="width:15%;">
                             <span>Departure Date: </span><br /><strong>{{mapDetails.DepartureDateTime | date:"yyyy-MM-dd"}}</strong>
                         </div>
+                        
                         <div class="col-sm-1" style="width:10%;padding:0px;">
                             <span>Return Date: </span><br /><strong>{{mapDetails.ReturnDateTime | date:"yyyy-MM-dd"}}</strong>
-                            
                         </div>
 
                         <div class="col-sm-1" style="padding:0px;">
-                            
                             <div class="pull-right" ng-controller="EmailForDestinationDet" style="margin-top:5px;">
-                                <button class="btn btn-primary btn-sm pull-right" ng-click="SendEmailToUser()">Share</button>
+                                <button class="btn btn-primary btn-sm pull-right" ng-click="SendEmailToUser($parent)">Share</button>
                             </div>
                         </div>
 
-                    </div>
-                    
-                    <div style="clear:both;padding-top:10px;">
-                        <accordion close-others="oneAtATime" style="clear:both;">
-                            <accordion-group >
-                                <accordion-heading>
-                                    <span ng-click="loadFareForecastInfo($event)">Fare Info</span>
-                                </accordion-heading>
-                                <div class="thumbnail" style="padding:0px;margin-bottom:0px;">
-                                    <div style="padding:8px;" ng-if="FareNoDataFound"><label class="text-danger">Ooops! We are sorry, no information is available.</label> </div>
-                                    <table ng-if="!FareNoDataFound" class="table fontsize" style="margin-bottom:0px;">
-                                        <tr><th class="col-md-3">Departure Date</th><td class="col-md-9 word-wrap">{{FareforecastData.DepartureDateTime | date:"yyyy-MM-dd"}}</td></tr>
-                                        <tr><th class="col-md-3">Return Date</th><td class="col-md-9 word-wrap">{{FareforecastData.ReturnDateTime | date:"yyyy-MM-dd"}}</td></tr>
-                                        <tr><th class="col-md-3">Highest Predicted Fare</th><td class="col-md-9 word-wrap">{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.HighestPredictedFare | number:2}}</td></tr>
-                                        <tr><th class="col-md-3">Lowest Predicted Fare</th><td class="col-md-9 word-wrap">{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.LowestPredictedFare | number:2}}</td></tr>
-                                        <tr><th class="col-md-3">Lowest Fare</th><td class="col-md-9 word-wrap">{{FareforecastData.CurrencyCode}} {{FareforecastData.LowestFare}}</td></tr>
-                                        <tr>
-                                            <th class="col-md-3">Recommendation</th>
-                                            <td class="col-md-9 word-wrap">
-                                                <img ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
-                                                <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
-                                                <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
-                                                <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </accordion-group>
-                            <accordion-group>
-                                <accordion-heading>
-                                    <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
-                                </accordion-heading>
-                                <div style="padding:8px;" ng-if="SeasonalityNoDataFound"><label class="text-danger">Ooops! We are sorry, no information is available.</label> </div>
-                                <div ng-if="!SeasonalityNoDataFound" class="thumbnail thumbnailstyle">
-                                    <table class="table fontsize">
-                                        <tr>
-                                            <th class="text-center underline">Week#</th>
-                                            <th class="underline">Start Date</th>
-                                            <th class="underline">End Date</th>
-                                            <th class="text-center underline">Traffic Volume</th>
-                                            <th class="underline">Booking Quantities</th>
-                                        </tr>
-                                        <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality">
-                                            <td class="word-wrap text-center">{{range.YearWeekNumber}}</td>
-                                            <td class="word-wrap">{{range.WeekStartDate | date:"yyyy-MM-dd"}}</td>
-                                            <td class="word-wrap">{{range.WeekEndDate | date:"yyyy-MM-dd"}}</td>
-                                            <td class="word-wrap text-center">
-                                                <span ng-if="range.SeasonalityIndicator == 'High'" class="highrange">{{range.SeasonalityIndicator}}</span>
-                                                <span ng-if="range.SeasonalityIndicator == 'Medium'" class="mediumrange">{{range.SeasonalityIndicator}}</span>
-                                                <span ng-if="range.SeasonalityIndicator == 'Low'" class="lowrange">{{range.SeasonalityIndicator}}</span>
-                                            </td>
-                                            <td class="word-wrap">
-                                                <span ng-if="range.NumberOfObservations == 'GreaterThan10000'">Greater than 10000</span>
-                                                <span ng-if="range.NumberOfObservations == 'LessThan10000'">Less than 10000</span>
-                                                <span ng-if="range.NumberOfObservations == 'LessThan1000'">Less than 1000</span>
-                                            </td>
-                                        </tr>
-                                        <!--<tr ng-if="MarkerSeasonalityInfo == null">
-                <td colspan="5" style="text-align:center">We are sorry, no data available</td>
-            </tr>-->
+                        <div class="col-md-12 padleft0" style="margin-top:10px;">
+                            <div style="padding:8px;" ng-if="FareNoDataFound"><label class="text-danger">Ooops! We are sorry, no information is available.</label> </div>
+                            <div ng-if="!FareNoDataFound" style="margin-bottom:10px;clear:both;">
 
-                                    </table>
+                                <label>Recommendation: </label>
+                                <img style="margin-top:-10px;" ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
+                                <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
+                                <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
+                                <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
+
+                                <div class="col-md-12 padleft0" style="clear:both;margin-top:10px;">
+                                    <div class="col-sm-4" style="padding:0px;">
+                                        <span>Highest Predicted Fare: </span><br /><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.HighestPredictedFare | number:2}}</strong>
+                                    </div>
+                                    <div class="col-sm-4" style="padding:0px;">
+                                        <span>Lowest Predicted Fare: </span><br /><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.LowestPredictedFare | number:2}}</strong>
+                                    </div>
                                 </div>
-                            </accordion-group>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="clear:both;padding-top:10px;">
+                        <accordion  style="clear:both;">
                             <accordion-group>
                                 <accordion-heading>
-                                    <span>Fare Range</span>
+                                    <span>More Insights on  {{DestinationairportName.airport_FullName + ', ' + DestinationairportName.airport_CityName}}</span>
                                 </accordion-heading>
-                                <div>
-                                    Coming soon
-                                </div>
+                                <accordion close-others="oneAtATime">
+                                    <accordion-group>
+                                        <accordion-heading>
+                                            <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
+                                        </accordion-heading>
+                                        <div style="padding:8px;" ng-if="SeasonalityNoDataFound"><label class="text-danger">Ooops! We are sorry, no information is available.</label> </div>
+                                        <div ng-if="!SeasonalityNoDataFound" class="thumbnail thumbnailstyle">
+                                            <table class="table fontsize">
+                                                <tr>
+                                                    <th class="text-center underline">Week#</th>
+                                                    <th class="underline">Start Date</th>
+                                                    <th class="underline">End Date</th>
+                                                    <th class="text-center underline">Traffic Volume</th>
+                                                    <th class="underline">Booking Quantities</th>
+                                                </tr>
+                                                <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality">
+                                                    <td class="word-wrap text-center">{{range.YearWeekNumber}}</td>
+                                                    <td class="word-wrap">{{range.WeekStartDate | date:"yyyy-MM-dd"}}</td>
+                                                    <td class="word-wrap">{{range.WeekEndDate | date:"yyyy-MM-dd"}}</td>
+                                                    <td class="word-wrap text-center">
+                                                        <span ng-if="range.SeasonalityIndicator == 'High'" class="highrange">{{range.SeasonalityIndicator}}</span>
+                                                        <span ng-if="range.SeasonalityIndicator == 'Medium'" class="mediumrange">{{range.SeasonalityIndicator}}</span>
+                                                        <span ng-if="range.SeasonalityIndicator == 'Low'" class="lowrange">{{range.SeasonalityIndicator}}</span>
+                                                    </td>
+                                                    <td class="word-wrap">
+                                                        <span ng-if="range.NumberOfObservations == 'GreaterThan10000'">Over crowded</span>
+                                                        <span ng-if="range.NumberOfObservations == 'LessThan10000'">crowded</span>
+                                                        <span ng-if="range.NumberOfObservations == 'LessThan1000'">not crowded</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </accordion-group>
+                                    <accordion-group>
+                                        <accordion-heading>
+                                            <span ng-click="loadfareRangeInfo($event)">Fare Range</span>
+                                        </accordion-heading>
+                                        <div>
+                                          
+                                            <table class="table fontsize">
+                                                <tr>
+                                                    <th>Maximum Fare</th>
+                                                    <th>Minimum Fare</th>
+                                                    <th>Median Fare</th>
+                                                    <th>Count</th>
+                                                    <th>Departure Date Time</th>
+                                                    <th>Return Date Time</th>
+                                                </tr>
+                                                <tr ng-repeat="range in fareRangeData.FareData">
+                                                    <td class="word-wrap">{{range.CurrencyCode}} {{range.MaximumFare}}</td>
+                                                    <td class="word-wrap"> {{range.CurrencyCode}} {{range.MinimumFare }}</td>
+                                                    <td class="word-wrap"> {{range.CurrencyCode}} {{range.MedianFare}}</td>
+                                                    <td class="word-wrap">{{range.Count}}</td>
+                                                    <td class="word-wrap">{{range.DepartureDateTime | date:"yyyy-MM-dd"}}</td>
+                                                    <td class="word-wrap">{{range.ReturnDateTime | date:"yyyy-MM-dd"}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </accordion-group>
+                                </accordion>
                             </accordion-group>
                         </accordion>
                     </div>
+
                 </accordion-group>
             </accordion>
+
         </div>
     </script>
