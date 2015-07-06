@@ -251,11 +251,12 @@
             var FromDate = ConvertToRequiredDate($scope.destinationScope.FromDate,'API');
             var ToDate = ConvertToRequiredDate($scope.destinationScope.ToDate,'API');
             var OriginName = $scope.destinationScope.Origin.toUpperCase();
-            var url = window.document.location.host;
+            var url = 'http://' + window.document.location.host;
+            
             //var rdrURL = '<a href="http://localhost:1299/#/destination?org=' + OriginName + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
             //var rdrURL = '<a href="http://www.trippism.com/#/destination?org=' + OriginName + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
             var rdrURL = '<a href="'+ url +'/#/destination?org=' + OriginName + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
-            
+            console.log(rdrURL);
             contentString += rdrURL + '<img src="https://maps.googleapis.com/maps/api/staticmap?zoom=2&size=800x500&maptype=roadmap&'+ MarkersString +'" /></a>';
                                 //'<img src="https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=800x500&maptype=roadmap&markers=color:blue%7SSlabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:A%7C40.718217,-73.998284" /></a>';
             

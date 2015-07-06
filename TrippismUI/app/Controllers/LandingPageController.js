@@ -12,13 +12,13 @@
         if (angular.lowercase($location.host()) == "localhost")
         {
             //devlopment url
-            $rootScope.apiURL = 'http://localhost:14606/sabre/api/';
+            $rootScope.apiURL = 'http://localhost:14606/api/';
             $rootScope.apiURLForEmail = 'http://localhost:14606/api/Email/SendEmailtoUser';
         }
         else
         {
             //live url
-            $rootScope.apiURL = 'http://' + $location.host() + '/sabre/api/';
+            $rootScope.apiURL = 'http://' + $location.host() + '/api/';
             $rootScope.apiURLForEmail = 'http://' + $location.host() + '/api/Email/SendEmailtoUser';
         }
 
