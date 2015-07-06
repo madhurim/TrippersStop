@@ -491,11 +491,6 @@
             Set db service.
             </summary>
         </member>
-        <member name="M:TrippismApi.Areas.IATA.Controllers.IATAController.Get">
-            <summary>
-            Get available city pairs.
-            </summary>
-        </member>
         <member name="M:TrippismApi.Areas.IATA.Controllers.IATAController.GetResponse">
             <summary>
             Get response from IATA service..
@@ -864,6 +859,21 @@
             </summary>
         </member>
         <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.GetResponse(System.String)">
+            <summary>
+            Get response from api based on url.
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.Weather.Controllers.HistoryController.#ctor(TrippismApi.TraveLayer.IAsyncWeatherAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Returns a weather summary based on historical information between the specified dates (30 days max).
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.Weather.Controllers.HistoryController.Get(TraveLayer.CustomTypes.Weather.HistoryInput)">
+            <summary>
+            Returns a weather summary based on historical information between the specified dates (30 days max).
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.Weather.Controllers.HistoryController.GetResponse(System.String,System.String)">
             <summary>
             Get response from api based on url.
             </summary>

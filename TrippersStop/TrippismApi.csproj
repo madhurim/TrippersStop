@@ -210,6 +210,7 @@
   <ItemGroup>
     <Compile Include="APIExtention\ControllerSelector\AreaHttpControllerSelector .cs" />
     <Compile Include="APIExtention\Filters\ExceptionFilterAttribute.cs" />
+    <Compile Include="APIExtention\Filters\TrippismCache.cs" />
     <Compile Include="APIExtention\Filters\ValidateModelAttribute.cs" />
     <Compile Include="APIHelper\MailgunEmail.cs" />
     <Compile Include="APIHelper\SabreApiTokenHelper.cs" />
@@ -264,6 +265,8 @@
     <Compile Include="Areas\Sabre\SabreAreaRegistration.cs" />
     <Compile Include="APIExtention\AreaRegistrationContextExtensions.cs" />
     <Compile Include="Controllers\Email\EmailController.cs" />
+    <Compile Include="Areas\Weather\Controllers\HistoryController.cs" />
+    <Compile Include="Areas\Weather\WeatherAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -352,6 +355,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Weather\Views\web.config" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -402,6 +406,8 @@
     <Folder Include="Areas\IATA\Views\Shared\" />
     <Folder Include="Areas\Sabre\Models\" />
     <Folder Include="Areas\Sabre\Views\Shared\" />
+    <Folder Include="Areas\Weather\Models\" />
+    <Folder Include="Areas\Weather\Views\Shared\" />
     <Folder Include="Models\" />
     <Folder Include="Views\SendEmail\" />
   </ItemGroup>

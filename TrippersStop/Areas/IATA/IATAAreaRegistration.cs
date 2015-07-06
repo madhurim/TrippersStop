@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web.Http;
+using System.Web.Mvc;
 
 namespace TrippismApi.Areas.IATA
 {
@@ -14,11 +15,12 @@ namespace TrippismApi.Areas.IATA
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+
             context.MapRoute(
-                "IATA_default",
-                "IATA/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
-        }
+"IATA_default",
+"IATA/{controller}/{action}/{id}",
+new { controller = "IATA", action = "Get", id = UrlParameter.Optional }
+);
+        }    
     }
 }
