@@ -1228,12 +1228,6 @@
         "airport_Lng": "138.53735"
       },
       {
-        "airport_Code": "XHX",
-        "airport_FullName": "Adelaide Keswick Railway",
-        "airport_Lat": "-34.9286212",
-        "airport_Lng": "138.5999594"
-      },
-      {
         "airport_Code": "ZII",
         "airport_FullName": "Adelaide Ferry Port",
         "airport_Lat": "-34.9286212",
@@ -1955,18 +1949,6 @@
         "airport_FullName": "Heliport",
         "airport_Lat": "56.033333",
         "airport_Lng": "12.7"
-      },
-      {
-        "airport_Code": "XYH",
-        "airport_FullName": "Helsingborg Railway",
-        "airport_Lat": "56.2432",
-        "airport_Lng": "12.8615092"
-      },
-      {
-        "airport_Code": "XYQ",
-        "airport_FullName": "Angelholm Railway",
-        "airport_Lat": "56.2432",
-        "airport_Lng": "12.8615092"
       }
     ]
   },
@@ -4436,12 +4418,6 @@
         "airport_FullName": "Deurne/ Antwerp Airport",
         "airport_Lat": "51.18916",
         "airport_Lng": "4.450672"
-      },
-      {
-        "airport_Code": "ZYZ",
-        "airport_FullName": "Berchem Railway",
-        "airport_Lat": "51.21992",
-        "airport_Lng": "4.39625"
       }
     ]
   },
@@ -5918,12 +5894,6 @@
         "airport_FullName": "Alice Springs",
         "airport_Lat": "-23.80139",
         "airport_Lng": "133.90338"
-      },
-      {
-        "airport_Code": "XHW",
-        "airport_FullName": "Alice Springs Railway",
-        "airport_Lat": "-23.7002104",
-        "airport_Lng": "133.8806114"
       }
     ]
   },
@@ -7010,12 +6980,6 @@
         "airport_FullName": "Avignon-Caumont",
         "airport_Lat": "43.9",
         "airport_Lng": "4.9"
-      },
-      {
-        "airport_Code": "XZN",
-        "airport_FullName": "Avignon Railway",
-        "airport_Lat": "43.949317",
-        "airport_Lng": "4.805528"
       }
     ]
   },
@@ -10763,12 +10727,6 @@
         "airport_FullName": "Birmingham International Airport",
         "airport_Lat": "52.45252",
         "airport_Lng": "-1.733256"
-      },
-      {
-        "airport_Code": "QQN",
-        "airport_FullName": "New Street Rail Station",
-        "airport_Lat": "52.4829614",
-        "airport_Lng": "-1.893592"
       }
     ]
   },
@@ -11969,12 +11927,6 @@
         "airport_FullName": "Dala Airport",
         "airport_Lat": "60.42973",
         "airport_Lng": "15.50826"
-      },
-      {
-        "airport_Code": "XYB",
-        "airport_FullName": "Borlange Railway",
-        "airport_Lat": "60.4856047",
-        "airport_Lng": "15.4363017"
       }
     ]
   },
@@ -13289,24 +13241,6 @@
         "airport_FullName": "Pease International",
         "airport_Lat": "43.179585",
         "airport_Lng": "-70.88272"
-      },
-      {
-        "airport_Code": "ZRU",
-        "airport_FullName": "Boston RT128 Railway",
-        "airport_Lat": "42.3584308",
-        "airport_Lng": "-71.0597732"
-      },
-      {
-        "airport_Code": "ZTO",
-        "airport_FullName": "Boston South Railway",
-        "airport_Lat": "42.3584308",
-        "airport_Lng": "-71.0597732"
-      },
-      {
-        "airport_Code": "ZTY",
-        "airport_FullName": "Boston BKBAY Railway",
-        "airport_Lat": "42.3584308",
-        "airport_Lng": "-71.0597732"
       }
     ]
   },
@@ -15133,12 +15067,6 @@
         "airport_FullName": "Buffalo Depew Rr",
         "airport_Lat": "42.8864468",
         "airport_Lng": "-78.8783689"
-      },
-      {
-        "airport_Code": "ZXS",
-        "airport_FullName": "Exchangest Railway",
-        "airport_Lat": "42.8864468",
-        "airport_Lng": "-78.8783689"
       }
     ]
   },
@@ -15805,12 +15733,6 @@
         "airport_FullName": "Braunschweig",
         "airport_Lat": "52.266666",
         "airport_Lng": "10.533333"
-      },
-      {
-        "airport_Code": "ZQU",
-        "airport_FullName": "Wolfsburg Rail Station",
-        "airport_Lat": "52.2641478",
-        "airport_Lng": "10.5263803"
       }
     ]
   },
@@ -15883,12 +15805,6 @@
         "airport_FullName": "Glenn L Martin",
         "airport_Lat": "39.321667",
         "airport_Lng": "-76.41167"
-      },
-      {
-        "airport_Code": "ZBP",
-        "airport_FullName": "Baltimore Railway",
-        "airport_Lat": null,
-        "airport_Lng": null
       }
     ]
   },
@@ -17710,12 +17626,6 @@
         "airport_FullName": "Cottbus",
         "airport_Lat": "51.77028",
         "airport_Lng": "14.299167"
-      },
-      {
-        "airport_Code": "ZTT",
-        "airport_FullName": "Cottbus Railway",
-        "airport_Lat": "51.7607292",
-        "airport_Lng": "14.3274885"
       }
     ]
   },
@@ -19306,12 +19216,6 @@
         "airport_FullName": "Koeln Hauptbahnhof",
         "airport_Lat": "50.9",
         "airport_Lng": "7.183"
-      },
-      {
-        "airport_Code": "QKU",
-        "airport_FullName": "Messe/Deutz Rail Station",
-        "airport_Lat": "50.9406645",
-        "airport_Lng": "6.9599115"
       }
     ]
   },
@@ -22327,12 +22231,6 @@
         "airport_FullName": "Roskilde Airport",
         "airport_Lat": "55.583332",
         "airport_Lng": "12.133333"
-      },
-      {
-        "airport_Code": "ZGH",
-        "airport_FullName": "Copenhagen H Rail Station",
-        "airport_Lat": "28.193336",
-        "airport_Lng": "113.21459"
       }
     ]
   },
@@ -22543,12 +22441,6 @@
         "airport_FullName": "Calais",
         "airport_Lat": "50.95",
         "airport_Lng": "1.933333"
-      },
-      {
-        "airport_Code": "XFF",
-        "airport_FullName": "Calais-Frethun Rail Station",
-        "airport_Lat": "50.95129",
-        "airport_Lng": "1.858686"
       }
     ]
   },
@@ -27659,12 +27551,6 @@
         "airport_FullName": "Dundee",
         "airport_Lat": "56.45409",
         "airport_Lng": "-3.014531"
-      },
-      {
-        "airport_Code": "ZDU",
-        "airport_FullName": "ScotRailway",
-        "airport_Lat": "56.4614282",
-        "airport_Lng": "-2.9681109"
       }
     ]
   },
@@ -28649,12 +28535,6 @@
         "airport_FullName": "Darwin",
         "airport_Lat": "-12.407805",
         "airport_Lng": "130.87752"
-      },
-      {
-        "airport_Code": "XJG",
-        "airport_FullName": "Darwin Railway",
-        "airport_Lat": "-12.4628198",
-        "airport_Lng": "130.8417694"
       }
     ]
   },
@@ -30978,12 +30858,6 @@
         "airport_FullName": "Eskilstuna",
         "airport_Lat": "59.36667",
         "airport_Lng": "16.533333"
-      },
-      {
-        "airport_Code": "XFJ",
-        "airport_FullName": "Eskilstuna C Rail Station",
-        "airport_Lat": "59.3664682",
-        "airport_Lng": "16.5084272"
       }
     ]
   },
@@ -32808,12 +32682,6 @@
         "airport_FullName": "Frescaty",
         "airport_Lat": "49.0725",
         "airport_Lng": "6.134444"
-      },
-      {
-        "airport_Code": "XZI",
-        "airport_FullName": "Lorraine TGV Rail Station",
-        "airport_Lat": "49.119666",
-        "airport_Lng": "6.176905"
       }
     ]
   },
@@ -33228,20 +33096,7 @@
     "airport_CountryCode": "US",
     "airport_CountryName": "United States",
     "airport_RegionName": "America/New_York",
-    "Airports": [
-      {
-        "airport_Code": "ZME",
-        "airport_FullName": "Metropark Railway",
-        "airport_Lat": null,
-        "airport_Lng": null
-      },
-      {
-        "airport_Code": "ZRP",
-        "airport_FullName": "Pennsylvania Railroad Station",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "EXI",
@@ -34920,12 +34775,6 @@
         "airport_FullName": "Peretola",
         "airport_Lat": "43.802128",
         "airport_Lng": "11.201989"
-      },
-      {
-        "airport_Code": "ZMS",
-        "airport_FullName": "S.M. Novella Rail.Svc",
-        "airport_Lat": "45.13128",
-        "airport_Lng": "110.17072"
       }
     ]
   },
@@ -35136,12 +34985,6 @@
         "airport_FullName": "Münster Osnabrück International",
         "airport_Lat": "52.130054",
         "airport_Lng": "7.694928"
-      },
-      {
-        "airport_Code": "ZPE",
-        "airport_FullName": "Osnabrueck Hbf Rail Station",
-        "airport_Lat": "52.0920702",
-        "airport_Lng": "7.6105746"
       }
     ]
   },
@@ -35310,12 +35153,6 @@
         "airport_FullName": "Garons",
         "airport_Lat": "43.75",
         "airport_Lng": "4.416667"
-      },
-      {
-        "airport_Code": "ZYN",
-        "airport_FullName": "Railway",
-        "airport_Lat": "43.836699",
-        "airport_Lng": "4.360054"
       }
     ]
   },
@@ -39984,12 +39821,6 @@
         "airport_FullName": "New London",
         "airport_Lat": "41.328888",
         "airport_Lng": "-72.04639"
-      },
-      {
-        "airport_Code": "ZGD",
-        "airport_FullName": "New London Railway",
-        "airport_Lat": "29.10712",
-        "airport_Lng": "110.44569"
       }
     ]
   },
@@ -42255,14 +42086,7 @@
     "airport_CountryCode": "NL",
     "airport_CountryName": "Netherlands",
     "airport_RegionName": "Europe/Amsterdam",
-    "Airports": [
-      {
-        "airport_Code": "ZXY",
-        "airport_FullName": "Holland Spoor Rail Station",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "HAI",
@@ -42291,18 +42115,6 @@
         "airport_FullName": "Hanover Airport",
         "airport_Lat": "52.459255",
         "airport_Lng": "9.694766"
-      },
-      {
-        "airport_Code": "ZVM",
-        "airport_FullName": "Messe-BF Railway Servi",
-        "airport_Lat": "52.3720683",
-        "airport_Lng": "9.7356861"
-      },
-      {
-        "airport_Code": "ZVR",
-        "airport_FullName": "Hanover Railway",
-        "airport_Lat": "52.3720683",
-        "airport_Lng": "9.7356861"
       }
     ]
   },
@@ -42441,12 +42253,6 @@
         "airport_FullName": "Harrisburg International",
         "airport_Lat": "40.196007",
         "airport_Lng": "-76.75606"
-      },
-      {
-        "airport_Code": "ZUG",
-        "airport_FullName": "Harrisburg Railway",
-        "airport_Lat": null,
-        "airport_Lng": null
       }
     ]
   },
@@ -43296,12 +43102,6 @@
         "airport_FullName": "Brainard",
         "airport_Lat": "41.733055",
         "airport_Lng": "-72.65"
-      },
-      {
-        "airport_Code": "ZRT",
-        "airport_FullName": "Hartford  Railway",
-        "airport_Lat": "41.7637111",
-        "airport_Lng": "-72.6850932"
       }
     ]
   },
@@ -46383,12 +46183,6 @@
         "airport_FullName": "New Haven",
         "airport_Lat": "41.265278",
         "airport_Lng": "-72.888336"
-      },
-      {
-        "airport_Code": "ZVE",
-        "airport_FullName": "New Haven Railway",
-        "airport_Lat": "41.3081527",
-        "airport_Lng": "-72.9281577"
       }
     ]
   },
@@ -48221,12 +48015,6 @@
         "airport_FullName": "Greater Wilmington",
         "airport_Lat": "39.678333",
         "airport_Lng": "-75.6075"
-      },
-      {
-        "airport_Code": "ZWI",
-        "airport_FullName": "Wilmington Railway",
-        "airport_Lat": "50.730556",
-        "airport_Lng": "12.544444"
       }
     ]
   },
@@ -48932,12 +48720,6 @@
         "airport_FullName": "Inverness",
         "airport_Lat": "57.539345",
         "airport_Lng": "-4.063738"
-      },
-      {
-        "airport_Code": "ZIV",
-        "airport_FullName": "ScotRailway",
-        "airport_Lat": "57.4766949",
-        "airport_Lng": "-4.2314535"
       }
     ]
   },
@@ -53006,12 +52788,6 @@
         "airport_FullName": "Sodertalje Heliport",
         "airport_Lat": "59.2",
         "airport_Lng": "17.65"
-      },
-      {
-        "airport_Code": "XEZ",
-        "airport_FullName": "Sodertalje S Railway",
-        "airport_Lat": "59.2",
-        "airport_Lng": "17.6167"
       }
     ]
   },
@@ -62573,12 +62349,6 @@
         "airport_FullName": "Rzhevka",
         "airport_Lat": "59.983334",
         "airport_Lng": "30.6"
-      },
-      {
-        "airport_Code": "ZLK",
-        "airport_FullName": "Moscovskiy Railway Stn",
-        "airport_Lat": "59.939039",
-        "airport_Lng": "30.315785"
       }
     ]
   },
@@ -62669,18 +62439,6 @@
         "airport_FullName": "Halle",
         "airport_Lat": "51.42026",
         "airport_Lng": "12.221202"
-      },
-      {
-        "airport_Code": "XIT",
-        "airport_FullName": "Leipzig Hbf Rail Station",
-        "airport_Lat": "51.43",
-        "airport_Lng": "12.24"
-      },
-      {
-        "airport_Code": "ZHZ",
-        "airport_FullName": "Halle Railway",
-        "airport_Lat": "51.43",
-        "airport_Lng": "12.24"
       }
     ]
   },
@@ -63733,12 +63491,6 @@
         "airport_FullName": "Lesquin",
         "airport_Lat": "50.57205",
         "airport_Lng": "3.106067"
-      },
-      {
-        "airport_Code": "XFA",
-        "airport_FullName": "Lille Flanders RailwaySv",
-        "airport_Lat": "50.62925",
-        "airport_Lng": "3.057256"
       }
     ]
   },
@@ -65080,12 +64832,6 @@
         "airport_FullName": "Lancaster",
         "airport_Lat": "40.121113",
         "airport_Lng": "-76.29972"
-      },
-      {
-        "airport_Code": "ZRL",
-        "airport_FullName": "Lancaster  Railway",
-        "airport_Lat": "40.0378755",
-        "airport_Lng": "-76.3055144"
       }
     ]
   },
@@ -65367,18 +65113,6 @@
         "airport_Lng": "-0.376232"
       },
       {
-        "airport_Code": "QQK",
-        "airport_FullName": "Kings Cross Rail Station",
-        "airport_Lat": "51.51",
-        "airport_Lng": "0.06"
-      },
-      {
-        "airport_Code": "QQS",
-        "airport_FullName": "St Pancras International RailSt",
-        "airport_Lat": "51.51",
-        "airport_Lng": "0.06"
-      },
-      {
         "airport_Code": "QQW",
         "airport_FullName": "London-Waterloo",
         "airport_Lat": "51.51",
@@ -65395,30 +65129,6 @@
         "airport_FullName": "Stansted",
         "airport_Lat": "51.889267",
         "airport_Lng": "0.262703"
-      },
-      {
-        "airport_Code": "XOF",
-        "airport_FullName": "Stratford International Rail Station",
-        "airport_Lat": "51.51",
-        "airport_Lng": "0.06"
-      },
-      {
-        "airport_Code": "XQE",
-        "airport_FullName": "Ebbsfleet International Rail Station",
-        "airport_Lat": "51.51",
-        "airport_Lng": "0.06"
-      },
-      {
-        "airport_Code": "ZEP",
-        "airport_FullName": "Victoria Railway",
-        "airport_Lat": "51.51",
-        "airport_Lng": "0.06"
-      },
-      {
-        "airport_Code": "ZLS",
-        "airport_FullName": "Liverpool St Rail Station",
-        "airport_Lat": "51.51",
-        "airport_Lng": "0.06"
       }
     ]
   },
@@ -67914,12 +67624,6 @@
         "airport_FullName": "Lyon Part-Dieu",
         "airport_Lat": "46.24",
         "airport_Lng": "5.15"
-      },
-      {
-        "airport_Code": "XYL",
-        "airport_FullName": "Lyon Perrache RailwaySvc",
-        "airport_Lat": "45.764043",
-        "airport_Lng": "4.835659"
       }
     ]
   },
@@ -68166,18 +67870,6 @@
         "airport_FullName": "Torrejon AFB",
         "airport_Lat": "40.455555",
         "airport_Lng": "-3.546667"
-      },
-      {
-        "airport_Code": "XOC",
-        "airport_FullName": "Atocha Railway St.",
-        "airport_Lat": "40.4166909",
-        "airport_Lng": "-3.7003454"
-      },
-      {
-        "airport_Code": "XTI",
-        "airport_FullName": "Chamartin Railway St.",
-        "airport_Lat": "40.4166909",
-        "airport_Lng": "-3.7003454"
       }
     ]
   },
@@ -73725,18 +73417,6 @@
         "airport_FullName": "Vnukovo",
         "airport_Lat": "55.60315",
         "airport_Lng": "37.2921"
-      },
-      {
-        "airport_Code": "XRK",
-        "airport_FullName": "Paveletskiy Railway.",
-        "airport_Lat": "55.755786",
-        "airport_Lng": "37.617633"
-      },
-      {
-        "airport_Code": "ZKD",
-        "airport_FullName": "Leningradskiy Railway",
-        "airport_Lat": "55.755786",
-        "airport_Lng": "37.617633"
       }
     ]
   },
@@ -73947,12 +73627,6 @@
         "airport_FullName": "Montpellier Méditerranée",
         "airport_Lat": "43.57843",
         "airport_Lng": "3.959174"
-      },
-      {
-        "airport_Code": "XPJ",
-        "airport_FullName": "Montpellier Railway",
-        "airport_Lat": "43.610769",
-        "airport_Lng": "3.876716"
       }
     ]
   },
@@ -74793,12 +74467,6 @@
         "airport_FullName": "Marseille Provence Airport",
         "airport_Lat": "43.44178",
         "airport_Lng": "5.222137"
-      },
-      {
-        "airport_Code": "XRF",
-        "airport_FullName": "Marseille Railway",
-        "airport_Lat": "43.296482",
-        "airport_Lng": "5.36978"
       }
     ]
   },
@@ -78122,12 +77790,6 @@
         "airport_Lng": "14.2516357"
       },
       {
-        "airport_Code": "ZMI",
-        "airport_FullName": "Mergellina Railway",
-        "airport_Lat": "40.8400969",
-        "airport_Lng": "14.2516357"
-      },
-      {
         "airport_Code": "ZMJ",
         "airport_FullName": "Mergellina Harbour",
         "airport_Lat": "40.8400969",
@@ -81237,12 +80899,6 @@
         "airport_FullName": "Kungsangen",
         "airport_Lat": "58.583298",
         "airport_Lng": "16.232393"
-      },
-      {
-        "airport_Code": "XYK",
-        "airport_FullName": "Norrkoping C Rail Station",
-        "airport_Lat": "58.5947017",
-        "airport_Lng": "16.1836073"
       }
     ]
   },
@@ -86007,12 +85663,6 @@
         "airport_FullName": "Sandefjord",
         "airport_Lat": "59.178085",
         "airport_Lng": "10.251807"
-      },
-      {
-        "airport_Code": "ZZN",
-        "airport_FullName": "Nationaltheatret RailS",
-        "airport_Lat": "59.9138688",
-        "airport_Lng": "10.7522454"
       }
     ]
   },
@@ -87557,24 +87207,6 @@
         "airport_Lng": "2.565278"
       },
       {
-        "airport_Code": "XHP",
-        "airport_FullName": "Gare de l'Est Rail Station",
-        "airport_Lat": "48.856614",
-        "airport_Lng": "2.3522219"
-      },
-      {
-        "airport_Code": "XJY",
-        "airport_FullName": "Massy TGV Rail Station",
-        "airport_Lat": "48.856614",
-        "airport_Lng": "2.3522219"
-      },
-      {
-        "airport_Code": "XPG",
-        "airport_FullName": "Gare du Nord Railway",
-        "airport_Lat": "48.856614",
-        "airport_Lng": "2.3522219"
-      },
-      {
         "airport_Code": "XTT",
         "airport_FullName": "Etoile",
         "airport_Lat": "48.856614",
@@ -88371,12 +88003,6 @@
         "airport_FullName": "Princeton",
         "airport_Lat": "40.35",
         "airport_Lng": "-74.65"
-      },
-      {
-        "airport_Code": "ZTJ",
-        "airport_FullName": "Princeton JT Railway",
-        "airport_Lat": "40.3487181",
-        "airport_Lng": "-74.6590472"
       }
     ]
   },
@@ -89628,18 +89254,6 @@
         "airport_FullName": "Newport News/williamsb",
         "airport_Lat": "37.13033",
         "airport_Lng": "-76.50282"
-      },
-      {
-        "airport_Code": "ZWB",
-        "airport_FullName": "Williamsburg Railway",
-        "airport_Lat": "36.9787588",
-        "airport_Lng": "-76.428003"
-      },
-      {
-        "airport_Code": "ZWW",
-        "airport_FullName": "Newport News Railway",
-        "airport_Lat": "43.90126",
-        "airport_Lng": "87.47515"
       }
     ]
   },
@@ -89724,18 +89338,6 @@
         "airport_FullName": "Trenton Mercer Airport",
         "airport_Lat": "40.278057",
         "airport_Lng": "-74.8125"
-      },
-      {
-        "airport_Code": "ZHC",
-        "airport_FullName": "N Philadelphia RailwaySt",
-        "airport_Lat": "34.52752",
-        "airport_Lng": "113.84024"
-      },
-      {
-        "airport_Code": "ZTN",
-        "airport_FullName": "Trenton RailwaySTN",
-        "airport_Lat": "39.952335",
-        "airport_Lng": "-75.163789"
       }
     ]
   },
@@ -93123,12 +92725,6 @@
         "airport_FullName": "Perth",
         "airport_Lat": "56.233334",
         "airport_Lng": "-3.566667"
-      },
-      {
-        "airport_Code": "ZXP",
-        "airport_FullName": "ScotRailway",
-        "airport_Lat": "56.4094132",
-        "airport_Lng": "-3.447528"
       }
     ]
   },
@@ -94137,12 +93733,6 @@
         "airport_FullName": "T. F. Green Airport",
         "airport_Lat": "41.72631",
         "airport_Lng": "-71.43632"
-      },
-      {
-        "airport_Code": "ZRV",
-        "airport_FullName": "Providence Railway",
-        "airport_Lat": "41.8239891",
-        "airport_Lng": "-71.4128343"
       }
     ]
   },
@@ -95046,14 +94636,7 @@
     "airport_CountryCode": "GB",
     "airport_CountryName": "United Kingdom",
     "airport_RegionName": "Europe/London",
-    "Airports": [
-      {
-        "airport_Code": "QDH",
-        "airport_FullName": "International Rail Station",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "QDL",
@@ -95161,14 +94744,7 @@
     "airport_CountryCode": "ES",
     "airport_CountryName": "Spain",
     "airport_RegionName": "Europe/Madrid",
-    "Airports": [
-      {
-        "airport_Code": "QGN",
-        "airport_FullName": "Tarragona/Camp Rail Station",
-        "airport_Lat": "41.11667",
-        "airport_Lng": "1.25"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "QGQ",
@@ -95508,14 +95084,7 @@
     "airport_CountryCode": "GB",
     "airport_CountryName": "United Kingdom",
     "airport_RegionName": "Europe/London",
-    "Airports": [
-      {
-        "airport_Code": "QQH",
-        "airport_FullName": "Harwich Town Rail Station",
-        "airport_Lat": "51.94194",
-        "airport_Lng": "1.28437"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "QQR",
@@ -97926,12 +97495,6 @@
         "airport_FullName": "Richmond International Airport",
         "airport_Lat": "37.50611",
         "airport_Lng": "-77.3225"
-      },
-      {
-        "airport_Code": "ZRD",
-        "airport_FullName": "Richmond VA Railway",
-        "airport_Lat": "37.542979",
-        "airport_Lng": "-77.469092"
       }
     ]
   },
@@ -98904,12 +98467,6 @@
         "airport_FullName": "Kallinge",
         "airport_Lat": "56.25833",
         "airport_Lng": "15.261111"
-      },
-      {
-        "airport_Code": "XWK",
-        "airport_FullName": "Karlskrona RailwaySvc.",
-        "airport_Lat": "56.27",
-        "airport_Lng": "15.27"
       }
     ]
   },
@@ -99186,12 +98743,6 @@
         "airport_FullName": "Greater Rochester International",
         "airport_Lat": "43.127975",
         "airport_Lng": "-77.66543"
-      },
-      {
-        "airport_Code": "ZTE",
-        "airport_FullName": "Rochester NY Railway",
-        "airport_Lat": "43.161",
-        "airport_Lng": "-77.611"
       }
     ]
   },
@@ -99303,12 +98854,6 @@
         "airport_FullName": "Leonardo Da Vinci (Fiumicino)",
         "airport_Lat": "41.794594",
         "airport_Lng": "12.250346"
-      },
-      {
-        "airport_Code": "XRJ",
-        "airport_FullName": "Termini Railway.",
-        "airport_Lat": "41.8905198",
-        "airport_Lng": "12.4942486"
       }
     ]
   },
@@ -101874,12 +101419,6 @@
         "airport_FullName": "Schenectady County",
         "airport_Lat": "42.85",
         "airport_Lng": "-73.933334"
-      },
-      {
-        "airport_Code": "ZTD",
-        "airport_FullName": "Schenectady Railway",
-        "airport_Lat": "42.8142432",
-        "airport_Lng": "-73.9395687"
       }
     ]
   },
@@ -102294,12 +101833,6 @@
         "airport_FullName": "Sundsvall/harnosand",
         "airport_Lat": "62.52165",
         "airport_Lng": "17.438147"
-      },
-      {
-        "airport_Code": "XXZ",
-        "airport_FullName": "Sundsvall C Rail Station",
-        "airport_Lat": "62.3908358",
-        "airport_Lng": "17.3069157"
       }
     ]
   },
@@ -104993,12 +104526,6 @@
         "airport_FullName": "Vojens",
         "airport_Lat": "55.221943",
         "airport_Lng": "9.264722"
-      },
-      {
-        "airport_Code": "XJE",
-        "airport_FullName": "Railway Service",
-        "airport_Lat": "55.23",
-        "airport_Lng": "9.26"
       }
     ]
   },
@@ -108320,12 +107847,6 @@
         "airport_FullName": "Vasteras/Hasslo",
         "airport_Lat": "59.58917",
         "airport_Lng": "16.630556"
-      },
-      {
-        "airport_Code": "XEV",
-        "airport_FullName": "Stockholm C Rail Station",
-        "airport_Lat": "59.3327881",
-        "airport_Lng": "18.0644881"
       }
     ]
   },
@@ -110165,12 +109686,6 @@
         "airport_FullName": "Syracuse Hancock International Airport",
         "airport_Lat": "43.113983",
         "airport_Lng": "-76.11223"
-      },
-      {
-        "airport_Code": "ZYQ",
-        "airport_FullName": "Syracuse  Railway",
-        "airport_Lat": "43.0481221",
-        "airport_Lng": "-76.1474244"
       }
     ]
   },
@@ -115955,12 +115470,6 @@
         "airport_FullName": "Værnes",
         "airport_Lat": "63.454285",
         "airport_Lng": "10.917863"
-      },
-      {
-        "airport_Code": "XZT",
-        "airport_FullName": "Trondheim S Rail Station",
-        "airport_Lat": "63.4305149",
-        "airport_Lng": "10.3950528"
       }
     ]
   },
@@ -116980,12 +116489,6 @@
         "airport_FullName": "St Symphorien",
         "airport_Lat": "47.428333",
         "airport_Lng": "0.7275"
-      },
-      {
-        "airport_Code": "XSH",
-        "airport_FullName": "St-Pierre-Corps RailSt",
-        "airport_Lat": "47.394144",
-        "airport_Lng": "0.68484"
       }
     ]
   },
@@ -118318,12 +117821,6 @@
         "airport_FullName": "Oneida County",
         "airport_Lat": "43.141388",
         "airport_Lng": "-75.38028"
-      },
-      {
-        "airport_Code": "ZUA",
-        "airport_FullName": "Utica N Railway",
-        "airport_Lat": "32.103817",
-        "airport_Lng": "80.054276"
       }
     ]
   },
@@ -121341,18 +120838,6 @@
         "airport_FullName": "Marco Polo",
         "airport_Lat": "45.502285",
         "airport_Lng": "12.337947"
-      },
-      {
-        "airport_Code": "XVQ",
-        "airport_FullName": "Santa Lucia Railway",
-        "airport_Lat": "45.4343363",
-        "airport_Lng": "12.3387844"
-      },
-      {
-        "airport_Code": "XVY",
-        "airport_FullName": "Mestre Railway.",
-        "airport_Lat": "45.4343363",
-        "airport_Lng": "12.3387844"
       }
     ]
   },
@@ -121983,24 +121468,6 @@
         "airport_FullName": "Vienna International",
         "airport_Lat": "48.11972",
         "airport_Lng": "16.563583"
-      },
-      {
-        "airport_Code": "XWC",
-        "airport_FullName": "Suedbahnhof Railway",
-        "airport_Lat": "48.2081743",
-        "airport_Lng": "16.3738189"
-      },
-      {
-        "airport_Code": "XWT",
-        "airport_FullName": "Mitte CAT Rail Station",
-        "airport_Lat": "48.2081743",
-        "airport_Lng": "16.3738189"
-      },
-      {
-        "airport_Code": "XWW",
-        "airport_FullName": "Westbahnhof Railway",
-        "airport_Lat": "48.2081743",
-        "airport_Lng": "16.3738189"
       }
     ]
   },
@@ -122442,12 +121909,6 @@
         "airport_FullName": "Valladolid",
         "airport_Lat": "41.70581",
         "airport_Lng": "-4.844626"
-      },
-      {
-        "airport_Code": "XIV",
-        "airport_FullName": "Campo Grande Rail Station",
-        "airport_Lat": "41.6529434",
-        "airport_Lng": "-4.7283811"
       }
     ]
   },
@@ -123120,12 +122581,6 @@
         "airport_FullName": "Valerio Catullo",
         "airport_Lat": "45.40233",
         "airport_Lng": "10.906796"
-      },
-      {
-        "airport_Code": "XIX",
-        "airport_FullName": "Porta Nuova Railway",
-        "airport_Lat": "45.4383278",
-        "airport_Lng": "10.9917623"
       }
     ]
   },
@@ -127580,14 +127035,7 @@
     "airport_CountryCode": "FR",
     "airport_CountryName": "France",
     "airport_RegionName": "Europe/Paris",
-    "Airports": [
-      {
-        "airport_Code": "XED",
-        "airport_FullName": "Marne/Chessy Rail Station",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XEE",
@@ -128369,14 +127817,7 @@
     "airport_CountryCode": "AT",
     "airport_CountryName": "Austria",
     "airport_RegionName": "Europe/Vienna",
-    "Airports": [
-      {
-        "airport_Code": "XJS",
-        "airport_FullName": "Kitzbuehl Railway",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XKA",
@@ -128407,14 +127848,7 @@
     "airport_CountryCode": "NO",
     "airport_CountryName": "Norway",
     "airport_RegionName": "Europe/Oslo",
-    "Airports": [
-      {
-        "airport_Code": "XKC",
-        "airport_FullName": "Sandnes Railway",
-        "airport_Lat": "66",
-        "airport_Lng": "12.5833"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XKD",
@@ -128920,14 +128354,7 @@
     "airport_CountryCode": "GB",
     "airport_CountryName": "United Kingdom",
     "airport_RegionName": "Europe/London",
-    "Airports": [
-      {
-        "airport_Code": "XNK",
-        "airport_FullName": "North Gate Rail Station",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XNN",
@@ -129348,14 +128775,7 @@
     "airport_CountryCode": "GB",
     "airport_CountryName": "United Kingdom",
     "airport_RegionName": "Europe/London",
-    "Airports": [
-      {
-        "airport_Code": "XQT",
-        "airport_FullName": "Trent Valley Rail Station",
-        "airport_Lat": "52.68154",
-        "airport_Lng": "-1.82549"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XQU",
@@ -129410,14 +128830,7 @@
     "airport_CountryCode": "GB",
     "airport_CountryName": "United Kingdom",
     "airport_RegionName": "Europe/London",
-    "Airports": [
-      {
-        "airport_Code": "XRE",
-        "airport_FullName": "Railway Service",
-        "airport_Lat": "51.45625",
-        "airport_Lng": "-0.97113"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XRG",
@@ -129425,14 +128838,7 @@
     "airport_CountryCode": "GB",
     "airport_CountryName": "United Kingdom",
     "airport_RegionName": "Europe/London",
-    "Airports": [
-      {
-        "airport_Code": "XRG",
-        "airport_FullName": "Trent Valley  Rail Station",
-        "airport_Lat": "52.7593",
-        "airport_Lng": "-1.93694"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XRH",
@@ -129788,14 +129194,7 @@
     "airport_CountryCode": "NO",
     "airport_CountryName": "Norway",
     "airport_RegionName": "Europe/Oslo",
-    "Airports": [
-      {
-        "airport_Code": "XUV",
-        "airport_FullName": "Storekvina Railway",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XUW",
@@ -129803,14 +129202,7 @@
     "airport_CountryCode": "NO",
     "airport_CountryName": "Norway",
     "airport_RegionName": "Europe/Oslo",
-    "Airports": [
-      {
-        "airport_Code": "XUW",
-        "airport_FullName": "Storen Railway",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XUX",
@@ -129992,14 +129384,7 @@
     "airport_CountryCode": "GB",
     "airport_CountryName": "United Kingdom",
     "airport_RegionName": "Europe/London",
-    "Airports": [
-      {
-        "airport_Code": "XWI",
-        "airport_FullName": "North Wstern Rail Station",
-        "airport_Lat": "53.53333",
-        "airport_Lng": "-2.61667"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XWM",
@@ -130015,14 +129400,7 @@
     "airport_CountryCode": "GB",
     "airport_CountryName": "United Kingdom",
     "airport_RegionName": "Europe/London",
-    "Airports": [
-      {
-        "airport_Code": "XWN",
-        "airport_FullName": "Bank Quay Rail Station",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XWO",
@@ -130301,14 +129679,7 @@
     "airport_CountryCode": "SE",
     "airport_CountryName": "Sweden",
     "airport_RegionName": "Europe/Stockholm",
-    "Airports": [
-      {
-        "airport_Code": "XYF",
-        "airport_FullName": "Falkoping C Rail Station",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XYI",
@@ -130331,14 +129702,7 @@
     "airport_CountryCode": "SE",
     "airport_CountryName": "Sweden",
     "airport_RegionName": "Europe/Stockholm",
-    "Airports": [
-      {
-        "airport_Code": "XYM",
-        "airport_FullName": "Falkenberg Railway",
-        "airport_Lat": "49.65",
-        "airport_Lng": "22.75"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XYN",
@@ -130346,14 +129710,7 @@
     "airport_CountryCode": "SE",
     "airport_CountryName": "Sweden",
     "airport_RegionName": "Europe/Stockholm",
-    "Airports": [
-      {
-        "airport_Code": "XYN",
-        "airport_FullName": "Kristinehamn Railway",
-        "airport_Lat": "56",
-        "airport_Lng": "14.15"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "XYO",
@@ -134125,12 +133482,6 @@
     "airport_RegionName": "America/Montreal",
     "Airports": [
       {
-        "airport_Code": "XLM",
-        "airport_FullName": "St Lambert Railway",
-        "airport_Lat": "45.5088889",
-        "airport_Lng": "-73.5541667"
-      },
-      {
         "airport_Code": "YHU",
         "airport_FullName": "St Hubert",
         "airport_Lat": "45.5",
@@ -134774,12 +134125,6 @@
         "airport_FullName": "Rockcliffe St",
         "airport_Lat": "45.45",
         "airport_Lng": "-75.7"
-      },
-      {
-        "airport_Code": "ZIF",
-        "airport_FullName": "Fallowfield Railway",
-        "airport_Lat": "45.411572",
-        "airport_Lng": "-75.698194"
       }
     ]
   },
@@ -135172,22 +134517,10 @@
     "airport_RegionName": "America/Montreal",
     "Airports": [
       {
-        "airport_Code": "XFY",
-        "airport_FullName": "Sainte-Foy Railway",
-        "airport_Lat": "46.8032826",
-        "airport_Lng": "-71.242796"
-      },
-      {
         "airport_Code": "XFZ",
         "airport_FullName": "Charny",
         "airport_Lat": "46.716667",
         "airport_Lng": "-71.25"
-      },
-      {
-        "airport_Code": "XLJ",
-        "airport_FullName": "Quebec Stn. Railway",
-        "airport_Lat": "46.8032826",
-        "airport_Lng": "-71.242796"
       },
       {
         "airport_Code": "YQB",
@@ -135804,12 +135137,6 @@
     "airport_CountryName": "Canada",
     "airport_RegionName": "America/Toronto",
     "Airports": [
-      {
-        "airport_Code": "XDY",
-        "airport_FullName": "Sudbury Jct Railway",
-        "airport_Lat": "46.63",
-        "airport_Lng": "-80.8"
-      },
       {
         "airport_Code": "YSB",
         "airport_FullName": "Sudbury",
@@ -136874,12 +136201,6 @@
         "airport_Lng": "-123.11667"
       },
       {
-        "airport_Code": "XEA",
-        "airport_FullName": "Vancouver Railway.",
-        "airport_Lat": "49.261226",
-        "airport_Lng": "-123.1139268"
-      },
-      {
         "airport_Code": "YDT",
         "airport_FullName": "Boundary Bay",
         "airport_Lat": "49.183334",
@@ -137343,12 +136664,6 @@
     "airport_CountryName": "Canada",
     "airport_RegionName": "America/Vancouver",
     "Airports": [
-      {
-        "airport_Code": "XDV",
-        "airport_FullName": "Pr. George Railway",
-        "airport_Lat": "53.91848",
-        "airport_Lng": "-122.776584"
-      },
       {
         "airport_Code": "YXS",
         "airport_FullName": "Prince George",
@@ -138173,14 +137488,7 @@
     "airport_CountryCode": "DE",
     "airport_CountryName": "Germany",
     "airport_RegionName": "Europe/Berlin",
-    "Airports": [
-      {
-        "airport_Code": "ZAU",
-        "airport_FullName": "Sachsen Railway",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "ZAW",
@@ -138212,12 +137520,6 @@
     "airport_CountryName": "Spain",
     "airport_RegionName": "Europe/Madrid",
     "Airports": [
-      {
-        "airport_Code": "XZZ",
-        "airport_FullName": "Delicias Railway St.",
-        "airport_Lat": null,
-        "airport_Lng": null
-      },
       {
         "airport_Code": "ZAZ",
         "airport_FullName": "Zaragoza",
@@ -138870,14 +138172,7 @@
     "airport_CountryCode": "DE",
     "airport_CountryName": "Germany",
     "airport_RegionName": "Europe/Berlin",
-    "Airports": [
-      {
-        "airport_Code": "ZFR",
-        "airport_FullName": "Frankfurt/Oder Railway",
-        "airport_Lat": "52.34714",
-        "airport_Lng": "14.55062"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "ZFU",
@@ -138915,14 +138210,7 @@
     "airport_CountryCode": "DE",
     "airport_CountryName": "Germany",
     "airport_RegionName": "Europe/Berlin",
-    "Airports": [
-      {
-        "airport_Code": "ZGA",
-        "airport_FullName": "Gera Railway",
-        "airport_Lat": "50.88029",
-        "airport_Lng": "12.08187"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "ZGE",
@@ -138930,14 +138218,7 @@
     "airport_CountryCode": "DE",
     "airport_CountryName": "Germany",
     "airport_RegionName": "Europe/Berlin",
-    "Airports": [
-      {
-        "airport_Code": "ZGE",
-        "airport_FullName": "Goerlitz Railway",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "ZGF",
@@ -139020,14 +138301,7 @@
     "airport_CountryCode": "DE",
     "airport_CountryName": "Germany",
     "airport_RegionName": "Europe/Berlin",
-    "Airports": [
-      {
-        "airport_Code": "ZGO",
-        "airport_FullName": "Gotha Railway",
-        "airport_Lat": "23.430237",
-        "airport_Lng": "116.75859"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "ZGR",
@@ -139080,14 +138354,7 @@
     "airport_CountryCode": "DE",
     "airport_CountryName": "Germany",
     "airport_RegionName": "Europe/Berlin",
-    "Airports": [
-      {
-        "airport_Code": "ZGW",
-        "airport_FullName": "Greifswald Railway",
-        "airport_Lat": "54.09311",
-        "airport_Lng": "13.38786"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "ZGX",
@@ -139405,14 +138672,7 @@
     "airport_CountryCode": "CH",
     "airport_CountryName": "Switzerland",
     "airport_RegionName": "Europe/Zurich",
-    "Airports": [
-      {
-        "airport_Code": "ZIN",
-        "airport_FullName": "Interlaken Ost Rail Station",
-        "airport_Lat": "13.779444",
-        "airport_Lng": "8.983056"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "ZIO",
@@ -139658,14 +138918,7 @@
     "airport_CountryCode": "DE",
     "airport_CountryName": "Germany",
     "airport_RegionName": "Europe/Berlin",
-    "Airports": [
-      {
-        "airport_Code": "ZJS",
-        "airport_FullName": "Jena Railway",
-        "airport_Lat": "18.31063",
-        "airport_Lng": "109.409706"
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "ZJT",
@@ -140922,14 +140175,7 @@
     "airport_CountryCode": "DE",
     "airport_CountryName": "Germany",
     "airport_RegionName": "Europe/Berlin",
-    "Airports": [
-      {
-        "airport_Code": "ZSU",
-        "airport_FullName": "Dessau Railway",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "ZSY",
@@ -141097,14 +140343,7 @@
     "airport_CountryCode": "DE",
     "airport_CountryName": "Germany",
     "airport_RegionName": "Europe/Berlin",
-    "Airports": [
-      {
-        "airport_Code": "ZTZ",
-        "airport_FullName": "Chemnitz Railway",
-        "airport_Lat": null,
-        "airport_Lng": null
-      }
-    ]
+    "Airports": []
   },
   {
     "airport_CityCode": "ZUC",
@@ -141143,12 +140382,6 @@
     "airport_CountryName": "China",
     "airport_RegionName": "Asia/Shanghai",
     "Airports": [
-      {
-        "airport_Code": "ZIU",
-        "airport_FullName": "Railway",
-        "airport_Lat": "22.270715",
-        "airport_Lng": "113.576726"
-      },
       {
         "airport_Code": "ZUH",
         "airport_FullName": "Zhuhai Airport",

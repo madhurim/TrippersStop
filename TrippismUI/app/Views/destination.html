@@ -62,7 +62,6 @@
                     <script type="text/ng-template" id="customTemplate.html">
                         <a style="padding-left:10px;" tabindex="-1" class="row-even1">
                             <i ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
-                            
                             <!--<span>{{match.model.airport_CityCode}}</span>,-->
                             <span>{{match.model.airport_Code}}</span>,
                             <span>{{match.model.airport_FullName.toLowerCase().indexOf("airport") >= 0 ? match.model.airport_FullName : match.model.airport_FullName + " Airport"}}</span>,
@@ -91,9 +90,9 @@
                                                name="Origin"
                                                tabindex="1"
                                                placeholder="Enter Origin"
-                                               typeahead="state for state in AvailableCodes |  filter: $viewValue  | limitTo: 150"
+                                               typeahead="state as state for AvailableCodes in getMatchingStuffs($viewValue)"
                                                class="form-control">
-
+                                        <!--typeahead="state for state in AvailableCodes |  filter: $viewValue  | limitTo: 150"-->
                                     </div>
 
                                     <div class="checkbox">
@@ -467,10 +466,10 @@
                         <accordion  style="clear:both;">
                             <accordion-group>
                                 <accordion-heading>
-                                    <span>More Insights on  {{DestinationairportName.airport_FullName + ', ' + DestinationairportName.airport_CityName}}</span>
+                                    <span ng-click="loadSeasonalityInfo($event)">More Insights on  {{DestinationairportName.airport_FullName + ', ' + DestinationairportName.airport_CityName}}</span>
                                 </accordion-heading>
                                 <accordion close-others="oneAtATime">
-                                    <accordion-group>
+                                    <accordion-group is-open="true">
                                         <accordion-heading>
                                             <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
                                         </accordion-heading>
@@ -484,7 +483,7 @@
                                                     <th class="text-center underline">Traffic Volume</th>
                                                     <th class="underline">Booking Quantities</th>
                                                 </tr>
-                                                <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality">
+                                                <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality | orderBy: '-WeekStartDate':true">
                                                     <td class="word-wrap text-center">{{range.YearWeekNumber}}</td>
                                                     <td class="word-wrap">{{range.WeekStartDate | date:"yyyy-MM-dd"}}</td>
                                                     <td class="word-wrap">{{range.WeekEndDate | date:"yyyy-MM-dd"}}</td>
@@ -507,8 +506,8 @@
                                             <span ng-click="loadfareRangeInfo($event)">Fare Range</span>
                                         </accordion-heading>
                                         <div>
-                                          
-                                            <table class="table fontsize">
+                                            <span ng-if="FareRangeLoading == true">Please wait, Details are loading...</span>
+                                            <table ng-if="!FareRangeLoading" class="table fontsize">
                                                 <tr>
                                                     <th>Maximum Fare</th>
                                                     <th>Minimum Fare</th>
@@ -517,7 +516,9 @@
                                                     <th>Departure Date Time</th>
                                                     <th>Return Date Time</th>
                                                 </tr>
-                                                <tr ng-repeat="range in fareRangeData.FareData">
+
+
+                                                <tr ng-repeat="range in fareRangeData.FareData ">
                                                     <td class="word-wrap">{{range.CurrencyCode}} {{range.MaximumFare}}</td>
                                                     <td class="word-wrap"> {{range.CurrencyCode}} {{range.MinimumFare }}</td>
                                                     <td class="word-wrap"> {{range.CurrencyCode}} {{range.MedianFare}}</td>

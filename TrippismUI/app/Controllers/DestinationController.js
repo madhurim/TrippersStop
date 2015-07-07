@@ -105,6 +105,17 @@
               }
        );
 
+        $scope.getMatchingStuffs = function ($viewValue) {
+            var matchingStuffs = [];
+            for (var i = 0; i < $scope.AvailableCodes.length; i++) {
+                if ($scope.AvailableCodes[i].airport_CityName.toLowerCase().indexOf($viewValue.toLowerCase()) != -1 || 
+                    $scope.AvailableCodes[i].airport_Code.toLowerCase().indexOf($viewValue.toLowerCase()) != -1) 
+                    matchingStuffs.push($scope.AvailableCodes[i]);
+                
+            }
+            return matchingStuffs;
+        }
+
         $scope.$watch('IsAdvancedSearch', function (scope) {
             if (scope == false || scope == undefined) {
                 $scope.Theme = "";
@@ -174,10 +185,14 @@
             var _qFromDate = search.fromdate;
             var _qToDate = search.todate;
 
+            
+            blockUIConfig.autoBlock = false;
             UtilFactory.ReadAirportJson().then(function (data) {
+                blockUIConfig.autoBlock = true;
                 $scope.AvailableAirports = data;
                 $scope.CalledOnPageLoad = true;
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
+                
                 if (org == undefined || org == '') {
                     UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
                         if (data == undefined) {
@@ -185,8 +200,8 @@
                             return;
                         }
                         else {
-                            $scope.Origin = data.airport_Code;
-                            $scope.findDestinations('Cheapest');
+                             $scope.Origin = data.airport_Code;
+                           $scope.findDestinations('Cheapest');
                         }
                     });
                 }
@@ -406,7 +421,6 @@ function DestinationDetailsCtrl($scope, blockUIConfig, $timeout, $modalInstance,
     $scope.loadSeasonalityInfoLoaded = false;
     $scope.SeasonalityNoDataFound = false;
     $scope.loadSeasonalityInfo = function ($event) {
-        
         if ($scope.loadSeasonalityInfoLoaded == false) {
             if ($scope.MarkerSeasonalityInfo == "") {
                 var Seasonalitydata = {
@@ -414,10 +428,28 @@ function DestinationDetailsCtrl($scope, blockUIConfig, $timeout, $modalInstance,
                 };
 
                 $timeout(function () {
-                    blockUIConfig.message = 'Please wait! Seasonality info are loading...!';
+                    //blockUIConfig.message = 'Please wait! Seasonality info are loading...!';
+                    blockUIConfig.message = 'Please wait! Insights details are loading...!';
                     SeasonalityFactory.Seasonality(Seasonalitydata).then(function (data) {
+
+                        blockUIConfig.autoBlock = false;
+                        $scope.loadfareRangeInfo();
+                        
                         if (data.status == 404)
                             $scope.SeasonalityNoDataFound = true;
+                       
+                        //var defaultSeasonality = data.Seasonality;
+                        //var now = new Date();
+                        //var Nextday;
+                        //Nextday =  common.addDays(now,30);
+                        
+                        
+
+                        //for (var i = 0; i < defaultSeasonality.length; i++) {
+                        //    var datetocheck = defaultSeasonality[i].WeekStartDate;
+                        //    console.log(datetocheck > from && datetocheck < to)
+                        //}
+
                         $scope.MarkerSeasonalityInfo = data;
                         blockUIConfig.message = 'Loading...';
                     });
@@ -431,7 +463,9 @@ function DestinationDetailsCtrl($scope, blockUIConfig, $timeout, $modalInstance,
     $scope.fareRangeInfoLoaded = false;
     $scope.fareRangeInfoNoDataFound = false;
     $scope.fareRangeData = "";
+
     $scope.loadfareRangeInfo = function ($event) {
+        
         var data = {
             "Origin" :  $scope.fareData.Origin,
             "Destination": $scope.fareData.Destination,
@@ -441,15 +475,21 @@ function DestinationDetailsCtrl($scope, blockUIConfig, $timeout, $modalInstance,
         }; 
         if ($scope.fareRangeInfoLoaded == false) {
             if ($scope.fareRangeData == "") {
-                    blockUIConfig.message = 'Please wait! fare range info are loading...!';
+                    $scope.FareRangeLoading = true;
+                    //blockUIConfig.message = 'Please wait! fare range info are loading...!';
                     FareRangeFactory.fareRange(data).then(function (data) {
+                        $scope.FareRangeLoading = false;
+                        blockUIConfig.autoBlock = true;
                         if (data.status == 404)
                             $scope.fareRangeInfoNoDataFound = true;
                         $scope.fareRangeData = data;
-                        blockUIConfig.message = 'Loading...';
+                      //  blockUIConfig.message = 'Loading...';
                     });
             }
         }
         $scope.fareRangeInfoLoaded = true;
     };
+
+
+  
 };
