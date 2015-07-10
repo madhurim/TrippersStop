@@ -1,8 +1,25 @@
 ﻿
 <div ng-controller="DestinationController">
+    <script type="text/ng-template" id="customTemplate.html">
+        <a style="padding-left:10px;" tabindex="-1" class="row-even1">
+            <i ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
+            <!--<span>{{match.model.airport_CityCode}}</span>,-->
+            <span>{{match.model.airport_Code}}</span>,
+            <span>{{match.model.airport_FullName.toLowerCase().indexOf("airport") >= 0 ? match.model.airport_FullName : match.model.airport_FullName + " Airport"}}</span>,
+
+            <span>{{match.model.airport_CityName}}</span>,
+            <span>{{match.model.airport_CountryName}}</span>
+
+        </a>
+    </script>
     <div style="margin-top:10px;">
+
+
+
         <div class="col-md-12">
-            <div class="panel panel-default">
+            
+            <!--ui-loader wrapperclass="ttLoaderImage" is-http-calling="false" isloading="inProgress"-->
+            <div class="panel panel-default" >
                 <div class="panel-heading">Search Destinations</div>
                 <div class="panel-body">
                     <div ng-show="hasError && frmdestfinder.$invalid">
@@ -59,50 +76,39 @@
                         </div>
                     </div>
 
-                    <script type="text/ng-template" id="customTemplate.html">
-                        <a style="padding-left:10px;" tabindex="-1" class="row-even1">
-                            <i ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
-                            <!--<span>{{match.model.airport_CityCode}}</span>,-->
-                            <span>{{match.model.airport_Code}}</span>,
-                            <span>{{match.model.airport_FullName.toLowerCase().indexOf("airport") >= 0 ? match.model.airport_FullName : match.model.airport_FullName + " Airport"}}</span>,
-
-                            <span>{{match.model.airport_CityName}}</span>,
-                            <span>{{match.model.airport_CountryName}}</span>
-
-                        </a>
-                    </script>
                     <form name="frmdestfinder" class="" novalidate>
                         <div class="row">
                             <div class="col-lg-12">
-
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" >
                                     <div class="form-group">
                                         <label class="control-label">Origin Airport</label>
-
-                                        <input type="text"
-                                               ng-model="Origin"
-                                               typeahead-min-length="2"
-                                               required
-                                               typeahead-input-formatter="formatInput($model)"
-                                               typeahead-editable="true"
-                                               typeahead-on-select="onSelect($item, $model, $label)"
-                                               typeahead-template-url="customTemplate.html"
-                                               name="Origin"
-                                               tabindex="1"
-                                               placeholder="Enter Origin"
-                                               typeahead="state as state for AvailableCodes in getMatchingStuffs($viewValue)"
-                                               class="form-control">
-                                        <!--typeahead="state for state in AvailableCodes |  filter: $viewValue  | limitTo: 150"-->
+                                        <p class="input-group">
+                                            <input type="text"
+                                                   ng-model="Origin"
+                                                   typeahead-min-length="2"
+                                                   required
+                                                   typeahead-input-formatter="formatInput($model)"
+                                                   typeahead-editable="true"
+                                                   typeahead-on-select="onSelect($item, $model, $label)"
+                                                   typeahead-template-url="customTemplate.html"
+                                                   name="Origin"
+                                                   tabindex="1"
+                                                   placeholder="Enter Origin"
+                                                   typeahead="state as state for AvailableCodes in getMatchingStuffs($viewValue)"
+                                                   style="border-radius:4px;"
+                                                   class=" form-control" />
+                                            <span ng-if="IsairportJSONLoading == true" class="input-group-btn">
+                                                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></button>
+                                            </span>
+                                        </p>
+                                        
                                     </div>
-
-                                    <div class="checkbox">
+                                    <!--<div class="checkbox">
                                         <label>
                                             <input ng-model="IsAdvancedSearch" type="checkbox"> Advanced Search
                                         </label>
-                                    </div>
-
+                                    </div>-->
                                 </div>
-
                                 <div class="col-xs-2">
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">From Date</label>
@@ -146,35 +152,38 @@
                                         </p>
                                     </div>
                                 </div>
+                                <div class="col-xs-2">
+                                    <div class="form-group">
+                                        <label>Minimum fare</label>
+                                        <input tabindex="6" min="1" type="number" name="Minfare" class="form-control" ng-model="Minfare" placeholder="Enter Minfare">
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="form-group">
+                                        <label>Maximum fare</label>
+                                        <input tabindex="7" type="number" class="form-control" name="Maxfare" ng-model="Maxfare" placeholder="Enter Maxfare">
+                                    </div>
+
+                                </div>
                                 <div class="col-xs-1">
                                     <div class="form-group">
                                         <label>&nbsp;</label>
-                                        <button tabindex="11" ng-disabled="SearchbuttonIsLoading" class="btn btn-primary btn-sm" ng-click="findDestinations('All')">{{SearchbuttonText}}</button>
+                                        <button tabindex="11" ng-disabled="SearchbuttonIsLoading" 
+                                                class="btn btn-primary btn-sm" ng-click="findDestinations('All')">
+                                            <i ng-if="SearchbuttonIsLoading" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>
+                                        {{SearchbuttonText}}</button>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-lg-12" ng-show="IsAdvancedSearch">
+                            <div class="col-lg-12" > <!--ng-show="IsAdvancedSearch"-->
                                 <div class="col-lg-12" style="padding-left:0px; padding-right:0px;">
-                                    <div class="col-xs-2">
-                                        <div class="form-group">
-                                            <label>Minfare</label>
-                                            <input tabindex="6" min="1" type="number" name="Minfare" class="form-control" ng-model="Minfare" placeholder="Enter Minfare">
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <div class="form-group">
-                                            <label>Maxfare</label>
-                                            <input tabindex="7" type="number" class="form-control" name="Maxfare" ng-model="Maxfare" placeholder="Enter Maxfare">
-                                        </div>
-
-                                    </div>
+                                   
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Region</label>
-
                                             <select class="form-control" ng-model="Region" ng-options="color.value for color in AvailableRegions">
-                                                <option value="">-- choose Regions --</option>
+                                                <option value="">Choose Region</option>
                                             </select>
 
                                         </div>
@@ -183,20 +192,9 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Theme</label>
                                             <select class="form-control" ng-model="Theme" ng-options="color.value for color in AvailableThemes">
-                                                <option value="">-- choose Theme --</option>
+                                                <option value="">Choose Theme</option>
                                             </select>
                                         </div>
-
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-12" style="padding-left:0px; padding-right:0px;">
-                                    <div class="col-xs-2">
-                                        <div class="form-group">
-                                            <label>Top Destinations</label>
-                                            <input tabindex="10" type="number" min="1" class="form-control" name="TopDestinations" ng-model="TopDestinations" placeholder="Top Destinations">
-                                        </div>
-
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
@@ -236,7 +234,7 @@
                                                        datepicker-options="dateOptions"
                                                        close-text="Close" />
                                                 <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-default" tabindex="3" ng-click="openLatestdeparturedate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                    <button type="button" class="btn btn-default" tabindex="4" ng-click="openLatestdeparturedate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                                 </span>
                                             </p>
                                         </div>
@@ -249,14 +247,24 @@
 
                                     </div>
                                 </div>
+                                <div class="col-lg-12" style="padding-left:0px; padding-right:0px;">
+                                    <!--<div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Top Destinations</label>
+                                            <input tabindex="10" type="number" min="1" class="form-control" name="TopDestinations" ng-model="TopDestinations" placeholder="Top Destinations">
+                                        </div>
+                                    </div>-->
+                                   
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
     </div>
-    <div class="col-lg-12">
+    <div class="col-lg-12" cg-busy="{promise:mappromise,message:'Please wait...'}">
         <div class="row" style="margin-left:0px;margin-right:0px;">
             <div id="wrapper">
                 <div google-map id="map_canvas" btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
@@ -270,47 +278,48 @@
                                     </div>
                                     <script type="text/ng-template" id="EmailDetForm.html">
                                         <div ng-controller="EmailForDestinationDet" style="padding: 20px;">
-                                            
-                                            <div ng-show="hasError && FormGetEmailDet.$invalid">
-                                                <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.email.$error.required">
-                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                                    Please enter Email Address.
-                                                </div>
-                                                <div class="alert alert-danger triperror" role="alert" ng-show="emailvalidate">
-                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                                    Please enter Valid Email Address.
-                                                </div>
-                                                
-                                                <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.fromemail.$error.email">
-                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                                    Please enter Valid From email Address.
+                                            <div cg-busy="{promise:sendmailPromise,message:'Sending email...'}">
+                                                <div ng-show="hasError && FormGetEmailDet.$invalid">
+                                                    <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.email.$error.required">
+                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                        Please enter Email Address.
+                                                    </div>
+                                                    <div class="alert alert-danger triperror" role="alert" ng-show="emailvalidate">
+                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                        Please enter Valid Email Address.
+                                                    </div>
+
+                                                    <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.fromemail.$error.email">
+                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                        Please enter Valid From email Address.
+                                                    </div>
+
+                                                    <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.Subject.$error.required">
+                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                        Please enter Subject.
+                                                    </div>
                                                 </div>
 
-                                                <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.Subject.$error.required">
-                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                                    Please enter Subject.
-                                                </div>
+                                                <form name="FormGetEmailDet" novalidate="novalidate">
+
+                                                    <div class="form-group">
+                                                        <label for="email">From email address</label>
+                                                        <input type="email" ng-model="fromemail" class="form-control" id="fromemail" name="fromemail" placeholder="Enter email" />
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label for="email">To email address</label>
+                                                        <input type="text" ng-model="email" class="form-control" id="email" name="email" placeholder="Enter email" required />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Subject">Subject</label>
+                                                        <input type="text" ng-model="Subject" class="form-control" id="Subject" name="Subject" placeholder="Subject" required />
+                                                    </div>
+                                                    <button type="submit" class="btn btn-default" ng-click="submitModal()">Share Now</button>
+                                                    <button class="btn btn-info" ng-click="dismiss()"><i class="fa fa-times"></i>Close</button>
+                                                </form>
                                             </div>
-
-                                            <form name="FormGetEmailDet" novalidate="novalidate">
-
-                                                <div class="form-group">
-                                                    <label for="email">From email address</label>
-                                                    <input type="email" ng-model="fromemail" class="form-control" id="fromemail" name="fromemail" placeholder="Enter email" />
-                                                </div>
-
-
-                                                <div class="form-group">
-                                                    <label for="email">To email address</label>
-                                                    <input type="text" ng-model="email" class="form-control" id="email" name="email" placeholder="Enter email" required />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Subject">Subject</label>
-                                                    <input type="text" ng-model="Subject" class="form-control" id="Subject" name="Subject" placeholder="Subject" required />
-                                                </div>
-                                                <button type="submit" class="btn btn-default" ng-click="submitModal()">Share Now</button>
-                                                <button class="btn btn-info" ng-click="dismiss()"><i class="fa fa-times"></i>Close</button>
-                                            </form>
                                         </div>
                                     </script>
 
@@ -331,7 +340,7 @@
                             </div>
 
                             <accordion close-others="oneAtATime">
-                                <accordion-group heading="Fare Info" >
+                                <accordion-group heading="Fare Info">
                                     <div class="thumbnail" style="padding:0px;">
                                         <table class="table fontsize" style="margin-bottom:0px;">
                                             <tr><th class="col-md-3">Origin</th><td class="col-md-9 word-wrap">{{MarkerInfo.OriginLocation}}</td></tr>
@@ -349,7 +358,7 @@
                                                     <!--{{MarkerInfo.Recommendation}}-->
                                                     <!--<i class="glyphicon glyphicon-thumbs-up text-success" title="Buy" ng-if="MarkerInfo.Recommendation == 'buy'"></i>-->
                                                     <i class="recommended text-success" title="Buy" ng-if="MarkerInfo.Recommendation == 'buy'"></i>
-                                                    
+
                                                     <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="MarkerInfo.Recommendation == 'wait'"></i>
                                                     <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="MarkerInfo.Recommendation == 'watch'"></i>
                                                 </td>
@@ -358,7 +367,7 @@
                                         </table>
                                     </div>
                                 </accordion-group>
-                                <accordion-group  >
+                                <accordion-group>
                                     <accordion-heading>
                                         <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
                                     </accordion-heading>
@@ -394,62 +403,56 @@
         <img src="../app/Styles/images/adsection_2.jpg" style="max-width:100%;height:290px;" />
     </div>-->
 
-    <style>.modal-content{opacity:0.8 !important;border-radius:1px;}</style>
+    <style>
+        .modal-content {
+            opacity: 0.8 !important;
+            border-radius: 1px;
+        }
+    </style>
 
     <script type="text/ng-template" id="DestinationDetails.html">
-        
-        <div class="modal-body">
-            
-            <accordion style="clear:both;">
-                <accordion-group is-disabled="true" is-open="true" >
-                    <accordion-heading>
-                        <span >Destination from Origin <b> {{DestinationName}} </b> </span> 
-                        <div class="pull-right">
-                            <i class="glyphicon glyphicon-remove" ng-click="cancel()"></i>
-                        </div>
-                    </accordion-heading>
-                    
-                    <div style="min-width:200px;margin-bottom:5px;" class="fontsize" id="content">
 
+        <div class="modal-body" > 
+            <!--ui-loader wrapperclass="ttLoaderImage modal-body" is-http-calling="false" isloading="inProgressFareinfo"-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span>Destination from Origin <b> {{DestinationName}} </b> </span>
+                        <div class="pull-right"><i class="glyphicon glyphicon-remove" ng-click="cancel()"></i></div>
+                    </h3>
+                </div>
+                <div class="panel-body" >
+                    <div style="min-width:200px;margin-bottom:5px;" class="fontsize" id="content">
                         <div class="col-sm-4 padleft0">
                             <span>Destination : </span><br /><strong>
                                 {{DestinationairportName.airport_FullName + ', ' + DestinationairportName.airport_CityName}}
                             </strong>
                         </div>
-
                         <div class="col-sm-2 padleft0" style="width:13%;">
                             <span>Lowest Fare: </span><br /><strong>{{mapDetails.CurrencyCode}} {{mapDetails.LowestFare | number : 2}} </strong><br />
-
                         </div>
-                        
                         <div class="col-md-2" style="width:20%;">
                             <span>Lowest Non Stop Fare: </span><br /><strong> {{mapDetails.CurrencyCode}} {{mapDetails.LowestNonStopFare | number :2}} </strong>
                         </div>
-                        
                         <div class="col-sm-2" style="width:15%;">
                             <span>Departure Date: </span><br /><strong>{{mapDetails.DepartureDateTime | date:"yyyy-MM-dd"}}</strong>
                         </div>
-                        
                         <div class="col-sm-1" style="width:10%;padding:0px;">
                             <span>Return Date: </span><br /><strong>{{mapDetails.ReturnDateTime | date:"yyyy-MM-dd"}}</strong>
                         </div>
-
                         <div class="col-sm-1" style="padding:0px;">
                             <div class="pull-right" ng-controller="EmailForDestinationDet" style="margin-top:5px;">
                                 <button class="btn btn-primary btn-sm pull-right" ng-click="SendEmailToUser($parent)">Share</button>
                             </div>
                         </div>
-
-                        <div class="col-md-12 padleft0" style="margin-top:10px;">
+                        <div class="col-md-12 padleft0" style="margin-top:10px;" cg-busy="{promise:fareinfopromise,message:'Loading Fare Info'}">
                             <div style="padding:8px;" ng-if="FareNoDataFound"><label class="text-danger">Ooops! We are sorry, no information is available.</label> </div>
                             <div ng-if="!FareNoDataFound" style="margin-bottom:10px;clear:both;">
-
                                 <label>Recommendation: </label>
                                 <img style="margin-top:-10px;" ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
                                 <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
                                 <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
                                 <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
-
                                 <div class="col-md-12 padleft0" style="clear:both;margin-top:10px;">
                                     <div class="col-sm-4" style="padding:0px;">
                                         <span>Highest Predicted Fare: </span><br /><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.HighestPredictedFare | number:2}}</strong>
@@ -458,84 +461,89 @@
                                         <span>Lowest Predicted Fare: </span><br /><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.LowestPredictedFare | number:2}}</strong>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
 
-                    <div style="clear:both;padding-top:10px;">
-                        <accordion  style="clear:both;">
+                    <div style="clear:both; padding-top:10px;">
+                        <accordion style="clear:both;">
                             <accordion-group>
                                 <accordion-heading>
                                     <span ng-click="loadSeasonalityInfo($event)">More Insights on  {{DestinationairportName.airport_FullName + ', ' + DestinationairportName.airport_CityName}}</span>
                                 </accordion-heading>
                                 <accordion close-others="oneAtATime">
-                                    <accordion-group is-open="true">
-                                        <accordion-heading>
-                                            <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
-                                        </accordion-heading>
-                                        <div style="padding:8px;" ng-if="SeasonalityNoDataFound"><label class="text-danger">Ooops! We are sorry, no information is available.</label> </div>
-                                        <div ng-if="!SeasonalityNoDataFound" class="thumbnail thumbnailstyle">
-                                            <table class="table fontsize">
-                                                <tr>
-                                                    <th class="text-center underline">Week#</th>
-                                                    <th class="underline">Start Date</th>
-                                                    <th class="underline">End Date</th>
-                                                    <th class="text-center underline">Traffic Volume</th>
-                                                    <th class="underline">Booking Quantities</th>
-                                                </tr>
-                                                <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality | orderBy: '-WeekStartDate':true">
-                                                    <td class="word-wrap text-center">{{range.YearWeekNumber}}</td>
-                                                    <td class="word-wrap">{{range.WeekStartDate | date:"yyyy-MM-dd"}}</td>
-                                                    <td class="word-wrap">{{range.WeekEndDate | date:"yyyy-MM-dd"}}</td>
-                                                    <td class="word-wrap text-center">
-                                                        <span ng-if="range.SeasonalityIndicator == 'High'" class="highrange">{{range.SeasonalityIndicator}}</span>
-                                                        <span ng-if="range.SeasonalityIndicator == 'Medium'" class="mediumrange">{{range.SeasonalityIndicator}}</span>
-                                                        <span ng-if="range.SeasonalityIndicator == 'Low'" class="lowrange">{{range.SeasonalityIndicator}}</span>
-                                                    </td>
-                                                    <td class="word-wrap">
-                                                        <span ng-if="range.NumberOfObservations == 'GreaterThan10000'">Over crowded</span>
-                                                        <span ng-if="range.NumberOfObservations == 'LessThan10000'">crowded</span>
-                                                        <span ng-if="range.NumberOfObservations == 'LessThan1000'">not crowded</span>
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title"><span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span></h3>
                                         </div>
-                                    </accordion-group>
-                                    <accordion-group>
-                                        <accordion-heading>
-                                            <span ng-click="loadfareRangeInfo($event)">Fare Range</span>
-                                        </accordion-heading>
-                                        <div>
-                                            <span ng-if="FareRangeLoading == true">Please wait, Details are loading...</span>
-                                            <table ng-if="!FareRangeLoading" class="table fontsize">
-                                                <tr>
-                                                    <th>Maximum Fare</th>
-                                                    <th>Minimum Fare</th>
-                                                    <th>Median Fare</th>
-                                                    <th>Count</th>
-                                                    <th>Departure Date Time</th>
-                                                    <th>Return Date Time</th>
-                                                </tr>
+                                        <div class="panel-body" cg-busy="{promise:seasonalitypromise,message:'Loading Seasonality Data'}">
+                                            <!--ui-loader wrapperclass="ttLoaderImage" is-http-calling="false" isloading="inProgressSeasonalityinfo"-->
+                                            <div style="padding:8px;" ng-if="SeasonalityNoDataFound"><label class="text-danger">Ooops! We are sorry, no information is available.</label> </div>
+                                            
+                                            <div ng-if="!SeasonalityNoDataFound" class="thumbnail thumbnailstyle">
 
-
-                                                <tr ng-repeat="range in fareRangeData.FareData ">
-                                                    <td class="word-wrap">{{range.CurrencyCode}} {{range.MaximumFare}}</td>
-                                                    <td class="word-wrap"> {{range.CurrencyCode}} {{range.MinimumFare }}</td>
-                                                    <td class="word-wrap"> {{range.CurrencyCode}} {{range.MedianFare}}</td>
-                                                    <td class="word-wrap">{{range.Count}}</td>
-                                                    <td class="word-wrap">{{range.DepartureDateTime | date:"yyyy-MM-dd"}}</td>
-                                                    <td class="word-wrap">{{range.ReturnDateTime | date:"yyyy-MM-dd"}}</td>
-                                                </tr>
-                                            </table>
+                                                <table class="table fontsize" style="clear:both;">
+                                                    <tr>
+                                                        <th class="text-center underline">Week#</th>
+                                                        <th class="underline">Start Date</th>
+                                                        <th class="underline">End Date</th>
+                                                        <th class="text-center underline">Traffic Volume</th>
+                                                        <th class="underline">Booking Quantities</th>
+                                                    </tr>
+                                                    <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality | orderBy: '-WeekStartDate':true">
+                                                        <td class="word-wrap text-center">{{range.YearWeekNumber}}</td>
+                                                        <td class="word-wrap">{{range.WeekStartDate | date:"yyyy-MM-dd"}}</td>
+                                                        <td class="word-wrap">{{range.WeekEndDate | date:"yyyy-MM-dd"}}</td>
+                                                        <td class="word-wrap text-center">
+                                                            <span ng-if="range.SeasonalityIndicator == 'High'" class="highrange">{{range.SeasonalityIndicator}}</span>
+                                                            <span ng-if="range.SeasonalityIndicator == 'Medium'" class="mediumrange">{{range.SeasonalityIndicator}}</span>
+                                                            <span ng-if="range.SeasonalityIndicator == 'Low'" class="lowrange">{{range.SeasonalityIndicator}}</span>
+                                                        </td>
+                                                        <td class="word-wrap">
+                                                            <span ng-if="range.NumberOfObservations == 'GreaterThan10000'">Over crowded</span>
+                                                            <span ng-if="range.NumberOfObservations == 'LessThan10000'">crowded</span>
+                                                            <span ng-if="range.NumberOfObservations == 'LessThan1000'">not crowded</span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="col-lg-12" style="padding-right:0px;margin-bottom:5px;"> <button ng-if="!SeasonalityNoDataFound" ng-click="SeasonalityDisplay()" class="btn btn-sm btn-primary pull-right">View more</button> </div>
                                         </div>
-                                    </accordion-group>
+                                    </div>
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Fare Range</div>
+                                        <div class="panel-body" cg-busy="{promise:farerangepromise,message:'Loading Fare range'}">
+                                            <!--ui-loader wrapperclass="ttLoaderImage panel-body" is-http-calling="false" isloading="FareRangeLoading"-->
+                                            <div>
+                                                <span ng-if="FareRangeLoading == true">Please wait, Details are loading...</span>
+                                                <table ng-if="!FareRangeLoading" class="table fontsize">
+                                                    <tr>
+                                                        <th>Maximum Fare</th>
+                                                        <th>Minimum Fare</th>
+                                                        <th>Median Fare</th>
+                                                        <th>Count</th>
+                                                        <th>Departure Date Time</th>
+                                                        <th>Return Date Time</th>
+                                                    </tr>
+                                                    <tr ng-repeat="range in fareRangeData.FareData ">
+                                                        <td class="word-wrap">{{range.CurrencyCode}} {{range.MaximumFare | number:2}}</td>
+                                                        <td class="word-wrap"> {{range.CurrencyCode}} {{range.MinimumFare | number:2 }}</td>
+                                                        <td class="word-wrap"> {{range.CurrencyCode}} {{range.MedianFare | number:2}}</td>
+                                                        <td class="word-wrap">{{range.Count}}</td>
+                                                        <td class="word-wrap">{{range.DepartureDateTime | date:"yyyy-MM-dd"}}</td>
+                                                        <td class="word-wrap">{{range.ReturnDateTime | date:"yyyy-MM-dd"}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </accordion>
                             </accordion-group>
                         </accordion>
                     </div>
-
-                </accordion-group>
-            </accordion>
-
+                </div>
+            </div>
         </div>
     </script>

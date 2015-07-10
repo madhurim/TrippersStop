@@ -3,10 +3,10 @@
                           //'ngRoute',
                           'ui.router',
                           'ui.bootstrap',
-                          'blockUI',
+                          //'blockUI',
                           'ui.map',
                           'ui.event',
-                          
+                          'cgBusy'
                         ]);
 
 
@@ -60,10 +60,8 @@ TrippismUIApp.directive("scroll", function ($window) {
 
 
 //TrippismUIApp.config(function (blockUIConfig) {
-//    // Change the default overlay message
-//    //blockUIConfig.message = 'Please stop clicking!';
-//    // Change the default delay to 100ms before the blocking is visible
-//   // blockUIConfig.delay = 0;
+//    blockUIConfig.autoInjectBodyBlock = false;
+//    blockUIConfig.delay = 10;
 //});
 
 

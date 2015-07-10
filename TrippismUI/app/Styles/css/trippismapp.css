@@ -150,3 +150,35 @@ right: -6px;
             font-size: 13px;
             font-weight: 300;
         }
+
+
+  .glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+.ttLoaderImage {
+        background: rgba(204,204,204,0.4);
+        background-image:url(../images/loader.gif);
+        background-position:center;
+        background-repeat:no-repeat;
+    }
+.cg-busy {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1001;
+}
+.radius4px{ border-radius:4px !important;
+}
