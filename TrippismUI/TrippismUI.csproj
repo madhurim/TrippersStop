@@ -95,10 +95,6 @@
     <Content Include="index.html" />
     <Content Include="app\Scripts\alertify\alertify.js" />
     <Content Include="app\Scripts\alertify\alertify.min.js" />
-    <Content Include="Scripts\angular-busy.js" />
-    <Content Include="Scripts\angular-busy.min.js" />
-    <Content Include="Scripts\promise-tracker-http-interceptor.js" />
-    <Content Include="Scripts\promise-tracker.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
