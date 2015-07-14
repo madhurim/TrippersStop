@@ -7,15 +7,31 @@ using System.Web.Mvc;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using ServiceStack.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+//using System.Web.Http;
 
 namespace TrippismApi.Controllers
 {
+    //public class HomeController : ApiController
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
+
+        ////calll from UI
+        //[HttpGet]
+        //public async Task<IHttpActionResult> GetairportData()
+        //{
+
+        //    var _jsonSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, DateFormatHandling = DateFormatHandling.IsoDateFormat };
+        //    StreamReader _readerairport = new StreamReader(HttpContext.Current.Server.MapPath("~/airports.json"));
+        //    string _airportjson = await _readerairport.ReadToEndAsync();
+        //    //var _allAirports = JsonConvert.DeserializeObject<CityWithAirports>(_airportjson, _jsonSettings);
+        //    return Ok(_airportjson);
+            
+        //}
+
+
+
 
         public void GenerateAirports()
         {
@@ -35,6 +51,7 @@ namespace TrippismApi.Controllers
             var _allcities = JsonConvert.DeserializeObject<Cities>(_citiesjson, _jsonSettings);
 
             List<CityWithAirports> _objCitywithairports = new List<CityWithAirports>();
+            string[] stringArray = { "Railway", "Railroad", "Rail" };
 
             //To be uncomment later
             //var requiredCities = new string[] {"PAR", "LON", "NYC", "QSF", "MOW", "CHI", "SHA", "BOM"};
@@ -43,11 +60,11 @@ namespace TrippismApi.Controllers
             {
                 var airportsinCity = _allAirports.response.Find(x => x.city_code == grps.Key);
                 CityWithAirports _obj = new CityWithAirports();
-                _obj.code = grps.Key;
-                _obj.countryCode = grps.First().country_code;
-                _obj.countryName = _allcountries.response.Find(x => x.code == grps.First().country_code).name;
-                _obj.regionName = grps.First().timezone;
-                _obj.name = grps.First().name;
+                _obj.airport_CityCode = grps.Key;
+                _obj.airport_CountryCode = grps.First().country_code;
+                _obj.airport_CountryName = _allcountries.response.Find(x => x.code == grps.First().country_code).name;
+                _obj.airport_RegionName = grps.First().timezone;
+                _obj.airport_CityName = grps.First().name;
 
                 List<AirportInfo> airportinfo = new List<AirportInfo>();
 
@@ -57,11 +74,13 @@ namespace TrippismApi.Controllers
                     for (int i = 0; i < airportsinthecity.Count; i++)
                     {
                         AirportInfo ainfo = new AirportInfo();
-                        ainfo.code = airportsinthecity[i].code;
-                        ainfo.fullname = airportsinthecity[i].name;
-                        ainfo.lat = airportsinthecity[i].lat;
-                        ainfo.lng = airportsinthecity[i].lng;
-                        airportinfo.Add(ainfo);
+                        ainfo.airport_Code = airportsinthecity[i].code;
+                        ainfo.airport_FullName = airportsinthecity[i].name;
+                        ainfo.airport_Lat = airportsinthecity[i].lat;
+                        ainfo.airport_Lng = airportsinthecity[i].lng;
+
+                        if (!stringArray.Any(airportsinthecity[i].name.Contains) || !stringArray.Any(airportsinthecity[i].alternatenames.Contains))
+                            airportinfo.Add(ainfo);
                     }
                     _obj.Airports = airportinfo;
                 }
@@ -169,11 +188,11 @@ namespace TrippismApi.Controllers
 
         private class CityWithAirports
         {
-            public string code { get; set; }
-            public string name { get; set; }
-            public string countryCode { get; set; }
-            public string countryName { get; set; }
-            public string regionName { get; set; }
+            public string airport_CityCode { get; set; }
+            public string airport_CityName { get; set; }
+            public string airport_CountryCode { get; set; }
+            public string airport_CountryName { get; set; }
+            public string airport_RegionName { get; set; }
             public List<AirportInfo> Airports { get; set; }
         }
 
@@ -181,10 +200,10 @@ namespace TrippismApi.Controllers
         {
 
 
-            public string code { get; set; }
-            public string fullname { get; set; }
-            public string lat { get; set; }
-            public string lng { get; set; }
+            public string airport_Code { get; set; }
+            public string airport_FullName { get; set; }
+            public string airport_Lat { get; set; }
+            public string airport_Lng { get; set; }
         }
 
 

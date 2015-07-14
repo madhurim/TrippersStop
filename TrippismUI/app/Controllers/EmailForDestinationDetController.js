@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'EmailForDestinationDet';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', 'blockUIConfig', '$filter', '$modal', 'EmailForDestinationDetFactory', EmailForDestinationDet]);
+        ['$scope', '$filter', '$modal', 'EmailForDestinationDetFactory', EmailForDestinationDet]);
 
-    function EmailForDestinationDet($scope,blockUIConfig, $filter, $modal, EmailForDestinationDetFactory) {
+    function EmailForDestinationDet($scope, $filter, $modal, EmailForDestinationDetFactory) {
         $scope.SharedbuttonText = "Share";
         $scope.SendEmailToUser = SendEmailToUser;   
         $scope.Toemailaddress = "";
@@ -131,7 +131,7 @@
 
                 FareForeCastHTML += '<div style="clear:both;" > </div><div style="font-size : 13px;clear:both;"><b>Recommendation:</b> ';
 
-                if (Recommendation != undefined || Recommendation != '') {
+                if (Recommendation != undefined && Recommendation != '') {
                     if (Recommendation.toUpperCase() == 'BUY')
                         FareForeCastHTML += '<img style="margin-top:-10px;" title="Buy" src="~/Styles/images/thumbs_up.png" /> ';
 
@@ -144,24 +144,29 @@
                     if (Recommendation.toUpperCase() == 'UNKNOWN')
                         FareForeCastHTML += '<img style="margin-top:-10px;" title="Buy" src="~/Styles/images/hor-loading.png" /> ';
                 }
+                var HighestPredictedFare;
+                var LowestPredictedFare;
+                if ($scope.destinationinfo.FareforecastData.Forecast != undefined) {
+                    HighestPredictedFare = ($scope.destinationinfo.FareforecastData.Forecast.HighestPredictedFare == 'N/A') ? 'N/A' : Number($scope.destinationinfo.FareforecastData.Forecast.HighestPredictedFare).toFixed(2);
+                    LowestPredictedFare = ($scope.destinationinfo.FareforecastData.Forecast.LowestPredictedFare == 'N/A') ? 'N/A' : Number($scope.destinationinfo.FareforecastData.Forecast.LowestPredictedFare).toFixed(2);
 
-                var HighestPredictedFare = ($scope.destinationinfo.FareforecastData.Forecast.HighestPredictedFare == 'N/A') ? 'N/A' : Number($scope.destinationinfo.FareforecastData.Forecast.HighestPredictedFare).toFixed(2);
-                var LowestPredictedFare = ($scope.destinationinfo.FareforecastData.Forecast.LowestPredictedFare == 'N/A') ? 'N/A' : Number($scope.destinationinfo.FareforecastData.Forecast.LowestPredictedFare).toFixed(2);
-                
-                FareForeCastHTML += '<div  style="clear:both;margin-top:10px;width:100%;">'+
-                                        '<div style="padding:0px;width:30%;float:left;">'+
-                                            '<span>Highest Predicted Fare: </span><br />' 
-                                                +'<strong>' + $scope.destinationinfo.FareforecastData.CurrencyCode + ' ' + HighestPredictedFare
-                                                +'</strong>' +
-                                        '</div>'+
-                                        '<div style="padding:0px;width:30%;float:left;">' +
-                                            '<span>Lowest Predicted Fare: </span><br /><strong>' +
-                                                $scope.destinationinfo.FareforecastData.CurrencyCode + ' ' + LowestPredictedFare +
-                                        '</strong>' +
-                                   '</div>'+
-                                   '</div>';
 
-                FareForeCastHTML += '</div>';
+
+                    FareForeCastHTML += '<div  style="clear:both;margin-top:10px;width:100%;">' +
+                                            '<div style="padding:0px;width:30%;float:left;">' +
+                                                '<span>Highest Predicted Fare: </span><br />'
+                                                    + '<strong>' + $scope.destinationinfo.FareforecastData.CurrencyCode + ' ' + HighestPredictedFare
+                                                    + '</strong>' +
+                                            '</div>' +
+                                            '<div style="padding:0px;width:30%;float:left;">' +
+                                                '<span>Lowest Predicted Fare: </span><br /><strong>' +
+                                                    $scope.destinationinfo.FareforecastData.CurrencyCode + ' ' + LowestPredictedFare +
+                                            '</strong>' +
+                                       '</div>' +
+                                       '</div>';
+
+                    FareForeCastHTML += '</div>';
+                }
             }
             contentString += FareForeCastHTML;
 
@@ -232,9 +237,9 @@
                                        '</tr>';
                 angular.forEach(fareRangeData.FareData, function (value, key) {
                     FareRangeHTML += '<tr>' +
-                                           '<td style="text-align:center;  border: 1px solid transparent;height: 30px;background: #fafafa;text-align: center;word-wrap: break-word;" > ' + value.CurrencyCode + ' ' + value.MaximumFare + '</td>' +
-                                           '<td style="text-align:center;  border: 1px solid transparent;height: 30px;background: #fafafa;text-align: center;word-wrap: break-word;" > ' + value.CurrencyCode + ' ' + value.MinimumFare + '</td>' +
-                                           '<td style="text-align:center;  border: 1px solid transparent;height: 30px;background: #fafafa;text-align: center;word-wrap: break-word;" > ' + value.CurrencyCode + ' ' + value.MedianFare + '</td>' +
+                                           '<td style="text-align:center;  border: 1px solid transparent;height: 30px;background: #fafafa;text-align: center;word-wrap: break-word;" > ' + value.CurrencyCode + ' ' + Number(value.MaximumFare).toFixed(2) + '</td>' +
+                                           '<td style="text-align:center;  border: 1px solid transparent;height: 30px;background: #fafafa;text-align: center;word-wrap: break-word;" > ' + value.CurrencyCode + ' ' + Number(value.MinimumFare).toFixed(2) + '</td>' +
+                                           '<td style="text-align:center;  border: 1px solid transparent;height: 30px;background: #fafafa;text-align: center;word-wrap: break-word;" > ' + value.CurrencyCode + ' ' + Number(value.MedianFare).toFixed(2) + '</td>' +
                                            '<td style="text-align:center;  border: 1px solid transparent;height: 30px;background: #fafafa;text-align: center;word-wrap: break-word;" > ' + value.Count + '</td>' +
                                            '<td style="text-align:center;  border: 1px solid transparent;height: 30px;background: #fafafa;text-align: center;word-wrap: break-word;" > ' + $filter('date')(value.DepartureDateTime, $scope.destinationScope.format) + '</td>' +
                                            '<td style="text-align:center;  border: 1px solid transparent;height: 30px;background: #fafafa;text-align: center;word-wrap: break-word;" > ' +  $filter('date')(value.ReturnDateTime, $scope.destinationScope.format) + '</td>' +
@@ -258,7 +263,7 @@
             var rdrURL = '<a href="'+ url +'/#/destination?org=' + OriginName + '&fromdate=' + FromDate + '&todate=' + ToDate + '">';
             
             contentString += rdrURL + '<img src="https://maps.googleapis.com/maps/api/staticmap?zoom=2&size=800x500&maptype=roadmap&'+ MarkersString +'" /></a>';
-                                //'<img src="https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=800x500&maptype=roadmap&markers=color:blue%7SSlabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:A%7C40.718217,-73.998284" /></a>';
+            //'<img src="https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=800x500&maptype=roadmap&markers=color:blue%7SSlabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:A%7C40.718217,-73.998284" /></a>';
             
             
             
@@ -269,8 +274,8 @@
                 body: contentString
             };
             
-            blockUIConfig.message = "Please Wait! Destination Information Sharing...";
-            EmailForDestinationDetFactory.SendEmail(email).then(function (data) {
+            
+            $scope.sendmailPromise = EmailForDestinationDetFactory.SendEmail(email).then(function (data) {
                 if (data.Data.status == "ok") {
                     alertify.alert("Sucess", "");
                     alertify.alert('Shared via Email sucessfully.').set('onok', function (closeEvent) { });
@@ -279,13 +284,14 @@
                     alertify.alert("Error", "");
                     alertify.alert(data.Data.status).set('onok', function (closeEvent) { });
                 }
-                blockUIConfig.message = "Loading...";
+            
             });
         }
 
         function SendEmailToUser(destinationdet) {
             
-            var dest = destinationdet.$parent.$parent.$parent;
+            //var dest = destinationdet.$parent.$parent.$parent;
+            var dest = destinationdet;
             $scope.Defaultsubject = $scope.destinationScope.OriginFullName;
             $scope.destinationinfo = dest;
             var GetEmailDetPopupInstance = $modal.open({
