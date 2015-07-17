@@ -24,6 +24,7 @@
     <Content Include="app\Controllers\FareRangeController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
     <Content Include="app\Controllers\SeasonalityController.js" />
+    <Content Include="app\Directives\FareForecast.js" />
     <Content Include="app\Directives\GoogleMap.directive.js" />
     <Content Include="app\Factory\DestinationFactory.js" />
     <Content Include="app\Factory\EmailForDestinationDetFactory.js" />
@@ -53,6 +54,7 @@
     <Content Include="app\Styles\images\loader.gif" />
     <Content Include="app\Styles\images\thumbs_up.png" />
     <Content Include="app\Styles\images\time.png" />
+    <Content Include="app\Views\FareForecastPartial.html" />
     <Content Include="app\Utility.js" />
     <Content Include="app\Views\farerange.html" />
     <Content Include="app\Views\GoogleMap.html" />
@@ -95,6 +97,10 @@
     <Content Include="index.html" />
     <Content Include="app\Scripts\alertify\alertify.js" />
     <Content Include="app\Scripts\alertify\alertify.min.js" />
+    <Content Include="Scripts\angular-busy.js" />
+    <Content Include="Scripts\angular-busy.min.js" />
+    <Content Include="Scripts\promise-tracker-http-interceptor.js" />
+    <Content Include="Scripts\promise-tracker.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -123,7 +129,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

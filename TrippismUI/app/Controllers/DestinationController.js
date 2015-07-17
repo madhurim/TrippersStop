@@ -298,6 +298,13 @@
             if (buttnText == 'All') { $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; }
             else if (buttnText == 'Cheapest') { $scope.SearchbuttonChepestIsLoading = true; $scope.SearchbuttonCheapestText = $scope.LoadingText; }
             
+            
+            var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin });
+
+            var PointOfsalesCountry ;
+            if (originairport != undefined)
+                PointOfsalesCountry = originairport.airport_CountryCode;
+
             var data = {
                 "Origin": $scope.Origin,
                 "DepartureDate": ($scope.FromDate == '' || $scope.FromDate == undefined) ? null : ConvertToRequiredDate($scope.FromDate ,'API'),
@@ -309,20 +316,17 @@
                 "Location": $scope.Location,
                 "Minfare": $scope.Minfare,
                 "Maxfare": $scope.Maxfare,
-                "PointOfSaleCountry": $scope.PointOfSaleCountry,
+                "PointOfSaleCountry": PointOfsalesCountry, //$scope.PointOfSaleCountry,
                 "Region": ($scope.Region != undefined) ? $scope.Region.id : "",
                 "TopDestinations": $scope.TopDestinations,
                 "Destination": $scope.Destination
             };
-            
             $scope.inProgress = true;
             $scope.mappromise = DestinationFactory.findDestinations(data).then(function (data) {
-                
                 $scope.SearchbuttonText = "Get Destinations";
                 $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
                 $scope.SearchbuttonIsLoading = false;
                 $scope.SearchbuttonChepestIsLoading = false;
-
                 if (data.FareInfo != null) {
                     $scope.destinationlist = data.FareInfo;
                     $scope.buttontext = "Cheapest";
