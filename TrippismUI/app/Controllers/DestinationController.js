@@ -318,7 +318,7 @@
                 "Maxfare": $scope.Maxfare,
                 "PointOfSaleCountry": PointOfsalesCountry, //$scope.PointOfSaleCountry,
                 "Region": ($scope.Region != undefined) ? $scope.Region.id : "",
-                "TopDestinations": $scope.TopDestinations,
+                "TopDestinations": 50 , //$scope.TopDestinations,
                 "Destination": $scope.Destination
             };
             $scope.inProgress = true;

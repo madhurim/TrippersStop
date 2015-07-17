@@ -58,24 +58,27 @@ angular.module('TrippismUIApp')
 
           $scope.displayDestinations = function (buttnText, destinations) {
               $scope.faresList = [];
-              if (buttnText == 'All') {
-                  $scope.faresList = angular.copy(destinations);
-                  $scope.showPosition(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
-              }
+              $scope.faresList = angular.copy(destinations);
+              $scope.showPosition(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
 
-              if (buttnText == 'Cheapest') {
-                  if (destinations.length > 0) {
-                      var sortedObjs = _.filter(destinations, function (item) {
-                          return item.LowestFare !== 'N/A';
-                      });
-                      sortedObjs = _(sortedObjs).sortBy(function (obj) { return parseInt(obj.LowestFare, 10) })
-                      for (var i = 0; i < 10; i++)
-                          if (sortedObjs[i] != undefined)
-                              $scope.faresList.push(sortedObjs[i]);
+              //if (buttnText == 'All') {
+              //    $scope.faresList = angular.copy(destinations);
+              //    $scope.showPosition(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
+              //}
+
+              //if (buttnText == 'Cheapest') {
+              //    if (destinations.length > 0) {
+              //        var sortedObjs = _.filter(destinations, function (item) {
+              //            return item.LowestFare !== 'N/A';
+              //        });
+              //        sortedObjs = _(sortedObjs).sortBy(function (obj) { return parseInt(obj.LowestFare, 10) })
+              //        for (var i = 0; i < 10; i++)
+              //            if (sortedObjs[i] != undefined)
+              //                $scope.faresList.push(sortedObjs[i]);
                     
-                  }
-                  $scope.showPosition(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
-              }
+              //    }
+              //    $scope.showPosition(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
+              //}
           }
 
         
