@@ -1,5 +1,6 @@
 ﻿
 <div ng-controller="DestinationController">
+
     <script type="text/ng-template" id="customTemplate.html">
         <a style="padding-left:10px;" tabindex="-1" class="row-even1">
             <i ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
@@ -340,7 +341,7 @@
                             </div>
 
                             <accordion close-others="oneAtATime">
-                                <accordion-group heading="Fare Info">
+                                <accordion-group heading="Fare forecast">
                                     <div class="thumbnail" style="padding:0px;">
                                         <table class="table fontsize" style="margin-bottom:0px;">
                                             <tr><th class="col-md-3">Origin</th><td class="col-md-9 word-wrap">{{MarkerInfo.OriginLocation}}</td></tr>
@@ -369,7 +370,7 @@
                                 </accordion-group>
                                 <accordion-group>
                                     <accordion-heading>
-                                        <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
+                                        <span ng-click="loadSeasonalityInfo($event)">Traffic volume</span>
                                     </accordion-heading>
                                     <div class="thumbnail thumbnailstyle">
                                         <table class="table fontsize">
@@ -445,14 +446,17 @@
                                 <button class="btn btn-primary btn-sm pull-right" ng-click="SendEmailToUser($parent)">Share</button>
                             </div>
                         </div>
-                        <div class="col-md-12 padleft0" style="margin-top:10px;" cg-busy="{promise:fareinfopromise,message:'Loading Fare Info'}">
+                        <div class="col-md-12 padleft0" style="margin-top:10px;" cg-busy="{promise:fareinfopromise,message:'Loading Fare forecast'}">
                             <div style="padding:8px;" ng-if="FareNoDataFound"><label class="text-danger">Ooops! We are sorry, no information is available.</label> </div>
                             <div ng-if="!FareNoDataFound" style="margin-bottom:10px;clear:both;">
-                                <label>Recommendation: </label>
-                                <img style="margin-top:-10px;" ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
-                                <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
-                                <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
-                                <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
+                                <div class="col-sm-12 padleft0" ng-hide="FareforecastData.Recommendation == 'unknown'">
+                                    <label>Recommendation: </label>
+                                    <img style="margin-top:-10px;" ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
+                                    <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
+                                    <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
+                                    <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
+                                </div>
+                                
                                 <div class="col-md-12 padleft0" style="clear:both;margin-top:10px;">
                                     <div class="col-sm-4" style="padding:0px;">
                                         <span>Highest Predicted Fare: </span><br /><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.HighestPredictedFare | number:2}}</strong>
@@ -475,9 +479,10 @@
                                 <accordion close-others="oneAtATime">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h3 class="panel-title"><span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span></h3>
+                                            <h3 class="panel-title" >
+                                            <span ng-click="loadSeasonalityInfo($event)" popover-trigger="mouseenter" popover="Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly."><b>Traffic patterns</b> </span></h3>
                                         </div>
-                                        <div class="panel-body" cg-busy="{promise:seasonalitypromise,message:'Loading Seasonality Data'}">
+                                        <div class="panel-body" cg-busy="{promise:seasonalitypromise,message:'Loading Traffic volume Data'}">
                                             <!--ui-loader wrapperclass="ttLoaderImage" is-http-calling="false" isloading="inProgressSeasonalityinfo"-->
                                             <div style="padding:8px;" ng-if="SeasonalityNoDataFound"><label class="text-danger">Ooops! We are sorry, no information is available.</label> </div>
                                             
@@ -513,7 +518,9 @@
                                     </div>
 
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">Fare Range</div>
+                                        <div class="panel-heading">
+                                        <b>Fare Range</b>
+                                        <p style="margin:0px;"><small>Median, highest, and lowest published fares  during the previous 4 weeks for each of the future departure dates in a range, using the specific origin, destination, and length of stay requested.</small> </p></div>
                                         <div class="panel-body" cg-busy="{promise:farerangepromise,message:'Loading Fare range'}">
                                             <!--ui-loader wrapperclass="ttLoaderImage panel-body" is-http-calling="false" isloading="FareRangeLoading"-->
                                             <div>

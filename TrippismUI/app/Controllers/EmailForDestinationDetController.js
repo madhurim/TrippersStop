@@ -5,6 +5,7 @@
         ['$scope', '$filter', '$modal', 'EmailForDestinationDetFactory', EmailForDestinationDet]);
 
     function EmailForDestinationDet($scope, $filter, $modal, EmailForDestinationDetFactory) {
+        
         $scope.SharedbuttonText = "Share";
         $scope.SendEmailToUser = SendEmailToUser;   
         $scope.Toemailaddress = "";
@@ -22,8 +23,12 @@
             }
             validateEmail();
             if ($scope.FormGetEmailDet.$valid) {
-                var data = {From : $scope.fromemail, To: $scope.email, subject: $scope.Subject }
-                $scope.$close(data);
+                var data = { From: $scope.fromemail, To: $scope.email, subject: $scope.Subject }
+                $scope.Toemailaddress = $scope.email;
+                $scope.subject = $scope.Subject;
+                $scope.FromEmail = $scope.fromemail;
+                activate();
+                
             }
         }
 
@@ -175,7 +180,8 @@
             
             var SeasonalityData = $scope.destinationinfo.MarkerSeasonalityInfo;
             if (SeasonalityData != "") {
-                contentString += "<div style='clear:both;padding-top:15px;margin-bottom:5px;' ><b style='text-decoration: underline;'>Seasonality Info</b></div>";
+                var SeasonText = 'Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly.';
+                contentString += "<div style='clear:both;padding-top:15px;margin-bottom:5px;' ><b style='text-decoration: underline;'>Traffic patterns</b><br/>" + SeasonText + "</div>";
                 SeasonalityHTML += '<table >'+
                                         '<tr>'+
                                             '<th style="border:1px solid transparent;height:30px;background:#dfdfdf">Week#</th>' +
@@ -225,7 +231,7 @@
             var FareRangeHTML = "";
             var fareRangeData = $scope.destinationinfo.fareRangeData;
             if (fareRangeData != "") {
-                contentString += "<div style='clear:both;padding-top:15px;margin-bottom:5px;' ><b style='text-decoration: underline;'>Fare Range Info</b></div>";
+                contentString += "<div style='clear:both;padding-top:15px;margin-bottom:5px;' ><b style='text-decoration: underline;'>Fare Range</b><br />Median, highest, and lowest published fares during the previous 4 weeks for each of the future departure dates in a range, using the specific origin, destination, and length of stay requested.</div>";
                 FareRangeHTML += '<table >' +
                                        '<tr>' +
                                            '<th style="border:1px solid transparent;height:30px;background:#dfdfdf">Maximum Fare</th>' +
@@ -277,6 +283,7 @@
             
             $scope.sendmailPromise = EmailForDestinationDetFactory.SendEmail(email).then(function (data) {
                 if (data.Data.status == "ok") {
+                    $scope.dismiss();
                     alertify.alert("Sucess", "");
                     alertify.alert('Shared via Email sucessfully.').set('onok', function (closeEvent) { });
                 }
@@ -289,7 +296,6 @@
         }
 
         function SendEmailToUser(destinationdet) {
-            
             //var dest = destinationdet.$parent.$parent.$parent;
             var dest = destinationdet;
             $scope.Defaultsubject = $scope.destinationScope.OriginFullName;
@@ -298,12 +304,12 @@
                 templateUrl: 'EmailDetForm.html',
                 scope: $scope,
             });
-            GetEmailDetPopupInstance.result.then(function (result) {
-                $scope.Toemailaddress = result.To;
-                $scope.subject = result.subject;
-                $scope.FromEmail = result.From;
-                activate();
-            });
+            //GetEmailDetPopupInstance.result.then(function (result) {
+            //    $scope.Toemailaddress = result.To;
+            //    $scope.subject = result.subject;
+            //    $scope.FromEmail = result.From;
+            //    activate();
+            //});
         }
     }
 })();

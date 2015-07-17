@@ -59,6 +59,8 @@ TrippismUIApp.directive("scroll", function ($window) {
 });
 
 
+
+
 //TrippismUIApp.config(function (blockUIConfig) {
 //    blockUIConfig.autoInjectBodyBlock = false;
 //    blockUIConfig.delay = 10;
