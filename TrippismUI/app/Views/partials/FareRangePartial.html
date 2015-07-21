@@ -1,0 +1,30 @@
+﻿<div class="" style="clear:both;">
+    <span><b>Fare Range</b> </span><br />
+    <h6>Median, highest, and lowest published fares during the previous 4 weeks for each of the future departure dates in a range, using the specific origin, destination, and length of stay requested.</h6>
+    
+    <div class="" cg-busy="{promise:farerangepromise,message:'Loading Fare range'}">
+        <div>
+            <span ng-if="FareRangeLoading == true">Please wait, Details are loading...</span>
+             <div class="thumbnail thumbnailstyle">
+            <table ng-if="!FareRangeLoading" class="table fontsize" style="color:black;">
+                <tr>
+                    <th>Maximum Fare</th>
+                    <th>Minimum Fare</th>
+                    <th>Median Fare</th>
+                    <th>Count</th>
+                    <th>Departure Date Time</th>
+                    <th>Return Date Time</th>
+                </tr>
+                <tr ng-repeat="range in fareRangeData.FareData ">
+                    <td class="word-wrap">{{range.CurrencyCode}} {{range.MaximumFare | number:2}}</td>
+                    <td class="word-wrap"> {{range.CurrencyCode}} {{range.MinimumFare | number:2 }}</td>
+                    <td class="word-wrap"> {{range.CurrencyCode}} {{range.MedianFare | number:2}}</td>
+                    <td class="word-wrap">{{range.Count}}</td>
+                    <td class="word-wrap">{{range.DepartureDateTime | date:"yyyy-MM-dd"}}</td>
+                    <td class="word-wrap">{{range.ReturnDateTime | date:"yyyy-MM-dd"}}</td>
+                </tr>
+            </table>
+                 </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,151 @@
+﻿
+<div class="fareforecastDiv" style="margin-bottom:10px;clear:both;">
+
+    <div class="container-fluid-header">
+
+        <div class="container" style="margin-top:8%;">
+            <!--style="transform: translate(0%, 12%);"-->
+            <div class="row my-space">
+                <div class="col-md-12 padlr0" cg-busy="{promise:fareinfopromise,message:'Please wait fare forecast loading...'}">
+                    <div class="button-right col-lg-12">
+                        <a class="close-panel-button pull-right" ng-click="closePanel()" role="button" id="close_destination_panel" tabindex="0" style="color:white;">X</a>
+                    </div>
+                    <div class="col-md-12 padlr0">
+                        <div class="col-lg-6 padlr0"><h4>Destination : <span>  {{seasonalityData.DestinationairportName.airport_FullName + ', ' + seasonalityData.DestinationairportName.airport_CityName}}</span></h4></div>
+                        <div class="col-lg-4" ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
+                            <h4>
+                                Recommendation :
+                                <span>
+                                    <img style="margin-top:-10px;" ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
+                                    <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
+                                    <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
+                                    <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
+                                </span>
+                            </h4>
+                        </div>
+                        <div class="col-lg-4" ng-if="FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
+
+                        </div>
+                        <div class="col-lg-2"><div class="share pull-right"><button class="btn btn-primary share-btn" type="button" ng-click="SendEmailToUser()">Share<i class="glyphicon glyphicon-share"></i></button></div></div>
+                    </div>
+                    <div class="col-md-12 padlr0">
+                        <div class="col-lg-6 padlr0"><h4>Lowest Fare: <span>{{mapDetails.CurrencyCode}} {{mapDetails.LowestFare | number : 2}} </span></h4></div>
+                        <div class="col-lg-5"><h4>Lowest Predicted Fare: <span>{{mapDetails.CurrencyCode}} {{mapDetails.LowestNonStopFare | number : 2 }}</span></h4></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 faredetails" style="padding:0px;">
+                    <accordion style="clear:both;" id="accordion">
+                        <accordion-group >
+                            <accordion-heading>
+                                <span ng-click="openaccordion()">More Insights on {{accordianDefault}} {{seasonalityData.DestinationairportName.airport_FullName + ', ' + seasonalityData.DestinationairportName.airport_CityName}}</span>
+                            </accordion-heading>
+                            <accordion close-others="oneAtATime">
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <seasonality-info seasonality-params="seasonalityData" is-open="openaccordiondata" class="seasonality"></seasonality-info>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <farerange-info farerange-params="seasonalityData" is-open="openaccordiondata" style="clear:both;"></farerange-info>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <googleattraction-info googleattraction-params="googleattractionData" is-open="openaccordiondata" class="googleattraction" style="clear:both;"></googleattraction-info>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <weather-info weather-params="seasonalityData" style="clear:both;"></weather-info>
+                                    </div>
+                                </div>
+                            </accordion>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+            <script type="text/ng-template" id="EmailDetForm.html">
+                <div style="padding: 20px;">
+
+                    <div cg-busy="{promise:sendmailPromise,message:'Sending email...'}">
+                        <div class="button-right col-lg-12">
+                            <a class="close-panel-button pull-right" ng-click="dismiss()" role="button" id="close_destination_panel" tabindex="0" >X</a>
+                        </div>
+                        <div ng-show="hasError && FormGetEmailDet.$invalid">
+                            <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.email.$error.required">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Please enter Email Address.
+                            </div>
+                            <div class="alert alert-danger triperror" role="alert" ng-show="emailvalidate">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Please enter Valid Email Address.
+                            </div>
+
+                            <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.fromemail.$error.email">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Please enter Valid From email Address.
+                            </div>
+
+                            <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.Subject.$error.required">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Please enter Subject.
+                            </div>
+                        </div>
+
+                        <form name="FormGetEmailDet" novalidate="novalidate">
+
+                            <div class="form-group">
+                                <label for="email">From email address</label>
+                                <input type="email" ng-model="fromemail" class="form-control" id="fromemail" name="fromemail" placeholder="Enter email" />
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="email">To email address</label>
+                                <input type="text" ng-model="email" class="form-control" id="email" name="email" placeholder="Enter email" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="Subject">Subject</label>
+                                <input type="text" ng-model="Subject" class="form-control" id="Subject" name="Subject" placeholder="Subject" required />
+                            </div>
+                            <button type="submit" class="btn btn-info" ng-click="submitModal()">Share Now</button>
+                            <!--<button class="btn btn-info" ng-click="dismiss()"><i class="fa fa-times"></i>Close</button>-->
+                        </form>
+                    </div>
+                </div>
+            </script>
+        </div>
+    </div>
+
+
+
+    <!--<div class="button-right col-lg-12">
+     <a class="close-panel-button pull-right" ng-click="closePanel()" role="button" id="close_destination_panel" tabindex="0">X</a>
+    </div>
+
+    <div style="min-height:75px;clear:both;" cg-busy="{promise:fareinfopromise,message:'Please wait fare forecast loading...'}">
+
+        <div style="padding:8px;" ng-if="FareNoDataFound && IsRequestCompleted">
+            <label class="text-danger">Ooops! We are sorry, no information is available.</label>
+        </div>
+
+        <div ng-if="!FareNoDataFound && IsRequestCompleted" style="margin-bottom:10px;clear:both;">
+            <div class="col-sm-12 padleft0" ng-hide="FareforecastData.Recommendation == 'unknown'">
+                <label>Recommendation: </label>
+                <img style="margin-top:-10px;" ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
+                <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
+                <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
+                <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
+            </div>
+            <div class="col-md-12 padleft0" style="clear:both;margin-top:10px;">
+                <span>Highest Predicted Fare: </span><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.HighestPredictedFare | number:2}}</strong>
+            </div>
+            <div class="col-md-12 padleft0" style="clear:both;margin-top:10px;">
+                <span>Lowest Predicted Fare: </span><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.LowestPredictedFare | number:2}}</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <div >
+        <span popover-trigger="mouseenter" popover="Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly."><b>Traffic patterns</b> </span>
+        <seasonality-info seasonality-params="seasonalityData"></seasonality-info>
+    </div>-->
+</div>

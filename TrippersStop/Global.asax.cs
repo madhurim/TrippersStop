@@ -36,7 +36,7 @@ namespace TrippismApi
             container.RegisterWebApiRequest<IAsyncWeatherAPICaller, WeatherAPICaller>();          
             container.RegisterWebApiRequest<ICacheService, RedisService>();
             container.RegisterWebApiRequest<IDBService, MongoService>();
-
+            container.RegisterWebApiRequest<IAsyncGoogleAPICaller, GoogleAPICaller>();
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 

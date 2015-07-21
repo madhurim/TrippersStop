@@ -147,7 +147,7 @@ right: -6px;
         }
 
         .fontsize {
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 300;
         }
 
@@ -182,3 +182,13 @@ right: -6px;
 }
 .radius4px{ border-radius:4px !important;
 }
+  .fareforecastDiv {
+        color: #fff;
+        float: left;
+        padding: 2%;
+        text-align: left;
+        width: 100%;
+        position: absolute;
+        top: 0px;
+        font-size: 1.3em;
+    }

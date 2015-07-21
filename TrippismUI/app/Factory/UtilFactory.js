@@ -10,11 +10,18 @@
             ReadAirportJson: ReadAirportJson,
             getIpinfo: getIpinfo,
             MapscrollTo: MapscrollTo,
+            ReadStateJson: ReadStateJson,
         };
         return service;
-     
+
+        function ReadStateJson() {
+            var States = [];
+            return $http.get('../app/Constants/State.json').then(function (_states) {
+                return _states.data;
+            });
+        }
         function ReadAirportJson() {
-            var AvailableCodes = [];          
+            var AvailableCodes = [];
             return $http.get('../app/Constants/airports.json').then(function (_arrairports) {
                 _arrairports = _arrairports.data;
                 for (var i = 0; i < _arrairports.length; i++) {
@@ -36,13 +43,13 @@
                         objtopush['airport_FullName'] = _arrairports[i].airport_CityName + ", All Airports";
                         objtopush['airport_Lat'] = null;
                         objtopush['airport_Lng'] = null;
-                        objtopush['airport_IsMAC'] = true;                      
+                        objtopush['airport_IsMAC'] = true;
                         AvailableCodes.push(objtopush);
                     }
                 }
-                
 
-                return AvailableCodes;                               
+
+                return AvailableCodes;
             });
 
         }
@@ -59,7 +66,7 @@
         //        async: true
         //    }).then(function (_arrairports) {
         //        _arrairports = JSON.parse(_arrairports.data);
-        
+
 
         //        for (var i = 0; i < _arrairports.length; i++) {
         //            debugger;
@@ -89,16 +96,16 @@
 
         //}
 
-        function getIpinfo(AvailableCodes) {                
+        function getIpinfo(AvailableCodes) {
             var url = "http://ipinfo.io?callback=JSON_CALLBACK";
-           return $http.jsonp(url)
-           .then(function (data) {
-               data = data.data;
-               var originairport = _.find(AvailableCodes, function (airport) { return airport.airport_CityName == data.city && airport.airport_CountryCode == data.country });
-               if (originairport != null) {
-                   return originairport;
-               }
-           });
+            return $http.jsonp(url)
+            .then(function (data) {
+                data = data.data;
+                var originairport = _.find(AvailableCodes, function (airport) { return airport.airport_CityName == data.city && airport.airport_CountryCode == data.country });
+                if (originairport != null) {
+                    return originairport;
+                }
+            });
 
         }
 

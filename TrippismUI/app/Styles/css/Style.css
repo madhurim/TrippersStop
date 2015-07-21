@@ -1,0 +1,12 @@
+﻿ table tbody, table thead
+{
+    display: block;
+    width:100%;
+}
+
+.googleattraction 
+{
+   overflow: auto;
+   height: 250px;
+   width:100%;
+}

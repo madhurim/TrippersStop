@@ -16,7 +16,7 @@
                 <ul class="nav navbar-nav">
                     <li ng-class="getClass('/destination')" class=""><a href="#/destination">Destination</a></li>
                     <!--<li ng-class="getClass('/fareforecast')"><a href="#/fareforecast">FareForecast</a></li>-->
-                    <li ng-class="getClass('/farerange')"><a href="#/farerange">FareRange</a></li>
+                    <!--<li ng-class="getClass('/farerange')"><a href="#/farerange">FareRange</a></li>-->
                     <!--<li ng-class="getClass('/seasonality')"><a href="#/seasonality">Seasonality</a></li>-->                   
                 </ul>
             </div>
@@ -26,7 +26,7 @@
 
     <div style="margin-top:50px;">
         <!--role="main"-->
-        <div ui-view style="" class="container-fluid"></div>
+        <div ui-view style="padding:0px;" class="container-fluid" ></div>
     </div>
    
     <link href="app/Styles/bootstrap.css" rel="stylesheet" />
@@ -63,10 +63,21 @@
 
     <script src="app/Scripts/libs/angular-busy.js"></script>
     <script src="app/Scripts/libs/Loader.js"></script>
+    <script src="app/Directives/FareForecast.js"></script>
+    <script src="app/Directives/SeasonalityDirective.js"></script>
+    <script src="app/Directives/FareRangeDirective.js"></script>
+    <script src="app/Factory/WeatherFactory.js"></script>
+    <script src="app/Directives/WetherApiDirective.js"></script>
+    <script src="app/Factory/GoogleAttractionFactory.js"></script>
+    <script src="app/Directives/GoogleAttractionDirective.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
 
     <link href="app/Styles/alertifyjs/alertify.css" rel="stylesheet" />
+    <link href="app/Styles/trippsimlatest.css" rel="stylesheet" />
     <!-- include semantic ui theme  -->
-
+    <link href="app/Styles/css/font-awesome.css" rel="stylesheet" />
+    <link href="app/Styles/css/Style.css" rel="stylesheet" />
     <link href="app/Styles/alertifyjs/themes/semantic.css" rel="stylesheet" />
     <link href="app/Styles/alertifyjs/themes/default.css" rel="stylesheet" />
     <!-- include alertify script -->

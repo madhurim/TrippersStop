@@ -1,0 +1,87 @@
+﻿
+<div class="">
+    <span><b>Traffic patterns</b> </span><br/>
+    <h6>Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly</h6>
+
+    <div cg-busy="{promise:seasonalitypromise,message:'Loading Traffic volume Data'}">
+        <div style="padding:8px;" ng-if="SeasonalityNoDataFound">
+            <label class="text-danger">Ooops! We are sorry, no information is available.</label>
+        </div>
+
+
+        <div ng-if="!SeasonalityNoDataFound" >
+            <div class="thumbnail thumbnailstyle" style="max-height:211px;overflow-y:auto;" >
+                <table class="table fontsize" style="clear:both; color:black; ">
+                    <tr style="height:47px;">
+                        <th class="text-center underline">Week#</th>
+                        <th class="underline">Start Date</th>
+                        <th class="underline">End Date</th>
+                        <th class="text-center underline">Traffic Volume</th>
+                        <th class="underline">Booking Quantities</th>
+                    </tr>
+                    <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality | orderBy: '-WeekStartDate':true">
+                        <td class="word-wrap text-center">{{range.YearWeekNumber}}</td>
+                        <td class="word-wrap">{{range.WeekStartDate | date:"yyyy-MM-dd"}}</td>
+                        <td class="word-wrap">{{range.WeekEndDate | date:"yyyy-MM-dd"}}</td>
+                        <td class="word-wrap text-center">
+                            <span ng-if="range.SeasonalityIndicator == 'High'" class="highrange">{{range.SeasonalityIndicator}}</span>
+                            <span ng-if="range.SeasonalityIndicator == 'Medium'" class="mediumrange">{{range.SeasonalityIndicator}}</span>
+                            <span ng-if="range.SeasonalityIndicator == 'Low'" class="lowrange">{{range.SeasonalityIndicator}}</span>
+                        </td>
+                        <td class="word-wrap">
+                            <span ng-if="range.NumberOfObservations == 'GreaterThan10000'">Over crowded</span>
+                            <span ng-if="range.NumberOfObservations == 'LessThan10000'">crowded</span>
+                            <span ng-if="range.NumberOfObservations == 'LessThan1000'">not crowded</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+        </div>
+        <div class="col-lg-12" style="padding-right:0px;margin-bottom:5px;clear:both;">
+            <button ng-if="!SeasonalityNoDataFound" ng-click="SeasonalityDisplay()" class="btn btn-sm btn-info pull-right">View more</button>
+        </div>
+    </div>
+    
+</div>
+
+
+<!--<div cg-busy="{promise:seasonalitypromise,message:'Loading Seasonality details'}">
+    <div style="padding:8px;" ng-if="SeasonalityNoDataFound">
+        <label class="text-danger">Ooops! We are sorry, no information is available.</label>
+    </div>
+
+
+    <div ng-if="!SeasonalityNoDataFound" class="thumbnail thumbnailstyle">
+        <div class="thumbnail thumbnailstyle">
+            <table class="table fontsize" style="clear:both; color:black; ">
+                <tr>
+                    <th class="text-center underline">Week#</th>
+                    <th class="underline">Start Date</th>
+                    <th class="underline">End Date</th>
+                    <th class="text-center underline">Traffic Volume</th>
+                    <th class="underline">Booking Quantities</th>
+                </tr>
+                <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality | orderBy: '-WeekStartDate':true">
+                    <td class="word-wrap text-center">{{range.YearWeekNumber}}</td>
+                    <td class="word-wrap">{{range.WeekStartDate | date:"yyyy-MM-dd"}}</td>
+                    <td class="word-wrap">{{range.WeekEndDate | date:"yyyy-MM-dd"}}</td>
+                    <td class="word-wrap text-center">
+                        <span ng-if="range.SeasonalityIndicator == 'High'" class="highrange">{{range.SeasonalityIndicator}}</span>
+                        <span ng-if="range.SeasonalityIndicator == 'Medium'" class="mediumrange">{{range.SeasonalityIndicator}}</span>
+                        <span ng-if="range.SeasonalityIndicator == 'Low'" class="lowrange">{{range.SeasonalityIndicator}}</span>
+                    </td>
+                    <td class="word-wrap">
+                        <span ng-if="range.NumberOfObservations == 'GreaterThan10000'">Over crowded</span>
+                        <span ng-if="range.NumberOfObservations == 'LessThan10000'">crowded</span>
+                        <span ng-if="range.NumberOfObservations == 'LessThan1000'">not crowded</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-12" style="padding-right:0px;margin-bottom:5px;clear:both;">
+            <button ng-if="!SeasonalityNoDataFound" ng-click="SeasonalityDisplay()" class="btn btn-sm btn-primary pull-right">View more</button>
+        </div>
+    </div>
+</div>
+<farerange-info farerange-params="seasonalityParams" style="clear:both;"></farerange-info>-->

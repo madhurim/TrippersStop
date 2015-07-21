@@ -25,10 +25,16 @@
     <Content Include="app\Controllers\LandingPageController.js" />
     <Content Include="app\Controllers\SeasonalityController.js" />
     <Content Include="app\Directives\FareForecast.js" />
+    <Content Include="app\Directives\GoogleAttractionDirective.js" />
+    <Content Include="app\Directives\WetherApiDirective.js" />
+    <Content Include="app\Directives\FareRangeDirective.js" />
     <Content Include="app\Directives\GoogleMap.directive.js" />
+    <Content Include="app\Directives\SeasonalityDirective.js" />
     <Content Include="app\Factory\DestinationFactory.js" />
     <Content Include="app\Factory\EmailForDestinationDetFactory.js" />
     <Content Include="app\Factory\FareforecastFactory.js" />
+    <Content Include="app\Factory\GoogleAttractionFactory.js" />
+    <Content Include="app\Factory\WeatherFactory.js" />
     <Content Include="app\Factory\FareRangeFactory.js" />
     <Content Include="app\Factory\SeasonalityFactory.js" />
     <Content Include="app\Factory\UtilFactory.js" />
@@ -44,6 +50,8 @@
     <Content Include="app\Scripts\libs\ui-map.min.js" />
     <Content Include="app\Styles\bootstrap.css" />
     <Content Include="app\Styles\bootstrap.min.css" />
+    <Content Include="app\Styles\css\font-awesome.css" />
+    <Content Include="app\Styles\css\Style.css" />
     <Content Include="app\Styles\css\trippismapp.css" />
     <Content Include="app\Styles\css\icon_top.png" />
     <Content Include="app\Styles\images\adsection_1.jpg" />
@@ -54,6 +62,8 @@
     <Content Include="app\Styles\images\loader.gif" />
     <Content Include="app\Styles\images\thumbs_up.png" />
     <Content Include="app\Styles\images\time.png" />
+    <Content Include="app\Styles\trippsimlatest.css" />
+    <Content Include="app\Views\destination1.html" />
     <Content Include="app\Views\FareForecastPartial.html" />
     <Content Include="app\Utility.js" />
     <Content Include="app\Views\farerange.html" />
@@ -91,6 +101,11 @@
     <Content Include="app\Styles\alertifyjs\themes\semantic.min.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.min.css" />
+    <Content Include="app\Views\partials\FareForecastPartial.html" />
+    <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
+    <Content Include="app\Views\partials\WeatherPartial.html" />
+    <Content Include="app\Views\partials\FareRangePartial.html" />
+    <Content Include="app\Views\partials\SeasonalityPartial.html" />
     <Content Include="app\Views\seasonality.html" />
     <Content Include="app\Styles\css\angular-busy.css" />
     <Content Include="app\Styles\css\angular-busy.min.css" />
@@ -119,6 +134,12 @@
     <Content Include="app\Constants\countries.json" />
     <Content Include="app\Constants\cities.json" />
     <Content Include="app\Constants\airports.json" />
+    <Content Include="app\Constants\State.json" />
+    <Content Include="app\Styles\fonts\fontawesome-webfont.eot" />
+    <Content Include="app\Styles\fonts\fontawesome-webfont.ttf" />
+    <Content Include="app\Styles\fonts\fontawesome-webfont.woff" />
+    <Content Include="app\Styles\fonts\fontawesome-webfont.woff2" />
+    <Content Include="app\Styles\fonts\FontAwesome.otf" />
     <None Include="Trippism.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
