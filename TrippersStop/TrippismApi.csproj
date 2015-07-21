@@ -58,6 +58,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="ExpressMapper">
+      <HintPath>..\packages\Expressmapper.1.0.3\lib\net451\ExpressMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="JetBrains.Profiler.Windows">
+      <HintPath>C:\Users\welcome\AppData\Local\JetBrains\Installations\dotTrace02\JetBrains.Profiler.Windows.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -210,6 +216,7 @@
     <Compile Include="APIExtention\Filters\TrippismCache.cs" />
     <Compile Include="APIExtention\Filters\ValidateModelAttribute.cs" />
     <Compile Include="APIHelper\SabreApiTokenHelper.cs" />
+    <Compile Include="APIHelper\TripperLog.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
