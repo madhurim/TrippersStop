@@ -17,7 +17,6 @@ using System.Web.Http.Description;
 using System.Threading.Tasks;
 using TraveLayer.CustomTypes.Weather;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
-using JetBrains.Profiler.Windows;
 using Trippism.APIHelper;
 
 namespace TrippismApi.Areas.Sabre.Controllers
@@ -204,12 +203,6 @@ namespace TrippismApi.Areas.Sabre.Controllers
               seasonality
             }.Select(url => _apiCaller.Get(url)));
             var result = responses.Result;
-            //if (PerformanceProfiler.IsActive)
-            //{
-            //    PerformanceProfiler.Begin();
-            //    PerformanceProfiler.Start();
-            //}
-
             TripOutput tripOutput = new TripOutput();
             tripOutput.TripWeather=GetWeatherResponse(weather);
             if(result[0].StatusCode==HttpStatusCode.OK )
@@ -220,11 +213,6 @@ namespace TrippismApi.Areas.Sabre.Controllers
                 tripOutput.FareRange = GetFareRangeResponse(result[2].Response);
             if (result[3].StatusCode == HttpStatusCode.OK)
                 tripOutput.TravelSeasonality = GetTravelSeasonalityResponse(result[3].Response);
-            //if (PerformanceProfiler.IsActive)
-            //{
-            //    PerformanceProfiler.Stop();
-            //    PerformanceProfiler.EndSave();
-            //}
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, tripOutput);
             
             return response;
