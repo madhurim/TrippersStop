@@ -1,15 +1,28 @@
 ﻿angular.module('TrippismUIApp').directive('weatherInfo', ['$compile', 'WeatherFactory', 'UtilFactory', function ($compile, WeatherFactory, UtilFactory) {
     return {
         restrict: 'E',
-        scope: { weatherParams: '='},
+        scope: {
+            weatherParams: '=',
+            isOpen: '='
+        },
         templateUrl: '/app/Views/Partials/WeatherPartial.html',
         link: function (scope, elem, attrs) {
-            scope.$watch('weatherParams',
-             function (newValue, oldValue) {
-                 if (newValue != oldValue)
-                     scope.WeatherRangeInfo();
-             }
-           );
+            // scope.$watch('weatherParams',
+            //  function (newValue, oldValue) {
+            //      if (newValue != oldValue)
+            //          scope.WeatherRangeInfo();
+            //  }
+            //);
+
+            scope.$watchGroup(['weatherParams', 'isOpen'], function (newValue, oldValue, scope) {
+                if (scope.isOpen == true) {
+                    if (newValue != oldValue)
+                        scope.WeatherRangeInfo();
+                }
+                else {
+                    scope.WeatherData = "";
+                }
+            });
 
             UtilFactory.ReadStateJson().then(function (data) {
                 scope.StateList = data;

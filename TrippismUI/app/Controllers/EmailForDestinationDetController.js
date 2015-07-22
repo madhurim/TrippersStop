@@ -87,7 +87,6 @@
         }
 
         function activate() {
-            
             $scope.formats = Dateformat();
             $scope.format = $scope.formats[5];
             var basicDetinationDetlist = $scope.seasonalityData.DestinationList;
@@ -125,8 +124,7 @@
 
             contentString += '</table>';
             if ($scope.seasonalityData.mapOptions != undefined) {
-                console.log($scope.seasonalityData.mapOptions);
-
+                
                 var LowestNonStopFare = ($scope.seasonalityData.mapOptions.LowestNonStopFare == 'N/A') ? 'N/A' : Number($scope.seasonalityData.mapOptions.LowestNonStopFare).toFixed(2);
                 var LowestFare = ($scope.seasonalityData.mapOptions.LowestFare == 'N/A') ? 'N/A' : Number($scope.seasonalityData.mapOptions.LowestFare).toFixed(2);
                 var DepartureDate = $filter('date')($scope.seasonalityData.mapOptions.DepartureDateTime, $scope.format)
@@ -160,9 +158,11 @@
             }
 
             var FareForeCastHTML = "";
-
-            if ($scope.seasonalityData.FareforecastData != undefined) {
-                var Recommendation = $scope.seasonalityData.FareforecastData.Recommendation;
+            
+            var FareData = $scope.$parent.FareforecastData;
+            //if ($scope.seasonalityData.FareforecastData != undefined) {
+            if (FareData != undefined) {
+                var Recommendation = FareData.Recommendation;
 
                 FareForeCastHTML += "<div style='clear:both;padding-top:15px;' ><b style='text-decoration: underline;'>Fareforecast Info</b></div>";
 
@@ -183,21 +183,21 @@
                 }
                 var HighestPredictedFare;
                 var LowestPredictedFare;
-                if ($scope.seasonalityData.FareforecastData.Forecast != undefined) {
-                    HighestPredictedFare = ($scope.seasonalityData.FareforecastData.Forecast.HighestPredictedFare == 'N/A') ? 'N/A' : Number($scope.seasonalityData.FareforecastData.Forecast.HighestPredictedFare).toFixed(2);
-                    LowestPredictedFare = ($scope.seasonalityData.FareforecastData.Forecast.LowestPredictedFare == 'N/A') ? 'N/A' : Number($scope.seasonalityData.FareforecastData.Forecast.LowestPredictedFare).toFixed(2);
+                if (FareData.Forecast != undefined) {
+                    HighestPredictedFare = (FareData.Forecast.HighestPredictedFare == 'N/A') ? 'N/A' : Number(FareData.Forecast.HighestPredictedFare).toFixed(2);
+                    LowestPredictedFare = (FareData.Forecast.LowestPredictedFare == 'N/A') ? 'N/A' : Number(FareData.Forecast.LowestPredictedFare).toFixed(2);
 
 
 
                     FareForeCastHTML += '<div  style="clear:both;margin-top:10px;width:100%;">' +
                                             '<div style="padding:0px;width:30%;float:left;">' +
                                                 '<span>Highest Predicted Fare: </span><br />'
-                                                    + '<strong>' + $scope.seasonalityData.FareforecastData.CurrencyCode + ' ' + HighestPredictedFare
+                                                    + '<strong>' + FareData.CurrencyCode + ' ' + HighestPredictedFare
                                                     + '</strong>' +
                                             '</div>' +
                                             '<div style="padding:0px;width:30%;float:left;">' +
                                                 '<span>Lowest Predicted Fare: </span><br /><strong>' +
-                                                    $scope.seasonalityData.FareforecastData.CurrencyCode + ' ' + LowestPredictedFare +
+                                                    FareData.CurrencyCode + ' ' + LowestPredictedFare +
                                             '</strong>' +
                                        '</div>' +
                                        '</div>';
@@ -209,8 +209,9 @@
 
 
             var SeasonalityHTML = "";
-
-            var SeasonalityData = $scope.MarkerSeasonalityInfo;
+            //var SeasonalityData = $scope.MarkerSeasonalityInfo;
+            var SeasonalityData = $scope.$parent.MailMarkerSeasonalityInfo;
+            
 
             if (SeasonalityData != undefined && SeasonalityData != "") {
                 var SeasonText = 'Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly.';
@@ -261,7 +262,9 @@
 
             contentString += SeasonalityHTML;
             var FareRangeHTML = "";
-            var fareRangeData = $scope.fareRangeData;
+            //var fareRangeData = $scope.fareRangeData;
+            var fareRangeData = $scope.$parent.MailFareRangeData;
+            
             if (fareRangeData != "") {
                 contentString += "<div style='clear:both;padding-top:15px;margin-bottom:5px;' ><b style='text-decoration: underline;'>Fare Range</b><br />Median, highest, and lowest published fares during the previous 4 weeks for each of the future departure dates in a range, using the specific origin, destination, and length of stay requested.</div>";
                 FareRangeHTML += '<table >' +
@@ -332,6 +335,7 @@
             var dest = destinationdet;
             $scope.Defaultsubject = $scope.seasonalityData.OriginairportName.airport_FullName;
             $scope.destinationinfo = dest;
+            
             var GetEmailDetPopupInstance = $modal.open({
                 templateUrl: 'EmailDetForm.html',
                 scope: $scope,

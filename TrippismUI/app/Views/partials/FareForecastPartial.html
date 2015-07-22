@@ -26,7 +26,7 @@
                         <div class="col-lg-4" ng-if="FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
 
                         </div>
-                        <div class="col-lg-2"><div class="share pull-right"><button class="btn btn-primary share-btn" type="button" ng-click="SendEmailToUser()">Share<i class="glyphicon glyphicon-share"></i></button></div></div>
+                        <div class="col-lg-2"><div class="share pull-right"><button class="btn btn-primary share-btn" type="button" ng-click="SendEmailToUser()">Share<i style="padding-left:5px;" class="glyphicon glyphicon-share"></i></button></div></div>
                     </div>
                     <div class="col-md-12 padlr0">
                         <div class="col-lg-6 padlr0"><h4>Lowest Fare: <span>{{mapDetails.CurrencyCode}} {{mapDetails.LowestFare | number : 2}} </span></h4></div>
@@ -34,31 +34,33 @@
                     </div>
                 </div>
                 <div class="col-xs-12 faredetails" style="padding:0px;">
-                    <accordion style="clear:both;" id="accordion">
-                        <accordion-group >
-                            <accordion-heading>
-                                <span ng-click="openaccordion()">More Insights on {{accordianDefault}} {{seasonalityData.DestinationairportName.airport_FullName + ', ' + seasonalityData.DestinationairportName.airport_CityName}}</span>
-                            </accordion-heading>
-                            <accordion close-others="oneAtATime">
+                    <div class="panel panel-default">
+                        <div class="panel-heading cursorpointer" ng-click="openaccordion()">
+                            <h4 class="panel-title">
+                                <a><span ng-class="text-muted">More Insights on {{accordianDefault}} {{seasonalityData.DestinationairportName.airport_FullName + ', ' + seasonalityData.DestinationairportName.airport_CityName}}</span></a>
+                            </h4>
+                        </div>
+                        <div class="panel-collapse" collapse="!isOpens">
+                            <div class="panel-body">
                                 <div class="col-md-12">
                                     <div class="col-md-6">
-                                        <seasonality-info seasonality-params="seasonalityData" is-open="openaccordiondata" class="seasonality"></seasonality-info>
+                                        <seasonality-info seasonality-params="seasonalityData" mailmarkereasonality-info="MailMarkerSeasonalityInfo" is-open="openaccordiondata" class="seasonality"></seasonality-info>
                                     </div>
-                                    <div class="col-md-6">
-                                        <farerange-info farerange-params="seasonalityData" is-open="openaccordiondata" style="clear:both;"></farerange-info>
+                                    <div class="col-md-6 padleft0">
+                                        <farerange-info farerange-params="seasonalityData" mailfarerange-data="MailFareRangeData" is-open="openaccordiondata" style="clear:both;"></farerange-info>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-6">
                                         <googleattraction-info googleattraction-params="googleattractionData" is-open="openaccordiondata" class="googleattraction" style="clear:both;"></googleattraction-info>
                                     </div>
-                                    <div class="col-md-6">
-                                        <weather-info weather-params="seasonalityData" style="clear:both;"></weather-info>
+                                    <div class="col-md-6 padleft0">
+                                        <weather-info weather-params="seasonalityData"  is-open="openaccordiondata" style="clear:both;"></weather-info>
                                     </div>
                                 </div>
-                            </accordion>
-                        </accordion-group>
-                    </accordion>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <script type="text/ng-template" id="EmailDetForm.html">
@@ -66,7 +68,7 @@
 
                     <div cg-busy="{promise:sendmailPromise,message:'Sending email...'}">
                         <div class="button-right col-lg-12">
-                            <a class="close-panel-button pull-right" ng-click="dismiss()" role="button" id="close_destination_panel" tabindex="0" >X</a>
+                            <a class="close-panel-button pull-right" ng-click="dismiss()" role="button" id="close_destination_panel" tabindex="0">X</a>
                         </div>
                         <div ng-show="hasError && FormGetEmailDet.$invalid">
                             <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.email.$error.required">

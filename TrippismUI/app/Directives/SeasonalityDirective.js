@@ -4,14 +4,16 @@
 
         scope: {
             seasonalityParams: '=',
-            isOpen: '='
+            isOpen: '=',
+            mailmarkereasonalityInfo: '=',
         },
         templateUrl: '/app/Views/Partials/SeasonalityPartial.html',
         link: function (scope, elem, attrs) {
             scope.SeasonalityDisplay = function () {
                 scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
+                scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
             };
-           
+            
             scope.loadSeasonalityInfo = function () {
                 scope.MarkerSeasonalityInfo = "";
                 scope.loadSeasonalityInfoLoaded = false;
@@ -36,7 +38,7 @@
                                     var defaultSeasonality = data.Seasonality;
                                     var now = new Date();
                                     var NextDate = common.addDays(now, 30);
-
+                                    
                                     var filteredSeasonalityData = [];
                                     for (var i = 0; i < defaultSeasonality.length; i++) {
                                         scope.MarkerSeasonalityInfo.Seasonality = [];
@@ -46,12 +48,17 @@
                                     }
                                     data.Seasonality = filteredSeasonalityData;
                                     scope.MarkerSeasonalityInfo = data;
+
+                                    scope.mailmarkereasonalityInfo = data;
+                                    
                                     scope.inProgressSeasonalityinfo = false;
+                                    scope.loadSeasonalityInfoLoaded = true;
+                                    
                                 });
                             }, 0, false);
                         }
                     }
-                    scope.loadSeasonalityInfoLoaded = true;
+  
                 }
             };
             scope.$watchGroup(['seasonalityParams', 'isOpen'], function (newValue, oldValue, scope) {

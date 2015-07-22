@@ -8,6 +8,8 @@
     function DestinationController($scope, $location, $modal, $rootScope, $timeout, DestinationFactory, UtilFactory, FareforecastFactory, SeasonalityFactory) {
 
         $scope.isSearching = true;
+        $scope.MailMarkerSeasonalityInfo = {};
+        $scope.MailFareRangeData = {};
 
         $scope.hasError = false;
         $scope.Location = "";

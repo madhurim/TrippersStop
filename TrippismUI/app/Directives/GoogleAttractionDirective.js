@@ -42,11 +42,11 @@
                                     scope.googleattractionInfoNoDataFound = true;
                                 scope.googleattractionData = data;
                                 scope.quantity = 5;
-
+                                scope.googleattractionInfoLoaded = true;
                             });
                         }
                     }
-                    scope.googleattractionInfoLoaded = true;
+                    
                 }
             };
         }

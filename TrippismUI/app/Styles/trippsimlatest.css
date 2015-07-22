@@ -350,3 +350,6 @@ option {
 .padleft10 {
     padding-left:10px;
 }
+.cursorpointer {
+    cursor:pointer;
+}

@@ -12,9 +12,10 @@
             scope.IsRequestCompleted = false;
             scope.activate = activate;
             scope.closePanel = closePanel;
-
+            
             function closePanel() {
                 scope.$parent.fareforecastdirectiveDisplay = false;
+                scope.isOpens = false;
             }
 
             function activate() {
@@ -38,6 +39,7 @@
               function (newValue, oldValue) {
                   if (newValue != oldValue) {
                       activate();
+                      scope.isOpens = false;
                   }
               }
             );
@@ -50,6 +52,7 @@
                           airport_Lat: scope.seasonalityData.DestinationairportName.airport_Lat,
                           airport_Lng: scope.seasonalityData.DestinationairportName.airport_Lng
                       }
+                      scope.isOpens = false;
                       scope.openaccordiondata = false;
                   }
               }
@@ -67,10 +70,10 @@
                     }
                 });
             }
-            
+
             scope.openaccordion = function () {
-                if (scope.openaccordiondata == false)
-                {
+                scope.isOpens = !scope.isOpens;
+                if (scope.openaccordiondata == false) {
                     scope.openaccordiondata = true;
                 }
             };

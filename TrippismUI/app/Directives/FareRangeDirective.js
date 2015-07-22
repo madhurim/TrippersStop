@@ -1,7 +1,10 @@
 ﻿angular.module('TrippismUIApp').directive('farerangeInfo', ['$compile', 'FareRangeFactory', function ($compile, FareRangeFactory) {
     return {
         restrict: 'E',
-        scope: { farerangeParams: '=', isOpen: '=' },
+        scope: {
+            farerangeParams: '=', isOpen: '=',
+            mailfarerangeData : '='
+        },
         templateUrl: '/app/Views/Partials/FareRangePartial.html',
         link: function (scope, elem, attrs) {
             scope.$watchGroup(['farerangeParams', 'isOpen'], function (newValue, oldValue, scope) {
@@ -10,6 +13,7 @@
                         scope.loadfareRangeInfo();
                 } else {
                     scope.fareRangeData = "";
+                    scope.mailfarerangeData = "";
                 }
             });
             // scope.$watch('farerangeParams',
@@ -23,6 +27,7 @@
                 scope.fareRangeInfoLoaded = false;
                 scope.fareRangeInfoNoDataFound = false;
                 scope.fareRangeData = "";
+                scope.mailfarerangeData = "";
                 if (scope.farerangeParams != undefined) {
                     var data = {
                         "Origin": scope.farerangeParams.Fareforecastdata.Origin,
@@ -38,6 +43,7 @@
                                 if (data.status == 404)
                                     scope.fareRangeInfoNoDataFound = true;
                                 scope.fareRangeData = data;
+                                scope.mailfarerangeData = data;
                             });
                         }
                     }
