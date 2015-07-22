@@ -1,4 +1,5 @@
 ﻿using DataLayer;
+using ExpressMapper;
 using ServiceStack.Text;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
@@ -11,8 +12,11 @@ using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using TraveLayer.CustomTypes.Sabre;
+using TraveLayer.CustomTypes.Sabre.ViewModels;
+using TraveLayer.CustomTypes.Weather;
 using TrippismApi.TraveLayer;
-
+using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 
 namespace TrippismApi
 {
@@ -44,9 +48,27 @@ namespace TrippismApi
 
             GlobalConfiguration.Configuration.DependencyResolver =
                 new SimpleInjectorWebApiDependencyResolver(container);
-
+            RegisterMappingEntities();
             //GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
            // GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
+        }
+
+        private void RegisterMappingEntities()
+        {
+            Mapper.Register<OTA_DestinationFinder, Fares>();
+            Mapper.Register<OTA_FareRange, VM.FareRange>();
+            Mapper.Register<OTA_TravelSeasonality, VM.TravelSeasonality>();
+            Mapper.Register<OTA_LowFareForecast, LowFareForecast>();
+            Mapper.Register<TempHigh, TempHighAvg>()
+                  .Member(h => h.Avg, m => m.avg);
+            Mapper.Register<TempLow, TempLowAvg>()
+               .Member(h => h.Avg, m => m.avg);
+            Mapper.Register<Trip, TripWeather>()
+            .Member(h => h.TempHighAvg, m => m.temp_high)
+            .Member(h => h.TempLowAvg, m => m.temp_low)
+            .Member(h => h.ChanceOf, m => m.chance_of)
+            .Member(h => h.CloudCover, m => m.cloud_cover);
+            Mapper.Compile();
         }
     }
 }

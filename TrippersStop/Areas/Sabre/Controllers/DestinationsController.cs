@@ -10,7 +10,7 @@ using ServiceStack;
 using System.Reflection;
 using System.Text;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
-using AutoMapper;
+//using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Configuration;
 using System.Web.Http.Description;
@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using TraveLayer.CustomTypes.Weather;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 using Trippism.APIHelper;
+using ExpressMapper;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
@@ -179,7 +180,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
             {
                 OTA_DestinationFinder cities = new OTA_DestinationFinder();
                 cities = ServiceStackSerializer.DeSerialize<OTA_DestinationFinder>(result.Response);
-                Mapper.CreateMap<OTA_DestinationFinder, Fares>();
+                //Mapper.CreateMap<OTA_DestinationFinder, Fares>();
                 Fares fares = Mapper.Map<OTA_DestinationFinder, Fares>(cities);
                 if (count != 0)
                 {
@@ -226,7 +227,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
             watch.Stop();
             TripperLog.LogMethodTime("TravelSeasonality Response-DeSerialize ", watch.ElapsedMilliseconds);
             watch = System.Diagnostics.Stopwatch.StartNew();
-            Mapper.CreateMap<OTA_TravelSeasonality, VM.TravelSeasonality>();
+            //Mapper.CreateMap<OTA_TravelSeasonality, VM.TravelSeasonality>();
             VM.TravelSeasonality travelSeasonality = Mapper.Map<OTA_TravelSeasonality, VM.TravelSeasonality>(seasonality);
             watch.Stop();
             TripperLog.LogMethodTime("TravelSeasonality Response-Mapping ", watch.ElapsedMilliseconds);
@@ -241,7 +242,8 @@ namespace TrippismApi.Areas.Sabre.Controllers
             watch.Stop();
             TripperLog.LogMethodTime("FareForecast Response-DeSerialize ", watch.ElapsedMilliseconds);
             watch = System.Diagnostics.Stopwatch.StartNew();
-            Mapper.CreateMap<OTA_LowFareForecast, LowFareForecast>();
+            //Mapper.CreateMap<OTA_LowFareForecast, LowFareForecast>();
+
             LowFareForecast lowFareForecast = Mapper.Map<OTA_LowFareForecast, LowFareForecast>(fares);
             watch.Stop();
             TripperLog.LogMethodTime("FareForecast Response-Mapping ", watch.ElapsedMilliseconds);
@@ -256,7 +258,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
             watch.Stop();
             TripperLog.LogMethodTime("FareRange Response-DeSerialize ", watch.ElapsedMilliseconds);
             watch = System.Diagnostics.Stopwatch.StartNew();
-            Mapper.CreateMap<OTA_FareRange, VM.FareRange>();
+            //Mapper.CreateMap<OTA_FareRange, VM.FareRange>();
             VM.FareRange fareRange = Mapper.Map<OTA_FareRange, VM.FareRange>(fares);
             watch.Stop();
             TripperLog.LogMethodTime("FareRange Response-Mapping ", watch.ElapsedMilliseconds);
@@ -271,7 +273,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
             watch.Stop();
             TripperLog.LogMethodTime("Destination Response-DeSerialize ", watch.ElapsedMilliseconds);
             watch = System.Diagnostics.Stopwatch.StartNew();
-            Mapper.CreateMap<OTA_DestinationFinder, Fares>();
+            //Mapper.CreateMap<OTA_DestinationFinder, Fares>();
             Fares fares = Mapper.Map<OTA_DestinationFinder, Fares>(cities);
             watch.Stop();
             TripperLog.LogMethodTime("Destination Response-Mapping ", watch.ElapsedMilliseconds);
@@ -283,8 +285,6 @@ namespace TrippismApi.Areas.Sabre.Controllers
             _weatherApiCaller.Accept = "application/json";
             _weatherApiCaller.ContentType = "application/json";
             APIResponse result = _weatherApiCaller.Get(weatherUrl).Result;
-            //watch.Stop();
-            //TripperLog.LogMethodTime("GetWeatherResponse-API Call ", watch.ElapsedMilliseconds);
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -295,16 +295,18 @@ namespace TrippismApi.Areas.Sabre.Controllers
                 TripperLog.LogMethodTime("GetWeatherResponse-DeSerialize ", watch.ElapsedMilliseconds);
                 watch = System.Diagnostics.Stopwatch.StartNew();
                 Trip trip = weather.trip;
-                Mapper.CreateMap<Trip, TripWeather>()
-                   .ForMember(h => h.TempHighAvg, m => m.MapFrom(s => s.temp_high))
-                   .ForMember(h => h.TempLowAvg, m => m.MapFrom(s => s.temp_low))
-                   .ForMember(h => h.ChanceOf, m => m.MapFrom(s => s.chance_of))
-                   .ForMember(h => h.CloudCover, m => m.MapFrom(s => s.cloud_cover));
-                Mapper.CreateMap<TempHigh, TempHighAvg>()
-                    .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
-                Mapper.CreateMap<TempLow, TempLowAvg>()
-                   .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
+                //Mapper.CreateMap<Trip, TripWeather>()
+                //   .ForMember(h => h.TempHighAvg, m => m.MapFrom(s => s.temp_high))
+                //   .ForMember(h => h.TempLowAvg, m => m.MapFrom(s => s.temp_low))
+                //   .ForMember(h => h.ChanceOf, m => m.MapFrom(s => s.chance_of))
+                //   .ForMember(h => h.CloudCover, m => m.MapFrom(s => s.cloud_cover));
+                //Mapper.CreateMap<TempHigh, TempHighAvg>()
+                //    .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
+                //Mapper.CreateMap<TempLow, TempLowAvg>()
+                //   .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
+
                 TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(trip);
+                //TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(trip);
                 watch.Stop();
                 TripperLog.LogMethodTime("GetWeatherResponse-Mapping ", watch.ElapsedMilliseconds);
                 return tripWeather;
