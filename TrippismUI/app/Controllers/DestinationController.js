@@ -158,7 +158,7 @@
             //$scope.seasonalitydirectiveData = args.Destinatrion;
             $scope.seasonalitydirectiveData = args;
             $scope.fareforecastdirectiveDisplay = true;
-            $scope.open('lg', args);
+            //$scope.open('lg', args);
         });
 
         function btnSearchClick() {
@@ -208,9 +208,9 @@
             $scope.IsairportJSONLoading = true;
             UtilFactory.ReadAirportJson().then(function (data) {
                 $scope.IsairportJSONLoading = false;
-
+                $scope.CalledOnPageLoad = false;
                 $scope.AvailableAirports = data;
-                $scope.CalledOnPageLoad = true;
+                
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
 
                 if (org == undefined || org == '') {
@@ -231,7 +231,7 @@
 
                     if (_qToDate != undefined && _qToDate != '')
                         $scope.ToDate = _qToDate;
-
+                    $scope.CalledOnPageLoad = true;
                     $scope.Origin = org;
                     $scope.findDestinations('Cheapest');
                 }
@@ -301,7 +301,6 @@
         $scope.SearchbuttonChepestIsLoading = false;
 
         function findDestinations(buttnText) {
-
             if ($scope.CalledOnPageLoad == false) {
                 if ($scope.frmdestfinder.$invalid) {
                     $scope.hasError = true;
@@ -336,7 +335,7 @@
                 "Maxfare": $scope.Maxfare,
                 "PointOfSaleCountry": PointOfsalesCountry, //$scope.PointOfSaleCountry,
                 "Region": ($scope.Region != undefined) ? $scope.Region.id : "",
-                "TopDestinations": 50, //$scope.TopDestinations,
+                //"TopDestinations": 50, //$scope.TopDestinations,
                 "Destination": $scope.Destination
             };
             $scope.inProgress = true;

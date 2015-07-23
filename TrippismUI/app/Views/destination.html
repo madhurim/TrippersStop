@@ -24,7 +24,59 @@
                 <form name="frmdestfinder" novalidate>
                     <div aria-labelledby="collapseListGroupHeading1" role="tabpanel" class="panel-collapse collapse in" id="collapseListGroup1" aria-expanded="true" style="">
                         <div class="row" style="margin: 0px;">
+                            <div class="col-lg-12" style="margin-top:5px;" ng-show="hasError && frmdestfinder.$invalid">
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Origin.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please enter Origin.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.LenghtOfStay.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please enter lenght of stay.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.LenghtOfStay.$invalid && !frmdestfinder.LenghtOfStay.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please enter valid lenght of stay.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.FromDate.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please select from date.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Earliestdeparturedate.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please select earliest departure date.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Latestdeparturedate.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please select earliest latest departure date.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.FromDate.$invalid && !frmdestfinder.FromDate.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please select valid from date.
+                                </div>
 
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.ToDate.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please select to date.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.ToDate.$invalid && !frmdestfinder.ToDate.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please select valid to date.
+                                </div>
+
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Minfare.$invalid">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please enter valid Minimun fare.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.TopDestinations.$invalid">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please enter valid Top Destinations.
+                                </div>
+
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Maxfare.$invalid">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please enter valid Maximum fare.
+                                </div>
+                            </div>
                             <div class="col-xs-12 col-sm-6 col-md-3 home">
                                 <h3>Origin Airport</h3>
                                 <div class="form-group">

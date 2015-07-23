@@ -71,61 +71,67 @@
             })
 
             function DisplayChart() {
-                var chartdata = [];
-                var categoriesData = [];
+                var allData = [];
                 if (scope.WeatherData != undefined && scope.WeatherData != "") {
                     scope.HighTempratureC = scope.WeatherData.TempHighAvg.Avg.C;
                     scope.HighTempratureF = scope.WeatherData.TempHighAvg.Avg.F;
                     scope.LowTempratureC = scope.WeatherData.TempLowAvg.Avg.C;
                     scope.LowTempratureF = scope.WeatherData.TempLowAvg.Avg.F;
                     for (i = 0; i < scope.WeatherData.WeatherChances.length; i++) {
-                        categoriesData.push(scope.WeatherData.WeatherChances[i].Name);
-                        chartdata.push(scope.WeatherData.WeatherChances[i].Percentage);
+                        var datas = {
+                            name: scope.WeatherData.WeatherChances[i].Name,
+                            y: scope.WeatherData.WeatherChances[i].Percentage
+                        };
+                        allData.push(datas);
                     }
+
                     $('#weatherChart').highcharts({
                         chart: {
-                            type: 'spline',
+                            type: 'column',
+                            
                         },
                         title: {
-                            text: ''
-                        },
-                        subtitle: {
-                            text: ''
+                            text: 'Weather fore cast'
                         },
                         xAxis: {
-                            categories: categoriesData,
+                            type: 'category',
                             title: {
-                                enabled: true,
-                                text: ''
+                                text: 'Weather Type'
                             }
-
                         },
                         yAxis: {
                             title: {
                                 text: 'Percentage'
-                            },
-                            labels: {
-                                formatter: function () {
-                                    return this.value + '%';
-                                }
-                            },
-                            lineWidth: 2
+                            }
+
                         },
-                        tooltip: {
-                            pointFormat: '{point.y} %'
+                        legend: {
+                            enabled: false
                         },
                         plotOptions: {
-                            spline: {
-                                marker: {
-                                    enable: false
+                            series: {
+                                borderWidth: 0,
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '{point.y:.1f}%'
                                 }
                             }
                         },
+
+                        tooltip: {
+                            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b><br/>'
+                        },
+
                         series: [{
-                            name: 'Temperature',
-                            data: chartdata
+                            name: "Temprature",
+                            colorByPoint: false,
+                            data: allData
                         }]
                     });
+
+
+               
                 }
             }
         }

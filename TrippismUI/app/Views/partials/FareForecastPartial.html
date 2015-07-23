@@ -6,22 +6,24 @@
         <div class="container" style="margin-top:8%;">
             <!--style="transform: translate(0%, 12%);"-->
             <div class="row my-space">
-                <div class="col-md-12 padlr0" cg-busy="{promise:fareinfopromise,message:'Please wait fare forecast loading...'}">
+                <div class="col-md-12 padlr0" >
                     <div class="button-right col-lg-12">
                         <a class="close-panel-button pull-right" ng-click="closePanel()" role="button" id="close_destination_panel" tabindex="0" style="color:white;">X</a>
                     </div>
                     <div class="col-md-12 padlr0">
                         <div class="col-lg-6 padlr0"><h4>Destination : <span>  {{seasonalityData.DestinationairportName.airport_FullName + ', ' + seasonalityData.DestinationairportName.airport_CityName}}</span></h4></div>
-                        <div class="col-lg-4" ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
-                            <h4>
-                                Recommendation :
-                                <span>
-                                    <img style="margin-top:-10px;" ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
-                                    <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
-                                    <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
-                                    <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
-                                </span>
-                            </h4>
+                        <div class="col-lg-4" cg-busy="{promise:fareinfopromise,message:'Please wait fare forecast loading...'}" >
+                            <div ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
+                                <h4>
+                                    Recommendation :
+                                    <span>
+                                        <img style="margin-top:-10px;" ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
+                                        <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
+                                        <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
+                                        <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
+                                    </span>
+                                </h4>
+                            </div>
                         </div>
                         <div class="col-lg-4" ng-if="FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
 
@@ -118,36 +120,5 @@
 
 
 
-    <!--<div class="button-right col-lg-12">
-     <a class="close-panel-button pull-right" ng-click="closePanel()" role="button" id="close_destination_panel" tabindex="0">X</a>
-    </div>
 
-    <div style="min-height:75px;clear:both;" cg-busy="{promise:fareinfopromise,message:'Please wait fare forecast loading...'}">
-
-        <div style="padding:8px;" ng-if="FareNoDataFound && IsRequestCompleted">
-            <label class="text-danger">Ooops! We are sorry, no information is available.</label>
-        </div>
-
-        <div ng-if="!FareNoDataFound && IsRequestCompleted" style="margin-bottom:10px;clear:both;">
-            <div class="col-sm-12 padleft0" ng-hide="FareforecastData.Recommendation == 'unknown'">
-                <label>Recommendation: </label>
-                <img style="margin-top:-10px;" ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
-                <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
-                <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
-                <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
-            </div>
-            <div class="col-md-12 padleft0" style="clear:both;margin-top:10px;">
-                <span>Highest Predicted Fare: </span><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.HighestPredictedFare | number:2}}</strong>
-            </div>
-            <div class="col-md-12 padleft0" style="clear:both;margin-top:10px;">
-                <span>Lowest Predicted Fare: </span><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.LowestPredictedFare | number:2}}</strong>
-            </div>
-        </div>
-
-    </div>
-
-    <div >
-        <span popover-trigger="mouseenter" popover="Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly."><b>Traffic patterns</b> </span>
-        <seasonality-info seasonality-params="seasonalityData"></seasonality-info>
-    </div>-->
 </div>
