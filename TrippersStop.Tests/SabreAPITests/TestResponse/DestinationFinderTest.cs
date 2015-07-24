@@ -28,7 +28,8 @@ namespace TrippismApi.Tests.SabreAPITests
 
             IAsyncSabreAPICaller apiCaller = new SabreAPICaller();
             ICacheService dbService = new RedisService();
-            var controller = new DestinationsController(apiCaller, dbService);
+            IAsyncWeatherAPICaller weatherApiCaller=new  WeatherAPICaller();
+            var controller = new DestinationsController(apiCaller, weatherApiCaller,dbService);
             controller.Request = new HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             // Act
@@ -53,7 +54,8 @@ namespace TrippismApi.Tests.SabreAPITests
             // Arrange
             IAsyncSabreAPICaller apiCaller = new SabreAPICaller();
             ICacheService dbService = new RedisService();
-            var controller = new DestinationsController(apiCaller, dbService);
+            IAsyncWeatherAPICaller weatherApiCaller = new WeatherAPICaller();
+            var controller = new DestinationsController(apiCaller,weatherApiCaller, dbService);
             controller.Request = new HttpRequestMessage();
             //controller.Request.SetConfiguration(new HttpConfiguration());
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
