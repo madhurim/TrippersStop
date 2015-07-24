@@ -65,9 +65,9 @@ namespace TrippismApi
                .Member(h => h.Avg, m => m.avg);
             Mapper.Register<Trip, TripWeather>()
             .Member(h => h.TempHighAvg, m => m.temp_high)
-            .Member(h => h.TempLowAvg, m => m.temp_low)
-            .Member(h => h.WeatherChances, m => m.chance_of)
+            .Member(h => h.TempLowAvg, m => m.temp_low)          
             .Member(h => h.CloudCover, m => m.cloud_cover);
+           //  .Member(h => h.WeatherChances, m => m.chance_of)
             Mapper.Compile();
         }
     }

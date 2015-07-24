@@ -352,8 +352,9 @@ namespace TrippismApi.Areas.Sabre.Controllers
                 watch.Stop();
                 TripperLog.LogMethodTime("GetWeatherResponse-DeSerialize ", watch.ElapsedMilliseconds);
                 watch = System.Diagnostics.Stopwatch.StartNew();
-                Trip trip = weather.trip;
-                TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(trip);
+                TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(weather.trip);
+                tripWeather.WeatherChances = new List<WeatherChance>();
+                FilterChanceRecord(weather.trip, tripWeather);
                 watch.Stop();
                 TripperLog.LogMethodTime("GetWeatherResponse-Mapping ", watch.ElapsedMilliseconds);
                 return tripWeather;
@@ -361,6 +362,47 @@ namespace TrippismApi.Areas.Sabre.Controllers
             return null;
         }
 
+        private void FilterChanceRecord(Trip trip, TripWeather tripWeather)
+        {
+            Type type = trip.chance_of.GetType();
+            PropertyInfo[] properties = type.GetProperties();
+            string propertyName = string.Empty;
+            Chance propertyValue = null;
+            string separator = string.Empty;
+            foreach (PropertyInfo property in properties)
+            {
+                propertyName = property.Name;
+                var result = property.GetValue(trip.chance_of, null);
+                if (result != null)
+                {
+                    propertyValue = result as Chance;
+                    bool addToCollection = IsValidRecord(propertyValue);
+                    if (addToCollection)
+                        AddChanceOfRecord(tripWeather, propertyValue, propertyName);
+                }
+            }
+        }
 
+
+        private void AddChanceOfRecord(TripWeather tripWeather, Chance propertyValue, string propertyName)
+        {
+            tripWeather.WeatherChances.Add(new WeatherChance()
+            {
+                ChanceType = propertyName,
+                Description = propertyValue.description,
+                Name = propertyValue.name,
+                Percentage = propertyValue.percentage
+            }
+                );
+        }
+
+        private bool IsValidRecord(Chance chance)
+        {
+            if (chance != null && chance.percentage > 30)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
