@@ -3,10 +3,10 @@
                           //'ngRoute',
                           'ui.router',
                           'ui.bootstrap',
-                          'blockUI',
+                          //'blockUI',
                           'ui.map',
                           'ui.event',
-                          
+                          'cgBusy'
                         ]);
 
 
@@ -26,6 +26,18 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
                  
              }
          })
+
+        .state('destination1', {
+            url: '/destination1',
+            templateUrl: '/app/Views/destination1.html',
+            views: {
+                "": {
+                    templateUrl: '/app/Views/destination1.html',
+                }
+
+            }
+        })
+
         .state('fareforecast', {
             url: '/fareforecast',
             templateUrl: '/app/Views/fareforecast.html'
@@ -59,11 +71,11 @@ TrippismUIApp.directive("scroll", function ($window) {
 });
 
 
+
+
 //TrippismUIApp.config(function (blockUIConfig) {
-//    // Change the default overlay message
-//    //blockUIConfig.message = 'Please stop clicking!';
-//    // Change the default delay to 100ms before the blocking is visible
-//   // blockUIConfig.delay = 0;
+//    blockUIConfig.autoInjectBodyBlock = false;
+//    blockUIConfig.delay = 10;
 //});
 
 

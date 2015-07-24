@@ -99,12 +99,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIServices\GoogleAPICaller.cs" />
     <Compile Include="APIServices\IAPICaller.cs" />
+    <Compile Include="APIServices\IAsyncGoogleAPICaller.cs" />
     <Compile Include="APIServices\IAsyncWeatherAPICaller.cs" />
     <Compile Include="APIServices\IAsyncSabreAPICaller.cs" />
     <Compile Include="APIServices\SabreAPICaller.cs" />
     <Compile Include="APIServices\ServiceStackSerializer.cs" />
     <Compile Include="APIServices\WeatherAPICaller.cs" />
+    <Compile Include="CustomTypes\Google\Request\GoogleInput.cs" />
+    <Compile Include="CustomTypes\Google\Response\GoogleOutput.cs" />
+    <Compile Include="CustomTypes\Google\ViewModels\Google.cs" />
     <Compile Include="CustomTypes\IATA\ViewModels\Entity.cs" />
     <Compile Include="CustomTypes\IATA\ViewModels\IATACode.cs" />
     <Compile Include="CustomTypes\Sabre\Request\AdvancedCalendar.cs">

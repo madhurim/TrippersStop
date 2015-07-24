@@ -12,14 +12,18 @@
         if (angular.lowercase($location.host()) == "localhost")
         {
             //devlopment url
-            $rootScope.apiURL = 'http://localhost:14606/api/';
+            $rootScope.apiURL = 'http://localhost:14606/api/Sabre/';
             $rootScope.apiURLForEmail = 'http://localhost:14606/api/Email/SendEmailtoUser';
+            $rootScope.apiURLForWather = 'http://localhost:14606/api/weather/history';
+            $rootScope.apiURLForGoogleAttraction = 'http://localhost:14606/api/googleplace/';
         }
         else
         {
             //live url
             $rootScope.apiURL = 'http://' + $location.host() + '/api/';
             $rootScope.apiURLForEmail = 'http://' + $location.host() + '/api/Email/SendEmailtoUser';
+            $rootScope.apiURLForWather = 'http://' + $location.host() + '/api/weather/history';
+            $rootScope.apiURLForGoogleAttraction = 'http://' + $location.host() + '/api/googleplace'; 
         }
 
      

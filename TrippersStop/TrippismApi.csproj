@@ -219,6 +219,8 @@
     <Compile Include="APIExtention\Handler\CompressionHandler.cs" />
     <Compile Include="APIHelper\SabreApiTokenHelper.cs" />
     <Compile Include="APIHelper\TripperLog.cs" />
+    <Compile Include="Areas\Google\Controllers\GoogleController.cs" />
+    <Compile Include="Areas\Google\GoogleAreaRegistration.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -407,6 +409,8 @@
     <Content Include="Web.config.uninstall.xdt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Google\Models\" />
+    <Folder Include="Areas\Google\Views\Shared\" />
     <Folder Include="Areas\IATA\Models\" />
     <Folder Include="Areas\IATA\Views\Shared\" />
     <Folder Include="Areas\Sabre\Models\" />

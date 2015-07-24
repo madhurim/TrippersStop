@@ -1,85 +1,86 @@
-﻿
-<div ng-controller="DestinationController">
-    <div style="margin-top:10px;">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">Search Destinations</div>
-                <div class="panel-body">
-                    <div ng-show="hasError && frmdestfinder.$invalid">
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Origin.$error.required">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please enter Origin.
-                        </div>
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.LenghtOfStay.$error.required">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please enter lenght of stay.
-                        </div>
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.LenghtOfStay.$invalid && !frmdestfinder.LenghtOfStay.$error.required">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please enter valid lenght of stay.
-                        </div>
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.FromDate.$error.required">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please select from date.
-                        </div>
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Earliestdeparturedate.$error.required">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please select earliest departure date.
-                        </div>
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Latestdeparturedate.$error.required">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please select earliest latest departure date.
-                        </div>
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.FromDate.$invalid && !frmdestfinder.FromDate.$error.required">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please select valid from date.
-                        </div>
-
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.ToDate.$error.required">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please select to date.
-                        </div>
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.ToDate.$invalid && !frmdestfinder.ToDate.$error.required">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please select valid to date.
-                        </div>
-
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Minfare.$invalid">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please enter valid Minimun fare.
-                        </div>
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.TopDestinations.$invalid">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please enter valid Top Destinations.
-                        </div>
-
-                        <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Maxfare.$invalid">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please enter valid Maximum fare.
+﻿<div ng-controller="DestinationController">
+    <div class="container-fluid-header">
+        <div class="container">
+            <div class="row">
+                <div class="search">
+                    <div role="tablist" class="panel-group1">
+                        <div class="panel1 panel-search">
+                            <div id="collapseListGroupHeading1"  role="tab" class="panel-heading">
+                                <h4 class="panel-title1" style="clear:both;z-index:999999;">
+                                    <a ng-click="btnSearchClick()" aria-controls="collapseListGroup1" aria-expanded="true"  data-toggle="collapse" role="button" class="">
+                                        <h3> Search</h3>
+                                        <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                                    </a>
+                                </h4>
+                            </div>
                         </div>
                     </div>
 
-                    <script type="text/ng-template" id="customTemplate.html">
-                        <a style="padding-left:10px;" tabindex="-1" class="row-even1">
-                            <i ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
-                            
-                            <!--<span>{{match.model.airport_CityCode}}</span>,-->
-                            <span>{{match.model.airport_Code}}</span>,
-                            <span>{{match.model.airport_FullName.toLowerCase().indexOf("airport") >= 0 ? match.model.airport_FullName : match.model.airport_FullName + " Airport"}}</span>,
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row destination" ng-show="isSearching" style="background-color: rgba(0, 0, 0, 0.5); transform: translate(0px, 0%);">
+                <form name="frmdestfinder" novalidate>
+                    <div aria-labelledby="collapseListGroupHeading1" role="tabpanel" class="panel-collapse collapse in" id="collapseListGroup1" aria-expanded="true" style="">
+                        <div class="row" style="margin: 0px;">
+                            <div class="col-lg-12" style="margin-top:5px;" ng-show="hasError && frmdestfinder.$invalid">
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Origin.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please enter Origin.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.LenghtOfStay.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please enter lenght of stay.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.LenghtOfStay.$invalid && !frmdestfinder.LenghtOfStay.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please enter valid lenght of stay.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.FromDate.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please select from date.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Earliestdeparturedate.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please select earliest departure date.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Latestdeparturedate.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please select earliest latest departure date.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.FromDate.$invalid && !frmdestfinder.FromDate.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please select valid from date.
+                                </div>
 
-                            <span>{{match.model.airport_CityName}}</span>,
-                            <span>{{match.model.airport_CountryName}}</span>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.ToDate.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please select to date.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.ToDate.$invalid && !frmdestfinder.ToDate.$error.required">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please select valid to date.
+                                </div>
 
-                        </a>
-                    </script>
-                    <form name="frmdestfinder" class="" novalidate>
-                        <div class="row">
-                            <div class="col-lg-12">
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Minfare.$invalid">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please enter valid Minimun fare.
+                                </div>
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.TopDestinations.$invalid">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please enter valid Top Destinations.
+                                </div>
 
-                                <div class="col-xs-2">
-                                    <div class="form-group">
-                                        <label class="control-label">Origin Airport</label>
-
+                                <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Maxfare.$invalid">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Please enter valid Maximum fare.
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3 home">
+                                <h3>Origin Airport</h3>
+                                <div class="form-group">
+                                    <div class="input-group">
                                         <input type="text"
                                                ng-model="Origin"
                                                typeahead-min-length="2"
@@ -91,450 +92,214 @@
                                                name="Origin"
                                                tabindex="1"
                                                placeholder="Enter Origin"
-                                               typeahead="state for state in AvailableCodes |  filter: $viewValue  | limitTo: 150"
-                                               class="form-control">
+                                               typeahead="state as state for AvailableCodes in getMatchingStuffs($viewValue)"
+                                               class="form-control input"
+                                               id="exampleInputAmount">
+                                        <div class="input-group-addon">
+                                            <span ng-if="IsairportJSONLoading == true" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                                            <span ng-if="!IsairportJSONLoading" class="glyphicon glyphicon-map-marker"></span>
+                                        </div>
 
-                                    </div>
-
-                                    <div class="checkbox">
-                                        <label>
-                                            <input ng-model="IsAdvancedSearch" type="checkbox"> Advanced Search
-                                        </label>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-xs-2">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">From Date</label>
-                                        <p class="input-group">
-                                            <input type="text"
-                                                   ng-disabled="true"
-                                                   class="form-control"
-                                                   datepicker-popup="{{format}}"
-                                                   min-date="minTodayDate"
-                                                   max-date="MaximumFromDate"
-                                                   ng-model="FromDate"
-                                                   name="FromDate"
-                                                   is-open="openedFromDate"
-                                                   datepicker-options="dateOptions"
-                                                   ng-required="!LenghtOfStay || ToDate"
-                                                   close-text="Close" />
-                                            <span class="input-group-btn">
-                                                <button type="button" tabindex="2" class="btn btn-default" ng-click="openFromDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                            </span>
-                                        </p>
                                     </div>
                                 </div>
-                                <div class="col-xs-2">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">To Date</label>
-                                        <p class="input-group">
-                                            <input type="text"
-                                                   ng-disabled="true"
-                                                   class="form-control"
-                                                   datepicker-popup="{{format}}"
-                                                   min-date="minFromDate"
-                                                   max-date="MaximumToDate"
-                                                   ng-model="ToDate"
-                                                   name="ToDate"
-                                                   is-open="opened"
-                                                   datepicker-options="dateOptions"
-                                                   ng-required="!LenghtOfStay || FromDate" close-text="Close" />
-                                            <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" tabindex="3" ng-click="openToDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                            </span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-xs-1">
-                                    <div class="form-group">
-                                        <label>&nbsp;</label>
-                                        <button tabindex="11" ng-disabled="SearchbuttonIsLoading" class="btn btn-primary btn-sm" ng-click="findDestinations('All')">{{SearchbuttonText}}</button>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3 orgin">
+                                <h3>From Date</h3>
+                                <div class="form-group">
+                                    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                                    <div class="input-group">
+                                        <input datepicker-popup="{{format}}"
+                                               ng-disabled="true"
+                                               min-date="minTodayDate"
+                                               max-date="MaximumFromDate"
+                                               ng-model="FromDate"
+                                               type="text" class="form-control input"
+                                               name="FromDate"
+                                               is-open="openedFromDate"
+                                               datepicker-options="dateOptions"
+                                               ng-required="!LenghtOfStay || ToDate"
+                                               close-text="Close"
+                                               id="exampleInputAmount" placeholder="Amount">
+                                        <div ng-click="openFromDate($event)" class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-lg-12" ng-show="IsAdvancedSearch">
-                                <div class="col-lg-12" style="padding-left:0px; padding-right:0px;">
-                                    <div class="col-xs-2">
-                                        <div class="form-group">
-                                            <label>Minfare</label>
-                                            <input tabindex="6" min="1" type="number" name="Minfare" class="form-control" ng-model="Minfare" placeholder="Enter Minfare">
-                                        </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3 orgin-two">
+                                <h3>To  Date</h3>
+                                <div class="form-group">
+                                    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                                    <div class="input-group">
+                                        <input class="form-control input" ng-disabled="true"
+                                               datepicker-popup="{{format}}"
+                                               min-date="minFromDate"
+                                               max-date="MaximumToDate"
+                                               ng-model="ToDate"
+                                               name="ToDate"
+                                               is-open="opened"
+                                               datepicker-options="dateOptions"
+                                               ng-required="!LenghtOfStay || FromDate" close-text="Close">
+                                        <div ng-click="openToDate($event)" class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
                                     </div>
-                                    <div class="col-xs-2">
-                                        <div class="form-group">
-                                            <label>Maxfare</label>
-                                            <input tabindex="7" type="number" class="form-control" name="Maxfare" ng-model="Maxfare" placeholder="Enter Maxfare">
-                                        </div>
-
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3 orgin">
+                                <div class="Length">
+                                    <h3>Length of Stay (Day) </h3>
+                                    <div align="left">
+                                        <select class="form-control drop" ng-model="LenghtOfStay">
+                                            <option value="1">1 </option>
+                                            <option value="2">2 </option>
+                                            <option value="3">3 </option>
+                                            <option value="4">4 </option>
+                                            <option value="5">5 </option>
+                                            <option value="6">6 </option>
+                                            <option value="7">7 </option>
+                                            <option value="8">8 </option>
+                                            <option value="9">9 </option>
+                                            <option value="10">10 </option>
+                                            <option value="11">11 </option>
+                                            <option value="12">12 </option>
+                                            <option value="13">13 </option>
+                                            <option value="14">14 </option>
+                                            <option value="15">15 </option>
+                                            <option value="16">16 </option>
+                                        </select>
                                     </div>
-                                    <div class="col-xs-2">
-                                        <div class="form-group">
-                                            <label>Region</label>
+                                </div>
 
-                                            <select class="form-control" ng-model="Region" ng-options="color.value for color in AvailableRegions">
-                                                <option value="">-- choose Regions --</option>
-                                            </select>
 
-                                        </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-3 orgin-two">
+
+                                <h3>Minimum Fare</h3>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input min="1" type="number" name="Minfare" class="form-control input" ng-model="Minfare" placeholder="Enter Minfare">
+                                        <div class="input-group-addon">$</div>
                                     </div>
-                                    <div class="col-xs-2">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Theme</label>
-                                            <select class="form-control" ng-model="Theme" ng-options="color.value for color in AvailableThemes">
-                                                <option value="">-- choose Theme --</option>
-                                            </select>
-                                        </div>
+                                </div>
 
+
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3 orgin">
+
+                                <h3>Maximum  Fare</h3>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="number" class="form-control input" name="Maxfare" ng-model="Maxfare" placeholder="Enter Maxfare">
+                                        <div class="input-group-addon">$</div>
                                     </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3 orgin-two">
+
+                                <h3>Latest departure</h3>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text"
+                                               ng-disabled="true"
+                                               class="form-control input"
+                                               datepicker-popup="{{format}}"
+                                               min-date="Earliestdeparturedate"
+                                               max-date="MaximumLatestdeparturedate"
+                                               ng-model="Latestdeparturedate"
+                                               name="Latestdeparturedate"
+                                               is-open="openedLatestdeparturedate"
+                                               ng-required="Earliestdeparturedate"
+                                               datepicker-options="dateOptions"
+                                               close-text="Close" />
+                                        <div class="input-group-addon" ng-click="openLatestdeparturedate($event)"><i class="glyphicon glyphicon-calendar"></i></div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3 orgin" style="margin-bottom: 10px;">
+                                <h3>Earliest departure</h3>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text"
+                                               ng-disabled="true"
+                                               class="form-control input"
+                                               datepicker-popup="{{format}}"
+                                               min-date="minFromDate"
+                                               ng-model="Earliestdeparturedate"
+                                               name="Earliestdeparturedate"
+                                               is-open="openedEarliestdeparturedate"
+                                               ng-required="Latestdeparturedate"
+                                               datepicker-options="dateOptions"
+                                               close-text="Close" />
+                                        <div ng-click="openEarliestdeparturedate($event)" class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-3 orgin-two">
+
+                                <h3> Region</h3>
+                                <div align="left">
+                                    <select class="form-control drop" ng-model="Region" ng-options="color.value for color in AvailableRegions">
+                                        <option value="">Choose Region</option>
+                                    </select>
+
 
                                 </div>
-                                <div class="col-lg-12" style="padding-left:0px; padding-right:0px;">
-                                    <div class="col-xs-2">
-                                        <div class="form-group">
-                                            <label>Top Destinations</label>
-                                            <input tabindex="10" type="number" min="1" class="form-control" name="TopDestinations" ng-model="TopDestinations" placeholder="Top Destinations">
-                                        </div>
 
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <div class="form-group">
-                                            <label for="">Earliest departure</label>
-                                            <p class="input-group">
-                                                <input type="text"
-                                                       ng-disabled="true"
-                                                       class="form-control"
-                                                       datepicker-popup="{{format}}"
-                                                       min-date="minFromDate"
-                                                       ng-model="Earliestdeparturedate"
-                                                       name="Earliestdeparturedate"
-                                                       is-open="openedEarliestdeparturedate"
-                                                       ng-required="Latestdeparturedate"
-                                                       datepicker-options="dateOptions"
-                                                       close-text="Close" />
-                                                <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-default" tabindex="3" ng-click="openEarliestdeparturedate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <div class="form-group">
-                                            <label for="">Latest departure</label>
-                                            <p class="input-group">
-                                                <input type="text"
-                                                       ng-disabled="true"
-                                                       class="form-control"
-                                                       datepicker-popup="{{format}}"
-                                                       min-date="Earliestdeparturedate"
-                                                       max-date="MaximumLatestdeparturedate"
-                                                       ng-model="Latestdeparturedate"
-                                                       name="Latestdeparturedate"
-                                                       is-open="openedLatestdeparturedate"
-                                                       ng-required="Earliestdeparturedate"
-                                                       datepicker-options="dateOptions"
-                                                       close-text="Close" />
-                                                <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-default" tabindex="3" ng-click="openLatestdeparturedate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <div class="form-group">
-                                            <label for="lengthofstay">Lenght of Stay(days)</label>
-                                            <input type="number" name="LenghtOfStay" ng-model="LenghtOfStay" value="" class="form-control" min="0" max="16">
-                                        </div>
 
-                                    </div>
+                            </div>
+
+
+                            <div class="col-xs-12 col-sm-6 col-md-3 orgin-two">
+                                <h3>Theme</h3>
+                                <div align="left">
+                                    <select class="form-control drop" ng-model="Theme" ng-options="color.value for color in AvailableThemes">
+                                        <option value="">Choose Theme</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="contry">
+                                    <button type="submit"
+                                            ng-click="findDestinations('All')"
+                                            ng-disabled="SearchbuttonIsLoading"
+                                            class="submit">
+                                        <i ng-if="SearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{SearchbuttonText}}
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <div class="col-lg-12">
-        <div class="row" style="margin-left:0px;margin-right:0px;">
-            <div id="wrapper">
-                <div google-map id="map_canvas" btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
-                <div id="over_map" ng-show="IsHistoricalInfo">
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" style="height:60px;">
-                                <div class="col-md-12" style="padding:0px;">
-                                    <div class="form-group col-md-6" ng-controller="EmailForDestinationDet" style="padding: 0px;margin-bottom:3px;">
-                                        <button class="btn btn-primary btn-sm" ng-click="SendEmailToUser()" style="padding: 2px;width: 28%;">Share</button>
-                                    </div>
-                                    <script type="text/ng-template" id="EmailDetForm.html">
-                                        <div ng-controller="EmailForDestinationDet" style="padding: 20px;">
-                                            
-                                            <div ng-show="hasError && FormGetEmailDet.$invalid">
-                                                <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.email.$error.required">
-                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                                    Please enter Email Address.
-                                                </div>
-                                                <div class="alert alert-danger triperror" role="alert" ng-show="emailvalidate">
-                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                                    Please enter Valid Email Address.
-                                                </div>
-                                                
-                                                <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.fromemail.$error.email">
-                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                                    Please enter Valid From email Address.
-                                                </div>
-
-                                                <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.Subject.$error.required">
-                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                                    Please enter Subject.
-                                                </div>
-                                            </div>
-
-                                            <form name="FormGetEmailDet" novalidate="novalidate">
-
-                                                <div class="form-group">
-                                                    <label for="email">From email address</label>
-                                                    <input type="email" ng-model="fromemail" class="form-control" id="fromemail" name="fromemail" placeholder="Enter email" />
-                                                </div>
-
-
-                                                <div class="form-group">
-                                                    <label for="email">To email address</label>
-                                                    <input type="text" ng-model="email" class="form-control" id="email" name="email" placeholder="Enter email" required />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Subject">Subject</label>
-                                                    <input type="text" ng-model="Subject" class="form-control" id="Subject" name="Subject" placeholder="Subject" required />
-                                                </div>
-                                                <button type="submit" class="btn btn-default" ng-click="submitModal()">Share Now</button>
-                                                <button class="btn btn-info" ng-click="dismiss()"><i class="fa fa-times"></i>Close</button>
-                                            </form>
-                                        </div>
-                                    </script>
-
-                                    <div class="col-md-6">
-                                        <i class="glyphicon glyphicon-remove removeicon" ng-click="CloseDetailInfo($event)"></i>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div style="float:left;">
-                                        <span class="fontsize" style="font-weight:bold;">Origin : </span>
-                                        <span class="fontsize">{{OriginFullName}}</span>
-                                    </div>
-                                    <div style="float:right;">
-                                        <span class="fontsize" style="font-weight:bold;">Destinatrion : </span>
-                                        <span class="fontsize">{{DestinationFullName}}</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <accordion close-others="oneAtATime">
-                                <accordion-group heading="Fare Info" >
-                                    <div class="thumbnail" style="padding:0px;">
-                                        <table class="table fontsize" style="margin-bottom:0px;">
-                                            <tr><th class="col-md-3">Origin</th><td class="col-md-9 word-wrap">{{MarkerInfo.OriginLocation}}</td></tr>
-                                            <tr><th class="col-md-3">Destination</th><td class="col-md-9 word-wrap">{{MarkerInfo.DestinationLocation}}</td></tr>
-                                            <tr><th class="col-md-3">Departure Date</th><td class="col-md-9 word-wrap">{{MarkerInfo.DepartureDateTime | date:"yyyy-MM-dd"}}</td></tr>
-                                            <tr><th class="col-md-3">Return Date</th><td class="col-md-9 word-wrap">{{MarkerInfo.ReturnDateTime | date:"yyyy-MM-dd"}}</td></tr>
-
-                                            <tr><th class="col-md-3">Highest Predicted Fare</th><td class="col-md-9 word-wrap">{{MarkerInfo.Forecast.HighestPredictedFare}}</td></tr>
-                                            <tr><th class="col-md-3">Lowest Predicted Fare</th><td class="col-md-9 word-wrap">{{MarkerInfo.Forecast.LowestPredictedFare}}</td></tr>
-                                            <tr><th class="col-md-3">Lowest Fare</th><td class="col-md-9 word-wrap">{{MarkerInfo.LowestFare}}</td></tr>
-                                            <tr>
-
-                                                <th class="col-md-3">Recommendation</th>
-                                                <td class="col-md-9 word-wrap">
-                                                    <!--{{MarkerInfo.Recommendation}}-->
-                                                    <!--<i class="glyphicon glyphicon-thumbs-up text-success" title="Buy" ng-if="MarkerInfo.Recommendation == 'buy'"></i>-->
-                                                    <i class="recommended text-success" title="Buy" ng-if="MarkerInfo.Recommendation == 'buy'"></i>
-                                                    
-                                                    <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="MarkerInfo.Recommendation == 'wait'"></i>
-                                                    <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="MarkerInfo.Recommendation == 'watch'"></i>
-                                                </td>
-                                            </tr>
-                                            <tr><th class="col-md-3">Currency Code</th><td class="col-md-9 word-wrap">{{MarkerInfo.CurrencyCode}}</td></tr>
-                                        </table>
-                                    </div>
-                                </accordion-group>
-                                <accordion-group  >
-                                    <accordion-heading>
-                                        <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
-                                    </accordion-heading>
-                                    <div class="thumbnail thumbnailstyle">
-                                        <table class="table fontsize">
-                                            <tr>
-                                                <th class="text-center">Week#</th>
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
-                                                <th class="text-center">Traffic Volume</th>
-                                                <th>Booking Quantities</th>
-                                            </tr>
-                                            <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality">
-                                                <td class="word-wrap text-center">{{range.YearWeekNumber}}</td>
-                                                <td class="word-wrap">{{range.WeekStartDate | date:"yyyy-MM-dd"}}</td>
-                                                <td class="word-wrap">{{range.WeekEndDate | date:"yyyy-MM-dd"}}</td>
-                                                <td class="word-wrap text-center">{{range.SeasonalityIndicator}}</td>
-                                                <td class="word-wrap">{{range.NumberOfObservations}}</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </accordion-group>
-                            </accordion>
-                        </div>
-                    </div>
-                </div>
+    <div class="" style="height:auto;width:auto;" cg-busy="{promise:mappromise,message:'Please wait...'}">
+        <div id="wrapper">
+            <div google-map id="map_canvas" btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
+        </div>
+    </div>
+    <div class="container-fluid-map" style="position:fixed; bottom:0">
+        <div class="container">
+            <div class="row">
             </div>
         </div>
     </div>
-    <!--<div class="col-lg-2" style="padding-left:0px;">
-        <img src="../app/Styles/images/adsection_1.jpg" style="max-width:100%;height:290px;" />
-        <div style="height:20px">&nbsp;</div>
-        <img src="../app/Styles/images/adsection_2.jpg" style="max-width:100%;height:290px;" />
-    </div>-->
 
-    <style>.modal-content{opacity:0.8 !important;border-radius:1px;}</style>
+    <fare-forecast ng-show="fareforecastdirectiveDisplay" seasonality-data="seasonalitydirectiveData" destination-data="fareforecastdirective"></fare-forecast>
+</div>
+<script type="text/ng-template" id="customTemplate.html">
+    <a style="padding-left:10px;" tabindex="-1" class="row-even1">
+        <i ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
+        <span>{{match.model.airport_Code}}</span>,
+        <span>{{match.model.airport_FullName.toLowerCase().indexOf("airport") >= 0 ? match.model.airport_FullName : match.model.airport_FullName + " Airport"}}</span>,
+        <span>{{match.model.airport_CityName}}</span>,
+        <span>{{match.model.airport_CountryName}}</span>
+    </a>
+</script>
 
-    <script type="text/ng-template" id="DestinationDetails.html">
-        
-        <div class="modal-body">
-            
-            <accordion style="clear:both;">
-                <accordion-group is-disabled="true" is-open="true" >
-                    <accordion-heading>
-                        <span >Destination from Origin <b> {{DestinationName}} </b> </span> 
-                        <div class="pull-right">
-                            <i class="glyphicon glyphicon-remove" ng-click="cancel()"></i>
-                        </div>
-                    </accordion-heading>
-                    
-                    <div style="min-width:200px;margin-bottom:5px;" class="fontsize" id="content">
 
-                        <div class="col-sm-4 padleft0">
-                            <span>Destination : </span><br /><strong>
-                                {{DestinationairportName.airport_FullName + ', ' + DestinationairportName.airport_CityName}}
-                            </strong>
-                        </div>
 
-                        <div class="col-sm-2 padleft0" style="width:13%;">
-                            <span>Lowest Fare: </span><br /><strong>{{mapDetails.CurrencyCode}} {{mapDetails.LowestFare | number : 2}} </strong><br />
-
-                        </div>
-                        
-                        <div class="col-md-2" style="width:20%;">
-                            <span>Lowest Non Stop Fare: </span><br /><strong> {{mapDetails.CurrencyCode}} {{mapDetails.LowestNonStopFare | number :2}} </strong>
-                        </div>
-                        
-                        <div class="col-sm-2" style="width:15%;">
-                            <span>Departure Date: </span><br /><strong>{{mapDetails.DepartureDateTime | date:"yyyy-MM-dd"}}</strong>
-                        </div>
-                        
-                        <div class="col-sm-1" style="width:10%;padding:0px;">
-                            <span>Return Date: </span><br /><strong>{{mapDetails.ReturnDateTime | date:"yyyy-MM-dd"}}</strong>
-                        </div>
-
-                        <div class="col-sm-1" style="padding:0px;">
-                            <div class="pull-right" ng-controller="EmailForDestinationDet" style="margin-top:5px;">
-                                <button class="btn btn-primary btn-sm pull-right" ng-click="SendEmailToUser($parent)">Share</button>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 padleft0" style="margin-top:10px;">
-                            <div style="padding:8px;" ng-if="FareNoDataFound"><label class="text-danger">Ooops! We are sorry, no information is available.</label> </div>
-                            <div ng-if="!FareNoDataFound" style="margin-bottom:10px;clear:both;">
-
-                                <label>Recommendation: </label>
-                                <img style="margin-top:-10px;" ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
-                                <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
-                                <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
-                                <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
-
-                                <div class="col-md-12 padleft0" style="clear:both;margin-top:10px;">
-                                    <div class="col-sm-4" style="padding:0px;">
-                                        <span>Highest Predicted Fare: </span><br /><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.HighestPredictedFare | number:2}}</strong>
-                                    </div>
-                                    <div class="col-sm-4" style="padding:0px;">
-                                        <span>Lowest Predicted Fare: </span><br /><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.LowestPredictedFare | number:2}}</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="clear:both;padding-top:10px;">
-                        <accordion  style="clear:both;">
-                            <accordion-group>
-                                <accordion-heading>
-                                    <span>More Insights on  {{DestinationairportName.airport_FullName + ', ' + DestinationairportName.airport_CityName}}</span>
-                                </accordion-heading>
-                                <accordion close-others="oneAtATime">
-                                    <accordion-group>
-                                        <accordion-heading>
-                                            <span ng-click="loadSeasonalityInfo($event)">Seasonality Info</span>
-                                        </accordion-heading>
-                                        <div style="padding:8px;" ng-if="SeasonalityNoDataFound"><label class="text-danger">Ooops! We are sorry, no information is available.</label> </div>
-                                        <div ng-if="!SeasonalityNoDataFound" class="thumbnail thumbnailstyle">
-                                            <table class="table fontsize">
-                                                <tr>
-                                                    <th class="text-center underline">Week#</th>
-                                                    <th class="underline">Start Date</th>
-                                                    <th class="underline">End Date</th>
-                                                    <th class="text-center underline">Traffic Volume</th>
-                                                    <th class="underline">Booking Quantities</th>
-                                                </tr>
-                                                <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality">
-                                                    <td class="word-wrap text-center">{{range.YearWeekNumber}}</td>
-                                                    <td class="word-wrap">{{range.WeekStartDate | date:"yyyy-MM-dd"}}</td>
-                                                    <td class="word-wrap">{{range.WeekEndDate | date:"yyyy-MM-dd"}}</td>
-                                                    <td class="word-wrap text-center">
-                                                        <span ng-if="range.SeasonalityIndicator == 'High'" class="highrange">{{range.SeasonalityIndicator}}</span>
-                                                        <span ng-if="range.SeasonalityIndicator == 'Medium'" class="mediumrange">{{range.SeasonalityIndicator}}</span>
-                                                        <span ng-if="range.SeasonalityIndicator == 'Low'" class="lowrange">{{range.SeasonalityIndicator}}</span>
-                                                    </td>
-                                                    <td class="word-wrap">
-                                                        <span ng-if="range.NumberOfObservations == 'GreaterThan10000'">Over crowded</span>
-                                                        <span ng-if="range.NumberOfObservations == 'LessThan10000'">crowded</span>
-                                                        <span ng-if="range.NumberOfObservations == 'LessThan1000'">not crowded</span>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </accordion-group>
-                                    <accordion-group>
-                                        <accordion-heading>
-                                            <span ng-click="loadfareRangeInfo($event)">Fare Range</span>
-                                        </accordion-heading>
-                                        <div>
-                                          
-                                            <table class="table fontsize">
-                                                <tr>
-                                                    <th>Maximum Fare</th>
-                                                    <th>Minimum Fare</th>
-                                                    <th>Median Fare</th>
-                                                    <th>Count</th>
-                                                    <th>Departure Date Time</th>
-                                                    <th>Return Date Time</th>
-                                                </tr>
-                                                <tr ng-repeat="range in fareRangeData.FareData">
-                                                    <td class="word-wrap">{{range.CurrencyCode}} {{range.MaximumFare}}</td>
-                                                    <td class="word-wrap"> {{range.CurrencyCode}} {{range.MinimumFare }}</td>
-                                                    <td class="word-wrap"> {{range.CurrencyCode}} {{range.MedianFare}}</td>
-                                                    <td class="word-wrap">{{range.Count}}</td>
-                                                    <td class="word-wrap">{{range.DepartureDateTime | date:"yyyy-MM-dd"}}</td>
-                                                    <td class="word-wrap">{{range.ReturnDateTime | date:"yyyy-MM-dd"}}</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </accordion-group>
-                                </accordion>
-                            </accordion-group>
-                        </accordion>
-                    </div>
-
-                </accordion-group>
-            </accordion>
-
-        </div>
-    </script>

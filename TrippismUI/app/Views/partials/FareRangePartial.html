@@ -1,0 +1,35 @@
+﻿<div class="" style="clear:both;">
+    <span><b>Fare Range</b> </span><br />
+    <h6>Median, highest, and lowest published fares during the previous 4 weeks for each of the future departure dates in a range, using the specific origin, destination, and length of stay requested.</h6>
+
+    <div class="" cg-busy="{promise:farerangepromise,message:'Loading Fare range'}">
+        <div>
+            <span ng-if="FareRangeLoading == true">Please wait, Details are loading...</span>
+            <div class="thumbnail thumbnailstyle" style="margin-top:22px;">
+                <table ng-if="!FareRangeLoading" class="table fontsize" style="color:black;">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="15%">Maximum Fare</th>
+                            <th class="text-center" width="15%">Minimum Fare</th>
+                            <th class="text-center" width="15%">Median Fare</th>
+                            <!--<th class="text-center" width="10%">Count</th>-->
+                            <th class="text-center" width="20%">Departure Date Time</th>
+                            <th class="text-center" width="20%">Return Date Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="range in fareRangeData.FareData">
+                            <td class="word-wrap" width="15%">{{range.CurrencyCode}} {{range.MaximumFare | number:2}}</td>
+                            <td class="word-wrap" width="15%">{{range.CurrencyCode}} {{range.MinimumFare | number:2 }}</td>
+                            <td class="word-wrap" width="15%">{{range.CurrencyCode}} {{range.MedianFare | number:2}}</td>
+                            <!--<td class="word-wrap" width="10%">{{range.Count}}</td>-->
+                            <td class="text-center word-wrap" width="20%">{{range.DepartureDateTime | date:"yyyy-MM-dd"}}</td>
+                            <td class="text-center word-wrap" width="20%">{{range.ReturnDateTime | date:"yyyy-MM-dd"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
