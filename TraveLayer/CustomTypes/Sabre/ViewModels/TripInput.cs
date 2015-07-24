@@ -11,5 +11,7 @@ namespace TraveLayer.CustomTypes.Sabre.ViewModels
         public string City { get; set; }
         public string State { get; set; }
     }
+
+
   
 }

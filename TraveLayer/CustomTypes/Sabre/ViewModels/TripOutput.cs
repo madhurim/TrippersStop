@@ -15,4 +15,14 @@ namespace TraveLayer.CustomTypes.Sabre.ViewModels
         public TravelSeasonality TravelSeasonality { get; set; }
         public LowFareForecast LowFareForecast { get; set; }
     }
+    public class FareOutput
+    {
+        public FareRange FareRange { get; set; }
+        public LowFareForecast LowFareForecast { get; set; }
+    }
+    public class SeasonalityOutput
+    {
+        public TripWeather TripWeather { get; set; }
+        public TravelSeasonality TravelSeasonality { get; set; }
+    }
 }
