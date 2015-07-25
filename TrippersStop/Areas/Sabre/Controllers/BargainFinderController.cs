@@ -45,12 +45,12 @@ namespace TrippismApi.Areas.Sabre.Controllers
             if (bargainFinder != null && bargainFinder.OTA_AirLowFareSearchRQ!=null && pos != null)
             bargainFinder.OTA_AirLowFareSearchRQ.POS = pos;
             //TBD : URL configurable using XML
-            SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
+            ApiHelper.SetApiToken(_apiCaller, _cacheService);
             
             APIResponse result = _apiCaller.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                SabreApiTokenHelper.RefreshApiToken(_cacheService, _apiCaller);
+                ApiHelper.RefreshApiToken(_cacheService, _apiCaller);
                 result = _apiCaller.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)

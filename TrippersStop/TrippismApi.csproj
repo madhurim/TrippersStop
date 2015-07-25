@@ -217,7 +217,7 @@
     <Compile Include="APIExtention\Filters\ValidateModelAttribute.cs" />
     <Compile Include="APIHelper\MailgunEmail.cs" />
     <Compile Include="APIExtention\Handler\CompressionHandler.cs" />
-    <Compile Include="APIHelper\SabreApiTokenHelper.cs" />
+    <Compile Include="APIHelper\ApiHelper.cs" />
     <Compile Include="APIHelper\TripperLog.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleController.cs" />
     <Compile Include="Areas\Google\GoogleAreaRegistration.cs" />

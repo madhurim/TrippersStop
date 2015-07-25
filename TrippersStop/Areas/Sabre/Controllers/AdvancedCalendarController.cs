@@ -38,13 +38,13 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(LowFareSearch))]
         public HttpResponseMessage Post(OTA_AdvancedCalendar advancedCalendar)
         {
-            SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
+            ApiHelper.SetApiToken(_apiCaller, _cacheService);
             //TBD : URL configurable using XML
             string url="v1.8.1/shop/calendar/flights?mode=live";
             APIResponse result = _apiCaller.Post(url, ServiceStackSerializer.Serialize(advancedCalendar)).Result;            
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                SabreApiTokenHelper.RefreshApiToken(_cacheService, _apiCaller);             
+                ApiHelper.RefreshApiToken(_cacheService, _apiCaller);             
                 result = _apiCaller.Post("v1.8.1/shop/calendar/flights?mode=live", ServiceStackSerializer.Serialize(advancedCalendar)).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)

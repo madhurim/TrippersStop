@@ -158,7 +158,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
 
         private HttpResponseMessage GetFareResponse(string fareForecast, string fareRange)
         {
-            SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
+            ApiHelper.SetApiToken(_apiCaller, _cacheService);
             var responses = Task.WhenAll(
             new[]
             {
@@ -183,27 +183,64 @@ namespace TrippismApi.Areas.Sabre.Controllers
         {
             StringBuilder url = new StringBuilder();
             url.Append("v1/shop/flights/fares?");
-            //url.Append("v1/shop/flights?");
-            Type type = destinationsRequest.GetType();
-            PropertyInfo[] properties = type.GetProperties();
-            string propertyName = string.Empty;
-            string propertyValue = string.Empty;
-            string separator = string.Empty;
-            foreach (PropertyInfo property in properties)
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.Origin))
             {
-                propertyName = property.Name;
-                var result = property.GetValue(destinationsRequest, null);
-                if (result != null)
-                {
-                    propertyValue = result.ToString();
-                    if (!string.IsNullOrWhiteSpace(propertyValue))
-                    {
-                        url.Append(separator);
-                        url.Append(string.Join("=", propertyName.ToLower(), propertyValue));
-                        //url.Append(string.Join("=", propertyName, propertyValue));
-                        separator = "&";
-                    }
-                }
+                url.Append("origin=" + destinationsRequest.Origin);
+            }
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.Destination))
+            {
+                url.Append("&destination=" + destinationsRequest.Destination);
+            }
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.DepartureDate))
+            {
+                url.Append("&departuredate=" + destinationsRequest.DepartureDate);
+            }
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.ReturnDate))
+            {
+                url.Append("&returndate=" + destinationsRequest.ReturnDate);
+            }
+
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.Earliestdeparturedate))
+            {
+                url.Append("&earliestdeparturedate=" + destinationsRequest.Earliestdeparturedate);
+            }
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.Latestdeparturedate))
+            {
+                url.Append("&latestdeparturedate=" + destinationsRequest.Latestdeparturedate);
+            }
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.Lengthofstay))
+            {
+                url.Append("&lengthofstay=" + destinationsRequest.Lengthofstay);
+            }
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.Location))
+            {
+                url.Append("&location=" + destinationsRequest.Location);
+            }
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.Maxfare))
+            {
+                url.Append("&maxfare=" + destinationsRequest.Maxfare);
+            }
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.Minfare))
+            {
+                url.Append("&minfare=" + destinationsRequest.Minfare);
+            }
+
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.PointOfSaleCountry))
+            {
+                url.Append("&pointofsalecountry=" + destinationsRequest.PointOfSaleCountry);
+            }
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.Region))
+            {
+                url.Append("&region=" + destinationsRequest.Region);
+            }
+
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.Theme))
+            {
+                url.Append("&theme=" + destinationsRequest.Theme);
+            }
+            if (!string.IsNullOrWhiteSpace(destinationsRequest.TopDestinations))
+            {
+                url.Append("&topdestinations=" + destinationsRequest.TopDestinations);
             }
             return url.ToString();
         }
@@ -213,11 +250,11 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// </summary>
         private HttpResponseMessage GetResponse(string url, int count = 0)
         {
-            SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
+            ApiHelper.SetApiToken(_apiCaller, _cacheService);
             APIResponse result = _apiCaller.Get(url).Result;
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                SabreApiTokenHelper.RefreshApiToken(_cacheService, _apiCaller);
+                ApiHelper.RefreshApiToken(_cacheService, _apiCaller);
                 result = _apiCaller.Get(url).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)
@@ -237,7 +274,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
 
         private HttpResponseMessage GetResponse(string seasonality, string weather)
         {
-            SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
+            ApiHelper.SetApiToken(_apiCaller, _cacheService);
             var responses = Task.WhenAll(
             new[]
             {
@@ -255,7 +292,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
 
         private  HttpResponseMessage GetResponse(string destinationUrl, string fareForecast, string fareRange, string seasonality,string weather)
         {
-            SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
+            ApiHelper.SetApiToken(_apiCaller, _cacheService);
             var responses =  Task.WhenAll(
             new[]
             {
@@ -354,55 +391,15 @@ namespace TrippismApi.Areas.Sabre.Controllers
                 watch = System.Diagnostics.Stopwatch.StartNew();
                 TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(weather.trip);
                 tripWeather.WeatherChances = new List<WeatherChance>();
-                FilterChanceRecord(weather.trip, tripWeather);
+                if (weather != null && weather.trip != null && weather.trip.chance_of != null)
+                {
+                    ApiHelper.FilterChanceRecord(weather.trip, tripWeather);
+                }
                 watch.Stop();
                 TripperLog.LogMethodTime("GetWeatherResponse-Mapping ", watch.ElapsedMilliseconds);
                 return tripWeather;
             }
             return null;
-        }
-
-        private void FilterChanceRecord(Trip trip, TripWeather tripWeather)
-        {
-            Type type = trip.chance_of.GetType();
-            PropertyInfo[] properties = type.GetProperties();
-            string propertyName = string.Empty;
-            Chance propertyValue = null;
-            string separator = string.Empty;
-            foreach (PropertyInfo property in properties)
-            {
-                propertyName = property.Name;
-                var result = property.GetValue(trip.chance_of, null);
-                if (result != null)
-                {
-                    propertyValue = result as Chance;
-                    bool addToCollection = IsValidRecord(propertyValue);
-                    if (addToCollection)
-                        AddChanceOfRecord(tripWeather, propertyValue, propertyName);
-                }
-            }
-        }
-
-
-        private void AddChanceOfRecord(TripWeather tripWeather, Chance propertyValue, string propertyName)
-        {
-            tripWeather.WeatherChances.Add(new WeatherChance()
-            {
-                ChanceType = propertyName,
-                Description = propertyValue.description,
-                Name = propertyValue.name,
-                Percentage = propertyValue.percentage
-            }
-                );
-        }
-
-        private bool IsValidRecord(Chance chance)
-        {
-            if (chance != null && chance.percentage > 30)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

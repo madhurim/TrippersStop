@@ -53,11 +53,11 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// </summary>
         private HttpResponseMessage GetResponse(string url)
         {
-            SabreApiTokenHelper.SetApiToken(_apiCaller, _cacheService);
+            ApiHelper.SetApiToken(_apiCaller, _cacheService);
             APIResponse result = _apiCaller.Get(url).Result;
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                SabreApiTokenHelper.RefreshApiToken(_cacheService, _apiCaller);
+                ApiHelper.RefreshApiToken(_cacheService, _apiCaller);
                 result = _apiCaller.Get(url).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)
