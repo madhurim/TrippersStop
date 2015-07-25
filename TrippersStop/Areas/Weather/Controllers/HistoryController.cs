@@ -57,7 +57,7 @@ namespace Trippism.Areas.Weather.Controllers
         [HttpGet]
         public HttpResponseMessage Get([FromUri]InternationalWeatherInput weatherInfo)
         {
-            string cacheKey = TrippismKey+string.Join(".", weatherInfo.CityCode , weatherInfo.CountryCode , weatherInfo.DepartDate.ToShortDateString() , weatherInfo.ReturnDate.ToShortDateString());
+            string cacheKey = TrippismKey+string.Join(".", weatherInfo.AirportCode , weatherInfo.CountryCode , weatherInfo.DepartDate.ToShortDateString() , weatherInfo.ReturnDate.ToShortDateString());
             var tripWeather = _cacheService.GetByKey<TripWeather>(cacheKey);
             if (tripWeather != null)
             {
@@ -67,7 +67,7 @@ namespace Trippism.Areas.Weather.Controllers
             //http://api.wunderground.com/api/my_key/planner_10011031/q/IN/Karwar.json
             string fromDate = weatherInfo.DepartDate.ToString("MMdd");
             string toDate = weatherInfo.ReturnDate.ToString("MMdd");
-            string url = string.Format("planner_{0}{1}/q/{2}/{3}.json", fromDate, toDate, weatherInfo.CountryCode, weatherInfo.CityCode);
+            string url = string.Format("planner_{0}{1}/q/{2}/{3}.json", fromDate, toDate, weatherInfo.CountryCode, weatherInfo.AirportCode);
             return GetResponse(url, cacheKey);
         }
 
