@@ -156,6 +156,7 @@
     <Compile Include="CustomTypes\Sabre\ViewModels\TripInput.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TripOutput.cs" />
     <Compile Include="CustomTypes\Weather\Request\HistoryInput.cs" />
+    <Compile Include="CustomTypes\Weather\Request\InternationalWeatherInput.cs" />
     <Compile Include="CustomTypes\Weather\Response\HistoryOutput.cs" />
     <Compile Include="CustomTypes\Weather\ViewModels\TripWeather.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -901,6 +901,11 @@
             Returns a weather summary based on historical information between the specified dates (30 days max).
             </summary>
         </member>
+        <member name="M:Trippism.Areas.Weather.Controllers.HistoryController.Get(TraveLayer.CustomTypes.Weather.InternationalWeatherInput)">
+            <summary>
+            Returns a weather summary for other tha US based on historical information between the specified dates (30 days max).
+            </summary>
+        </member>
         <member name="M:Trippism.Areas.Weather.Controllers.HistoryController.GetResponse(System.String,System.String)">
             <summary>
             Get response from api based on url.

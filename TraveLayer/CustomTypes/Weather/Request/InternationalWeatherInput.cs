@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TraveLayer.CustomTypes.Weather
+{
+    public class InternationalWeatherInput
+    {
+        public string CountryCode { get; set; }
+        public string CityCode { get; set; }
+        public DateTime DepartDate { get; set; }
+        public DateTime ReturnDate { get; set; }
+    }
+}
