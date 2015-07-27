@@ -212,11 +212,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIExtention\ControllerSelector\AreaHttpControllerSelector .cs" />
+    <Compile Include="APIExtention\Filters\GZipCompressionAttribute.cs" />
     <Compile Include="APIExtention\Filters\ExceptionFilterAttribute.cs" />
     <Compile Include="APIExtention\Filters\TrippismCache.cs" />
     <Compile Include="APIExtention\Filters\ValidateModelAttribute.cs" />
+    <Compile Include="APIHelper\CompressedContent.cs" />
     <Compile Include="APIHelper\MailgunEmail.cs" />
-    <Compile Include="APIExtention\Handler\CompressionHandler.cs" />
     <Compile Include="APIHelper\ApiHelper.cs" />
     <Compile Include="APIHelper\TripperLog.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleController.cs" />
@@ -409,6 +410,7 @@
     <Content Include="Web.config.uninstall.xdt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="APIExtention\Handler\" />
     <Folder Include="Areas\Google\Models\" />
     <Folder Include="Areas\Google\Views\Shared\" />
     <Folder Include="Areas\IATA\Models\" />

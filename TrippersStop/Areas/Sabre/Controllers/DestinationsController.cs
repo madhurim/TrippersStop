@@ -19,12 +19,14 @@ using TraveLayer.CustomTypes.Weather;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 using Trippism.APIHelper;
 using ExpressMapper;
+using Trippism.APIExtention.Filters;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
     /// <summary>
     /// Return the current nonstop lead fare and an overall lead fare available to destinations
     /// </summary>
+    [GZipCompressionFilter]
     public class DestinationsController : ApiController
     {
 
