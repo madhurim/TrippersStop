@@ -23,7 +23,7 @@
             $rootScope.apiURL = 'http://' + $location.host() + '/api/';
             $rootScope.apiURLForEmail = 'http://' + $location.host() + '/api/Email/SendEmailtoUser';
             $rootScope.apiURLForWather = 'http://' + $location.host() + '/api/weather/history';
-            $rootScope.apiURLForGoogleAttraction = 'http://' + $location.host() + '/api/googleplace'; 
+            $rootScope.apiURLForGoogleAttraction = 'http://' + $location.host() + '/api/googleplace/'; 
         }
 
      
