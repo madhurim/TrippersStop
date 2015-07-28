@@ -1,11 +1,113 @@
-﻿
+﻿/// <reference path="../Views/partials/aside.html" />
+/// <reference path="../Views/partials/aside.html" />
+
 (function () {
     'use strict';
     var controllerId = 'DestinationController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$location', '$modal', '$rootScope', '$timeout', 'DestinationFactory', 'UtilFactory', 'FareforecastFactory', 'SeasonalityFactory', DestinationController]);
+        ['$scope',
+            '$location',
+            '$modal',
+            '$rootScope',
+            '$timeout',
+            'DestinationFactory',
+            'UtilFactory',
+            'FareforecastFactory',
+            'SeasonalityFactory',
+             DestinationController]);
 
-    function DestinationController($scope, $location, $modal, $rootScope, $timeout, DestinationFactory, UtilFactory, FareforecastFactory, SeasonalityFactory) {
+    function DestinationController(
+        $scope,
+        $location,
+        $modal,
+        $rootScope,
+        $timeout,
+        DestinationFactory,
+        UtilFactory,
+        FareforecastFactory,
+        SeasonalityFactory
+        ) {
+
+        $scope.ShowDestinationView = true;
+        $scope.TabcontentView = true;
+
+        $scope.tabManager = {};
+
+        $scope.tabManager.tabItems = [];
+
+        $scope.tabManager.checkIfMaxTabs = function () {
+            var max = 4;
+            var i = $scope.tabManager.tabItems.length;
+            if (i > max) {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.tabManager.getTitle = function (tabInfo) {
+            tabInfo.title.substr(0, 10);
+        };
+
+        $scope.tabManager.resetSelected = function () {
+
+            angular.forEach($scope.tabManager.tabItems, function (pane) {
+                pane.TabcontentView = false; // Custom
+                pane.selected = false;
+            });
+        };
+
+        $scope.tabManager.addTab = function () {
+            if ($scope.tabManager.checkIfMaxTabs()) {
+                alert("[Max Tabs] You have opened max tabs for this page.");
+                return;
+            }
+            $scope.tabManager.resetSelected();
+            var i = ($scope.tabManager.tabItems.length + 1);
+            $scope.tabManager.tabItems.push({
+                title: "Tab No: " + i,
+                content: "Lores sum ep sum news test [" + i + "]",
+                selected: true
+            });
+        };
+        $scope.$on('CreateTabForDestination', function () {
+            
+            $scope.tabManager.resetSelected();
+            var i = ($scope.tabManager.tabItems.length + 1);
+            $scope.tabManager.tabItems.push({
+                youtubeData: $scope.seasonalitydirectiveData,
+                title: $scope.seasonalitydirectiveData.OriginairportName.airport_Code + ' - ' + $scope.seasonalitydirectiveData.DestinationairportName.airport_Code,
+                content: "Lores sum ep sum news test [" + i + "]",
+                selected: true,
+                TabcontentView :true
+            });
+            $scope.ShowDestinationView = false;
+        });
+
+
+        $scope.tabManager.select = function (i) {
+            $scope.ShowDestinationView = false;
+            angular.forEach($scope.tabManager.tabItems, function (tabInfo) {
+                tabInfo.selected = false;
+                tabInfo.TabcontentView = false;
+            });
+            $scope.tabManager.tabItems[i].selected = true;
+            $scope.tabManager.tabItems[i].TabcontentView = true;
+            
+        }
+
+        //add few tabs
+        //$scope.tabManager.tabItems.push({ title: "Tab No Home"  });
+        //for (var i = 1; i < 3; i++) {
+        //    $scope.tabManager.tabItems.push({
+        //        title: "Tab No: " + i,
+        //        content: "Lores sum ep sum news test [" + i + "]",
+        //        selected: false
+        //    });
+        //}
+
+        // init the first active tab
+        //$scope.tabManager.select(0);
+
 
         $scope.isSearching = true;
         $scope.MailMarkerSeasonalityInfo = {};
@@ -63,6 +165,14 @@
         $scope.Destinationfortab = "";
 
         // $scope.Earliestdeparturedate = ConvertToRequiredDate($scope.FromDate, 'UI');
+
+        $scope.ViewDestination = function () {
+            
+           // $rootScope.$broadcast('FitToScreenSearch');
+            $scope.ShowDestinationView = true;
+            $scope.tabManager.resetSelected();
+            $scope.TabcontentView = false;
+        };
 
         $scope.$watch(function (scope) { return scope.Earliestdeparturedate },
            function (newValue, oldValue) {
@@ -212,6 +322,13 @@
                 $scope.AvailableAirports = data;
                 
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
+
+                // Static Block
+                $scope.Origin = 'BOS';
+                $scope.CalledOnPageLoad = true;
+                $scope.findDestinations('Cheapest');
+                return;
+                // Static Block Ends
 
                 if (org == undefined || org == '') {
                     UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {

@@ -1,4 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('fareForecast', ['$compile', 'FareforecastFactory', '$modal', function ($compile, FareforecastFactory, $modal) {
+﻿angular.module('TrippismUIApp').directive('fareForecast', ['$compile', 'FareforecastFactory', '$rootScope', '$modal',
+    function ($compile, FareforecastFactory, $rootScope,$modal) {
     return {
         restrict: 'E',
 
@@ -13,6 +14,13 @@
             scope.activate = activate;
             scope.closePanel = closePanel;
             
+            scope.ShowMoreDestinationsInfo = ShowMoreDestinationsInfo;
+
+            function ShowMoreDestinationsInfo(seasonalitydirectiveData) {
+                $rootScope.$broadcast('CreateTabForDestination');
+                closePanel();
+            }
+
             function closePanel() {
                 scope.$parent.fareforecastdirectiveDisplay = false;
                 scope.isOpens = false;

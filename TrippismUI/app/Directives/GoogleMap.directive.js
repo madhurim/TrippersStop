@@ -18,7 +18,7 @@ angular.module('TrippismUIApp')
           $scope.destinationMap = undefined;
           $scope.faresList = [];
           $scope.myMarkers = [];
-
+          $scope.bounds;
           var styleArray = [{ featureType: "landscape.natural", elementType: "geometry.fill", stylers: [{ visibility: "on" }, { color: "#FFFFFF" }] },
                           { featureType: "poi", elementType: "geometry.fill", stylers: [{ visibility: "on" }, { hue: "#1900ff" }, { color: "#c0e8e8" }] },
                           { featureType: "poi", elementType: "labels.text", stylers: [{ visibility: "off" }] },
@@ -33,6 +33,17 @@ angular.module('TrippismUIApp')
                           { featureType: "transit.station", elementType: "labels.text", stylers: [{ visibility: "off" }] },
                           { featureType: "transit.station", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
                           { featureType: "water", elementType: "all", stylers: [{ color: "#BCCFDE" }] }];
+
+          //$scope.mapOptions = {
+          //    center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng),
+          //    zoom: 2,
+          //    minZoom: 2,
+          //    backgroundColor: "#BCCFDE",
+          //    styles: styleArray,
+          //    mapTypeId: google.maps.MapTypeId.ROADMAP
+          //};
+
+          //$scope.destinationMap1;
 
           $scope.mapOptions = {
               center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng),
@@ -89,6 +100,7 @@ angular.module('TrippismUIApp')
               $scope.InfoWindow;
 
               var bounds = new google.maps.LatLngBounds();
+              $scope.bounds = bounds;
               selected = maps;
               
               for (var x = 0; x < maps.length; x++) {
@@ -109,7 +121,7 @@ angular.module('TrippismUIApp')
 
 
                   bounds.extend(marker.position);
-
+                  $scope.bounds.extend(marker.position);
                   var airportName = _.find($scope.airportlist, function (airport) {
                       return airport.airport_Code == maps[x].DestinationLocation
                   });
@@ -192,6 +204,15 @@ angular.module('TrippismUIApp')
               } else { d.resolve(); }
               return d.promise;
           }
+
+          
+
+          //$scope.$on('FitToScreenSearch', function (event, args) {
+          //    google.maps.event.trigger($scope.destinationMap, 'resize');
+          //    var latlng = google.maps.LatLng($scope.defaultlat, $scope.defaultlng);
+          //    $scope.destinationMap.setCenter(latlng);
+          //    $scope.destinationMap.fitBounds($scope.bounds);
+          //});
 
           $scope.resetMarker = function () {
               $timeout(function () {

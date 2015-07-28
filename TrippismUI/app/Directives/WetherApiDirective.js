@@ -71,7 +71,7 @@
             })
 
             function DisplayChart() {
-                var allData = [];
+                var chartData = [];
                 if (scope.WeatherData != undefined && scope.WeatherData != "") {
                     scope.HighTempratureC = scope.WeatherData.TempHighAvg.Avg.C;
                     scope.HighTempratureF = scope.WeatherData.TempHighAvg.Avg.F;
@@ -82,13 +82,12 @@
                             name: scope.WeatherData.WeatherChances[i].Name,
                             y: scope.WeatherData.WeatherChances[i].Percentage
                         };
-                        allData.push(datas);
+                        chartData.push(datas);
                     }
 
                     $('#weatherChart').highcharts({
                         chart: {
                             type: 'column',
-                            
                         },
                         title: {
                             text: 'Weather fore cast'
@@ -103,7 +102,6 @@
                             title: {
                                 text: 'Percentage'
                             }
-
                         },
                         legend: {
                             enabled: false
@@ -117,21 +115,16 @@
                                 }
                             }
                         },
-
                         tooltip: {
                             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
                             pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b><br/>'
                         },
-
                         series: [{
                             name: "Temprature",
                             colorByPoint: false,
-                            data: allData
+                            data: chartData
                         }]
                     });
-
-
-               
                 }
             }
         }

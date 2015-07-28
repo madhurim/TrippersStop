@@ -24,12 +24,16 @@
     <Content Include="app\Controllers\FareRangeController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
     <Content Include="app\Controllers\SeasonalityController.js" />
+    <Content Include="app\Controllers\DestinationTestingController.js" />
+    <Content Include="app\Directives\AttractionTabDirective.js" />
+    <Content Include="app\Directives\averageStarRatingDirective.js" />
     <Content Include="app\Directives\FareForecast.js" />
     <Content Include="app\Directives\GoogleAttractionDirective.js" />
     <Content Include="app\Directives\WetherApiDirective.js" />
     <Content Include="app\Directives\FareRangeDirective.js" />
     <Content Include="app\Directives\GoogleMap.directive.js" />
     <Content Include="app\Directives\SeasonalityDirective.js" />
+    <Content Include="app\Directives\YoutubeDirective.js" />
     <Content Include="app\Factory\DestinationFactory.js" />
     <Content Include="app\Factory\EmailForDestinationDetFactory.js" />
     <Content Include="app\Factory\FareforecastFactory.js" />
@@ -38,6 +42,7 @@
     <Content Include="app\Factory\FareRangeFactory.js" />
     <Content Include="app\Factory\SeasonalityFactory.js" />
     <Content Include="app\Factory\UtilFactory.js" />
+    <Content Include="app\Factory\YouTubeFactory.js" />
     <Content Include="app\Module\angular-youtube-embed.js" />
     <Content Include="app\Scripts\common.js" />
     <Content Include="app\Scripts\highcharts.js" />
@@ -66,7 +71,6 @@
     <Content Include="app\Styles\images\time.png" />
     <Content Include="app\Styles\trippsimlatest.css" />
     <Content Include="app\Views\destination1.html" />
-    <Content Include="app\Views\FareForecastPartial.html" />
     <Content Include="app\Utility.js" />
     <Content Include="app\Views\farerange.html" />
     <Content Include="app\Views\GoogleMap.html" />
@@ -103,21 +107,19 @@
     <Content Include="app\Styles\alertifyjs\themes\semantic.min.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.min.css" />
+    <Content Include="app\Views\partials\attractionTabPartial.html" />
     <Content Include="app\Views\partials\FareForecastPartial.html" />
     <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
     <Content Include="app\Views\partials\WeatherPartial.html" />
     <Content Include="app\Views\partials\FareRangePartial.html" />
     <Content Include="app\Views\partials\SeasonalityPartial.html" />
+    <Content Include="app\Views\partials\YoutubePartial.html" />
     <Content Include="app\Views\seasonality.html" />
     <Content Include="app\Styles\css\angular-busy.css" />
     <Content Include="app\Styles\css\angular-busy.min.css" />
     <Content Include="index.html" />
     <Content Include="app\Scripts\alertify\alertify.js" />
     <Content Include="app\Scripts\alertify\alertify.min.js" />
-    <Content Include="Scripts\angular-busy.js" />
-    <Content Include="Scripts\angular-busy.min.js" />
-    <Content Include="Scripts\promise-tracker-http-interceptor.js" />
-    <Content Include="Scripts\promise-tracker.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

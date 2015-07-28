@@ -11,3 +11,8 @@ thead, tbody tr {
 table {
     width: 100%;
 }
+.ytube tbody {
+    height:auto !important;
+}
+    .ytube tbody > tr > td {border:0px;
+    }

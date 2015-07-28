@@ -104,9 +104,11 @@
     <Compile Include="APIServices\IAsyncGoogleAPICaller.cs" />
     <Compile Include="APIServices\IAsyncWeatherAPICaller.cs" />
     <Compile Include="APIServices\IAsyncSabreAPICaller.cs" />
+    <Compile Include="APIServices\IAsyncYouTubeAPICaller.cs" />
     <Compile Include="APIServices\SabreAPICaller.cs" />
     <Compile Include="APIServices\ServiceStackSerializer.cs" />
     <Compile Include="APIServices\WeatherAPICaller.cs" />
+    <Compile Include="APIServices\YouTubeAPICaller.cs" />
     <Compile Include="CustomTypes\Google\Request\GoogleInput.cs" />
     <Compile Include="CustomTypes\Google\Response\GoogleOutput.cs" />
     <Compile Include="CustomTypes\Google\ViewModels\Google.cs" />
@@ -156,6 +158,9 @@
     <Compile Include="CustomTypes\Weather\Request\HistoryInput.cs" />
     <Compile Include="CustomTypes\Weather\Response\HistoryOutput.cs" />
     <Compile Include="CustomTypes\Weather\ViewModels\TripWeather.cs" />
+    <Compile Include="CustomTypes\YouTube\Request\YouTubeInput.cs" />
+    <Compile Include="CustomTypes\YouTube\Response\YouTubeOutput.cs" />
+    <Compile Include="CustomTypes\YouTube\ViewModels\YouTube.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

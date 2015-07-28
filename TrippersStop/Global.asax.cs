@@ -37,6 +37,7 @@ namespace TrippismApi
             container.RegisterWebApiRequest<ICacheService, RedisService>();
             container.RegisterWebApiRequest<IDBService, MongoService>();
             container.RegisterWebApiRequest<IAsyncGoogleAPICaller, GoogleAPICaller>();
+            container.RegisterWebApiRequest<IAsyncYouTubeAPICaller, YouTubeAPICaller>();
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 
