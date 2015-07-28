@@ -9,6 +9,7 @@ using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
+using Trippism.APIExtention.Filters;
 using TrippismApi.TraveLayer;
 
 namespace TrippismApi.Areas.Sabre.Controllers
@@ -16,6 +17,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
     /// <summary>
     /// API retrieves a list of destination airport and multi-airport city (MAC) codes that are associated with the theme in the request
     /// </summary>
+    [GZipCompressionFilter]
     public class ThemeAirportController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;

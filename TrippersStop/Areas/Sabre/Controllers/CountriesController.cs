@@ -10,6 +10,7 @@ using TraveLayer;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
+using Trippism.APIExtention.Filters;
 using TrippismApi.TraveLayer;
 
 namespace TrippismApi.Areas.Sabre.Controllers
@@ -17,6 +18,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
     /// <summary>
     /// Retrieves a list of origin and destination countries.
     /// </summary>
+      [GZipCompressionFilter]
     public class CountriesController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;

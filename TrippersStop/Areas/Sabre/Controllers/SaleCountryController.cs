@@ -9,6 +9,7 @@ using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
+using Trippism.APIExtention.Filters;
 using TrippismApi.TraveLayer;
 
 namespace TrippismApi.Areas.Sabre.Controllers
@@ -17,6 +18,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
     /// To retrieve a list of supported point of sale country codes. 
     /// To obtain country codes to use as a request parameter for other REST APIs.
     /// </summary>
+      [GZipCompressionFilter]
     public class SaleCountryController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;

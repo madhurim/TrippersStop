@@ -33,7 +33,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         IAsyncSabreAPICaller _apiCaller;
         IAsyncWeatherAPICaller _weatherApiCaller;
         ICacheService _cacheService;
-        const string _destinationKey = "TrippismApi.Destinations.All";
+        const string _destinationKey = "Trippism.Destinations.All";
         string _expireTime = ConfigurationManager.AppSettings["RedisExpireInMin"].ToString();
 
         /// <summary>

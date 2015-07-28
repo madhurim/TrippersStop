@@ -10,6 +10,7 @@ using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
+using Trippism.APIExtention.Filters;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
@@ -18,6 +19,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
     ///   Travelers who want to choose a destination based on theme, e.g., BEACH .
     ///   Travelers who want to choose a destination based on country or region, e.g., EUROPE .
     /// </summary>
+    [GZipCompressionFilter]
     public class TopDestinationsController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;

@@ -8,12 +8,14 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TraveLayer.CustomTypes.IATA.ViewModels;
+using Trippism.APIExtention.Filters;
 
 namespace TrippismApi.Areas.IATA.Controllers
 {
     /// <summary>
     /// API to retrieve data for city pairs.
     /// </summary>
+     [GZipCompressionFilter]
     public class IATAController : ApiController
     {
         IDBService _dbService;

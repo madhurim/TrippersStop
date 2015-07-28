@@ -9,11 +9,16 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Weather;
+using Trippism.APIExtention.Filters;
 using TrippismApi;
 using TrippismApi.TraveLayer;
 
 namespace Trippism.Areas.Weather.Controllers
 {
+    /// <summary>
+    ///  API retrieves weather information
+    /// </summary>
+      [GZipCompressionFilter]
     public class HistoryController : ApiController
     {
         const string TrippismKey = "Trippism.Weather."; 

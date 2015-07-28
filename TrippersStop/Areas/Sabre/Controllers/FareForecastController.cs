@@ -10,6 +10,7 @@ using TraveLayer.CustomTypes.Sabre;
 using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
+using Trippism.APIExtention.Filters;
 
 
 namespace TrippismApi.Areas.Sabre.Controllers
@@ -17,6 +18,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
     /// <summary>
     /// Forecasts the price range into which the lowest published fare that is available 
     /// </summary>
+     [GZipCompressionFilter]
     public class FareForecastController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;

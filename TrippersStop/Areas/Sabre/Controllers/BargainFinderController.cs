@@ -16,12 +16,14 @@ using System.Xml.Linq;
 using System.Web.Hosting;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
+using Trippism.APIExtention.Filters;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
     /// <summary>
     /// Search for the lowest available priced itineraries based upon a travel date
     /// </summary>
+     [GZipCompressionFilter]
     public class BargainFinderController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;

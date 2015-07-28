@@ -10,12 +10,14 @@ using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 using TrippismApi.TraveLayer;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
+using Trippism.APIExtention.Filters;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
     /// <summary>
     /// API rates weekly traffic volumes to certain destination airports. The API looks up the traffic volume booked 
     /// </summary>
+     [GZipCompressionFilter]
     public class SeasonalityController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;

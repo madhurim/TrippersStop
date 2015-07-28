@@ -9,6 +9,7 @@ using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
+using Trippism.APIExtention.Filters;
 using TrippismApi.TraveLayer;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 
@@ -20,6 +21,8 @@ namespace TrippismApi.Areas.Sabre.Controllers
     /// Consumers who know their destination, but are flexible on their travel dates and want to search flight options across a large set or range of travel dates, or lengths of stay.
     /// Consumers who want to shop across several specific shopping parameters.
     /// </summary>
+
+    [GZipCompressionFilter]
     public class AdvancedCalendarController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;

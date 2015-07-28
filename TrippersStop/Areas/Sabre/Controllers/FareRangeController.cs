@@ -10,12 +10,14 @@ using AutoMapper;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
+using Trippism.APIExtention.Filters;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
     /// <summary>
     /// API returns the median, highest, and lowest published fares 
     /// </summary>
+    [GZipCompressionFilter]
     public class FareRangeController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;

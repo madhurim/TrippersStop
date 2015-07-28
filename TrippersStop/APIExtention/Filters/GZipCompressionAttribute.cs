@@ -22,7 +22,7 @@ namespace Trippism.APIExtention.Filters
             {
                 return;
             }
-
+            if (context.Response.Content!=null)
             context.Response.Content = new CompressedContent(context.Response.Content, acceptedEncoding);
         }
     }

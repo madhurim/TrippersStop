@@ -9,6 +9,7 @@ using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
+using Trippism.APIExtention.Filters;
 using TrippismApi.TraveLayer;
 
 namespace TrippismApi.Areas.Sabre.Controllers
@@ -19,6 +20,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
     ///  To get destination airport codes that are associated with an origin
     ///  To get origin and destination airport codes in a specific region or country
     /// </summary>
+     [GZipCompressionFilter]
     public class CityPairsController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;

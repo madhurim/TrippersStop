@@ -9,6 +9,7 @@ using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
+using Trippism.APIExtention.Filters;
 using TrippismApi.TraveLayer;
 
 namespace TrippismApi.Areas.Sabre.Controllers
@@ -16,6 +17,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
     /// <summary>
     /// API retrieves a list of multi-airport city (MAC) codes.
     /// </summary>
+      [GZipCompressionFilter]
     public class MultiAirportCityController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
