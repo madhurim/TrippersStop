@@ -34,17 +34,6 @@ angular.module('TrippismUIApp')
                           { featureType: "transit.station", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
                           { featureType: "water", elementType: "all", stylers: [{ color: "#BCCFDE" }] }];
 
-          //$scope.mapOptions = {
-          //    center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng),
-          //    zoom: 2,
-          //    minZoom: 2,
-          //    backgroundColor: "#BCCFDE",
-          //    styles: styleArray,
-          //    mapTypeId: google.maps.MapTypeId.ROADMAP
-          //};
-
-          //$scope.destinationMap1;
-
           $scope.mapOptions = {
               center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng),
               zoom: 2,
@@ -105,19 +94,37 @@ angular.module('TrippismUIApp')
               
               for (var x = 0; x < maps.length; x++) {
                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
+
                   var marker = new MarkerWithLabel({
                       position: latlng1,
                       map: $scope.destinationMap,
-                      title: ''+maps[x].LowestFare +'',
-                      //labelContent: maps[x].DestinationLocation,
+                      title: '' + maps[x].LowestFare + '',
+                      labelContent: maps[x].LowestFare,
                       labelAnchor: new google.maps.Point(12, 35),
-                      labelClass: "labels", // the CSS class for the label
+                      labelClass: "labelscolor", // the CSS class for the label
                       labelInBackground: false,
+                      labelanimation: google.maps.Animation.DROP,
                       animation: google.maps.Animation.DROP,
                       CustomMarkerInfo: maps[x],
-                      labelStyle: { opacity: 0.75 },
-                      icon: 'https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-b.png&text=' + maps[x].LowestFare + '&psize=8&font=fonts/Roboto-Regular.ttf&color=ff000033&ax=44&ay=48&scale=1',
+                      labelStyle: { opacity: 1 },
+                      //icon: 'http://demo.crackerworld.in/images/map-blues.png',
+                      icon: 'app/Styles/images/mapicon.png'
                   });
+
+
+                  //var marker = new MarkerWithLabel({
+                  //    position: latlng1,
+                  //    map: $scope.destinationMap,
+                  //    title: ''+maps[x].LowestFare +'',
+                  //    //labelContent: maps[x].DestinationLocation,
+                  //    labelAnchor: new google.maps.Point(12, 35),
+                  //    labelClass: "labels", // the CSS class for the label
+                  //    labelInBackground: false,
+                  //    animation: google.maps.Animation.DROP,
+                  //    CustomMarkerInfo: maps[x],
+                  //    labelStyle: { opacity: 0.75 },
+                  //    icon: 'https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-b.png&text=' + maps[x].LowestFare + '&psize=8&font=fonts/Roboto-Regular.ttf&color=ff000033&ax=44&ay=48&scale=1',
+                  //});
 
 
                   bounds.extend(marker.position);

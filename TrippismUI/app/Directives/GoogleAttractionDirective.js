@@ -1,7 +1,7 @@
 ﻿angular.module('TrippismUIApp').directive('googleattractionInfo',
-                                            [   '$compile',
+                                            ['$compile',
                                                 '$q',
-                                                'GoogleAttractionFactory','$timeout',
+                                                'GoogleAttractionFactory', '$timeout',
     function ($compile, $q, GoogleAttractionFactory, $timeout) {
         return {
             restrict: 'E',
@@ -12,13 +12,29 @@
                 $scope.googleattractionsMap = undefined;
                 $scope.AttractionMarkers = [];
                 $scope.bounds = new google.maps.LatLngBounds();
+                $scope.MapLoaded = false;
+                
 
                 $scope.FittoScreen = function () {
+                    
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
-                    var latlng = google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng);
+                    var latlng = new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng);
                     $scope.googleattractionsMap.setCenter(latlng);
                     $scope.googleattractionsMap.fitBounds($scope.bounds);
+
                 };
+
+
+                //$scope.$on('ViewTab', function (event, args) {
+                    
+                //    if ($scope.MapLoaded) {
+                        
+                //        $timeout(function () {
+                //            $scope.googleattractionsMap.setCenter(new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng));
+                //        }, 1000, false);
+                //    }
+                //});
+
 
                 $scope.attractionmapOptions = {
                     center: new google.maps.LatLng(0, 0),
@@ -31,48 +47,61 @@
                 };
                 $scope.$watchGroup(['googleattractionParams', 'isOpen'], function (newValue, oldValue, $scope) {
                     $scope.loadgoogleattractionInfo();
-                    if ($scope.googleattractionsMap != undefined) 
-                        $scope.FittoScreen();
+                    //if ($scope.googleattractionsMap != undefined) {
+
+                        //$timeout(function () {
+                        //    $scope.FittoScreen();
+                        //    $scope.googleattractionsMap.panTo(new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng));
+                            
+                        //}, 1000, false);
+
+
+                    // }
+                    
+                    
+
                 });
 
                 $scope.loadgoogleattractionInfo = function () {
-                    $scope.googleattractionInfoLoaded = false;
-                    $scope.googleattractionInfoNoDataFound = false;
-                    $scope.googleattractionData = "";
-                    if ($scope.googleattractionParams != undefined) {
-                        var data = {
-                            "Latitude": $scope.googleattractionParams.DestinationairportName.airport_Lat,//$scope.googleattractionParams.airport_Lat,
-                            "Longitude": $scope.googleattractionParams.DestinationairportName.airport_Lng //$scope.googleattractionParams.airport_Lng
-                        };
-                        if ($scope.googleattractionInfoLoaded == false) {
-
-                            $scope.attractionmapOptions = {
-                                center: new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng),
-                                zoom: 1,
-                                minZoom: 10,
-                                backgroundColor: "#BCCFDE",
-                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                    if (!$scope.MapLoaded) {
+                        $scope.googleattractionInfoLoaded = false;
+                        $scope.googleattractionInfoNoDataFound = false;
+                        $scope.googleattractionData = "";
+                        if ($scope.googleattractionParams != undefined) {
+                            var data = {
+                                "Latitude": $scope.googleattractionParams.DestinationairportName.airport_Lat,//$scope.googleattractionParams.airport_Lat,
+                                "Longitude": $scope.googleattractionParams.DestinationairportName.airport_Lng //$scope.googleattractionParams.airport_Lng
                             };
+                            if ($scope.googleattractionInfoLoaded == false) {
 
-                            if ($scope.googleattractionData == "") {
-                                $scope.googleattractionpromise = GoogleAttractionFactory.googleAttraction(data).then(function (data) {
-                                    if (data.status == 404) {
-                                        $scope.googleattractionInfoNoDataFound = true;
-                                        return;
-                                    }
-                                    RenderMap(data.results);
-                                    $scope.googleattractionData = data;
-                                    $scope.quantity = 5;
-                                    $scope.googleattractionInfoLoaded = true;
-                                });
+                                $scope.attractionmapOptions = {
+                                    center: new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng),
+                                    zoom: 1,
+                                    minZoom: 10,
+                                    backgroundColor: "#BCCFDE",
+                                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                                };
+
+                                if ($scope.googleattractionData == "") {
+                                    $scope.googleattractionpromise = GoogleAttractionFactory.googleAttraction(data).then(function (data) {
+                                        if (data.status == 404) {
+                                            $scope.googleattractionInfoNoDataFound = true;
+                                            return;
+                                        }
+                                        RenderMap(data.results);
+                                        $scope.MapLoaded = true;
+                                        $scope.googleattractionData = data;
+                                        $scope.quantity = 5;
+                                        $scope.googleattractionInfoLoaded = true;
+                                    });
+                                }
                             }
-                        }
 
+                        }
                     }
                 };
-                
+
                 function RenderMap(maps) {
-                    console.log($scope.AttractionMarkers);
                     if (maps != undefined && maps.length > 0) {
                         $scope.InfoWindow;
                         selected = maps;
@@ -109,14 +138,22 @@
                             })(marker, contentString, $scope.InfoWindow));
                             $scope.AttractionMarkers.push(marker);
                         }
-                        $timeout(function () {
-                            $scope.FittoScreen();
-                        }, 1000, false);
                         
+                        //$timeout(function () {
+                        //  alert('time oput called');
+                        
+                        google.maps.event.addListenerOnce($scope.googleattractionsMap, 'idle', function () {
+                            $scope.FittoScreen();
+                        });
+                        
+                        $timeout(function () {
+                            $scope.googleattractionsMap.setCenter(new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng));
+                        }, 1000, false);
+                        //$scope.googleattractionsMap.panTo(new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng));
+
+
                     }
                 };
-
-
             },
             link: function (scope, elem, attrs) {
 

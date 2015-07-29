@@ -15,13 +15,19 @@
             //);
 
             scope.$watchGroup(['weatherParams', 'isOpen'], function (newValue, oldValue, scope) {
-                if (scope.isOpen == true) {
-                    if (newValue != oldValue)
-                        scope.WeatherRangeInfo();
-                }
-                else {
-                    scope.WeatherData = "";
-                }
+                UtilFactory.ReadStateJson().then(function (data) {
+
+                    scope.StateList = data;
+                    scope.WeatherRangeInfo();
+                });
+                //scope.WeatherRangeInfo();
+                //if (scope.isOpen == true) {
+                //    if (newValue != oldValue)
+                //        scope.WeatherRangeInfo();
+                //}
+                //else {
+                //    scope.WeatherData = "";
+                //}
             });
 
             UtilFactory.ReadStateJson().then(function (data) {

@@ -9,42 +9,6 @@
 <div class="" style="clear:both;" cg-busy="{promise:googleattractionpromise,message:'Loading Attractions'}">
     <span><b>Attractions</b> </span><br />
     <div ui-map="googleattractionsMap" id="googleattractionsMap" ui-options="attractionmapOptions" class="map-canvas"></div>
-
-    <!--<div style="clear:both;" class="" cg-busy="{promise:googleattractionpromise,message:'Loading Attractions'}">
-        <div style="padding:8px;" ng-if="googleattractionInfoNoDataFound">
-            <label class="text-danger">Ooops! We are sorry, no information is available.</label>
-        </div>
-
-        <div ng-if="!googleattractionInfoNoDataFound">
-            <div class="thumbnail thumbnailstyle">
-                <table class="table fontsize" style="clear:both; color:black;">
-                    <thead>
-                        <tr>
-                            <th class="text-center underline" width="10%">No</th>
-                            <th class="underline" width="35%">Name</th>
-                            <th class="underline" width="25%">Address</th>
-                            <th class="underline" width="20%">Rating</th>
-                            <th class="text-center underline" width="10%">Locate</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="attraction in googleattractionData.results | limitTo:quantity" id="container">
-                            <td class="word-wrap text-center" width="10%">{{$index + 1}}</td>
-                            <td class="word-wrap" width="35%">{{attraction.name}}</td>
-                            <td class="word-wrap" width="25%">{{attraction.vicinity}}</td>
-                            <td class="average average-rating-container" ng-model="attraction.rating" max="5" average-star-rating width="20%"></td>
-                            <td class="word-wrap text-center" width="10%">
-                                <i class="glyphicon glyphicon-map-marker"></i>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="col-lg-12" style="padding-right:0px;margin-bottom:5px;clear:both;">
-            <button ng-if="!googleattractionInfoNoDataFound && googleattractionData.results.length > 4" ng-click="GoogleAttractionDisplay()" class="btn btn-sm btn-info pull-right">View more</button>
-        </div>
-    </div>-->
 </div>
 
 

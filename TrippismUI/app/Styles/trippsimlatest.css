@@ -420,6 +420,10 @@ text-align:center;
 	display:none !important;
 	}
 
+.my-tab a:hover > .my-close {
+    display: block !important;
+}
+
 
 .my-tab .active > .my-close {
     display: block !important;
@@ -493,3 +497,46 @@ text-align:center;
 	background-color:rgba(0,102,255,0.6);
 	color:#FFF;
 	}
+
+.containermodel {
+        width: 750px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+.loadclass {
+    background-image: url("/app/Styles/images/loader.gif");
+    background-position: 50% 20px;
+    background-repeat: no-repeat;
+    bottom: 0;
+    left: 0;
+    position: relative !important;
+    right: 0;
+    top: -20px !important;
+    height: 60px;
+}
+.messageclass{
+    color:#000 !important;
+    text-align:center;
+    font-size:16px;
+    position:relative !important;
+    top: 52px;
+    width:100%;
+}
+.headerunderline{
+    text-decoration:underline;
+}
+.labelscolor {
+    color: white;
+    background-color: #ef4234;
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    font-size: 10px !important;
+    font-weight: bold !important;
+    text-align: center;
+    min-width: 40px !important;    
+    white-space: nowrap !important;
+    margin-left: -21px !important;
+    margin-top: -73px !important;
+    opacity: 1 !important;
+   }

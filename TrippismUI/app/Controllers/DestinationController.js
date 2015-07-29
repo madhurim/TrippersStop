@@ -76,7 +76,7 @@
             $scope.tabManager.tabItems.push({
                 youtubeData: $scope.seasonalitydirectiveData,
                 title: $scope.seasonalitydirectiveData.OriginairportName.airport_Code + ' - ' + $scope.seasonalitydirectiveData.DestinationairportName.airport_Code,
-                content: "Lores sum ep sum news test [" + i + "]",
+                content: "",
                 selected: true,
                 TabcontentView :true
             });
@@ -85,14 +85,17 @@
 
 
         $scope.tabManager.select = function (i) {
+            
             $scope.ShowDestinationView = false;
             angular.forEach($scope.tabManager.tabItems, function (tabInfo) {
                 tabInfo.selected = false;
                 tabInfo.TabcontentView = false;
             });
             $scope.tabManager.tabItems[i].selected = true;
+            $scope.tabManager.tabItems[i].youtubeData.viewMap = true;
             $scope.tabManager.tabItems[i].TabcontentView = true;
             
+            //$rootScope.$broadcast('ViewTab');
         }
 
         //add few tabs
@@ -324,10 +327,10 @@
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
 
                 // Static Block
-                $scope.Origin = 'BOS';
-                $scope.CalledOnPageLoad = true;
-                $scope.findDestinations('Cheapest');
-                return;
+                //$scope.Origin = 'ATL';
+                //$scope.CalledOnPageLoad = true;
+                //$scope.findDestinations('Cheapest');
+                //return;
                 // Static Block Ends
 
                 if (org == undefined || org == '') {

@@ -5,9 +5,9 @@
             <!--<button class="btn btn-info" ng-click="ViewDestination()"><span style="padding-right:5px;" class="glyphicon glyphicon-home"> </span> Home</button>-->
         </div>
         <div class="col-lg-11" ng-if="tabManager.tabItems.length > 0">
-            <div tabs >
+            <div tabs  >
                 <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
-                    <attraction-tab attraction-params="tabInfo.youtubeData"></attraction-tab>
+                    <attraction-tab tabs-loading="loadingTab" attraction-params="tabInfo.youtubeData"></attraction-tab>
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('farerangeInfo', ['$compile', 'FareRangeFactory', function ($compile, FareRangeFactory) {
+﻿angular.module('TrippismUIApp').directive('farerangeInfo', ['$compile', '$rootScope', 'FareRangeFactory',
+    function ($compile, $rootScope,FareRangeFactory) {
     return {
         restrict: 'E',
         scope: {
@@ -16,6 +17,16 @@
                     scope.mailfarerangeData = "";
                 }
             });
+
+            scope.loadingFareRange = true;
+            scope.$parent.divFareRange = false;
+            scope.$watch('fareRangeInfoLoaded',
+              function (newValue) {
+                  scope.loadingFareRange = angular.copy(!newValue);
+                  scope.$parent.divFareRange = newValue;
+              }
+            );
+
             // scope.$watch('farerangeParams',
             //  function (newValue, oldValue) {
             //      if (newValue != oldValue)
@@ -40,14 +51,20 @@
                         if (scope.fareRangeData == "") {
                             scope.farerangepromise = FareRangeFactory.fareRange(data).then(function (data) {
                                 scope.FareRangeLoading = false;
-                                if (data.status == 404)
+                                if (data.status == 404) {
+                                    
                                     scope.fareRangeInfoNoDataFound = true;
+                                    $rootScope.$broadcast('divFareRangeEvent', false, scope.Seasonalityresult);
+                                    return;
+                                }
                                 scope.fareRangeData = data;
                                 scope.mailfarerangeData = data;
+                                scope.fareRangeInfoLoaded = true;
+                                $rootScope.$broadcast('divFareRangeEvent', true, scope.Seasonalityresult);
                             });
                         }
                     }
-                    scope.fareRangeInfoLoaded = true;
+                    //scope.fareRangeInfoLoaded = true;
                 }
             };
         }

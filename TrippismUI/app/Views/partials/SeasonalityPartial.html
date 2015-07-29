@@ -1,16 +1,16 @@
 ﻿
 <div class="">
-    <span><b>Traffic patterns</b> </span><br />
-    <h6>Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly</h6>
+   
 
     <div cg-busy="{promise:seasonalitypromise,message:'Loading Traffic volume Data'}">
-        <div style="padding:8px;" ng-if="SeasonalityNoDataFound">
-            <label class="text-danger">Ooops! We are sorry, no information is available.</label>
-        </div>
+        
 
-
+    </div>
+    <div ng-if="!loadingSeasonality">
         <div ng-if="!SeasonalityNoDataFound">
-            <div class="thumbnail thumbnailstyle" >
+            <span><b>Traffic patterns</b> </span><br />
+            <h6>Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly</h6>
+            <div class="thumbnail thumbnailstyle">
                 <table class="table fontsize" style="clear:both; color:black;">
                     <thead>
                         <tr style="height:47px;">
@@ -32,7 +32,7 @@
                                 <span ng-if="range.SeasonalityIndicator == 'Low'" class="lowrange">{{range.SeasonalityIndicator}}</span>
                             </td>
                             <td class="text-center word-wrap" width="30%">
-                                <span >{{range.NumberOfObservations}}</span>
+                                <span>{{range.NumberOfObservations}}</span>
                                 <!--<span ng-if="range.NumberOfObservations == 'GreaterThan10000'">Over crowded</span>
                                 <span ng-if="range.NumberOfObservations == 'LessThan10000'">crowded</span>
                                 <span ng-if="range.NumberOfObservations == 'LessThan1000'">not crowded</span>-->
@@ -46,5 +46,6 @@
             <button ng-if="!SeasonalityNoDataFound && MarkerSeasonalityInfo.Seasonality.length > 1" ng-click="SeasonalityDisplay()" class="btn btn-sm btn-info pull-right">View more</button>
         </div>
     </div>
+
 </div>
 

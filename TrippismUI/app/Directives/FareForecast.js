@@ -16,6 +16,12 @@
             
             scope.ShowMoreDestinationsInfo = ShowMoreDestinationsInfo;
 
+            scope.$watch('FareNoDataFound',
+              function (newValue) {
+                  scope.FareNoDataFound = angular.copy(newValue);
+              }
+            );
+
             function ShowMoreDestinationsInfo(seasonalitydirectiveData) {
                 $rootScope.$broadcast('CreateTabForDestination');
                 closePanel();
@@ -55,6 +61,7 @@
             scope.$watch('seasonalityData',
               function (newValue, oldValue) {
                   if (newValue != oldValue) {
+                      scope.visibleDiv = true;
                       scope.mapDetails = scope.seasonalityData.mapOptions;
                       scope.googleattractionData = {
                           airport_Lat: scope.seasonalityData.DestinationairportName.airport_Lat,
@@ -86,16 +93,28 @@
                 }
             };
 
-            // Events
-            //elem.bind('click', function () {
-            //    elem.css('background-color', 'white');
-            //    scope.$apply(function () {
-            //        scope.color = "white";
-            //    });
-            //});
-            //elem.bind('mouseover', function () {
-            //    elem.css('cursor', 'pointer');
-            //});
+            scope.visibleDiv = true;
+            scope.FareRangeData = true;
+            scope.SeasonalityData = true;
+
+            scope.$on('divFareRangeEvent', function (event, args) {
+                scope.FareRangeData = args;
+                if (scope.FareRangeData == true || scope.SeasonalityData == true) {
+                    scope.visibleDiv = true;
+                }
+                else {
+                    scope.visibleDiv = false;
+                }
+            });
+            scope.$on('divSeasonalityEvent', function (event, args) {
+                scope.SeasonalityData = args;
+                if (scope.FareRangeData == true || scope.SeasonalityData == true) {
+                    scope.visibleDiv = true;
+                }
+                else {
+                    scope.visibleDiv = false;
+                }
+            });
         }
     }
 }]);
