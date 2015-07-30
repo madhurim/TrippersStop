@@ -42,7 +42,6 @@
                 selected: true
             });
             $scope.ShowDestinationView = false;
-            console.log($scope.seasonalitydirectiveData);
         });
 
         $scope.tabManager.addTab = function () {

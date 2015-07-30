@@ -540,3 +540,24 @@ text-align:center;
     margin-top: -73px !important;
     opacity: 1 !important;
    }
+.imageclass {
+        float: left;
+        margin: 0 8px 0 0;
+        height: 68px;
+        display: inline-block;
+        overflow: hidden;
+        position: relative;
+    }
+
+.play {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 20px;
+    opacity: 0;
+    padding: 15px 37px;
+    position: absolute;
+    z-index: 1;
+}
+.imageclass a:hover .play {
+    opacity: 1;
+}

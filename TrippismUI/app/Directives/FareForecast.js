@@ -67,6 +67,7 @@
                           airport_Lat: scope.seasonalityData.DestinationairportName.airport_Lat,
                           airport_Lng: scope.seasonalityData.DestinationairportName.airport_Lng
                       }
+                      scope.weatherData = undefined;
                       scope.isOpens = false;
                       scope.openaccordiondata = false;
                   }
@@ -90,6 +91,7 @@
                 scope.isOpens = !scope.isOpens;
                 if (scope.openaccordiondata == false) {
                     scope.openaccordiondata = true;
+
                 }
             };
 

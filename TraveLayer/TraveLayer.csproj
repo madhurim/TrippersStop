@@ -156,6 +156,7 @@
     <Compile Include="CacheServices\ICacheService.cs" />
     <Compile Include="CacheServices\RedisService.cs" />
     <Compile Include="CustomTypes\Weather\Request\HistoryInput.cs" />
+    <Compile Include="CustomTypes\Weather\Request\InternationalWeatherInput.cs" />
     <Compile Include="CustomTypes\Weather\Response\HistoryOutput.cs" />
     <Compile Include="CustomTypes\Weather\ViewModels\TripWeather.cs" />
     <Compile Include="CustomTypes\YouTube\Request\YouTubeInput.cs" />

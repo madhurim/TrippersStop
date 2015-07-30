@@ -102,10 +102,20 @@
                 };
 
                 function RenderMap(maps) {
+                    
                     if (maps != undefined && maps.length > 0) {
                         $scope.InfoWindow;
                         selected = maps;
                         for (var x = 0; x < maps.length; x++) {
+                            var icon = new google.maps.MarkerImage(
+                                             maps[x].icon,
+                                            
+    new google.maps.Size(71, 71),
+    new google.maps.Point(0, 0),
+    new google.maps.Point(17, 34),
+    new google.maps.Size(25, 25));
+           
+
                             var latlng1 = new google.maps.LatLng(maps[x].geometry.location.lat, maps[x].geometry.location.lng);
                             var marker = new MarkerWithLabel({
                                 position: latlng1,
@@ -116,6 +126,8 @@
                                 animation: google.maps.Animation.DROP,
                                 CustomMarkerInfo: maps[x],
                                 labelStyle: { opacity: 0.75 },
+                                icon: icon,//'app/Styles/images/mapicon.png'
+
                                 //icon: 'https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-b.png&text=' + maps[x].name + '&psize=8&font=fonts/Roboto-Regular.ttf&color=ff000033&ax=44&ay=48&scale=1',
                             });
 
@@ -129,7 +141,7 @@
 
                             $scope.InfoWindow = new google.maps.InfoWindow();
 
-                            google.maps.event.addListener(marker, 'mouseover', (function (marker, contentString, infowindow) {
+                            google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
                                 return function () {
                                     if ($scope.InfoWindow) $scope.InfoWindow.close();
                                     $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });

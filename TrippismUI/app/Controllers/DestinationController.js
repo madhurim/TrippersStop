@@ -30,6 +30,7 @@
 
         $scope.ShowDestinationView = true;
         $scope.TabcontentView = true;
+        $scope.TabCreatedCount = 0;
 
         $scope.tabManager = {};
 
@@ -73,8 +74,11 @@
             
             $scope.tabManager.resetSelected();
             var i = ($scope.tabManager.tabItems.length + 1);
+            $scope.TabCreatedCount = $scope.TabCreatedCount + 1;
+            var _youtubeparams = $scope.seasonalitydirectiveData;
+            _youtubeparams.tabIndex = $scope.TabCreatedCount;
             $scope.tabManager.tabItems.push({
-                youtubeData: $scope.seasonalitydirectiveData,
+                youtubeData: _youtubeparams,
                 title: $scope.seasonalitydirectiveData.OriginairportName.airport_Code + ' - ' + $scope.seasonalitydirectiveData.DestinationairportName.airport_Code,
                 content: "",
                 selected: true,
@@ -327,10 +331,10 @@
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
 
                 // Static Block
-                //$scope.Origin = 'ATL';
-                //$scope.CalledOnPageLoad = true;
-                //$scope.findDestinations('Cheapest');
-                //return;
+                $scope.Origin = 'ATL';
+                $scope.CalledOnPageLoad = true;
+                $scope.findDestinations('Cheapest');
+                return;
                 // Static Block Ends
 
                 if (org == undefined || org == '') {

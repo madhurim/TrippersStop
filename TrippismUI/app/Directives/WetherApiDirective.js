@@ -7,16 +7,13 @@
         },
         templateUrl: '/app/Views/Partials/WeatherPartial.html',
         link: function (scope, elem, attrs) {
-            // scope.$watch('weatherParams',
-            //  function (newValue, oldValue) {
-            //      if (newValue != oldValue)
-            //          scope.WeatherRangeInfo();
-            //  }
-            //);
 
+            scope.TabIndex = "weather" + scope.weatherParams.tabIndex;
+            var mapHTML = "<div id='" + scope.TabIndex + "'></div>";
+            elem.append($compile(mapHTML)(scope));
             scope.$watchGroup(['weatherParams', 'isOpen'], function (newValue, oldValue, scope) {
-                UtilFactory.ReadStateJson().then(function (data) {
 
+                UtilFactory.ReadStateJson().then(function (data) {
                     scope.StateList = data;
                     scope.WeatherRangeInfo();
                 });
@@ -30,9 +27,9 @@
                 //}
             });
 
-            UtilFactory.ReadStateJson().then(function (data) {
-                scope.StateList = data;
-            });
+            //UtilFactory.ReadStateJson().then(function (data) {
+            //    scope.StateList = data;
+            //});
 
             scope.WeatherRangeInfo = function () {
                 scope.WeatherInfoLoaded = false;
@@ -50,8 +47,8 @@
                     else {
                         scope.WeatherData = "";
                         var data = {
-                            "State": statedata.StateName,
-                            "City": statedata.CityName,//scope.weatherParams.DestinationairportName.airport_CityName,
+                            "CountryCode": scope.weatherParams.DestinationairportName.airport_CountryCode,
+                            "AirportCode": scope.weatherParams.DestinationairportName.airport_Code,//scope.weatherParams.DestinationairportName.airport_CityName,
                             "DepartDate": scope.weatherParams.Fareforecastdata.DepartureDate,
                             "ReturnDate": scope.weatherParams.Fareforecastdata.ReturnDate
                         };
@@ -79,10 +76,17 @@
             function DisplayChart() {
                 var chartData = [];
                 if (scope.WeatherData != undefined && scope.WeatherData != "") {
-                    scope.HighTempratureC = scope.WeatherData.TempHighAvg.Avg.C;
-                    scope.HighTempratureF = scope.WeatherData.TempHighAvg.Avg.F;
-                    scope.LowTempratureC = scope.WeatherData.TempLowAvg.Avg.C;
-                    scope.LowTempratureF = scope.WeatherData.TempLowAvg.Avg.F;
+
+                    if (scope.WeatherData.TempHighAvg != undefined)
+                        scope.HighTempratureC = scope.WeatherData.TempHighAvg.Avg.C;
+
+                    if (scope.WeatherData.TempLowAvg != undefined) {
+                        scope.LowTempratureC = scope.WeatherData.TempLowAvg.Avg.C;
+                        scope.LowTempratureF = scope.WeatherData.TempLowAvg.Avg.F;
+                    }
+
+
+                    // if (scope.WeatherData.WeatherChances != undefined && scope.WeatherData.WeatherChances.length > 0) {
                     for (i = 0; i < scope.WeatherData.WeatherChances.length; i++) {
                         var datas = {
                             name: scope.WeatherData.WeatherChances[i].Name,
@@ -90,9 +94,16 @@
                         };
                         chartData.push(datas);
                     }
+                    //   }
 
-                    $('#weatherChart').highcharts({
+
+
+
+                    //$('#weatherChart').highcharts({
+                    var id = document.getElementById(scope.TabIndex)
+                    $('#' + scope.TabIndex).highcharts({
                         chart: {
+                            height: 250,
                             type: 'column',
                         },
                         title: {
@@ -131,6 +142,10 @@
                             data: chartData
                         }]
                     });
+
+
+
+
                 }
             }
         }

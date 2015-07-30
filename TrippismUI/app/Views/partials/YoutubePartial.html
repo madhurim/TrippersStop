@@ -16,9 +16,10 @@
                                 <table class="table fontsize" style="clear:both; color:black;">
                                     <tbody style="">
                                         <tr ng-repeat="data in youtubeData" id="container">
-                                            <td width="35%">
-                                                <!--<iframe width="300" height="200" ng-src="{{getVideoUrl(data.VideoId)}}" frameborder="0" allowfullscreen></iframe>-->
-                                                <span class="imagClass">
+                                            <td width="40%">
+                                                
+                                                
+                                                <span class="imageclass">
                                                     <a ng-click="setVideoUrl(data.VideoId)" style="cursor:pointer;">
                                                         <span class="play">&#9658;</span>
                                                         <img width="120" height="90" aria-hidden="true" alt="" src="{{data.DefaultURL}}" style="position: relative;top: -11px;">
