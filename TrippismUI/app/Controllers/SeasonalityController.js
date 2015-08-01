@@ -47,12 +47,10 @@
         }
 
         function findseasonality() {
-
             if ($scope.frmrangefinder.$invalid) {
                 $scope.hasError = true;
                 return;
             }
-        
             $scope.SearchedseasonalityInfo = undefined;
             $scope.IsSearched = true;
             $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText;

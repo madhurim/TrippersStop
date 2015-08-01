@@ -1,4 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('weatherInfo', ['$compile', 'WeatherFactory', 'UtilFactory', function ($compile, WeatherFactory, UtilFactory) {
+﻿angular.module('TrippismUIApp').directive('weatherInfo', ['$compile', '$timeout', '$rootScope', 'WeatherFactory', 'UtilFactory',
+    function ($compile,$timeout, $rootScope, WeatherFactory, UtilFactory) {
     return {
         restrict: 'E',
         scope: {
@@ -8,15 +9,46 @@
         templateUrl: '/app/Views/Partials/WeatherPartial.html',
         link: function (scope, elem, attrs) {
 
-            scope.TabIndex = "weather" + scope.weatherParams.tabIndex;
-            var mapHTML = "<div id='" + scope.TabIndex + "'></div>";
-            elem.append($compile(mapHTML)(scope));
+            //scope.TabIndex = "weather" + scope.weatherParams.tabIndex;
+            //var mapHTML = "<div id='" + scope.TabIndex + "'></div>";
+            //elem.append($compile(mapHTML)(scope));
+
+            scope.chartHeight = 200;
+            scope.StateList = [];
+            UtilFactory.ReadStateJson().then(function (data) {
+                scope.StateList = data;
+            });
+           
             scope.$watchGroup(['weatherParams', 'isOpen'], function (newValue, oldValue, scope) {
 
                 UtilFactory.ReadStateJson().then(function (data) {
                     scope.StateList = data;
-                    scope.WeatherRangeInfo();
+                    if (scope.weatherParams != undefined && scope.weatherParams.tabIndex != undefined) {
+                        if (scope.weatherParams.tabIndex == 999)
+                        {   
+                            var elementcls = document.getElementsByClassName("weatherinmaindiv");
+                            if (elementcls.length > 0) {
+                                for (var i = 0; i < elementcls.length; i++)
+                                    removeElement(elementcls[i]);
+                            }   
+                        }
+                        scope.TabIndex = "weather" + scope.weatherParams.tabIndex;
+                        var mapHTML = "";
+                        
+                        if (scope.weatherParams.tabIndex == 999)
+                            mapHTML = "<div id='" + scope.TabIndex + "' class='weatherinmaindiv' ></div>";
+                        else
+                            mapHTML = "<div id='" + scope.TabIndex + "'></div>";
+                        elem.append($compile(mapHTML)(scope));
+                        if (scope.weatherParams.tabIndex == 999)
+                            document.getElementById(scope.TabIndex).innerHTML = "";
+                        scope.WeatherRangeInfo();
+
+                    } else {
+                        scope.WeatherData = "";
+                    }
                 });
+
                 //scope.WeatherRangeInfo();
                 //if (scope.isOpen == true) {
                 //    if (newValue != oldValue)
@@ -31,6 +63,12 @@
             //    scope.StateList = data;
             //});
 
+            function removeElement(element) {
+                element && element.parentNode && element.parentNode.removeChild(element);
+            }
+
+           
+
             scope.WeatherRangeInfo = function () {
                 scope.WeatherInfoLoaded = false;
                 scope.WeatherInfoNoDataFound = false;
@@ -39,6 +77,7 @@
                 scope.LowTempratureC = "0";
                 scope.LowTempratureF = "0";
                 if (scope.weatherParams != undefined) {
+                    
                     var statedata = _.find(scope.StateList, function (state) { return state.CityName == scope.weatherParams.DestinationairportName.airport_CityName });
                     if (statedata == undefined) {
                         scope.WeatherData = "";
@@ -57,8 +96,14 @@
                             if (scope.WeatherData == "") {
                                 scope.Weatherpromise = WeatherFactory.GetData(data).then(function (data) {
                                     scope.WeatherInfoLoaded = false;
-                                    if (data.status == 404)
+                                    if (data == "" || data.status == 404) {
                                         scope.WeatherInfoNoDataFound = true;
+                                        return;
+                                    }
+                                    if (scope.weatherParams.tabIndex == 999) {
+                                        scope.chartHeight = 200;
+                                        $rootScope.$broadcast('divWeatherEvent', true);
+                                    }   
                                     scope.WeatherData = data;
                                 });
                             }
@@ -73,6 +118,8 @@
                     DisplayChart();
             })
 
+            
+            scope.Chart = [];
             function DisplayChart() {
                 var chartData = [];
                 if (scope.WeatherData != undefined && scope.WeatherData != "") {
@@ -95,19 +142,16 @@
                         chartData.push(datas);
                     }
                     //   }
-
-
-
-
+                    
                     //$('#weatherChart').highcharts({
-                    var id = document.getElementById(scope.TabIndex)
-                    $('#' + scope.TabIndex).highcharts({
+                    var options = {
                         chart: {
-                            height: 250,
+                            height: scope.chartHeight,
                             type: 'column',
+                            renderTo: scope.TabIndex,
                         },
                         title: {
-                            text: 'Weather fore cast'
+                            text: 'Weather forecast'
                         },
                         xAxis: {
                             type: 'category',
@@ -141,10 +185,11 @@
                             colorByPoint: false,
                             data: chartData
                         }]
-                    });
-
-
-
+                    };
+                    
+                    $timeout(function () {
+                        scope.Chart = new Highcharts.Chart(options);
+                    }, 0, false);
 
                 }
             }

@@ -16,12 +16,10 @@
                 
 
                 $scope.FittoScreen = function () {
-                    
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
                     var latlng = new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng);
                     $scope.googleattractionsMap.setCenter(latlng);
                     $scope.googleattractionsMap.fitBounds($scope.bounds);
-
                 };
 
 
@@ -42,6 +40,14 @@
                     minZoom: 2,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
+
+                var mapid = angular.element(document.querySelector('#googleattractionsMap'));
+                mapid.css('height', ($(window).height() - 350) + 'px');
+                $timeout(function () {
+                    google.maps.event.trigger($scope.googleattractionsMap, 'resize');
+
+                }, 1000, false);
+
                 $scope.GoogleAttractionDisplay = function () {
                     $scope.quantity = 20;
                 };
@@ -109,13 +115,11 @@
                         for (var x = 0; x < maps.length; x++) {
                             var icon = new google.maps.MarkerImage(
                                              maps[x].icon,
-                                            
-    new google.maps.Size(71, 71),
-    new google.maps.Point(0, 0),
-    new google.maps.Point(17, 34),
-    new google.maps.Size(25, 25));
-           
-
+                                            new google.maps.Size(71, 71),
+                                            new google.maps.Point(0, 0),
+                                            new google.maps.Point(17, 34),
+                                            new google.maps.Size(25, 25)
+                                        );
                             var latlng1 = new google.maps.LatLng(maps[x].geometry.location.lat, maps[x].geometry.location.lng);
                             var marker = new MarkerWithLabel({
                                 position: latlng1,
@@ -168,7 +172,6 @@
                 };
             },
             link: function (scope, elem, attrs) {
-
             }
         }
     }]);

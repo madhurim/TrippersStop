@@ -1,66 +1,69 @@
 ﻿<div class="fareforecastDiv" style="margin-bottom:10px;clear:both;">
     <div class="container-fluid-header">
-        <div class="containermodel" style="margin-top:8%;">
+        <div class="containermodel" style="margin-top:-10px;">
             <!--style=" transform translate(0%, 12%);"-->
             <div class="row my-space">
                 <div class="col-md-12 padlr0">
                     <div class="col-lg-10 padlr0 headerunderline">
-                        <span class="headertag">
+                        <span class="headertag fnt15">
                             {{seasonalityData.DestinationairportName.airport_FullName + ', ' + seasonalityData.DestinationairportName.airport_CityName}}
                         </span>
                     </div>
-                    <div class="col-lg-2">
-                        <div class="button-right">
-                            <a class=" close-panel-button pull-right" ng-click="closePanel()" role="button" id="close_destination_panel" tabindex="0" style="color:white;">
-                                X
-                            </a>
-                        </div>
+                    <div class="col-md-2 padlr0">
+                        <button title="Share via email" class="btn btn-primary share-btn" type="button" ng-click="SendEmailToUser()">
+                            <i style="padding-left:5px;" class="glyphicon glyphicon-share"></i>
+                        </button>
+                        <a class=" close-panel-button pull-right" ng-click="closePanel()" role="button" id="close_destination_panel" tabindex="0" style="color:white;">X</a>
                     </div>
                 </div>
 
                 <div class="col-md-12 padlr0">
                     <div class="col-lg-6 padlr0">
-                        <h4>Lowest Fare: <span>{{mapDetails.CurrencyCode}} {{mapDetails.LowestFare | number : 2}} </span></h4>
-                        <h4>Lowest Predicted Fare: <span>{{mapDetails.CurrencyCode}} {{mapDetails.LowestNonStopFare | number : 2 }}</span></h4>
+                        <span class="fnt15">Lowest Fare: <span>{{mapDetails.CurrencyCode}} {{mapDetails.LowestFare | number : 2}} </span></span>
+                        
                     </div>
-                    <div class="col-lg-5">
-                        <div class="share" style="margin-top:10px;">
-                            <button class="btn btn-primary share-btn" type="button" ng-click="SendEmailToUser()">
-                                Share<i style="padding-left:5px;" class="glyphicon glyphicon-share"></i>
-                            </button>
+                    <div class="col-lg-6 padlr0" ng-show="!FareNoDataFound"> <!--cg-busy="{promise:fareinfopromise,message:'Please wait fare forecast loading...'}"--> 
+                        <div ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
+                            <span class="fnt15">
+                                Recommendation :
+                                <span>
+                                    <img style="margin-top:-10px;" ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
+                                    <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
+                                    <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
+                                    <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
+                                </span>
+                            </span>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-12 padlr0" cg-busy="{promise:fareinfopromise,message:'Please wait fare forecast loading...'}" style="height:50px;" ng-show="!FareNoDataFound">
-                    <div ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
-                        <h4>
-                            Recommendation :
-                            <span>
-                                <img style="margin-top:-10px;" ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
-                                <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
-                                <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
-                                <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
-                            </span>
-                        </h4>
+
+                    <div class="col-lg-6 padlr0">
+                        <span class="fnt15">Lowest Predicted Fare: <span>{{mapDetails.CurrencyCode}} {{mapDetails.LowestNonStopFare | number : 2 }}</span></span>
                     </div>
+
+                    <div class="col-lg-6 padlr0">
+                        <button ng-click="ShowMoreDestinationsInfo()" type="button" style="padding:0px 5px;" class="btn btn-sm btn-success">Show Attractions @ {{seasonalityData.DestinationairportName.airport_CityName}}</button>
+                    </div>
+
                 </div>
+                
                 
                 <div class="col-xs-12 faredetails" style="padding:0px;" ng-show="visibleDiv">
                     <div class="panel panel-default">
-                        <div class="panel-heading cursorpointer" ng-click="openaccordion()">
-                            <h4 class="panel-title">
+                        <div class="panel-heading cursorpointer" style="padding: 3px 5px;" ng-click="openaccordion()">
+                            <h4 class="panel-title fnt15">
                                 <a><span ng-class="text-muted">More Insights on {{accordianDefault}} {{seasonalityData.DestinationairportName.airport_FullName + ', ' + seasonalityData.DestinationairportName.airport_CityName}}</span></a>
                             </h4>
                         </div>
-                        <div class="panel-collapse" collapse="!isOpens" style="margin-bottom:35px;">
-                            <div class="panel-body">
-                                <div class="col-md-12">
-                                    <seasonality-info seasonality-params="seasonalityData" mailmarkereasonality-info="MailMarkerSeasonalityInfo" is-open="openaccordiondata" class="seasonality"></seasonality-info>
+                        <div class="panel-collapse"  style="margin-bottom:0px;"> <!--collapse="!isOpens"-->
+                            <div class="panel-body" style="padding-bottom:0px;">
+                                <div class="col-md-12 padlr0">
+                                    <div class="col-md-6 padlr0"><seasonality-info seasonality-params="seasonalityData" mailmarkereasonality-info="MailMarkerSeasonalityInfo" is-open="true" class="seasonality"></seasonality-info> <!--is-open="openaccordiondata"--></div>
+                                    <div class="col-md-6 padlr0"><weather-info style="min-width:300px;" weather-params="seasonalityData" is-open="true" style="clear:both;"></weather-info></div>
                                 </div>
                                 <br />
                                 <br />
                                 <div class="col-md-12">
-                                    <farerange-info farerange-params="seasonalityData" mailfarerange-data="MailFareRangeData" is-open="openaccordiondata" style="clear:both;"></farerange-info>
+                                    <farerange-info farerange-params="seasonalityData" mailfarerange-data="MailFareRangeData" is-open="true" style="clear:both;"></farerange-info> <!--is-open="openaccordiondata"-->
                                 </div>
                             </div>
                             <!--<div class="col-md-12 padleft0">
@@ -70,7 +73,7 @@
                         
                     </div>
                 </div>
-                <button ng-click="ShowMoreDestinationsInfo()" type="button" class="btn btn-success">Show Attractions @ {{seasonalityData.DestinationairportName.airport_CityName}}</button>
+                
                 
             </div>
             <script type="text/ng-template" id="EmailDetForm.html">

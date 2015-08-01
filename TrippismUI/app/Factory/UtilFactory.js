@@ -41,8 +41,14 @@
                         var objtopush = _.omit(_arrairports[i], "Airports");
                         objtopush['airport_Code'] = _arrairports[i].airport_CityCode;
                         objtopush['airport_FullName'] = _arrairports[i].airport_CityName + ", All Airports";
-                        objtopush['airport_Lat'] = null;
-                        objtopush['airport_Lng'] = null;
+
+                        // For now get defalut first airport lat/long 
+                        objtopush['airport_Lat'] = _arrairports[i].Airports[0].airport_Lat;
+                        objtopush['airport_Lng'] = _arrairports[i].Airports[0].airport_Lng;//null;
+
+                        //objtopush['airport_Lat'] = null;
+                        //objtopush['airport_Lng'] = null
+
                         objtopush['airport_IsMAC'] = true;
                         AvailableCodes.push(objtopush);
                     }

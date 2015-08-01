@@ -95,11 +95,14 @@ angular.module('TrippismUIApp')
               for (var x = 0; x < maps.length; x++) {
                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
 
+                  var LowestFarePrice = Math.round(maps[x].LowestFare);
+                  LowestFarePrice = LowestFarePrice.toLocaleString()
+
                   var marker = new MarkerWithLabel({
                       position: latlng1,
                       map: $scope.destinationMap,
-                      title: '' + maps[x].LowestFare + '',
-                      labelContent: maps[x].LowestFare,
+                      title: LowestFarePrice,
+                      labelContent: LowestFarePrice,
                       labelAnchor: new google.maps.Point(12, 35),
                       labelClass: "labelscolor", // the CSS class for the label
                       labelInBackground: false,
@@ -166,7 +169,6 @@ angular.module('TrippismUIApp')
                           //});
 
                           //$scope.InfoWindow.open($scope.destinationMap, marker);
-
                           var OriginairportName = _.find($scope.airportlist, function (airport) {
                               return airport.airport_Code == $scope.$parent.Origin.toUpperCase()
                           });
@@ -191,6 +193,7 @@ angular.module('TrippismUIApp')
                               DestinationairportName: DestinationairportName,
                               DestinationList: $scope.destinations,
                               AvailableAirports: $scope.airportlist,
+                              tabIndex : 999 
                           });
                       };
                   })(marker, contentString, $scope.InfoWindow));
@@ -212,7 +215,11 @@ angular.module('TrippismUIApp')
               return d.promise;
           }
 
+
           
+          $scope.$on('eventDestinationMapresize', function (event, args) {
+              google.maps.event.trigger($scope.destinationMap, 'resize');
+          });
 
           //$scope.$on('FitToScreenSearch', function (event, args) {
           //    google.maps.event.trigger($scope.destinationMap, 'resize');

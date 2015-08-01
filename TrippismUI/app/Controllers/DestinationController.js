@@ -31,11 +31,8 @@
         $scope.ShowDestinationView = true;
         $scope.TabcontentView = true;
         $scope.TabCreatedCount = 0;
-
         $scope.tabManager = {};
-
         $scope.tabManager.tabItems = [];
-
         $scope.tabManager.checkIfMaxTabs = function () {
             var max = 4;
             var i = $scope.tabManager.tabItems.length;
@@ -50,53 +47,73 @@
         };
 
         $scope.tabManager.resetSelected = function () {
-
             angular.forEach($scope.tabManager.tabItems, function (pane) {
                 pane.TabcontentView = false; // Custom
                 pane.selected = false;
             });
         };
 
-        $scope.tabManager.addTab = function () {
-            if ($scope.tabManager.checkIfMaxTabs()) {
-                alert("[Max Tabs] You have opened max tabs for this page.");
-                return;
-            }
-            $scope.tabManager.resetSelected();
-            var i = ($scope.tabManager.tabItems.length + 1);
-            $scope.tabManager.tabItems.push({
-                title: "Tab No: " + i,
-                content: "Lores sum ep sum news test [" + i + "]",
-                selected: true
-            });
-        };
+        //$scope.tabManager.addTab = function () {
+        //    $scope.tabManager.resetSelected();
+        //    var i = ($scope.tabManager.tabItems.length + 1);
+        //    $scope.tabManager.tabItems.push({
+        //        title: "Tab No: " + i,
+        //        content: "Lores sum ep sum news test [" + i + "]",
+        //        selected: true
+        //    });
+        //};
+
         $scope.$on('CreateTabForDestination', function () {
-            
             $scope.tabManager.resetSelected();
             var i = ($scope.tabManager.tabItems.length + 1);
             $scope.TabCreatedCount = $scope.TabCreatedCount + 1;
-            var _youtubeparams = $scope.seasonalitydirectiveData;
-            _youtubeparams.tabIndex = $scope.TabCreatedCount;
+            var _paramsdata = $scope.seasonalitydirectiveData;
+            _paramsdata.tabIndex = $scope.TabCreatedCount;
+
             $scope.tabManager.tabItems.push({
-                youtubeData: _youtubeparams,
+                //youtubeData: _youtubeparams,
+                parametersData: _paramsdata,
                 title: $scope.seasonalitydirectiveData.OriginairportName.airport_Code + ' - ' + $scope.seasonalitydirectiveData.DestinationairportName.airport_Code,
                 content: "",
                 selected: true,
                 TabcontentView :true
             });
+
             $scope.ShowDestinationView = false;
         });
 
+        $scope.tabManager.selectPreviousTab = function (i, $event) {
+            if (typeof $event != 'undefined') {
+                $event.stopPropagation();
+            }
+            if (i > 0) {
+                angular.forEach($scope.tabManager.tabItems, function (tabInfo) {
+                    tabInfo.selected = false;
+                });
+                $scope.tabManager.tabItems[i - 1].selected = true;
+            }
+        }
+
+        $scope.tabManager.removeTab = function (i, $event) {
+
+            if (typeof $event != 'undefined') {
+                $event.stopPropagation();
+            }
+            if ($scope.tabManager.tabItems.length > 0)
+                $scope.tabManager.selectPreviousTab(i);
+            // remove from array
+            $scope.tabManager.tabItems.splice(i, 1);
+            $scope.ViewDestination();
+        }
+
 
         $scope.tabManager.select = function (i) {
-            
             $scope.ShowDestinationView = false;
             angular.forEach($scope.tabManager.tabItems, function (tabInfo) {
                 tabInfo.selected = false;
                 tabInfo.TabcontentView = false;
             });
             $scope.tabManager.tabItems[i].selected = true;
-            $scope.tabManager.tabItems[i].youtubeData.viewMap = true;
             $scope.tabManager.tabItems[i].TabcontentView = true;
             
             //$rootScope.$broadcast('ViewTab');
@@ -174,11 +191,10 @@
         // $scope.Earliestdeparturedate = ConvertToRequiredDate($scope.FromDate, 'UI');
 
         $scope.ViewDestination = function () {
-            
-           // $rootScope.$broadcast('FitToScreenSearch');
             $scope.ShowDestinationView = true;
             $scope.tabManager.resetSelected();
             $scope.TabcontentView = false;
+            //$rootScope.$broadcast('eventDestinationMapresize');
         };
 
         $scope.$watch(function (scope) { return scope.Earliestdeparturedate },

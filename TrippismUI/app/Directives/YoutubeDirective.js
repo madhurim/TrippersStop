@@ -1,12 +1,26 @@
-﻿angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', 'YouTubeFactory', '$sce', function ($compile, YouTubeFactory,$sce) {
+﻿angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout', 'YouTubeFactory', '$sce',
+    function ($compile, $timeout, YouTubeFactory, $sce) {
     return {
         restrict: 'E',
         scope: {
             youtubeParams : '=',
         },
         templateUrl: '/app/Views/Partials/YoutubePartial.html',
-        
+        controller: function ($scope) {
+
+            
+                
+            
+
+           
+        },
         link: function (scope, elem, attrs) {
+            var mapid = angular.element(document.querySelector('#ytubetabletbody'));
+            console.log(mapid)
+            mapid.css('height', ($(window).height() - 100) + 'px');
+           
+            
+
             scope.youtubeInfoDataFound = false;
             scope.$watchGroup(['youtubeParams'], function (newValue, oldValue, scope) {
                 scope.youtubeData = "";
@@ -37,6 +51,7 @@
                                     return;
                                 }
                                 scope.youtubeData = data;
+                                console.log(data);
                                 scope.getVideoUrl = $sce.trustAsResourceUrl("//www.youtube.com/embed/" + data[0].VideoId);
                                 scope.youtubeInfoDataFound = true;
                             });

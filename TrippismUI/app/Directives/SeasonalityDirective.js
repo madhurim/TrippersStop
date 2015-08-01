@@ -10,9 +10,13 @@
         },
         templateUrl: '/app/Views/Partials/SeasonalityPartial.html',
         link: function (scope, elem, attrs) {
+
+            scope.Isviewmoredisplayed = false;
+
             scope.SeasonalityDisplay = function () {
                 scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
                 scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
+                scope.Isviewmoredisplayed = true;
             };
 
             scope.$parent.divSeasonality = false;

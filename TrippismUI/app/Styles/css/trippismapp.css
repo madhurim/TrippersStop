@@ -115,8 +115,8 @@ right: -6px;
     width: 400px; 
     height: 300px
 }
-.highrange {background-color:#468847;padding:5px 15px; color:#FFF}
-          .lowrange {background-color:#dff0d8; padding:5px 18px;}
+.highrange {background-color:#468847;padding:5px 13px; color:#FFF}
+          .lowrange {background-color:#dff0d8; padding:5px 14px;}
         .mediumrange {background-color:#b6ff00; padding:5px; }
           .thumbnailstyle {
             padding: 0px;

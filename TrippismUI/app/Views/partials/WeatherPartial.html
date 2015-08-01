@@ -1,9 +1,6 @@
-﻿<div class="" style="clear:both;padding-top:5px;">
+﻿<div class="col-md-12" style="clear:both;padding-top:5px;">
     <div class="" cg-busy="{promise:Weatherpromise,message:'Loading Weather Detail'}">
         <div>
-            <div style="padding:8px;" ng-if="WeatherInfoNoDataFound">
-                <label class="text-danger">Ooops! We are sorry, no information is available.</label>
-            </div>
             <div class="thumbnail thumbnailstyle" ng-if="!WeatherInfoLoaded">
                 <div class="selest">
                     <span class="fontsize"><b>Avg. Hig Temprature : {{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103</b></span>  <span class="fontsize padleft10"><b>Avg. Low Temprature : {{LowTempratureF}}&#x2109 {{LowTempratureC}}&#x2103</b></span>

@@ -24,7 +24,7 @@
     <Content Include="app\Controllers\FareRangeController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
     <Content Include="app\Controllers\SeasonalityController.js" />
-    <Content Include="app\Controllers\DestinationTestingController.js" />
+    <Content Include="app\Controllers\YouTubeController.js" />
     <Content Include="app\Directives\AttractionTabDirective.js" />
     <Content Include="app\Directives\averageStarRatingDirective.js" />
     <Content Include="app\Directives\FareForecast.js" />
@@ -70,7 +70,6 @@
     <Content Include="app\Styles\images\thumbs_up.png" />
     <Content Include="app\Styles\images\time.png" />
     <Content Include="app\Styles\trippsimlatest.css" />
-    <Content Include="app\Views\destination1.html" />
     <Content Include="app\Utility.js" />
     <Content Include="app\Views\farerange.html" />
     <Content Include="app\Views\GoogleMap.html" />
