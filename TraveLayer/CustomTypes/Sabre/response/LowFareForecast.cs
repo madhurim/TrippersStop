@@ -5,6 +5,7 @@
 
 
 
+using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,17 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Sabre
 {
-   
+     [ProtoContract]
     public class Forecast
     {
+        [ProtoMember(1)]
         public int HighestPredictedFare { get; set; }
+        [ProtoMember(2)]
         public string CurrencyCode { get; set; }
+        [ProtoMember(3)]
         public int LowestPredictedFare { get; set; }
     }
-    
+
     public class OTA_LowFareForecast
     {
         public string OriginLocation { get; set; }

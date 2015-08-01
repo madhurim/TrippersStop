@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProtoBuf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,12 @@ namespace TraveLayer.CustomTypes.Sabre.ViewModels
         public TravelSeasonality TravelSeasonality { get; set; }
         public LowFareForecast LowFareForecast { get; set; }
     }
+    [ProtoContract]
     public class FareOutput
     {
+        [ProtoMember(1)]
         public FareRange FareRange { get; set; }
+        [ProtoMember(2)]
         public LowFareForecast LowFareForecast { get; set; }
     }
     public class SeasonalityOutput

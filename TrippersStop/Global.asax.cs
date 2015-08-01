@@ -16,6 +16,7 @@ using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Weather;
 using TrippismApi.TraveLayer;
+using WebApiContrib.Formatting;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 
 namespace TrippismApi
@@ -27,6 +28,8 @@ namespace TrippismApi
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configuration.Formatters.Add(
+    new WebApiContrib.Formatting.ProtoBufFormatter());
             AreaRegistration.RegisterAllAreas();
 
            // WebApiConfig.Register(GlobalConfiguration.Configuration);
@@ -49,8 +52,21 @@ namespace TrippismApi
             GlobalConfiguration.Configuration.DependencyResolver =
                 new SimpleInjectorWebApiDependencyResolver(container);
             RegisterMappingEntities();
+            RegisterBufferEntities();
             //GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
            // GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
+        }
+
+        private void RegisterBufferEntities()
+        {
+            ProtoBufFormatter.Model.Add(typeof(FareOutput), true);
+            ProtoBufFormatter.Model.Add(typeof(LowFareForecast), true);
+            ProtoBufFormatter.Model.Add(typeof(VM.FareRange), true);
+            ProtoBufFormatter.Model.Add(typeof(Link), true);
+            ProtoBufFormatter.Model.Add(typeof(Forecast), true);
+            ProtoBufFormatter.Model.Add(typeof(FareData), true);
+            ProtoBufFormatter.Model.CompileInPlace();
+
         }
 
         private void RegisterMappingEntities()

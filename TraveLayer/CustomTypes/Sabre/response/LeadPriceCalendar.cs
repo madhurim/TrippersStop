@@ -4,6 +4,7 @@
 
 
 
+using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.Sabre
 {
-
+     [ProtoContract]
     public class Link
     {
+        [ProtoMember(1)]
         public string rel { get; set; }
+        [ProtoMember(2)]
         public string href { get; set; }
     }
 
