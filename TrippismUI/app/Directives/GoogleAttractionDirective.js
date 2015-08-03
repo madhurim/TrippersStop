@@ -8,6 +8,13 @@
             scope: { googleattractionParams: '=', isOpen: '=' },
             templateUrl: '/app/Views/Partials/GoogleAttractionPartial.html',
             controller: function ($scope) {
+
+                //var elem = angular.element(document.querySelector('.mapwrapper'));
+                //$scope.TabIndex = "googleattractionsMap_" + $scope.googleattractionParams.tabIndex;
+                //var mapHTML = "<div ui-map='googleattractionsMap' class='map-canvas' id='" + $scope.TabIndex + "'></div>";
+                //elem.append($compile(mapHTML)($scope));
+
+
                 $scope.RenderMap = RenderMap;
                 $scope.googleattractionsMap = undefined;
                 $scope.AttractionMarkers = [];
@@ -42,11 +49,18 @@
                 };
 
                 var mapid = angular.element(document.querySelector('#googleattractionsMap'));
+                
+                //var mapid = angular.element(document.querySelector('.googleattractionsMap'));
+                //var mapid = angular.element(document.querySelector('#googleattractionsMap_' + $scope.googleattractionParams.tabIndex));
                 mapid.css('height', ($(window).height() - 350) + 'px');
                 $timeout(function () {
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
-
                 }, 1000, false);
+                    
+                   
+                
+                
+                
 
                 $scope.GoogleAttractionDisplay = function () {
                     $scope.quantity = 20;
@@ -94,6 +108,7 @@
                                             $scope.googleattractionInfoNoDataFound = true;
                                             return;
                                         }
+                                        
                                         RenderMap(data.results);
                                         $scope.MapLoaded = true;
                                         $scope.googleattractionData = data;
@@ -120,6 +135,7 @@
                                             new google.maps.Point(17, 34),
                                             new google.maps.Size(25, 25)
                                         );
+                            
                             var latlng1 = new google.maps.LatLng(maps[x].geometry.location.lat, maps[x].geometry.location.lng);
                             var marker = new MarkerWithLabel({
                                 position: latlng1,
@@ -136,19 +152,28 @@
                             });
 
                             $scope.bounds.extend(marker.position);
-
-                            var contentString = '<div style="min-width:100px;padding-top:5px;" id="content">' +
-                                             '<div class="col-sm-12 padleft0"><strong>'
-                                               + maps[x].name + '</strong></div>' +
-                                               '<br /><div class="col-sm-12 padleft0 word-wrap">' + maps[x].vicinity + '</div>' +
-                                       '</div> ';
+                            var Imgdiv = "";
+                            if (maps[x].photos.length > 0) {
+                                Imgdiv = "<div class='padleft0'>";
+                                var refPhotoUrl = maps[x].photos[0].photo_reference;
+                                var Imgsrc = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + refPhotoUrl + "&key=AIzaSyAQUUoKix1RYuUSlnQHdCG0mFGOSC29vGk";
+                                Imgdiv += "<img height='190' width='250' src=" + Imgsrc + "></img>";
+                                Imgdiv += "</div>";
+                            }
+                            
+                            var contentString = '<div class="custmarker">'
+                                                + Imgdiv +
+                                                    '<div class="col-sm-12 padleft0"><strong>'
+                                                        + maps[x].name + '</strong></div>' +
+                                                        '<div class="col-sm-12 padleft0 word-wrap">' + maps[x].vicinity + '</div>' +
+                                                '</div> ';
 
                             $scope.InfoWindow = new google.maps.InfoWindow();
 
                             google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
                                 return function () {
                                     if ($scope.InfoWindow) $scope.InfoWindow.close();
-                                    $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
+                                    $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500});
                                     $scope.InfoWindow.open($scope.googleattractionsMap, marker);
                                 };
                             })(marker, contentString, $scope.InfoWindow));
@@ -172,6 +197,10 @@
                 };
             },
             link: function (scope, elem, attrs) {
+                //var lemtoadd =  angular.element(document.querySelector('.mapwrapper'))
+                //scope.TabIndex = "googleattractionsMap" + scope.googleattractionParams.tabIndex;
+                //var mapHTML = "<div class='map-canvas' ui-map='googleattractionsMap' id='" + scope.TabIndex + "'></div>";
+                //lemtoadd.append($compile(mapHTML)(scope));
             }
         }
     }]);

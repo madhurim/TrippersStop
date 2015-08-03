@@ -659,9 +659,22 @@ a{
 .fnt15 {
     font-size:15px;
 }
+.padleft10 {
+    margin-left:10px;
+}
 .align {
     margin-left: 7%;
     margin-right: 7%;
     margin-top: 100px;
     position: absolute;
 }
+.custmarker {
+    clear:both;
+}
+
+/* IE related css */
+ .input-group-addon
+{
+    cursor:default;
+}
+    /**/
