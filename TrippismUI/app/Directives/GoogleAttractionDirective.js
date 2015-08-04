@@ -29,18 +29,6 @@
                     $scope.googleattractionsMap.fitBounds($scope.bounds);
                 };
 
-
-                //$scope.$on('ViewTab', function (event, args) {
-                    
-                //    if ($scope.MapLoaded) {
-                        
-                //        $timeout(function () {
-                //            $scope.googleattractionsMap.setCenter(new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng));
-                //        }, 1000, false);
-                //    }
-                //});
-
-
                 $scope.attractionmapOptions = {
                     center: new google.maps.LatLng(0, 0),
                     zoom: 2,
@@ -48,15 +36,14 @@
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
 
-                var mapid = angular.element(document.querySelector('#googleattractionsMap'));
-                
-                //var mapid = angular.element(document.querySelector('.googleattractionsMap'));
+                var mapid = angular.element(document.querySelector('.map-canvas'));
                 //var mapid = angular.element(document.querySelector('#googleattractionsMap_' + $scope.googleattractionParams.tabIndex));
 
-                //if ($rootScope.mapHeight == undefined) {
+                if ($rootScope.mapHeight == undefined) {
                     mapid.css('height', ($(window).height() - 350) + 'px');
-                  //  $rootScope.mapHeight = $(window).height() - 350;
-                //} else { mapid.css('height', $rootScope.mapHeight + 'px'); }
+                    $rootScope.mapHeight = $(window).height() - 350;
+                    $(".map-canvas").css("height", $rootScope.mapHeight + 'px');
+                }
                 
                 $timeout(function () {
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
@@ -193,6 +180,7 @@
                             $scope.FittoScreen();
                         });
                         
+                        console.log(document.querySelector('.map-canvas'));
 
                         $timeout(function () {
                             $scope.googleattractionsMap.setCenter(new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng));

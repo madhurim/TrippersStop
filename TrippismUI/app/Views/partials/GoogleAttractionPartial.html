@@ -4,7 +4,7 @@
         height:100%;
 		position:fixed !important;
       }
-    .map-canvas { min-height:300px; width:100%; position:relative; }
+   
 </style>
 <div class="" style="clear:both;" cg-busy="{promise:googleattractionpromise,message:'Loading Attractions'}">
     <span><b>Attractions</b> </span><br />
@@ -12,7 +12,7 @@
     <div ui-map="googleattractionsMap" id="googleattractionsMap_{{googleattractionParams.tabIndex}}" ui-options="attractionmapOptions" class="map-canvas googleattractionsMap"></div>
     </div>-->
 
-    <div ui-map="googleattractionsMap" id="googleattractionsMap" ui-options="attractionmapOptions" class="map-canvas"></div>
+    <div ui-map="googleattractionsMap"  ui-options="attractionmapOptions" class="map-canvas"></div> <!--id="googleattractionsMap"-->
     
 </div>
 
