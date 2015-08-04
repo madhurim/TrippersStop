@@ -1,8 +1,8 @@
 ﻿angular.module('TrippismUIApp').directive('googleattractionInfo',
                                             ['$compile',
-                                                '$q',
+                                                '$q','$rootScope',
                                                 'GoogleAttractionFactory', '$timeout',
-    function ($compile, $q, GoogleAttractionFactory, $timeout) {
+    function ($compile, $q,$rootScope, GoogleAttractionFactory, $timeout) {
         return {
             restrict: 'E',
             scope: { googleattractionParams: '=', isOpen: '=' },
@@ -52,7 +52,12 @@
                 
                 //var mapid = angular.element(document.querySelector('.googleattractionsMap'));
                 //var mapid = angular.element(document.querySelector('#googleattractionsMap_' + $scope.googleattractionParams.tabIndex));
-                mapid.css('height', ($(window).height() - 350) + 'px');
+
+                //if ($rootScope.mapHeight == undefined) {
+                    mapid.css('height', ($(window).height() - 350) + 'px');
+                  //  $rootScope.mapHeight = $(window).height() - 350;
+                //} else { mapid.css('height', $rootScope.mapHeight + 'px'); }
+                
                 $timeout(function () {
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
                 }, 1000, false);
@@ -84,6 +89,7 @@
 
                 $scope.loadgoogleattractionInfo = function () {
                     if (!$scope.MapLoaded) {
+
                         $scope.googleattractionInfoLoaded = false;
                         $scope.googleattractionInfoNoDataFound = false;
                         $scope.googleattractionData = "";
@@ -187,6 +193,7 @@
                             $scope.FittoScreen();
                         });
                         
+
                         $timeout(function () {
                             $scope.googleattractionsMap.setCenter(new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng));
                         }, 1000, false);

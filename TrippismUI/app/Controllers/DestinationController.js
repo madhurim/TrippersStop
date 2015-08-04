@@ -71,7 +71,6 @@
             _paramsdata.tabIndex = $scope.TabCreatedCount;
 
             $scope.tabManager.tabItems.push({
-                //youtubeData: _youtubeparams,
                 parametersData: _paramsdata,
                 title: $scope.seasonalitydirectiveData.OriginairportName.airport_Code + ' - ' + $scope.seasonalitydirectiveData.DestinationairportName.airport_Code,
                 content: "",
@@ -115,23 +114,7 @@
             });
             $scope.tabManager.tabItems[i].selected = true;
             $scope.tabManager.tabItems[i].TabcontentView = true;
-            
-            //$rootScope.$broadcast('ViewTab');
         }
-
-        //add few tabs
-        //$scope.tabManager.tabItems.push({ title: "Tab No Home"  });
-        //for (var i = 1; i < 3; i++) {
-        //    $scope.tabManager.tabItems.push({
-        //        title: "Tab No: " + i,
-        //        content: "Lores sum ep sum news test [" + i + "]",
-        //        selected: false
-        //    });
-        //}
-
-        // init the first active tab
-        //$scope.tabManager.select(0);
-
 
         $scope.isSearching = true;
         $scope.MailMarkerSeasonalityInfo = {};
@@ -180,21 +163,20 @@
 
         $scope.ToDate = ConvertToRequiredDate(Todt, 'UI');
         $scope.FromDate = ConvertToRequiredDate(dt, 'UI');
-
-
-
         $scope.minTodayDate = new Date();
         $scope.minFromDate = new Date();
         $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
         $scope.Destinationfortab = "";
-
         // $scope.Earliestdeparturedate = ConvertToRequiredDate($scope.FromDate, 'UI');
 
         $scope.ViewDestination = function () {
             $scope.ShowDestinationView = true;
             $scope.tabManager.resetSelected();
             $scope.TabcontentView = false;
-            //$rootScope.$broadcast('eventDestinationMapresize');
+            $timeout(function () {
+                $rootScope.$broadcast('eventDestinationMapresize');
+            }, 500, false);
+            
         };
 
         $scope.$watch(function (scope) { return scope.Earliestdeparturedate },

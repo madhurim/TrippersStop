@@ -16,10 +16,7 @@
         },
         link: function (scope, elem, attrs) {
             var mapid = angular.element(document.querySelector('#ytubetabletbody'));
-            console.log(mapid)
             mapid.css('height', ($(window).height() - 100) + 'px');
-           
-            
 
             scope.youtubeInfoDataFound = false;
             scope.$watchGroup(['youtubeParams'], function (newValue, oldValue, scope) {
@@ -51,7 +48,6 @@
                                     return;
                                 }
                                 scope.youtubeData = data;
-                                console.log(data);
                                 scope.getVideoUrl = $sce.trustAsResourceUrl("//www.youtube.com/embed/" + data[0].VideoId);
                                 scope.youtubeInfoDataFound = true;
                             });
