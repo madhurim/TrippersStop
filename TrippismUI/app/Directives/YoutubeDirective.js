@@ -7,16 +7,14 @@
         },
         templateUrl: '/app/Views/Partials/YoutubePartial.html',
         controller: function ($scope) {
-
-            
-                
-            
-
            
         },
         link: function (scope, elem, attrs) {
-            var mapid = angular.element(document.querySelector('#ytubetabletbody'));
-            mapid.css('height', ($(window).height() - 100) + 'px');
+            
+            var youtubeTblheight = ($(window).height() - 100) + 'px';
+            $('.ytubetabletbody').each(function (i, obj) {
+                $(this).css('height', youtubeTblheight);
+            });
 
             scope.youtubeInfoDataFound = false;
             scope.$watchGroup(['youtubeParams'], function (newValue, oldValue, scope) {

@@ -8,7 +8,7 @@
         <div class="col-lg-11" ng-if="tabManager.tabItems.length > 0">
             <div tabs  >
                 <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
-                    <attraction-tab tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
+                    <attraction-tab  tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
                 </div>
             </div>
         </div>

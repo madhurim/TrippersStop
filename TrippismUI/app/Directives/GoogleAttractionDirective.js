@@ -37,46 +37,37 @@
                 };
 
                 var mapid = angular.element(document.querySelector('.map-canvas'));
-                //var mapid = angular.element(document.querySelector('#googleattractionsMap_' + $scope.googleattractionParams.tabIndex));
-
+                
                 if ($rootScope.mapHeight == undefined) {
-                    mapid.css('height', ($(window).height() - 350) + 'px');
                     $rootScope.mapHeight = $(window).height() - 350;
                     $(".map-canvas").css("height", $rootScope.mapHeight + 'px');
+                } else {
+                    $('.map-canvas').each(function (i, obj) {
+                        $(this).css('height', $rootScope.mapHeight);
+                    });
                 }
                 
+                
+
                 $timeout(function () {
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
                 }, 1000, false);
                     
-                   
-                
-                
-                
-
                 $scope.GoogleAttractionDisplay = function () {
                     $scope.quantity = 20;
                 };
                 $scope.$watchGroup(['googleattractionParams', 'isOpen'], function (newValue, oldValue, $scope) {
                     $scope.loadgoogleattractionInfo();
-                    //if ($scope.googleattractionsMap != undefined) {
-
-                        //$timeout(function () {
-                        //    $scope.FittoScreen();
+                    if ($scope.googleattractionsMap != undefined) {
+                        $timeout(function () {
+                            $scope.FittoScreen();
                         //    $scope.googleattractionsMap.panTo(new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng));
-                            
-                        //}, 1000, false);
-
-
-                    // }
-                    
-                    
-
+                        }, 1000, false);
+                     }
                 });
 
                 $scope.loadgoogleattractionInfo = function () {
                     if (!$scope.MapLoaded) {
-
                         $scope.googleattractionInfoLoaded = false;
                         $scope.googleattractionInfoNoDataFound = false;
                         $scope.googleattractionData = "";
@@ -101,7 +92,6 @@
                                             $scope.googleattractionInfoNoDataFound = true;
                                             return;
                                         }
-                                        
                                         RenderMap(data.results);
                                         $scope.MapLoaded = true;
                                         $scope.googleattractionData = data;
@@ -140,7 +130,6 @@
                                 CustomMarkerInfo: maps[x],
                                 labelStyle: { opacity: 0.75 },
                                 icon: icon,//'app/Styles/images/mapicon.png'
-
                                 //icon: 'https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-b.png&text=' + maps[x].name + '&psize=8&font=fonts/Roboto-Regular.ttf&color=ff000033&ax=44&ay=48&scale=1',
                             });
 
@@ -163,7 +152,7 @@
 
                             $scope.InfoWindow = new google.maps.InfoWindow();
 
-                            google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
+                            google.maps.event.addListener(marker, 'mouseover', (function (marker, contentString, infowindow) {
                                 return function () {
                                     if ($scope.InfoWindow) $scope.InfoWindow.close();
                                     $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500});
@@ -173,29 +162,17 @@
                             $scope.AttractionMarkers.push(marker);
                         }
                         
-                        //$timeout(function () {
-                        //  alert('time oput called');
-                        
                         google.maps.event.addListenerOnce($scope.googleattractionsMap, 'idle', function () {
                             $scope.FittoScreen();
                         });
-                        
-                        console.log(document.querySelector('.map-canvas'));
-
                         $timeout(function () {
                             $scope.googleattractionsMap.setCenter(new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng));
                         }, 1000, false);
                         //$scope.googleattractionsMap.panTo(new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng));
-
-
                     }
                 };
             },
             link: function (scope, elem, attrs) {
-                //var lemtoadd =  angular.element(document.querySelector('.mapwrapper'))
-                //scope.TabIndex = "googleattractionsMap" + scope.googleattractionParams.tabIndex;
-                //var mapHTML = "<div class='map-canvas' ui-map='googleattractionsMap' id='" + scope.TabIndex + "'></div>";
-                //lemtoadd.append($compile(mapHTML)(scope));
             }
         }
     }]);
