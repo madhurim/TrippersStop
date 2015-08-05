@@ -152,7 +152,7 @@
 
                             $scope.InfoWindow = new google.maps.InfoWindow();
 
-                            google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
+                            google.maps.event.addListener(marker, 'mouseover', (function (marker, contentString, infowindow) {
                                 return function () {
                                     if ($scope.InfoWindow) $scope.InfoWindow.close();
                                     $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500});
