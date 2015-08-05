@@ -161,7 +161,7 @@
             
             var FareData = $scope.$parent.FareforecastData;
             //if ($scope.seasonalityData.FareforecastData != undefined) {
-            if (FareData != undefined) {
+            if (FareData != undefined && FareData != "") {
                 var Recommendation = FareData.Recommendation;
 
                 FareForeCastHTML += "<div style='clear:both;padding-top:15px;' ><b style='text-decoration: underline;'>Fareforecast Info</b></div>";
@@ -213,7 +213,7 @@
             var SeasonalityData = $scope.$parent.MailMarkerSeasonalityInfo;
             
 
-            if (SeasonalityData != undefined && SeasonalityData != "") {
+            if (SeasonalityData != undefined && SeasonalityData != "" && SeasonalityData.Seasonality.length > 0) {
                 var SeasonText = 'Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly.';
                 contentString += "<div style='clear:both;padding-top:15px;margin-bottom:5px;' ><b style='text-decoration: underline;'>Traffic patterns</b><br/>" + SeasonText + "</div>";
                 SeasonalityHTML += '<table >' +

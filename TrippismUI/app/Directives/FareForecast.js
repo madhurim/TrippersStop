@@ -1,4 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('fareForecast', ['$compile', 'FareforecastFactory', '$modal', function ($compile, FareforecastFactory, $modal) {
+﻿angular.module('TrippismUIApp').directive('fareForecast', ['$compile', 'FareforecastFactory', '$rootScope', '$modal',
+    function ($compile, FareforecastFactory, $rootScope,$modal) {
     return {
         restrict: 'E',
 
@@ -12,13 +13,29 @@
             scope.IsRequestCompleted = false;
             scope.activate = activate;
             scope.closePanel = closePanel;
-            
+            scope.visibleDiv = false;
+            scope.ShowMoreDestinationsInfo = ShowMoreDestinationsInfo;
+
+            scope.$watch('FareNoDataFound',
+              function (newValue) {
+                  scope.FareNoDataFound = angular.copy(newValue);
+              }
+            );
+
+            function ShowMoreDestinationsInfo(seasonalitydirectiveData) {
+                scope.visibleDiv = false;
+                $rootScope.$broadcast('CreateTabForDestination');
+                closePanel();
+            }
+
             function closePanel() {
                 scope.$parent.fareforecastdirectiveDisplay = false;
                 scope.isOpens = false;
+                scope.visibleDiv = false;
             }
 
             function activate() {
+                scope.visibleDiv = false;
                 scope.FareNoDataFound = false;
                 scope.FareforecastData = "";
                 scope.IsRequestCompleted = false;
@@ -47,11 +64,13 @@
             scope.$watch('seasonalityData',
               function (newValue, oldValue) {
                   if (newValue != oldValue) {
+                     // scope.visibleDiv = true;
                       scope.mapDetails = scope.seasonalityData.mapOptions;
                       scope.googleattractionData = {
                           airport_Lat: scope.seasonalityData.DestinationairportName.airport_Lat,
                           airport_Lng: scope.seasonalityData.DestinationairportName.airport_Lng
                       }
+                      scope.weatherData = undefined;
                       scope.isOpens = false;
                       scope.openaccordiondata = false;
                   }
@@ -72,22 +91,50 @@
             }
 
             scope.openaccordion = function () {
-                scope.isOpens = !scope.isOpens;
-                if (scope.openaccordiondata == false) {
-                    scope.openaccordiondata = true;
-                }
+                scope.openaccordiondata = true;
+
+                //scope.isOpens = !scope.isOpens;
+                //if (scope.openaccordiondata == false) {
+                //    scope.openaccordiondata = true;
+
+                //}
             };
 
-            // Events
-            //elem.bind('click', function () {
-            //    elem.css('background-color', 'white');
-            //    scope.$apply(function () {
-            //        scope.color = "white";
-            //    });
-            //});
-            //elem.bind('mouseover', function () {
-            //    elem.css('cursor', 'pointer');
-            //});
+            scope.openaccordion();
+
+            //scope.visibleDiv = true;
+            
+
+            //scope.FareRangeData = true;
+            //scope.SeasonalityData = true;
+
+            scope.FareRangeDivDisplay = true;
+            scope.SeasonalityDivDisplay = true;
+            scope.WeatherDivDisplay = true;
+            
+            scope.$on('divFareRangeEvent', function (event, args) {
+                scope.FareRangeDivDisplay = args;
+                if (scope.FareRangeDivDisplay == true || scope.SeasonalityDivDisplay == true || scope.WeatherDivDisplay == true)
+                    scope.visibleDiv = true;
+                else
+                    scope.visibleDiv = false;
+            });
+            scope.$on('divSeasonalityEvent', function (event, args) {
+                scope.SeasonalityDivDisplay = args;
+                if (scope.FareRangeDivDisplay == true || scope.SeasonalityDivDisplay == true || scope.WeatherDivDisplay == true)
+                    scope.visibleDiv = true;
+                else 
+                    scope.visibleDiv = false;
+            });
+
+            scope.$on('divWeatherEvent', function (event, args) {
+                scope.WeatherDivDisplay = args;
+                if (scope.FareRangeDivDisplay == true || scope.SeasonalityDivDisplay == true || scope.WeatherDivDisplay == true)
+                    scope.visibleDiv = true;
+                else
+                    scope.visibleDiv = false;
+            });
+
         }
     }
 }]);

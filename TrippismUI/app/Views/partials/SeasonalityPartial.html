@@ -1,29 +1,29 @@
 ﻿
-<div class="">
-    <span><b>Traffic patterns</b> </span><br />
-    <h6>Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly</h6>
 
-    <div cg-busy="{promise:seasonalitypromise,message:'Loading Traffic volume Data'}">
-        <div style="padding:8px;" ng-if="SeasonalityNoDataFound">
-            <label class="text-danger">Ooops! We are sorry, no information is available.</label>
-        </div>
+   
 
+    <div > <!--cg-busy="{promise:seasonalitypromise,message:'Loading Traffic volume Data'}"-->
+        
 
+    </div>
+    <div ng-if="!loadingSeasonality">
         <div ng-if="!SeasonalityNoDataFound">
-            <div class="thumbnail thumbnailstyle" >
-                <table class="table fontsize" style="clear:both; color:black;">
+            <span><b>Traffic patterns</b> </span><br />
+            <h6 style="margin:0px;">Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly</h6>
+            <div class="thumbnail thumbnailstyle marginbtm5">
+                <table class="table fontsize tblseason" style="clear:both; color:black;">
                     <thead>
                         <tr style="height:47px;">
-                            <th class="text-center underline" width="10%">Week#</th>
+                            <th class="text-center underline" width="14%">Week#</th>
                             <th class="underline" width="20%">Start Date</th>
                             <th class="underline" width="20%">End Date</th>
                             <th class="text-center underline" width="20%">Traffic Volume</th>
-                            <th class="text-center underline" width="30%">Booking Quantities</th>
+                            <th class="text-center underline" width="21%">Booking Quantities</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="sliderstyle">
                         <tr ng-repeat="range in MarkerSeasonalityInfo.Seasonality | orderBy: '-WeekStartDate':true">
-                            <td class="word-wrap text-center" width="10%">{{range.YearWeekNumber}}</td>
+                            <td class="word-wrap text-center" width="14%">{{range.YearWeekNumber}}</td>
                             <td class="word-wrap" width="20%">{{range.WeekStartDate | date:"yyyy-MM-dd"}}</td>
                             <td class="word-wrap" width="20%">{{range.WeekEndDate | date:"yyyy-MM-dd"}}</td>
                             <td class="word-wrap text-center" width="20%">
@@ -31,11 +31,11 @@
                                 <span ng-if="range.SeasonalityIndicator == 'Medium'" class="mediumrange">{{range.SeasonalityIndicator}}</span>
                                 <span ng-if="range.SeasonalityIndicator == 'Low'" class="lowrange">{{range.SeasonalityIndicator}}</span>
                             </td>
-                            <td class="text-center word-wrap" width="30%">
-                                <span >{{range.NumberOfObservations}}</span>
-                                <!--<span ng-if="range.NumberOfObservations == 'GreaterThan10000'">Over crowded</span>
-                                <span ng-if="range.NumberOfObservations == 'LessThan10000'">crowded</span>
-                                <span ng-if="range.NumberOfObservations == 'LessThan1000'">not crowded</span>-->
+                            <td class="text-center word-wrap" width="21%">
+                                <!--<span>{{range.NumberOfObservations}}</span>-->
+                                <span ng-if="range.NumberOfObservations == 'GreaterThan10000'">> 10,000</span>
+                                <span ng-if="range.NumberOfObservations == 'LessThan10000'">< 10,000</span>
+                                <span ng-if="range.NumberOfObservations == 'LessThan1000'">< 1,000</span>
                             </td>
                         </tr>
                     </tbody>
@@ -43,8 +43,9 @@
             </div>
         </div>
         <div class="col-lg-12" style="padding-right:0px;margin-bottom:5px;clear:both;">
-            <button ng-if="!SeasonalityNoDataFound && MarkerSeasonalityInfo.Seasonality.length > 1" ng-click="SeasonalityDisplay()" class="btn btn-sm btn-info pull-right">View more</button>
+            <button style="padding:0px 5px;" ng-show="!Isviewmoredisplayed" ng-if="!SeasonalityNoDataFound && MarkerSeasonalityInfo.Seasonality.length > 1" ng-click="SeasonalityDisplay()" class="btn btn-sm btn-info pull-right">View more</button>
         </div>
     </div>
-</div>
+
+
 

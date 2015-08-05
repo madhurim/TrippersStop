@@ -22,7 +22,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
     /// Consumers who want to shop across several specific shopping parameters.
     /// </summary>
 
-    [GZipCompressionFilter]
+  [GZipCompressionFilter]
     public class AdvancedCalendarController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;

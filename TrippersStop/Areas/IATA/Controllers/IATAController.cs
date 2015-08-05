@@ -15,7 +15,7 @@ namespace TrippismApi.Areas.IATA.Controllers
     /// <summary>
     /// API to retrieve data for city pairs.
     /// </summary>
-     [GZipCompressionFilter]
+     
     public class IATAController : ApiController
     {
         IDBService _dbService;

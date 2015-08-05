@@ -18,7 +18,7 @@ angular.module('TrippismUIApp')
           $scope.destinationMap = undefined;
           $scope.faresList = [];
           $scope.myMarkers = [];
-
+          $scope.bounds;
           var styleArray = [{ featureType: "landscape.natural", elementType: "geometry.fill", stylers: [{ visibility: "on" }, { color: "#FFFFFF" }] },
                           { featureType: "poi", elementType: "geometry.fill", stylers: [{ visibility: "on" }, { hue: "#1900ff" }, { color: "#c0e8e8" }] },
                           { featureType: "poi", elementType: "labels.text", stylers: [{ visibility: "off" }] },
@@ -89,27 +89,49 @@ angular.module('TrippismUIApp')
               $scope.InfoWindow;
 
               var bounds = new google.maps.LatLngBounds();
+              $scope.bounds = bounds;
               selected = maps;
               
               for (var x = 0; x < maps.length; x++) {
                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
+
+                  var LowestFarePrice = Math.round(maps[x].LowestFare);
+                  LowestFarePrice = LowestFarePrice.toLocaleString()
+
                   var marker = new MarkerWithLabel({
                       position: latlng1,
                       map: $scope.destinationMap,
-                      title: ''+maps[x].LowestFare +'',
-                      //labelContent: maps[x].DestinationLocation,
+                      title: LowestFarePrice,
+                      labelContent: LowestFarePrice,
                       labelAnchor: new google.maps.Point(12, 35),
-                      labelClass: "labels", // the CSS class for the label
+                      labelClass: "labelscolor", // the CSS class for the label
                       labelInBackground: false,
+                      labelanimation: google.maps.Animation.DROP,
                       animation: google.maps.Animation.DROP,
                       CustomMarkerInfo: maps[x],
-                      labelStyle: { opacity: 0.75 },
-                      icon: 'https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-b.png&text=' + maps[x].LowestFare + '&psize=8&font=fonts/Roboto-Regular.ttf&color=ff000033&ax=44&ay=48&scale=1',
+                      labelStyle: { opacity: 1 },
+                      //icon: 'http://demo.crackerworld.in/images/map-blues.png',
+                      icon: 'app/Styles/images/mapicon.png'
                   });
 
 
-                  bounds.extend(marker.position);
+                  //var marker = new MarkerWithLabel({
+                  //    position: latlng1,
+                  //    map: $scope.destinationMap,
+                  //    title: ''+maps[x].LowestFare +'',
+                  //    //labelContent: maps[x].DestinationLocation,
+                  //    labelAnchor: new google.maps.Point(12, 35),
+                  //    labelClass: "labels", // the CSS class for the label
+                  //    labelInBackground: false,
+                  //    animation: google.maps.Animation.DROP,
+                  //    CustomMarkerInfo: maps[x],
+                  //    labelStyle: { opacity: 0.75 },
+                  //    icon: 'https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-b.png&text=' + maps[x].LowestFare + '&psize=8&font=fonts/Roboto-Regular.ttf&color=ff000033&ax=44&ay=48&scale=1',
+                  //});
 
+
+                  bounds.extend(marker.position);
+                  $scope.bounds.extend(marker.position);
                   var airportName = _.find($scope.airportlist, function (airport) {
                       return airport.airport_Code == maps[x].DestinationLocation
                   });
@@ -147,7 +169,6 @@ angular.module('TrippismUIApp')
                           //});
 
                           //$scope.InfoWindow.open($scope.destinationMap, marker);
-
                           var OriginairportName = _.find($scope.airportlist, function (airport) {
                               return airport.airport_Code == $scope.$parent.Origin.toUpperCase()
                           });
@@ -172,6 +193,7 @@ angular.module('TrippismUIApp')
                               DestinationairportName: DestinationairportName,
                               DestinationList: $scope.destinations,
                               AvailableAirports: $scope.airportlist,
+                              tabIndex : 999 
                           });
                       };
                   })(marker, contentString, $scope.InfoWindow));
@@ -192,6 +214,19 @@ angular.module('TrippismUIApp')
               } else { d.resolve(); }
               return d.promise;
           }
+
+
+          
+          $scope.$on('eventDestinationMapresize', function (event, args) {
+              google.maps.event.trigger($scope.destinationMap, 'resize');
+          });
+
+          //$scope.$on('FitToScreenSearch', function (event, args) {
+          //    google.maps.event.trigger($scope.destinationMap, 'resize');
+          //    var latlng = google.maps.LatLng($scope.defaultlat, $scope.defaultlng);
+          //    $scope.destinationMap.setCenter(latlng);
+          //    $scope.destinationMap.fitBounds($scope.bounds);
+          //});
 
           $scope.resetMarker = function () {
               $timeout(function () {

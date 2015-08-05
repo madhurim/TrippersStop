@@ -6,26 +6,8 @@
 
 </head>
 <body scroll ng-controller="LandingPageController">
-    <!--block-ui="main" class="block-ui-main"-->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#/destination">Trippism</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li ng-class="getClass('/destination')" class=""><a href="#/destination">Destination</a></li>
-                    <!--<li ng-class="getClass('/fareforecast')"><a href="#/fareforecast">FareForecast</a></li>-->
-                    <!--<li ng-class="getClass('/farerange')"><a href="#/farerange">FareRange</a></li>-->
-                    <!--<li ng-class="getClass('/seasonality')"><a href="#/seasonality">Seasonality</a></li>-->                   
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-
-    <div style="margin-top:50px;">
-        <!--role="main"-->
+    
+    <div >
         <div ui-view style="padding:0px;" class="container-fluid" ></div>
     </div>
    
@@ -33,10 +15,18 @@
     <link href="app/Styles/css/angular-block-ui.css" rel="stylesheet" />
     <link href="app/Styles/css/trippismapp.css" rel="stylesheet" />
     <link href="app/Styles/css/angular-busy.css" rel="stylesheet" />
+    
     <script src="app/Scripts/angular.min.js"></script>
+    
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
     
+    <!--<script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=weather,visualization&sensor=false&language=en&v=3.14"></script>-->
     
+    
+    <!--<script src="app/Scripts/libs/angular-maps/lodash.js"></script>
+    <script src="app/Scripts/libs/angular-maps/angular-google-maps.js"></script>-->
     <script src="app/Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
     <script src="app/Scripts/libs/event.js"></script>
     <script src="app/Scripts/libs/ui-map.min.js"></script>
@@ -51,12 +41,14 @@
     <script src="/app/Controllers/DestinationController.js"></script>
     <script src="app/Factory/FareforecastFactory.js"></script>
     <script src="app/Controllers/FareforecastController.js"></script>
-    <script src="app/Directives/GoogleMap.directive.js"></script>
+    <script src="app/Directives/GoogleMap.directive.js"></script>   
     <script src="app/Utility.js"></script>
     <script src="app/Factory/UtilFactory.js"></script>
     <script src="app/Controllers/FareRangeController.js"></script>
     <script src="app/Factory/FareRangeFactory.js"></script>
     <script src="app/Controllers/SeasonalityController.js"></script>
+    <script src="app/Controllers/YouTubeController.js"></script>
+
     <script src="app/Factory/SeasonalityFactory.js"></script>
     <script src="app/Controllers/EmailForDestinationDetController.js"></script>
     <script src="app/Factory/EmailForDestinationDetFactory.js"></script>
@@ -69,7 +61,11 @@
     <script src="app/Factory/WeatherFactory.js"></script>
     <script src="app/Directives/WetherApiDirective.js"></script>
     <script src="app/Factory/GoogleAttractionFactory.js"></script>
+    <script src="app/Factory/YouTubeFactory.js"></script>
     <script src="app/Directives/GoogleAttractionDirective.js"></script>
+    <script src="app/Directives/YoutubeDirective.js"></script>
+    <script src="app/Directives/averageStarRatingDirective.js"></script>
+    <script src="app/Directives/AttractionTabDirective.js"></script>
     <!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>-->
     <script src="app/Scripts/jquery-1.9.1.js"></script>
@@ -101,7 +97,7 @@
         </div>
     </div>
 
-    <script src="https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.8/src/markerwithlabel.js"></script>
+    <!--<script src="https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.8/src/markerwithlabel.js"></script>-->
     <!--<script>
 
     $(document).ready(function () {

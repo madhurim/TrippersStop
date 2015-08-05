@@ -14,16 +14,19 @@
             //devlopment url
             $rootScope.apiURL = 'http://localhost:14606/api/Sabre/';
             $rootScope.apiURLForEmail = 'http://localhost:14606/api/Email/SendEmailtoUser';
-            $rootScope.apiURLForWather = 'http://localhost:14606/api/weather/history';
             $rootScope.apiURLForGoogleAttraction = 'http://localhost:14606/api/googleplace/';
+            $rootScope.apiURLForYouTube = 'http://localhost:14606/api/youtube/';
+            $rootScope.apiURLForWeather = 'http://localhost:14606/api/weather/international/history';
+
         }
         else
         {
             //live url
             $rootScope.apiURL = 'http://' + $location.host() + '/api/';
             $rootScope.apiURLForEmail = 'http://' + $location.host() + '/api/Email/SendEmailtoUser';
-            $rootScope.apiURLForWather = 'http://' + $location.host() + '/api/weather/history';
-            $rootScope.apiURLForGoogleAttraction = 'http://' + $location.host() + '/api/googleplace/'; 
+            $rootScope.apiURLForWeather = 'http://' + $location.host() + '/api/weather/international/history';
+            $rootScope.apiURLForGoogleAttraction = 'http://' + $location.host() + '/api/googleplace/';
+            $rootScope.apiURLForYouTube = 'http://' + $location.host() + '/api/youtube/';
         }
 
      

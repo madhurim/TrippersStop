@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -34,11 +34,11 @@ namespace TrippismApi
         {
             _cacheService.Expire(_apiCaller.SabreTokenKey);
             _cacheService.Expire(_apiCaller.SabreTokenExpireKey);
-             ApiHelper.SetApiToken(_apiCaller, _cacheService);
+            ApiHelper.SetApiToken(_apiCaller, _cacheService);
         }
 
         public static void FilterChanceRecord(Trip trip, TripWeather tripWeather)
-         {
+        {
             if (trip.chance_of.chanceofcloudyday != null && IsValidRecord(trip.chance_of.chanceofcloudyday))
             {
                 AddChanceOfRecord(tripWeather, trip.chance_of.chanceofcloudyday, "chanceofcloudyday");
@@ -97,21 +97,20 @@ namespace TrippismApi
             }
         }
 
-         public static void AddChanceOfRecord(TripWeather tripWeather, Chance propertyValue, string propertyName)
-         {
+        public static void AddChanceOfRecord(TripWeather tripWeather, Chance propertyValue, string propertyName)
+        {
             tripWeather.WeatherChances.Add(new WeatherChance()
             {
                 ChanceType = propertyName,
                 Description = propertyValue.description,
                 Name = propertyValue.name,
                 Percentage = propertyValue.percentage
-            }
-                );
-         }
+            });
+        }
 
-         public static bool IsValidRecord(Chance chance)
+        public static bool IsValidRecord(Chance chance)
         {
-            if (chance !=null && chance.percentage > 30)
+            if (chance != null && chance.percentage > 30)
             {
                 return true;
             }

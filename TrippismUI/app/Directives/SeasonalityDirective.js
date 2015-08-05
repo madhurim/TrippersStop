@@ -1,4 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('seasonalityInfo', ['$compile', '$timeout', 'SeasonalityFactory', function ($compile, $timeout, SeasonalityFactory) {
+﻿angular.module('TrippismUIApp').directive('seasonalityInfo', ['$compile', '$rootScope', '$timeout', 'SeasonalityFactory',
+    function ($compile, $rootScope, $timeout, SeasonalityFactory) {
     return {
         restrict: 'E',
 
@@ -9,10 +10,24 @@
         },
         templateUrl: '/app/Views/Partials/SeasonalityPartial.html',
         link: function (scope, elem, attrs) {
+
+            scope.Isviewmoredisplayed = false;
+
             scope.SeasonalityDisplay = function () {
                 scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
                 scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
+                scope.Isviewmoredisplayed = true;
             };
+
+            scope.$parent.divSeasonality = false;
+
+            scope.loadingSeasonality = true;
+            scope.$watch('loadSeasonalityInfoLoaded',
+              function (newValue) {
+                  scope.loadingSeasonality = angular.copy(!newValue);
+                  scope.$parent.divSeasonality = newValue;
+              }
+            );
             
             scope.loadSeasonalityInfo = function () {
                 scope.MarkerSeasonalityInfo = "";
@@ -29,11 +44,14 @@
                                 scope.inProgressSeasonalityinfo = true;
                                 scope.seasonalitypromise = SeasonalityFactory.Seasonality(Seasonalitydata).then(function (data) {
 
-                                    if (data.status == 404)
+                                    if (data.status == 404){
                                         scope.SeasonalityNoDataFound = true;
-                                    else {
-                                        scope.SeasonalityData = data.Seasonality;
-                                    }
+                                        $rootScope.$broadcast('divSeasonalityEvent', false);
+                                        return;
+                                    }   
+                                    
+                                    scope.SeasonalityData = data.Seasonality;
+                                    $rootScope.$broadcast('divSeasonalityEvent', true);
 
                                     var defaultSeasonality = data.Seasonality;
                                     var now = new Date();
@@ -46,9 +64,12 @@
                                         if (datetocheck > now && datetocheck < NextDate)
                                             filteredSeasonalityData.push(defaultSeasonality[i]);
                                     }
+                                    if (filteredSeasonalityData.length == 0) {
+                                        for (var i = 0; i < 5; i++) 
+                                            filteredSeasonalityData.push(defaultSeasonality[i]);
+                                    }
                                     data.Seasonality = filteredSeasonalityData;
                                     scope.MarkerSeasonalityInfo = data;
-
                                     scope.mailmarkereasonalityInfo = data;
                                     
                                     scope.inProgressSeasonalityinfo = false;

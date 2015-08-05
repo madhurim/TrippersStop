@@ -1,10 +1,135 @@
-﻿
-<div class="fareforecastDiv" style="margin-bottom:10px;clear:both;">
+﻿<div class="fareforecastDiv" style="margin-bottom:10px;clear:both;">
+    <div class="container-fluid-header">
+        <div class="containermodel" style="margin-top:-10px;">
+            <!--style=" transform translate(0%, 12%);"-->
+            <div class="row my-space">
+                <div class="col-md-12 padlr0">
+                    <div class="col-lg-10 padlr0 headerunderline" style="width:90%;" >
+                        <span class="headertag fnt15">
+                            {{seasonalityData.DestinationairportName.airport_FullName + ', ' + seasonalityData.DestinationairportName.airport_CityName}}
+                        </span>
+                    </div>
+                    <div class="col-md-2 padlr0" style="width:10%;">
+                        <button title="Share via email" class="btn btn-primary share-btn" type="button" ng-click="SendEmailToUser()">
+                            <i style="padding-left:5px;" class="glyphicon glyphicon-share"></i>
+                        </button>
+                        <a class=" close-panel-button pull-right" ng-click="closePanel()" role="button" id="close_destination_panel" tabindex="0" style="color:white;">X</a>
+                    </div>
+                </div>
+
+                <div class="col-md-12 padlr0">
+                    <div class="col-lg-6 padlr0">
+                        <span class="fnt15">Lowest Fare: <span>{{mapDetails.CurrencyCode}} {{mapDetails.LowestFare | number : 2}} </span></span>
+                        
+                    </div>
+                    <div class="col-lg-6 padlr0" ng-show="!FareNoDataFound"> <!--cg-busy="{promise:fareinfopromise,message:'Please wait fare forecast loading...'}"--> 
+                        <div ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
+                            <span class="fnt15">
+                                Recommendation :
+                                <span>
+                                    <img style="margin-top:-10px;" ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="../app/Styles/images/thumbs_up.png" />
+                                    <i class="glyphicon glyphicon-time text-warning" title="Wait" ng-if="FareforecastData.Recommendation == 'wait'"></i>
+                                    <i class="glyphicon glyphicons-circle-info text-warning" title="Watch" ng-if="FareforecastData.Recommendation == 'watch'"></i>
+                                    <i class="glyphicon glyphicon-option-horizontal text-warning" title="Unknown" ng-if="FareforecastData.Recommendation == 'unknown'"></i>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 padlr0">
+                        <span class="fnt15">Lowest Predicted Fare: <span>{{mapDetails.CurrencyCode}} {{mapDetails.LowestNonStopFare | number : 2 }}</span></span>
+                    </div>
+
+                    <div class="col-lg-6 padlr0">
+                        <button ng-click="ShowMoreDestinationsInfo()" type="button" style="padding:0px 5px;" class="btn btn-sm btn-success">Show Attractions @ {{seasonalityData.DestinationairportName.airport_CityName}}</button>
+                    </div>
+
+                </div>
+                
+                
+                <div class="col-xs-12 faredetails" style="padding:0px;" ng-show="visibleDiv">
+                    <div class="panel panel-default">
+                        <div class="panel-heading cursorpointer" style="padding: 3px 5px;" ng-click="openaccordion()">
+                            <h4 class="panel-title fnt15">
+                                <a><span ng-class="text-muted">More Insights on {{accordianDefault}} {{seasonalityData.DestinationairportName.airport_FullName + ', ' + seasonalityData.DestinationairportName.airport_CityName}}</span></a>
+                            </h4>
+                        </div>
+                        <div class="panel-collapse"  style="margin-bottom:0px;"> <!--collapse="!isOpens"-->
+                            <div class="panel-body" style="padding-bottom:0px;">
+                                <div class="col-md-12 padlr0">
+                                    <div class="col-md-6 padlr0"><seasonality-info seasonality-params="seasonalityData" mailmarkereasonality-info="MailMarkerSeasonalityInfo" is-open="true" class="seasonality"></seasonality-info> <!--is-open="openaccordiondata"--></div>
+                                    <div class="col-md-6 padlr0"><weather-info style="min-width:300px;" weather-params="seasonalityData" is-open="true" style="clear:both;"></weather-info></div>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="col-md-12">
+                                    <farerange-info farerange-params="seasonalityData" mailfarerange-data="MailFareRangeData" is-open="true" style="clear:both;"></farerange-info> <!--is-open="openaccordiondata"-->
+                                </div>
+                            </div>
+                            <!--<div class="col-md-12 padleft0">
+                                <weather-info weather-params="seasonalityData" is-open="openaccordiondata" style="clear:both;"></weather-info>
+                            </div>-->
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                
+            </div>
+            <script type="text/ng-template" id="EmailDetForm.html">
+                <div style="padding: 20px;">
+                    <div cg-busy="{promise:sendmailPromise,message:'Sending email...'}">
+                        <div class="button-right col-lg-12">
+                            <a class="close-panel-button pull-right" ng-click="dismiss()" role="button" id="close_destination_panel" tabindex="0">X</a>
+                        </div>
+                        <div ng-show="hasError && FormGetEmailDet.$invalid">
+                            <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.email.$error.required">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Please enter Email Address.
+                            </div>
+                            <div class="alert alert-danger triperror" role="alert" ng-show="emailvalidate">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Please enter Valid Email Address.
+                            </div>
+
+                            <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.fromemail.$error.email">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Please enter Valid From email Address.
+                            </div>
+
+                            <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.Subject.$error.required">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Please enter Subject.
+                            </div>
+                        </div>
+                        <form name="FormGetEmailDet" novalidate="novalidate">
+                            <div class="form-group">
+                                <label for="email">From email address</label>
+                                <input type="email" ng-model="fromemail" class="form-control" id="fromemail" name="fromemail" placeholder="Enter email" />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">To email address</label>
+                                <input type="text" ng-model="email" class="form-control" id="email" name="email" placeholder="Enter email" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="Subject">Subject</label>
+                                <input type="text" ng-model="Subject" class="form-control" id="Subject" name="Subject" placeholder="Subject" required />
+                            </div>
+                            <button type="submit" class="btn btn-info" ng-click="submitModal()">Share Now</button>
+                            <!--<button class="btn btn-info" ng-click="dismiss()"><i class="fa fa-times"></i>Close</button>-->
+                        </form>
+                    </div>
+                </div>
+            </script>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="fareforecastDiv" style="margin-bottom:10px;clear:both;">
 
     <div class="container-fluid-header">
-
-        <div class="container" style="margin-top:8%;">
-            <!--style="transform: translate(0%, 12%);"-->
+        <div class="containermodel" style="margin-top:8%;">
             <div class="row my-space">
                 <div class="col-md-12 padlr0" >
                     <div class="button-right col-lg-12">
@@ -52,13 +177,8 @@
                                         <farerange-info farerange-params="seasonalityData" mailfarerange-data="MailFareRangeData" is-open="openaccordiondata" style="clear:both;"></farerange-info>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="col-md-6">
-                                        <googleattraction-info googleattraction-params="googleattractionData" is-open="openaccordiondata" class="googleattraction" style="clear:both;"></googleattraction-info>
-                                    </div>
-                                    <div class="col-md-6 padleft0">
-                                        <weather-info weather-params="seasonalityData"  is-open="openaccordiondata" style="clear:both;"></weather-info>
-                                    </div>
+                                <div class="col-lg-12">
+                                    <button ng-click="ShowMoreDestinationsInfo()">Show Attractions</button>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +230,7 @@
                                 <input type="text" ng-model="Subject" class="form-control" id="Subject" name="Subject" placeholder="Subject" required />
                             </div>
                             <button type="submit" class="btn btn-info" ng-click="submitModal()">Share Now</button>
-                            <!--<button class="btn btn-info" ng-click="dismiss()"><i class="fa fa-times"></i>Close</button>-->
+                            
                         </form>
                     </div>
                 </div>
@@ -121,4 +241,4 @@
 
 
 
-</div>
+</div>-->
