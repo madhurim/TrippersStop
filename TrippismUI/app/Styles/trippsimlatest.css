@@ -361,6 +361,8 @@ option {
 }
 .highcharts-container {
     width:100% !important;
+    overflow: -moz-hidden-unscrollable !important;
+    height: auto !important;
 }
 .padleft10 {
     padding-left:10px;
@@ -381,7 +383,6 @@ option {
 }
 
 /*  you tube section */
-
 
 .container-flude-youtube{
 	width:100%;

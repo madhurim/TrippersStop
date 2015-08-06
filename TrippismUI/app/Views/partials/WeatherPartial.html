@@ -8,8 +8,11 @@
                 <span style="font-size:100% !important;font-weight:bold;">Historical Weather pattern for date {{DepartDate}} to {{ReturnDate}}</span>
             </div>
             <div class="thumbnail thumbnailstyle">
-                <div class="selest">
-                    <span class="fontsize"><b>Avg. Hig Temprature : {{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103</b></span>  <span class="fontsize padleft10"><b>Avg. Low Temprature : {{LowTempratureF}}&#x2109 {{LowTempratureC}}&#x2103</b></span>
+                <div class="selest" ng-show="weatherParams.tabIndex == '999'">
+                    <span class="fontsize" style="float:left;padding-bottom:2px;margin-left:6px;"><b>Avg. Hig Temprature : {{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103</b></span><span class="fontsize" style="float:left;margin-left:6px;"><b>Avg. Low Temprature : {{LowTempratureF}}&#x2109 {{LowTempratureC}}&#x2103</b></span>
+                </div>
+                <div class="selest" ng-show="weatherParams.tabIndex != '999'">
+                    <span class="fontsize"><b>Avg. Hig Temprature : {{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103</b></span><span class="fontsize padleft10"><b>Avg. Low Temprature : {{LowTempratureF}}&#x2109 {{LowTempratureC}}&#x2103</b></span>
                 </div>
                 <!--<div id="weatherChart" ></div>-->
             </div>
