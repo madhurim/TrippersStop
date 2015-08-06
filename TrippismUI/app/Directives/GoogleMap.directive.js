@@ -95,8 +95,16 @@ angular.module('TrippismUIApp')
               for (var x = 0; x < maps.length; x++) {
                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
 
-                  var LowestFarePrice = Math.round(maps[x].LowestFare);
-                  LowestFarePrice = LowestFarePrice.toLocaleString()
+                  //var LowestFarePrice = Math.round(maps[x].LowestFare);
+                  var LowestFarePrice = "N/A";
+
+                  if (maps[x].LowestFare != "N/A") {
+                      LowestFarePrice = Math.round(maps[x].LowestFare);
+                      if (LowestFarePrice == 0) {
+                          LowestFarePrice = "N/A";
+                      }
+                      LowestFarePrice = LowestFarePrice.toLocaleString();
+                  }
 
                   var marker = new MarkerWithLabel({
                       position: latlng1,

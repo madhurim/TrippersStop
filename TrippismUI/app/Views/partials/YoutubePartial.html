@@ -48,15 +48,23 @@
         </div>
     </div>
 </div>
-
-<script type="text/ng-template" id="YoutubePlayerPartial.html">
+<!--<script type="text/ng-template" id="YoutubePlayerPartial.html">
     <div class="modal-header head">
         <button class="close closebutton" ng-click="cancel()" type="button">×</button>
     </div>
     <div class="modal-body" cg-busy="{promise:youtubeplayerpromise,message:'Loading video'}">
         <iframe width="100%" height="375" ng-src="{{videoID}}" frameborder="0" allowfullscreen></iframe>
     </div>
+</script>-->
+<script type="text/ng-template" id="YoutubePlayerPartial.html">
+    <div class="modal-header head" style="padding-bottom: 24px !important;">
+        <button class="close closebutton" ng-click="cancel()" type="button">×</button>
+    </div>
+    <div class="modal-body" cg-busy="{promise:youtubeplayerpromise,message:'Loading video'}" style="padding-top: 0px !important;">
+        <iframe width="100%" height="375" ng-src="{{videoID}}" frameborder="0" allowfullscreen></iframe>
+    </div>
 </script>
+
 <!--<div class="" style="clear:both;">
     <span><b>YouTube</b> </span><br />
     <div class="" cg-busy="{promise:youtubepromise,message:'Loading Data'}">
