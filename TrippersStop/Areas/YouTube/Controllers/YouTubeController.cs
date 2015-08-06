@@ -51,26 +51,26 @@ namespace Trippism.Areas.YouTube.Controllers
                 YouTubeOutput youtube = new YouTubeOutput();
                 youtube = ServiceStackSerializer.DeSerialize<YouTubeOutput>(result.Response);
 
-                List<Items> lstItems = youtube.items;
+                Mapper.CreateMap<YouTubeOutput, TraveLayer.CustomTypes.YouTube.ViewModels.YouTube>();
+                Mapper.CreateMap<Items, TraveLayer.CustomTypes.YouTube.ViewModels.Items>();
+                Mapper.CreateMap<Snippet, TraveLayer.CustomTypes.YouTube.ViewModels.Snippet>();
+                Mapper.CreateMap<Id, TraveLayer.CustomTypes.YouTube.ViewModels.Id>();
+                Mapper.CreateMap<Thumbnails, TraveLayer.CustomTypes.YouTube.ViewModels.Thumbnails>();
+                Mapper.CreateMap<Default, TraveLayer.CustomTypes.YouTube.ViewModels.Default>();
+                Mapper.CreateMap<Medium, TraveLayer.CustomTypes.YouTube.ViewModels.Medium>();
+                Mapper.CreateMap<High, TraveLayer.CustomTypes.YouTube.ViewModels.High>();
+                Mapper.CreateMap<pageInfo, TraveLayer.CustomTypes.YouTube.ViewModels.pageInfo>();
 
-                Mapper.CreateMap<Items, TraveLayer.CustomTypes.YouTube.ViewModels.YouTube>()
-                   .ForMember(h => h.VideoId, m => m.MapFrom(s => s.id.videoid))
-                   .ForMember(h => h.Title, m => m.MapFrom(s => s.snippet.title))
-                   .ForMember(h => h.Description, m => m.MapFrom(s => s.snippet.description))
-                   .ForMember(h => h.ChannelId, m => m.MapFrom(s => s.snippet.channelid))
-                   .ForMember(h => h.DefaultURL, m => m.MapFrom(s => s.snippet.thumbnails.@default.url))
-                   .ForMember(h => h.MediumURL, m => m.MapFrom(s => s.snippet.thumbnails.medium.url))
-                   .ForMember(h => h.HighURL, m => m.MapFrom(s => s.snippet.thumbnails.high.url));
+                TraveLayer.CustomTypes.YouTube.ViewModels.YouTube lstVideos = Mapper.Map<YouTubeOutput, TraveLayer.CustomTypes.YouTube.ViewModels.YouTube>(youtube);
 
-                List<TraveLayer.CustomTypes.YouTube.ViewModels.YouTube> lstLocations = Mapper.Map<List<Items>, List<TraveLayer.CustomTypes.YouTube.ViewModels.YouTube>>(lstItems);
-                _cacheService.Save<List<TraveLayer.CustomTypes.YouTube.ViewModels.YouTube>>(cacheKey, lstLocations);
+                _cacheService.Save<TraveLayer.CustomTypes.YouTube.ViewModels.YouTube>(cacheKey, lstVideos);
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lstVideos);
                 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lstLocations);
                 return response;
             }
 
             return Request.CreateResponse(result.StatusCode, result.Response);
         }
-
     }
 }

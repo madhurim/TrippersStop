@@ -8,7 +8,16 @@ namespace TraveLayer.CustomTypes.YouTube.Response
 {
     public class YouTubeOutput
     {
+        public string nextPageToken { get; set; }
+        public string prevPageToken { get; set; }
+        public pageInfo pageInfo { get; set; }
         public List<Items> items { get; set; }
+    }
+
+    public class pageInfo
+    {
+        public string totalResults { get; set; }
+        public string resultsPerPage { get; set; }
     }
 
     public class Items
@@ -27,7 +36,7 @@ namespace TraveLayer.CustomTypes.YouTube.Response
     public class Id
     {
         public string kind { get; set; }
-        public string videoid { get; set; }
+        public string videoId { get; set; }
     }
     public class Thumbnails
     {

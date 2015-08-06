@@ -8,18 +8,53 @@ namespace TraveLayer.CustomTypes.YouTube.ViewModels
 {
     public class YouTube
     {
-        public string ChannelId { get; set; }
-
-        public string Title { get; set; }
-
-        public string VideoId { get; set; }
-
-        public string Description { get; set; }
-
-        public string DefaultURL { get; set; }
-
-        public string MediumURL { get; set; }
-
-        public string HighURL { get; set; }
+        public string nextPageToken { get; set; }
+        public string prevPageToken { get; set; }
+        public pageInfo pageInfo { get; set; }
+        public List<Items> items { get; set; }
     }
+
+    public class Items
+    {
+        public Id id { get; set; }
+        public Snippet snippet { get; set; }
+    }
+    public class pageInfo
+    {
+        public string totalResults { get; set; }
+        public string resultsPerPage { get; set; }
+    }
+    public class Snippet
+    {
+        public string publishedat { get; set; }
+        public string channelid { get; set; }
+        public string title { get; set; }
+        public string description { get; set; }
+        public Thumbnails thumbnails { get; set; }
+    }
+    public class Id
+    {
+        public string kind { get; set; }
+        public string videoId { get; set; }
+    }
+    public class Thumbnails
+    {
+        public Medium medium { get; set; }
+        public High high { get; set; }
+        public Default @default { get; set; }
+
+    }
+    public class Default
+    {
+        public string url { get; set; }
+    }
+    public class Medium
+    {
+        public string url { get; set; }
+    }
+    public class High
+    {
+        public string url { get; set; }
+    }
+
 }
