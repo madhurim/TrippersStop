@@ -128,8 +128,10 @@
                     var chartData = [];
                     if (scope.WeatherData != undefined && scope.WeatherData != "") {
 
-                        if (scope.WeatherData.TempHighAvg != undefined)
+                        if (scope.WeatherData.TempHighAvg != undefined) {
+                            scope.HighTempratureF = scope.WeatherData.TempHighAvg.Avg.F;
                             scope.HighTempratureC = scope.WeatherData.TempHighAvg.Avg.C;
+                        }
 
                         if (scope.WeatherData.TempLowAvg != undefined) {
                             scope.LowTempratureC = scope.WeatherData.TempLowAvg.Avg.C;
