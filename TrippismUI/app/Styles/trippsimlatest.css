@@ -680,3 +680,5 @@ a{
     /**/
 
      .map-canvas { min-height:300px; width:100%; position:relative; }
+
+     .carousel .carousel-control { visibility: hidden; }
