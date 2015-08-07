@@ -154,7 +154,7 @@
                                 animation: google.maps.Animation.DROP,
                                 CustomMarkerInfo: maps[x],
                                 labelStyle: { opacity: 0.75 },
-                                // icon: icon,//'app/Styles/images/mapicon.png'
+                                 icon: icon,//'app/Styles/images/mapicon.png'
                                 //icon: 'https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-b.png&text=' + maps[x].name + '&psize=8&font=fonts/Roboto-Regular.ttf&color=ff000033&ax=44&ay=48&scale=1',
                             });
 
