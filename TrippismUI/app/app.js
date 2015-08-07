@@ -8,13 +8,13 @@
                           'cgBusy',
                           //'ngAside' ,
                           //'google-maps',
-                          
+
                         ]);
 
 TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.when('', '/destination').otherwise('/destination');
 
-  
+
     $stateProvider
         // HOME STATES AND NESTED VIEWS ========================================
          .state('destination', {
@@ -24,7 +24,7 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
                  "": {
                      templateUrl: '/app/Views/destination.html',
                  }
-                 
+
              }
          })
 
@@ -53,11 +53,11 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
          .state('seasonality', {
              url: '/seasonality',
              templateUrl: '/app/Views/seasonality.html'
-         })         
+         })
      .state('/', {
          url: '/destination',
          templateUrl: '/app/Views/destination.html'
-        
+
      })
 });
 
@@ -82,6 +82,35 @@ TrippismUIApp.filter('limit', function () {
         return input.substr(0, value);
     }
 });
+TrippismUIApp.directive('infowindow', function () {
+    return {
+        restrict: 'E',
+        templateUrl: '/app/Views/Partials/infowindowpartial.html',
+        scope: {
+            markerData: '='
+        },
+        link: function (scope) {
+        }
+    }
+});
+
+TrippismUIApp.directive('onCarouselChange', function ($parse) {
+    return {
+        require: 'carousel',
+        link: function (scope, element, attrs, carouselCtrl) {
+            var fn = $parse(attrs.onCarouselChange);
+            var origSelect = carouselCtrl.select;
+            carouselCtrl.select = function (nextSlide, direction) {
+                if (nextSlide !== this.currentSlide) {
+                    fn(scope, {
+                        nextSlide: nextSlide,
+                        direction: direction,
+                    });
+                }
+                return origSelect.apply(this, arguments);
+            };
+        }
+    }});
 
 TrippismUIApp.directive('tabs', function () {
     return {
@@ -124,7 +153,7 @@ TrippismUIApp.directive('pane', function () {
         link: function (scope, element, attrs, tabsCtrl) {
 
             tabsCtrl.addPane(scope);
-           // tabsCtrl.removePane(scope);
+            // tabsCtrl.removePane(scope);
         },
         template:
             '<div class="tab-pane" ng-class="{active: $parent.tabInfo.selected}" ng-transclude>' +
