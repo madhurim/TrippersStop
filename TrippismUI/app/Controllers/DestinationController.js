@@ -344,10 +344,10 @@
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
 
                 // Static Block
-                $scope.Origin = 'ATL';
-                $scope.CalledOnPageLoad = true;
-                $scope.findDestinations('Cheapest');
-                return;
+                //$scope.Origin = 'ATL';
+                //$scope.CalledOnPageLoad = true;
+                //$scope.findDestinations('Cheapest');
+                //return;
                 // Static Block Ends
 
                 if (org == undefined || org == '') {
