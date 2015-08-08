@@ -107,6 +107,8 @@
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.min.css" />
     <Content Include="app\Views\partials\attractionTabPartial.html" />
+    <Content Include="app\Views\partials\avarageStarRatingPartial.html" />
+    <Content Include="app\Views\partials\EmailDetFormPartial.html" />
     <Content Include="app\Views\partials\FareForecastPartial.html" />
     <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
     <Content Include="app\Views\partials\WeatherPartial.html" />
