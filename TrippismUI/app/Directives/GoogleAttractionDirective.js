@@ -97,6 +97,8 @@
                                         $scope.googleattractionData = data;
                                         $scope.quantity = 5;
                                         $scope.googleattractionInfoLoaded = true;
+
+
                                     });
                                 }
                             }
@@ -108,34 +110,44 @@
                 $scope.noWrapSlides = false;
                 var slides = [];
                 $scope.slides = [];
-
-                //$scope.addSlide = function (i) {
-                //    var newWidth = 300 + slides.length + 1;
-                //    //slides[i] = new Array();
-                //    var obj = {
-                //        image: '//placekitten.com/' + newWidth + '/300',
-                //        text: ['More', 'Extra', 'Lots of', 'Surplus'][slides.length % 4] + ' ' +
-                //          ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4],
-                //    };
-                //    slides.push(obj);
-                //};
-                //for (var i = 0; i < 4; i++)
-                //    $scope.addSlide(i);
-
-
                 $scope.addSlides = function (i, photos) {
                     $scope.slides[i] = new Array();
                     for (var photoidex = 0; photoidex < photos.length; photoidex++)
                         $scope.slides[i].push(photos[photoidex]);
                 };
 
+                $scope.MaxRating = 5;
+                function getRatings(num) {
+                    var stars = [];
+                    for (var i = 0; i < $scope.MaxRating; i++) {
+                        stars.push({});
+                    }
+                    var starContainerMaxWidth = 100; //%
+                    var filledInStarsContainerWidth = num / $scope.MaxRating * starContainerMaxWidth;
+
+                    var ratingDiv = "<div class='average-rating-container'>";
+                    if (stars.length > 0) {
+                        ratingDiv += "<ul class='rating background' class='readonly'>";
+                        for (var starIdx = 0; starIdx < stars.length; starIdx++) {
+                            ratingDiv += "<li class='star'><i class='fa fa-star'></i></li>";
+                        }
+                        ratingDiv += "</ul>";
+                        ratingDiv += "<ul class='rating foreground readonly'  style='width:" + filledInStarsContainerWidth + "%'>";
+
+                        for (var starIdx = 0; starIdx < stars.length; starIdx++) {
+                            ratingDiv += "<li ng-repeat='star in stars' class='star filled'><i class='fa fa-star'></i></li>";
+                        }
+                    }
+                    ratingDiv += "  </ul></div>";
+
+                    return ratingDiv;
+                }
+
                 function RenderMap(maps) {
                     if (maps != undefined && maps.length > 0) {
                         $scope.InfoWindow;
                         selected = maps;
                         for (var x = 0; x < maps.length; x++) {
-
-                            console.log(maps[x]);
                             var icon = new google.maps.MarkerImage(
                                              maps[x].icon,
                                             new google.maps.Size(71, 71),
@@ -163,10 +175,9 @@
                             if (maps[x].photos.length > 0) {
                                 var photos = [];
                                 for (var photoidx = 0; photoidx < maps[x].photos.length; photoidx++) {
-
                                     var refPhotoUrl = maps[x].photos[photoidx].photo_reference;
-                                    var Imgsrc = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + refPhotoUrl + "&key=AIzaSyAQUUoKix1RYuUSlnQHdCG0mFGOSC29vGk";
-                                    var imgtext = "test";
+                                    var Imgsrc = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + refPhotoUrl + "&key=AIzaSyCiLkS_y8WJsAhoJduPbhVCeI3GCU5fUUY";
+                                    var imgtext = "";
                                     var objtopush = { image: Imgsrc, text: imgtext };
                                     photos.push(objtopush);
                                 }
@@ -177,41 +188,14 @@
                                 //Imgdiv += "<img height='190' width='250' src=" + Imgsrc + "></img>";
                                 //Imgdiv += "</div>";
                             }
-
-                            //var placeid = maps[x].place_id;
-                            //var request = { placeId: placeid };
-
-                            //var service = new google.maps.places.PlacesService($scope.googleattractionsMap);
-                            //var StreetAddr = "";
-                            
-                            //service.getDetails(request, function (place, status) {
-                            //    if (status == google.maps.places.PlacesServiceStatus.OK) {
-                            //        if (place.adr_address != undefined)
-                            //            StreetAddr = place.adr_address;
-                            //        console.log(place);
-                            //    }
-                            //});
-                            //GoogleAttractionFactory.getPlaceDetails(placeid, $scope.googleattractionsMap, function (response) {
-                            //    $scope.data.random_artists = response;
-                            //});
-
-                            //var myDataPromise = GoogleAttractionFactory.getPlaceDetails(placeid, $scope.googleattractionsMap);
-                            
-
+                            var name = maps[x].name;
                             var contentString1 = '<div><carousel  id="cas1"  on-carousel-change="onSlideChanged(nextSlide, direction)" no-wrap="noWrapSlides">' +
-                                '<slide ng-repeat="slide in slides[' + x + ']" active="slide.active">' +
-                                '<img ng-src="{{slide.image}}" style="margin:auto;">' +
-                                '<div class="carousel-caption">' +
-                                '<h4>Slide {{$index}}</h4>' +
-                                '<p>{{slide.text}}</p>' +
-                                '</div>' +
-                                '</slide>' +
-                                '</carousel>' +
-                                '<div class="col-sm-12 padleft0"><strong>' + maps[x].name + '</strong></div>' +
-                                                        '<div class="col-sm-12 padleft0 word-wrap">' + maps[x].vicinity + '</div>' +
-                                                        //'<div class="col-sm-12 padleft0 word-wrap">' + StreetAddr + '</div>' +
-                                                        
-                                                '</div> ' + '</div>';
+                           '<slide ng-repeat="slide in slides[' + x + ']" active="slide.active">' +
+                           '<img ng-src="{{slide.image}}" style="margin:auto;">' +
+                           '</slide>' +
+                           '</carousel>' +
+                           '<div class="col-sm-12 padleft0"><strong>' + name + '</strong></div>' +
+                                           '</div> ' + '</div>';
 
                             var contentString = ($compile(contentString1)($scope));
                             contentString = contentString[0];
@@ -219,16 +203,50 @@
                             //var contentString = '<div class="custmarker">' + Imgdiv + '<div class="col-sm-12 padleft0"><strong>' + maps[x].name + '</strong></div>' + '<div class="col-sm-12 padleft0 word-wrap">' + maps[x].vicinity + '</div>' + '</div> ';
 
                             $scope.InfoWindow = new google.maps.InfoWindow();
-
-                            google.maps.event.addListener(marker, 'mouseover', (function (marker, contentString, infowindow) {
+                            var MapDet = maps[x];
+                            google.maps.event.addListener(marker, 'mouseover', (function (marker, MapDet, contentString, $compile, infowindow) {
                                 return function () {
+
                                     if ($scope.InfoWindow) $scope.InfoWindow.close();
-                                    $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
-                                    $scope.InfoWindow.open($scope.googleattractionsMap, marker);
+                                    //$scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
+                                    //$scope.InfoWindow.open($scope.googleattractionsMap, marker);
+                                    if (!MapDet['IsLoaded'] || MapDet['IsLoaded'] == undefined) {
+                                        MapDet['IsLoaded'] = true;
+                                        var service = new google.maps.places.PlacesService($scope.googleattractionsMap);
+                                        var request = { placeId: MapDet.place_id };
+                                        service.getDetails(request, function (place, status) {
+                                            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                                                if ($scope.InfoWindow) $scope.InfoWindow.close();
+                                                contentString.innerHTML += place.adr_address;
+                                                if (place.formatted_phone_number != undefined)
+                                                    contentString.innerHTML += "<br/>" + place.formatted_phone_number;
+
+                                                if (place.website != undefined)
+                                                    contentString.innerHTML += "<br/><a target='_blank' href=" + place.website + ">" + place.website + "</a>";
+                                                //var ratinghtml = '<average-star-rating average-rating-value="2" ></average-star-rating>';
+                                                //var raingtoappend = ($compile(ratinghtml)($scope));
+                                                //raingtoappend = raingtoappend[0];
+                                                var raingtoappend = "";
+                                                if (place.rating != undefined) {
+                                                    raingtoappend = getRatings(place.rating);
+                                                    contentString.innerHTML += "<br/>" + raingtoappend;// raingtoappend.innerHTML;
+                                                }
+
+                                                $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
+                                                $scope.InfoWindow.open($scope.googleattractionsMap, marker);
+                                            }
+                                        });
+                                    } else {
+                                        $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
+                                        $scope.InfoWindow.open($scope.googleattractionsMap, marker);
+                                    }
                                 };
-                            })(marker, contentString, $scope.InfoWindow));
+                            })(marker, MapDet, contentString, $compile, $scope.InfoWindow));
 
                             $scope.AttractionMarkers.push(marker);
+
+
+
                         }
 
                         google.maps.event.addListenerOnce($scope.googleattractionsMap, 'idle', function () {

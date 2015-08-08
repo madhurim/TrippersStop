@@ -18,7 +18,7 @@
         $scope.emailvalidate = false;
         $scope.seasonalityData = seasonalityData;
 
-        
+
 
         $scope.submitModal = function () {
             if ($scope.FormGetEmailDet.$invalid) {
@@ -32,7 +32,6 @@
                 $scope.subject = $scope.Subject;
                 $scope.FromEmail = $scope.fromemail;
                 activate();
-
             }
         }
         function loadSeasonalityInfo(seasonalityData) {
@@ -94,6 +93,7 @@
             var OriginairportName = _.find(airportlist, function (airport) {
                 return airport.airport_Code == $scope.seasonalityData.OriginairportName.airport_Code.toUpperCase()
             });
+            var FareData = $scope.$parent.FareforecastData;
 
             var sortedObjs = _.filter(basicDetinationDetlist, function (item) {
                 return item.LowestFare !== 'N/A';
@@ -123,10 +123,21 @@
             }
 
             contentString += '</table>';
+
+            var LowestFare = 'N/A';
+            var CurrencyCode = "N/A";
+
+            if (FareData != undefined && FareData != "") {
+                if (FareData.LowestFare != undefined)
+                    LowestFare = FareData.LowestFare;
+                if (FareData.CurrencyCode != undefined)
+                    CurrencyCode = FareData.CurrencyCode;
+            }
+
             if ($scope.seasonalityData.mapOptions != undefined) {
-                
+
                 var LowestNonStopFare = ($scope.seasonalityData.mapOptions.LowestNonStopFare == 'N/A') ? 'N/A' : Number($scope.seasonalityData.mapOptions.LowestNonStopFare).toFixed(2);
-                var LowestFare = ($scope.seasonalityData.mapOptions.LowestFare == 'N/A') ? 'N/A' : Number($scope.seasonalityData.mapOptions.LowestFare).toFixed(2);
+
                 var DepartureDate = $filter('date')($scope.seasonalityData.mapOptions.DepartureDateTime, $scope.format)
                 var ReturnDate = $filter('date')($scope.seasonalityData.mapOptions.ReturnDateTime, $scope.format)
 
@@ -139,13 +150,13 @@
                               '</div>' +
                               '<div  style="width:13%;float:left;">' +
                                   '<span>Lowest Fare: </span><br><strong >'
-                                    + $scope.seasonalityData.mapOptions.CurrencyCode + ' '
+                                    + CurrencyCode + ' '
                                     + LowestFare +
                                     '</strong><br>' +
                               '</div>' +
                               '<div  style="width:20%;float:left;">' +
                                   '<span>Lowest Non Stop Fare: </span><br><strong > '
-                                  + $scope.seasonalityData.mapOptions.CurrencyCode + ' '
+                                  + CurrencyCode + ' '
                                   + LowestNonStopFare + '</strong>' +
                               '</div>' +
                               '<div  style="width:15%;float:left;">' +
@@ -158,8 +169,9 @@
             }
 
             var FareForeCastHTML = "";
-            
-            var FareData = $scope.$parent.FareforecastData;
+
+
+            debugger;
             //if ($scope.seasonalityData.FareforecastData != undefined) {
             if (FareData != undefined && FareData != "") {
                 var Recommendation = FareData.Recommendation;
@@ -187,12 +199,10 @@
                     HighestPredictedFare = (FareData.Forecast.HighestPredictedFare == 'N/A') ? 'N/A' : Number(FareData.Forecast.HighestPredictedFare).toFixed(2);
                     LowestPredictedFare = (FareData.Forecast.LowestPredictedFare == 'N/A') ? 'N/A' : Number(FareData.Forecast.LowestPredictedFare).toFixed(2);
 
-
-
                     FareForeCastHTML += '<div  style="clear:both;margin-top:10px;width:100%;">' +
                                             '<div style="padding:0px;width:30%;float:left;">' +
                                                 '<span>Highest Predicted Fare: </span><br />'
-                                                    + '<strong>' + FareData.CurrencyCode + ' ' + HighestPredictedFare
+                                                    + '<strong>' + CurrencyCode + ' ' + HighestPredictedFare
                                                     + '</strong>' +
                                             '</div>' +
                                             '<div style="padding:0px;width:30%;float:left;">' +
@@ -211,7 +221,7 @@
             var SeasonalityHTML = "";
             //var SeasonalityData = $scope.MarkerSeasonalityInfo;
             var SeasonalityData = $scope.$parent.MailMarkerSeasonalityInfo;
-            
+
 
             if (SeasonalityData != undefined && SeasonalityData != "" && SeasonalityData.Seasonality.length > 0) {
                 var SeasonText = 'Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly.';
@@ -264,7 +274,7 @@
             var FareRangeHTML = "";
             //var fareRangeData = $scope.fareRangeData;
             var fareRangeData = $scope.$parent.MailFareRangeData;
-            
+
             if (fareRangeData != "") {
                 contentString += "<div style='clear:both;padding-top:15px;margin-bottom:5px;' ><b style='text-decoration: underline;'>Fare Range</b><br />Median, highest, and lowest published fares during the previous 4 weeks for each of the future departure dates in a range, using the specific origin, destination, and length of stay requested.</div>";
                 FareRangeHTML += '<table >' +
@@ -332,10 +342,11 @@
 
         function SendEmailToUser(destinationdet) {
             //var dest = destinationdet.$parent.$parent.$parent;
+
             var dest = destinationdet;
             $scope.Defaultsubject = $scope.seasonalityData.OriginairportName.airport_FullName;
             $scope.destinationinfo = dest;
-            
+
             var GetEmailDetPopupInstance = $modal.open({
                 templateUrl: 'EmailDetForm.html',
                 scope: $scope,
