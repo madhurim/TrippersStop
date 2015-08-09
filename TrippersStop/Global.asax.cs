@@ -15,6 +15,7 @@ using System.Web.Routing;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Weather;
+using Trippism.APIExtention;
 using TrippismApi.TraveLayer;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 
@@ -52,6 +53,10 @@ namespace TrippismApi
             RegisterMappingEntities();
             //GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
            // GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
+
+            GlobalConfiguration.Configuration.Formatters.Clear();
+            GlobalConfiguration.Configuration.Formatters.Add(new MediaTypeFormatterCompatibleMessagePack());
+
         }
 
         private void RegisterMappingEntities()

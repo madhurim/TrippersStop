@@ -90,6 +90,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\mongocsharpdriver.2.0.0\lib\net45\MongoDB.Driver.Legacy.dll</HintPath>
     </Reference>
+    <Reference Include="MsgPack, Version=0.6.0.0, Culture=neutral, PublicKeyToken=a2625990d5dc0167, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MsgPack.Cli.0.6.0\lib\net45\MsgPack.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -216,6 +220,7 @@
     <Compile Include="APIExtention\Filters\GZipCompressionAttribute.cs" />
     <Compile Include="APIExtention\Filters\TrippismCache.cs" />
     <Compile Include="APIExtention\Filters\ValidateModelAttribute.cs" />
+    <Compile Include="APIExtention\MediaTypeFormatter\MediaTypeFormatterCompatibleMessagePack.cs" />
     <Compile Include="APIHelper\ApiHelper.cs" />
     <Compile Include="APIHelper\CompressedContent.cs" />
     <Compile Include="APIHelper\MailgunEmail.cs" />
