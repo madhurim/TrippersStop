@@ -19,7 +19,13 @@
 
                 <div class="col-md-12 padlr0">
                     <div class="col-lg-6 padlr0" ng-show="!FareNoDataFound">
+                        <span class="fnt15">Lowest Non Stop Fare: <span>{{seasonalityData.mapOptions.CurrencyCode}} {{seasonalityData.mapOptions.LowestNonStopFare | number : 2}} </span></span>
+                    </div>
+                    <div class="col-lg-6 padlr0" ng-show="!FareNoDataFound">
                         <span class="fnt15">Lowest Fare: <span>{{FareforecastData.CurrencyCode}} {{FareforecastData.LowestFare | number : 2}} </span></span>
+                    </div>
+                    <div class="col-lg-6 padlr0" ng-show="!FareNoDataFound">
+                        <span class="fnt15">Lowest Predicted Fare: <span>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.LowestPredictedFare | number : 2 }}</span></span>
                     </div>
                     <div class="col-lg-6 padlr0" ng-show="!FareNoDataFound">
                         <div ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
@@ -31,9 +37,6 @@
                                 </span>
                             </span>
                         </div>
-                    </div>
-                    <div class="col-lg-6 padlr0" ng-show="!FareNoDataFound">
-                        <span class="fnt15">Lowest Predicted Fare: <span>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.LowestPredictedFare | number : 2 }}</span></span>
                     </div>
 
                     <div class="col-lg-6 padlr0">
