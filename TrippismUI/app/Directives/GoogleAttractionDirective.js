@@ -21,6 +21,18 @@
                 $scope.bounds = new google.maps.LatLngBounds();
                 $scope.MapLoaded = false;
 
+                $scope.$on('ontabClicked', function () {
+                        if ($scope.MapLoaded){
+                            $timeout(function () {
+                                if ($scope.InfoWindow) $scope.InfoWindow.close();
+                                $scope.FittoScreen();
+                            }, 100, false);
+                        }   
+                        else
+                            $scope.loadgoogleattractionInfo();
+                    
+                });
+                
 
                 $scope.FittoScreen = function () {
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
@@ -176,7 +188,7 @@
                                 var photos = [];
                                 for (var photoidx = 0; photoidx < maps[x].photos.length; photoidx++) {
                                     var refPhotoUrl = maps[x].photos[photoidx].photo_reference;
-                                    var Imgsrc = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + refPhotoUrl + "&key=AIzaSyCiLkS_y8WJsAhoJduPbhVCeI3GCU5fUUY";
+                                    var Imgsrc = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + refPhotoUrl + "&key=AIzaSyC0CVNlXkejEzLzGCMVMj8PZ7gBzj8ewuQ";
                                     var imgtext = "";
                                     var objtopush = { image: Imgsrc, text: imgtext };
                                     photos.push(objtopush);
@@ -206,7 +218,6 @@
                             var MapDet = maps[x];
                             google.maps.event.addListener(marker, 'mouseover', (function (marker, MapDet, contentString, $compile, infowindow) {
                                 return function () {
-
                                     if ($scope.InfoWindow) $scope.InfoWindow.close();
                                     //$scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
                                     //$scope.InfoWindow.open($scope.googleattractionsMap, marker);
@@ -231,7 +242,6 @@
                                                     raingtoappend = getRatings(place.rating);
                                                     contentString.innerHTML += "<br/>" + raingtoappend;// raingtoappend.innerHTML;
                                                 }
-
                                                 $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
                                                 $scope.InfoWindow.open($scope.googleattractionsMap, marker);
                                             }
@@ -242,11 +252,7 @@
                                     }
                                 };
                             })(marker, MapDet, contentString, $compile, $scope.InfoWindow));
-
                             $scope.AttractionMarkers.push(marker);
-
-
-
                         }
 
                         google.maps.event.addListenerOnce($scope.googleattractionsMap, 'idle', function () {
@@ -255,7 +261,6 @@
                         $timeout(function () {
                             $scope.googleattractionsMap.setCenter(new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng));
                         }, 1000, false);
-                        //$scope.googleattractionsMap.panTo(new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng));
                     }
                 };
             },

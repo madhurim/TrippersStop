@@ -129,6 +129,9 @@
             });
             $scope.tabManager.tabItems[i].selected = true;
             $scope.tabManager.tabItems[i].TabcontentView = true;
+
+            $rootScope.$broadcast('ontabClicked');
+
         }
 
         $scope.isSearching = true;
