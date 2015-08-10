@@ -24,6 +24,7 @@
                 $scope.$on('ontabClicked', function () {
                         if ($scope.MapLoaded){
                             $timeout(function () {
+                                if ($scope.InfoWindow) $scope.InfoWindow.close();
                                 $scope.FittoScreen();
                             }, 100, false);
                         }   
@@ -187,7 +188,7 @@
                                 var photos = [];
                                 for (var photoidx = 0; photoidx < maps[x].photos.length; photoidx++) {
                                     var refPhotoUrl = maps[x].photos[photoidx].photo_reference;
-                                    var Imgsrc = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + refPhotoUrl + "&key=AIzaSyAQUUoKix1RYuUSlnQHdCG0mFGOSC29vGk";
+                                    var Imgsrc = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + refPhotoUrl + "&key=AIzaSyC0CVNlXkejEzLzGCMVMj8PZ7gBzj8ewuQ";
                                     var imgtext = "";
                                     var objtopush = { image: Imgsrc, text: imgtext };
                                     photos.push(objtopush);
