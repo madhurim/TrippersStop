@@ -54,8 +54,10 @@ namespace TrippismApi
             //GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
            // GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
 
-            GlobalConfiguration.Configuration.Formatters.Clear();
-            GlobalConfiguration.Configuration.Formatters.Add(new MediaTypeFormatterCompatibleMessagePack());
+           // GlobalConfiguration.Configuration.Formatters.Clear();
+          //  GlobalConfiguration.Configuration.Formatters.Add(new MediaTypeFormatterCompatibleMessagePack());
+            GlobalConfiguration.Configuration.Formatters.RemoveAt(0);
+            GlobalConfiguration.Configuration.Formatters.Insert(0, new ServiceStackTextFormatter());
 
         }
 
