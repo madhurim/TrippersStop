@@ -698,9 +698,7 @@ a{
 }
 .social-box i {
     display: block;
-    font-size: 40px;
-    line-height: 90px;
-    background: #f5f5f5;
+    font-size: 28px;
 }
 .social-box ul {
     list-style: none;
