@@ -6,7 +6,6 @@
         },
         templateUrl: '/app/Views/Partials/attractionTabPartial.html',
         link: function (scope, elem, attrs) {
-
         }
     }
 }]);

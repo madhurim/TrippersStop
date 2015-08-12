@@ -291,7 +291,7 @@
             //$scope.seasonalitydirectiveData = args.Destinatrion;
             $scope.seasonalitydirectiveData = args;
             $scope.fareforecastdirectiveDisplay = true;
-            //$scope.open('lg', args);
+            
         });
 
         function btnSearchClick() {

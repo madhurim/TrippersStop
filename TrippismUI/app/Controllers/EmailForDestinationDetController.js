@@ -171,7 +171,6 @@
             var FareForeCastHTML = "";
 
 
-            debugger;
             //if ($scope.seasonalityData.FareforecastData != undefined) {
             if (FareData != undefined && FareData != "") {
                 var Recommendation = FareData.Recommendation;
