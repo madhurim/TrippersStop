@@ -254,13 +254,13 @@
                                 }
                                 var zresult = '';
                                 if (this.point.z == 12000) {
-                                    zresult = '<span> ' + 'GreaterThan10000' + ' </span>';
+                                    zresult = '<span> ' + '> 10000' + ' </span>';
                                 }
                                 else if (this.point.z == 8000) {
-                                    zresult = '<span> ' + 'LessThan10000' + ' </span>';
+                                    zresult = '<span> ' + '< 10000' + ' </span>';
                                 }
                                 else if (this.point.z == 800) {
-                                    zresult = '<span> ' + 'LessThan1000' + ' </span>';
+                                    zresult = '<span> ' + '< 1000' + ' </span>';
                                 }
                                 else {
                                     zresult = '<span> ' + '' + ' </span>';

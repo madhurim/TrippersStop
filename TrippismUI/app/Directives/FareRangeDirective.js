@@ -158,7 +158,7 @@
                                 year: '%b'
                             },
                             title: {
-                                text: scope.farerangeParams.Fareforecastdata.DepartureDate + ' To ' + scope.farerangeParams.Fareforecastdata.ReturnDate
+                               text:'Historical Fare Rate for date '+scope.farerangeParams.Fareforecastdata.DepartureDate + ' To ' + scope.farerangeParams.Fareforecastdata.ReturnDate
                             }
                         },
                         yAxis: {
