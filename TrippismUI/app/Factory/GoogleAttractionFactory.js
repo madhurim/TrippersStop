@@ -22,18 +22,7 @@
             return str.join("&");
         }
 
-        function getPlaceDetails(placeid, map) {
-            var service = new google.maps.places.PlacesService(map);
-            var request = { placeId: placeid };
-            var sss=  service.getDetails(request, function (place, status) {});
-            //var url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid="'+ placeid +'"&key=AIzaSyAQUUoKix1RYuUSlnQHdCG0mFGOSC29vGk';
-            //return $http.get(url)
-            //   .then(function (data) {
-            //       return data.data;
-            //   }, function (e) {
-            //       return e;
-            //   });
-        }
+       
         function googleAttraction(data) {
             var testURL = 'locationsearch?' + serialize(data);
             var url = $rootScope.apiURLForGoogleAttraction + testURL;
