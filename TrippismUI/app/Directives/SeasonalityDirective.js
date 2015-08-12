@@ -57,7 +57,6 @@
                                         $rootScope.$broadcast('divSeasonalityEvent', false);
                                         return;
                                     }   
-                                    debugger;
                                     scope.SeasonalityData = data.Seasonality;
                                     $rootScope.$broadcast('divSeasonalityEvent', true);
 
@@ -131,16 +130,21 @@
             })
             scope.Chart = [];
             function DisplayChart() {
-                var chartData = [];
+                var chartData1 = [];
+                var chartData2 = [];
+                var chartData3 = [];
+
                 var startdate;
                 if (scope.SeasonalityData != undefined && scope.SeasonalityData != "") {
                     for (i = 0; i < scope.SeasonalityData.length; i++) 
                     {
                         var WeekStartDate = new Date(scope.SeasonalityData[i].WeekStartDate);
+                        var WeekEndDate = new Date(scope.SeasonalityData[i].WeekEndDate);
                         if (i == 0)
                         { startdate = Date.UTC(WeekStartDate.getFullYear(), WeekStartDate.getMonth(), WeekStartDate.getDate()); }
 
                         var utcdate = Date.UTC(WeekStartDate.getFullYear(), WeekStartDate.getMonth(), WeekStartDate.getDate());
+                        var endutcdate = Date.UTC(WeekEndDate.getFullYear(), WeekEndDate.getMonth(), WeekEndDate.getDate());
                         var SeasonalityIndicator = 1;
                         var NumberOfObervations = 0;
                         if (scope.SeasonalityData[i].SeasonalityIndicator == "Low") {
@@ -152,20 +156,26 @@
                         if (scope.SeasonalityData[i].SeasonalityIndicator == "High") {
                             SeasonalityIndicator = 3;
                         }
-                        if (scope.SeasonalityData[i].NumberOfObervations == "GreaterThen10000")
+                        if (scope.SeasonalityData[i].NumberOfObservations == "GreaterThan10000")
                             NumberOfObervations = 12000;
-                        if (scope.SeasonalityData[i].NumberOfObervations == "LessThan10000")
+                        if (scope.SeasonalityData[i].NumberOfObservations == "LessThan10000")
                             NumberOfObervations = 8000;
-                        if(scope.SeasonalityData[i].NumberOfObervations == "LessThan1000")
-                            NumberOfObervations = 00;
+                        if (scope.SeasonalityData[i].NumberOfObservations == "LessThan1000")
+                            NumberOfObervations = 800;
                         
                         var serise = {
                             x: utcdate,
                             y: SeasonalityIndicator,
-                            z: NumberOfObervations
+                            z: NumberOfObervations,
+                            enddate: endutcdate,
+                            YearWeekNumber: scope.SeasonalityData[i].YearWeekNumber
                         };
-                       
-                        chartData.push(serise);
+                        if (SeasonalityIndicator ==1)
+                            chartData1.push(serise);
+                        else if (SeasonalityIndicator ==2)
+                            chartData2.push(serise);
+                        else if (SeasonalityIndicator ==3)
+                            chartData3.push(serise);
                        
                     }
                     //   }
@@ -187,8 +197,8 @@
                             },
                             //tickInterval: 14,
                             dateTimeLabelFormats: {
-                                day: '%Y-%m-%e',
-                                month: '%Y-%m-%e',
+                                day: '%m-%e-%Y',
+                                month: '%m-%e-%Y',
                                 year: '%Y'
                             },
                             title: {
@@ -229,15 +239,58 @@
                             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
                             pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}$</b><br/>',
                             formatter: function () {
-                                return '<span style="font-size:11px">' + this.series.name + '</span><br><b>' +
-                                    Highcharts.dateFormat('%Y-%m-%e', new Date(this.x)) + ',' + this.y  ;
+                                var yresult = '';
+                                if (this.y == 1) {
+                                    yresult = '<span> ' + 'Low' + ' </span>';
+                                }
+                                else if (this.y == 2) {
+                                    yresult = '<span> ' + 'Medium' + ' </span>';
+                                }
+                                else if (this.y == 3) {
+                                    yresult = '<span> ' + 'High' + ' </span>';
+                                }
+                                else {
+                                    yresult = '<span> ' + '' + ' </span>';
+                                }
+                                var zresult = '';
+                                if (this.point.z == 12000) {
+                                    zresult = '<span> ' + 'GreaterThan10000' + ' </span>';
+                                }
+                                else if (this.point.z == 8000) {
+                                    zresult = '<span> ' + 'LessThan10000' + ' </span>';
+                                }
+                                else if (this.point.z == 800) {
+                                    zresult = '<span> ' + 'LessThan1000' + ' </span>';
+                                }
+                                else {
+                                    zresult = '<span> ' + '' + ' </span>';
+                                }
+
+
+                                return '<span style="color:#87ceeb">Week :</span> <b> #' + this.point.YearWeekNumber + ' [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.enddate)) + ' ] </b><br>' +
+                                    '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
+                                    '<span style="color:#87ceeb">Booking Quntities :</span> <b>' + zresult +'</b>';
                             }
                         },
                         series: [{
-                            name: "Seasonality",
-                            data: chartData,
+                            name: "Low Seasonality",
+                            data: chartData1,
                             pointStart: startdate,
-                            colorByPoint: false,
+                            color: '#adff2f',
+                            pointInterval: 336 * 3600 * 1000 // 14 days
+                        },
+                        {
+                            name: "Medium Seasonality",
+                            data: chartData2,
+                            pointStart: startdate,
+                            color: '#2e8b57',
+                            pointInterval: 336 * 3600 * 1000 // one day
+                        },
+                        {
+                            name: "High Seasonality",
+                            data: chartData3,
+                            pointStart: startdate,
+                            color: '#87ceeb',
                             pointInterval: 336 * 3600 * 1000 // one day
                         }]
                     };

@@ -106,24 +106,31 @@
                 if (scope.fareRangeData != undefined && scope.fareRangeData != "") {
                     for (i = 0; i < scope.fareRangeData.FareData.length; i++) {
                         var DepartureDate = new Date(scope.fareRangeData.FareData[i].DepartureDateTime);
+                        var returnDate = new Date(scope.fareRangeData.FareData[i].ReturnDateTime);
+
                         if (i == 0)
                         { startdate = Date.UTC(DepartureDate.getFullYear(), DepartureDate.getMonth(), DepartureDate.getDate()); }
                        
                         var utcdate = Date.UTC(DepartureDate.getFullYear(), DepartureDate.getMonth(), DepartureDate.getDate());
+                        var retutcdate = Date.UTC(returnDate.getFullYear(), returnDate.getMonth(), returnDate.getDate());
+                        
                         var serise1 = {
                             x: utcdate,
                             y: scope.fareRangeData.FareData[i].MaximumFare,
-                            z: scope.fareRangeData.FareData[i].MaximumFare
+                            z: scope.fareRangeData.FareData[i].MaximumFare,
+                            returndate: retutcdate
                         };
                         var serise2 = {
                             x: utcdate,
                             y: scope.fareRangeData.FareData[i].MinimumFare,
-                            z: scope.fareRangeData.FareData[i].MinimumFare
+                            z: scope.fareRangeData.FareData[i].MinimumFare,
+                            returndate: retutcdate
                         };
                         var serise3 = {
                             x: utcdate,
                             y: scope.fareRangeData.FareData[i].MedianFare,
-                            z: scope.fareRangeData.FareData[i].MedianFare
+                            z: scope.fareRangeData.FareData[i].MedianFare,
+                            returndate: retutcdate
                         };
                         chartData1.push(serise1);
                         chartData2.push(serise2);
@@ -146,7 +153,7 @@
                             labels:{ rotation : -45
                             },
                             dateTimeLabelFormats: {
-                                day: '%Y-%m-%e',
+                                day: '%m-%e-%Y',
                                 month: '%e. %b',
                                 year: '%b'
                             },
@@ -166,8 +173,10 @@
                             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
                             pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}$</b><br/>',
                             formatter: function () {
-                                return '<span style="font-size:11px">' + this.series.name + '</span><br><b>' +
-                                    Highcharts.dateFormat('%Y-%m-%e', new Date(this.x)) + ',' + this.y + ' $.';
+                                return '<span style="font-size:11px;color:#87ceeb"> Fare Detail </span><br>' +
+                                    '<span style="color:#87ceeb">Departure Date :</span><b>' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + '</b><br>' +
+                                    '<span style="color:#87ceeb">Return Date :</span><b> ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.returndate)) + '</b><br>' +
+                                    '<span style="color:#87ceeb">'+this.series.name + ' : </span><b>$'+Highcharts.numberFormat(this.point.y,2)+'</b>';
                             }
                         },
                         series: [{

@@ -35,12 +35,17 @@
         </div>
     </div>
     <div class="col-md-12" style="clear:both;padding-top:5px;" ng-show="showChart">
-        <div ng-show="farerangeParams.tabIndex == '999'">
-            <span style="font-size:14px !important;font-weight:bold;line-height:1.1 !important;display: block !important;">Historical Fare Rate for date {{DepartDate}} to {{ReturnDate}}</span>
+        <div ng-show="!loadingFareRange">
+            <div ng-show="farerangeParams.tabIndex == '999'">
+                <span style="font-size:14px !important;font-weight:bold;line-height:1.1 !important;display: block !important;">Historical Fare Rate for date {{DepartDate}} to {{ReturnDate}}</span>
+            </div>
+            <div ng-show="farerangeParams.tabIndex != '999'">
+                <span style="font-size:100% !important;font-weight:bold;text-decoration: underline;">Historical Fare Rate for date {{DepartDate}} to {{ReturnDate}}</span>
+                <br />
+                <h6 style="margin:0px;">Median, highest, and lowest published fares during the previous 4 weeks for each of the future departure dates in a range, using the specific origin, destination, and length of stay requested.</h6>
+
+            </div>
         </div>
-        <div ng-show="farerangeParams.tabIndex != '999'">
-            <span style="font-size:100% !important;font-weight:bold;">Historical Fare Rate for date {{DepartDate}} to {{ReturnDate}}</span>
-        </div>
-    </div> 
+        </div> 
 </div>
 
