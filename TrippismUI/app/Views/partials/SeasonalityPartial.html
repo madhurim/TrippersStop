@@ -49,13 +49,17 @@
     </div>
 </div>
 <div class="col-md-12" style="clear:both;padding-top:5px;" ng-show="showChart">
-    <div ng-show="farerangeParams.tabIndex == '999'">
-        <span style="font-size:14px !important;font-weight:bold;line-height:1.1 !important;display: block !important;">Traffic patterns for date {{DepartDate}} to {{ReturnDate}}</span>
-    </div>
-    <div ng-show="farerangeParams.tabIndex != '999'">
-        <span style="font-size:100% !important;font-weight:bold;">Traffic patterns for next 52 Weeks</span>
-    </div>
-</div> 
+    <div ng-if="!loadingSeasonality">
+        <div ng-show="farerangeParams.tabIndex == '999'">
+            <span style="font-size:14px !important;font-weight:bold;line-height:1.1 !important;display: block !important;text-decoration: underline;">Traffic patterns for date {{DepartDate}} to {{ReturnDate}}</span>
+        </div>
+        <div ng-show="farerangeParams.tabIndex != '999'">
+            <span style="font-size:100% !important;font-weight:bold;text-decoration: underline;">Traffic patterns for next 52 Weeks</span>
+            <h6 style="margin:0px;">Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly</h6>
+
+        </div>
+        </div>
+    </div> 
 
 
 

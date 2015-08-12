@@ -1,11 +1,11 @@
 ﻿<div class="col-md-12" style="clear:both;padding-top:5px;">
-    <div class="" cg-busy="{promise:Weatherpromise,message:'Loading Weather Detail'}">
+    <div class="" >
         <div ng-if="!WeatherInfoLoaded">
             <div ng-show="weatherParams.tabIndex == '999'">
                 <span style="font-size:14px !important;font-weight:bold;line-height:1.1 !important;display: block !important;">Historical Weather pattern for date {{DepartDate}} to {{ReturnDate}}</span>
             </div>
             <div ng-show="weatherParams.tabIndex != '999'">
-                <span style="font-size:100% !important;font-weight:bold;">Historical Weather pattern for date {{DepartDate}} to {{ReturnDate}}</span>
+                <span style="font-size:100% !important;font-weight:bold;text-decoration: underline;">Historical Weather pattern for date {{DepartDate}} to {{ReturnDate}}</span>
             </div>
             <div class="thumbnail thumbnailstyle">
                 <div class="selest" ng-show="weatherParams.tabIndex == '999'">
