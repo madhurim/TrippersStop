@@ -456,8 +456,7 @@
             else if (buttnText == 'Cheapest') { $scope.SearchbuttonChepestIsLoading = true; $scope.SearchbuttonCheapestText = $scope.LoadingText; }
 
 
-            var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin });
-
+            var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin.toUpperCase() });
             var PointOfsalesCountry;
             if (originairport != undefined)
                 PointOfsalesCountry = originairport.airport_CountryCode;
@@ -473,13 +472,12 @@
                 "Location": $scope.Location,
                 "Minfare": $scope.Minfare,
                 "Maxfare": $scope.Maxfare,
-                "PointOfSaleCountry": PointOfsalesCountry, //$scope.PointOfSaleCountry,
+                "PointOfSaleCountry": PointOfsalesCountry,
                 "Region": ($scope.Region != undefined) ? $scope.Region.id : "",
-                //"TopDestinations": 50, //$scope.TopDestinations,
                 "Destination": $scope.Destination
             };
             $scope.inProgress = true;
-            
+            debugger;
             $scope.mappromise = DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.isSearching = false;
                 $scope.SearchbuttonText = "Get Destinations";
