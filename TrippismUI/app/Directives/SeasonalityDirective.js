@@ -6,7 +6,6 @@
         scope: {
             seasonalityParams: '=',
             isOpen: '=',
-           // mailmarkereasonalityInfo: '=',
             showChart: '='
         },
         templateUrl: '/app/Views/Partials/SeasonalityPartial.html',
@@ -18,12 +17,9 @@
             scope.SeasonalityDisplay = function () {
                 scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
                  scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
-
                 // Setting up fare data for email
                 //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = {};
                 //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = data;
-
-
                 scope.Isviewmoredisplayed = true;
             };
 
@@ -78,13 +74,9 @@
                                     data.Seasonality = filteredSeasonalityData;
                                     scope.MarkerSeasonalityInfo = data;
                                     scope.mailmarkereasonalityInfo = data;
-
-
                                     // Setting up fare data for email
                                     //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = {};
                                     //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = data;
-
-                                    
                                     scope.inProgressSeasonalityinfo = false;
                                     scope.loadSeasonalityInfoLoaded = true;
                                     
@@ -97,7 +89,6 @@
             };
             scope.$watchGroup(['seasonalityParams', 'isOpen', 'showChart'], function (newValue, oldValue, scope) {
                 //Add Scope For Chart
-
                 if (scope.seasonalityParams != undefined) {
                     scope.DepartDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.DepartureDate, scope.format, null);
                     scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
@@ -195,7 +186,7 @@
                             labels: {
                                 rotation: -45
                             },
-                            //tickInterval: 14,
+                            tickInterval: 14,
                             dateTimeLabelFormats: {
                                 day: '%m-%e-%Y',
                                 month: '%m-%e-%Y',
@@ -269,7 +260,7 @@
 
                                 return '<span style="color:#87ceeb">Week :</span> <b> #' + this.point.YearWeekNumber + ' [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.enddate)) + ' ] </b><br>' +
                                     '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
-                                    '<span style="color:#87ceeb">Booking Quntities :</span> <b>' + zresult +'</b>';
+                                    '<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult +'</b>';
                             }
                         },
                         series: [{
@@ -300,12 +291,6 @@
                     }, 0, false);
                 }
             }
-            //scope.$watch('seasonalityParams',
-            //  function (newValue, oldValue) {
-            //      if (newValue != oldValue)
-            //          scope.loadSeasonalityInfo();
-            //  }
-            //);
         }
     }
 }]);
