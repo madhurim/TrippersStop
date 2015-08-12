@@ -7,7 +7,7 @@
         // Define the functions and properties to reveal.
         var service = {
             googleAttraction: googleAttraction,
-            getPlaceDetails: getPlaceDetails
+           // getPlaceDetails: getPlaceDetails
         };
         return service;
 
