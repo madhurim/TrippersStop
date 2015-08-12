@@ -26,6 +26,7 @@
     <Content Include="app\Controllers\SeasonalityController.js" />
     <Content Include="app\Controllers\YouTubeController.js" />
     <Content Include="app\Directives\AttractionTabDirective.js" />
+    <Content Include="app\Directives\attractiontabFareForecastDirective.js" />
     <Content Include="app\Directives\averageStarRatingDirective.js" />
     <Content Include="app\Directives\FareForecast.js" />
     <Content Include="app\Directives\GoogleAttractionDirective.js" />
@@ -106,6 +107,7 @@
     <Content Include="app\Styles\alertifyjs\themes\semantic.min.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.min.css" />
+    <Content Include="app\Views\partials\attractiontabFareForecastPartial.html" />
     <Content Include="app\Views\partials\attractionTabPartial.html" />
     <Content Include="app\Views\partials\avarageStarRatingPartial.html" />
     <Content Include="app\Views\partials\EmailDetFormPartial.html" />

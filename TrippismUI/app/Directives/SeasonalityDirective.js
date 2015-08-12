@@ -15,7 +15,13 @@
 
             scope.SeasonalityDisplay = function () {
                 scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
-                scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
+                 scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
+
+                // Setting up fare data for email
+                //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = {};
+                //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = data;
+
+
                 scope.Isviewmoredisplayed = true;
             };
 
@@ -71,6 +77,12 @@
                                     data.Seasonality = filteredSeasonalityData;
                                     scope.MarkerSeasonalityInfo = data;
                                     scope.mailmarkereasonalityInfo = data;
+
+
+                                    // Setting up fare data for email
+                                    //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = {};
+                                    //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = data;
+
                                     
                                     scope.inProgressSeasonalityinfo = false;
                                     scope.loadSeasonalityInfoLoaded = true;
