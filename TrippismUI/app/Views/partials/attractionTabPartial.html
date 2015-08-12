@@ -6,8 +6,15 @@
             <div class="col-md-6" style="clear:both;">
                 <weather-info  weather-params="attractionParams"></weather-info>
             </div>
+            <div class="col-md-12" style="clear:both;">
+                <seasonality-info seasonality-params="attractionParams" is-open="true" show-chart="true" ></seasonality-info>
+            </div>
+            <div class="col-md-12" style="clear:both;margin-top:50px">
+                <farerange-info farerange-params="attractionParams" is-open="true" show-chart="true" style="clear:both;"></farerange-info> <!--is-open="openaccordiondata" mailfarerange-data="MailFareRangeData"-->
+            </div>
             
         </div>
+      
         <div class="col-lg-3 padright0">
             <youtube-info youtube-params="attractionParams"></youtube-info>
         </div>

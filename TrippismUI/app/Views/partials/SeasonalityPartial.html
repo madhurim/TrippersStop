@@ -6,6 +6,7 @@
         
 
     </div>
+<div ng-hide="showChart">
     <div ng-if="!loadingSeasonality">
         <div ng-if="!SeasonalityNoDataFound">
             <span><b>Traffic patterns</b> </span><br />
@@ -46,6 +47,15 @@
             <button style="padding:0px 5px;" ng-show="!Isviewmoredisplayed" ng-if="!SeasonalityNoDataFound && MarkerSeasonalityInfo.Seasonality.length > 1" ng-click="SeasonalityDisplay()" class="btn btn-sm btn-info pull-right">View more</button>
         </div>
     </div>
+</div>
+<div class="col-md-12" style="clear:both;padding-top:5px;" ng-show="showChart">
+    <div ng-show="farerangeParams.tabIndex == '999'">
+        <span style="font-size:14px !important;font-weight:bold;line-height:1.1 !important;display: block !important;">Traffic patterns for date {{DepartDate}} to {{ReturnDate}}</span>
+    </div>
+    <div ng-show="farerangeParams.tabIndex != '999'">
+        <span style="font-size:100% !important;font-weight:bold;">Traffic patterns for next 52 Weeks</span>
+    </div>
+</div> 
 
 
 

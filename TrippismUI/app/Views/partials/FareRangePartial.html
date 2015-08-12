@@ -4,34 +4,43 @@
     <div class="" > <!--cg-busy="{promise:farerangepromise,message:'Loading Fare range'}"-->
         
     </div>
-    <div ng-show="!loadingFareRange">
-        <div ng-if="!fareRangeInfoNoDataFound">
-            <span><b>Fare Range</b> </span><br />
-            <h6 style="margin:0px;">Median, highest, and lowest published fares during the previous 4 weeks for each of the future departure dates in a range, using the specific origin, destination, and length of stay requested.</h6>
-            <div class="thumbnail thumbnailstyle marginbtm5" style="margin-top:5px;">
-                <table ng-if="!FareRangeLoading" class="table fontsize tblseason" style="color:black;">
-                    <thead>
-                        <tr>
-                            <th class="text-center underline" width="15%">Maximum Fare</th>
-                            <th class="text-center  underline" width="15%">Minimum Fare</th>
-                            <th class="text-center underline" width="15%">Median Fare</th>
-                            <th class="text-center underline" width="20%">Departure Date Time</th>
-                            <th class="text-center underline" width="20%">Return Date Time</th>
-                        </tr>
-                    </thead>
-                    <tbody style="height:120px">
-                        <tr ng-repeat="range in fareRangeData.FareData">
-                            <td class="word-wrap text-center" width="15%">{{range.CurrencyCode}} {{range.MaximumFare | number:2}}</td>
-                            <td class="word-wrap text-center" width="15%">{{range.CurrencyCode}} {{range.MinimumFare | number:2 }}</td>
-                            <td class="word-wrap text-center" width="15%">{{range.CurrencyCode}} {{range.MedianFare | number:2}}</td>
-                            <td class="text-center word-wrap" width="20%">{{range.DepartureDateTime | date:"yyyy-MM-dd"}}</td>
-                            <td class="text-center word-wrap" width="20%">{{range.ReturnDateTime | date:"yyyy-MM-dd"}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div ng-hide="showChart">
+        <div ng-show="!loadingFareRange">
+            <div ng-if="!fareRangeInfoNoDataFound">
+                <span><b>Fare Range</b> </span><br />
+                <h6 style="margin:0px;">Median, highest, and lowest published fares during the previous 4 weeks for each of the future departure dates in a range, using the specific origin, destination, and length of stay requested.</h6>
+                <div class="thumbnail thumbnailstyle marginbtm5" style="margin-top:5px;">
+                    <table ng-if="!FareRangeLoading" class="table fontsize tblseason" style="color:black;">
+                        <thead>
+                            <tr>
+                                <th class="text-center underline" width="15%">Maximum Fare</th>
+                                <th class="text-center  underline" width="15%">Minimum Fare</th>
+                                <th class="text-center underline" width="15%">Median Fare</th>
+                                <th class="text-center underline" width="20%">Departure Date Time</th>
+                                <th class="text-center underline" width="20%">Return Date Time</th>
+                            </tr>
+                        </thead>
+                        <tbody style="height:120px">
+                            <tr ng-repeat="range in fareRangeData.FareData">
+                                <td class="word-wrap text-center" width="15%">{{range.CurrencyCode}} {{range.MaximumFare | number:2}}</td>
+                                <td class="word-wrap text-center" width="15%">{{range.CurrencyCode}} {{range.MinimumFare | number:2 }}</td>
+                                <td class="word-wrap text-center" width="15%">{{range.CurrencyCode}} {{range.MedianFare | number:2}}</td>
+                                <td class="text-center word-wrap" width="20%">{{range.DepartureDateTime | date:"yyyy-MM-dd"}}</td>
+                                <td class="text-center word-wrap" width="20%">{{range.ReturnDateTime | date:"yyyy-MM-dd"}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-
+    <div class="col-md-12" style="clear:both;padding-top:5px;" ng-show="showChart">
+        <div ng-show="farerangeParams.tabIndex == '999'">
+            <span style="font-size:14px !important;font-weight:bold;line-height:1.1 !important;display: block !important;">Historical Fare Rate for date {{DepartDate}} to {{ReturnDate}}</span>
+        </div>
+        <div ng-show="farerangeParams.tabIndex != '999'">
+            <span style="font-size:100% !important;font-weight:bold;">Historical Fare Rate for date {{DepartDate}} to {{ReturnDate}}</span>
+        </div>
+    </div> 
 </div>
 
