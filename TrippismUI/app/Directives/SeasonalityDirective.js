@@ -6,6 +6,7 @@
         scope: {
             seasonalityParams: '=',
             isOpen: '=',
+           // mailmarkereasonalityInfo: '=',
             showChart: '='
         },
         templateUrl: '/app/Views/Partials/SeasonalityPartial.html',
@@ -17,9 +18,12 @@
             scope.SeasonalityDisplay = function () {
                 scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
                  scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
+
                 // Setting up fare data for email
                 //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = {};
                 //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = data;
+
+
                 scope.Isviewmoredisplayed = true;
             };
 
@@ -74,9 +78,13 @@
                                     data.Seasonality = filteredSeasonalityData;
                                     scope.MarkerSeasonalityInfo = data;
                                     scope.mailmarkereasonalityInfo = data;
+
+
                                     // Setting up fare data for email
                                     //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = {};
                                     //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = data;
+
+                                    
                                     scope.inProgressSeasonalityinfo = false;
                                     scope.loadSeasonalityInfoLoaded = true;
                                     
@@ -89,19 +97,14 @@
             };
             scope.$watchGroup(['seasonalityParams', 'isOpen', 'showChart'], function (newValue, oldValue, scope) {
                 //Add Scope For Chart
+
                 if (scope.seasonalityParams != undefined) {
                     scope.DepartDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.DepartureDate, scope.format, null);
                     scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
                     scope.chartHeight = 300;
                     scope.TabIndex = "seasonality" + scope.seasonalityParams.tabIndex;
-                    var mapHTML = "";
-                    if (scope.seasonalityParams.tabIndex == 999)
-                        mapHTML = "<div id='" + scope.TabIndex + "' class='seasonalityinmaindiv' ></div>";
-                    else
-                        mapHTML = "<div id='" + scope.TabIndex + "'></div>";
+                    var mapHTML =  "<div id='" + scope.TabIndex + "'></div>";
                     elem.append($compile(mapHTML)(scope));
-                    if (scope.seasonalityParams.tabIndex == 999)
-                        document.getElementById(scope.TabIndex).innerHTML = "";
                 }
                 //Add Scope For Chart
                 if (scope.isOpen == true) {
@@ -184,16 +187,16 @@
                         xAxis: {
                             type: 'datetime',
                             labels: {
+                                formatter: function () {
+                                    var d = new Date(this.value);
+                                    return Highcharts.dateFormat('%m-%e-%Y', this.value);
+                                },
                                 rotation: -45
                             },
-                            tickInterval: 14,
-                            dateTimeLabelFormats: {
-                                day: '%m-%e-%Y',
-                                month: '%m-%e-%Y',
-                                year: '%Y'
-                            },
+                            tickInterval: 336 * 3600 * 1000,
+                            minTickInterval: 336 * 3600 * 1000,
                             title: {
-                                text: 'Traffic patterns for next 52 Weeks'
+                                text: 'Historical Traffic pattern for [ ' + scope.seasonalityParams.DestinationairportName.airport_FullName + ' , ' + scope.seasonalityParams.DestinationairportName.airport_CityName + ']'
                             }
                         },
                         yAxis: {
@@ -260,7 +263,7 @@
 
                                 return '<span style="color:#87ceeb">Week :</span> <b> #' + this.point.YearWeekNumber + ' [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.enddate)) + ' ] </b><br>' +
                                     '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
-                                    '<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult +'</b>';
+                                    '<span style="color:#87ceeb">Booking Quntities :</span> <b>' + zresult +'</b>';
                             }
                         },
                         series: [{
@@ -268,21 +271,18 @@
                             data: chartData1,
                             pointStart: startdate,
                             color: '#adff2f',
-                            pointInterval: 336 * 3600 * 1000 // 14 days
                         },
                         {
                             name: "Medium Seasonality",
                             data: chartData2,
                             pointStart: startdate,
                             color: '#2e8b57',
-                            pointInterval: 336 * 3600 * 1000 // one day
                         },
                         {
                             name: "High Seasonality",
                             data: chartData3,
                             pointStart: startdate,
                             color: '#87ceeb',
-                            pointInterval: 336 * 3600 * 1000 // one day
                         }]
                     };
 
@@ -291,6 +291,12 @@
                     }, 0, false);
                 }
             }
+            //scope.$watch('seasonalityParams',
+            //  function (newValue, oldValue) {
+            //      if (newValue != oldValue)
+            //          scope.loadSeasonalityInfo();
+            //  }
+            //);
         }
     }
 }]);

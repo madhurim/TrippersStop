@@ -14,22 +14,14 @@
             scope.$watchGroup(['farerangeParams', 'isOpen','showChart'], function (newValue, oldValue, scope) {
 
                 //Add Scope For Chart
-
                 if (scope.farerangeParams != undefined) {
                     scope.DepartDate = $filter('date')(scope.farerangeParams.Fareforecastdata.DepartureDate, scope.format, null);
                     scope.ReturnDate = $filter('date')(scope.farerangeParams.Fareforecastdata.ReturnDate, scope.format, null);
                     scope.chartHeight = 400;
                     scope.TabIndex = "farerange" + scope.farerangeParams.tabIndex;
-                    var mapHTML = "";
-                    if (scope.farerangeParams.tabIndex == 999)
-                        mapHTML = "<div id='" + scope.TabIndex + "' class='farerangeinmaindiv' ></div>";
-                    else
-                        mapHTML = "<div id='" + scope.TabIndex + "'></div>";
+                    var mapHTML = "<div id='" + scope.TabIndex + "'></div>";
                     elem.append($compile(mapHTML)(scope));
-                    if (scope.farerangeParams.tabIndex == 999)
-                        document.getElementById(scope.TabIndex).innerHTML = ""; 
                 }
-
 
                 if (scope.isOpen == true) {
                   //  if (newValue != oldValue || (newValue == null && newValue == null))
@@ -48,13 +40,7 @@
               }
             );
 
-            // scope.$watch('farerangeParams',
-            //  function (newValue, oldValue) {
-            //      if (newValue != oldValue)
-            //          scope.loadfareRangeInfo();
-            //  }
-            //);
-
+          
             scope.loadfareRangeInfo = function () {
                 scope.fareRangeInfoLoaded = false;
                 scope.fareRangeInfoNoDataFound = false;
@@ -85,7 +71,6 @@
                             });
                         }
                     }
-                    //scope.fareRangeInfoLoaded = true;
                 }
             };
 
@@ -136,13 +121,11 @@
                         chartData2.push(serise2);
                         chartData3.push(serise3);
                     }
-                    //   }
 
-                   
                     var options = {
                         chart: {
                             height: scope.chartHeight,
-                            type: 'line',
+                            type: 'column',
                             renderTo: scope.TabIndex,
                         },
                         title: {
@@ -158,7 +141,7 @@
                                 year: '%b'
                             },
                             title: {
-                               text:'Historical Fare Rate for date '+scope.farerangeParams.Fareforecastdata.DepartureDate + ' To ' + scope.farerangeParams.Fareforecastdata.ReturnDate
+                               text:'Historical Fare Rate for date of [ '+scope.farerangeParams.Fareforecastdata.DepartureDate + ' To ' + scope.farerangeParams.Fareforecastdata.ReturnDate +' ]'
                             }
                         },
                         yAxis: {
@@ -167,7 +150,16 @@
                             }
                         },
                         legend: {
-                            enabled: false
+                            enabled: true
+                        },
+                        plotOptions: {
+                            series: {
+                                borderWidth: 0,
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '${point.y:.2f}'
+                                }
+                            }
                         },
                         tooltip: {
                             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
@@ -183,20 +175,20 @@
                             name:"Maximum Fare",
                             data: chartData1,
                             pointStart: startdate,
-                            color: 'red',
+                            color: '#87ceeb',
                             pointInterval: 24 * 3600 * 1000 // one day
                         }, {
                             name :"Minimum Fare",
                             data: chartData2,
                             pointStart: startdate,
-                            color: 'green',
+                            color: '#adff2f',
                             pointInterval: 24 * 3600 * 1000 // one day
                         },
                         {
                             name :"Median Fare",
                             data: chartData3,
                             pointStart: startdate,
-                            color: 'yellow',
+                            color: '#2e8b57',
                             pointInterval: 24 * 3600 * 1000 // one day
                         }]
                     };

@@ -31,44 +31,23 @@
                             scope.DepartDate = $filter('date')(scope.weatherParams.Fareforecastdata.DepartureDate, scope.format, null);
                             scope.ReturnDate = $filter('date')(scope.weatherParams.Fareforecastdata.ReturnDate, scope.format, null);
 
-                            if (scope.weatherParams.tabIndex == 999) {
-                                var elementcls = document.getElementsByClassName("weatherinmaindiv");
-                                if (elementcls.length > 0) {
-                                    for (var i = 0; i < elementcls.length; i++)
-                                        removeElement(elementcls[i]);
-                                }
-                            }
+                            //if (scope.weatherParams.tabIndex == 999) {
+                            //    var elementcls = document.getElementsByClassName("weatherinmaindiv");
+                            //    if (elementcls.length > 0) {
+                            //        for (var i = 0; i < elementcls.length; i++)
+                            //            removeElement(elementcls[i]);
+                            //    }
+                            //}
                             scope.TabIndex = "weather" + scope.weatherParams.tabIndex;
-                            var mapHTML = "";
-
-                            if (scope.weatherParams.tabIndex == 999)
-                                mapHTML = "<div id='" + scope.TabIndex + "' class='weatherinmaindiv' ></div>";
-                            else
-                                mapHTML = "<div id='" + scope.TabIndex + "'></div>";
+                            var mapHTML =  "<div id='" + scope.TabIndex + "'></div>";
                             elem.append($compile(mapHTML)(scope));
-                            if (scope.weatherParams.tabIndex == 999)
-                                document.getElementById(scope.TabIndex).innerHTML = "";
                             scope.WeatherRangeInfo();
 
                         } else {
                             scope.WeatherData = "";
                         }
                     });
-
-                    //scope.WeatherRangeInfo();
-                    //if (scope.isOpen == true) {
-                    //    if (newValue != oldValue)
-                    //        scope.WeatherRangeInfo();
-                    //}
-                    //else {
-                    //    scope.WeatherData = "";
-                    //}
                 });
-
-                //UtilFactory.ReadStateJson().then(function (data) {
-                //    scope.StateList = data;
-                //});
-
                 function removeElement(element) {
                     element && element.parentNode && element.parentNode.removeChild(element);
                 }
@@ -105,10 +84,10 @@
                                             scope.WeatherInfoNoDataFound = true;
                                             return;
                                         }
-                                        if (scope.weatherParams.tabIndex == 999) {
-                                            scope.chartHeight = 200;
-                                            $rootScope.$broadcast('divWeatherEvent', true);
-                                        }
+                                        //if (scope.weatherParams.tabIndex == 999) {
+                                        //    scope.chartHeight = 200;
+                                        //    $rootScope.$broadcast('divWeatherEvent', true);
+                                        //}
                                         scope.WeatherData = data;
                                     });
                                 }
