@@ -96,23 +96,16 @@
                 }
             };
             scope.$watchGroup(['seasonalityParams', 'isOpen', 'showChart'], function (newValue, oldValue, scope) {
-                //Add Scope For Chart
-
+                //Add Scope For Chart start
                 if (scope.seasonalityParams != undefined) {
                     scope.DepartDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.DepartureDate, scope.format, null);
                     scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
                     scope.chartHeight = 300;
                     scope.TabIndex = "seasonality" + scope.seasonalityParams.tabIndex;
-                    var mapHTML = "";
-                    if (scope.seasonalityParams.tabIndex == 999)
-                        mapHTML = "<div id='" + scope.TabIndex + "' class='seasonalityinmaindiv' ></div>";
-                    else
-                        mapHTML = "<div id='" + scope.TabIndex + "'></div>";
+                    var mapHTML =  "<div id='" + scope.TabIndex + "'></div>";
                     elem.append($compile(mapHTML)(scope));
-                    if (scope.seasonalityParams.tabIndex == 999)
-                        document.getElementById(scope.TabIndex).innerHTML = "";
                 }
-                //Add Scope For Chart
+                //Add Scope For Chart end
                 if (scope.isOpen == true) {
                    // if (newValue != oldValue)
                         scope.loadSeasonalityInfo();
@@ -122,11 +115,11 @@
                 }
             });
             scope.$watch('SeasonalityData', function (newValue, oldValue) {
-                //if (newValue != oldValue) {
+              //  if (newValue != oldValue) {
                     if (scope.showChart == true) {
                         DisplayChart();
                     }
-               // }
+                //}
             })
             scope.Chart = [];
             function DisplayChart() {
@@ -178,8 +171,6 @@
                             chartData3.push(serise);
                        
                     }
-                    //   }
-
 
                     var options = {
                         chart: {
@@ -193,16 +184,16 @@
                         xAxis: {
                             type: 'datetime',
                             labels: {
+                                formatter: function () {
+                                    var d = new Date(this.value);
+                                    return Highcharts.dateFormat('%m-%e-%Y', this.value);
+                                },
                                 rotation: -45
                             },
-                            //tickInterval: 14,
-                            dateTimeLabelFormats: {
-                                day: '%m-%e-%Y',
-                                month: '%m-%e-%Y',
-                                year: '%Y'
-                            },
+                            tickInterval: 336 * 3600 * 1000,
+                            minTickInterval: 336 * 3600 * 1000,
                             title: {
-                                text: 'Traffic patterns for next 52 Weeks'
+                                text: 'Historical Traffic pattern for [ ' + scope.seasonalityParams.DestinationairportName.airport_FullName + ' , ' + scope.seasonalityParams.DestinationairportName.airport_CityName + ']'
                             }
                         },
                         yAxis: {
@@ -277,21 +268,18 @@
                             data: chartData1,
                             pointStart: startdate,
                             color: '#adff2f',
-                            pointInterval: 336 * 3600 * 1000 // 14 days
                         },
                         {
                             name: "Medium Seasonality",
                             data: chartData2,
                             pointStart: startdate,
                             color: '#2e8b57',
-                            pointInterval: 336 * 3600 * 1000 // one day
                         },
                         {
                             name: "High Seasonality",
                             data: chartData3,
                             pointStart: startdate,
                             color: '#87ceeb',
-                            pointInterval: 336 * 3600 * 1000 // one day
                         }]
                     };
 
@@ -300,12 +288,6 @@
                     }, 0, false);
                 }
             }
-            //scope.$watch('seasonalityParams',
-            //  function (newValue, oldValue) {
-            //      if (newValue != oldValue)
-            //          scope.loadSeasonalityInfo();
-            //  }
-            //);
         }
     }
 }]);

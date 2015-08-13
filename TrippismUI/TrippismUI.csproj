@@ -46,6 +46,8 @@
     <Content Include="app\Factory\YouTubeFactory.js" />
     <Content Include="app\Module\angular-youtube-embed.js" />
     <Content Include="app\Scripts\common.js" />
+    <Content Include="app\Scripts\exporting.js" />
+    <Content Include="app\Scripts\highcharts-more.js" />
     <Content Include="app\Scripts\highcharts.js" />
     <Content Include="app\Scripts\jquery-1.9.1.js" />
     <Content Include="app\Scripts\libs\angular-busy.js" />
@@ -172,7 +174,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1299</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
