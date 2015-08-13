@@ -41,7 +41,30 @@
                                 <span style="color: #167ac6 !important;font-size: 13px !important;font-weight: bold;">{{data.snippet.title}}</span>
                             </td>
                         </tr>
-                        
+                        <tr>
+                            <td>
+                                <div class="divpagination pagination-centered" ng-show="youtubeData.items.length">
+                                    <ul class="pagination-controle divpagination">
+                                        <li>
+                                            <button type="button" class="btnnextprev" ng-disabled="curPage == 0"
+                                                    ng-click="loadyoutubeInfo(null,prevToken)">
+                                                &lt; PREV
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="btnnextprev"
+                                                    ng-disabled="isdisabled == 0"
+                                                    ng-click="loadyoutubeInfo(nextToken,null)">
+                                                NEXT &gt;
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
