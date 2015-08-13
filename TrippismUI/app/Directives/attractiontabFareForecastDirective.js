@@ -5,24 +5,19 @@
         scope: {
             attractionParams: '=',
         },
-       // bindToController: true,
-
         templateUrl: '/app/Views/Partials/attractiontabFareForecastPartial.html',
         link: function (scope, elem, attrs) {
             
             scope.SendEmailToUser = SendEmailToUser;
             function SendEmailToUser() {
                 var GetEmailDetPopupInstance = $modal.open({
-                    templateUrl: '/app/Views/Partials/EmailDetFormPartial.html', //'EmailDetForm.html',
+                    templateUrl: '/app/Views/Partials/EmailDetFormPartial.html', 
                     controller: 'EmailForDestinationDet',
                     scope: scope,
                     resolve: {
                         seasonalityData: function () { return scope.attractionParams; }
                     }
                 });
-
-                console.log(scope.attractionParams.dataforEmail);
-                debugger;
             }
 
             function activate() {
@@ -38,8 +33,6 @@
                     }
                     scope.FareNoDataFound = false;
                     scope.FareforecastData = data;
-                    
-                    
                     // Setting up fare data for email
                     scope.attractionParams.dataforEmail.FareForecastDataForEmail = {};
                     scope.attractionParams.dataforEmail.FareForecastDataForEmail =data;

@@ -20,8 +20,8 @@
             return str.join("&");
         }
         function youTube(data) {
-            var testURL = 'locationsearch?' + serialize(data);
-            var url = $rootScope.apiURLForYouTube + testURL;
+            var dataURL = 'locationsearch?' + serialize(data);
+            var url = $rootScope.apiURLForYouTube + dataURL;
             return $http.get(url)
                 .then(function (data) {
                     return data.data;

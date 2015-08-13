@@ -1,15 +1,12 @@
 ﻿<div ng-controller="DestinationController">
 
     <div class="col-lg-12 padtop5" style="clear:both;">
-        
         <div class="col-lg-1">
             <div class="home-btn"><input type="submit" ng-click="ViewDestination()" value="Home" class="home-submit"></div>
-            <!--<button class="btn btn-info" ng-click="ViewDestination()"><span style="padding-right:5px;" class="glyphicon glyphicon-home"> </span> Home</button>-->
         </div>
         <div class="col-lg-11" ng-if="tabManager.tabItems.length > 0">
             <div tabs  >
                 <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
-                    <!--<pre> {{tabInfo.parametersData.dataforEmail}}</pre>-->
                     <attraction-tab  tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
                 </div>
             </div>

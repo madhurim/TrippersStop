@@ -7,7 +7,6 @@
         // Define the functions and properties to reveal.
         var service = {
             googleAttraction: googleAttraction,
-           // getPlaceDetails: getPlaceDetails
         };
         return service;
 
@@ -24,9 +23,8 @@
 
        
         function googleAttraction(data) {
-            var testURL = 'locationsearch?' + serialize(data);
-            var url = $rootScope.apiURLForGoogleAttraction + testURL;
-
+            var dataURL = 'locationsearch?' + serialize(data);
+            var url = $rootScope.apiURLForGoogleAttraction + dataURL;
             return $http.get(url)
                 .then(function (data) {
                     return data.data;

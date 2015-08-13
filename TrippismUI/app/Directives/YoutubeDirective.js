@@ -31,9 +31,7 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
                     scope.youtubeInfoDataFound = false;
                     scope.youtubeData = "";
                     if (scope.youtubeParams != undefined) {
-
                         var parameters = scope.youtubeParams.DestinationairportName.airport_Lat + "," + scope.youtubeParams.DestinationairportName.airport_Lng;
-
                         if (nextTokenID != null) {
                             scope.curPage = scope.curPage + 1;
                             parameters += "&pageToken=" + nextTokenID
@@ -54,26 +52,21 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
                                         scope.youtubeInfoDataFound = false;
                                         return;
                                     }
-                                    
                                     scope.youtubeData = data;
                                    
-                                    if (scope.youtubeData.nextPageToken != null) {
+                                    if (scope.youtubeData.nextPageToken != null)
                                         scope.nextToken = scope.youtubeData.nextPageToken;
-                                    }
-
-                                    if (scope.youtubeData.prevPageToken != null) {
-                                        scope.prevToken = scope.youtubeData.prevPageToken;
-                                    }
-
-                                    scope.numberOfPages = Math.ceil(scope.youtubeData.pageInfo.totalResults / scope.pageSize);
                                     
+                                    if (scope.youtubeData.prevPageToken != null)
+                                        scope.prevToken = scope.youtubeData.prevPageToken;
+                                    
+                                    scope.numberOfPages = Math.ceil(scope.youtubeData.pageInfo.totalResults / scope.pageSize);
                                     if((scope.curPage + 1) >= scope.numberOfPages)
                                         scope.isdisabled = 0;
                                     else
                                         scope.isdisabled = 1;
 
                                     scope.youtubeInfoDataFound = true;
-
                                 });
                             }
                         }

@@ -119,6 +119,11 @@
                     }
                // }
             })
+
+
+          
+
+            
             scope.Chart = [];
             function DisplayChart() {
                 var chartData1 = [];

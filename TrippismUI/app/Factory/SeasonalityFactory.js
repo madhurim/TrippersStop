@@ -22,9 +22,8 @@
         }
 
         function Seasonality(data) {
-            var testURL = 'Seasonality?' + serialize(data);
-
-            var url = $rootScope.apiURL + testURL;
+            var dataURL = 'Seasonality?' + serialize(data);
+            var url = $rootScope.apiURL + dataURL;
             return $http.get(url)
                 .then(function (data) {
                     return data.data;

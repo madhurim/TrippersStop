@@ -24,7 +24,6 @@
 
         function SendEmail(data) {           
           var url = $rootScope.apiURLForEmail
-           
           return $http({
                 method: 'POST',
                 url: url,

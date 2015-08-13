@@ -733,3 +733,51 @@ ul li {
     text-transform: uppercase;
 }
 
+
+.ibox-content {
+    clear: both;
+}
+.ibox-content {
+    background-color: #ffffff;
+    color: inherit;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0px;
+    padding-top:5px;
+}
+
+.ibox {
+    clear: both;
+    margin-top: 0;
+    padding: 0;
+}
+.ibox-title h5 {
+    display: inline-block;
+    font-size: 14px;
+    margin: 3px 0 0px;
+    padding: 0;
+    text-overflow: ellipsis;
+    float: left;
+}
+.ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #f7f9fa;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 2px 0px 0;
+    color: inherit;
+    margin-bottom: 0;
+    padding: 10px 15px 7px 10px;
+    min-height: 43px;
+}
+.ibox {
+    clear: both;
+    
+    margin-top: 0;
+    padding: 0;
+}
