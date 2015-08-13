@@ -21,9 +21,8 @@
         }
 
         function GetData(data) {
-            var testURL = '?' + serialize(data);
-
-            var url = $rootScope.apiURLForWeather + testURL;
+            var dataURL = '?' + serialize(data);
+            var url = $rootScope.apiURLForWeather + dataURL;
             return $http.get(url)
                 .then(function (data) {
                     return data.data;

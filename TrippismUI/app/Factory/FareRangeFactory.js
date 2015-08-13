@@ -22,9 +22,8 @@
         }
 
         function fareRange(data) {
-            var testURL = 'FareRange?' + serialize(data);
-
-            var url = $rootScope.apiURL + testURL;
+            var dataURL = 'FareRange?' + serialize(data);
+            var url = $rootScope.apiURL + dataURL;
             return $http.get(url)
                 .then(function (data) {
                     return data.data;

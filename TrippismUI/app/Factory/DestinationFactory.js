@@ -22,10 +22,8 @@
             return str.join("&");
         }
         function findDestinations(data) {
-            
-            var testURL = 'Destinations?' + serialize(data);
-
-            var RequestedURL = $rootScope.apiURL + testURL;
+            var dataURL = 'Destinations?' + serialize(data);
+            var RequestedURL = $rootScope.apiURL + dataURL;
             return $http.get(RequestedURL)
             .then(function (data) {
                 return data.data;

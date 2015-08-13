@@ -1,22 +1,9 @@
 ﻿<div class="" style="clear:both;" ng-controller="YouTubeController">
-    <div id="ytubetabletbody" class="ytubetabletbody" cg-busy=" {promise:youtubepromise,message:'loading data'}">
+    <div id="ytubetabletbody" class="ytubetabletbody" cg-busy=" {promise:youtubepromise,message:'loading videos'}">
         <div ng-if="youtubeInfoDataFound" style="height:100%;">
             <div class="thumbnail thumbnailstyle" style="height:100%;">
                 <table class="table fontsize" style="clear:both; color:black; height:100%;">
                     <tbody style="height:100%;overflow-y:hidden;">
-                        <tr ng-repeat="data in youtubeData.items | limitTo: pageSize " id="container">
-                            <td width="40%">
-                                <span class="imageclass">
-                                    <a ng-click="open(data.id.videoId)" style="cursor:pointer;">
-                                        <span class="play">&#9658;</span>
-                                        <img width="100" height="90" aria-hidden="true" alt="" src="{{data.snippet.thumbnails.default.url}}" style="position: relative;top: -11px;">
-                                    </a>
-                                </span>
-                            </td>
-                            <td width="60%">
-                                <span style="color: #167ac6 !important;font-size: 13px !important;font-weight: bold;">{{data.snippet.title}}</span>
-                            </td>
-                        </tr>
                         <tr>
                             <td>
                                 <div class="divpagination pagination-centered" ng-show="youtubeData.items.length">
@@ -41,20 +28,26 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr ng-repeat="data in youtubeData.items | limitTo: pageSize " id="container">
+                            <td width="40%">
+                                <span class="imageclass">
+                                    <a ng-click="open(data.id.videoId)" style="cursor:pointer;">
+                                        <span class="play">&#9658;</span>
+                                        <img width="100" height="90" aria-hidden="true" alt="" src="{{data.snippet.thumbnails.default.url}}" style="position: relative;top: -11px;">
+                                    </a>
+                                </span>
+                            </td>
+                            <td width="60%">
+                                <span style="color: #167ac6 !important;font-size: 13px !important;font-weight: bold;">{{data.snippet.title}}</span>
+                            </td>
+                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<!--<script type="text/ng-template" id="YoutubePlayerPartial.html">
-    <div class="modal-header head">
-        <button class="close closebutton" ng-click="cancel()" type="button">×</button>
-    </div>
-    <div class="modal-body" cg-busy="{promise:youtubeplayerpromise,message:'Loading video'}">
-        <iframe width="100%" height="375" ng-src="{{videoID}}" frameborder="0" allowfullscreen></iframe>
-    </div>
-</script>-->
 <script type="text/ng-template" id="YoutubePlayerPartial.html">
     <div class="modal-header head" style="padding-bottom: 24px !important;">
         <button class="close closebutton" ng-click="cancel()" type="button">×</button>
@@ -63,40 +56,3 @@
         <iframe width="100%" height="375" ng-src="{{videoID}}" frameborder="0" allowfullscreen></iframe>
     </div>
 </script>
-
-<!--<div class="" style="clear:both;">
-    <span><b>YouTube</b> </span><br />
-    <div class="" cg-busy="{promise:youtubepromise,message:'Loading Data'}">
-        <div ng-if="youtubeInfoDataFound">
-            <div class="thumbnail thumbnailstyle">
-                <table class="table fontsize ytube" style="clear:both; color:black;">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <table class="table fontsize" style="clear:both; color:black;">
-                                    <tbody style="">
-                                        <tr ng-repeat="data in youtubeData" id="container">
-                                            <td width="40%">
-
-
-                                                <span class="imageclass">
-                                                    <a ng-click="setVideoUrl(data.VideoId)" style="cursor:pointer;">
-                                                        <span class="play">&#9658;</span>
-                                                        <img width="120" height="90" aria-hidden="true" alt="" src="{{data.DefaultURL}}" style="position: relative;top: -11px;">
-                                                    </a>
-                                                </span>
-                                            </td>
-                                            <td width="60%">
-                                                <span style="color: #167ac6 !important;font-size: 13px !important;font-weight: bold;">{{data.Title}}</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>-->
