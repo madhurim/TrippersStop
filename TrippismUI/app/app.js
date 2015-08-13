@@ -27,21 +27,6 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
 
              }
          })
-
-        .state('destination1', {
-            url: '/destination1',
-            templateUrl: '/app/Views/destination1.html',
-            views: {
-                "": {
-                    templateUrl: '/app/Views/destination1.html',
-                }
-
-            }
-        })
-        .state('destinationtesting', {
-            url: '/destinationtesting',
-            templateUrl: '/app/Views/DestinationTesting.html'
-        })
         .state('fareforecast', {
             url: '/fareforecast',
             templateUrl: '/app/Views/fareforecast.html'
@@ -151,9 +136,7 @@ TrippismUIApp.directive('pane', function () {
         transclude: true,
         scope: { title: '@' },
         link: function (scope, element, attrs, tabsCtrl) {
-
             tabsCtrl.addPane(scope);
-            // tabsCtrl.removePane(scope);
         },
         template:
             '<div class="tab-pane" ng-class="{active: $parent.tabInfo.selected}" ng-transclude>' +
@@ -161,14 +144,3 @@ TrippismUIApp.directive('pane', function () {
         replace: true
     };
 });
-
-
-
-//TrippismUIApp.config(function (blockUIConfig) {
-//    blockUIConfig.autoInjectBodyBlock = false;
-//    blockUIConfig.delay = 10;
-//});
-
-
-
-

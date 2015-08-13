@@ -12,10 +12,6 @@
                 scope.formats = Dateformat();
                 scope.format = scope.formats[5];
 
-                //scope.TabIndex = "weather" + scope.weatherParams.tabIndex;
-                //var mapHTML = "<div id='" + scope.TabIndex + "'></div>";
-                //elem.append($compile(mapHTML)(scope));
-
                 scope.chartHeight = 200;
                 scope.StateList = [];
                 UtilFactory.ReadStateJson().then(function (data) {
@@ -31,13 +27,6 @@
                             scope.DepartDate = $filter('date')(scope.weatherParams.Fareforecastdata.DepartureDate, scope.format, null);
                             scope.ReturnDate = $filter('date')(scope.weatherParams.Fareforecastdata.ReturnDate, scope.format, null);
 
-                            //if (scope.weatherParams.tabIndex == 999) {
-                            //    var elementcls = document.getElementsByClassName("weatherinmaindiv");
-                            //    if (elementcls.length > 0) {
-                            //        for (var i = 0; i < elementcls.length; i++)
-                            //            removeElement(elementcls[i]);
-                            //    }
-                            //}
                             scope.TabIndex = "weather" + scope.weatherParams.tabIndex;
                             var mapHTML =  "<div id='" + scope.TabIndex + "'></div>";
                             elem.append($compile(mapHTML)(scope));

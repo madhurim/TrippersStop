@@ -6,7 +6,6 @@
         scope: {
             seasonalityParams: '=',
             isOpen: '=',
-           // mailmarkereasonalityInfo: '=',
             showChart: '='
         },
         templateUrl: '/app/Views/Partials/SeasonalityPartial.html',

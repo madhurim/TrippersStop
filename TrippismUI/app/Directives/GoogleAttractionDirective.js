@@ -194,11 +194,6 @@
                                     photos.push(objtopush);
                                 }
                                 $scope.addSlides(x, photos);
-                                //Imgdiv = "<div class='padleft0'>";
-                                //var refPhotoUrl = maps[x].photos[0].photo_reference;
-                                //var Imgsrc = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + refPhotoUrl + "&key=AIzaSyAQUUoKix1RYuUSlnQHdCG0mFGOSC29vGk";
-                                //Imgdiv += "<img height='190' width='250' src=" + Imgsrc + "></img>";
-                                //Imgdiv += "</div>";
                             }
                             var name = maps[x].name;
                             var contentString1 = '<div><carousel  id="cas1"  on-carousel-change="onSlideChanged(nextSlide, direction)" no-wrap="noWrapSlides">' +
@@ -212,15 +207,14 @@
                             var contentString = ($compile(contentString1)($scope));
                             contentString = contentString[0];
 
-                            //var contentString = '<div class="custmarker">' + Imgdiv + '<div class="col-sm-12 padleft0"><strong>' + maps[x].name + '</strong></div>' + '<div class="col-sm-12 padleft0 word-wrap">' + maps[x].vicinity + '</div>' + '</div> ';
+                            
 
                             $scope.InfoWindow = new google.maps.InfoWindow();
                             var MapDet = maps[x];
                             google.maps.event.addListener(marker, 'mouseover', (function (marker, MapDet, contentString, $compile, infowindow) {
                                 return function () {
                                     if ($scope.InfoWindow) $scope.InfoWindow.close();
-                                    //$scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
-                                    //$scope.InfoWindow.open($scope.googleattractionsMap, marker);
+                                    
                                     if (!MapDet['IsLoaded'] || MapDet['IsLoaded'] == undefined) {
                                         MapDet['IsLoaded'] = true;
                                         var service = new google.maps.places.PlacesService($scope.googleattractionsMap);
@@ -234,9 +228,7 @@
 
                                                 if (place.website != undefined)
                                                     contentString.innerHTML += "<br/><a target='_blank' href=" + place.website + ">" + place.website + "</a>";
-                                                //var ratinghtml = '<average-star-rating average-rating-value="2" ></average-star-rating>';
-                                                //var raingtoappend = ($compile(ratinghtml)($scope));
-                                                //raingtoappend = raingtoappend[0];
+                                                
                                                 var raingtoappend = "";
                                                 if (place.rating != undefined) {
                                                     raingtoappend = getRatings(place.rating);
