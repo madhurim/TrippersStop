@@ -16,9 +16,6 @@ angular.module('TrippismUIApp').directive("averageStarRating", ['$timeout',
                        "  </ul>" +
                        "</div>",
 
-
-            //templateUrl: '/app/Views/Partials/avarageStarRatingPartial.html',
-
             scope: {
                 averageRatingValue: "=",
                 max: "=?", //optional: default is 5

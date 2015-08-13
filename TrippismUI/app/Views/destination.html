@@ -5,15 +5,15 @@
             <div class="home-btn"><input type="submit" ng-click="ViewDestination()" value="Home" class="home-submit"></div>
         </div>
         <div class="col-lg-11" ng-if="tabManager.tabItems.length > 0">
-            <div tabs  >
+            <div tabs>
                 <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
-                    <attraction-tab  tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
+                    <attraction-tab tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
                 </div>
             </div>
         </div>
     </div>
 
-   
+
     <div ng-show="ShowDestinationView">
         <div class="container-fluid-header" style="clear:both;">
             <div class="">
@@ -304,11 +304,8 @@
                 </div>
             </div>
         </div>
-        <!--<fare-forecast ng-show="fareforecastdirectiveDisplay" seasonality-data="seasonalitydirectiveData" destination-data="fareforecastdirective"></fare-forecast>-->
     </div>
-        
-
-    </div>
+</div>
 <script type="text/ng-template" id="customTemplate.html">
     <a style="padding-left:10px;" tabindex="-1" class="row-even1">
         <i ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
