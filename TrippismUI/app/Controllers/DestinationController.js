@@ -113,9 +113,7 @@
             });
             $scope.tabManager.tabItems[i].selected = true;
             $scope.tabManager.tabItems[i].TabcontentView = true;
-
-            //$rootScope.$broadcast('ontabClicked', $scope.tabManager.tabItems[i].parametersData.tabIndex);
-            $rootScope.$broadcast('ontabClicked');
+            $rootScope.$broadcast('ontabClicked', $scope.tabManager.tabItems[i].parametersData.tabIndex);
 
         }
 

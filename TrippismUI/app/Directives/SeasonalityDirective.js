@@ -13,6 +13,16 @@
             scope.formats = Dateformat();
             scope.format = scope.formats[5];
             scope.Isviewmoredisplayed = false;
+            scope.ChartLoaded = false;
+
+            scope.$on('ontabClicked', function (event, args) {
+                if (scope.ChartLoaded) {
+                    $timeout(function () {
+                        $(window).resize();
+                    }, 0, false);
+                }
+            });
+
 
             scope.SeasonalityDisplay = function () {
                 scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
@@ -292,6 +302,7 @@
 
                     $timeout(function () {
                         scope.Chart = new Highcharts.Chart(options);
+                        scope.ChartLoaded = true;
                     }, 0, false);
                 }
             }

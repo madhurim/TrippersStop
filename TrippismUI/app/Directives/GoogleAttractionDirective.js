@@ -21,17 +21,21 @@
                 $scope.bounds = new google.maps.LatLngBounds();
                 $scope.MapLoaded = false;
 
-                $scope.$on('ontabClicked', function () {
-                        if ($scope.MapLoaded){
+                $scope.$on('ontabClicked', function (event, args) {
+                    if (args == $scope.googleattractionParams.tabIndex) {
+                        if ($scope.MapLoaded) {
                             $timeout(function () {
                                 if ($scope.InfoWindow) $scope.InfoWindow.close();
                                 $scope.FittoScreen();
                             }, 100, false);
-                        }   
+                        }
+
                         else
                             $scope.loadgoogleattractionInfo();
-                    
+                    }
+
                 });
+
                 
 
                 $scope.FittoScreen = function () {
