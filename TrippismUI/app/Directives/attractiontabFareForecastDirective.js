@@ -27,7 +27,9 @@
                 scope.fareinfopromise = FareforecastFactory.fareforecast(scope.attractionParams.Fareforecastdata).then(function (data) {
                     scope.IsRequestCompleted = true;
                     scope.inProgressFareinfo = false;
-                    if (data.status == 404) {
+                    //400 for "Parameter 'departuredate' exceeds the maximum days allowed" api limit Valid dates are a maximum of 60 future dates.
+                    if (data.status == 404 || data.status == 400)
+                    {
                         scope.FareNoDataFound = true;
                         return;
                     }

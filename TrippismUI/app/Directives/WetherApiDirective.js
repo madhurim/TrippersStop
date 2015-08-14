@@ -93,6 +93,7 @@
 
                 scope.Chart = [];
                 function DisplayChart() {
+                    debugger;
                     var chartData = [];
                     if (scope.WeatherData != undefined && scope.WeatherData != "") {
 
@@ -133,6 +134,9 @@
                                 }
                             },
                             yAxis: {
+                                tickInterval: 25,
+                                min: 0,
+                                max: 100,
                                 title: {
                                     text: 'Percentage'
                                 }

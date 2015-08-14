@@ -141,13 +141,17 @@
                 var chartData1 = [];
                 var chartData2 = [];
                 var chartData3 = [];
-
+                var rec = 1;
                 var startdate;
+
                 if (scope.SeasonalityData != undefined && scope.SeasonalityData != "") {
-                    for (i = 0; i < scope.SeasonalityData.length; i++) 
+
+                    var chartrec = _.sortBy(scope.SeasonalityData, 'WeekStartDate');
+                    
+                    for (i = 0; i < chartrec.length; i++)
                     {
-                        var WeekStartDate = new Date(scope.SeasonalityData[i].WeekStartDate);
-                        var WeekEndDate = new Date(scope.SeasonalityData[i].WeekEndDate);
+                        var WeekStartDate = new Date(chartrec[i].WeekStartDate);
+                        var WeekEndDate = new Date(chartrec[i].WeekEndDate);
                         if (i == 0)
                         { startdate = Date.UTC(WeekStartDate.getFullYear(), WeekStartDate.getMonth(), WeekStartDate.getDate()); }
 
@@ -155,28 +159,37 @@
                         var endutcdate = Date.UTC(WeekEndDate.getFullYear(), WeekEndDate.getMonth(), WeekEndDate.getDate());
                         var SeasonalityIndicator = 1;
                         var NumberOfObervations = 0;
-                        if (scope.SeasonalityData[i].SeasonalityIndicator == "Low") {
+                        if (chartrec[i].SeasonalityIndicator == "Low") {
                             SeasonalityIndicator = 1;
                         }
-                        if (scope.SeasonalityData[i].SeasonalityIndicator == "Medium") {
+                        if (chartrec[i].SeasonalityIndicator == "Medium") {
                             SeasonalityIndicator = 2;
                         }
-                        if (scope.SeasonalityData[i].SeasonalityIndicator == "High") {
+                        if (chartrec[i].SeasonalityIndicator == "High") {
                             SeasonalityIndicator = 3;
                         }
-                        if (scope.SeasonalityData[i].NumberOfObservations == "GreaterThan10000")
+                        if (chartrec[i].NumberOfObservations == "GreaterThan10000")
                             NumberOfObervations = 12000;
-                        if (scope.SeasonalityData[i].NumberOfObservations == "LessThan10000")
+                        if (chartrec[i].NumberOfObservations == "LessThan10000")
                             NumberOfObervations = 8000;
-                        if (scope.SeasonalityData[i].NumberOfObservations == "LessThan1000")
+                        if (chartrec[i].NumberOfObservations == "LessThan1000")
                             NumberOfObervations = 800;
-                        
+
+                        //var serise = {
+                        //    x: utcdate,
+                        //    y: SeasonalityIndicator,
+                        //    z: NumberOfObervations,
+                        //    enddate: endutcdate,
+                        //    YearWeekNumber: scope.SeasonalityData[i].YearWeekNumber
+                        //};
+
                         var serise = {
-                            x: utcdate,
+                            x: rec,
                             y: SeasonalityIndicator,
                             z: NumberOfObervations,
+                            startdate:utcdate,
                             enddate: endutcdate,
-                            YearWeekNumber: scope.SeasonalityData[i].YearWeekNumber
+                            YearWeekNumber: chartrec[i].YearWeekNumber
                         };
                         if (SeasonalityIndicator ==1)
                             chartData1.push(serise);
@@ -184,6 +197,7 @@
                             chartData2.push(serise);
                         else if (SeasonalityIndicator ==3)
                             chartData3.push(serise);
+                        rec++;
                        
                     }
                     //   }
@@ -198,17 +212,26 @@
                         title: {
                             text: ''
                         },
+                        //xAxis: {
+                        //    type: 'datetime',
+                        //    labels: {
+                        //        formatter: function () {
+                        //            var d = new Date(this.value);
+                        //            return Highcharts.dateFormat('%m-%e-%Y', this.value);
+                        //        },
+                        //        rotation: -45
+                        //    },
+                        //    tickInterval: 336 * 3600 * 1000,
+                        //    minTickInterval: 336 * 3600 * 1000,
+                        //    title: {
+                        //        text: 'Historical Traffic pattern for [ ' + scope.seasonalityParams.DestinationairportName.airport_FullName + ' , ' + scope.seasonalityParams.DestinationairportName.airport_CityName + ']'
+                        //    }
+                        //},
                         xAxis: {
-                            type: 'datetime',
-                            labels: {
-                                formatter: function () {
-                                    var d = new Date(this.value);
-                                    return Highcharts.dateFormat('%m-%e-%Y', this.value);
-                                },
-                                rotation: -45
-                            },
-                            tickInterval: 336 * 3600 * 1000,
-                            minTickInterval: 336 * 3600 * 1000,
+                            tickInterval: 1,
+                            maxTickInterval: 1,
+                            min:0,
+                            max: 54,
                             title: {
                                 text: 'Historical Traffic pattern for [ ' + scope.seasonalityParams.DestinationairportName.airport_FullName + ' , ' + scope.seasonalityParams.DestinationairportName.airport_CityName + ']'
                             }
@@ -274,10 +297,13 @@
                                     zresult = '<span> ' + '' + ' </span>';
                                 }
 
-
-                                return '<span style="color:#87ceeb">Week :</span> <b> #' + this.point.YearWeekNumber + ' [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.enddate)) + ' ] </b><br>' +
+                                return '<span style="color:#87ceeb"> week  :</span> <b> #' + this.x + '</b><br>'+
+                                        '<span style="color:#87ceeb">Year Week :</span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.startdate)) + ' / ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.enddate)) + ' ] </b><br>' +
                                     '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
-                                    '<span style="color:#87ceeb">Booking Quntities :</span> <b>' + zresult +'</b>';
+                                    '<span style="color:#87ceeb">Booking Quntities :</span> <b>' + zresult + '</b>';
+                                //return '<span style="color:#87ceeb">Week :</span> <b> #' + this.point.YearWeekNumber + ' [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.enddate)) + ' ] </b><br>' +
+                                //    '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
+                                //    '<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult +'</b>';
                             }
                         },
                         series: [{
