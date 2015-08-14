@@ -1,19 +1,16 @@
 ﻿angular.module('TrippismUIApp').directive('googleattractionInfo',
                                             ['$compile',
-                                                '$q', '$rootScope',
-                                                'GoogleAttractionFactory', '$timeout',
-    function ($compile, $q, $rootScope, GoogleAttractionFactory, $timeout) {
+                                                '$q',
+                                                '$rootScope',
+                                                'GoogleAttractionFactory',
+                                                '$timeout',
+                                                'TrippismConstants',
+    function ($compile, $q, $rootScope, GoogleAttractionFactory, $timeout, TrippismConstants) {
         return {
             restrict: 'E',
             scope: { googleattractionParams: '=', isOpen: '=' },
             templateUrl: '/app/Views/Partials/GoogleAttractionPartial.html',
             controller: function ($scope) {
-
-                //var elem = angular.element(document.querySelector('.mapwrapper'));
-                //$scope.TabIndex = "googleattractionsMap_" + $scope.googleattractionParams.tabIndex;
-                //var mapHTML = "<div ui-map='googleattractionsMap' class='map-canvas' id='" + $scope.TabIndex + "'></div>";
-                //elem.append($compile(mapHTML)($scope));
-
 
                 $scope.RenderMap = RenderMap;
                 $scope.googleattractionsMap = undefined;
@@ -29,14 +26,10 @@
                                 $scope.FittoScreen();
                             }, 100, false);
                         }
-
                         else
                             $scope.loadgoogleattractionInfo();
                     }
-
                 });
-
-                
 
                 $scope.FittoScreen = function () {
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
@@ -77,7 +70,6 @@
                     if ($scope.googleattractionsMap != undefined) {
                         $timeout(function () {
                             $scope.FittoScreen();
-                            //    $scope.googleattractionsMap.panTo(new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng));
                         }, 1000, false);
                     }
                 });
@@ -182,8 +174,7 @@
                                 animation: google.maps.Animation.DROP,
                                 CustomMarkerInfo: maps[x],
                                 labelStyle: { opacity: 0.75 },
-                                 icon: icon,//'app/Styles/images/mapicon.png'
-                                //icon: 'https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-b.png&text=' + maps[x].name + '&psize=8&font=fonts/Roboto-Regular.ttf&color=ff000033&ax=44&ay=48&scale=1',
+                                icon: icon,//'app/Styles/images/mapicon.png'
                             });
 
                             $scope.bounds.extend(marker.position);
@@ -192,7 +183,7 @@
                                 var photos = [];
                                 for (var photoidx = 0; photoidx < maps[x].photos.length; photoidx++) {
                                     var refPhotoUrl = maps[x].photos[photoidx].photo_reference;
-                                    var Imgsrc = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + refPhotoUrl + "&key=AIzaSyC0CVNlXkejEzLzGCMVMj8PZ7gBzj8ewuQ";
+                                    var Imgsrc = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + refPhotoUrl + "&key=" + TrippismConstants.googlePlacesApiKey;
                                     var imgtext = "";
                                     var objtopush = { image: Imgsrc, text: imgtext };
                                     photos.push(objtopush);

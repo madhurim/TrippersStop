@@ -9,6 +9,7 @@
    
     function LandingPageController($scope, $rootScope, $location, $anchorScroll) {
         
+        
         if (angular.lowercase($location.host()) == "localhost")
         {
             //devlopment url

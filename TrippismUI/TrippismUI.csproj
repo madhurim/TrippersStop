@@ -18,6 +18,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\Constants\UIConstants.js" />
     <Content Include="app\Controllers\DestinationController.js" />
     <Content Include="app\Controllers\EmailForDestinationDetController.js" />
     <Content Include="app\Controllers\FareforecastController.js" />
@@ -26,9 +27,8 @@
     <Content Include="app\Controllers\SeasonalityController.js" />
     <Content Include="app\Controllers\YouTubeController.js" />
     <Content Include="app\Directives\AttractionTabDirective.js" />
-    <Content Include="app\Directives\attractiontabFareForecastDirective.js" />
-    <Content Include="app\Directives\averageStarRatingDirective.js" />
-    <Content Include="app\Directives\FareForecast.js" />
+    <Content Include="app\Directives\AttractiontabFareForecastDirective.js" />
+    <Content Include="app\Directives\AverageStarRatingDirective.js" />
     <Content Include="app\Directives\GoogleAttractionDirective.js" />
     <Content Include="app\Directives\WetherApiDirective.js" />
     <Content Include="app\Directives\FareRangeDirective.js" />
@@ -109,11 +109,10 @@
     <Content Include="app\Styles\alertifyjs\themes\semantic.min.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.min.css" />
-    <Content Include="app\Views\partials\attractiontabFareForecastPartial.html" />
-    <Content Include="app\Views\partials\attractionTabPartial.html" />
+    <Content Include="app\Views\partials\AttractiontabFareForecastPartial.html" />
+    <Content Include="app\Views\partials\AttractionTabPartial.html" />
     <Content Include="app\Views\partials\avarageStarRatingPartial.html" />
     <Content Include="app\Views\partials\EmailDetFormPartial.html" />
-    <Content Include="app\Views\partials\FareForecastPartial.html" />
     <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
     <Content Include="app\Views\partials\WeatherPartial.html" />
     <Content Include="app\Views\partials\FareRangePartial.html" />

@@ -1,7 +1,7 @@
 ﻿<div class="col-lg-12 padlr0">
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            
+
             <h5><b> {{attractionParams.DestinationairportName.airport_FullName + ', ' + attractionParams.DestinationairportName.airport_CityName + ', ' + attractionParams.DestinationairportName.airport_CountryName}}</b></h5>
 
             <div class="pull-right">
@@ -21,12 +21,22 @@
             </div>
             <div class="col-md-2" ng-show="!FareNoDataFound" ng-if="FareforecastData.LowestFare != 'N/A' &&  FareforecastData.LowestFare != 0">
                 <div class="social-box facebook">
-                    <ul><li><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.LowestFare | number : 2}}</strong><span>Lowest Fare</span></li></ul>
+                    <ul>
+                        <li>
+                            <strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.LowestFare | number : 2}}</strong>
+                            <span>Lowest Fare</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="col-md-2" ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0">
                 <div class="social-box facebook">
-                    <ul><li><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.LowestPredictedFare | number : 2 }}</strong><span>Lowest Predicted Fare</span></li></ul>
+                    <ul>
+                        <li>
+                            <strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.LowestPredictedFare | number : 2 }}</strong>
+                            <span>Lowest Predicted Fare</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="col-lg-2" ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">

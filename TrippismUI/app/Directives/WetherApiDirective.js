@@ -11,6 +11,7 @@
 
                 scope.formats = Dateformat();
                 scope.format = scope.formats[5];
+                scope.WeatherInfoNoDataFound = true;
 
                 scope.chartHeight = 200;
                 scope.StateList = [];
@@ -43,7 +44,7 @@
 
                 scope.WeatherRangeInfo = function () {
                     scope.WeatherInfoLoaded = false;
-                    scope.WeatherInfoNoDataFound = false;
+                    
                     scope.HighTempratureC = "0";
                     scope.HighTempratureF = "0";
                     scope.LowTempratureC = "0";
@@ -51,6 +52,7 @@
                     if (scope.weatherParams != undefined) {
 
                         var statedata = _.find(scope.StateList, function (state) { return state.CityName == scope.weatherParams.DestinationairportName.airport_CityName });
+                        debugger;
                         if (statedata == undefined) {
                             scope.WeatherData = "";
                             scope.WeatherInfoNoDataFound = true;
@@ -68,15 +70,13 @@
                             if (scope.WeatherInfoLoaded == false) {
                                 if (scope.WeatherData == "") {
                                     scope.Weatherpromise = WeatherFactory.GetData(data).then(function (data) {
+                                        debugger;
                                         scope.WeatherInfoLoaded = false;
                                         if (data == "" || data.status == 404) {
                                             scope.WeatherInfoNoDataFound = true;
                                             return;
                                         }
-                                        //if (scope.weatherParams.tabIndex == 999) {
-                                        //    scope.chartHeight = 200;
-                                        //    $rootScope.$broadcast('divWeatherEvent', true);
-                                        //}
+                                        scope.WeatherInfoNoDataFound = false;
                                         scope.WeatherData = data;
                                     });
                                 }

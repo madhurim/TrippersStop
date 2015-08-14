@@ -1,7 +1,4 @@
-﻿/// <reference path="../Views/partials/aside.html" />
-/// <reference path="../Views/partials/aside.html" />
-
-(function () {
+﻿(function () {
     'use strict';
     var controllerId = 'DestinationController';
     angular.module('TrippismUIApp').controller(controllerId,
@@ -28,20 +25,20 @@
         SeasonalityFactory
         ) {
 
-            $scope.myInterval = 5000;
-            $scope.noWrapSlides = false;
-            var slides = $scope.slides = [];
-            $scope.addSlide = function () {
-                var newWidth = 600 + slides.length + 1;
-                slides.push({
-                    image: '//placekitten.com/' + newWidth + '/300',
-                    text: ['More', 'Extra', 'Lots of', 'Surplus'][slides.length % 4] + ' ' +
-                      ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
-                });
-            };
-            for (var i = 0; i < 4; i++) {
-                $scope.addSlide();
-            }
+        $scope.myInterval = 5000;
+        $scope.noWrapSlides = false;
+        var slides = $scope.slides = [];
+        $scope.addSlide = function () {
+            var newWidth = 600 + slides.length + 1;
+            slides.push({
+                image: '//placekitten.com/' + newWidth + '/300',
+                text: ['More', 'Extra', 'Lots of', 'Surplus'][slides.length % 4] + ' ' +
+                  ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
+            });
+        };
+        for (var i = 0; i < 4; i++) {
+            $scope.addSlide();
+        }
 
         $scope.ShowDestinationView = true;
         $scope.TabcontentView = true;
@@ -78,7 +75,7 @@
         //    });
         //};
 
-       
+
 
         $scope.tabManager.selectPreviousTab = function (i, $event) {
             if (typeof $event != 'undefined') {
@@ -114,7 +111,6 @@
             $scope.tabManager.tabItems[i].selected = true;
             $scope.tabManager.tabItems[i].TabcontentView = true;
             $rootScope.$broadcast('ontabClicked', $scope.tabManager.tabItems[i].parametersData.tabIndex);
-
         }
 
         $scope.isSearching = true;
@@ -178,7 +174,7 @@
             $timeout(function () {
                 $rootScope.$broadcast('eventDestinationMapresize');
             }, 500, false);
-            
+
         };
 
         $scope.$watch(function (scope) { return scope.Earliestdeparturedate },
@@ -241,19 +237,6 @@
             return matchingStuffs;
         }
 
-        //$scope.$watch('IsAdvancedSearch', function (scope) {
-        //    if (scope == false || scope == undefined) {
-        //        $scope.Theme = "";
-        //        $scope.Region = "";
-        //        $scope.Minfare = "";
-        //        $scope.Maxfare = "";
-        //        $scope.TopDestinations = "";
-        //        $scope.Earliestdeparturedate = "";
-        //        $scope.Latestdeparturedate = "";
-        //        $scope.LenghtOfStay = "";
-        //    }
-        //});
-
         $scope.$on('CloseFareForcastInfo', function (event, args) {
             $scope.IsHistoricalInfo = false;
             $scope.ISloader = false;
@@ -273,11 +256,7 @@
             $scope.Destinationfortab = args.Destinatrion;
             $scope.fareforecastdirective = $scope.fareData;
             $scope.seasonalitydirectiveData = args;
-            //$scope.fareforecastdirectiveDisplay = true;
-
             CreateTab();
-            
-            
         });
 
         function CreateTab() {
@@ -320,7 +299,6 @@
             $scope.fareforecastdirectiveDisplay = false;
             if ($scope.isSearching == true) {
                 $scope.isSearching = false;
-
             }
             else {
                 $scope.isSearching = true;
@@ -365,7 +343,7 @@
                 $scope.IsairportJSONLoading = false;
                 $scope.CalledOnPageLoad = false;
                 $scope.AvailableAirports = data;
-                
+
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
 
                 // Static Block
@@ -493,12 +471,12 @@
                 "Location": $scope.Location,
                 "Minfare": $scope.Minfare,
                 "Maxfare": $scope.Maxfare,
-                "PointOfSaleCountry": PointOfsalesCountry, 
+                "PointOfSaleCountry": PointOfsalesCountry,
                 "Region": ($scope.Region != undefined) ? $scope.Region.id : "",
                 "Destination": $scope.Destination
             };
             $scope.inProgress = true;
-            
+
             $scope.mappromise = DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.isSearching = false;
                 $scope.SearchbuttonText = "Get Destinations";
@@ -557,7 +535,7 @@ angular.module('TrippismUIApp').controller(controllerId,
     ['$scope', '$timeout', '$modalInstance', 'mapDetails', 'OriginairportName', 'DestinationairportName', 'Fareforecastdata', 'Destination', 'destinationScope', 'FareforecastFactory', 'SeasonalityFactory', 'FareRangeFactory', DestinationDetailsCtrl]);
 
 function DestinationDetailsCtrl($scope, $timeout, $modal, $modalInstance, mapDetails, OriginairportName, DestinationairportName, Fareforecastdata, Destination, destinationScope, FareforecastFactory, SeasonalityFactory, FareRangeFactory) {
-    
+
     $scope.mapDetails = mapDetails;
     $scope.delay = 0;
     $scope.minDuration = 0;

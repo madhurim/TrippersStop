@@ -4,7 +4,7 @@
         scope: {
             attractionParams: '=',
         },
-        templateUrl: '/app/Views/Partials/attractionTabPartial.html',
+        templateUrl: '/app/Views/Partials/AttractionTabPartial.html',
         link: function (scope, elem, attrs) {
         }
     }

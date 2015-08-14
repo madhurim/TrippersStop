@@ -5,7 +5,7 @@
         scope: {
             attractionParams: '=',
         },
-        templateUrl: '/app/Views/Partials/attractiontabFareForecastPartial.html',
+        templateUrl: '/app/Views/Partials/AttractiontabFareForecastPartial.html',
         link: function (scope, elem, attrs) {
             
             scope.SendEmailToUser = SendEmailToUser;
