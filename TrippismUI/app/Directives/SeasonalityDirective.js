@@ -184,7 +184,7 @@
                         //};
 
                         var serise = {
-                            x: rec,
+                            x: utcdate,
                             y: SeasonalityIndicator,
                             z: NumberOfObervations,
                             startdate:utcdate,
@@ -212,30 +212,30 @@
                         title: {
                             text: ''
                         },
-                        //xAxis: {
-                        //    type: 'datetime',
-                        //    labels: {
-                        //        formatter: function () {
-                        //            var d = new Date(this.value);
-                        //            return Highcharts.dateFormat('%m-%e-%Y', this.value);
-                        //        },
-                        //        rotation: -45
-                        //    },
-                        //    tickInterval: 336 * 3600 * 1000,
-                        //    minTickInterval: 336 * 3600 * 1000,
-                        //    title: {
-                        //        text: 'Historical Traffic pattern for [ ' + scope.seasonalityParams.DestinationairportName.airport_FullName + ' , ' + scope.seasonalityParams.DestinationairportName.airport_CityName + ']'
-                        //    }
-                        //},
                         xAxis: {
-                            tickInterval: 1,
-                            maxTickInterval: 1,
-                            min:0,
-                            max: 54,
+                            type: 'datetime',
+                            labels: {
+                                formatter: function () {
+                                    var d = new Date(this.value);
+                                    return Highcharts.dateFormat('%m-%e-%Y', this.value);
+                                },
+                                rotation: -45
+                            },
+                            tickInterval: 336 * 3600 * 1000,
+                            minTickInterval: 336 * 3600 * 1000,
                             title: {
                                 text: 'Historical Traffic pattern for [ ' + scope.seasonalityParams.DestinationairportName.airport_FullName + ' , ' + scope.seasonalityParams.DestinationairportName.airport_CityName + ']'
                             }
                         },
+                        //xAxis: {
+                        //    tickInterval: 1,
+                        //    maxTickInterval: 1,
+                        //    min:0,
+                        //    max: 54,
+                        //    title: {
+                        //        text: 'Year Week Number'
+                        //    }
+                        //},
                         yAxis: {
                             min:0,
                             max: 4,
@@ -296,14 +296,14 @@
                                 else {
                                     zresult = '<span> ' + '' + ' </span>';
                                 }
-
-                                return '<span style="color:#87ceeb"> week  :</span> <b> #' + this.x + '</b><br>'+
-                                        '<span style="color:#87ceeb">Year Week :</span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.startdate)) + ' / ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.enddate)) + ' ] </b><br>' +
+                                    //'<span style="color:#87ceeb"> week  :</span> <b> #' + this.x + '</b><br>'+
+                               // return  
+                                  //      '<span style="color:#87ceeb">Year Week :</span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.startdate)) + ' / ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.enddate)) + ' ] </b><br>' +
+                                  //  '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
+                                  //  '<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult + '</b>';
+                                return '<span style="color:#87ceeb">Year Week :</span> <b> [#' + this.point.YearWeekNumber +' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate))+'], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.enddate)) + ' ] </b><br>' +
                                     '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
-                                    '<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult + '</b>';
-                                //return '<span style="color:#87ceeb">Week :</span> <b> #' + this.point.YearWeekNumber + ' [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.enddate)) + ' ] </b><br>' +
-                                //    '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
-                                //    '<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult +'</b>';
+                                    '<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult +'</b>';
                             }
                         },
                         series: [{

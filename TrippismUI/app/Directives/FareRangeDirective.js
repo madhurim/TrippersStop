@@ -138,17 +138,34 @@
                         },
                         xAxis: {
                             type: 'datetime',
-                            labels:{ rotation : -45
-                            },
-                            dateTimeLabelFormats: {
-                                day: '%m-%e-%Y',
-                                month: '%e. %b',
-                                year: '%b'
+                            labels: {
+                                
+                                formatter: function () {
+                                    var d = new Date(this.value);
+                                    var returndate = new Date( $filter('date')(this.value, scope.format, null));
+                                    returndate.setDate(returndate.getDate() + 5)
+                                 //   returndate = $filter('date')(returndate, scope.format, null);
+                                    return Highcharts.dateFormat('%m-%e-%Y', this.value) + ' -<br> ' + Highcharts.dateFormat('%m-%e-%Y', returndate);
+                                },
+                                rotation: -45
                             },
                             title: {
-                                text:'Historical Fare Rate for date of [ '+Highcharts.dateFormat('%m-%e-%Y',new Date(scope.farerangeParams.Fareforecastdata.DepartureDate)) + ' To ' + Highcharts.dateFormat('%m-%e-%Y',new Date(scope.farerangeParams.Fareforecastdata.ReturnDate)) +' ]'
+                                 text: 'Departure Date - Return Date'
                             }
                         },
+                        //xAxis: {
+                        //    type: 'datetime',
+                        //    labels:{ rotation : -45
+                        //    },
+                        //    dateTimeLabelFormats: {
+                        //        day: '%m-%e-%Y',
+                        //        month: '%e. %b',
+                        //        year: '%b'
+                        //    },
+                        //    title: {
+                        //        text: 'Departure Date - Return Date'
+                        //    }
+                        //},
                         yAxis: {
                             title: {
                                 text: 'Fare Rate in ' + firstCurrencyCode
