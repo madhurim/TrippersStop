@@ -58,8 +58,7 @@
                         if (scope.fareRangeData == "") {
                             scope.farerangepromise = FareRangeFactory.fareRange(data).then(function (data) {
                                 scope.FareRangeLoading = false;
-                                if (data.status == 404) {
-                                    
+                                if (data.status == 404 || data.status==400) {
                                     scope.fareRangeInfoNoDataFound = true;
                                     $rootScope.$broadcast('divFareRangeEvent', false, scope.Seasonalityresult);
                                     return;

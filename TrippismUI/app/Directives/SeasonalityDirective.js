@@ -300,7 +300,7 @@
                                 return '<span style="color:#87ceeb"> week  :</span> <b> #' + this.x + '</b><br>'+
                                         '<span style="color:#87ceeb">Year Week :</span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.startdate)) + ' / ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.enddate)) + ' ] </b><br>' +
                                     '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
-                                    '<span style="color:#87ceeb">Booking Quntities :</span> <b>' + zresult + '</b>';
+                                    '<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult + '</b>';
                                 //return '<span style="color:#87ceeb">Week :</span> <b> #' + this.point.YearWeekNumber + ' [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.enddate)) + ' ] </b><br>' +
                                 //    '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
                                 //    '<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult +'</b>';
