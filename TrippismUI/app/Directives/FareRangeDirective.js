@@ -147,7 +147,7 @@
                                 year: '%b'
                             },
                             title: {
-                               text:'Historical Fare Rate for date of [ '+scope.farerangeParams.Fareforecastdata.DepartureDate + ' To ' + scope.farerangeParams.Fareforecastdata.ReturnDate +' ]'
+                                text:'Historical Fare Rate for date of [ '+Highcharts.dateFormat('%m-%e-%Y',new Date(scope.farerangeParams.Fareforecastdata.DepartureDate)) + ' To ' + Highcharts.dateFormat('%m-%e-%Y',new Date(scope.farerangeParams.Fareforecastdata.ReturnDate)) +' ]'
                             }
                         },
                         yAxis: {
@@ -172,9 +172,8 @@
                             pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}$</b><br/>',
                             formatter: function () {
                                 return '<span style="font-size:11px;color:#87ceeb"> Fare Detail </span><br>' +
-                                    '<span style="color:#87ceeb">Departure Date :</span><b>' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + '</b><br>' +
-                                    '<span style="color:#87ceeb">Return Date :</span><b> ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.returndate)) + '</b><br>' +
-                                    '<span style="color:#87ceeb">'+this.series.name + ' : </span><b>'+this.point.CurrencyCode+' '+Highcharts.numberFormat(this.point.y,0)+'</b>';
+                                    '<span style="color:#87ceeb"> Date : </span><b> [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' - ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.returndate)) + ' ] </b><br>' +
+                                    '<span style="color:#87ceeb">' + this.series.name + ' : </span><b>' + this.point.CurrencyCode + ' ' + Highcharts.numberFormat(this.point.y, 0) + '</b>';
                             }
                         },
                         series: [{
