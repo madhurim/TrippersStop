@@ -52,7 +52,6 @@
                     if (scope.weatherParams != undefined) {
 
                         var statedata = _.find(scope.StateList, function (state) { return state.CityName == scope.weatherParams.DestinationairportName.airport_CityName });
-                        debugger;
                         if (statedata == undefined) {
                             scope.WeatherData = "";
                             scope.WeatherInfoNoDataFound = true;
@@ -70,7 +69,6 @@
                             if (scope.WeatherInfoLoaded == false) {
                                 if (scope.WeatherData == "") {
                                     scope.Weatherpromise = WeatherFactory.GetData(data).then(function (data) {
-                                        debugger;
                                         scope.WeatherInfoLoaded = false;
                                         if (data == "" || data.status == 404) {
                                             scope.WeatherInfoNoDataFound = true;
@@ -93,7 +91,6 @@
 
                 scope.Chart = [];
                 function DisplayChart() {
-                    debugger;
                     var chartData = [];
                     if (scope.WeatherData != undefined && scope.WeatherData != "") {
 
