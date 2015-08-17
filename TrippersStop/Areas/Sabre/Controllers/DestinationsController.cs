@@ -29,7 +29,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
     [GZipCompressionFilter]
     public class DestinationsController : ApiController
     {
-
+        const string TrippismKey = "Trippism.Destinations."; 
         IAsyncSabreAPICaller _apiCaller;
         IAsyncWeatherAPICaller _weatherApiCaller;
         ICacheService _cacheService;
@@ -160,6 +160,12 @@ namespace TrippismApi.Areas.Sabre.Controllers
 
         private HttpResponseMessage GetFareResponse(string fareForecast, string fareRange)
         {
+            string cacheKey = TrippismKey + string.Join(".", fareForecast.Replace("/", "_"), fareRange.Replace("/", "_"));
+            var tripFares = _cacheService.GetByKey<FareOutput>(cacheKey);
+            if (tripFares != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, tripFares);
+            }
             ApiHelper.SetApiToken(_apiCaller, _cacheService);
             var responses = Task.WhenAll(
             new[]
@@ -173,9 +179,10 @@ namespace TrippismApi.Areas.Sabre.Controllers
                 fareOutput.LowFareForecast = GetFareForecastResponse(result[0].Response);
             if (result[1].StatusCode == HttpStatusCode.OK)
                 fareOutput.FareRange = GetFareRangeResponse(result[1].Response);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fareOutput);
-
+            _cacheService.Save<FareOutput>(cacheKey, fareOutput);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fareOutput);     
             return response;
+
         }
 
         /// <summary>
