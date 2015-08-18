@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'YouTubeController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$modal', '$sce', YouTubeController]);
+        ['$scope', '$modal', '$sce', 'TrippismConstants', YouTubeController]);
 
-    function YouTubeController($scope, $modal, $sce) {
+    function YouTubeController($scope, $modal, $sce, TrippismConstants) {
 
         $scope.open = function (videoID) {
 
@@ -15,7 +15,7 @@
                 size: 'lg',
                 resolve: {
                     videoID: function () {
-                        return $scope.videoID = $sce.trustAsResourceUrl("//www.youtube.com/embed/" + videoID);
+                        return $scope.videoID = $sce.trustAsResourceUrl(TrippismConstants.YouTubeEmbedUrl + videoID);
                     }
                 }
             });
