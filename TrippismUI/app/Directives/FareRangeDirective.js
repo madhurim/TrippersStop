@@ -1,5 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('farerangeInfo', ['$compile', '$timeout', '$filter', '$rootScope', 'FareRangeFactory',
-    function ($compile, $timeout, $filter, $rootScope, FareRangeFactory) {
+﻿angular.module('TrippismUIApp').directive('farerangeInfo', ['$compile', '$timeout', '$filter', '$rootScope', 'FareRangeFactory', 'TrippismConstants',
+    function ($compile, $timeout, $filter, $rootScope, FareRangeFactory, TrippismConstants) {
     return {
         restrict: 'E',
         scope: {
@@ -52,7 +52,7 @@
                         "Destination": scope.farerangeParams.Fareforecastdata.Destination,
                         "EarliestDepartureDate": scope.farerangeParams.Fareforecastdata.DepartureDate,
                         "LatestDepartureDate": scope.farerangeParams.Fareforecastdata.ReturnDate,
-                        "Lengthofstay": 4
+                        "Lengthofstay": TrippismConstants.DefaultLenghtOfStay
                     };
                     if (scope.fareRangeInfoLoaded == false) {
                         if (scope.fareRangeData == "") {

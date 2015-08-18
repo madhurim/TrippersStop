@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'EmailForDestinationDet';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$filter', '$modal', 'EmailForDestinationDetFactory', 'SeasonalityFactory', 'FareRangeFactory', 'seasonalityData', '$timeout', EmailForDestinationDet]);
+        ['$scope', '$filter', '$modal', 'EmailForDestinationDetFactory', 'SeasonalityFactory', 'FareRangeFactory', 'seasonalityData', '$timeout', 'TrippismConstants', EmailForDestinationDet]);
 
-    function EmailForDestinationDet($scope, $filter, $modal, EmailForDestinationDetFactory, SeasonalityFactory, FareRangeFactory, seasonalityData, $timeout) {
+    function EmailForDestinationDet($scope, $filter, $modal, EmailForDestinationDetFactory, SeasonalityFactory, FareRangeFactory, seasonalityData, $timeout, TrippismConstants) {
 
         $scope.SharedbuttonText = "Share";
         $scope.SendEmailToUser = SendEmailToUser;
@@ -49,7 +49,7 @@
                     "Destination": seasonalityData.Fareforecastdata.Destination,
                     "EarliestDepartureDate": seasonalityData.Fareforecastdata.DepartureDate,
                     "LatestDepartureDate": seasonalityData.Fareforecastdata.ReturnDate,
-                    "Lengthofstay": 4
+                    "Lengthofstay": TrippismConstants.DefaultLenghtOfStay
                 };
                 $scope.farerangepromise = FareRangeFactory.fareRange(data).then(function (data) {
                     if (data.status == 404)
