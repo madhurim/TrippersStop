@@ -95,17 +95,19 @@ angular.module('TrippismUIApp')
                   var LowestFarePrice = "N/A";
 
                   if (maps[x].LowestFare != "N/A") {
-                      LowestFarePrice = Math.round(maps[x].LowestFare);
+                      LowestFarePrice = maps[x].LowestFare.toFixed(2);
                       if (LowestFarePrice == 0) 
                           LowestFarePrice = "N/A";
                       LowestFarePrice = LowestFarePrice.toLocaleString();
                   }
-
+                  var airportName = _.find($scope.airportlist, function (airport) {
+                      return airport.airport_Code == maps[x].DestinationLocation
+                  });
                   var marker = new MarkerWithLabel({
                       position: latlng1,
                       map: $scope.destinationMap,
-                      title: LowestFarePrice,
-                      labelContent: LowestFarePrice,
+                      title: airportName.airport_FullName,
+                      labelContent: LowestFarePrice + ' <br/>' + maps[x].DestinationLocation,
                       labelAnchor: new google.maps.Point(12, 35),
                       labelClass: "labelscolor", // the CSS class for the label
                       labelInBackground: false,
@@ -118,9 +120,7 @@ angular.module('TrippismUIApp')
                   });
                   bounds.extend(marker.position);
                   $scope.bounds.extend(marker.position);
-                  var airportName = _.find($scope.airportlist, function (airport) {
-                      return airport.airport_Code == maps[x].DestinationLocation
-                  });
+                 
 
                   var contentString = '<div style="min-width:100px;padding-top:5px;" id="content">' +
                                           '<div class="col-sm-12 padleft0"><strong>'
