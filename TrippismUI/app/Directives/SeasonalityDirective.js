@@ -138,9 +138,9 @@
             
             scope.Chart = [];
             function DisplayChart() {
-                var chartData1 = [];
-                var chartData2 = [];
-                var chartData3 = [];
+                var chartDataLow = [];
+                var chartDataMedium = [];
+                var chartDataHigh = [];
                 var rec = 1;
                 var startdate;
 
@@ -192,17 +192,17 @@
                             YearWeekNumber: chartrec[i].YearWeekNumber
                         };
                         if (SeasonalityIndicator ==1)
-                            chartData1.push(serise);
+                            chartDataLow.push(serise);
                         else if (SeasonalityIndicator ==2)
-                            chartData2.push(serise);
+                            chartDataMedium.push(serise);
                         else if (SeasonalityIndicator ==3)
-                            chartData3.push(serise);
+                            chartDataHigh.push(serise);
                         rec++;
                        
                     }
                     //   }
 
-
+                    var PrevDate = "";
                     var options = {
                         chart: {
                             height: scope.chartHeight,
@@ -216,8 +216,23 @@
                             type: 'datetime',
                             labels: {
                                 formatter: function () {
+                                    debugger;
+                                    var result = "";
+                                    var startdaterange = new Date( $filter('date')(this.value, scope.format, null));
+                                    var enddaterange = new Date($filter('date')(this.value, scope.format, null));
+                                    enddaterange = enddaterange.setDate(startdaterange.getDate() + 14);
+                                    startdaterange = $filter('date')(startdaterange, scope.format, null);
+                                    enddaterange = $filter('date')(enddaterange, scope.format, null);
+                                    
+                                     if ((scope.DepartDate >= startdaterange && scope.DepartDate <= enddaterange) || 
+                                        (scope.ReturnDate >= startdaterange && scope.ReturnDate <= enddaterange))
+                                        result = '<span style="fill: red;">'
+                                    else
+                                        result = '<span>'
+
                                     var d = new Date(this.value);
-                                    return Highcharts.dateFormat('%m-%e-%Y', this.value);
+
+                                    return result += Highcharts.dateFormat('%m-%e-%Y', this.value) + '</span><b>';
                                 },
                                 rotation: -45
                             },
@@ -308,19 +323,19 @@
                         },
                         series: [{
                             name: "Low Seasonality",
-                            data: chartData1,
+                            data: chartDataLow,
                             pointStart: startdate,
                             color: '#adff2f',
                         },
                         {
                             name: "Medium Seasonality",
-                            data: chartData2,
+                            data: chartDataMedium,
                             pointStart: startdate,
                             color: '#2e8b57',
                         },
                         {
                             name: "High Seasonality",
-                            data: chartData3,
+                            data: chartDataHigh,
                             pointStart: startdate,
                             color: '#87ceeb',
                         }]

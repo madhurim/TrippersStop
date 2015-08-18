@@ -195,7 +195,7 @@
                                             if (status == google.maps.places.PlacesServiceStatus.OK) {
                                                 // Multi photo
                                                 var imagelink = "";
-                                                if (place.photos.length > 0) {
+                                                if (place.photos != null && place.photos.length > 0) {
                                                     var photos = [];
                                                     for (var photoidx = 0; photoidx < place.photos.length; photoidx++) {
                                                         var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 400, 'maxHeight': 400 }) + '?maxwidth=400&?maxHeight=400'
@@ -220,7 +220,7 @@
                                                     attractionContentHtml += '<strong>' + place.formatted_phone_number + '</strong><br/>';
                                                 if (place.website != undefined)
                                                     attractionContentHtml += "<br/><a target='_blank' href=" + place.website + ">" + place.website + "</a>";
-
+                                                debugger;
                                                 var raitingToAppend = "";
                                                 if (place.rating != undefined) {
                                                     raitingToAppend = getRatings(place.rating);
