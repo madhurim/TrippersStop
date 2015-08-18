@@ -183,6 +183,7 @@
                             var contentString = "";
 
                             $scope.InfoWindow = new google.maps.InfoWindow();
+                           
                             var MapDet = maps[x];
                             google.maps.event.addListener(marker, 'mouseover', (function (marker, MapDet, x, contentString, $compile, infowindow,$scope) {
                                 return function () {
@@ -199,7 +200,8 @@
                                                 if (place.photos != null && place.photos.length > 0) {
                                                     var photos = [];
                                                     for (var photoidx = 0; photoidx < place.photos.length; photoidx++) {
-                                                        var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 400, 'maxHeight': 400 }) + '?maxwidth=400&?maxHeight=400'
+                                                        //var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 400, 'maxHeight': 400 }) + '?maxwidth=400&?maxHeight=400'
+                                                        var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 400, 'maxHeight': 200 }) + '?maxwidth=400&?maxHeight=200'
                                                         var imgtext = "";
                                                         var objtopush = { image: Imgsrc, text: imgtext };
                                                         photos.push(objtopush);
@@ -210,7 +212,7 @@
                                                 var name = MapDet.name;
                                                 var attractionContentHtml = '<div><carousel  id="cas1"  on-carousel-change="onSlideChanged(nextSlide, direction)" no-wrap="noWrapSlides">' +
                                                    '<slide ng-repeat="slide in slides[' + x + ']" active="slide.active">' +
-                                                   '<img ng-src="{{slide.image}}" style="margin:auto;">' +
+                                                   '<img ng-src="{{slide.image}}" style="margin:auto;min-height:200px;max-width:400px;">' +
                                                    '</slide>' +
                                                    '</carousel>' +
                                                    '<div class="col-sm-12 padleft0"><strong>' + name + '</strong><br>';
@@ -218,9 +220,9 @@
                                                 if ($scope.InfoWindow) $scope.InfoWindow.close();
                                                     attractionContentHtml += '<strong>' + place.adr_address + '</strong><br/>';
                                                 if (place.formatted_phone_number != undefined)
-                                                    attractionContentHtml += '<strong>' + place.formatted_phone_number + '</strong><br/>';
-                                                if (place.website != undefined)
-                                                    attractionContentHtml += "<br/><a target='_blank' href=" + place.website + ">" + place.website + "</a>";
+                                                    attractionContentHtml += '<strong>' + place.formatted_phone_number + '</strong>';
+                                                //if (place.website != undefined)
+                                                //    attractionContentHtml += "<br/><a target='_blank' href=" + place.website + ">" + place.website + "</a>";
 
                                                 var raitingToAppend = "";
                                                 if (place.rating != undefined) {
@@ -232,7 +234,7 @@
                                                 contentString = ($compile(attractionContentHtml)($scope));
                                                 contentString = contentString[0];
                                                 $scope.$apply();
-                                                $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
+                                                $scope.InfoWindow = new google.maps.InfoWindow({ disableAutoPan : true, content: contentString, maxWidth: 500 });
                                                 $scope.InfoWindow.open($scope.googleattractionsMap, marker);
                                                 
                                             }

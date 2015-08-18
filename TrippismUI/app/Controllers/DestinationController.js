@@ -25,26 +25,12 @@
         SeasonalityFactory
         ) {
 
-        $scope.myInterval = 5000;
-        $scope.noWrapSlides = false;
-        var slides = $scope.slides = [];
-        $scope.addSlide = function () {
-            var newWidth = 600 + slides.length + 1;
-            slides.push({
-                image: '//placekitten.com/' + newWidth + '/300',
-                text: ['More', 'Extra', 'Lots of', 'Surplus'][slides.length % 4] + ' ' +
-                  ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
-            });
-        };
-        for (var i = 0; i < 4; i++) {
-            $scope.addSlide();
-        }
-
         $scope.ShowDestinationView = true;
         $scope.TabcontentView = true;
         $scope.TabCreatedCount = 0;
         $scope.tabManager = {};
         $scope.tabManager.tabItems = [];
+
         $scope.tabManager.checkIfMaxTabs = function () {
             var max = 4;
             var i = $scope.tabManager.tabItems.length;
@@ -64,18 +50,6 @@
                 pane.selected = false;
             });
         };
-
-        //$scope.tabManager.addTab = function () {
-        //    $scope.tabManager.resetSelected();
-        //    var i = ($scope.tabManager.tabItems.length + 1);
-        //    $scope.tabManager.tabItems.push({
-        //        title: "Tab No: " + i,
-        //        content: "Lores sum ep sum news test [" + i + "]",
-        //        selected: true
-        //    });
-        //};
-
-
 
         $scope.tabManager.selectPreviousTab = function (i, $event) {
             if (typeof $event != 'undefined') {
@@ -343,22 +317,19 @@
                 $scope.IsairportJSONLoading = false;
                 $scope.CalledOnPageLoad = false;
                 $scope.AvailableAirports = data;
-
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
 
                 // Static Block
-                //$scope.Origin = 'ATL';
-                //$scope.CalledOnPageLoad = true;
-                //$scope.findDestinations('Cheapest');
-                //return;
+                $scope.Origin = 'ATL';
+                $scope.CalledOnPageLoad = true;
+                $scope.findDestinations('Cheapest');
+                return;
                 // Static Block Ends
 
                 if (org == undefined || org == '') {
                     UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
-                        if (data == undefined) {
-                            //  alertify.alert('Trippism', 'Oops! Sorry, we are unable to detect your home location automatically.');
+                        if (data == undefined) 
                             return;
-                        }
                         else {
                             $scope.Origin = data.airport_Code;
                             $scope.findDestinations('Cheapest');

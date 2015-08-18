@@ -216,7 +216,6 @@
                             type: 'datetime',
                             labels: {
                                 formatter: function () {
-                                    debugger;
                                     var result = "";
                                     var startdaterange = new Date( $filter('date')(this.value, scope.format, null));
                                     var enddaterange = new Date($filter('date')(this.value, scope.format, null));
