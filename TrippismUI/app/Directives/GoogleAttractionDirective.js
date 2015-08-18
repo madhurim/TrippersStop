@@ -143,7 +143,8 @@
                         ratingDiv += "<ul class='rating foreground readonly'  style='width:" + filledInStarsContainerWidth + "%'>";
 
                         for (var starIdx = 0; starIdx < stars.length; starIdx++) {
-                            ratingDiv += "<li ng-repeat='star in stars' class='star filled'><i class='fa fa-star'></i></li>";
+                            ratingDiv += "<li class='star filled'><i class='fa fa-star'></i></li>";
+                            //ratingDiv += "<li ng-repeat='star in stars' class='star filled'><i class='fa fa-star'></i></li>";
                         }
                     }
                     ratingDiv += "  </ul></div>";
@@ -219,7 +220,7 @@
                                                 if (place.formatted_phone_number != undefined)
                                                     attractionContentHtml += '<strong>' + place.formatted_phone_number + '</strong><br/>';
                                                 if (place.website != undefined)
-                                                    attractionContentHtml += "<br/><a target='_blank' href=" + place.website + ">" + place.website + "</a>";
+                                                    attractionContentHtml += "<br/><a target='_blank' href='" + place.website + "'>" + place.website + "</a>";
 
                                                 var raitingToAppend = "";
                                                 if (place.rating != undefined) {
@@ -227,10 +228,9 @@
                                                     attractionContentHtml += "<br/>" + raitingToAppend;
                                                 }
                                                +'</div>' +'</div> ';
-
+                                               
                                                 contentString = ($compile(attractionContentHtml)($scope));
                                                 contentString = contentString[0];
-
                                                 $scope.$apply();
                                                 $scope.InfoWindow = new google.maps.InfoWindow({ content: contentString, maxWidth: 500 });
                                                 $scope.InfoWindow.open($scope.googleattractionsMap, marker);

@@ -126,7 +126,6 @@
                         chartData2.push(serise2);
                         chartData3.push(serise3);
                     }
-
                     var options = {
                         chart: {
                             height: scope.chartHeight,
@@ -144,7 +143,6 @@
                                     var d = new Date(this.value);
                                     var returndate = new Date( $filter('date')(this.value, scope.format, null));
                                     returndate.setDate(returndate.getDate() + 5)
-                                 //   returndate = $filter('date')(returndate, scope.format, null);
                                     return Highcharts.dateFormat('%m-%e-%Y', this.value) + ' -<br> ' + Highcharts.dateFormat('%m-%e-%Y', returndate);
                                 },
                                 rotation: -45
@@ -179,7 +177,7 @@
                                 borderWidth: 0,
                                 dataLabels: {
                                     enabled: true,
-                                    format: firstCurrencyCode +' {point.y:.0f}'
+                                    format: firstCurrencyCode +' {point.y:.2f}'
                                 }
                             }
                         },
@@ -189,7 +187,7 @@
                             formatter: function () {
                                 return '<span style="font-size:11px;color:#87ceeb"> Fare Detail </span><br>' +
                                     '<span style="color:#87ceeb"> Date : </span><b> [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' - ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.returndate)) + ' ] </b><br>' +
-                                    '<span style="color:#87ceeb">' + this.series.name + ' : </span><b>' + this.point.CurrencyCode + ' ' + Highcharts.numberFormat(this.point.y, 0) + '</b>';
+                                    '<span style="color:#87ceeb">' + this.series.name + ' : </span><b>' + this.point.CurrencyCode + ' ' + Highcharts.numberFormat(this.point.y, 2) + '</b>';
                             }
                         },
                         series: [{

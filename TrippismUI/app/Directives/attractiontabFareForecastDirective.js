@@ -30,6 +30,7 @@
                     //400 for "Parameter 'departuredate' exceeds the maximum days allowed" api limit Valid dates are a maximum of 60 future dates.
                     if (data.status == 404 || data.status == 400)
                     {
+                        scope.FareApiLoaded = true;
                         scope.FareNoDataFound = true;
                         return;
                     }
