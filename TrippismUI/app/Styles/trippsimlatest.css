@@ -172,10 +172,10 @@
     height:32px;
 	text-align:left;
 	}
-.btn-default:hover {
+/*.btn-default:hover {
     background-color: transparent;
     border: 1px solid #fff;
-    color: #fff;
+    color: #333333;
 
 }
 .btn-default:focus {
@@ -190,12 +190,17 @@
     border: 1px solid #fff;
     color: #fff;
 
-}
-.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default.focus:active, .btn-default:active:focus, .btn-default:active:hover, .open > .dropdown-toggle.btn-default.focus, .open > .dropdown-toggle.btn-default:focus, .open > .dropdown-toggle.btn-default:hover {
+}*/
+.btn-default.active.focus, .btn-default.active:focus,  .btn-default.focus:active,  .btn-default:active:hover, .open > .dropdown-toggle.btn-default.focus, .open > .dropdown-toggle.btn-default:focus, .open > .dropdown-toggle.btn-default:hover {
    background-color: transparent;
     border: 1px solid #fff;
     color: #fff;
 
+}
+.btn-default:active:focus {color: #333333;
+}
+.btn-default.active:hover {
+       color: #333333;
 }
 .input-two {
     background-color: #fff;

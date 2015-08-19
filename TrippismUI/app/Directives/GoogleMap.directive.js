@@ -98,7 +98,7 @@ angular.module('TrippismUIApp')
                       LowestFarePrice = maps[x].LowestFare.toFixed(2);
                       if (LowestFarePrice == 0) 
                           LowestFarePrice = "N/A";
-                      LowestFarePrice = LowestFarePrice.toLocaleString();
+                      LowestFarePrice = $filter('currency')(LowestFarePrice, maps[x].CurrencyCode +' ', 0)
                   }
                   var airportName = _.find($scope.airportlist, function (airport) {
                       return airport.airport_Code == maps[x].DestinationLocation

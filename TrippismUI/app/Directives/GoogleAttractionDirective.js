@@ -212,7 +212,7 @@
                                                 var name = MapDet.name;
                                                 var attractionContentHtml = '<div><carousel  id="cas1"  on-carousel-change="onSlideChanged(nextSlide, direction)" no-wrap="noWrapSlides">' +
                                                    '<slide ng-repeat="slide in slides[' + x + ']" active="slide.active">' +
-                                                   '<img ng-src="{{slide.image}}" style="margin:auto;min-height:200px;max-width:400px;">' +
+                                                   '<img ng-src="{{slide.image}}" style="margin:auto;height:200px;width:350px;">' +
                                                    '</slide>' +
                                                    '</carousel>' +
                                                    '<div class="col-sm-12 padleft0"><strong>' + name + '</strong><br>';
@@ -234,7 +234,11 @@
                                                 contentString = ($compile(attractionContentHtml)($scope));
                                                 contentString = contentString[0];
                                                 $scope.$apply();
-                                                $scope.InfoWindow = new google.maps.InfoWindow({ disableAutoPan : true, content: contentString, maxWidth: 500 });
+                                                $scope.InfoWindow = new google.maps.InfoWindow({
+                                                    content: contentString,
+                                                    disableAutoPan: true,
+                                                    maxWidth: 500,
+                                                });
                                                 $scope.InfoWindow.open($scope.googleattractionsMap, marker);
                                                 
                                             }
