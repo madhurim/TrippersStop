@@ -1,5 +1,11 @@
-﻿angular.module('TrippismUIApp').directive('seasonalityInfo', ['$compile', '$rootScope', '$timeout', '$filter', 'SeasonalityFactory',
-    function ($compile, $rootScope, $timeout, $filter, SeasonalityFactory) {
+﻿angular.module('TrippismUIApp').directive('seasonalityInfo', [
+                                                    '$compile',
+                                                    '$rootScope',
+                                                    '$timeout',
+                                                    '$filter',
+                                                    'SeasonalityFactory',
+                                                    'TrippismConstants',
+    function ($compile, $rootScope, $timeout, $filter, SeasonalityFactory, TrippismConstants) {
         return {
             restrict: 'E',
 
@@ -15,7 +21,7 @@
 
                 scope.$on('ontabClicked', function (event, args) {
                     if (scope.ChartLoaded) {
-                        $timeout(function () {$(window).resize();}, 0, false);
+                        $timeout(function () { $(window).resize(); }, 0, false);
                     }
                 });
 
@@ -201,7 +207,7 @@
 
                                         var d = new Date(this.value);
 
-                                        return result += Highcharts.dateFormat('%m-%e-%Y', this.value) + '</span><b>';
+                                        return result += Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, this.value) + '</span><b>';
                                     },
                                     rotation: -45
                                 },
@@ -243,7 +249,7 @@
                             },
                             tooltip: {
                                 headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}$</b><br/>',
+                                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>' + TrippismConstants.HighChartTwoDecimalCurrencyFormat + '$</b><br/>',
                                 formatter: function () {
                                     var yresult = '';
 
@@ -252,27 +258,27 @@
 
                                     else if (this.y == 2)
                                         yresult = '<span> ' + 'Medium' + ' </span>';
-                                    
-                                    else if (this.y == 3) 
+
+                                    else if (this.y == 3)
                                         yresult = '<span> ' + 'High' + ' </span>';
 
-                                    else 
+                                    else
                                         yresult = '<span> ' + '' + ' </span>';
-                                    
+
                                     var zresult = '';
-                                    if (this.point.z == 12000) 
+                                    if (this.point.z == 12000)
                                         zresult = '<span> ' + '> 10000' + ' </span>';
-                                    
-                                    else if (this.point.z == 8000) 
+
+                                    else if (this.point.z == 8000)
                                         zresult = '<span> ' + '< 10000' + ' </span>';
-                                    
-                                    else if (this.point.z == 800) 
+
+                                    else if (this.point.z == 800)
                                         zresult = '<span> ' + '< 1000' + ' </span>';
-                                    
-                                    else 
+
+                                    else
                                         zresult = '<span> ' + '' + ' </span>';
-                                    
-                                    return '<span style="color:#87ceeb">Year Week :</span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.point.enddate)) + ' ] </b><br>' +
+
+                                    return '<span style="color:#87ceeb">Year Week :</span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, new Date(this.point.enddate)) + ' ] </b><br>' +
                                         '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
                                         '<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult + '</b>';
                                 }

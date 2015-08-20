@@ -31,9 +31,9 @@ angular.module('TrippismUIApp').directive("averageStarRating", ['$timeout',
                     scope.filledInStarsContainerWidth = scope.averageRatingValue / scope.max * starContainerMaxWidth;
                 };
                 scope.$watch("averageRatingValue", function (oldVal, newVal) {
-                    if (newVal) {
+                    if (newVal) 
                         updateStars();
-                    }
+                    
                 });
             }
         };

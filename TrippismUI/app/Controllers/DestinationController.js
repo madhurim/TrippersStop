@@ -139,7 +139,7 @@
         $scope.minFromDate = new Date();
         $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
         $scope.Destinationfortab = "";
-        
+
         $scope.ViewDestination = function () {
             $scope.ShowDestinationView = true;
             $scope.tabManager.resetSelected();
@@ -270,12 +270,10 @@
 
         function btnSearchClick() {
             $scope.fareforecastdirectiveDisplay = false;
-            if ($scope.isSearching == true) {
+            if ($scope.isSearching == true)
                 $scope.isSearching = false;
-            }
-            else {
+            else
                 $scope.isSearching = true;
-            }
         }
         function loadFareForecastInfo() {
             $scope.MarkerInfo = "";
@@ -320,7 +318,7 @@
 
                 if (org == undefined || org == '') {
                     UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
-                        if (data == undefined) 
+                        if (data == undefined)
                             return;
                         else {
                             $scope.Origin = data.airport_Code;

@@ -69,16 +69,16 @@ angular.module('TrippismUIApp')
               var bounds = new google.maps.LatLngBounds();
               $scope.bounds = bounds;
               selected = maps;
-              
+
               for (var x = 0; x < maps.length; x++) {
                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
                   var LowestFarePrice = "N/A";
 
                   if (maps[x].LowestFare != "N/A") {
                       LowestFarePrice = maps[x].LowestFare.toFixed(2);
-                      if (LowestFarePrice == 0) 
+                      if (LowestFarePrice == 0)
                           LowestFarePrice = "N/A";
-                      LowestFarePrice = $filter('currency')(LowestFarePrice, maps[x].CurrencyCode +' ', 0)
+                      LowestFarePrice = $filter('currency')(LowestFarePrice, maps[x].CurrencyCode + ' ', 0)
                   }
                   var airportName = _.find($scope.airportlist, function (airport) {
                       return airport.airport_Code == maps[x].DestinationLocation
@@ -100,7 +100,7 @@ angular.module('TrippismUIApp')
                   });
                   bounds.extend(marker.position);
                   $scope.bounds.extend(marker.position);
-                 
+
 
                   var contentString = '<div style="min-width:100px;padding-top:5px;" id="content">' +
                                           '<div class="col-sm-12 padleft0"><strong>'
@@ -127,7 +127,7 @@ angular.module('TrippismUIApp')
                               "ReturnDate": $filter('date')(marker.CustomMarkerInfo.ReturnDateTime, 'yyyy-MM-dd'),
                               "Destination": marker.CustomMarkerInfo.DestinationLocation
                           };
-                          
+
                           $rootScope.$broadcast('EmptyFareForcastInfo', {
                               Origin: OriginairportName.airport_CityName,
                               Destinatrion: DestinationairportName.airport_Code,
@@ -146,7 +146,6 @@ angular.module('TrippismUIApp')
           };
 
           var getMapUrlData = function (airportCode) {
-              debugger;
               var d = $q.defer();
               var originairport = _.find($scope.airportlist, function (airport) {
                   return airport.airport_Code == airportCode.DestinationLocation

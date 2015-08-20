@@ -1,10 +1,9 @@
-﻿angular.module('TrippismUIApp').directive('weatherInfo', ['$compile', '$filter', '$timeout', '$rootScope', 'WeatherFactory', 'UtilFactory',
-    function ($compile, $filter, $timeout, $rootScope, WeatherFactory, UtilFactory) {
+﻿angular.module('TrippismUIApp').directive('weatherInfo', ['$compile', '$filter', '$timeout', '$rootScope', 'WeatherFactory', 'UtilFactory', 'TrippismConstants',
+    function ($compile, $filter, $timeout, $rootScope, WeatherFactory, UtilFactory, TrippismConstants) {
         return {
             restrict: 'E',
             scope: {
                 weatherParams: '=',
-                isOpen: '='
             },
             templateUrl: '/app/Views/Partials/WeatherPartial.html',
             link: function (scope, elem, attrs) {
@@ -19,7 +18,7 @@
                     scope.StateList = data;
                 });
 
-                scope.$watchGroup(['weatherParams', 'isOpen'], function (newValue, oldValue, scope) {
+                scope.$watchGroup(['weatherParams'], function (newValue, oldValue, scope) {
 
                     UtilFactory.ReadStateJson().then(function (data) {
                         scope.StateList = data;
@@ -29,7 +28,7 @@
                             scope.ReturnDate = $filter('date')(scope.weatherParams.Fareforecastdata.ReturnDate, scope.format, null);
 
                             scope.TabIndex = "weather" + scope.weatherParams.tabIndex;
-                            var mapHTML =  "<div id='" + scope.TabIndex + "'></div>";
+                            var mapHTML = "<div id='" + scope.TabIndex + "'></div>";
                             elem.append($compile(mapHTML)(scope));
                             scope.WeatherRangeInfo();
 
@@ -44,7 +43,7 @@
 
                 scope.WeatherRangeInfo = function () {
                     scope.WeatherInfoLoaded = false;
-                    
+
                     scope.HighTempratureC = "0";
                     scope.HighTempratureF = "0";
                     scope.LowTempratureC = "0";
@@ -152,7 +151,7 @@
                             },
                             tooltip: {
                                 headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b><br/>'
+                                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>' + TrippismConstants.HighChartTwoDecimalCurrencyFormat + '%</b><br/>'
                             },
                             series: [{
                                 name: "Temprature",
