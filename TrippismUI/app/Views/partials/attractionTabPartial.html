@@ -5,15 +5,17 @@
             <googleattraction-info googleattraction-params="attractionParams" is-open="openaccordiondata" class="googleattraction" style="clear:both;"></googleattraction-info>
 
             <div class="col-md-12 padlr0" style="clear:both;">
-                <weather-info weather-params="attractionParams"></weather-info>
-            </div>
+                <div class="col-md-6 padlr0" >
+                    <weather-info weather-params="attractionParams"></weather-info>
+                 </div>
+                <div class="col-md-6 padlr0">
+                    <farerange-info farerange-params="attractionParams" is-open="true" show-chart="true" style="clear:both;"></farerange-info> <!--is-open="openaccordiondata" mailfarerange-data="MailFareRangeData"-->
+                </div>
+                </div>
             <div class="col-md-12 padlr0" style="clear:both;">
                 <seasonality-info seasonality-params="attractionParams" is-open="true" show-chart="true"></seasonality-info>
             </div>
-            <div class="col-md-12 padlr0" style="clear:both;margin-top:50px">
-                <farerange-info farerange-params="attractionParams" is-open="true" show-chart="true" style="clear:both;"></farerange-info> <!--is-open="openaccordiondata" mailfarerange-data="MailFareRangeData"-->
-            </div>
-
+           
         </div>
 
         <div class="col-lg-3 padright0">

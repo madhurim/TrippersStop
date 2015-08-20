@@ -13,7 +13,7 @@
                 scope.format = scope.formats[5];
                 scope.WeatherInfoNoDataFound = true;
 
-                scope.chartHeight = 200;
+                scope.chartHeight = 300;
                 scope.StateList = [];
                 UtilFactory.ReadStateJson().then(function (data) {
                     scope.StateList = data;

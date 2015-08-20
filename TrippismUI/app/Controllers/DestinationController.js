@@ -139,8 +139,7 @@
         $scope.minFromDate = new Date();
         $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
         $scope.Destinationfortab = "";
-        // $scope.Earliestdeparturedate = ConvertToRequiredDate($scope.FromDate, 'UI');
-
+        
         $scope.ViewDestination = function () {
             $scope.ShowDestinationView = true;
             $scope.tabManager.resetSelected();
@@ -318,13 +317,6 @@
                 $scope.CalledOnPageLoad = false;
                 $scope.AvailableAirports = data;
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
-
-                // Static Block
-                //$scope.Origin = 'ATL';
-                //$scope.CalledOnPageLoad = true;
-                //$scope.findDestinations('Cheapest');
-                //return;
-                // Static Block Ends
 
                 if (org == undefined || org == '') {
                     UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {

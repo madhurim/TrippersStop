@@ -1,10 +1,15 @@
 ﻿<div class="" style="clear:both;" ng-controller="YouTubeController">
     <div id="ytubetabletbody" class="ytubetabletbody" cg-busy=" {promise:youtubepromise,message:'loading videos'}">
         <div ng-if="youtubeInfoDataFound" style="height:100%;">
-            <div class="thumbnail thumbnailstyle" style="height:100%;">
+             <div class="thumbnail thumbnailstyle" style="height:100%;">
                 <table class="table fontsize" style="clear:both; color:black; height:100%;">
                     <tbody style="height:100%;overflow-y:hidden;">
                         <tr style="text-align:center;">
+                            <td>
+                                <h5>Related Youtube Videos</h5>
+                            </td>
+                        </tr>
+                         <tr style="text-align:center;">
                             <td>
                                 <div class="divpagination pagination-centered" ng-show="youtubeData.items.length">
                                     <ul class="pagination-controle divpagination">
