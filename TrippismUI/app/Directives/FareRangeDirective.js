@@ -17,7 +17,7 @@
                 if (scope.farerangeParams != undefined) {
                     scope.DepartDate = $filter('date')(scope.farerangeParams.Fareforecastdata.DepartureDate, scope.format, null);
                     scope.ReturnDate = $filter('date')(scope.farerangeParams.Fareforecastdata.ReturnDate, scope.format, null);
-                    scope.chartHeight = 400;
+                    scope.chartHeight = 300;
                     scope.TabIndex = "farerange" + scope.farerangeParams.tabIndex;
                     var mapHTML = "<div id='" + scope.TabIndex + "'></div>";
                     elem.append($compile(mapHTML)(scope));

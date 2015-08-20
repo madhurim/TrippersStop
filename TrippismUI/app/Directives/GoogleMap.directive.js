@@ -60,32 +60,12 @@ angular.module('TrippismUIApp')
               $scope.faresList = [];
               $scope.faresList = angular.copy(destinations);
               $scope.showPosition(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
-
-              //if (buttnText == 'All') {
-              //    $scope.faresList = angular.copy(destinations);
-              //    $scope.showPosition(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
-              //}
-
-              //if (buttnText == 'Cheapest') {
-              //    if (destinations.length > 0) {
-              //        var sortedObjs = _.filter(destinations, function (item) {
-              //            return item.LowestFare !== 'N/A';
-              //        });
-              //        sortedObjs = _(sortedObjs).sortBy(function (obj) { return parseInt(obj.LowestFare, 10) })
-              //        for (var i = 0; i < 10; i++)
-              //            if (sortedObjs[i] != undefined)
-              //                $scope.faresList.push(sortedObjs[i]);
-
-              //    }
-              //    $scope.showPosition(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
-              //}
           }
 
 
 
           var RenderMap = function (maps) {
               $scope.InfoWindow;
-
               var bounds = new google.maps.LatLngBounds();
               $scope.bounds = bounds;
               selected = maps;
@@ -107,7 +87,7 @@ angular.module('TrippismUIApp')
                       position: latlng1,
                       map: $scope.destinationMap,
                       title: airportName.airport_FullName,
-                      labelContent: LowestFarePrice + ' <br/>' + maps[x].DestinationLocation,
+                      labelContent: LowestFarePrice + ' <br/>' + maps[x].DestinationLocation + ' [ ' + airportName.airport_CityName + ' ]',
                       labelAnchor: new google.maps.Point(12, 35),
                       labelClass: "labelscolor", // the CSS class for the label
                       labelInBackground: false,
@@ -166,6 +146,7 @@ angular.module('TrippismUIApp')
           };
 
           var getMapUrlData = function (airportCode) {
+              debugger;
               var d = $q.defer();
               var originairport = _.find($scope.airportlist, function (airport) {
                   return airport.airport_Code == airportCode.DestinationLocation

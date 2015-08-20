@@ -27,19 +27,6 @@
 
         $scope.myInterval = 5000;
         $scope.noWrapSlides = false;
-        var slides = $scope.slides = [];
-        $scope.addSlide = function () {
-            var newWidth = 600 + slides.length + 1;
-            slides.push({
-                image: '//placekitten.com/' + newWidth + '/300',
-                text: ['More', 'Extra', 'Lots of', 'Surplus'][slides.length % 4] + ' ' +
-                  ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
-            });
-        };
-        for (var i = 0; i < 4; i++) {
-            $scope.addSlide();
-        }
-
         $scope.ShowDestinationView = true;
         $scope.TabcontentView = true;
         $scope.TabCreatedCount = 0;
@@ -65,18 +52,7 @@
             });
         };
 
-        //$scope.tabManager.addTab = function () {
-        //    $scope.tabManager.resetSelected();
-        //    var i = ($scope.tabManager.tabItems.length + 1);
-        //    $scope.tabManager.tabItems.push({
-        //        title: "Tab No: " + i,
-        //        content: "Lores sum ep sum news test [" + i + "]",
-        //        selected: true
-        //    });
-        //};
-
-
-
+      
         $scope.tabManager.selectPreviousTab = function (i, $event) {
             if (typeof $event != 'undefined') {
                 $event.stopPropagation();
@@ -165,8 +141,7 @@
         $scope.minFromDate = new Date();
         $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
         $scope.Destinationfortab = "";
-        // $scope.Earliestdeparturedate = ConvertToRequiredDate($scope.FromDate, 'UI');
-
+        
         $scope.ViewDestination = function () {
             $scope.ShowDestinationView = true;
             $scope.tabManager.resetSelected();
@@ -346,13 +321,6 @@
 
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
 
-                // Static Block
-                //$scope.Origin = 'ATL';
-                //$scope.CalledOnPageLoad = true;
-                //$scope.findDestinations('Cheapest');
-                //return;
-                // Static Block Ends
-
                 if (org == undefined || org == '') {
                     UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
                         if (data == undefined) {
@@ -483,6 +451,7 @@
                 $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
                 $scope.SearchbuttonIsLoading = false;
                 $scope.SearchbuttonChepestIsLoading = false;
+                debugger;
                 if (data.FareInfo != null) {
                     $scope.destinationlist = data.FareInfo;
                     $scope.buttontext = "Cheapest";
@@ -530,7 +499,7 @@
 })();
 
 
-var controllerId = 'DestinationDetailsCtrl'; //DestinationDetailsCtrl
+var controllerId = 'DestinationDetailsCtrl'; 
 angular.module('TrippismUIApp').controller(controllerId,
     ['$scope', '$timeout', '$modalInstance', 'mapDetails', 'OriginairportName', 'DestinationairportName', 'Fareforecastdata', 'Destination', 'destinationScope', 'FareforecastFactory', 'SeasonalityFactory', 'FareRangeFactory', DestinationDetailsCtrl]);
 
