@@ -21,10 +21,7 @@
     <Content Include="app\Constants\UIConstants.js" />
     <Content Include="app\Controllers\DestinationController.js" />
     <Content Include="app\Controllers\EmailForDestinationDetController.js" />
-    <Content Include="app\Controllers\FareforecastController.js" />
-    <Content Include="app\Controllers\FareRangeController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
-    <Content Include="app\Controllers\SeasonalityController.js" />
     <Content Include="app\Controllers\YouTubeController.js" />
     <Content Include="app\Directives\AttractionTabDirective.js" />
     <Content Include="app\Directives\AttractiontabFareForecastDirective.js" />
@@ -74,7 +71,6 @@
     <Content Include="app\Styles\images\time.png" />
     <Content Include="app\Styles\trippsimlatest.css" />
     <Content Include="app\Utility.js" />
-    <Content Include="app\Views\farerange.html" />
     <Content Include="app\Views\GoogleMap.html" />
     <Content Include="app\Views\destination.html" />
     <Content Include="app\Scripts\angular-mocks.js" />
@@ -92,7 +88,6 @@
     <Content Include="app\Styles\css\angular-block-ui.min.css" />
     <Content Include="app\Scripts\libs\angular-block-ui.js" />
     <Content Include="app\Scripts\libs\angular-block-ui.min.js" />
-    <Content Include="app\Views\fareforecast.html" />
     <Content Include="app\Styles\alertifyjs\alertify.css" />
     <Content Include="app\Styles\alertifyjs\alertify.min.css" />
     <Content Include="app\Styles\alertifyjs\alertify.rtl.css" />
@@ -118,7 +113,6 @@
     <Content Include="app\Views\partials\FareRangePartial.html" />
     <Content Include="app\Views\partials\SeasonalityPartial.html" />
     <Content Include="app\Views\partials\YoutubePartial.html" />
-    <Content Include="app\Views\seasonality.html" />
     <Content Include="app\Styles\css\angular-busy.css" />
     <Content Include="app\Styles\css\angular-busy.min.css" />
     <Content Include="index.html" />

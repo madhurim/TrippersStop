@@ -105,8 +105,6 @@
                                         $scope.googleattractionData = data;
                                         $scope.quantity = 5;
                                         $scope.googleattractionInfoLoaded = true;
-
-
                                     });
                                 }
                             }
