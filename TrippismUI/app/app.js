@@ -19,31 +19,8 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
         // HOME STATES AND NESTED VIEWS ========================================
          .state('destination', {
              url: '/destination',
-             templateUrl: '/app/Views/destination.html',
-             views: {
-                 "": {
-                     templateUrl: '/app/Views/destination.html',
-                 }
-
-             }
+             templateUrl: '/app/Views/destination.html'
          })
-        .state('fareforecast', {
-            url: '/fareforecast',
-            templateUrl: '/app/Views/fareforecast.html'
-        })
-         .state('farerange', {
-             url: '/farerange',
-             templateUrl: '/app/Views/farerange.html'
-         })
-         .state('seasonality', {
-             url: '/seasonality',
-             templateUrl: '/app/Views/seasonality.html'
-         })
-     .state('/', {
-         url: '/destination',
-         templateUrl: '/app/Views/destination.html'
-
-     })
 });
 
 TrippismUIApp.directive("scroll", function ($window) {
