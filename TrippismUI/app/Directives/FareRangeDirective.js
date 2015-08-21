@@ -63,14 +63,15 @@
                 scope.$watch('fareRangeData', function (newValue, oldValue) {
                     if (newValue != oldValue) {
                         DisplayChart();
+
                     }
                 })
 
                 scope.Chart = [];
                 function DisplayChart() {
-                    var chartData1 = [];
-                    var chartData2 = [];
-                    var chartData3 = [];
+                    var chartDataMax = [];
+                    var chartDataMin = [];
+                    var chartDataMed = [];
                     var startdate;
                     if (scope.fareRangeData != undefined && scope.fareRangeData != "") {
                         for (i = 0; i < scope.fareRangeData.FareData.length; i++) {
@@ -85,30 +86,30 @@
                             var utcdate = Date.UTC(DepartureDate.getFullYear(), DepartureDate.getMonth(), DepartureDate.getDate());
                             var retutcdate = Date.UTC(returnDate.getFullYear(), returnDate.getMonth(), returnDate.getDate());
 
-                            var serise1 = {
+                            var seriseMax = {
                                 x: utcdate,
                                 y: scope.fareRangeData.FareData[i].MaximumFare,
                                 z: scope.fareRangeData.FareData[i].MaximumFare,
                                 returndate: retutcdate,
                                 CurrencyCode: scope.fareRangeData.FareData[i].CurrencyCode
                             };
-                            var serise2 = {
+                            var seriseMin = {
                                 x: utcdate,
                                 y: scope.fareRangeData.FareData[i].MinimumFare,
                                 z: scope.fareRangeData.FareData[i].MinimumFare,
                                 returndate: retutcdate,
                                 CurrencyCode: scope.fareRangeData.FareData[i].CurrencyCode
                             };
-                            var serise3 = {
+                            var seriseMed = {
                                 x: utcdate,
                                 y: scope.fareRangeData.FareData[i].MedianFare,
                                 z: scope.fareRangeData.FareData[i].MedianFare,
                                 returndate: retutcdate,
                                 CurrencyCode: scope.fareRangeData.FareData[i].CurrencyCode
                             };
-                            chartData1.push(serise1);
-                            chartData2.push(serise2);
-                            chartData3.push(serise3);
+                            chartDataMax.push(seriseMax);
+                            chartDataMin.push(seriseMin);
+                            chartDataMed.push(seriseMed);
                         }
                         var options = {
                             chart: {
@@ -146,8 +147,13 @@
                                 series: {
                                     borderWidth: 0,
                                     dataLabels: {
+                                        allowOverlap:true,
                                         enabled: true,
-                                        format: firstCurrencyCode + ' ' + TrippismConstants.HighChartTwoDecimalCurrencyFormat
+                                        format: firstCurrencyCode + '<br/>' + TrippismConstants.HighChartTwoDecimalCurrencyFormat,
+                                        style: {
+                                            fontWeight: 'bold',
+                                            fontSize: '10px'
+                                        }
                                     }
                                 }
                             },
@@ -162,20 +168,20 @@
                             },
                             series: [{
                                 name: "Minimum Fare",
-                                data: chartData2,
+                                data: chartDataMin,
                                 pointStart: startdate,
                                 color: '#adff2f',
                                 pointInterval: 24 * 3600 * 1000 // one day
                             },
                             {
                                 name: "Median Fare",
-                                data: chartData3,
+                                data: chartDataMed,
                                 pointStart: startdate,
                                 color: '#2e8b57',
                                 pointInterval: 24 * 3600 * 1000 // one day
                             }, {
                                 name: "Maximum Fare",
-                                data: chartData1,
+                                data: chartDataMax,
                                 pointStart: startdate,
                                 color: '#87ceeb',
                                 pointInterval: 24 * 3600 * 1000 // one day
