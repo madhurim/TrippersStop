@@ -78,7 +78,7 @@ angular.module('TrippismUIApp')
                       LowestFarePrice = maps[x].LowestFare.toFixed(2);
                       if (LowestFarePrice == 0)
                           LowestFarePrice = "N/A";
-                      LowestFarePrice = $filter('currency')(LowestFarePrice, maps[x].CurrencyCode + ' ', 0)
+                    //  LowestFarePrice = $filter('currency')(LowestFarePrice, maps[x].CurrencyCode + ' ', 0)
                   }
                   var airportName = _.find($scope.airportlist, function (airport) {
                       return airport.airport_Code == maps[x].DestinationLocation
@@ -87,7 +87,7 @@ angular.module('TrippismUIApp')
                       position: latlng1,
                       map: $scope.destinationMap,
                       title: airportName.airport_FullName,
-                      labelContent: LowestFarePrice + ' <br/>' + maps[x].DestinationLocation + ' [ ' + airportName.airport_CityName + ' ]',
+                      labelContent: maps[x].CurrencyCode +' '+LowestFarePrice + ' <br/>' + maps[x].DestinationLocation + ' [ ' + airportName.airport_CityName + ' ]',
                       labelAnchor: new google.maps.Point(12, 35),
                       labelClass: "labelscolor", // the CSS class for the label
                       labelInBackground: false,

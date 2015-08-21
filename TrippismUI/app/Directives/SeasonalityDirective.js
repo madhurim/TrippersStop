@@ -201,7 +201,7 @@
 
                                         if ((scope.DepartDate >= startdaterange && scope.DepartDate <= enddaterange) ||
                                            (scope.ReturnDate >= startdaterange && scope.ReturnDate <= enddaterange))
-                                            result = '<span style="fill: red;">'
+                                            result = '<span style="font-weight: bold;">'
                                         else
                                             result = '<span>'
 
