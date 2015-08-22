@@ -11,7 +11,7 @@
                 scope.formats = Dateformat();
                 scope.format = scope.formats[5];
                 scope.WeatherInfoNoDataFound = true;
-
+                scope.weatherParams.WeatherInfoNoDataFound = true;
                 scope.chartHeight = 300;
                 scope.StateList = [];
                 UtilFactory.ReadStateJson().then(function (data) {
@@ -52,6 +52,7 @@
                         if (statedata == undefined) {
                             scope.WeatherData = "";
                             scope.WeatherInfoNoDataFound = true;
+                            scope.weatherParams.WeatherInfoNoDataFound = true;
                         }
                         else {
 
@@ -69,9 +70,11 @@
                                         scope.WeatherInfoLoaded = false;
                                         if (data == "" || data.status == 404) {
                                             scope.WeatherInfoNoDataFound = true;
+                                            scope.weatherParams.WeatherInfoNoDataFound = false;
                                             return;
                                         }
                                         scope.WeatherInfoNoDataFound = false;
+                                        scope.weatherParams.WeatherInfoNoDataFound = false;
                                         scope.WeatherData = data;
                                     });
                                 }

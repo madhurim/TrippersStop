@@ -5,9 +5,9 @@
             <googleattraction-info googleattraction-params="attractionParams" is-open="openaccordiondata" class="googleattraction" style="clear:both;"></googleattraction-info>
 
             <div class="col-md-12 padlr0" style="clear:both;">
-                <div class="col-md-6 padlr0" >
+                <div class="col-md-6 padlr0" ng-hide="attractionParams.WeatherInfoNoDataFound">
                     <weather-info weather-params="attractionParams"></weather-info>
-                 </div>
+                </div>
                 <div class="col-md-6 padlr0">
                     <farerange-info farerange-params="attractionParams" style="clear:both;"></farerange-info> <!--is-open="openaccordiondata" mailfarerange-data="MailFareRangeData"-->
                 </div>

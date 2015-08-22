@@ -1,9 +1,21 @@
 ﻿<div ng-controller="DestinationController">
 
+    <div class="col-lg-12" style="clear:both;">
+        <div class=" col-lg-1" style="float:right;">
+            <div style="width:84px">
+                <span style="font-weight:bold;font-size:20px">
+                    Trippism
+                </span>
+                <span style="vertical-align: super; font-size:10px;float:right;">Alpha</span>
+            </div>
+        </div>
+
+    </div>
     <div class="col-lg-12 padtop5" style="clear:both;">
         <div class="col-lg-1">
             <div class="home-btn"><input type="submit" ng-click="ViewDestination()" value="Home" class="home-submit"></div>
         </div>
+        
         <div class="col-lg-11" ng-if="tabManager.tabItems.length > 0">
             <div tabs>
                 <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
