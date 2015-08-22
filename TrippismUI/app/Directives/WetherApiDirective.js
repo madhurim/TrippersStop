@@ -23,10 +23,8 @@
                     UtilFactory.ReadStateJson().then(function (data) {
                         scope.StateList = data;
                         if (scope.weatherParams != undefined && scope.weatherParams.tabIndex != undefined) {
-
                             scope.DepartDate = $filter('date')(scope.weatherParams.Fareforecastdata.DepartureDate, scope.format, null);
                             scope.ReturnDate = $filter('date')(scope.weatherParams.Fareforecastdata.ReturnDate, scope.format, null);
-
                             scope.TabIndex = "weather" + scope.weatherParams.tabIndex;
                             var mapHTML = "<div id='" + scope.TabIndex + "'></div>";
                             elem.append($compile(mapHTML)(scope));
