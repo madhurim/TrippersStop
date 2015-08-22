@@ -35,12 +35,23 @@
                     scope.fareRangeInfoNoDataFound = false;
                     scope.fareRangeData = "";
                     if (scope.farerangeParams != undefined) {
+                        scope.staydaylength = 0;
+                        if (scope.farerangeParams.searchcriteria.FromDate != null && scope.farerangeParams.searchcriteria.ToDate != null) {
+                            var frdt = new Date(scope.farerangeParams.searchcriteria.FromDate);
+                            var todt = new Date(scope.farerangeParams.searchcriteria.ToDate);
+                            var timeDiff = Math.abs(todt.getTime() - frdt.getTime());
+                            scope.staydaylength = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                        }
+                        else {
+                            staydaylength = scope.farerangeParams.searchcriteria.Lengthofstay;
+                        }
+                       
                         var data = {
                             "Origin": scope.farerangeParams.Fareforecastdata.Origin,
                             "Destination": scope.farerangeParams.Fareforecastdata.Destination,
                             "EarliestDepartureDate": scope.farerangeParams.Fareforecastdata.DepartureDate,
                             "LatestDepartureDate": scope.farerangeParams.Fareforecastdata.ReturnDate,
-                            "Lengthofstay": TrippismConstants.DefaultLenghtOfStay
+                            "Lengthofstay": scope.staydaylength  //TrippismConstants.DefaultLenghtOfStay
                         };
                         if (scope.fareRangeInfoLoaded == false) {
                             if (scope.fareRangeData == "") {
@@ -126,7 +137,7 @@
                                     formatter: function () {
                                         var d = new Date(this.value);
                                         var returndate = new Date($filter('date')(this.value, scope.format, null));
-                                        returndate.setDate(returndate.getDate() + 5)
+                                        returndate.setDate(returndate.getDate() + scope.staydaylength+1)
                                         return Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, this.value) + ' -<br> ' + Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, returndate);
                                     },
                                     rotation: -45
@@ -145,15 +156,20 @@
                             },
                             plotOptions: {
                                 series: {
+                                    
                                     borderWidth: 0,
                                     dataLabels: {
-                                        allowOverlap:true,
+                                        //allowOverlap:true,
+                                        crop: false,
+                                        overflow: 'none',
                                         enabled: true,
-                                        format: firstCurrencyCode + '<br/>' + TrippismConstants.HighChartTwoDecimalCurrencyFormat,
+                                        align: 'right',
+                                        format:TrippismConstants.HighChartTwoDecimalCurrencyFormat ,
                                         style: {
                                             fontWeight: 'bold',
                                             fontSize: '10px'
-                                        }
+                                        },
+                                        rotation: -90
                                     }
                                 }
                             },

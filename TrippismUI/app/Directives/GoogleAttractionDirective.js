@@ -199,7 +199,7 @@
                                                     var photos = [];
                                                     for (var photoidx = 0; photoidx < place.photos.length; photoidx++) {
                                                         //var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 400, 'maxHeight': 400 }) + '?maxwidth=400&?maxHeight=400'
-                                                        var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 400, 'maxHeight': 200 }) + '?maxwidth=400&?maxHeight=200'
+                                                        var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 400, 'maxHeight': 200 }) + '?maxHeight=200'
                                                         var imgtext = "";
                                                         var objtopush = { image: Imgsrc, text: imgtext };
                                                         photos.push(objtopush);
@@ -210,7 +210,7 @@
                                                 var name = MapDet.name;
                                                 var attractionContentHtml = '<div><carousel  id="cas1"  on-carousel-change="onSlideChanged(nextSlide, direction)" no-wrap="noWrapSlides">' +
                                                    '<slide ng-repeat="slide in slides[' + x + ']" active="slide.active">' +
-                                                   '<img ng-src="{{slide.image}}" style="margin:auto;height:200px;width:350px;">' +
+                                                   '<img ng-src="{{slide.image}}" style="margin:auto;height:200px;max-width:400px">' +
                                                    '</slide>' +
                                                    '</carousel>' +
                                                    '<div class="col-sm-12 padleft0"><strong>' + name + '</strong><br>';

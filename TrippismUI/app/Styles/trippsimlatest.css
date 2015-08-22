@@ -283,7 +283,7 @@ option {
     left: 0 !important;
     margin-bottom: 30px !important;
     position: absolute !important;
-    top: 120px !important;
+    top: 160px !important;
     transform: translate(0px) !important;
     z-index: 15665 !important;
      width: 90% !important;
@@ -811,7 +811,7 @@ ul li {
      left: 43%;
     margin-right: 50%;
     position: absolute;
-    top: 50%;
+    top: 55%;
     transform: translate(-50%, -50%);
     z-index: 999;
 }
