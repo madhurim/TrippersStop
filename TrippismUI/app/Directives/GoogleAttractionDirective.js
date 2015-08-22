@@ -205,7 +205,6 @@
                                     $scope.slides = [];
 
                                     $scope.PhoneNo = "";
-                                    $scope.myInterval = 5000;
                                     $scope.noWrapSlides = false;
 
                                     var service = new google.maps.places.PlacesService($scope.googleattractionsMap);

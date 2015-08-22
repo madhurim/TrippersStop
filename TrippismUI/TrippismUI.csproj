@@ -22,6 +22,7 @@
     <Content Include="app\Controllers\DestinationController.js" />
     <Content Include="app\Controllers\EmailForDestinationDetController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
+    <Content Include="app\Controllers\MarkerPhotoSliderController.js" />
     <Content Include="app\Controllers\YouTubeController.js" />
     <Content Include="app\Directives\AttractionTabDirective.js" />
     <Content Include="app\Directives\AttractiontabFareForecastDirective.js" />
@@ -69,6 +70,7 @@
     <Content Include="app\Styles\images\loader.gif" />
     <Content Include="app\Styles\images\thumbs_up.png" />
     <Content Include="app\Styles\images\time.png" />
+    <Content Include="app\Styles\images\Trippismlogo.png" />
     <Content Include="app\Styles\trippsimlatest.css" />
     <Content Include="app\Utility.js" />
     <Content Include="app\Views\GoogleMap.html" />
@@ -109,6 +111,7 @@
     <Content Include="app\Views\partials\avarageStarRatingPartial.html" />
     <Content Include="app\Views\partials\EmailDetFormPartial.html" />
     <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
+    <Content Include="app\Views\partials\MarkerPhotoSlider.html" />
     <Content Include="app\Views\partials\WeatherPartial.html" />
     <Content Include="app\Views\partials\FareRangePartial.html" />
     <Content Include="app\Views\partials\SeasonalityPartial.html" />
