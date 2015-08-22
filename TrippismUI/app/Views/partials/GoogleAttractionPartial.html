@@ -1,6 +1,34 @@
 ﻿
 <div class="" style="clear:both;" cg-busy="{promise:googleattractionpromise,message:'Loading Attractions'}">
-    <div ui-map="googleattractionsMap" ui-options="attractionmapOptions" class="map-canvas"></div>
+    <div ui-map="googleattractionsMap" id={{gMapId}} ui-options="attractionmapOptions" style="width:100%;" class="map-canvas"></div>
 </div>
+<div ng-show="IsMarkerSelected" id={{googleMapId}} class="popupmarker" style="width: 500px;  min-height:300px;  z-index: 999;">
+
+    <div class="modal-content">
+        <div class="modal-header head ng-scope" style="padding-bottom: 24px !important;">
+            <button class="close closebutton" ng-click="cancel()" type="button">×</button>
+        </div>
+
+        <div class="modal-body">
+            <carousel interval="myInterval" no-wrap="noWrapSlides">
+                <slide ng-repeat="slide in slides" active="slide.active">
+                    <img ng-src="{{slide.image}}" style="margin:auto;max-width:400px;max-height:200px;">
+                    <div class="carousel-caption">
+                    </div>
+                </slide>
+            </carousel>
+            <div style="color:black;font-size:14px;">
+                <div class="col-sm-12 padleft0"><strong>{{PlaceName }}</strong><br></div>
+                <div ng-bind-html="Placeaddress"></div>
+                {{PhoneNo}}
+                <div ng-bind-html="raitingToAppend"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
 
 
