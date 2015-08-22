@@ -402,7 +402,9 @@ option {
 .marginbtm5 {margin-bottom : 5px;
 }
 .tab-content {
-    margin-left:-10%;
+    /*margin-left:-10%;*/
+    margin-left:-13%;
+    margin-right:-24%;
 }
 
 /*  you tube section */
@@ -678,7 +680,7 @@ a{
 {
     cursor:pointer;
     margin-top: 3px !important;
-    padding-right: 17px !important;
+    margin-right: 14px !important;
 }
 .fnt15 {
     font-size:15px;
