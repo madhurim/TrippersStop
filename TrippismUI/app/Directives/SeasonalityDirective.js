@@ -195,13 +195,13 @@
                                         var result = "";
                                         var startdaterange = new Date($filter('date')(this.value, scope.format, null));
                                         var enddaterange = new Date($filter('date')(this.value, scope.format, null));
-                                        enddaterange = enddaterange.setDate(startdaterange.getDate() + 14);
+                                        enddaterange = enddaterange.setDate(startdaterange.getDate() + 13);
                                         startdaterange = $filter('date')(startdaterange, scope.format, null);
                                         enddaterange = $filter('date')(enddaterange, scope.format, null);
 
                                         if ((scope.DepartDate >= startdaterange && scope.DepartDate <= enddaterange) ||
                                            (scope.ReturnDate >= startdaterange && scope.ReturnDate <= enddaterange))
-                                            result = '<span style="font-weight: bold;">'
+                                            result = '<span style="font-weight: bold; font-size:12px">'
                                         else
                                             result = '<span>'
 
