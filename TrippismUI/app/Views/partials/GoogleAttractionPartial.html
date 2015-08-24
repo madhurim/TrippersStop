@@ -13,7 +13,7 @@
 
         </div>
 
-        <div class="modal-body">
+        <div ng-show="!IsMapPopupLoading" class="modal-body">
             <carousel no-wrap="noWrapSlides" class="slidercarsoul">
                 <slide ng-repeat="slide in slides" active="slide.active">
                     <img ng-src="{{slide.image}}" style="margin:auto;max-width:400px;max-height:250px;">

@@ -203,7 +203,7 @@
                                     $scope.slides = [];
                                     $scope.IsMarkerSelected = false;
                                     $scope.IsMapPopupLoading = true;
-
+                                    
                                     $scope.PhoneNo = "";
                                     $scope.raitingToAppend = "";
                                     $scope.PlaceName = "";
@@ -239,7 +239,7 @@
                                             if (place.rating != undefined) {
                                                 $scope.raitingToAppend = $sce.trustAsHtml(getRatings(place.rating));
                                             }
-                                            $scope.IsMapPopupLoading = false;
+                                           $scope.IsMapPopupLoading = false;
                                         }
                                     });
 
@@ -248,7 +248,7 @@
 
                                     $("#" + $scope.googleMapId).css('top', mapheight / 2);
                                     $("#" + $scope.googleMapId).css('left', mapWidth / 2);
-
+                                    
                                     $scope.IsMarkerSelected = true;
                                     
                                     
