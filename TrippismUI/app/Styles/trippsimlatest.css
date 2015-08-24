@@ -553,6 +553,19 @@ text-align:center;
     top: -20px !important;
     height: 60px;
 }
+.sqrloadclass {
+    background-image: url("/app/Styles/images/sqrloading.gif");
+    background-position: 50% 20px;
+    background-repeat: no-repeat;
+    bottom: 0;
+    left: 0;
+    position: relative !important;
+    right: 0;
+    top: -10px !important;
+    height: 60px;
+    
+    
+}
 .messageclass{
     color:#000 !important;
     text-align:center;
@@ -826,3 +839,17 @@ ul li {
     .average-rating-container {
         width: 88px !important;
     }
+
+    .slidercarsoul
+    {
+    background-image: background: rgba(181,217,238,1);
+    background: -moz-linear-gradient(left, rgba(181,217,238,1) 0%, rgba(42,173,229,1) 50%, rgba(190,222,239,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(181,217,238,1)), color-stop(50%, rgba(42,173,229,1)), color-stop(100%, rgba(190,222,239,1)));
+    background: -webkit-linear-gradient(left, rgba(181,217,238,1) 0%, rgba(42,173,229,1) 50%, rgba(190,222,239,1) 100%);
+    background: -o-linear-gradient(left, rgba(181,217,238,1) 0%, rgba(42,173,229,1) 50%, rgba(190,222,239,1) 100%);
+    background: -ms-linear-gradient(left, rgba(181,217,238,1) 0%, rgba(42,173,229,1) 50%, rgba(190,222,239,1) 100%);
+    background: linear-gradient(to right, rgba(181,217,238,1) 0%, rgba(42,173,229,1) 50%, rgba(190,222,239,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5d9ee', endColorstr='#bedeef', GradientType=1 );
+}
+
+   
