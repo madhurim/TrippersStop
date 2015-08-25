@@ -1,39 +1,23 @@
 ﻿<div class="" style="clear:both;" ng-controller="YouTubeController">
     <div id="ytubetabletbody" class="ytubetabletbody" cg-busy=" {promise:youtubepromise,message:'loading videos'}">
-        <div ng-if="youtubeInfoDataFound" style="height:100%;">
+        <div  style="height:100%;">
              <div class="thumbnail thumbnailstyle" style="height:100%;">
                 <table class="table fontsize" style="clear:both; color:black; height:100%;">
                     <tbody style="height:100%;overflow-y:hidden;">
-                        <tr style="text-align:center;">
-                            <td>
-                                <h5>Related Youtube Videos</h5>
-                            </td>
+                        <tr style="text-align:center;"><td><h5>Related Youtube Videos</h5></td>
                         </tr>
                          <tr style="text-align:center;">
                             <td>
-                                <div class="divpagination pagination-centered" ng-show="youtubeData.items.length">
+                                <div class="divpagination pagination-centered" > <!--ng-show="youtubeData.items.length"-->
                                     <ul class="pagination-controle divpagination">
-                                        <li>
-                                            <button type="button" class="btnnextprev" ng-disabled="curPage == 0"
-                                                    ng-click="loadyoutubeInfo(null,prevToken)">
-                                                &lt; PREV
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span>
-                                        </li>
-                                        <li>
-                                            <button type="button" class="btnnextprev"
-                                                    ng-disabled="isdisabled == 0"
-                                                    ng-click="loadyoutubeInfo(nextToken,null)">
-                                                NEXT &gt;
-                                            </button>
-                                        </li>
+                                        <li><button type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)">&lt; PREV</button></li>
+                                        <li><span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span></li>
+                                        <li><button type="button" class="btnnextprev" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)">NEXT &gt;</button></li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
-                        <tr ng-repeat="data in youtubeData.items | limitTo: pageSize " id="container">
+                        <tr  ng-repeat="data in youtubeData.items | limitTo: pageSize " id="container"> <!--ng-if="youtubeInfoDataFound"-->
                             <td width="40%">
                                 <span class="imageclass">
                                     <a ng-click="open(data.id.videoId)" style="cursor:pointer;">
@@ -48,24 +32,11 @@
                         </tr>
                         <tr style="text-align:center;">
                             <td>
-                                <div class="divpagination pagination-centered" ng-show="youtubeData.items.length">
+                                <div class="divpagination pagination-centered" >
                                     <ul class="pagination-controle divpagination">
-                                        <li>
-                                            <button type="button" class="btnnextprev" ng-disabled="curPage == 0"
-                                                    ng-click="loadyoutubeInfo(null,prevToken)">
-                                                &lt; PREV
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span>
-                                        </li>
-                                        <li>
-                                            <button type="button" class="btnnextprev"
-                                                    ng-disabled="isdisabled == 0"
-                                                    ng-click="loadyoutubeInfo(nextToken,null)">
-                                                NEXT &gt;
-                                            </button>
-                                        </li>
+                                        <li><button type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)"> &lt; PREV</button></li>
+                                        <li><span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span></li>
+                                        <li><button type="button" class="btnnextprev" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)"> NEXT &gt;</button></li>
                                     </ul>
                                 </div>
                             </td>

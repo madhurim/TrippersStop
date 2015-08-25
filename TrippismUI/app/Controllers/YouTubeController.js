@@ -15,9 +15,7 @@
                 size: 'lg',
                 resolve: {
                     videoID: function () {
-                        //return $scope.videoID = $sce.trustAsResourceUrl(TrippismConstants.YouTubeEmbedUrl + videoID);
-                        return $scope.videoID = $sce.trustAsResourceUrl("//www.youtube.com/embed/" + videoID);
-                        
+                        return $scope.videoID = $sce.trustAsResourceUrl("//www.youtube.com/embed/" + videoID + "?autoplay=1");
                     }
                 }
             });

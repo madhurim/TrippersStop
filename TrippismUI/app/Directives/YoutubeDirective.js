@@ -29,7 +29,7 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
                 scope.loadyoutubeInfo = function (nextTokenID,prevTokenID) {
                     scope.youtubeInfoLoaded = false;
                     scope.youtubeInfoDataFound = false;
-                    scope.youtubeData = "";
+                   // scope.youtubeData = "";
                     if (scope.youtubeParams != undefined) {
                         var parameters = scope.youtubeParams.DestinationairportName.airport_Lat + "," + scope.youtubeParams.DestinationairportName.airport_Lng;
                         if (nextTokenID != null) {
@@ -46,12 +46,13 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
                         };
 
                         if (scope.youtubeInfoLoaded == false) {
-                            if (scope.youtubeData == "") {
+                           // if (scope.youtubeData == "") {
                                 scope.youtubepromise = YouTubeFactory.youTube(data).then(function (data) {
                                     if (data.status == 404) {
                                         scope.youtubeInfoDataFound = false;
                                         return;
                                     }
+                                    
                                     scope.youtubeData = data;
                                    
                                     if (scope.youtubeData.nextPageToken != null)
@@ -68,7 +69,7 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
 
                                     scope.youtubeInfoDataFound = true;
                                 });
-                            }
+                          //  }
                         }
                         scope.youtubeInfoLoaded = true;
                     }
