@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <div class="col-md-2" ng-show="FareNoDataFound && FareApiLoaded" ng-if="FareforecastData.LowestFare != 'N/A' &&  FareforecastData.LowestFare != 0">
+            <div class="col-md-2" ng-show="FareNoDataFound && FareApiLoaded" ng-if="attractionParams.mapOptions.LowestFare != 'N/A' &&  attractionParams.mapOptions.LowestFare != 0">
                 <div class="social-box facebook">
                     <ul><li><strong>{{attractionParams.mapOptions.CurrencyCode}} {{attractionParams.mapOptions.LowestFare | number : 2}}</strong><span>Lowest Fare</span></li></ul>
                 </div>
