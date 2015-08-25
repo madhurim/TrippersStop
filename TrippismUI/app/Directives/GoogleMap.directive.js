@@ -69,17 +69,29 @@ angular.module('TrippismUIApp')
               var bounds = new google.maps.LatLngBounds();
               $scope.bounds = bounds;
               selected = maps;
-
+             // debugger;
+              //var top10 = maps.sort(function (a, b) { return a.LowestFare < b.LowestFare ? 1 : -1; }).reverse().slice(0, 10);
               for (var x = 0; x < maps.length; x++) {
                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
                   var LowestFarePrice = "N/A";
-
+                  var LowestNonStopeFare = "N/A";
+                  var LowRate = 'N/A';
+                  if (maps[x].LowestNonStopFare != "N/A")
+                  {
+                      LowestNonStopeFare = parseFloat(maps[x].LowestNonStopFare).toFixed(2);
+                      if (LowestNonStopeFare == 0)
+                          LowestNonStopeFare = "N/A";
+                      
+                  }
+                  LowRate = LowestNonStopeFare;
                   if (maps[x].LowestFare != "N/A") {
                       LowestFarePrice = maps[x].LowestFare.toFixed(2);
                       if (LowestFarePrice == 0)
                           LowestFarePrice = "N/A";
                     //  LowestFarePrice = $filter('currency')(LowestFarePrice, maps[x].CurrencyCode + ' ', 0)
                   }
+                  if (LowRate == "N/A")
+                      LowRate = LowestFarePrice;
                   var airportName = _.find($scope.airportlist, function (airport) {
                       return airport.airport_Code == maps[x].DestinationLocation
                   });
@@ -87,7 +99,7 @@ angular.module('TrippismUIApp')
                       position: latlng1,
                       map: $scope.destinationMap,
                       title: airportName.airport_FullName,
-                      labelContent: maps[x].CurrencyCode +' '+LowestFarePrice + ' <br/>' + maps[x].DestinationLocation + ' [ ' + airportName.airport_CityName + ' ]',
+                      labelContent: maps[x].CurrencyCode + ' ' + LowRate + ' <br/>' + maps[x].DestinationLocation + ' [ ' + airportName.airport_CityName + ' ]',
                       labelAnchor: new google.maps.Point(12, 35),
                       labelClass: "labelscolor", // the CSS class for the label
                       labelInBackground: false,

@@ -19,6 +19,11 @@
                     <ul><li><strong>{{attractionParams.mapOptions.CurrencyCode}} {{attractionParams.mapOptions.LowestNonStopFare | number : 2}}</strong><span>Lowest Non Stop Fare</span></li></ul>
                 </div>
             </div>
+            <div class="col-md-2" ng-if="(attractionParams.mapOptions.LowestNonStopFare == 'N/A' || attractionParams.mapOptions.LowestNonStopFare == 0) && attractionParams.mapOptions.LowestFare != 'N/A' &&  attractionParams.mapOptions.LowestFare != 0">
+                <div class="social-box facebook">
+                    <ul><li><strong>{{attractionParams.mapOptions.CurrencyCode}} {{attractionParams.mapOptions.LowestFare | number : 2}}</strong><span>Lowest Non Stop Fare</span></li></ul>
+                </div>
+            </div>
 
             <div class="col-md-2" ng-show="FareNoDataFound && FareApiLoaded" ng-if="attractionParams.mapOptions.LowestFare != 'N/A' &&  attractionParams.mapOptions.LowestFare != 0">
                 <div class="social-box facebook">
