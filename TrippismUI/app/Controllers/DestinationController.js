@@ -310,6 +310,13 @@
             }
         };
 
+        $scope.$watch('Origin',
+                function (oldval, newValue) {
+                    if (newValue != undefined && newValue != "")
+                        $scope.OrigintoDisp = $scope.Origin.toUpperCase();
+                }
+              );
+
         function activate() {
             var search = $location.search();
             var org = search.Origin;
