@@ -305,6 +305,10 @@ option {
     z-index: 15665 !important;
      width: 90% !important;
 }
+
+.logdiv{
+    width: 188px;
+}
 	
 }
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
@@ -369,6 +373,9 @@ option {
     .contry{
     text-align:center;      
     }
+    .logdiv{
+    width: 188px;
+}
     
 }
  

@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 pull-right">
+        <div class="col-lg-2 col-sm-2 col-md-2 pull-right logdiv" style="width:190px;">
             <img height="47" src="../app/Styles/images/Trippismlogo.png" />
             <span style="font-size:9px;clear:both;float:left;font-weight:bolder;padding:0px;">Where your next holiday trip can be!</span>
         </div>
@@ -54,6 +54,12 @@
                 <div class="row destination" ng-show="isSearching" style="background-color: rgba(0, 0, 0, 0.5); transform: translate(0px, 0%);">
                     <form name="frmdestfinder" novalidate>
                         <div aria-labelledby="collapseListGroupHeading1" role="tabpanel" class="panel-collapse collapse in" id="collapseListGroup1" aria-expanded="true" style="">
+                            <div class="row home" style="margin:0px;">
+                                <div class="col-lg-12">
+                                    <h3>Give us your Origin airport and dates of travel , we will suggest you destinations !</h3>
+                                </div>
+
+                            </div>
                             <div class="row" style="margin: 0px;">
                                 <div class="col-lg-12" style="margin-top:5px;" ng-show="hasError && frmdestfinder.$invalid">
                                     <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Origin.$error.required">
@@ -206,21 +212,21 @@
 
                                     <h3>Minimum Fare</h3>
                                     <div class="form-group">
-                                        <div class="input-group">
+                                        <div align="left">
                                             <input min="1" type="number" name="Minfare" class="form-control input" ng-model="Minfare" placeholder="Enter Minfare">
-                                            <div class="input-group-addon">$</div>
+                                            <!--<div class="input-group-addon">$</div>-->
                                         </div>
                                     </div>
 
 
                                 </div>
-                                <div class="col-xs-12 col-sm-6 col-md-3 orgin">
+                                <div class="col-xs-12 col-sm-6 col-md-3 orgin-two">
 
                                     <h3>Maximum  Fare</h3>
                                     <div class="form-group">
-                                        <div class="input-group">
+                                        <div align="left">
                                             <input min="1" type="number" class="form-control input" name="Maxfare" ng-model="Maxfare" placeholder="Enter Maxfare">
-                                            <div class="input-group-addon">$</div>
+                                            <!--<div class="input-group-addon">$</div>-->
                                         </div>
                                     </div>
 
