@@ -101,7 +101,7 @@ TrippismUIApp.directive('tabs', function () {
         '<a href="" ng-click="pane.$parent.tabManager.select($index)">{{pane.title}}</a><i ng-click="pane.$parent.tabManager.removeTab($index);panes.splice($index, 1);" class="fa fa-times-circle close my-close"></i>' +
                 '</li>' +
                 '</ul>' +
-                '<div class="tab-content padtop5" ng-transclude></div>' +
+                '<div class="tab-content padtop5" style="margin-top:15px;" ng-transclude></div>' +
                 '</div>',
         replace: true
     };

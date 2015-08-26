@@ -5,21 +5,26 @@
     <div class="modal-content">
 
 
-        <div class="modal-header head ng-scope" style="padding-bottom: 24px !important;">
+        <div class="modal-header head ng-scope" style="padding-bottom: 15px !important;">
             <button class="close closebutton" ng-click="cancel()" type="button">×</button>
         </div>
 
         <div ng-show="IsMapPopupLoading" class="sqrloadclass" style="padding-top:10px;padding-bottom:0px;">
         </div>
         <div class="modal-body" ng-show="!IsMapPopupLoading">
-            <carousel no-wrap="noWrapSlides" class="slidercarsoul">
-                <slide ng-repeat="slide in slides" active="slide.active">
-                    <img ng-src="{{slide.image}}" style="margin:auto;max-width:400px;max-height:250px;">
-                    <div class="carousel-caption">
-                    </div>
-                </slide>
-            </carousel>
-            <div style="color:black;font-size:14px;">
+            <div style="height:235px;overflow:auto;" ng-if="slides.length == 0">
+                <img height="235" width="360" src="../app/Styles/images/noimageavailable.png">
+            </div>
+            <div style="height:235px;overflow:auto;" ng-if="slides.length > 0">
+                <carousel no-wrap="noWrapSlides" class="slidercarsoul">
+                    <slide ng-repeat="slide in slides" active="slide.active">
+                        <img ng-src="{{slide.image}}" style="margin:auto;max-width:400px;max-height:250px;">
+                        <div class="carousel-caption">
+                        </div>
+                    </slide>
+                </carousel>
+            </div>
+            <div style="color:black;font-size:14px;height:105px;">
                 <div class="col-sm-12 padleft0"><strong>{{PlaceName }}</strong><br></div>
                 <div style="word-wrap:break-word;" ng-bind-html="Placeaddress"></div>
                 {{PhoneNo}}
