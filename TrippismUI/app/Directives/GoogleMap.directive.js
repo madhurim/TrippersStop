@@ -69,8 +69,8 @@ angular.module('TrippismUIApp')
               var bounds = new google.maps.LatLngBounds();
               $scope.bounds = bounds;
               selected = maps;
-             // debugger;
-              //var top10 = maps.sort(function (a, b) { return a.LowestFare < b.LowestFare ? 1 : -1; }).reverse().slice(0, 10);
+            // debugger;
+           //   var maps = maps.sort(function (a, b) {  return ((a.LowestNonStopFare != "N/A" || a.LowestNonStopFare != 0) ? parseFloat(a.LowestNonStopFare) : a.LowestFare) < ((a.LowestNonStopFare != "N/A" || a.LowestNonStopFare != 0) ?  parseFloat(a.LowestNonStopFare) : a.LowestFare) ? 1 : -1;  }).reverse().slice(0, 1000);
               for (var x = 0; x < maps.length; x++) {
                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
                   var LowestFarePrice = "N/A";

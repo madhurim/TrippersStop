@@ -326,9 +326,18 @@
             $scope.formats = Dateformat();
             $scope.format = $scope.formats[5];
             var basicDetinationDetlist = $scope.seasonalityData.DestinationList;
+
+            var basicDetinationDetlist = _.filter(basicDetinationDetlist, function (item) {
+                return item.LowestNonStopFare !== 'N/A';
+            });
+            var basicDetinationDetlist = basicDetinationDetlist.sort(function (a, b) { return (parseFloat(a.LowestNonStopFare) < parseFloat(b.LowestNonStopFare)) ? 1 : -1; }).reverse().slice(0, 20);
+            //basicDetinationDetlist = basicDetinationDetlist.sort(function (a, b) { return ((a.LowestNonStopFare != "N/A" || a.LowestNonStopFare != 0) ? parseFloat(a.LowestNonStopFare) : a.LowestFare) < ((a.LowestNonStopFare != "N/A" || a.LowestNonStopFare != 0) ? parseFloat(a.LowestNonStopFare) : a.LowestFare) ? 1 : -1; }).reverse().slice(0, 20);
             var airportlist = $scope.seasonalityData.AvailableAirports;
             var OriginairportName = _.find(airportlist, function (airport) {
                 return airport.airport_Code == $scope.seasonalityData.OriginairportName.airport_Code.toUpperCase()
+            });
+            var destinationfareinfo = _.find($scope.seasonalityData.DestinationList, function (Destination) {
+                return Destination.DestinationLocation == $scope.seasonalityData.DestinationairportName.airport_Code.toUpperCase()
             });
             //var FareData = $scope.$parent.FareforecastData;
             var FareData = $scope.seasonalityData.dataforEmail.FareForecastDataForEmail;
@@ -337,7 +346,7 @@
                 return item.LowestFare !== 'N/A';
             });
             sortedObjs = _(sortedObjs).sortBy(function (obj) { return parseInt(obj.LowestFare, 10) })
-
+            debugger;
             var contentString = '<div style="font-family: arial,sans-serif;color: black;">' +
                            '<p>Hi,</p><p>I got following from <a href="www.trippism.com">www.trippism.com</a></p><p>From our orgin <strong>' + OriginairportName.airport_CityName + '</strong> during ' + $filter('date')(sortedObjs[0].DepartureDateTime, $scope.format, null) + ' to ' + $filter('date')(sortedObjs[0].ReturnDateTime, $scope.format, null) + ' , we have following options to fly.</p>' +
                           '<table class="table" style="color: #333;font-family: Helvetica, Arial, sans-serif;width:90%%; border-collapse:collapse; border-spacing: 0;"><tr><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Destination</th><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Lowest Fare</th><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Lowest Non Stop Fare</th></tr>';
@@ -370,6 +379,11 @@
                     LowestFare = FareData.LowestFare;
                 if (FareData.CurrencyCode != undefined)
                     CurrencyCode = FareData.CurrencyCode;
+            }
+            if ((LowestFare == "N/A" || LowestFare == 0) && destinationfareinfo.LowestFare != "N/A") {
+                LowestFare = destinationfareinfo.LowestFare.toFixed(2)
+                CurrencyCode = destinationfareinfo.CurrencyCode;
+
             }
 
             if ($scope.seasonalityData.mapOptions != undefined) {
