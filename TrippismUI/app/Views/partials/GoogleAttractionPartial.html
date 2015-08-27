@@ -5,13 +5,13 @@
     <div class="modal-content">
 
 
-        <div class="modal-header head ng-scope" style="padding-bottom: 15px !important;">
+        <div class="modal-header head ng-scope" style="padding-bottom: 24px !important;">
             <button class="close closebutton" ng-click="cancel()" type="button">×</button>
         </div>
 
         <div ng-show="IsMapPopupLoading" class="sqrloadclass" style="padding-top:10px;padding-bottom:0px;">
         </div>
-        <div class="modal-body" ng-show="!IsMapPopupLoading">
+        <div class="modal-body" style="padding-top:5px;" ng-show="!IsMapPopupLoading">
             <div style="height:235px;overflow:auto;" ng-if="slides.length == 0">
                 <img height="235" width="360" src="../app/Styles/images/noimageavailable.png">
             </div>
