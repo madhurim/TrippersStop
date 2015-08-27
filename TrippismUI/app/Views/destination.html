@@ -16,15 +16,17 @@
         </div>
 
         <div class="col-lg-9" ng-if="tabManager.tabItems.length > 0">
-            <div tabs>
-                <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
-                    <attraction-tab tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
+            <div  tabs>
+                <div  ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
+                    <attraction-tab  tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 col-sm-2 col-md-2 pull-right logdiv" style="width:190px;">
-            <img height="47" src="../app/Styles/images/Trippismlogo.png" />
-            <span style="font-size:9px;clear:both;float:left;font-weight:bolder;padding:0px;">Where your next holiday trip can be!</span>
+        <div class="col-lg-2 col-sm-2 col-md-2 pull-right logdiv" style="width: 210px;">
+           <!-- <img height="47" src="../app/Styles/images/Trippismlogo.png" style="background-color:darkslategrey"  />-->
+            <span style="font-size:30px;color:black;">Trippism</span>
+            <span style="font-size:10px;clear:both;float:left;font-weight:bolder;color:black;padding:0px;">Alpha version</span>
+            
         </div>
     </div>
 
