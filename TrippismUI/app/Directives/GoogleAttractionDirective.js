@@ -61,7 +61,7 @@
                     });
                 }
 
-
+                 
 
                 $timeout(function () {
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
@@ -206,7 +206,7 @@
                             google.maps.event.addListener(marker, 'mouseover', (function (marker, MapDet, x, contentString, $compile, infowindow, $scope) {
                                 return function () {
                                     $scope.slides = [];
-                                    //$scope.IsMarkerSelected = false;
+                                    $scope.IsMarkerSelected = false;
                                     $scope.IsMapPopupLoading = true;
                                     $scope.PhoneNo = "";
                                     $scope.raitingToAppend = "";
