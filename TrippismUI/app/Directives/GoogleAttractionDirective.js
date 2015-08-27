@@ -460,7 +460,10 @@
                 //};
 
                 $scope.addSlides = function (photos) {
-                    $scope.slides.push(photos);
+                    for (var photoidex = 0; photoidex < photos.length; photoidex++) {
+                        $scope.slides.push(photos[photoidex]);
+                    }
+                    //$scope.slides.push(photos);
                     $scope.$apply();
                 };
                 $scope.SelectedPlaceId = "";
@@ -518,12 +521,12 @@
                                                 for (var photoidx = 0; photoidx < place.photos.length; photoidx++) {
                                                     var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 400, 'maxHeight': 250 });
                                                     var objtopush = { image: Imgsrc, text: "" };
-                                                    // photos.push(objtopush);
-                                                    $scope.addSlides(objtopush);
+                                                    photos.push(objtopush);
+                                                    //$scope.addSlides(objtopush);
                                                     //$scope.addSlides(MapDet.place_id , objtopush);
                                                     
                                                 }
-                                                //$scope.addSlides(photos);
+                                                $scope.addSlides(photos);
                                             }
                                             $scope.PlaceName = MapDet.name;
                                             $scope.Placeaddress = $sce.trustAsHtml(place.adr_address);
