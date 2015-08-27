@@ -3,15 +3,12 @@
 </div>
 <div ng-show="IsMarkerSelected" id={{googleMapId}} class="popupmarker" style="width: 400px;  min-height:300px;  z-index: 999;">
     <div class="modal-content">
-
-
         <div class="modal-header head ng-scope" style="padding-bottom: 24px !important;">
-            <button class="close closebutton" ng-click="cancel()" type="button">×</button>
+            <button class="close closebutton" style="margin-top:2px !important;" ng-click="cancel()" type="button">×</button>
         </div>
-
         <div ng-show="IsMapPopupLoading" class="sqrloadclass" style="padding-top:10px;padding-bottom:0px;">
         </div>
-        <div class="modal-body" style="padding-top:5px;" ng-show="!IsMapPopupLoading">
+        <div class="modal-body" style="padding-top:0px;" ng-show="!IsMapPopupLoading">
             <div style="height:235px;overflow:auto;" ng-if="slides.length == 0">
                 <img height="235" width="360" src="../app/Styles/images/noimageavailable.png">
             </div>
@@ -24,6 +21,7 @@
                     </slide>
                 </carousel>
             </div>
+
             <div style="color:black;font-size:14px;height:105px;">
                 <div class="col-sm-12 padleft0"><strong>{{PlaceName }}</strong><br></div>
                 <div style="word-wrap:break-word;" ng-bind-html="Placeaddress"></div>

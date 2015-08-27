@@ -410,21 +410,7 @@
                     }
                 };
 
-                $scope.noWrapSlides = false;
-                var slides = [];
-                $scope.slides = [];
-                //$scope.addSlides = function (i, photos) {
-                //    $scope.slides[i] = new Array();
-                //    for (var photoidex = 0; photoidex < photos.length; photoidex++)
-                //        $scope.slides[i].push(photos[photoidex]);
-                //};
-                $scope.addSlides = function (photos) {
-                    for (var photoidex = 0; photoidex < photos.length; photoidex++) {
-                        $scope.slides.push(photos[photoidex]);
-                    }
-                    $scope.$apply();
-                };
-
+              
                 $scope.cancel = function () {
                     $scope.IsMarkerSelected = false;
                 };
@@ -461,7 +447,23 @@
                 $scope.IsMapPopupLoading = false;
                 $scope.noWrapSlides = false;
 
+                var slides = [];
+                $scope.slides = [];
+                
+                //$scope.addSlides = function (id, photos) {
+                //    debugger;
+                //    if($scope.slides[id] == undefined)
+                //        $scope.slides[id] = new Array();
 
+                //    $scope.slides[id].push(photos);
+                //    $scope.$apply();
+                //};
+
+                $scope.addSlides = function (photos) {
+                    $scope.slides.push(photos);
+                    $scope.$apply();
+                };
+                $scope.SelectedPlaceId = "";
                 function RenderMap(maps) {
                     if (maps != undefined && maps.length > 0) {
                         $scope.InfoWindow;
@@ -489,9 +491,7 @@
                             });
 
                             $scope.bounds.extend(marker.position);
-
                             var contentString = "";
-
                             $scope.InfoWindow = new google.maps.InfoWindow();
 
                             var MapDet = maps[x];
@@ -507,6 +507,7 @@
 
                                     var service = new google.maps.places.PlacesService($scope.googleattractionsMap);
                                     var request = { placeId: MapDet.place_id };
+                                    $scope.SelectedPlaceId = MapDet.place_id;
                                     service.getDetails(request, function (place, status) {
                                         $scope.IsMapPopupLoading = false;
                                         if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -517,20 +518,22 @@
                                                 for (var photoidx = 0; photoidx < place.photos.length; photoidx++) {
                                                     var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 400, 'maxHeight': 250 });
                                                     var objtopush = { image: Imgsrc, text: "" };
-                                                    photos.push(objtopush);
+                                                    // photos.push(objtopush);
+                                                    $scope.addSlides(objtopush);
+                                                    //$scope.addSlides(MapDet.place_id , objtopush);
+                                                    
                                                 }
-                                                $scope.addSlides(photos);
+                                                //$scope.addSlides(photos);
                                             }
-
                                             $scope.PlaceName = MapDet.name;
                                             $scope.Placeaddress = $sce.trustAsHtml(place.adr_address);
                                             if (place.formatted_phone_number != undefined)
                                                 $scope.PhoneNo = place.formatted_phone_number;
 
                                             $scope.raitingToAppend = "";
-                                            if (place.rating != undefined) {
+                                            if (place.rating != undefined) 
                                                 $scope.raitingToAppend = $sce.trustAsHtml(getRatings(place.rating));
-                                            }
+                                            
                                             $scope.IsMapPopupLoading = false;
 
                                         }
@@ -544,6 +547,7 @@
                                     $("#" + $scope.googleMapId).css('left', mapWidth / 2);
 
                                     $scope.IsMarkerSelected = true;
+                                    return;
                                 };
                             })(marker, MapDet, x, contentString, $compile, $scope.InfoWindow, $scope));
                             $scope.AttractionMarkers.push(marker);
