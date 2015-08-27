@@ -345,10 +345,17 @@
             var sortedObjs = _.filter(basicDetinationDetlist, function (item) {
                 return item.LowestFare !== 'N/A';
             });
-            sortedObjs = _(sortedObjs).sortBy(function (obj) { return parseInt(obj.LowestFare, 10) })
-            debugger;
+            sortedObjs = _(sortedObjs).sortBy(function (obj) { return parseInt(obj.LowestFare, 10) });
+
+            var FromDate = ConvertToRequiredDate($scope.seasonalityData.Fareforecastdata.DepartureDate, 'API');
+            var ToDate = ConvertToRequiredDate($scope.seasonalityData.Fareforecastdata.ReturnDate, 'API');
+            var OriginName = $scope.seasonalityData.OriginairportName.airport_CityCode.toUpperCase();
+            var url = 'http://' + window.document.location.host;
+            var tripissm_rdrURL = '<a href="' + url + '/#/destination?Origin=' + OriginName + '&DepartureDate=' + FromDate + '&ReturnDate=' + ToDate + '">www.trippism.com</a>';
+
+            
             var contentString = '<div style="font-family: arial,sans-serif;color: black;">' +
-                           '<p>Hi,</p><p>I got following from <a href="www.trippism.com">www.trippism.com</a></p><p>From our orgin <strong>' + OriginairportName.airport_CityName + '</strong> during ' + $filter('date')(sortedObjs[0].DepartureDateTime, $scope.format, null) + ' to ' + $filter('date')(sortedObjs[0].ReturnDateTime, $scope.format, null) + ' , we have following options to fly.</p>' +
+                           '<p>Hi,</p><p>I got following from ' + tripissm_rdrURL + '</p><p>From our orgin <strong>' + OriginairportName.airport_CityName + '</strong> during ' + $filter('date')(sortedObjs[0].DepartureDateTime, $scope.format, null) + ' to ' + $filter('date')(sortedObjs[0].ReturnDateTime, $scope.format, null) + ' , we have following options to fly.</p>' +
                           '<table class="table" style="color: #333;font-family: Helvetica, Arial, sans-serif;width:90%%; border-collapse:collapse; border-spacing: 0;"><tr><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Destination</th><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Lowest Fare</th><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Lowest Non Stop Fare</th></tr>';
 
             var MarkersString = '';
@@ -547,12 +554,12 @@
 
             //contentString += FareRangeHTML;
 
-            contentString += ' <p style="clear:both;padding-top:20px;">Please explore <a href="www.trippism.com">www.trippism.com</a> for more details to plan vacation, trip.</p><p>Thanks,</p><p>via Trippism - new generation trip planner!</p></div>';
+            contentString += ' <p style="clear:both;padding-top:20px;">Please explore ' + tripissm_rdrURL + ' for more details to plan vacation, trip.</p><p>Thanks,</p><p>via Trippism - new generation trip planner!</p></div>';
 
-            var FromDate = ConvertToRequiredDate($scope.seasonalityData.Fareforecastdata.DepartureDate, 'API');
-            var ToDate = ConvertToRequiredDate($scope.seasonalityData.Fareforecastdata.ReturnDate, 'API');
-            var OriginName = $scope.seasonalityData.OriginairportName.airport_CityCode.toUpperCase();
-            var url = 'http://' + window.document.location.host;
+            //var FromDate = ConvertToRequiredDate($scope.seasonalityData.Fareforecastdata.DepartureDate, 'API');
+            //var ToDate = ConvertToRequiredDate($scope.seasonalityData.Fareforecastdata.ReturnDate, 'API');
+            //var OriginName = $scope.seasonalityData.OriginairportName.airport_CityCode.toUpperCase();
+            //var url = 'http://' + window.document.location.host;
             var rdrURL = '<a href="' + url + '/#/destination?Origin=' + OriginName + '&DepartureDate=' + FromDate + '&ReturnDate=' + ToDate + '">';
             contentString += rdrURL + '<img src="https://maps.googleapis.com/maps/api/staticmap?zoom=2&size=800x500&maptype=roadmap&' + MarkersString + '" /></a>';
 
