@@ -214,8 +214,10 @@
     <Compile Include="APIExtention\ControllerSelector\AreaHttpControllerSelector .cs" />
     <Compile Include="APIExtention\Filters\ExceptionFilterAttribute.cs" />
     <Compile Include="APIExtention\Filters\GZipCompressionAttribute.cs" />
+    <Compile Include="APIExtention\Filters\ServiceStackFormatterConfigAttribute.cs" />
     <Compile Include="APIExtention\Filters\TrippismCache.cs" />
     <Compile Include="APIExtention\Filters\ValidateModelAttribute.cs" />
+    <Compile Include="APIExtention\MediaTypeFormatter\ServiceStackTextFormatter.cs" />
     <Compile Include="APIHelper\ApiHelper.cs" />
     <Compile Include="APIHelper\CompressedContent.cs" />
     <Compile Include="APIHelper\MailgunEmail.cs" />
