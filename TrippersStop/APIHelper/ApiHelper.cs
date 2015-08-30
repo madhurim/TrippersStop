@@ -18,17 +18,22 @@ namespace TrippismApi
             if (string.IsNullOrWhiteSpace(apiCaller.LongTermToken))
             {
                 apiCaller.LongTermToken = apiCaller.GetToken().Result;
-            }
+                SaveTokenInCache(apiCaller, cacheService);
+            }       
+            apiCaller.Authorization = "bearer";
+            apiCaller.ContentType = "application/json";
+        }
+
+        private static void SaveTokenInCache(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
+        {
             double expireTimeInSec;
             if (!string.IsNullOrWhiteSpace(apiCaller.TokenExpireIn) && double.TryParse(apiCaller.TokenExpireIn, out expireTimeInSec))
             {
                 cacheService.Save<string>(apiCaller.SabreTokenKey, apiCaller.LongTermToken, expireTimeInSec / 60);
                 cacheService.Save<string>(apiCaller.SabreTokenExpireKey, apiCaller.TokenExpireIn, expireTimeInSec / 60);
             }
-
-            apiCaller.Authorization = "bearer";
-            apiCaller.ContentType = "application/json";
         }
+
 
         public static void RefreshApiToken(ICacheService _cacheService, IAsyncSabreAPICaller _apiCaller)
         {

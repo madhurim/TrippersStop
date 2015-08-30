@@ -12,6 +12,7 @@ using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using TraveLayer.CacheServices;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Weather;
@@ -37,8 +38,15 @@ namespace TrippismApi
             //JsConfig.EmitLowercaseUnderscoreNames = true;
             var container = new Container();
             container.RegisterWebApiRequest<IAsyncSabreAPICaller, SabreAPICaller>();
-            container.RegisterWebApiRequest<IAsyncWeatherAPICaller, WeatherAPICaller>();          
-            container.RegisterWebApiRequest<ICacheService, RedisService>();
+            container.RegisterWebApiRequest<IAsyncWeatherAPICaller, WeatherAPICaller>();
+            if(IsRedisAvailable())
+            {
+                container.RegisterWebApiRequest<ICacheService, RedisService>();
+            }
+            else
+            {
+                   container.RegisterWebApiRequest<ICacheService, MemoryCacheService>();
+            }         
             container.RegisterWebApiRequest<IDBService, MongoService>();
             container.RegisterWebApiRequest<IAsyncGoogleAPICaller, GoogleAPICaller>();
             container.RegisterWebApiRequest<IAsyncYouTubeAPICaller, YouTubeAPICaller>();
@@ -52,6 +60,14 @@ namespace TrippismApi
             RegisterMappingEntities();
             //GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
            // GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
+        }
+
+        private bool IsRedisAvailable()
+        {
+            bool isRedisAvailable = true;
+            RedisService redisService =new RedisService();
+            isRedisAvailable=redisService.Save<string>("Test","Test");
+            return isRedisAvailable;
         }
 
         private void RegisterMappingEntities()
