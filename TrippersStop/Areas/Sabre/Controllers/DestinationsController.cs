@@ -27,6 +27,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
     /// Return the current nonstop lead fare and an overall lead fare available to destinations
     /// </summary>
     [GZipCompressionFilter]
+    [ServiceStackFormatterConfigAttribute]
     public class DestinationsController : ApiController
     {
 
