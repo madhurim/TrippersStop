@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Web;
-using TrippersStop.TraveLayer;
+using TrippismApi.TraveLayer;
 using ServiceStack.Text;
 using ServiceStack.Redis;
 using System.Web.Configuration;
@@ -13,7 +13,7 @@ using TraveLayer.CustomTypes.Sabre.Response;
 using System.Net;
 
 
-namespace TrippersStop.TraveLayer
+namespace TrippismApi.TraveLayer
 {
     public class SabreAPICaller : IAsyncSabreAPICaller
     {
@@ -42,7 +42,7 @@ namespace TrippersStop.TraveLayer
         {
             get
             {
-                return "Trippersstop.SabreToken";
+                return "TrippismApi.SabreToken";
             }
         }
 
@@ -50,7 +50,7 @@ namespace TrippersStop.TraveLayer
         {
             get
             {
-                return "Trippersstop.SabreToken.ExpireIn";
+                return "TrippismApi.SabreToken.ExpireIn";
             }
         }
         
@@ -208,8 +208,8 @@ namespace TrippersStop.TraveLayer
 
         public async Task<APIResponse> Get(string Method)
         {
-            const string statusComplete = "Complete";
-            const string statusMessage = "No results were found";
+            //const string statusComplete = "Complete";
+            //const string statusMessage = "No results were found";
             using (var client = new HttpClient())
             {   
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_Accept));
@@ -228,8 +228,8 @@ namespace TrippersStop.TraveLayer
                     string status = error.Get<string>("status");
                     string errorMessage = error.Get<string>("message");
                     string responseMessage = string.Join(" ", errorType, errorDescription, errorMessage).Trim();
-                    if (status == statusComplete && message == statusMessage)
-                        return new APIResponse { StatusCode = HttpStatusCode.OK, Response =string.Empty};
+                    //if (status == statusComplete && message == statusMessage)
+                    //    return new APIResponse { StatusCode = HttpStatusCode.OK, Response =string.Empty};
                     return new APIResponse { StatusCode = sabreResponse.StatusCode, Response = responseMessage };
                 }
                

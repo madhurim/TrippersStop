@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TraveLayer.APIServices;
 using TraveLayer.CustomTypes;
 using TraveLayer.CustomTypes.Sabre;
-using TrippersStop.TraveLayer;
+using TrippismApi.TraveLayer;
 using TraveLayer.CustomTypes.Sabre.Response;
 
 
-namespace TrippersStop.Tests.SabreAPITests
+namespace TrippismApi.Tests.SabreAPITests
 {
      [TestClass]
     public class MultiAirportCityLookup

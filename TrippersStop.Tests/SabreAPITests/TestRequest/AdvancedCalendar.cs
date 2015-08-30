@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TraveLayer.CustomTypes.Sabre;
-using TrippersStop.TraveLayer;
+using TrippismApi.TraveLayer;
 using TraveLayer.CustomTypes.Sabre.Response;
 
-namespace TrippersStop.Tests.SabreAPITests.TestRequest
+namespace TrippismApi.Tests.SabreAPITests.TestRequest
 {
     class AdvancedCalendar
     {

@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{B01EA087-5828-4FFE-9226-1BC14884F180}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="app\app.js" />
+    <Content Include="app\Constants\UIConstants.js" />
+    <Content Include="app\Controllers\DestinationController.js" />
+    <Content Include="app\Controllers\EmailForDestinationDetController.js" />
+    <Content Include="app\Controllers\LandingPageController.js" />
+    <Content Include="app\Controllers\MarkerPhotoSliderController.js" />
+    <Content Include="app\Controllers\YouTubeController.js" />
+    <Content Include="app\Directives\AttractionTabDirective.js" />
+    <Content Include="app\Directives\AttractiontabFareForecastDirective.js" />
+    <Content Include="app\Directives\AverageStarRatingDirective.js" />
+    <Content Include="app\Directives\GoogleAttractionDirective.js" />
+    <Content Include="app\Directives\WetherApiDirective.js" />
+    <Content Include="app\Directives\FareRangeDirective.js" />
+    <Content Include="app\Directives\GoogleMap.directive.js" />
+    <Content Include="app\Directives\SeasonalityDirective.js" />
+    <Content Include="app\Directives\YoutubeDirective.js" />
+    <Content Include="app\Factory\DestinationFactory.js" />
+    <Content Include="app\Factory\EmailForDestinationDetFactory.js" />
+    <Content Include="app\Factory\FareforecastFactory.js" />
+    <Content Include="app\Factory\GoogleAttractionFactory.js" />
+    <Content Include="app\Factory\WeatherFactory.js" />
+    <Content Include="app\Factory\FareRangeFactory.js" />
+    <Content Include="app\Factory\SeasonalityFactory.js" />
+    <Content Include="app\Factory\UtilFactory.js" />
+    <Content Include="app\Factory\YouTubeFactory.js" />
+    <Content Include="app\Module\angular-youtube-embed.js" />
+    <Content Include="app\Scripts\common.js" />
+    <Content Include="app\Scripts\exporting.js" />
+    <Content Include="app\Scripts\highcharts-more.js" />
+    <Content Include="app\Scripts\highcharts.js" />
+    <Content Include="app\Scripts\jquery-1.9.1.js" />
+    <Content Include="app\Scripts\libs\angular-busy.js" />
+    <Content Include="app\Scripts\libs\angular-busy.min.js" />
+    <Content Include="app\Scripts\libs\event.js" />
+    <Content Include="app\Scripts\libs\Loader.js" />
+    <Content Include="app\Scripts\libs\promise-tracker-http-interceptor.js" />
+    <Content Include="app\Scripts\libs\promise-tracker.js" />
+    <Content Include="app\Scripts\libs\ui-map.js" />
+    <Content Include="app\Scripts\libs\ui-map.min.js" />
+    <Content Include="app\Styles\bootstrap.css" />
+    <Content Include="app\Styles\bootstrap.min.css" />
+    <Content Include="app\Styles\css\font-awesome.css" />
+    <Content Include="app\Styles\css\style.css" />
+    <Content Include="app\Styles\css\trippismapp.css" />
+    <Content Include="app\Styles\css\icon_top.png" />
+    <Content Include="app\Styles\images\adsection_1.jpg" />
+    <Content Include="app\Styles\images\adsection_2.jpg" />
+    <Content Include="app\Styles\images\busy.gif" />
+    <Content Include="app\Styles\images\circle-info.png" />
+    <Content Include="app\Styles\images\hor-loading.png" />
+    <Content Include="app\Styles\images\loader.gif" />
+    <Content Include="app\Styles\images\noimageavailable.png" />
+    <Content Include="app\Styles\images\thumbs_up.png" />
+    <Content Include="app\Styles\images\time.png" />
+    <Content Include="app\Styles\images\Trippismlogo.png" />
+    <Content Include="app\Styles\trippsimlatest.css" />
+    <Content Include="app\Utility.js" />
+    <Content Include="app\Views\GoogleMap.html" />
+    <Content Include="app\Views\destination.html" />
+    <Content Include="app\Scripts\angular-mocks.js" />
+    <Content Include="app\Scripts\angular-ui-router.js" />
+    <Content Include="app\Scripts\angular-ui-router.min.js" />
+    <Content Include="app\Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="app\Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="app\Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="app\Scripts\angular-ui\ui-bootstrap.min.js" />
+    <Content Include="app\Scripts\angular.js" />
+    <Content Include="app\Scripts\angular.min.js" />
+    <Content Include="app\Scripts\libs\underscore.js" />
+    <Content Include="app\Scripts\libs\underscore.min.js" />
+    <Content Include="app\Styles\css\angular-block-ui.css" />
+    <Content Include="app\Styles\css\angular-block-ui.min.css" />
+    <Content Include="app\Scripts\libs\angular-block-ui.js" />
+    <Content Include="app\Scripts\libs\angular-block-ui.min.js" />
+    <Content Include="app\Styles\alertifyjs\alertify.css" />
+    <Content Include="app\Styles\alertifyjs\alertify.min.css" />
+    <Content Include="app\Styles\alertifyjs\alertify.rtl.css" />
+    <Content Include="app\Styles\alertifyjs\alertify.rtl.min.css" />
+    <Content Include="app\Styles\alertifyjs\themes\bootstrap.css" />
+    <Content Include="app\Styles\alertifyjs\themes\bootstrap.min.css" />
+    <Content Include="app\Styles\alertifyjs\themes\bootstrap.rtl.css" />
+    <Content Include="app\Styles\alertifyjs\themes\bootstrap.rtl.min.css" />
+    <Content Include="app\Styles\alertifyjs\themes\default.css" />
+    <Content Include="app\Styles\alertifyjs\themes\default.min.css" />
+    <Content Include="app\Styles\alertifyjs\themes\default.rtl.css" />
+    <Content Include="app\Styles\alertifyjs\themes\default.rtl.min.css" />
+    <Content Include="app\Styles\alertifyjs\themes\semantic.css" />
+    <Content Include="app\Styles\alertifyjs\themes\semantic.min.css" />
+    <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.css" />
+    <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.min.css" />
+    <Content Include="app\Views\partials\AttractiontabFareForecastPartial.html" />
+    <Content Include="app\Views\partials\AttractionTabPartial.html" />
+    <Content Include="app\Views\partials\avarageStarRatingPartial.html" />
+    <Content Include="app\Views\partials\cgbusyMessagePartial.html" />
+    <Content Include="app\Views\partials\EmailDetFormPartial.html" />
+    <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
+    <Content Include="app\Views\partials\MarkerPhotoSlider.html" />
+    <Content Include="app\Views\partials\WeatherPartial.html" />
+    <Content Include="app\Views\partials\FareRangePartial.html" />
+    <Content Include="app\Views\partials\SeasonalityPartial.html" />
+    <Content Include="app\Views\partials\YoutubePartial.html" />
+    <Content Include="app\Styles\css\angular-busy.css" />
+    <Content Include="app\Styles\css\angular-busy.min.css" />
+    <Content Include="index.html" />
+    <Content Include="app\Scripts\alertify\alertify.js" />
+    <Content Include="app\Scripts\alertify\alertify.min.js" />
+    <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\Scripts\angular.min.js.map" />
+    <Content Include="packages.config" />
+    <Content Include="app\Styles\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="app\Styles\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="app\Styles\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="app\Styles\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="app\Styles\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="app\Scripts\libs\underscore.min.map" />
+    <Content Include="app\Scripts\libs\angular-block-ui.min.js.map" />
+    <Content Include="app\Scripts\libs\angular-block-ui.js.map" />
+    <Content Include="app\Styles\css\angular-block-ui.css.map" />
+    <Content Include="app\Constants\iataairports.json" />
+    <Content Include="app\Constants\countries.json" />
+    <Content Include="app\Constants\cities.json" />
+    <Content Include="app\Constants\airports.json" />
+    <Content Include="app\Constants\State.json" />
+    <Content Include="app\Styles\fonts\fontawesome-webfont.eot" />
+    <Content Include="app\Styles\fonts\fontawesome-webfont.ttf" />
+    <Content Include="app\Styles\fonts\fontawesome-webfont.woff" />
+    <Content Include="app\Styles\fonts\fontawesome-webfont.woff2" />
+    <Content Include="app\Styles\fonts\FontAwesome.otf" />
+    <None Include="Trippism.pubxml" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\" />
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>TrippismUI</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1299</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1299/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets')" />
+</Project>

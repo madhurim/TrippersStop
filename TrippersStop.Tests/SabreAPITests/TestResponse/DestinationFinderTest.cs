@@ -1,20 +1,19 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TrippersStop.TraveLayer;
+using TrippismApi.TraveLayer;
 using System.Threading.Tasks;
 using TraveLayer.CustomTypes.Sabre;
 using System.Collections.Generic;
 using Moq;
-using TraveLayer.APIServices;
 using TraveLayer.CustomTypes;
-using TrippersStop.Areas.Sabre.Controllers;
+using TrippismApi.Areas.Sabre.Controllers;
 using System.Net.Http;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using System.Web.Http;
 using System.Web.Http.Hosting;
 using System.Net;
 
-namespace TrippersStop.Tests.SabreAPITests
+namespace TrippismApi.Tests.SabreAPITests
 {
     [TestClass]
     public class DestinationFinderTest
@@ -29,7 +28,8 @@ namespace TrippersStop.Tests.SabreAPITests
 
             IAsyncSabreAPICaller apiCaller = new SabreAPICaller();
             ICacheService dbService = new RedisService();
-            var controller = new DestinationsController(apiCaller, dbService);
+            IAsyncWeatherAPICaller weatherApiCaller=new  WeatherAPICaller();
+            var controller = new DestinationsController(apiCaller, weatherApiCaller,dbService);
             controller.Request = new HttpRequestMessage();
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             // Act
@@ -54,7 +54,8 @@ namespace TrippersStop.Tests.SabreAPITests
             // Arrange
             IAsyncSabreAPICaller apiCaller = new SabreAPICaller();
             ICacheService dbService = new RedisService();
-            var controller = new DestinationsController(apiCaller, dbService);
+            IAsyncWeatherAPICaller weatherApiCaller = new WeatherAPICaller();
+            var controller = new DestinationsController(apiCaller,weatherApiCaller, dbService);
             controller.Request = new HttpRequestMessage();
             //controller.Request.SetConfiguration(new HttpConfiguration());
             controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());

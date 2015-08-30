@@ -1,0 +1,57 @@
+﻿<div class="" style="clear:both;" ng-controller="YouTubeController">
+    <div id="ytubetabletbody" class="ytubetabletbody" cg-busy=" {promise:youtubepromise,message:'loading videos'}">
+        <div  style="height:100%;">
+             <div class="thumbnail thumbnailstyle" style="height:100%;">
+                <table class="table fontsize" style="clear:both; color:black; height:100%;">
+                    <tbody style="height:100%;overflow-y:hidden;">
+                        <tr style="text-align:center;"><td><h5>[ {{youtubeParams.Destinatrion}} ] attraction videos in 150 kms radius</h5></td>
+                        </tr>
+                         <tr style="text-align:center;">
+                            <td>
+                                <div class="divpagination pagination-centered" > <!--ng-show="youtubeData.items.length"-->
+                                    <ul class="pagination-controle divpagination">
+                                        <li><button type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)">&lt; PREV</button></li>
+                                        <li><span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span></li>
+                                        <li><button type="button" class="btnnextprev" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)">NEXT &gt;</button></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr  ng-repeat="data in youtubeData.items | limitTo: pageSize " id="container"> <!--ng-if="youtubeInfoDataFound"-->
+                            <td width="40%">
+                                <span class="imageclass">
+                                    <a ng-click="open(data.id.videoId)" style="cursor:pointer;">
+                                        <span class="play">&#9658;</span>
+                                        <img width="100" height="90" aria-hidden="true" alt="" src="{{data.snippet.thumbnails.default.url}}" style="position: relative;top: -11px;">
+                                    </a>
+                                </span>
+                            </td>
+                            <td width="60%">
+                                <span style="color: #167ac6 !important;font-size: 13px !important;font-weight: bold;">{{data.snippet.title}}</span>
+                            </td>
+                        </tr>
+                        <tr style="text-align:center;">
+                            <td>
+                                <div class="divpagination pagination-centered" >
+                                    <ul class="pagination-controle divpagination">
+                                        <li><button type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)"> &lt; PREV</button></li>
+                                        <li><span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span></li>
+                                        <li><button type="button" class="btnnextprev" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)"> NEXT &gt;</button></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="YoutubePlayerPartial.html">
+    <div class="modal-header head" style="padding-bottom: 24px !important;">
+        <button class="close closebutton" ng-click="cancel()" type="button">×</button>
+    </div>
+    <div class="modal-body" cg-busy="{promise:youtubeplayerpromise,message:'Loading video'}" style="padding-top: 0px !important;">
+        <iframe width="100%" height="375" ng-src="{{videoID}}" frameborder="0" allowfullscreen></iframe>
+    </div>
+</script>

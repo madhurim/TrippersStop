@@ -34,6 +34,18 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\MongoDB.Bson.2.0.0\lib\net45\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\MongoDB.Driver.2.0.0\lib\net45\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.0.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Legacy">
+      <HintPath>..\packages\mongocsharpdriver.2.0.0\lib\net45\MongoDB.Driver.Legacy.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
@@ -87,10 +99,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIServices\GoogleAPICaller.cs" />
     <Compile Include="APIServices\IAPICaller.cs" />
+    <Compile Include="APIServices\IAsyncGoogleAPICaller.cs" />
+    <Compile Include="APIServices\IAsyncWeatherAPICaller.cs" />
     <Compile Include="APIServices\IAsyncSabreAPICaller.cs" />
+    <Compile Include="APIServices\IAsyncYouTubeAPICaller.cs" />
     <Compile Include="APIServices\SabreAPICaller.cs" />
     <Compile Include="APIServices\ServiceStackSerializer.cs" />
+    <Compile Include="APIServices\WeatherAPICaller.cs" />
+    <Compile Include="APIServices\YouTubeAPICaller.cs" />
+    <Compile Include="CustomTypes\Google\Request\GoogleInput.cs" />
+    <Compile Include="CustomTypes\Google\Response\GoogleOutput.cs" />
+    <Compile Include="CustomTypes\Google\ViewModels\Google.cs" />
+    <Compile Include="CustomTypes\IATA\ViewModels\Entity.cs" />
+    <Compile Include="CustomTypes\IATA\ViewModels\IATACode.cs" />
     <Compile Include="CustomTypes\Sabre\Request\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -132,10 +155,21 @@
     <Compile Include="CustomTypes\Sabre\Response\TravelThemeLookup.cs" />
     <Compile Include="CacheServices\ICacheService.cs" />
     <Compile Include="CacheServices\RedisService.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\TripInput.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\TripOutput.cs" />
+    <Compile Include="CustomTypes\Weather\Request\HistoryInput.cs" />
+    <Compile Include="CustomTypes\Weather\Request\InternationalWeatherInput.cs" />
+    <Compile Include="CustomTypes\Weather\Response\HistoryOutput.cs" />
+    <Compile Include="CustomTypes\Weather\ViewModels\TripWeather.cs" />
+    <Compile Include="CustomTypes\YouTube\Request\YouTubeInput.cs" />
+    <Compile Include="CustomTypes\YouTube\Response\YouTubeOutput.cs" />
+    <Compile Include="CustomTypes\YouTube\ViewModels\YouTube.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrippersStop.TraveLayer
+namespace TrippismApi.TraveLayer
 {
     public interface IAsyncSabreAPICaller : IAPIAsyncCaller
     {
@@ -13,5 +13,9 @@ namespace TrippersStop.TraveLayer
         String SabreTokenExpireKey { get; }
         String LongTermToken { get; set; }
         String TokenExpireIn { get; set; }
+
+        String Authorization { set; }
+
+        String ClientSecret { set; }
     }
 }
