@@ -859,4 +859,7 @@ ul li {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5d9ee', endColorstr='#bedeef', GradientType=1 );
 }
 
-   
+.custimage {
+    text-align: center; 
+    line-height: 250px;
+}

@@ -7,9 +7,10 @@
                         <tr style="text-align:center;">
                             <td><h5>[ {{youtubeParams.DestinationairportName.airport_CityName}} ] attraction videos in 93 Miles radius</h5></td>
                         </tr>
-                         <tr style="text-align:center;">
+                        <tr ng-show="isDataLoadedFirstTime" style="text-align:center;">
                             <td>
-                                <div class="divpagination pagination-centered" > <!--ng-show="youtubeData.items.length"-->
+                                <div class="divpagination pagination-centered">
+                                    <!--ng-show="youtubeData.items.length"-->
                                     <ul class="pagination-controle divpagination">
                                         <li><button type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)">&lt; PREV</button></li>
                                         <li><span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span></li>
@@ -31,9 +32,9 @@
                                 <span style="color: #167ac6 !important;font-size: 13px !important;font-weight: bold;">{{data.snippet.title}}</span>
                             </td>
                         </tr>
-                        <tr style="text-align:center;">
+                        <tr ng-show="isDataLoadedFirstTime" style="text-align:center;" >
                             <td>
-                                <div class="divpagination pagination-centered" >
+                                <div class="divpagination pagination-centered">
                                     <ul class="pagination-controle divpagination">
                                         <li><button type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)"> &lt; PREV</button></li>
                                         <li><span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span></li>

@@ -3953,7 +3953,7 @@ angular.module("template/carousel/slide.html", []).run(["$templateCache", functi
     "    'next': (next || active) && direction=='next',\n" +
     "    'right': direction=='prev',\n" +
     "    'left': direction=='next'\n" +
-    "  }\" class=\"item text-center\" ng-transclude></div>\n" +
+    "  }\" class=\"item text-center custimage\" ng-transclude></div>\n" +
     "");
 }]);
 

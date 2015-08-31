@@ -36,14 +36,14 @@
                     scope.fareRangeData = "";
                     if (scope.farerangeParams != undefined) {
                         scope.staydaylength = 0;
-                        if (scope.farerangeParams.searchcriteria.FromDate != null && scope.farerangeParams.searchcriteria.ToDate != null) {
-                            var frdt = new Date(scope.farerangeParams.searchcriteria.FromDate);
-                            var todt = new Date(scope.farerangeParams.searchcriteria.ToDate);
+                        if (scope.farerangeParams.SearchCriteria.FromDate != null && scope.farerangeParams.SearchCriteria.ToDate != null) {
+                            var frdt = new Date(scope.farerangeParams.SearchCriteria.FromDate);
+                            var todt = new Date(scope.farerangeParams.SearchCriteria.ToDate);
                             var timeDiff = Math.abs(todt.getTime() - frdt.getTime());
                             scope.staydaylength = Math.ceil(timeDiff / (1000 * 3600 * 24));
                         }
                         else {
-                            staydaylength = scope.farerangeParams.searchcriteria.Lengthofstay;
+                            staydaylength = scope.farerangeParams.SearchCriteria.Lengthofstay;
                         }
                        
                         var data = {

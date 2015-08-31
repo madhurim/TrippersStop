@@ -15,7 +15,8 @@
                     controller: 'EmailForDestinationDet',
                     scope: scope,
                     resolve: {
-                        seasonalityData: function () { return scope.attractionParams; }
+                        eMailData: function () { return scope.attractionParams; },
+                        eMailDataFareForeCast: function () { return scope.attractionParams.dataforEmail.FareForecastDataForEmail }
                     }
                 });
             }
