@@ -99,6 +99,7 @@
         $scope.activate = activate;
         $scope.findDestinations = findDestinations;
         $scope.Origin = '';
+        $scope.OriginCityName = '';
         $scope.Destination = '';
         $scope.buttontext = "All";
         $scope.AvailableAirports = [];
@@ -312,8 +313,14 @@
 
         $scope.$watch('Origin',
                 function (oldval, newValue) {
-                    if (newValue != undefined && newValue != "")
+                    if (newValue != undefined && newValue != "") {
                         $scope.OrigintoDisp = $scope.Origin.toUpperCase();
+                        var originairportdata = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin.toUpperCase() });
+                        if (originairportdata != undefined)
+                            $scope.OriginCityName = originairportdata.airport_CityName;
+                        else
+                            $scope.OriginCityName = '';
+                    }
                 }
               );
 
@@ -329,7 +336,7 @@
                 $scope.CalledOnPageLoad = false;
                 $scope.AvailableAirports = data;
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
-
+               
                 if (org == undefined || org == '') {
                     UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
                         if (data == undefined)
@@ -357,6 +364,7 @@
 
         $scope.onSelect = function ($item, $model, $label) {
             $scope.Origin = $item.airport_Code;
+            $scope.OriginCityName = $item.airport_CityName;
         };
 
         $scope.formatInput = function ($model) {
@@ -431,8 +439,9 @@
             else if (buttnText == 'Cheapest') { $scope.SearchbuttonChepestIsLoading = true; $scope.SearchbuttonCheapestText = $scope.LoadingText; }
 
             var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin.toUpperCase() });
+           
             var PointOfsalesCountry;
-            if (originairport != undefined)
+            if (originairport != undefined) 
                 PointOfsalesCountry = originairport.airport_CountryCode;
 
             var data = {
