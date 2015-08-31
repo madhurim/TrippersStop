@@ -25,6 +25,7 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
 
                 scope.curPage = 0;
                 scope.pageSize = 10;
+                scope.isDataLoadedFirstTime = false;
 
                 scope.loadyoutubeInfo = function (nextTokenID,prevTokenID) {
                     scope.youtubeInfoLoaded = false;
@@ -53,6 +54,7 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
                                         return;
                                     }
                                     
+                                    scope.isDataLoadedFirstTime = true;
                                     scope.youtubeData = data;
                                    
                                     if (scope.youtubeData.nextPageToken != null)

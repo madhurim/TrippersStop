@@ -238,14 +238,16 @@
             $scope.TabCreatedCount = $scope.TabCreatedCount + 1;
             var _paramsdata = $scope.seasonalitydirectiveData;
             _paramsdata.tabIndex = $scope.TabCreatedCount;
-            var searchcriteria = {
+            var SearchCriteria = {
                 FromDate :$scope.FromDate,
                 ToDate: $scope.ToDate,
-                Lengthofstay: $scope.LenghtOfStay
+                Lengthofstay: $scope.LenghtOfStay,
+                Origin: $scope.Origin,
+                Theme : $scope.Theme
                 };
 
             _paramsdata.dataforEmail = {};
-            _paramsdata.searchcriteria = searchcriteria;
+            _paramsdata.SearchCriteria = SearchCriteria;
             $scope.tabManager.tabItems.push({
                 parametersData: _paramsdata,
                 title: $scope.seasonalitydirectiveData.OriginairportName.airport_Code + ' - ' + $scope.seasonalitydirectiveData.DestinationairportName.airport_Code,
