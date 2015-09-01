@@ -1,7 +1,7 @@
 ﻿<div class="" style="clear:both;" cg-busy="{promise:googleattractionpromise,message:'Loading Attractions'}">
     <div ui-map="googleattractionsMap" id={{gMapId}} ui-options="attractionmapOptions" style="width:100%;" class="map-canvas"></div>
 </div>
-<div ng-show="IsMarkerSelected" id={{googleMapId}} class="popupmarker" style="width: 440px;  min-height:320px;  z-index: 999;">
+<div ng-show="IsMarkerSelected" id={{googleMapId}} class="popupmarker" style="width: 600px;  min-height:505px;  z-index: 999;">
     <div class="modal-content">
         <div class="modal-header head ng-scope" style="padding-bottom: 24px !important;">
             <button class="close closebutton" style="margin-top:2px !important;" ng-click="cancel()" type="button">×</button>
@@ -9,13 +9,13 @@
         <div ng-show="IsMapPopupLoading" class="sqrloadclass" style="padding-top:10px;padding-bottom:0px;">
         </div>
         <div class="modal-body" style="padding-top:0px;" ng-show="!IsMapPopupLoading">
-            <div style="height:255px;overflow:auto;" ng-if="slides.length == 0">
-                <img height="255" width="400" src="../app/Styles/images/noimageavailable.png">
+            <div style="height:400px;overflow:auto;" ng-if="slides.length == 0">
+                <img height="300" width="500" src="../app/Styles/images/noimageavailable.png">
             </div>
-            <div style="height:255px;overflow:auto;" ng-if="slides.length > 0">
+            <div style="height:400px;overflow:auto;" ng-if="slides.length > 0">
                 <carousel no-wrap="noWrapSlides" class="slidercarsoul">
                     <slide ng-repeat="slide in slides" active="slide.active">
-                        <img ng-src="{{slide.image}}" style="margin:auto;max-width:440px;max-height:270px;display:inline-block;">
+                        <img ng-src="{{slide.image}}" style="margin:auto;max-width:570px;max-height:400px;display:inline-block;">
                         <div class="carousel-caption">
                         </div>
                     </slide>

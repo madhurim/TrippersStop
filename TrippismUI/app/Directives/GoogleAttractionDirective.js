@@ -218,7 +218,8 @@
                                             if (place.photos != null && place.photos.length > 0) {
                                                 var photos = [];
                                                 for (var photoidx = 0; photoidx < place.photos.length; photoidx++) {
-                                                    var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 440, 'maxHeight': 270 });
+                                                    //var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 440, 'maxHeight': 270 });
+                                                    var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 570, 'maxHeight': 400 });
                                                     var objtopush = { image: Imgsrc, text: "" };
                                                     photos.push(objtopush);
                                                 }
@@ -239,8 +240,8 @@
 
                                     });
 
-                                    var mapheight = $('#' + $scope.gMapId).height() - 320;
-                                    var mapWidth = $('#' + $scope.gMapId).width() - 430;
+                                    var mapheight = $('#' + $scope.gMapId).height() - 400;
+                                    var mapWidth = $('#' + $scope.gMapId).width() - 600;
 
                                     $("#" + $scope.googleMapId).css('top', '-25px');
                                     $("#" + $scope.googleMapId).css('left', mapWidth / 2);
