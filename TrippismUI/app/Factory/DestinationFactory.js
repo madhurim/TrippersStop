@@ -8,6 +8,7 @@
         // Define the functions and properties to reveal.
         var service = {
             findDestinations: findDestinations,
+            findTopDestinations: findTopDestinations
         };
         return service;
 
@@ -23,6 +24,16 @@
         }
         function findDestinations(data) {
             var dataURL = 'Destinations?' + serialize(data);
+            var RequestedURL = $rootScope.apiURL + dataURL;
+            return $http.get(RequestedURL)
+            .then(function (data) {
+                return data.data;
+            }, function (e) {
+                return e;
+            });
+        }
+        function findTopDestinations(data) {
+            var dataURL = 'TopDestinations?' + serialize(data);
             var RequestedURL = $rootScope.apiURL + dataURL;
             return $http.get(RequestedURL)
             .then(function (data) {

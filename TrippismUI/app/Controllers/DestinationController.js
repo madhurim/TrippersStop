@@ -7,6 +7,7 @@
             '$modal',
             '$rootScope',
             '$timeout',
+            '$filter',
             'DestinationFactory',
             'UtilFactory',
             'FareforecastFactory',
@@ -19,6 +20,7 @@
         $modal,
         $rootScope,
         $timeout,
+        $filter,
         DestinationFactory,
         UtilFactory,
         FareforecastFactory,
@@ -108,6 +110,7 @@
             formatYear: 'yy',
             startingDay: 1
         };
+        $scope.topdestinationflg = true;
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
         $scope.IsHistoricalInfo = false;
@@ -140,6 +143,37 @@
         $scope.minFromDate = new Date();
         $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
         $scope.Destinationfortab = "";
+        $scope.top5destinationclick = function (item) {
+            debugger;
+            var OriginairportName = _.find($scope.AvailableAirports, function (airport) {
+                return airport.airport_Code == $scope.Origin.toUpperCase()
+            });
+            var DestinationairportName = _.find($scope.AvailableAirports, function (airport) {
+                return airport.airport_Code == item.topdestinationFareInfo.DestinationLocation
+            });
+
+            var dataForecast = {
+                "Origin": $scope.Origin,
+                "DepartureDate": $filter('date')(item.topdestinationFareInfo.DepartureDateTime, 'yyyy-MM-dd'),
+                "ReturnDate": $filter('date')(item.topdestinationFareInfo.ReturnDateTime, 'yyyy-MM-dd'),
+                "Destination": item.topdestinationFareInfo.DestinationLocation
+            };
+
+            $rootScope.$broadcast('EmptyFareForcastInfo', {
+                Origin: OriginairportName.airport_CityName,
+                Destinatrion: DestinationairportName.airport_Code,
+                Fareforecastdata: dataForecast,
+                mapOptions: item.topdestinationFareInfo,
+                OriginairportName: OriginairportName,
+                DestinationairportName: DestinationairportName,
+                DestinationList: $scope.destinationlist,
+                AvailableAirports: $scope.AvailableAirports,
+                //tabIndex : 999  // used for popup
+            });
+       
+      
+
+        };
 
         $scope.ViewDestination = function () {
             $scope.ShowDestinationView = true;
@@ -480,6 +514,29 @@
                 $scope.inProgress = false;
 
             });
+           
+            //Get Top Destination
+            data.TopDestinations = 5;
+            $scope.topdestination = DestinationFactory.findDestinations(data).then(function (data) {
+                if (data.FareInfo != null) {
+                    $scope.topdestinationlist = [];
+                    for (var x = 0; x < data.FareInfo.length; x++) {
+                        var airportdata = _.find($scope.AvailableAirports, function (airport) {
+                            return airport.airport_Code == data.FareInfo[x].DestinationLocation
+                        });
+                        var topdestination = {
+                            "AirportCode" : airportdata.airport_Code,
+                            "Cityname": airportdata.airport_CityName,
+                            "LowestNonStopFare": data.FareInfo[x].LowestNonStopFare,
+                            "LowestFare": data.FareInfo[x].LowestFare,
+                            "topdestinationFareInfo": data.FareInfo[x]
+                        };
+                        $scope.topdestinationlist.push(topdestination);
+                    }
+                }
+                $scope.inProgress = false;
+            });
+
 
             if ($scope.CalledOnPageLoad)
                 $scope.CalledOnPageLoad = false;
