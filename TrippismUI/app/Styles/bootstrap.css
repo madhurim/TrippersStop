@@ -6072,7 +6072,7 @@ button.close {
   position: relative;
   overflow: hidden;
   width: 100%;
-  min-height:255px;
+  min-height:400px;
 }
 .carousel-inner > .item {
   display: none;
