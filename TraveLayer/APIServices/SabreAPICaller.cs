@@ -119,7 +119,7 @@ namespace TrippismApi.TraveLayer
             _ClientId = ConfigurationManager.AppSettings["SabreClientID"].ToString();
             _ClientSecret = ConfigurationManager.AppSettings["SabreClientSecret"].ToString();
         }
-        public async Task<String> GetToken()
+        public async Task<String> GetToken(string url)
         {
                 using (var client = new HttpClient())
                 {
@@ -151,7 +151,7 @@ namespace TrippismApi.TraveLayer
                     //grant_type=client_credentials
 
                     HttpContent requestContent = new StringContent("grant_type=client_credentials", System.Text.Encoding.UTF8, _ContentType);
-                    HttpResponseMessage sabreResponse = await client.PostAsync(_TokenUri + "v2/auth/token/", requestContent).ConfigureAwait(false); ;
+                    HttpResponseMessage sabreResponse = await client.PostAsync(_TokenUri + url, requestContent).ConfigureAwait(false); ;
 
                     // If client authentication failed then we get a JSON response from Azure Market Place
                     if (!sabreResponse.IsSuccessStatusCode)

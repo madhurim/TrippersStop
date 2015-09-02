@@ -20,7 +20,7 @@ namespace TrippismApi.Tests.SabreAPITests
             apiWrapper.ContentType = "application/x-www-form-urlencoded";
 
             // Act
-            string token = apiWrapper.GetToken().Result;
+            string token = apiWrapper.GetToken("v2/auth/token/").Result;
 
             //post https://api.sabre.com/v1.8.2/shop/flights?mode=live HTTP/1.1
 
