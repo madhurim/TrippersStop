@@ -47,8 +47,8 @@ namespace TrippismApi.Areas.Sabre.Controllers
             APIResponse result = _apiCaller.Post(url, ServiceStackSerializer.Serialize(advancedCalendar)).Result;            
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                ApiHelper.RefreshApiToken(_cacheService, _apiCaller);             
-                result = _apiCaller.Post("v1.8.1/shop/calendar/flights?mode=live", ServiceStackSerializer.Serialize(advancedCalendar)).Result;
+                ApiHelper.RefreshApiToken(_cacheService, _apiCaller);
+                result = _apiCaller.Post(url, ServiceStackSerializer.Serialize(advancedCalendar)).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)
             {
