@@ -8,7 +8,7 @@ namespace TrippismApi.TraveLayer
 {
     public interface IAsyncSabreAPICaller : IAPIAsyncCaller
     {
-        Task<String> GetToken();
+        Task<String> GetToken(string url);
         String SabreTokenKey { get;  }
         String SabreTokenExpireKey { get; }
         String LongTermToken { get; set; }

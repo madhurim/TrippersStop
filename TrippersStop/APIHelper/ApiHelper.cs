@@ -9,6 +9,7 @@ namespace TrippismApi
 {
     public static class ApiHelper
     {
+        const string TokenUrl = "v2/auth/token/";
         public static void SetApiToken(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             apiCaller.Accept = "application/json";
@@ -17,7 +18,7 @@ namespace TrippismApi
             apiCaller.TokenExpireIn = cacheService.GetByKey<string>(apiCaller.SabreTokenExpireKey);
             if (string.IsNullOrWhiteSpace(apiCaller.LongTermToken))
             {
-                apiCaller.LongTermToken = apiCaller.GetToken().Result;
+                apiCaller.LongTermToken = apiCaller.GetToken(TokenUrl).Result;
                 SaveTokenInCache(apiCaller, cacheService);
             }       
             apiCaller.Authorization = "bearer";

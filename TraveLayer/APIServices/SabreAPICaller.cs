@@ -119,7 +119,7 @@ namespace TrippismApi.TraveLayer
             _ClientId = ConfigurationManager.AppSettings["SabreClientID"].ToString();
             _ClientSecret = ConfigurationManager.AppSettings["SabreClientSecret"].ToString();
         }
-        public async Task<String> GetToken()
+        public async Task<String> GetToken(string url)
         {
                 using (var client = new HttpClient())
                 {
@@ -151,7 +151,7 @@ namespace TrippismApi.TraveLayer
                     //grant_type=client_credentials
 
                     HttpContent requestContent = new StringContent("grant_type=client_credentials", System.Text.Encoding.UTF8, _ContentType);
-                    HttpResponseMessage sabreResponse = await client.PostAsync(_TokenUri + "v1/auth/token/", requestContent).ConfigureAwait(false); ;
+                    HttpResponseMessage sabreResponse = await client.PostAsync(_TokenUri + url, requestContent).ConfigureAwait(false); ;
 
                     // If client authentication failed then we get a JSON response from Azure Market Place
                     if (!sabreResponse.IsSuccessStatusCode)
@@ -168,7 +168,8 @@ namespace TrippismApi.TraveLayer
                     JsonObject response = await sabreResponse.Content.ReadAsAsync<JsonObject>();
 
                     //should we URLencode this ?
-                    LongTermToken = HttpUtility.UrlEncode(response.Get<string>("access_token"));
+                    //LongTermToken = HttpUtility.UrlEncode(response.Get<string>("access_token"));
+                    LongTermToken = response.Get<string>("access_token");
 
                     // TODO : add them to the class
                     // string _token_type = response.Value<string>("token_type");
