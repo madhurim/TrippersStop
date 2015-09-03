@@ -875,15 +875,19 @@ ul li {
     text-align: center; 
     line-height: 400px;
 }
+.mainpagepopup-title{
+     left: 6%;position: absolute;z-index: 1; padding: 0 !important;    font-size: 15px; font-weight: bold;
+}
 .mainpagepopup{
-     left: 6%;position: absolute;z-index: 1; background-color: rgba(0, 0, 0, 0.5); color:white;padding: 0 !important;
+     left: 6%;position: absolute;z-index: 1; background-color: rgba(0, 0, 0, 0.5); color:white;padding: 0 !important;    max-width: 290px; min-width: 290px;
 }
 .mainpage-topdestination {
 display: block;    max-height: 300px;    overflow-y: auto;    overflow-x: hidden;border-bottom: 1px solid;padding: 0;
 }
 .mainpage-topdestinationsub {
-min-height: 67px;line-height: 16px;
- background-color: #b5b5b5;
+min-height: 67px;line-height: 16px; border-top: 1px solid;
+font-size:12px;
+ /*background-color: #b5b5b5;*/
     cursor: pointer;
     margin: 1px;
     padding: 10px;
