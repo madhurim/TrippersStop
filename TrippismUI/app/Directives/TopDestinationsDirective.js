@@ -8,7 +8,6 @@
         },
         templateUrl: '/app/Views/Partials/TopDestinationsPartial.html',
         link: function (scope, elem, attrs) {
-            debugger;
             scope.topdestinationflg = true;
             scope.showAllDestinations = false;
             scope.topdestinationlist = [];
@@ -50,11 +49,7 @@
                     DestinationairportName: DestinationairportName,
                     DestinationList: scope.destinations,
                     AvailableAirports: scope.airportlist,
-                    //tabIndex : 999  // used for popup
                 });
-
-
-
             };
         }
     }
