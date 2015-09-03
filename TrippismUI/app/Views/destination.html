@@ -16,19 +16,58 @@
         </div>
 
         <div class="col-lg-9" ng-if="tabManager.tabItems.length > 0">
-            <div  tabs>
-                <div  ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
-                    <attraction-tab  tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
+            <div tabs>
+                <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
+                    <attraction-tab tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-sm-2 col-md-2 pull-right logdiv" style="width: 210px;">
-           <!-- <img height="47" src="../app/Styles/images/Trippismlogo.png" style="background-color:darkslategrey"  />-->
+            <!-- <img height="47" src="../app/Styles/images/Trippismlogo.png" style="background-color:darkslategrey"  />-->
             <span style="font-size:30px;color:black;">Trippism</span>
             <span style="font-size:10px;clear:both;float:left;font-weight:bolder;color:black;padding:0px;">Alpha version</span>
-            
+
         </div>
     </div>
+    
+    <div ng-show="destinationlist">
+        <div ng-show="ShowDestinationView" ng-hide="isSearching" class="col-lg-9 col-xs-9 col-md-4 mainpagepopup mainpage-topmargin66">
+            <div class="col-lg-12 col-sm-12 col-md-12">
+                Your Searched : <span ng-show="Origin">Origin : {{Origin}}</span>
+                <span ng-show="FromDate">, From Date : {{FromDate|date:'dd/MM/yyyy'}} </span><span ng-show="ToDate"> , To Date : {{ToDate |date:'MM/dd/yyyy'}}</span> <span ng-show="LenghtOfStay > 0">,LengthOfStay: {{LenghtOfStay}}</span><span ng-show="Minfare > 0">,Minimum Fare: {{Minfare}}</span><span ng-show="Maxfare > 0"> Maximum Fare: {{Maxfare}}</span><span ng-show="Region.id"> ,Region:{{Region.id}} </span><span ng-show="Theme.id">, Theme:{{Theme.id}}</span>
+            </div>
+            <div class="col-lg-12 col-sm-12 col-md-12">
+                Total Number of Destinations Found :{{destinationlist.length}}
+            </div>
+        </div>
+    </div>
+   
+        <div ng-show="ShowDestinationView" ng-hide="isSearching" class="col-lg-3 col-xs-5 col-md-4 mainpagepopup mainpage-topmargin128">
+            <topdestination-popup destinations-params="topdestinationlist" destinations="destinationlist" airportlist="AvailableAirports"></topdestination-popup>
+        </div>
+    <div ng-hide="true">
+        <div ng-show="ShowDestinationView" ng-hide="isSearching" class="col-lg-2 col-xs-2 col-md-4 mainpagepopup mainpage-topmargin190 ">
+            <div class="col-lg-12" style="padding:0px">
+                <div class="col-lg-10">
+                    <h4>Top 5 Chepest Destination</h4>
+                </div>
+                <div class="col-lg-2">
+                    <span style="margin-top: 20px;margin-bottom: 10px;" class="glyphicon" aria-hidden="true" ng-click="topcheapestdestinationflg =!topcheapestdestinationflg" ng-class="topcheapestdestinationflg ?'glyphicon-menu-up' :'glyphicon-menu-down'"></span>
+                </div>
+                <div class="col-lg-12 mainpage-topdestination" ng-show="topcheapestdestinationflg">
+                    <div class="mainpage-topdestinationsub" ng-repeat="item in  topcheapestdestinationlist" ng-click="top5destinationclick(item)">
+
+                        <span style="font-size: 17px;">{{item.AirportCode}} [{{item.Cityname}}] </span><br />
+                        <span ng-if="item.LowestNonStopFare != 'N/A'|| item.LowestNonStopFare != 0 ">LowestNonStope Fare  : {{item.topdestinationFareInfo.CurrencyCode}} {{item.LowestNonStopFare | number : 2}} </span> <br />
+                        <span ng-if="item.LowestFare != 'N/A' || item.LowestFare != 0 ">
+                            LowestFare : {{item.topdestinationFareInfo.CurrencyCode}} {{item.LowestFare | number : 2}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
 
 
     <div ng-show="ShowDestinationView">

@@ -7,6 +7,7 @@
             '$modal',
             '$rootScope',
             '$timeout',
+            '$filter',
             'DestinationFactory',
             'UtilFactory',
             'FareforecastFactory',
@@ -19,6 +20,7 @@
         $modal,
         $rootScope,
         $timeout,
+        $filter,
         DestinationFactory,
         UtilFactory,
         FareforecastFactory,
@@ -108,6 +110,7 @@
             formatYear: 'yy',
             startingDay: 1
         };
+        $scope.topcheapestdestinationflg = true;
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
         $scope.IsHistoricalInfo = false;
@@ -472,6 +475,24 @@
                 if (data.FareInfo != null) {
                     $scope.destinationlist = data.FareInfo;
                     $scope.buttontext = "Cheapest";
+                    //Get Top 5 cheapest Destination 
+                    if ($scope.destinationlist != null) {
+                        var top5chepestdata = $scope.destinationlist.sort(function (a, b) { return (parseFloat(a.LowestNonStopFare) < parseFloat(b.LowestNonStopFare)) ? 1 : -1; }).reverse().slice(0, 5);
+                        $scope.topcheapestdestinationlist = [];
+                        for (var x = 0; x < top5chepestdata.length; x++) {
+                            var airportdata = _.find($scope.AvailableAirports, function (airport) {
+                                return airport.airport_Code == top5chepestdata[x].DestinationLocation
+                            });
+                            var topcheapestdestination = {
+                                "AirportCode": airportdata.airport_Code,
+                                "Cityname": airportdata.airport_CityName,
+                                "LowestNonStopFare": top5chepestdata[x].LowestNonStopFare,
+                                "LowestFare": top5chepestdata[x].LowestFare,
+                                "topdestinationFareInfo": top5chepestdata[x]
+                            };
+                            $scope.topcheapestdestinationlist.push(topcheapestdestination);
+                        }
+                    }
                     UtilFactory.MapscrollTo('wrapper');
                 }
                 else {
@@ -482,6 +503,29 @@
                 $scope.inProgress = false;
 
             });
+           
+            //Get Top Destination
+            data.TopDestinations = 50;
+            $scope.topdestination = DestinationFactory.findDestinations(data).then(function (data) {
+                if (data.FareInfo != null) {
+                    $scope.topdestinationlist = [];
+                    for (var x = 0; x < data.FareInfo.length; x++) {
+                        var airportdata = _.find($scope.AvailableAirports, function (airport) {
+                            return airport.airport_Code == data.FareInfo[x].DestinationLocation
+                        });
+                        var topdestination = {
+                            "AirportCode" : airportdata.airport_Code,
+                            "Cityname": airportdata.airport_CityName,
+                            "LowestNonStopFare": data.FareInfo[x].LowestNonStopFare,
+                            "LowestFare": data.FareInfo[x].LowestFare,
+                            "topdestinationFareInfo": data.FareInfo[x]
+                        };
+                        $scope.topdestinationlist.push(topdestination);
+                    }
+                }
+                $scope.inProgress = false;
+            });
+           
 
             if ($scope.CalledOnPageLoad)
                 $scope.CalledOnPageLoad = false;

@@ -27,6 +27,7 @@
     <Content Include="app\Directives\AttractiontabFareForecastDirective.js" />
     <Content Include="app\Directives\AverageStarRatingDirective.js" />
     <Content Include="app\Directives\GoogleAttractionDirective.js" />
+    <Content Include="app\Directives\TopDestinationsDirective.js" />
     <Content Include="app\Directives\WetherApiDirective.js" />
     <Content Include="app\Directives\FareRangeDirective.js" />
     <Content Include="app\Directives\GoogleMap.directive.js" />
@@ -112,6 +113,8 @@
     <Content Include="app\Views\partials\cgbusyMessagePartial.html" />
     <Content Include="app\Views\partials\EmailDetFormPartial.html" />
     <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
+
+    <Content Include="app\Views\partials\TopDestinationsPartial.html" />
     <Content Include="app\Views\partials\WeatherPartial.html" />
     <Content Include="app\Views\partials\FareRangePartial.html" />
     <Content Include="app\Views\partials\SeasonalityPartial.html" />
