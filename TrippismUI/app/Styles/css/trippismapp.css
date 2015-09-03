@@ -217,7 +217,7 @@ right: -6px;
 
     .pagination-controle button {
         font-size: 12px;
-        margin-top: -22px;
+        /*margin-top: -22px;*/
         cursor: pointer;
     }
 
