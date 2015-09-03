@@ -13,7 +13,7 @@
                                     <!--ng-show="youtubeData.items.length"-->
                                     <ul class="pagination-controle divpagination">
                                         <li><button type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)">&lt; PREV</button></li>
-                                        <li><span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span></li>
+                                        <!--<li><span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span></li>-->
                                         <li><button type="button" class="btnnextprev" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)">NEXT &gt;</button></li>
                                     </ul>
                                 </div>
@@ -37,7 +37,7 @@
                                 <div class="divpagination pagination-centered">
                                     <ul class="pagination-controle divpagination">
                                         <li><button type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)"> &lt; PREV</button></li>
-                                        <li><span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span></li>
+                                        <!--<li><span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span></li>-->
                                         <li><button type="button" class="btnnextprev" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)"> NEXT &gt;</button></li>
                                     </ul>
                                 </div>
