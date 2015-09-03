@@ -81,6 +81,7 @@
                                 $scope.raitingToAppend = $sce.trustAsHtml(getRatings(place.rating));
 
                             $scope.IsMapPopupLoading = false;
+                            $scope.$apply();
                         }
 
                     });
