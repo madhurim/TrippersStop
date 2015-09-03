@@ -110,7 +110,7 @@
             formatYear: 'yy',
             startingDay: 1
         };
-        $scope.topdestinationflg = true;
+        $scope.topcheapestdestinationflg = true;
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
         $scope.IsHistoricalInfo = false;
@@ -143,37 +143,6 @@
         $scope.minFromDate = new Date();
         $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
         $scope.Destinationfortab = "";
-        $scope.top5destinationclick = function (item) {
-            debugger;
-            var OriginairportName = _.find($scope.AvailableAirports, function (airport) {
-                return airport.airport_Code == $scope.Origin.toUpperCase()
-            });
-            var DestinationairportName = _.find($scope.AvailableAirports, function (airport) {
-                return airport.airport_Code == item.topdestinationFareInfo.DestinationLocation
-            });
-
-            var dataForecast = {
-                "Origin": $scope.Origin,
-                "DepartureDate": $filter('date')(item.topdestinationFareInfo.DepartureDateTime, 'yyyy-MM-dd'),
-                "ReturnDate": $filter('date')(item.topdestinationFareInfo.ReturnDateTime, 'yyyy-MM-dd'),
-                "Destination": item.topdestinationFareInfo.DestinationLocation
-            };
-
-            $rootScope.$broadcast('EmptyFareForcastInfo', {
-                Origin: OriginairportName.airport_CityName,
-                Destinatrion: DestinationairportName.airport_Code,
-                Fareforecastdata: dataForecast,
-                mapOptions: item.topdestinationFareInfo,
-                OriginairportName: OriginairportName,
-                DestinationairportName: DestinationairportName,
-                DestinationList: $scope.destinationlist,
-                AvailableAirports: $scope.AvailableAirports,
-                //tabIndex : 999  // used for popup
-            });
-       
-      
-
-        };
 
         $scope.ViewDestination = function () {
             $scope.ShowDestinationView = true;
@@ -504,6 +473,24 @@
                 if (data.FareInfo != null) {
                     $scope.destinationlist = data.FareInfo;
                     $scope.buttontext = "Cheapest";
+                    //Get Top 5 cheapest Destination 
+                    if ($scope.destinationlist != null) {
+                        var top5chepestdata = $scope.destinationlist.sort(function (a, b) { return (parseFloat(a.LowestNonStopFare) < parseFloat(b.LowestNonStopFare)) ? 1 : -1; }).reverse().slice(0, 5);
+                        $scope.topcheapestdestinationlist = [];
+                        for (var x = 0; x < top5chepestdata.length; x++) {
+                            var airportdata = _.find($scope.AvailableAirports, function (airport) {
+                                return airport.airport_Code == top5chepestdata[x].DestinationLocation
+                            });
+                            var topcheapestdestination = {
+                                "AirportCode": airportdata.airport_Code,
+                                "Cityname": airportdata.airport_CityName,
+                                "LowestNonStopFare": top5chepestdata[x].LowestNonStopFare,
+                                "LowestFare": top5chepestdata[x].LowestFare,
+                                "topdestinationFareInfo": top5chepestdata[x]
+                            };
+                            $scope.topcheapestdestinationlist.push(topcheapestdestination);
+                        }
+                    }
                     UtilFactory.MapscrollTo('wrapper');
                 }
                 else {
@@ -516,7 +503,7 @@
             });
            
             //Get Top Destination
-            data.TopDestinations = 5;
+            data.TopDestinations = 50;
             $scope.topdestination = DestinationFactory.findDestinations(data).then(function (data) {
                 if (data.FareInfo != null) {
                     $scope.topdestinationlist = [];
@@ -536,7 +523,7 @@
                 }
                 $scope.inProgress = false;
             });
-
+           
 
             if ($scope.CalledOnPageLoad)
                 $scope.CalledOnPageLoad = false;

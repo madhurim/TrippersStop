@@ -858,5 +858,32 @@ ul li {
     background: linear-gradient(to right, rgba(181,217,238,1) 0%, rgba(42,173,229,1) 50%, rgba(190,222,239,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5d9ee', endColorstr='#bedeef', GradientType=1 );
 }
+.mainpage-topmargin66 {
+    margin-top: 66px;
+}
+.mainpage-topmargin128 {
+    margin-top: 128px;
+    padding-right:0px;
+}
+.mainpage-topmargin190 {
+    margin-top: 190px;
+    padding-right:0px;
+}
 
-   
+
+.mainpagepopup{
+     left: 6%;position: absolute;z-index: 1; background-color: rgba(0, 0, 0, 0.5); color:white;padding: 0 !important;
+}
+.mainpage-topdestination {
+display: block;    max-height: 300px;    overflow-y: auto;    overflow-x: hidden;border-bottom: 1px solid;padding: 0;
+}
+.mainpage-topdestinationsub {
+min-height: 67px;line-height: 16px;background-color: #b5b5b5;cursor: pointer;margin: 1px;padding: 10px;width: 100%;}
+.mainpage-showall {padding:0px; clear:both;background-color: #b5b5b5;margin: 0 0 0 1px;text-align: right;}
+.glyphicon.glyphicon-menu-up {
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    margin-left: 10px;
+}
+
