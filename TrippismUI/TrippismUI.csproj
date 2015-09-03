@@ -23,6 +23,7 @@
     <Content Include="app\Controllers\EmailForDestinationDetController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
     <Content Include="app\Controllers\YouTubeController.js" />
+    <Content Include="app\Directives\attractionsListDirective.js" />
     <Content Include="app\Directives\AttractionTabDirective.js" />
     <Content Include="app\Directives\AttractiontabFareForecastDirective.js" />
     <Content Include="app\Directives\AverageStarRatingDirective.js" />
@@ -106,6 +107,7 @@
     <Content Include="app\Styles\alertifyjs\themes\semantic.min.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.min.css" />
+    <Content Include="app\Views\partials\attractionsList.html" />
     <Content Include="app\Views\partials\AttractiontabFareForecastPartial.html" />
     <Content Include="app\Views\partials\AttractionTabPartial.html" />
     <Content Include="app\Views\partials\avarageStarRatingPartial.html" />
