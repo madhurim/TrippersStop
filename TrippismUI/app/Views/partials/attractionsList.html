@@ -5,9 +5,9 @@
                 <h3>Total Attractions Found : {{attractions.length}} </h3>
             </div>
             <div class="col-lg-2">
-                <span style="margin-top:4px;" class="glyphicon" aria-hidden="true" ng-click="topdestinationflg =!topdestinationflg" ng-class="topdestinationflg ?'glyphicon-menu-up' :'glyphicon-menu-down'"></span>
+                <span style="margin-top:4px;" class="glyphicon" aria-hidden="true" ng-click="attractiondispflg =!attractiondispflg" ng-class="attractiondispflg ?'glyphicon-menu-up' :'glyphicon-menu-down'"></span>
             </div>
-            <div ng-show="topdestinationflg" class="col-lg-12 mainpage-topdestination">
+            <div ng-show="attractiondispflg" class="col-lg-12 mainpage-topdestination">
                 <div ng-click="SelectPlace(item)" class="mainpage-topdestinationsub" ng-repeat="item in attractionstoDisp">
                     <div style="color:white;font-size:12px;min-height:50px;">
                         <div class="col-sm-12 padleft0"><strong>{{item.name}}</strong><br></div>
@@ -15,7 +15,7 @@
                         {{item.PhoneNo}}
                     </div>
                 </div>
-                <div class="mainpage-topdestinationsub" style="min-height:30px;" ng-show="showmore">
+                <div class="mainpage-topdestinationsub" style="min-height:30px;" ng-show="attractiondispflg && showmore">
                     <a class="pull-right" ng-click="ShowMoreAttractions()">Show more</a>
                 </div>
 

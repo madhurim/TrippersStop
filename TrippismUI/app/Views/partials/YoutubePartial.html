@@ -5,16 +5,18 @@
                 <table class="table fontsize" style="clear:both; color:black; height:100%;">
                     <tbody style="height:100%;overflow-y:hidden;">
                         <tr style="text-align:center;">
-                            <td><h5>[ {{youtubeParams.DestinationairportName.airport_CityName}} ] attraction videos in 93 Miles radius</h5></td>
+                            <td><h5>[ {{youtubeParams.DestinationairportName.airport_CityName}} ] attraction videos in 30 Miles radius</h5></td>
                         </tr>
                         <tr ng-show="isDataLoadedFirstTime" style="text-align:center;">
                             <td>
                                 <div class="divpagination pagination-centered">
-                                    <!--ng-show="youtubeData.items.length"-->
                                     <ul class="pagination-controle divpagination">
-                                        <li><button type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)">&lt; PREV</button></li>
-                                        <!--<li><span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span></li>-->
-                                        <li><button type="button" class="btnnextprev" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)">NEXT &gt;</button></li>
+                                        <li style="display:inline;">
+                                            <button style="float:left;" type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)"> &lt; PREV</button>
+                                        </li>
+                                        <li style="display:inline;">
+                                            <button style="float:right;" type="button" class="btnnextprev" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)"> NEXT &gt;</button>
+                                        </li>
                                     </ul>
                                 </div>
                             </td>
@@ -36,9 +38,12 @@
                             <td>
                                 <div class="divpagination pagination-centered">
                                     <ul class="pagination-controle divpagination">
-                                        <li><button type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)"> &lt; PREV</button></li>
-                                        <!--<li><span class="btnpageno">Page {{curPage + 1}} of {{ numberOfPages }}</span></li>-->
-                                        <li><button type="button" class="btnnextprev" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)"> NEXT &gt;</button></li>
+                                        <li style="display:inline;">
+                                            <button style="float:left;" type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)"> &lt; PREV</button>
+                                        </li>
+                                        <li style="display:inline;">
+                                            <button style="float:right;" type="button" class="btnnextprev" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)"> NEXT &gt;</button>
+                                        </li>
                                     </ul>
                                 </div>
                             </td>
