@@ -245,7 +245,6 @@
             var SearchCriteria = {
                 FromDate :$scope.FromDate,
                 ToDate: $scope.ToDate,
-                Lengthofstay: $scope.LenghtOfStay,
                 Origin: $scope.Origin,
                 Theme : $scope.Theme
                 };
@@ -348,7 +347,7 @@
                             return;
                         else {
                             $scope.Origin = data.airport_Code;
-                            $scope.findDestinations('Cheapest');
+                            $scope.findDestinations();
                         }
                     });
                 }
@@ -360,12 +359,14 @@
                         $scope.ToDate = _qToDate;
                     $scope.CalledOnPageLoad = true;
                     $scope.Origin = org;
-                    $scope.findDestinations('Cheapest');
+                    $scope.findDestinations();
                 }
             });
         }
 
         activate();
+
+        
 
         $scope.onSelect = function ($item, $model, $label) {
             $scope.Origin = $item.airport_Code;
@@ -428,7 +429,17 @@
         $scope.SearchbuttonTop10IsLoading = false;
         $scope.SearchbuttonChepestIsLoading = false;
 
+        $scope.isAdvancedSearch = false;
+
         function findDestinations(buttnText) {
+            $scope.isAdvancedSearch = false;
+            if (buttnText != undefined && buttnText == 'advenced')
+                $scope.isAdvancedSearch = true;
+            else {
+                $scope.Theme = "";
+                $scope.Minfare = "";
+                $scope.Region = "";
+            }
             if ($scope.CalledOnPageLoad == false) {
                 if ($scope.frmdestfinder.$invalid) {
                     $scope.hasError = true;
@@ -506,9 +517,10 @@
            
             //Get Top Destination
             data.TopDestinations = 50;
+            
             $scope.topdestination = DestinationFactory.findDestinations(data).then(function (data) {
+                $scope.topdestinationlist = [];
                 if (data.FareInfo != null) {
-                    $scope.topdestinationlist = [];
                     for (var x = 0; x < data.FareInfo.length; x++) {
                         var airportdata = _.find($scope.AvailableAirports, function (airport) {
                             return airport.airport_Code == data.FareInfo[x].DestinationLocation

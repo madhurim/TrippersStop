@@ -18,22 +18,24 @@ angular.module('TrippismUIApp').directive('attractionList', ['$compile', '$sce',
                 if (scope.attractions != undefined && scope.attractions.length > 0) {
                     if (scope.attractionsCnt + 10 >= scope.attractions.length)
                         scope.showmore = false;
-
+                    scope.attractiondispflg = true;
                     for (var i = index; i < index + 10 ; i++) {
                         var MapDet = scope.attractions[i];
                         if (MapDet != undefined) {
                             var request = { placeId: MapDet.place_id };
                             scope.service.getDetails(request, function (place, status) {
-                                var PhoneNo = "";
-                                if (place.formatted_phone_number != undefined)
-                                    PhoneNo = place.formatted_phone_number;
-                                var placedetails = {
-                                    name: place.name,
-                                    Placeaddress: $sce.trustAsHtml(place.adr_address),
-                                    PhoneNo: PhoneNo,
-                                    place_id: place.place_id
-                                };
-                                scope.attractionstoDisp.push(placedetails);
+                                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                                    var PhoneNo = "";
+                                    if (place.formatted_phone_number != undefined)
+                                        PhoneNo = place.formatted_phone_number;
+                                    var placedetails = {
+                                        name: place.name,
+                                        Placeaddress: $sce.trustAsHtml(place.adr_address),
+                                        PhoneNo: PhoneNo,
+                                        place_id: place.place_id
+                                    };
+                                    scope.attractionstoDisp.push(placedetails);
+                                }
                             });
                         }
                     }
@@ -56,7 +58,7 @@ angular.module('TrippismUIApp').directive('attractionList', ['$compile', '$sce',
                     getAttractionsList(scope.attractionsCnt);
                 }
             });
-
+            
             scope.ShowMoreAttractions = function () {
                 scope.attractionsCnt += 10;
                 getAttractionsList(scope.attractionsCnt);
