@@ -880,7 +880,9 @@ ul li {
      left: 6%;position: absolute;z-index: 1; padding: 0 !important;    font-size: 15px; font-weight: bold;
 }
 .mainpagepopup{
-     left: 6%;position: absolute;z-index: 2; background-color: rgba(0, 0, 0, 0.5); color:white;padding: 0 !important;
+     left: 6%;position: absolute;z-index: 2;color:white;padding: 0 !important;
+}
+.bgblack {  background-color: rgba(0, 0, 0, 0.5) !important; 
 }
 .mainpage-topdestination {
 display: block;    max-height: 200px;    overflow-y: auto;    overflow-x: hidden;border-bottom: 1px solid;padding: 0;

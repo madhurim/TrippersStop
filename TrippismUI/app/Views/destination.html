@@ -47,52 +47,53 @@
             </div>
         </div>
     </div>
-   
-        <div ng-show="ShowDestinationView" ng-hide="isSearching" class="col-lg-3 col-xs-4 col-md-3 mainpagepopup mainpage-topmargin128">
-            <topdestination-popup destinations-params="topdestinationlist" destinations="destinationlist" airportlist="AvailableAirports"></topdestination-popup>
-            <div class="col-lg-12" >
-                <div class="col-lg-10 home padlr0">
-                    <h3>Refine your search</h3>
-                </div>
-                <div class="col-lg-2 padlr0">
-                    <span style="margin-top:4px;" class="glyphicon" aria-hidden="true" ng-click="advancedsrchflg =!advancedsrchflg" ng-class="advancedsrchflg ?'glyphicon-menu-up' :'glyphicon-menu-down'"></span>
-                </div>
-                <div class="col-lg-12 padlr0 fnt12" ng-show="advancedsrchflg" style="border-radius: 5px;">
-                    <form role="form">
-                        <div class="form-group">
-                            <label>Min Fare</label>
-                            <input min="1" type="number" name="Minfare" class="form-control input hgth26 fnt12" ng-model="Minfare" placeholder="Enter Minfare">
-                        </div>
+    
+    <div ng-hide="isSearching" ng-show="ShowDestinationView" ng-class="{'bgblack': topdestinationlist != null}" class="col-lg-3 col-xs-4 col-md-3 mainpagepopup mainpage-topmargin128">
+        <topdestination-popup destinations-params="topdestinationlist" destinations="destinationlist" airportlist="AvailableAirports"></topdestination-popup>
 
-                        <div class="form-group">
-                            <label>Themes</label>
-                            <select class="form-control drop hgth26 fnt12" ng-model="Theme" ng-options="color.value for color in AvailableThemes">
-                                <option value="">Choose Theme</option>
-                            </select>
-                        </div>
+        <div class="col-lg-12" ng-hide="!topdestinationlist">
+            <div class="col-lg-10 home padlr0">
+                <h3>Refine your search</h3>
+            </div>
+            <div class="col-lg-2 padlr0">
+                <span style="margin-top:4px;" class="glyphicon" aria-hidden="true" ng-click="advancedsrchflg =!advancedsrchflg" ng-class="advancedsrchflg ?'glyphicon-menu-up' :'glyphicon-menu-down'"></span>
+            </div>
+            <div class="col-lg-12 padlr0 fnt12" ng-show="advancedsrchflg" style="border-radius: 5px;">
+                <form role="form">
+                    <div class="form-group">
+                        <label>Min Fare</label>
+                        <input min="1" type="number" name="Minfare" class="form-control input hgth26 fnt12" ng-model="Minfare" placeholder="Enter Minfare">
+                    </div>
 
-                        <div class="form-group">
-                            <label>Regions</label>
-                            <select class="form-control drop hgth26 fnt12" ng-model="Region" ng-options="color.value for color in AvailableRegions">
-                                <option value="">Choose Region</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label>Themes</label>
+                        <select class="form-control drop hgth26 fnt12" ng-model="Theme" ng-options="color.value for color in AvailableThemes">
+                            <option value="">Choose Theme</option>
+                        </select>
+                    </div>
 
-                        <button type="submit"
-                                ng-click="findDestinations('advenced')"
-                                ng-disabled="SearchbuttonIsLoading"
-                                class="submit" style="margin-bottom:15px;">
-                            <i ng-if="SearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{SearchbuttonText}}
-                        </button>
+                    <div class="form-group">
+                        <label>Regions</label>
+                        <select class="form-control drop hgth26 fnt12" ng-model="Region" ng-options="color.value for color in AvailableRegions">
+                            <option value="">Choose Region</option>
+                        </select>
+                    </div>
 
-                        <!--<button type="submit" ng-click="findDestinations('All')" ng-disabled="SearchbuttonIsLoading" class="btn btn-default">Search</button>-->
-                    </form>
+                    <button type="submit"
+                            ng-click="findDestinations('advenced')"
+                            ng-disabled="SearchbuttonIsLoading"
+                            class="submit" style="margin-bottom:15px;">
+                        <i ng-if="SearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{SearchbuttonText}}
+                    </button>
 
-                </div>
+                </form>
+
             </div>
         </div>
+    </div>
+    
     <div ng-hide="true">
-        <div ng-show="ShowDestinationView" ng-hide="isSearching" class="col-lg-2 col-xs-2 col-md-4 mainpagepopup mainpage-topmargin190 ">
+        <div ng-show="ShowDestinationView" ng-hide="isSearching"  class="col-lg-2 col-xs-2 col-md-4 mainpagepopup mainpage-topmargin190 ">
             <div class="col-lg-12" style="padding:0px">
                 <div class="col-lg-10">
                     <h4>Top 5 Chepest Destination</h4>
@@ -163,14 +164,7 @@
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         Please select from date.
                                     </div>
-                                    <!--<div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Earliestdeparturedate.$error.required">
-                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                        Please select earliest departure date.
-                                    </div>
-                                    <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Latestdeparturedate.$error.required">
-                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                        Please select earliest latest departure date.
-                                    </div>-->
+                                
                                     <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.FromDate.$invalid && !frmdestfinder.FromDate.$error.required">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         Please select valid from date.
@@ -275,107 +269,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--<div class="col-xs-12 col-sm-6 col-md-3 orgin">
-                                    <div class="Length">
-                                        <h3>Length of Stay (Day) </h3>
-                                        <div align="left">
-                                            <select class="form-control drop" ng-model="LenghtOfStay">
-                                                <option value="1">1 </option>
-                                                <option value="2">2 </option>
-                                                <option value="3">3 </option>
-                                                <option value="4">4 </option>
-                                                <option value="5">5 </option>
-                                                <option value="6">6 </option>
-                                                <option value="7">7 </option>
-                                                <option value="8">8 </option>
-                                                <option value="9">9 </option>
-                                                <option value="10">10 </option>
-                                                <option value="11">11 </option>
-                                                <option value="12">12 </option>
-                                                <option value="13">13 </option>
-                                                <option value="14">14 </option>
-                                                <option value="15">15 </option>
-                                                <option value="16">16 </option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-                                </div>-->
-
-                                <!--<div class="col-xs-12 col-sm-6 col-md-3 orgin-two">
-                                    <h3>Minimum Fare</h3>
-                                    <div class="form-group">
-                                        <div align="left">
-                                            <input min="1" type="number" name="Minfare" class="form-control input" ng-model="Minfare" placeholder="Enter Minfare">
-                                        </div>
-                                    </div>
-                                </div>-->
-
-                             
-                                <!--<div class="col-xs-12 col-sm-6 col-md-3 orgin-two">
-
-                                    <h3>Latest departure</h3>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <input type="text"
-                                                   ng-disabled="true"
-                                                   class="form-control input"
-                                                   datepicker-popup="{{format}}"
-                                                   min-date="Earliestdeparturedate"
-                                                   max-date="MaximumLatestdeparturedate"
-                                                   ng-model="Latestdeparturedate"
-                                                   name="Latestdeparturedate"
-                                                   is-open="openedLatestdeparturedate"
-                                                   ng-required="Earliestdeparturedate"
-                                                   datepicker-options="dateOptions"
-                                                   close-text="Close" />
-                                            <div class="input-group-addon" ng-click="openLatestdeparturedate($event)"><i class="glyphicon glyphicon-calendar"></i></div>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-3 orgin" style="margin-bottom: 10px;">
-                                    <h3>Earliest departure</h3>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <input type="text"
-                                                   ng-disabled="true"
-                                                   class="form-control input"
-                                                   datepicker-popup="{{format}}"
-                                                   min-date="minFromDate"
-                                                   ng-model="Earliestdeparturedate"
-                                                   name="Earliestdeparturedate"
-                                                   is-open="openedEarliestdeparturedate"
-                                                   ng-required="Latestdeparturedate"
-                                                   datepicker-options="dateOptions"
-                                                   close-text="Close" />
-                                            <div ng-click="openEarliestdeparturedate($event)" class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
-                                        </div>
-                                    </div>
-                                </div>-->
-
-                                <!--<div class="col-xs-12 col-sm-6 col-md-3 orgin-two">
-                                    <h3> Region</h3>
-                                    <div align="left">
-                                        <select class="form-control drop" ng-model="Region" ng-options="color.value for color in AvailableRegions">
-                                            <option value="">Choose Region</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12 col-sm-6 col-md-3 orgin-two">
-                                    <h3>Theme</h3>
-                                    <div align="left">
-                                        <select class="form-control drop" ng-model="Theme" ng-options="color.value for color in AvailableThemes">
-                                            <option value="">Choose Theme</option>
-                                        </select>
-                                    </div>
-                                </div>-->
-
-                                
-
                                 <div class="col-xs-12">
                                     <div class="contry">
                                         <button type="submit"

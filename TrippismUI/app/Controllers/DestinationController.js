@@ -435,11 +435,7 @@
             $scope.isAdvancedSearch = false;
             if (buttnText != undefined && buttnText == 'advenced')
                 $scope.isAdvancedSearch = true;
-            else {
-                $scope.Theme = "";
-                $scope.Minfare = "";
-                $scope.Region = "";
-            }
+            
             if ($scope.CalledOnPageLoad == false) {
                 if ($scope.frmdestfinder.$invalid) {
                     $scope.hasError = true;
