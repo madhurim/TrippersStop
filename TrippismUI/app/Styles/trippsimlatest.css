@@ -902,3 +902,11 @@ font-size:12px;
     line-height: 30px;
     margin-left: 10px;
 }
+
+.WeatherWidget{
+    position: absolute;z-index: 2; background-color: rgba(0, 0, 0, 0.5); color:white;padding: 0 !important;
+        float: right;
+    margin-top: -27%!important ; /*-300px!important;*/
+    right: 2%;
+   
+}
