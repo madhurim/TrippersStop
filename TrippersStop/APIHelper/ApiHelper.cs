@@ -1,11 +1,14 @@
+using ExpressMapper;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
+using TraveLayer.CustomTypes.Sabre;
+using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Weather;
 using TrippismApi.TraveLayer;
-
+using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 namespace TrippismApi
 {
     public static class ApiHelper
@@ -122,6 +125,32 @@ namespace TrippismApi
                 return true;
             }
             return false;
+        }
+
+        public static void RegisterMappingEntities()
+        {
+           // ConfigurationManager.AppSettings["SabreDestinationsUrl"];
+            Mapper.Register<OTA_DestinationFinder, Fares>();
+            Mapper.Register<OTA_FareRange, VM.FareRange>();
+            Mapper.Register<OTA_TravelSeasonality, VM.TravelSeasonality>();
+            Mapper.Register<OTA_LowFareForecast, LowFareForecast>();
+            Mapper.Register<TempHigh, TempHighAvg>()
+                  .Member(h => h.Avg, m => m.avg);
+            Mapper.Register<TempLow, TempLowAvg>()
+               .Member(h => h.Avg, m => m.avg);
+            Mapper.Register<Trip, TripWeather>()
+            .Member(h => h.TempHighAvg, m => m.temp_high)
+            .Member(h => h.TempLowAvg, m => m.temp_low)
+            .Member(h => h.CloudCover, m => m.cloud_cover);
+            Mapper.Compile();
+        }
+
+        public static bool IsRedisAvailable()
+        {
+            bool isRedisAvailable = false;
+            RedisService redisService = new RedisService();
+            isRedisAvailable = redisService.IsConnected();
+            return isRedisAvailable;
         }
     }
 }

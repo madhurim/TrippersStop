@@ -90,6 +90,11 @@ namespace TraveLayer.CacheServices
             }
             return isSuccess;
         }
+
+        public bool IsConnected()
+        {           
+            return true;
+        }
     }
  
 

@@ -39,7 +39,7 @@ namespace TrippismApi
             var container = new Container();
             container.RegisterWebApiRequest<IAsyncSabreAPICaller, SabreAPICaller>();
             container.RegisterWebApiRequest<IAsyncWeatherAPICaller, WeatherAPICaller>();
-            if(IsRedisAvailable())
+            if (ApiHelper.IsRedisAvailable())
             {
                 container.RegisterWebApiRequest<ICacheService, RedisService>();
             }
@@ -57,34 +57,9 @@ namespace TrippismApi
 
             GlobalConfiguration.Configuration.DependencyResolver =
                 new SimpleInjectorWebApiDependencyResolver(container);
-            RegisterMappingEntities();
+            ApiHelper.RegisterMappingEntities();
             //GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
            // GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
-        }
-
-        private bool IsRedisAvailable()
-        {
-            bool isRedisAvailable = true;
-            RedisService redisService =new RedisService();
-            isRedisAvailable=redisService.Save<string>("Test","Test");
-            return isRedisAvailable;
-        }
-
-        private void RegisterMappingEntities()
-        {
-            Mapper.Register<OTA_DestinationFinder, Fares>();
-            Mapper.Register<OTA_FareRange, VM.FareRange>();
-            Mapper.Register<OTA_TravelSeasonality, VM.TravelSeasonality>();
-            Mapper.Register<OTA_LowFareForecast, LowFareForecast>();
-            Mapper.Register<TempHigh, TempHighAvg>()
-                  .Member(h => h.Avg, m => m.avg);
-            Mapper.Register<TempLow, TempLowAvg>()
-               .Member(h => h.Avg, m => m.avg);
-            Mapper.Register<Trip, TripWeather>()
-            .Member(h => h.TempHighAvg, m => m.temp_high)
-            .Member(h => h.TempLowAvg, m => m.temp_low)          
-            .Member(h => h.CloudCover, m => m.cloud_cover);
-            Mapper.Compile();
         }
     }
 }
