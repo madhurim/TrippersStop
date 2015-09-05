@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -22,6 +23,21 @@ namespace Trippism.Areas.Weather.Controllers
         const string TrippismKey = "Trippism.Weather."; 
         IAsyncWeatherAPICaller _apiCaller;
         ICacheService _cacheService;
+        public string WeatherHistoryUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["WeatherHistoryUrl"];
+            }
+        }
+        public string WeatherInternationalHistoryUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["WeatherInternationalHistoryUrl"];
+            }
+        }
+
         /// <summary>
         /// Returns a weather summary based on historical information between the specified dates (30 days max).
         /// </summary>
@@ -48,7 +64,7 @@ namespace Trippism.Areas.Weather.Controllers
             // http://api.wunderground.com/api/Your_Key/planner_MMDDMMDD/q/CA/San_Francisco.json
             string fromDate = weatherInfo.DepartDate.ToString("MMdd");
             string toDate = weatherInfo.ReturnDate.ToString("MMdd");
-            string url = string.Format("planner_{0}{1}/q/{2}/{3}.json", fromDate, toDate, weatherInfo.State, weatherInfo.City);
+            string url = string.Format(WeatherHistoryUrl, fromDate, toDate, weatherInfo.State, weatherInfo.City);
             return GetResponse(url, cacheKey);
         }
 
@@ -70,7 +86,7 @@ namespace Trippism.Areas.Weather.Controllers
             //http://api.wunderground.com/api/my_key/planner_10011031/q/IN/Karwar.json
             string fromDate = weatherInfo.DepartDate.ToString("MMdd");
             string toDate = weatherInfo.ReturnDate.ToString("MMdd");
-            string url = string.Format("planner_{0}{1}/q/{2}/{3}.json", fromDate, toDate, weatherInfo.CountryCode, weatherInfo.AirportCode);
+            string url = string.Format(WeatherInternationalHistoryUrl, fromDate, toDate, weatherInfo.CountryCode, weatherInfo.AirportCode);
             return GetResponse(url, cacheKey);
         }
 
