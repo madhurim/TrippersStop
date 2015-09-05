@@ -28,7 +28,6 @@ angular.module('TrippismUIApp')
           };
 
           $scope.showPosition = function (destinations) {
-
               $scope.destinationslist = destinations;
               var promises = [];
               for (var i = 0; i < $scope.destinationslist.length; i++) {

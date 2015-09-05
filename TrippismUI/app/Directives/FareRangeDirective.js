@@ -42,9 +42,6 @@
                             var timeDiff = Math.abs(todt.getTime() - frdt.getTime());
                             scope.staydaylength = Math.ceil(timeDiff / (1000 * 3600 * 24));
                         }
-                        else {
-                            staydaylength = scope.farerangeParams.SearchCriteria.Lengthofstay;
-                        }
                        
                         var data = {
                             "Origin": scope.farerangeParams.Fareforecastdata.Origin,

@@ -14,6 +14,8 @@
             templateUrl: '/app/Views/Partials/GoogleAttractionPartial.html',
             controller: function ($scope) {
 
+                $scope.DisplayattractionsInfo = false;
+
                 $scope.googleMapId = "googleMapId_" + $scope.googleattractionParams.tabIndex;
                 $scope.gMapId = "gMapId_" + $scope.googleattractionParams.tabIndex;
 
@@ -35,6 +37,65 @@
                             $scope.loadgoogleattractionInfo();
                     }
                 });
+
+
+                $scope.$on('onMarkerPopup', function (event, args) {
+                    if (args.tabIndex == $scope.googleattractionParams.tabIndex)
+                        SetMarkerSlider(args.place)
+                });
+
+
+                function SetMarkerSlider(MapDet) {
+                    $scope.slides = [];
+                    $scope.IsMarkerSelected = false;
+                    $scope.IsMapPopupLoading = true;
+                    $scope.PhoneNo = "";
+                    $scope.raitingToAppend = "";
+                    $scope.PlaceName = "";
+                    $scope.Placeaddress = "";
+                    var service = new google.maps.places.PlacesService($scope.googleattractionsMap);
+                    var request = { placeId: MapDet.place_id };
+                    $scope.SelectedPlaceId = MapDet.place_id;
+                    service.getDetails(request, function (place, status) {
+                        $scope.IsMapPopupLoading = false;
+                        if (status == google.maps.places.PlacesServiceStatus.OK) {
+
+                            // Multi photo
+                            if (place.photos != null && place.photos.length > 0) {
+                                var photos = [];
+                                for (var photoidx = 0; photoidx < place.photos.length; photoidx++) {
+                                    //var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 440, 'maxHeight': 270 });
+                                    var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 570, 'maxHeight': 400 });
+                                    var objtopush = { image: Imgsrc, text: "" };
+                                    photos.push(objtopush);
+                                }
+                                $scope.addSlides(photos);
+                            }
+                            $scope.PlaceName = place.name;
+                            $scope.Placeaddress = $sce.trustAsHtml(place.adr_address);
+                            if (place.formatted_phone_number != undefined)
+                                $scope.PhoneNo = place.formatted_phone_number;
+
+                            $scope.raitingToAppend = "";
+                            if (place.rating != undefined)
+                                $scope.raitingToAppend = $sce.trustAsHtml(getRatings(place.rating));
+
+                            $scope.IsMapPopupLoading = false;
+                            $scope.$apply();
+                        }
+
+                    });
+
+                    var mapheight = $('#' + $scope.gMapId).height() - 400;
+                    var mapWidth = $('#' + $scope.gMapId).width() - 600;
+
+                    $("#" + $scope.googleMapId).css('top', '-25px');
+                    $("#" + $scope.googleMapId).css('left', mapWidth / 2);
+
+                    $scope.IsMarkerSelected = true;
+
+                }
+
 
                 $scope.FittoScreen = function () {
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
@@ -64,7 +125,7 @@
                     });
                 }
 
-                 
+
 
                 $timeout(function () {
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
@@ -87,6 +148,7 @@
                         $scope.googleattractionInfoLoaded = false;
                         $scope.googleattractionInfoNoDataFound = false;
                         $scope.googleattractionData = "";
+                        $scope.attractionsplaces = [];
                         if ($scope.googleattractionParams != undefined) {
                             var data = {
                                 "Latitude": $scope.googleattractionParams.DestinationairportName.airport_Lat,//$scope.googleattractionParams.airport_Lat,
@@ -110,6 +172,7 @@
                                         }
                                         RenderMap(data.results);
                                         $scope.MapLoaded = true;
+                                        $scope.attractionsplaces = data.results;
                                         $scope.googleattractionData = data;
                                         $scope.quantity = 5;
                                         $scope.googleattractionInfoLoaded = true;
@@ -121,7 +184,7 @@
                     }
                 };
 
-              
+
                 $scope.cancel = function () {
                     $scope.IsMarkerSelected = false;
                 };
@@ -143,7 +206,7 @@
 
                         for (var starIdx = 0; starIdx < stars.length; starIdx++)
                             ratingDiv += "<li class='star'><i class='fa fa-star'></i></li>";
-                        
+
                         ratingDiv += "</ul>";
                         ratingDiv += "<ul class='rating foreground readonly'  style='width:" + filledInStarsContainerWidth + "%'>";
 
@@ -159,7 +222,7 @@
 
                 var slides = [];
                 $scope.slides = [];
-                
+
                 $scope.addSlides = function (photos) {
                     for (var photoidex = 0; photoidex < photos.length; photoidex++)
                         $scope.slides.push(photos[photoidex]);
@@ -168,6 +231,8 @@
                 $scope.SelectedPlaceId = "";
                 function RenderMap(maps) {
                     if (maps != undefined && maps.length > 0) {
+
+                        $scope.DisplayattractionsInfo = true;
                         $scope.InfoWindow;
                         selected = maps;
                         for (var x = 0; x < maps.length; x++) {
@@ -197,59 +262,14 @@
                             $scope.InfoWindow = new google.maps.InfoWindow();
 
                             var MapDet = maps[x];
-                            google.maps.event.addListener(marker, 'mouseover', (function (marker, MapDet, x, contentString, $compile, infowindow, $scope) {
+
+                            //google.maps.event.addListener(marker, 'mouseover', (function (marker, MapDet, x, contentString, $compile, infowindow, $scope) {
+                            google.maps.event.addListener(marker, 'mouseover', (function (MapDet) {
                                 return function () {
-                                    $scope.slides = [];
-                                    $scope.IsMarkerSelected = false;
-                                    $scope.IsMapPopupLoading = true;
-                                    $scope.PhoneNo = "";
-                                    $scope.raitingToAppend = "";
-                                    $scope.PlaceName = "";
-                                    $scope.Placeaddress = "";
-
-                                    var service = new google.maps.places.PlacesService($scope.googleattractionsMap);
-                                    var request = { placeId: MapDet.place_id };
-                                    $scope.SelectedPlaceId = MapDet.place_id;
-                                    service.getDetails(request, function (place, status) {
-                                        $scope.IsMapPopupLoading = false;
-                                        if (status == google.maps.places.PlacesServiceStatus.OK) {
-
-                                            // Multi photo
-                                            if (place.photos != null && place.photos.length > 0) {
-                                                var photos = [];
-                                                for (var photoidx = 0; photoidx < place.photos.length; photoidx++) {
-                                                    //var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 440, 'maxHeight': 270 });
-                                                    var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 570, 'maxHeight': 400 });
-                                                    var objtopush = { image: Imgsrc, text: "" };
-                                                    photos.push(objtopush);
-                                                }
-                                                $scope.addSlides(photos);
-                                            }
-                                            $scope.PlaceName = MapDet.name;
-                                            $scope.Placeaddress = $sce.trustAsHtml(place.adr_address);
-                                            if (place.formatted_phone_number != undefined)
-                                                $scope.PhoneNo = place.formatted_phone_number;
-
-                                            $scope.raitingToAppend = "";
-                                            if (place.rating != undefined) 
-                                                $scope.raitingToAppend = $sce.trustAsHtml(getRatings(place.rating));
-                                            
-                                            $scope.IsMapPopupLoading = false;
-
-                                        }
-
-                                    });
-
-                                    var mapheight = $('#' + $scope.gMapId).height() - 400;
-                                    var mapWidth = $('#' + $scope.gMapId).width() - 600;
-
-                                    $("#" + $scope.googleMapId).css('top', '-25px');
-                                    $("#" + $scope.googleMapId).css('left', mapWidth / 2);
-
-                                    $scope.IsMarkerSelected = true;
-                                    return;
+                                    SetMarkerSlider(MapDet);
                                 };
-                            })(marker, MapDet, x, contentString, $compile, $scope.InfoWindow, $scope));
+                            })(MapDet));
+                            //})(marker, MapDet, x, contentString, $compile, $scope.InfoWindow, $scope));
                             $scope.AttractionMarkers.push(marker);
                         }
 

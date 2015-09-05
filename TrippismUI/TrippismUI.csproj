@@ -23,10 +23,12 @@
     <Content Include="app\Controllers\EmailForDestinationDetController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
     <Content Include="app\Controllers\YouTubeController.js" />
+    <Content Include="app\Directives\attractionsListDirective.js" />
     <Content Include="app\Directives\AttractionTabDirective.js" />
     <Content Include="app\Directives\AttractiontabFareForecastDirective.js" />
     <Content Include="app\Directives\AverageStarRatingDirective.js" />
     <Content Include="app\Directives\GoogleAttractionDirective.js" />
+    <Content Include="app\Directives\TopDestinationsDirective.js" />
     <Content Include="app\Directives\WetherApiDirective.js" />
     <Content Include="app\Directives\FareRangeDirective.js" />
     <Content Include="app\Directives\GoogleMap.directive.js" />
@@ -106,12 +108,15 @@
     <Content Include="app\Styles\alertifyjs\themes\semantic.min.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.min.css" />
+    <Content Include="app\Views\partials\attractionsList.html" />
     <Content Include="app\Views\partials\AttractiontabFareForecastPartial.html" />
     <Content Include="app\Views\partials\AttractionTabPartial.html" />
     <Content Include="app\Views\partials\avarageStarRatingPartial.html" />
     <Content Include="app\Views\partials\cgbusyMessagePartial.html" />
     <Content Include="app\Views\partials\EmailDetFormPartial.html" />
     <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
+
+    <Content Include="app\Views\partials\TopDestinationsPartial.html" />
     <Content Include="app\Views\partials\WeatherPartial.html" />
     <Content Include="app\Views\partials\FareRangePartial.html" />
     <Content Include="app\Views\partials\SeasonalityPartial.html" />
