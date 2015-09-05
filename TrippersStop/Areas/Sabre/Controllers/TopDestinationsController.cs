@@ -11,6 +11,7 @@ using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
 using Trippism.APIExtention.Filters;
+using System.Configuration;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
@@ -24,6 +25,14 @@ namespace TrippismApi.Areas.Sabre.Controllers
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        public string SabreTopDestinationsUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreTopDestinationsUrl"];
+            }
+        }
+        
         /// <summary>
         /// Set api class and cache service.
         /// </summary>
@@ -40,8 +49,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage Get()
         {
-            string url = string.Format("v1/lists/top/destinations");
-            return GetResponse(url);
+            return GetResponse(SabreTopDestinationsUrl);
         }
         /// <summary>
         /// API retrieves top booked leisure destinations from a given origin, theme, region and returns them in ascending rank order.
@@ -49,7 +57,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinationByTheme(string origin, string theme, string region)
         {
-            string url = string.Format("v1/lists/top/destinations?origin={0}&theme={1}&region={2}", origin, theme, region);
+            string url = string.Format(SabreTopDestinationsUrl+"?origin={0}&theme={1}&region={2}", origin, theme, region);
             return GetResponse(url);
         }
         /// <summary>
@@ -58,7 +66,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinationByBackweeks(string origin, string lookbackweeks, string topdestinations)
         {
-            string url = string.Format("v1/lists/top/destinations?origin={0}&lookbackweeks={1}&topdestinations={2}", origin, lookbackweeks, topdestinations);
+            string url = string.Format(SabreTopDestinationsUrl+"?origin={0}&lookbackweeks={1}&topdestinations={2}", origin, lookbackweeks, topdestinations);
             return GetResponse(url);
         }
         /// <summary>
@@ -67,7 +75,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinationByairportCode(string airportCode)
         {
-            string url = string.Format("v1/lists/top/destinations?origin={0}", airportCode);
+            string url = string.Format(SabreTopDestinationsUrl+"?origin={0}", airportCode);
             return GetResponse(url);
         }
         /// <summary>
@@ -76,7 +84,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinationByCountryCode(string countryCode)
         {
-            string url = string.Format("v1/lists/top/destinations?origincountry={0}", countryCode);
+            string url = string.Format(SabreTopDestinationsUrl+"?origincountry={0}", countryCode);
             return GetResponse(url);
         }
         /// <summary>
@@ -85,7 +93,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinationByDestinationType(string origin, string destinationType)
         {
-            string url = string.Format("v1/lists/top/destinations?origin={0}&destinationtype={1}", origin,destinationType);
+            string url = string.Format(SabreTopDestinationsUrl+"?origin={0}&destinationtype={1}", origin,destinationType);
             return GetResponse(url);
         }
         /// <summary>
@@ -94,7 +102,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinations(int number)
         {
-            string url = string.Format("v1/lists/top/destinations?topdestinations={0}", number);
+            string url = string.Format(SabreTopDestinationsUrl+"?topdestinations={0}", number);
             return GetResponse(url);
         }
         /// <summary>
@@ -103,7 +111,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinationsByDestinationCountry(string destinationcountry)
         {
-            string url = string.Format("v1/lists/top/destinations?destinationcountry={0}", destinationcountry);
+            string url = string.Format(SabreTopDestinationsUrl+"?destinationcountry={0}", destinationcountry);
             return GetResponse(url);
         }
         /// <summary>
@@ -112,7 +120,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(TopDestination))]
         public HttpResponseMessage GetTopDestinationsByRegion(string region)
         {
-            string url = string.Format("v1/lists/top/destinations?region={0}", region);
+            string url = string.Format(SabreTopDestinationsUrl+"?region={0}", region);
             return GetResponse(url);
         }
         /// <summary>

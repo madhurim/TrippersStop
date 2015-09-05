@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -23,6 +24,20 @@ namespace TrippismApi.Areas.Sabre.Controllers
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        public string SabreCountriesUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreCountriesUrl"];
+            }
+        }
+        public string SabrePointOfSaleCountryUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabrePointOfSaleCountryUrl"];
+            }
+        }
         /// <summary>
         /// Set api class and cache service.
         /// </summary>
@@ -38,8 +53,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(Countries))]
         public HttpResponseMessage Get()
         {
-            string url = "v1/lists/supported/countries";
-            return GetResponse(url);
+            return GetResponse(SabreCountriesUrl);
         }
         /// <summary>
         /// Retrieves a list of origin and destination countries based on point of sale country.
@@ -47,7 +61,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(Countries))]
         public HttpResponseMessage Get(string pointofsalecountry)
         {
-            string url = string.Format("v1/lists/supported/countries?pointofsalecountry={0}", pointofsalecountry);
+            string url = string.Format(SabrePointOfSaleCountryUrl, pointofsalecountry);
             return GetResponse(url);
         }
         /// <summary>

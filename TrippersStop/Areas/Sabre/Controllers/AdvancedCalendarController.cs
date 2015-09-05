@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -27,6 +28,13 @@ namespace TrippismApi.Areas.Sabre.Controllers
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        public string SabreAdvancedCalendarUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreAdvancedCalendarUrl"];
+            }
+        }
         /// <summary>
         /// Set api class and cache service.
         /// </summary>
@@ -42,13 +50,12 @@ namespace TrippismApi.Areas.Sabre.Controllers
         public HttpResponseMessage Post(OTA_AdvancedCalendar advancedCalendar)
         {
             ApiHelper.SetApiToken(_apiCaller, _cacheService);
-            //TBD : URL configurable using XML
-            string url="v1.8.1/shop/calendar/flights?mode=live";
-            APIResponse result = _apiCaller.Post(url, ServiceStackSerializer.Serialize(advancedCalendar)).Result;            
+
+            APIResponse result = _apiCaller.Post(SabreAdvancedCalendarUrl, ServiceStackSerializer.Serialize(advancedCalendar)).Result;            
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                ApiHelper.RefreshApiToken(_cacheService, _apiCaller);             
-                result = _apiCaller.Post("v1.8.1/shop/calendar/flights?mode=live", ServiceStackSerializer.Serialize(advancedCalendar)).Result;
+                ApiHelper.RefreshApiToken(_cacheService, _apiCaller);
+                result = _apiCaller.Post(SabreAdvancedCalendarUrl, ServiceStackSerializer.Serialize(advancedCalendar)).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)
             {

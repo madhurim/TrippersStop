@@ -11,6 +11,7 @@ using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
 using Trippism.APIExtention.Filters;
+using System.Configuration;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
@@ -22,6 +23,13 @@ namespace TrippismApi.Areas.Sabre.Controllers
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        public string SabreFareRangeUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreFareRangeUrl"];
+            }
+        }
         /// <summary>
         /// Set api class and cache service.
         /// </summary>
@@ -37,7 +45,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(VM.FareRange))]
         public HttpResponseMessage Get([FromUri]VM.FareForecast fareForecastRequest)
         {
-            string url = string.Format("v1/historical/flights/fares?origin={0}&destination={1}&earliestdeparturedate={2}&latestdeparturedate={3}&lengthofstay={4}", fareForecastRequest.Origin, fareForecastRequest.Destination, fareForecastRequest.EarliestDepartureDate, fareForecastRequest.LatestDepartureDate, fareForecastRequest.LengthOfStay);
+            string url = string.Format(SabreFareRangeUrl+"?origin={0}&destination={1}&earliestdeparturedate={2}&latestdeparturedate={3}&lengthofstay={4}", fareForecastRequest.Origin, fareForecastRequest.Destination, fareForecastRequest.EarliestDepartureDate, fareForecastRequest.LatestDepartureDate, fareForecastRequest.LengthOfStay);
             return GetResponse(url);
         }
         /// <summary>

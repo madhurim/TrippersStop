@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -22,6 +23,15 @@ namespace TrippismApi.Areas.Sabre.Controllers
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+
+        public string SabreMultiAirportCityUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreMultiAirportCityUrl"];
+            }
+        }
+
         /// <summary>
         /// Set api class and cache service.
         /// </summary>
@@ -37,7 +47,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(MultiAirportCity))]
         public HttpResponseMessage Get(string country)
         {
-            string url = string.Format("v1/lists/supported/cities?country={0}", country);
+            string url = string.Format(SabreMultiAirportCityUrl+"?country={0}", country);
             return GetResponse(url);
         }
         /// <summary>

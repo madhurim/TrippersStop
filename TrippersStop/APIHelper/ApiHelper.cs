@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using TraveLayer.CustomTypes.Weather;
@@ -9,7 +10,6 @@ namespace TrippismApi
 {
     public static class ApiHelper
     {
-        const string TokenUrl = "v2/auth/token/";
         public static void SetApiToken(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             apiCaller.Accept = "application/json";
@@ -18,7 +18,8 @@ namespace TrippismApi
             apiCaller.TokenExpireIn = cacheService.GetByKey<string>(apiCaller.SabreTokenExpireKey);
             if (string.IsNullOrWhiteSpace(apiCaller.LongTermToken))
             {
-                apiCaller.LongTermToken = apiCaller.GetToken(TokenUrl).Result;
+                string sabreAuthenticationUrl = ConfigurationManager.AppSettings["SabreAuthenticationUrl"];
+                apiCaller.LongTermToken = apiCaller.GetToken(sabreAuthenticationUrl).Result;
                 SaveTokenInCache(apiCaller, cacheService);
             }       
             apiCaller.Authorization = "bearer";
