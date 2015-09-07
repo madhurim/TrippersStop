@@ -29,13 +29,13 @@
 
         </div>
     </div>
-    
+
     <div ng-show="destinationlist">
         <div ng-show="ShowDestinationView" ng-hide="isSearching" class="col-lg-9 col-xs-12 col-md-6 mainpagepopup-title mainpage-topmargin66">
             <div class="col-lg-12 col-sm-12 col-md-12" style="text-align:center">
                 Your Searched : <span ng-show="Origin">Origin : {{OrigintoDisp}}</span>
                 <span ng-show="FromDate">, From Date : {{FromDate|date:'dd/MM/yyyy'}} </span>
-                <span ng-show="ToDate"> , To Date : {{ToDate |date:'MM/dd/yyyy'}}</span> 
+                <span ng-show="ToDate"> , To Date : {{ToDate |date:'MM/dd/yyyy'}}</span>
                 <span ng-show="LenghtOfStay > 0">,LengthOfStay: {{LenghtOfStay}}</span>
                 <span ng-show="Minfare > 0 && isAdvancedSearch">,Minimum Fare: {{Minfare}}</span>
                 <span ng-show="Maxfare > 0"> Maximum Fare: {{Maxfare}}</span>
@@ -47,10 +47,9 @@
             </div>
         </div>
     </div>
-    
+
     <div ng-hide="isSearching" ng-show="ShowDestinationView" ng-class="{'bgblack': topdestinationlist != null}" class="col-lg-3 col-xs-4 col-md-3 mainpagepopup mainpage-topmargin128">
         <topdestination-popup destinations-params="topdestinationlist" destinations="destinationlist" airportlist="AvailableAirports"></topdestination-popup>
-
         <div class="col-lg-12" ng-hide="!topdestinationlist">
             <div class="col-lg-10 home padlr0">
                 <h3>Refine your search</h3>
@@ -91,9 +90,9 @@
             </div>
         </div>
     </div>
-    
+
     <div ng-hide="true">
-        <div ng-show="ShowDestinationView" ng-hide="isSearching"  class="col-lg-2 col-xs-2 col-md-4 mainpagepopup mainpage-topmargin190 ">
+        <div ng-show="ShowDestinationView" ng-hide="isSearching" class="col-lg-2 col-xs-2 col-md-4 mainpagepopup mainpage-topmargin190 ">
             <div class="col-lg-12" style="padding:0px">
                 <div class="col-lg-10">
                     <h4>Top 5 Chepest Destination</h4>
@@ -137,17 +136,32 @@
                 </div>
             </div>
             <div class="container align searchcenter">
-                <div class="row destination" ng-show="isSearching" style="background-color: rgba(0, 0, 0, 0.5); transform: translate(0px, 0%);">
+                <div class="row destination" ng-show="isSearching" style="min-height:420px; background-color: rgba(0, 0, 0, 0.5); transform: translate(0px, 0%);">
+
+
+                    <div class="col-lg-12">
+                        <h1></h1>
+                        
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default" ng-class="{'active' : selectedform == 'SuggestDestination'}">
+                                    <input name="selectedform" class="active" ng-click="hasError = false" value="SuggestDestination" ng-model="selectedform" type="radio">Suggest Destination
+                                </label>
+                                <label class="btn btn-default" ng-class="{'active' : selectedform == 'KnowMyDestination'}">
+                                    <input name="selectedform" ng-click="hasError = false" value="KnowMyDestination" ng-model="selectedform" type="radio">I Know My Destination
+                                </label>
+                            </div>
+                        
+                    </div>
+                    
                     <form name="frmdestfinder" novalidate>
                         <div aria-labelledby="collapseListGroupHeading1" role="tabpanel" class="panel-collapse collapse in" id="collapseListGroup1" aria-expanded="true" style="">
                             <div class="row home" style="margin:0px;">
-                                <div class="col-lg-12">
-                                    <h3>Give us your Origin airport and dates of travel , we will suggest you destinations !</h3>
-                                </div>
-
+                                <div class="col-lg-12"><h3>Give us your Origin airport and dates of travel , we will suggest you destinations !</h3></div>
                             </div>
                             <div class="row" style="margin: 0px;">
+                                
                                 <div class="col-lg-12" style="margin-top:5px;" ng-show="hasError && frmdestfinder.$invalid">
+                                   
                                     <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Origin.$error.required">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         Please enter Origin.
@@ -164,7 +178,7 @@
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         Please select from date.
                                     </div>
-                                
+
                                     <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.FromDate.$invalid && !frmdestfinder.FromDate.$error.required">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         Please select valid from date.
@@ -183,6 +197,7 @@
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         Please enter valid Minimun fare.
                                     </div>
+
                                     <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.TopDestinations.$invalid">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         Please enter valid Top Destinations.
@@ -192,7 +207,14 @@
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         Please enter valid Maximum fare.
                                     </div>
+                                    <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.KnownDestinationAirport.$error.required">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        Please enter Destination Airport.
+                                    </div>
                                 </div>
+
+
+
                                 <div class="col-xs-12 col-sm-6 home">
                                     <h3>Origin Airport</h3>
                                     <div class="form-group">
@@ -219,7 +241,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-xs-12 col-sm-6 orgin-two">
                                     <h3>Maximum  Fare</h3>
                                     <div class="form-group">
@@ -228,7 +249,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-xs-12 col-sm-6 orgin">
                                     <h3>From Date</h3>
                                     <div class="form-group">
@@ -250,7 +270,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-xs-12 col-sm-6 orgin-two">
                                     <h3>To  Date</h3>
                                     <div class="form-group">
@@ -269,8 +288,33 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-xs-12 col-sm-6 home" ng-show="selectedform == 'KnowMyDestination'">
+                                    <h3>Destination Airport</h3>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   ng-model="KnownDestinationAirport"
+                                                   typeahead-min-length="2"
+                                                   ng-required="selectedform == 'KnowMyDestination'"
+                                                   typeahead-input-formatter="formatInput($model)"
+                                                   typeahead-editable="true"
+                                                   typeahead-on-select="onKnowDestinationSelect($item, $model, $label)"
+                                                   typeahead-template-url="customTemplate.html"
+                                                   name="KnownDestinationAirport"
+                                                   tabindex="1"
+                                                   placeholder="Enter your Destination"
+                                                   typeahead="state as state for AvailableCodes in getMatchingStuffs($viewValue)"
+                                                   class="form-control input">
+                                            <div class="input-group-addon">
+                                                <span ng-if="IsairportJSONLoading == true" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                                                <span ng-if="!IsairportJSONLoading" class="glyphicon glyphicon-map-marker"></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-xs-12">
-                                    <div class="contry">
+                                    <div ng-if="selectedform == 'SuggestDestination'" class="contry" style="margin-bottom:0px;padding-bottom :5px;">
                                         <button type="submit"
                                                 ng-click="findDestinations()"
                                                 ng-disabled="SearchbuttonIsLoading"
@@ -278,14 +322,28 @@
                                             <i ng-if="SearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{SearchbuttonText}}
                                         </button>
                                     </div>
+
+                                    <div ng-if="selectedform == 'KnowMyDestination'" class="contry" style="margin-top:15px; padding-bottom:5px; margin-bottom:0px;">
+                                        <button type="submit"
+                                                ng-click="getDestinationDetails()"
+                                                ng-disabled="KnowSearchbuttonIsLoading"
+                                                class="submit" style="width:auto;">
+                                            <i ng-if="KnowSearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{KnowSearchbuttonText}}
+                                        </button>
+                                    </div>
+
                                 </div>
+
                             </div>
                         </div>
                     </form>
+
+                    
+
                 </div>
             </div>
         </div>
-      
+
         <div class="" style="height:auto;width:auto;" cg-busy="{promise:mappromise,message:'Please wait, we are getting cheapest destinations from ' + OrigintoDisp,templateUrl:'/app/Views/partials/cgbusyMessagePartial.html'}">
             <div id="wrapper">
                 <div google-map id="map_canvas" btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
