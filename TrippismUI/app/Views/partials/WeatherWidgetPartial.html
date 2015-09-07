@@ -1,5 +1,4 @@
-﻿ <div class="col-lg-3 WeatherWidget " style="padding:0px; height: 264px;overflow-x: hidden;overflow-y: auto;
-">
+﻿ <div class="col-lg-3 WeatherWidget " style="padding:0px; height: 264px;overflow-x: hidden;overflow-y: auto;" ng-if="!WeatherInfoNoDataFound">
     <div class="col-lg-12 col-sm-12 col-md-6" style="padding:0px">
         <div class="col-lg-12 col-sm-12 col-md-6">
             <span style="font-size:100% !important;font-weight:bold;text-decoration: underline;">Historical Weather pattern for [ {{weatherParams.DestinationairportName.airport_CityName}} ] for the week of [ {{DepartDate}} to {{ReturnDate}} ]</span>
@@ -8,34 +7,34 @@
             <div class="col-lg-12">Temprature :</div>
             <div class="col-lg-6"><div class="fontsize"><b>Avg. Hig : </b></div><h2>{{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103</h2></div>
             <div class="col-lg-6"><div class="fontsize"><b>Avg. Low :</b></div><h2> {{LowTempratureF}}&#x2109 {{LowTempratureC}}&#x2103</h2></div>
-            </div>
-            <span style="margin-top: 9px;margin-bottom: 10px;" class=" col-lg-2 col-sm-2 col-md-2 glyphicon" aria-hidden="true"></span>
-            <div class="col-lg-12">
-                <div ng-repeat="item in  WeatherwidgetData.WeatherChances">
-                    <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Cloudy' && item.Percentage > 60">
-                        <div style="text-align:center"> <img src="../app/Styles/images/Cloudy.gif" style="width:70px;height:70px" /><span>{{item.Name}}</span> </div>
-                    </div>
-                    <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Humid' && item.Percentage > 60">
-                        <div style="text-align:center"><img src="../app/Styles/images/Humid.gif" style="width:70px;height:70px" /><span>{{item.Name}}</span> </div>
-                    </div>
-                    <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Partyly Cloudy' && item.Percentage > 60">
-                        <div style="text-align:center"><img src="../app/Styles/images/Partyly Cloudy.gif" style="width:70px;height:70px" /><span>{{item.Name}}</span> </div>
-                    </div>
-                    <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Precipitation' && item.Percentage > 60">
-                        <div style="text-align:center"><img src="../app/Styles/images/Precipitation.gif" style="width:70px;height:70px" /><span>{{item.Name}}</span> </div>
-                    </div>
-                    <div class="col-lg-6" ng-if="item.Name=='Rain' && item.Percentage > 60">
-                        <div style="text-align:center"><img src="../app/Styles/images/Rain.gif" style="width:70px;height:70px" />{{item.Name}} </div>
-                    </div>
-
-                    <div class="col-lg-6" ng-if="item.Name=='Sweltering' && item.Percentage > 60">
-                        <div style="text-align:center"><img src="../app/Styles/images/Sweltering.gif" style="width:70px;height:70px" />{{item.Name}} </div>
-                    </div>
-                    <div class="col-lg-6" ng-if="item.Name=='Thunderstorms' && item.Percentage > 60">
-                        <div style="text-align:center"><img src="../app/Styles/images/Thunderstorms.gif" style="width:70px;height:70px" />{{item.Name}} </div>
-                    </div>
-
+        </div>
+        <span style="margin-top: 9px;margin-bottom: 10px;" class=" col-lg-2 col-sm-2 col-md-2 glyphicon" aria-hidden="true"></span>
+        <div class="col-lg-12">
+            <div ng-repeat="item in  WeatherwidgetData.WeatherChances">
+                <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Cloudy' && item.Percentage > 60">
+                    <div style="text-align:center"> <img src="../app/Styles/images/Cloudy.gif" style="width:70px;height:70px" /><span>{{item.Name}}</span> </div>
                 </div>
+                <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Humid' && item.Percentage > 60">
+                    <div style="text-align:center"><img src="../app/Styles/images/Humid.gif" style="width:70px;height:70px" /><span>{{item.Name}}</span> </div>
+                </div>
+                <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Partyly Cloudy' && item.Percentage > 60">
+                    <div style="text-align:center"><img src="../app/Styles/images/Partyly Cloudy.gif" style="width:70px;height:70px" /><span>{{item.Name}}</span> </div>
+                </div>
+                <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Precipitation' && item.Percentage > 60">
+                    <div style="text-align:center"><img src="../app/Styles/images/Precipitation.gif" style="width:70px;height:70px" /><span>{{item.Name}}</span> </div>
+                </div>
+                <div class="col-lg-6" ng-if="item.Name=='Rain' && item.Percentage > 60">
+                    <div style="text-align:center"><img src="../app/Styles/images/Rain.gif" style="width:70px;height:70px" />{{item.Name}} </div>
+                </div>
+
+                <div class="col-lg-6" ng-if="item.Name=='Sweltering' && item.Percentage > 60">
+                    <div style="text-align:center"><img src="../app/Styles/images/Sweltering.gif" style="width:70px;height:70px" />{{item.Name}} </div>
+                </div>
+                <div class="col-lg-6" ng-if="item.Name=='Thunderstorms' && item.Percentage > 60">
+                    <div style="text-align:center"><img src="../app/Styles/images/Thunderstorms.gif" style="width:70px;height:70px" />{{item.Name}} </div>
+                </div>
+
             </div>
         </div>
+    </div>
 </div>
