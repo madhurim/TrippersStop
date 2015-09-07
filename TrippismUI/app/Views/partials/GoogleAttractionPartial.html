@@ -3,6 +3,8 @@
 </div>
 
 <attraction-list ng-show="DisplayattractionsInfo" attractiontabindex="googleattractionParams.tabIndex" attractionmap="googleattractionsMap" attractions="attractionsplaces"></attraction-list>
+ 
+<weatherwidget-info weather-params="googleattractionParams"></weatherwidget-info>
 
 <div ng-show="IsMarkerSelected" id={{googleMapId}} class="popupmarker" style="width: 600px;  min-height:505px;  z-index: 999;">
     <div class="modal-content">

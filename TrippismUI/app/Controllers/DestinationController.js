@@ -431,7 +431,7 @@
         };
 
         $scope.LoadingText = "Loading..";
-        $scope.SearchbuttonText = "Suggest Destination";
+        $scope.SearchbuttonText = "Suggest Destinations";
         $scope.SearchbuttonTo10Text = "Top 10";
         $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
         $scope.SearchbuttonIsLoading = false;

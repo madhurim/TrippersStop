@@ -33,6 +33,7 @@
     <Content Include="app\Directives\FareRangeDirective.js" />
     <Content Include="app\Directives\GoogleMap.directive.js" />
     <Content Include="app\Directives\SeasonalityDirective.js" />
+    <Content Include="app\Directives\WeatherWidgetDirective.js" />
     <Content Include="app\Directives\YoutubeDirective.js" />
     <Content Include="app\Factory\DestinationFactory.js" />
     <Content Include="app\Factory\EmailForDestinationDetFactory.js" />
@@ -67,10 +68,17 @@
     <Content Include="app\Styles\images\adsection_2.jpg" />
     <Content Include="app\Styles\images\busy.gif" />
     <Content Include="app\Styles\images\circle-info.png" />
+    <Content Include="app\Styles\images\Cloudy.gif" />
     <Content Include="app\Styles\images\hor-loading.png" />
+    <Content Include="app\Styles\images\Humid.gif" />
     <Content Include="app\Styles\images\loader.gif" />
     <Content Include="app\Styles\images\noimageavailable.png" />
+    <Content Include="app\Styles\images\partly cloudy.gif" />
+    <Content Include="app\Styles\images\Precipitation.gif" />
+    <Content Include="app\Styles\images\Rain.gif" />
+    <Content Include="app\Styles\images\Sweltering.gif" />
     <Content Include="app\Styles\images\thumbs_up.png" />
+    <Content Include="app\Styles\images\Thunderstorms.gif" />
     <Content Include="app\Styles\images\time.png" />
     <Content Include="app\Styles\images\Trippismlogo.png" />
     <Content Include="app\Styles\trippsimlatest.css" />
@@ -115,11 +123,11 @@
     <Content Include="app\Views\partials\cgbusyMessagePartial.html" />
     <Content Include="app\Views\partials\EmailDetFormPartial.html" />
     <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
-
     <Content Include="app\Views\partials\TopDestinationsPartial.html" />
     <Content Include="app\Views\partials\WeatherPartial.html" />
     <Content Include="app\Views\partials\FareRangePartial.html" />
     <Content Include="app\Views\partials\SeasonalityPartial.html" />
+    <Content Include="app\Views\partials\WeatherWidgetPartial.html" />
     <Content Include="app\Views\partials\YoutubePartial.html" />
     <Content Include="app\Styles\css\angular-busy.css" />
     <Content Include="app\Styles\css\angular-busy.min.css" />
