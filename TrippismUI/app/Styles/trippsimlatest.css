@@ -836,6 +836,7 @@ ul li {
     top: 55%;
     width:612px !important;
     transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
     z-index: 999;
 }
    #map_attractions {

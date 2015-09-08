@@ -10,7 +10,7 @@
         </div>
         <span style="margin-top: 9px;margin-bottom: 10px;" class=" col-lg-2 col-sm-2 col-md-2 glyphicon" aria-hidden="true"></span>
         <div class="col-lg-12">
-            <div ng-repeat="item in  WeatherwidgetData.WeatherChances">
+            <div ng-repeat="item in  WeatherwidgetData.WeatherChances">{{item.Name}}
                 <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Cloudy' && item.Percentage > 60">
                     <div style="text-align:center"> <img src="../app/Styles/images/Cloudy.gif" style="width:70px;height:70px" /><span>{{item.Name}}</span> </div>
                 </div>

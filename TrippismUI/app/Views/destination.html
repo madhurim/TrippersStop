@@ -119,13 +119,6 @@
                         </div>
                     </div>
 
-                    <!--<div class="form-group">
-                        <label>Themes</label>
-                        <select class="form-control drop hgth26 fnt12" ng-model="Theme" ng-options="color.value for color in AvailableThemes">
-                            <option value="">Choose Theme</option>
-                        </select>
-                    </div>-->
-
                     <div class="form-group">
                         <label>Regions</label>
                         <select class="form-control drop hgth26 fnt12" ng-model="Region" ng-options="color.value for color in AvailableRegions">
@@ -288,7 +281,34 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 orgin-two">
+
+                                <div class="col-xs-12 col-sm-6 home" ng-show="selectedform == 'KnowMyDestination'">
+                                    <h3>Destination Airport</h3>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   ng-model="KnownDestinationAirport"
+                                                   typeahead-min-length="2"
+                                                   ng-required="selectedform == 'KnowMyDestination'"
+                                                   typeahead-input-formatter="formatInput($model)"
+                                                   typeahead-editable="true"
+                                                   typeahead-on-select="onKnowDestinationSelect($item, $model, $label)"
+                                                   typeahead-template-url="customTemplate.html"
+                                                   name="KnownDestinationAirport"
+                                                   tabindex="1"
+                                                   placeholder="Enter your Destination"
+                                                   typeahead="state as state for AvailableCodes in getMatchingStuffs($viewValue)"
+                                                   class="form-control input">
+                                            <div class="input-group-addon">
+                                                <span ng-if="IsairportJSONLoading == true" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                                                <span ng-if="!IsairportJSONLoading" class="glyphicon glyphicon-map-marker"></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div ng-show="selectedform == 'SuggestDestination'" class="col-xs-12 col-sm-6 orgin-two">
                                     <h3>Maximum  Fare</h3>
                                     <div class="form-group">
                                         <div align="left">
@@ -335,28 +355,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 home" ng-show="selectedform == 'KnowMyDestination'">
-                                    <h3>Destination Airport</h3>
+                                
+                                <div ng-show="selectedform == 'KnowMyDestination'" class="col-xs-12 col-sm-6 orgin-two">
+                                    <h3>Maximum  Fare</h3>
                                     <div class="form-group">
-                                        <div class="input-group">
-                                            <input type="text"
-                                                   ng-model="KnownDestinationAirport"
-                                                   typeahead-min-length="2"
-                                                   ng-required="selectedform == 'KnowMyDestination'"
-                                                   typeahead-input-formatter="formatInput($model)"
-                                                   typeahead-editable="true"
-                                                   typeahead-on-select="onKnowDestinationSelect($item, $model, $label)"
-                                                   typeahead-template-url="customTemplate.html"
-                                                   name="KnownDestinationAirport"
-                                                   tabindex="1"
-                                                   placeholder="Enter your Destination"
-                                                   typeahead="state as state for AvailableCodes in getMatchingStuffs($viewValue)"
-                                                   class="form-control input">
-                                            <div class="input-group-addon">
-                                                <span ng-if="IsairportJSONLoading == true" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
-                                                <span ng-if="!IsairportJSONLoading" class="glyphicon glyphicon-map-marker"></span>
-                                            </div>
-
+                                        <div align="left">
+                                            <input min="1" type="number" class="form-control input" name="Maxfare" ng-model="Maxfare" placeholder="Enter Maxfare">
                                         </div>
                                     </div>
                                 </div>
