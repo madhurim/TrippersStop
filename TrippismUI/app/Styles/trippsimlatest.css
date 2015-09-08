@@ -904,13 +904,90 @@ font-size:12px;
     line-height: 30px;
     margin-left: 10px;
 }
-.hgth26 {height:26px !important;}
-.fnt12 {font-size:12px !important;}
 
+.hgth26 {
+    height: 26px !important;
+}
+
+.fnt12 {
+    font-size: 12px !important;
 .WeatherWidget{
     position: absolute;z-index: 2; background-color: rgba(0, 0, 0, 0.5); color:white;padding: 0 !important;
         float: right;
     margin-top: -27%!important ; /*-300px!important;*/
     right: 2%;
-   
+ }
+/*Theme*/
+
+.cc-selector input {margin: 0;padding: 0;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
+.cc-selector-2 input {position: absolute;z-index: 999;}
+.beach {background-image: url("images/themes/Beach-icon.png");}
+.disney {background-image: url("images/themes/mickey-mouse-icon.png");}
+.gambling {background-image: url("images/themes/games-icon.png");}
+.historic {background-image: url("images/themes/history-icon.png");}
+.mountains {background-image:url("images/themes/Mountain-48.png")}
+.nationalparks {background-image:url("images/themes/Park-icon.png")}
+.outdoors {background-image:url("images/themes/soccer-icon.png")}
+.romantic{background-image:url("images/themes/love-box-icon.png")}
+.shopping{background-image:url("images/themes/Shopping-icon.png")}
+.themepark{background-image:url("images/themes/nature-icon.png")}
+.skiing {background-image:url("images/themes/Skiing-2-icon.png")}
+.carribean {background-image:url("images/themes/Trillian-icon.png")
 }
+.cc-selector-2 input:active + .drinkcard-cc, .cc-selector input:active + .drinkcard-cc {
+    opacity: .9;
+}
+
+.cc-selector-2 input:checked + .drinkcard-cc, .cc-selector input:checked + .drinkcard-cc {
+    -webkit-filter: none;
+    -moz-filter: none;
+    filter: none;
+}
+
+.drinkcard-cc {
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    -webkit-transition: all 100ms ease-in;
+    -moz-transition: all 100ms ease-in;
+    transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+    -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+    filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+
+    .drinkcard-cc:hover {
+        -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+        -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+        filter: brightness(1.2) grayscale(.5) opacity(.9);
+    }
+
+.cc-selector-2 input {
+    margin: 5px 0 0 12px;
+}
+
+.cc-selector-2 label {
+    margin-left: 7px;
+}
+.join {
+    float: left;
+    text-align: center;
+    width: 25%;
+}
+/*Theme Ends*/
+
+.btn-customRadio:hover, .btn-customRadio:focus, .btn-customRadio.focus, .btn-customRadio:active, .btn-customRadio.active, .open > .dropdown-toggle.btn-customRadio {
+       color: #333333;
+    background-color: #ffffff;
+    border-color: #cccccc;
+}
+.btn-customRadio {
+         color: #333333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+    
