@@ -40,7 +40,7 @@
                 <span ng-show="Minfare > 0 && isAdvancedSearch">,Minimum Fare: {{Minfare}}</span>
                 <span ng-show="Maxfare > 0"> Maximum Fare: {{Maxfare}}</span>
                 <span ng-show="Region.id && isAdvancedSearch"> ,Region:{{Region.id}} </span>
-                <span ng-show="Theme.id && isAdvancedSearch">, Theme:{{Theme.id}}</span>
+                <span ng-show="Theme && isAdvancedSearch">, Theme:{{Theme}}</span>
             </div>
             <div class="col-lg-12 col-sm-12 col-md-12" style="text-align:center">
                 Total number of top cheapest destinations found from {{Origin |uppercase}} : {{destinationlist.length}}
@@ -65,11 +65,66 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Theme <span ng-show="Theme">(Selected:{{Theme}}) <button type="button" class="btn btn-default btn-xs" ng-click="Theme = ''">clear</button></span> </label>
+                        <div class="cc-selector">   
+                            <div class="join">
+                                <input id="BEACH" type="radio" ng-model="Theme" name="Theme" value="BEACH" />
+                                <label class="drinkcard-cc beach" style="" for="BEACH" title="BEACH"></label>
+                            </div>
+                            <div class="join">
+                                <input type="radio" id="DISNEY" ng-model="Theme" name="Theme" value="DISNEY" />
+                                <label class="drinkcard-cc disney" for="DISNEY" title="DISNEY"></label>
+                            </div>
+                            <div class="join">
+                                <input type="radio" id="GAMBLING" ng-model="Theme" name="Theme" value="GAMBLING" />
+                                <label class="drinkcard-cc gambling" for="GAMBLING" title="GAMBLING"></label>
+                            </div>
+                            <div class="join">
+                                <input type="radio" id="HISTORIC" ng-model="Theme" name="Theme" value="HISTORIC" />
+                                <label class="drinkcard-cc historic" for="HISTORIC" title="HISTORIC"></label>
+                            </div>
+                            <div class="join">
+                                <input type="radio" id="MOUNTAINS" ng-model="Theme" name="Theme" value="MOUNTAINS" />
+                                <label class="drinkcard-cc mountains" for="MOUNTAINS" title="MOUNTAINS"></label>
+                            </div>
+                            <div class="join">
+                                <input type="radio" id="NATIONAL-PARKS" name="Theme" ng-model="Theme" value="NATIONAL-PARKS" />
+                                <label class="drinkcard-cc nationalparks" for="NATIONAL-PARKS" title="NATIONAL-PARKS"></label>
+                            </div>
+                            <div class="join">
+                                <input type="radio" id="OUTDOORS" name="Theme" ng-model="Theme" value="OUTDOORS" />
+                                <label class="drinkcard-cc outdoors" for="OUTDOORS" title="OUTDOORS"></label>
+                            </div>
+                            <div class="join">
+                                <input type="radio" id="ROMANTIC" name="Theme" ng-model="Theme" value="ROMANTIC" />
+                                <label class="drinkcard-cc romantic" for="ROMANTIC" title="ROMANTIC"></label>
+                            </div>
+                            <div class="join">
+                                <input type="radio" id="SHOPPING" name="Theme" ng-model="Theme" value="SHOPPING" />
+                                <label class="drinkcard-cc shopping" for="SHOPPING" title="SHOPPING"></label>
+                            </div>
+                            <div class="join">
+                                <input type="radio" id="THEME-PARK" name="Theme" ng-model="Theme" value="THEME-PARK" />
+                                <label class="drinkcard-cc themepark" for="THEME-PARK" title="THEME-PARK"></label>
+                            </div>
+                            <div class="join">
+                                <input type="radio" id="SKIING" name="Theme" ng-model="Theme" value="SKIING" />
+                                <label class="drinkcard-cc skiing" for="SKIING" title="SKIING"></label>
+
+                            </div>
+                            <div class="join">
+                                <input type="radio" id="CARIBBEAN" name="Theme" ng-model="Theme" value="CARIBBEAN" />
+                                <label class="drinkcard-cc carribean" for="CARIBBEAN" title="CARIBBEAN"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="form-group">
                         <label>Themes</label>
                         <select class="form-control drop hgth26 fnt12" ng-model="Theme" ng-options="color.value for color in AvailableThemes">
                             <option value="">Choose Theme</option>
                         </select>
-                    </div>
+                    </div>-->
 
                     <div class="form-group">
                         <label>Regions</label>
@@ -138,30 +193,24 @@
             <div class="container align searchcenter">
                 <div class="row destination" ng-show="isSearching" style="min-height:420px; background-color: rgba(0, 0, 0, 0.5); transform: translate(0px, 0%);">
 
-
                     <div class="col-lg-12">
-                        <h1></h1>
-                        
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default" ng-class="{'active' : selectedform == 'SuggestDestination'}">
-                                    <input name="selectedform" class="active" ng-click="hasError = false" value="SuggestDestination" ng-model="selectedform" type="radio">Suggest Destination
-                                </label>
-                                <label class="btn btn-default" ng-class="{'active' : selectedform == 'KnowMyDestination'}">
-                                    <input name="selectedform" ng-click="hasError = false" value="KnowMyDestination" ng-model="selectedform" type="radio">I Know My Destination
-                                </label>
-                            </div>
-                        
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-customRadio" ng-class="{'active' : selectedform == 'SuggestDestination'}">
+                                <input name="selectedform" class="active" ng-click="hasError = false" value="SuggestDestination" ng-model="selectedform" type="radio">Suggest Destination
+                            </label>
+                            <label class="btn btn-customRadio" ng-class="{'active' : selectedform == 'KnowMyDestination'}">
+                                <input name="selectedform" ng-click="hasError = false" value="KnowMyDestination" ng-model="selectedform" type="radio">I Know My Destination
+                            </label>
+                        </div>
                     </div>
-                    
+
                     <form name="frmdestfinder" novalidate>
                         <div aria-labelledby="collapseListGroupHeading1" role="tabpanel" class="panel-collapse collapse in" id="collapseListGroup1" aria-expanded="true" style="">
                             <div class="row home" style="margin:0px;">
                                 <div class="col-lg-12"><h3>Give us your Origin airport and dates of travel , we will suggest you destinations !</h3></div>
                             </div>
                             <div class="row" style="margin: 0px;">
-                                
                                 <div class="col-lg-12" style="margin-top:5px;" ng-show="hasError && frmdestfinder.$invalid">
-                                   
                                     <div class="alert alert-danger triperror" role="alert" ng-show="frmdestfinder.Origin.$error.required">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         Please enter Origin.
@@ -212,8 +261,6 @@
                                         Please enter Destination Airport.
                                     </div>
                                 </div>
-
-
 
                                 <div class="col-xs-12 col-sm-6 home">
                                     <h3>Origin Airport</h3>
@@ -338,7 +385,7 @@
                         </div>
                     </form>
 
-                    
+
 
                 </div>
             </div>

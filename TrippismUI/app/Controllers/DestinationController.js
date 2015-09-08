@@ -35,17 +35,6 @@
         $scope.tabManager = {};
         $scope.tabManager.tabItems = [];
 
-
-
-        $scope.tabManager.checkIfMaxTabs = function () {
-            var max = 4;
-            var i = $scope.tabManager.tabItems.length;
-            if (i > max) {
-                return true;
-            }
-            return false;
-        };
-
         $scope.tabManager.getTitle = function (tabInfo) {
             tabInfo.title.substr(0, 10);
         };
@@ -70,7 +59,6 @@
         }
 
         $scope.tabManager.removeTab = function (i, $event) {
-
             if (typeof $event != 'undefined') {
                 $event.stopPropagation();
             }
@@ -120,11 +108,17 @@
         $scope.IsHistoricalInfo = false;
         $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 192), 'UI');
         $scope.LoadingText = "Loading..";
-        $scope.SearchbuttonText = "Get Destinations";
+        $scope.oneAtATime = true;
+        $scope.SearchbuttonText = "Suggest Destination";
+        $scope.SearchbuttonTo10Text = "Top 10";
         $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
         $scope.SearchbuttonIsLoading = false;
+        $scope.SearchbuttonTop10IsLoading = false;
         $scope.SearchbuttonChepestIsLoading = false;
-        $scope.oneAtATime = true;
+        $scope.isAdvancedSearch = false;
+        $scope.isSearching = true;
+        $scope.KnowSearchbuttonText = 'Get Destination Details';
+
         $scope.status = {
             isFirstOpen: true,
             Seasonalitystatus: false
@@ -291,6 +285,7 @@
             else
                 $scope.isSearching = true;
         }
+
         function loadFareForecastInfo() {
             $scope.MarkerInfo = "";
             $scope.status = {
@@ -319,18 +314,16 @@
             }
         };
 
-        $scope.$watch('Origin',
-                function (oldval, newValue) {
-                    if (newValue != undefined && newValue != "") {
-                        $scope.OrigintoDisp = $scope.Origin.toUpperCase();
-                        var originairportdata = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin.toUpperCase() });
-                        if (originairportdata != undefined)
-                            $scope.OriginCityName = originairportdata.airport_CityName;
-                        else
-                            $scope.OriginCityName = '';
-                    }
-                }
-              );
+        $scope.$watch('Origin', function (oldval, newValue) {
+            if (newValue != undefined && newValue != "") {
+                $scope.OrigintoDisp = $scope.Origin.toUpperCase();
+                var originairportdata = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin.toUpperCase() });
+                if (originairportdata != undefined)
+                    $scope.OriginCityName = originairportdata.airport_CityName;
+                else
+                    $scope.OriginCityName = '';
+            }
+        });
 
         function activate() {
             var search = $location.search();
@@ -370,8 +363,6 @@
 
         activate();
 
-
-
         $scope.onSelect = function ($item, $model, $label) {
             $scope.Origin = $item.airport_Code;
             $scope.OriginCityName = $item.airport_CityName;
@@ -380,8 +371,7 @@
         $scope.onKnowDestinationSelect = function ($item, $model, $label) {
             $scope.KnownDestinationAirport = $item.airport_Code;
         };
-
-
+        
         $scope.formatInput = function ($model) {
             if ($model == "" || $model == undefined) return "";
             var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $model });
@@ -429,19 +419,7 @@
             formatYear: 'yy',
             startingDay: 1
         };
-
-        $scope.LoadingText = "Loading..";
-        $scope.SearchbuttonText = "Suggest Destination";
-        $scope.SearchbuttonTo10Text = "Top 10";
-        $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
-        $scope.SearchbuttonIsLoading = false;
-        $scope.SearchbuttonTop10IsLoading = false;
-        $scope.SearchbuttonChepestIsLoading = false;
-
-        $scope.isAdvancedSearch = false;
-        $scope.isSearching = true;
-        $scope.KnowSearchbuttonText = 'Get Destination Details';
-
+        
         $scope.getDestinationDetails = function (buttnText) {
             if ($scope.frmdestfinder.$invalid) {
                 $scope.hasError = true;
@@ -463,7 +441,7 @@
                 PointOfsalesCountry = originairport.airport_CountryCode;
 
             var data = CreateSearchCriteria();
-        
+
             $scope.mappromise = DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.KnowSearchbuttonText = 'Get Destination Details';
                 $scope.KnowSearchbuttonIsLoading = false;
@@ -497,7 +475,7 @@
                         alertify.alert('Opps! Sorry, entered destination not found, however we got other destinations for you!').set('onok', function (closeEvent) { });
                     }
 
-                    
+
                 }
                 else {
                     alertify.alert("Destination Finder", "");
@@ -510,11 +488,9 @@
 
             GetTopPopularDestinations(data);
         };
-
-    
-
+        
         function findDestinations(buttnText) {
-            
+
             $scope.isAdvancedSearch = false;
             if (buttnText != undefined && buttnText == 'advenced')
                 $scope.isAdvancedSearch = true;
@@ -535,7 +511,7 @@
 
             var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin.toUpperCase() });
 
-           
+
             var data = CreateSearchCriteria();
 
             $scope.inProgress = true;
@@ -599,7 +575,8 @@
                 "Lengthofstay": $scope.LenghtOfStay,
                 "Earliestdeparturedate": ($scope.Earliestdeparturedate == '' || $scope.Earliestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Earliestdeparturedate, 'API'),
                 "Latestdeparturedate": ($scope.Latestdeparturedate == '' || $scope.Latestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Latestdeparturedate, 'API'),
-                "Theme": ($scope.Theme != undefined) ? $scope.Theme.id : "",
+                "Theme": $scope.Theme,
+                //"Theme": ($scope.Theme != undefined) ? $scope.Theme.id : "",
                 "Location": $scope.Location,
                 "Minfare": $scope.Minfare,
                 "Maxfare": $scope.Maxfare,
@@ -609,6 +586,7 @@
             };
             return data;
         }
+
         function GetTopPopularDestinations(data) {
             $scope.topdestination = DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.topdestinationlist = [];

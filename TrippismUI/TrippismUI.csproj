@@ -70,6 +70,19 @@
     <Content Include="app\Styles\images\hor-loading.png" />
     <Content Include="app\Styles\images\loader.gif" />
     <Content Include="app\Styles\images\noimageavailable.png" />
+    <Content Include="app\Styles\images\themes\app-x-theme-icon.png" />
+    <Content Include="app\Styles\images\themes\Beach-icon.png" />
+    <Content Include="app\Styles\images\themes\games-icon.png" />
+    <Content Include="app\Styles\images\themes\history-icon.png" />
+    <Content Include="app\Styles\images\themes\love-box-icon.png" />
+    <Content Include="app\Styles\images\themes\mickey-mouse-icon.png" />
+    <Content Include="app\Styles\images\themes\Mountain-48.png" />
+    <Content Include="app\Styles\images\themes\nature-icon.png" />
+    <Content Include="app\Styles\images\themes\Park-icon.png" />
+    <Content Include="app\Styles\images\themes\Shopping-icon.png" />
+    <Content Include="app\Styles\images\themes\Skiing-2-icon.png" />
+    <Content Include="app\Styles\images\themes\soccer-icon.png" />
+    <Content Include="app\Styles\images\themes\Trillian-icon.png" />
     <Content Include="app\Styles\images\thumbs_up.png" />
     <Content Include="app\Styles\images\time.png" />
     <Content Include="app\Styles\images\Trippismlogo.png" />
@@ -115,7 +128,6 @@
     <Content Include="app\Views\partials\cgbusyMessagePartial.html" />
     <Content Include="app\Views\partials\EmailDetFormPartial.html" />
     <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
-
     <Content Include="app\Views\partials\TopDestinationsPartial.html" />
     <Content Include="app\Views\partials\WeatherPartial.html" />
     <Content Include="app\Views\partials\FareRangePartial.html" />
