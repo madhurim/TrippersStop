@@ -143,6 +143,7 @@
         $scope.Destinationfortab = "";
 
         $scope.ViewDestination = function () {
+            $scope.isSearching = false;
             $scope.ShowDestinationView = true;
             $scope.tabManager.resetSelected();
             $scope.TabcontentView = false;

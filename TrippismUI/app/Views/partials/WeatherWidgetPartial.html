@@ -1,7 +1,7 @@
 ﻿ <div class="col-lg-3 WeatherWidget " style="padding:0px; height: 264px;overflow-x: hidden;overflow-y: auto;" ng-if="!WeatherInfoNoDataFound">
     <div class="col-lg-12 col-sm-12 col-md-6" style="padding:0px">
         <div class="col-lg-12 col-sm-12 col-md-6">
-            <span style="font-size:100% !important;font-weight:bold;text-decoration: underline;">Historical Weather pattern for [ {{weatherParams.DestinationairportName.airport_CityName}} ] for the week of [ {{DepartDate}} to {{ReturnDate}} ]</span>
+            <span style="font-size:100% !important;font-weight:bold;text-decoration: underline;">Historical Weather pattern for [{{DepartDate}} to {{ReturnDate}}]</span>
         </div>
         <div class="col-lg-12 col-sm-9 col-md-9 home" style="padding-top: 14px;">
             <div class="col-lg-12">Temprature :</div>
@@ -18,7 +18,7 @@
                     <div style="text-align:center"><img src="../app/Styles/images/Humid.gif" style="width:70px;height:70px" /><span>{{item.Name}}</span> </div>
                 </div>
                 <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Partyly Cloudy' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/Partyly Cloudy.gif" style="width:70px;height:70px" /><span>{{item.Name}}</span> </div>
+                    <div style="text-align:center"><img src="../app/Styles/images/Partly Cloudy.gif" style="width:70px;height:70px" /><span>{{item.Name}}</span> </div>
                 </div>
                 <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Precipitation' && item.Percentage > 60">
                     <div style="text-align:center"><img src="../app/Styles/images/Precipitation.gif" style="width:70px;height:70px" /><span>{{item.Name}}</span> </div>
