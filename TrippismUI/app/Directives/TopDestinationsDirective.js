@@ -20,8 +20,6 @@
            );
            
             scope.showallrecord = function () {
-                debugger;
-
                 scope.recordshow = scope.destinationsParams.length;
                 scope.showAllDestinations = true;
                 scope.topdestinationlist = scope.destinationsParams.slice(0, scope.recordshow);

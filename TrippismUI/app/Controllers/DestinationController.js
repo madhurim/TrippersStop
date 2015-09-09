@@ -242,12 +242,16 @@
             var _paramsdata = $scope.seasonalitydirectiveData;
             _paramsdata.tabIndex = $scope.TabCreatedCount;
             var SearchCriteria = {
+                OrigintoDisp: $scope.OrigintoDisp,
+                Minfare : $scope.Minfare,
+                Maxfare : $scope.Maxfare,
+                Region : ($scope.Region == undefined || $scope.Region == '' ) ? "" : $scope.Region.id,
                 FromDate: $scope.FromDate,
                 ToDate: $scope.ToDate,
                 Origin: $scope.Origin,
                 Theme: $scope.Theme
             };
-
+            
             _paramsdata.dataforEmail = {};
             _paramsdata.SearchCriteria = SearchCriteria;
             $scope.tabManager.tabItems.push({

@@ -22,7 +22,6 @@
             }
 
             function activate() {
-                debugger;
                 scope.FareNoDataFound = true;
                 scope.FareforecastData = "";
                 scope.IsRequestCompleted = false;

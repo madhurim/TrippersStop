@@ -55,7 +55,6 @@
                             scope.weatherParams.WeatherInfoNoDataFound = true;
                         }
                         else {
-                            debugger;
                             scope.WeatherwidgetData = "";
                             var data = {
                                 "CountryCode": scope.weatherParams.DestinationairportName.airport_CountryCode,
