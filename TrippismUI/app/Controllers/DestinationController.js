@@ -56,7 +56,7 @@
         $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 192), 'UI');
         $scope.LoadingText = "Loading..";
         $scope.oneAtATime = true;
-        $scope.SearchbuttonText = "Suggest Destination";
+        $scope.SearchbuttonText = "Suggest Destinations";
         $scope.SearchbuttonTo10Text = "Top 10";
         $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
         $scope.SearchbuttonIsLoading = false;
@@ -246,7 +246,6 @@
                 OrigintoDisp: $scope.OrigintoDisp,
                 Minfare : $scope.Minfare,
                 Maxfare : $scope.Maxfare,
-                //Region : ($scope.Region == undefined || $scope.Region == '' ) ? "" : $scope.Region.id,
                 Region: $scope.Region ,
                 FromDate: $scope.FromDate,
                 ToDate: $scope.ToDate,
@@ -456,14 +455,17 @@
                     $scope.destinationlist = data.FareInfo;
                     var DestinationairportName = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.KnownDestinationAirport.toUpperCase() });
 
-                    var objDestinationairport = _.find($scope.destinationlist, function (airport) { return airport.DestinationLocation == $scope.KnownDestinationAirport.toUpperCase() });
+                    var objDestinationairport = $scope.destinationlist[0];
+                    
                     if (objDestinationairport != undefined) {
                         var dataForecast = {
                             "Origin": $scope.Origin,
                             "DepartureDate": $filter('date')(objDestinationairport.DepartureDateTime, 'yyyy-MM-dd'),
                             "ReturnDate": $filter('date')(objDestinationairport.ReturnDateTime, 'yyyy-MM-dd'),
-                            "Destination": objDestinationairport.DestinationLocation
+                            //"Destination": objDestinationairport.DestinationLocation
+                            "Destination": $scope.KnownDestinationAirport.toUpperCase()
                         };
+                        objDestinationairport.objDestinationairport = $scope.KnownDestinationAirport.toUpperCase();
 
                         $rootScope.$broadcast('EmptyFareForcastInfo', {
                             Origin: originairport.airport_CityName,
@@ -491,13 +493,10 @@
                 $scope.inProgress = false;
             });
 
-            data.TopDestinations = 50;
-
-            GetTopPopularDestinations(data);
         };
         
         function findDestinations(buttnText) {
-
+            
             $scope.isAdvancedSearch = false;
             if (buttnText != undefined && buttnText == 'advenced')
                 $scope.isAdvancedSearch = true;
@@ -525,7 +524,7 @@
 
             $scope.mappromise = DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.isSearching = false;
-                $scope.SearchbuttonText = "Get Destinations";
+                $scope.SearchbuttonText = "Suggest Destinations";
                 $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
                 $scope.SearchbuttonIsLoading = false;
                 $scope.SearchbuttonChepestIsLoading = false;
@@ -570,6 +569,13 @@
         }
 
         function CreateSearchCriteria() {
+
+            if ($scope.KnownDestinationAirport != "" || $scope.KnownDestinationAirport != undefined) {
+                var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+                var secondDate = new Date($scope.ToDate);
+                var firstDate = new Date($scope.FromDate);
+                $scope.LenghtOfStay = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+            }
             var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin.toUpperCase() });
             var PointOfsalesCountry;
             if (originairport != undefined)
@@ -588,7 +594,8 @@
                 "Maxfare": $scope.Maxfare,
                 "PointOfSaleCountry": PointOfsalesCountry,
                 "Region": $scope.Region ,
-                "Destination": $scope.Destination
+                //"Destination": $scope.Destination
+                "Destination": $scope.KnownDestinationAirport
             };
             return data;
         }

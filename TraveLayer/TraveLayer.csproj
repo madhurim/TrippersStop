@@ -119,6 +119,7 @@
     <Compile Include="CustomTypes\Sabre\Request\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CustomTypes\Sabre\Request\InstaFlightSearchInput.cs" />
     <Compile Include="CustomTypes\Sabre\Response\APIResponse.cs" />
     <Compile Include="CustomTypes\Sabre\Response\BargainFinder.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\AdvancedCalendar.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="CustomTypes\Sabre\ViewModels\Countries.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\Destinations.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\FareForecast.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\InstaFlightSearch.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\LowFareForecast.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\MultiAirportCity.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\PointofSaleCountryCode.cs" />
@@ -145,7 +147,7 @@
     <Compile Include="CustomTypes\Sabre\Response\CountriesLookup.cs" />
     <Compile Include="CustomTypes\Sabre\Response\DestinationFinder.cs" />
     <Compile Include="CustomTypes\Sabre\Response\FareRange.cs" />
-    <Compile Include="CustomTypes\Sabre\Response\InstaFlightsSearch.cs" />
+    <Compile Include="CustomTypes\Sabre\Response\InstaFlightsSearchOutput.cs" />
     <Compile Include="CustomTypes\Sabre\Response\LeadPriceCalendar.cs" />
     <Compile Include="CustomTypes\Sabre\Response\LowFareForecast.cs" />
     <Compile Include="CustomTypes\Sabre\Response\MultiAirportCityLookup.cs" />

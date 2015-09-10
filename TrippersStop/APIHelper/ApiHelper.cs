@@ -130,6 +130,7 @@ namespace TrippismApi
         public static void RegisterMappingEntities()
         {
            // ConfigurationManager.AppSettings["SabreDestinationsUrl"];
+            Mapper.Register<InstaFlightsSearchOutput, InstaFlightSearch>();
             Mapper.Register<OTA_DestinationFinder, Fares>();
             Mapper.Register<OTA_FareRange, VM.FareRange>();
             Mapper.Register<OTA_TravelSeasonality, VM.TravelSeasonality>();
