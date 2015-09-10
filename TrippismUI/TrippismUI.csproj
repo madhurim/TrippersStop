@@ -73,6 +73,12 @@
     <Content Include="app\Styles\images\Humid.gif" />
     <Content Include="app\Styles\images\loader.gif" />
     <Content Include="app\Styles\images\noimageavailable.png" />
+    <Content Include="app\Styles\images\regions\africa-icon.png" />
+    <Content Include="app\Styles\images\regions\asia-icon.png" />
+    <Content Include="app\Styles\images\regions\europe.png" />
+    <Content Include="app\Styles\images\regions\icon-middle-east.png" />
+    <Content Include="app\Styles\images\regions\latin-america.png" />
+    <Content Include="app\Styles\images\regions\North_America.png" />
     <Content Include="app\Styles\images\themes\app-x-theme-icon.png" />
     <Content Include="app\Styles\images\themes\Beach-icon.png" />
     <Content Include="app\Styles\images\themes\games-icon.png" />

@@ -28,12 +28,44 @@
         ) {
 
         $scope.selectedform = 'SuggestDestination';
-
         $scope.ShowDestinationView = true;
         $scope.TabcontentView = true;
         $scope.TabCreatedCount = 0;
         $scope.tabManager = {};
         $scope.tabManager.tabItems = [];
+        $scope.isSearching = true;
+        $scope.MailMarkerSeasonalityInfo = {};
+        $scope.MailFareRangeData = {};
+        $scope.hasError = false;
+        $scope.Location = "";
+        $scope.AvailableCodes = [];
+        $scope.formats = Dateformat();
+        $scope.format = $scope.formats[5];
+        $scope.activate = activate;
+        $scope.findDestinations = findDestinations;
+        $scope.Origin = '';
+        $scope.OriginCityName = '';
+        $scope.Destination = '';
+        $scope.buttontext = "All";
+        $scope.AvailableAirports = [];
+        $scope.destinationlist = "";
+        $scope.topcheapestdestinationflg = true;
+        $scope.AvailableThemes = AvailableTheme();
+        $scope.AvailableRegions = AvailableRegions();
+        $scope.IsHistoricalInfo = false;
+        $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 192), 'UI');
+        $scope.LoadingText = "Loading..";
+        $scope.oneAtATime = true;
+        $scope.SearchbuttonText = "Suggest Destination";
+        $scope.SearchbuttonTo10Text = "Top 10";
+        $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
+        $scope.SearchbuttonIsLoading = false;
+        $scope.SearchbuttonTop10IsLoading = false;
+        $scope.SearchbuttonChepestIsLoading = false;
+        $scope.isAdvancedSearch = false;
+        $scope.isSearching = true;
+        $scope.KnowSearchbuttonText = 'Get Destination Details';
+
 
         $scope.tabManager.getTitle = function (tabInfo) {
             tabInfo.title.substr(0, 10);
@@ -81,43 +113,12 @@
             $rootScope.$broadcast('ontabClicked', $scope.tabManager.tabItems[i].parametersData.tabIndex);
         }
 
-        $scope.isSearching = true;
-        $scope.MailMarkerSeasonalityInfo = {};
-        $scope.MailFareRangeData = {};
-
-        $scope.hasError = false;
-        $scope.Location = "";
-        $scope.AvailableCodes = [];
-        $scope.formats = Dateformat();
-        $scope.format = $scope.formats[5];
-        $scope.activate = activate;
-        $scope.findDestinations = findDestinations;
-        $scope.Origin = '';
-        $scope.OriginCityName = '';
-        $scope.Destination = '';
-        $scope.buttontext = "All";
-        $scope.AvailableAirports = [];
-        $scope.destinationlist = "";
+       
         $scope.dateOptions = {
             formatYear: 'yy',
             startingDay: 1
         };
-        $scope.topcheapestdestinationflg = true;
-        $scope.AvailableThemes = AvailableTheme();
-        $scope.AvailableRegions = AvailableRegions();
-        $scope.IsHistoricalInfo = false;
-        $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 192), 'UI');
-        $scope.LoadingText = "Loading..";
-        $scope.oneAtATime = true;
-        $scope.SearchbuttonText = "Suggest Destination";
-        $scope.SearchbuttonTo10Text = "Top 10";
-        $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
-        $scope.SearchbuttonIsLoading = false;
-        $scope.SearchbuttonTop10IsLoading = false;
-        $scope.SearchbuttonChepestIsLoading = false;
-        $scope.isAdvancedSearch = false;
-        $scope.isSearching = true;
-        $scope.KnowSearchbuttonText = 'Get Destination Details';
+     
 
         $scope.status = {
             isFirstOpen: true,
@@ -245,7 +246,8 @@
                 OrigintoDisp: $scope.OrigintoDisp,
                 Minfare : $scope.Minfare,
                 Maxfare : $scope.Maxfare,
-                Region : ($scope.Region == undefined || $scope.Region == '' ) ? "" : $scope.Region.id,
+                //Region : ($scope.Region == undefined || $scope.Region == '' ) ? "" : $scope.Region.id,
+                Region: $scope.Region ,
                 FromDate: $scope.FromDate,
                 ToDate: $scope.ToDate,
                 Origin: $scope.Origin,
@@ -581,12 +583,11 @@
                 "Earliestdeparturedate": ($scope.Earliestdeparturedate == '' || $scope.Earliestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Earliestdeparturedate, 'API'),
                 "Latestdeparturedate": ($scope.Latestdeparturedate == '' || $scope.Latestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Latestdeparturedate, 'API'),
                 "Theme": $scope.Theme,
-                //"Theme": ($scope.Theme != undefined) ? $scope.Theme.id : "",
                 "Location": $scope.Location,
                 "Minfare": $scope.Minfare,
                 "Maxfare": $scope.Maxfare,
                 "PointOfSaleCountry": PointOfsalesCountry,
-                "Region": ($scope.Region != undefined) ? $scope.Region.id : "",
+                "Region": $scope.Region ,
                 "Destination": $scope.Destination
             };
             return data;

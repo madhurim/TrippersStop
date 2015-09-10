@@ -934,8 +934,15 @@ font-size:12px;
 .shopping{background-image:url("images/themes/Shopping-icon.png")}
 .themepark{background-image:url("images/themes/nature-icon.png")}
 .skiing {background-image:url("images/themes/Skiing-2-icon.png")}
-.carribean {background-image:url("images/themes/Trillian-icon.png")
-}
+.carribean {background-image:url("images/themes/Trillian-icon.png")}
+.Africa {background-image:url("images/regions/africa-icon.png")}
+.AsiaPacific {background-image:url("images/regions/asia-icon.png")}
+.Europe{background-image:url("images/regions/europe.png")}
+.LatinAmerica{background-image:url("images/regions/latin-america.png")}
+.NorthAmerica{background-image:url("images/regions/North_America.png")}
+.MiddleEast{background-image:url("images/regions/icon-middle-east.png")}
+
+
 .cc-selector-2 input:active + .drinkcard-cc, .cc-selector input:active + .drinkcard-cc {
     opacity: .9;
 }
@@ -944,6 +951,10 @@ font-size:12px;
     -webkit-filter: none;
     -moz-filter: none;
     filter: none;
+
+        -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+    -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+    filter: brightness(1.8) grayscale(1) opacity(.7);
 }
 
 .drinkcard-cc {
@@ -956,9 +967,9 @@ font-size:12px;
     -webkit-transition: all 100ms ease-in;
     -moz-transition: all 100ms ease-in;
     transition: all 100ms ease-in;
-    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+    /*-webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
     -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
-    filter: brightness(1.8) grayscale(1) opacity(.7);
+    filter: brightness(1.8) grayscale(1) opacity(.7);*/
 }
 
     .drinkcard-cc:hover {
@@ -991,5 +1002,4 @@ font-size:12px;
     background-color: #e6e6e6;
     border-color: #adadad;
 }
-
-    
+.fnt20 {font-size:20px;}
