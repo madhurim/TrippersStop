@@ -119,13 +119,48 @@
                         </div>
                     </div>
 
+
                     <div class="form-group">
-                        <label>Regions</label>
-                        <select class="form-control drop hgth26 fnt12" ng-model="Region" ng-options="color.value for color in AvailableRegions">
-                            <option value="">Choose Region</option>
-                        </select>
+
+                        <label>Region <span ng-show="Region">(Selected:{{Region}}) <button type="button" class="btn btn-default btn-xs" ng-click="Region = ''">clear</button></span> </label>
+                        <div class="cc-selector">
+                            <div class="join">
+                                <input id="Africa" type="radio" ng-model="Region" name="Region" value="Africa" />
+                                <label class="drinkcard-cc Africa" style="" for="Africa" title="Africa"></label>
+                            </div>
+
+                            <div class="join">
+                                <input id="AsiaPacific" type="radio" ng-model="Region" name="Region" value="Asia Pacific" />
+                                <label class="drinkcard-cc AsiaPacific" for="AsiaPacific" title="Asia Pacific"></label>
+                            </div>
+
+                            <div class="join">
+                                <input id="Europe" type="radio" ng-model="Region" name="Region" value="Europe" />
+                                <label class="drinkcard-cc Europe" for="Europe" title="Europe"></label>
+                            </div>
+
+                            <div class="join">
+                                <input id="LatinAmerica" type="radio" ng-model="Region" name="Region" value="Latin America" />
+                                <label class="drinkcard-cc LatinAmerica" for="LatinAmerica" title="Latin America"></label>
+                            </div>
+
+                            <div class="join">
+                                <input id="NorthAmerica" type="radio" ng-model="Region" name="Region" value="North America" />
+                                <label class="drinkcard-cc NorthAmerica" for="NorthAmerica" title="North America"></label>
+                            </div>
+
+                            <div class="join">
+                                <input id="MiddleEast" type="radio" ng-model="Region" name="Region" value="Middle East" />
+                                <label class="drinkcard-cc MiddleEast" for="MiddleEast" title="Middle East"></label>
+                            </div>
+
+
+
+
+                        </div>
                     </div>
 
+                  
                     <button type="submit"
                             ng-click="findDestinations('advenced')"
                             ng-disabled="SearchbuttonIsLoading"
@@ -175,6 +210,7 @@
                                             <h3> Search</h3>
                                             <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                                         </a>
+                                        <button ng-click="edit()" class="btn btn-sm btn-xs" >save search</button> <!--ng-if="destinationlist.length > 0"-->
                                     </h4>
                                 </div>
                             </div>
@@ -196,6 +232,9 @@
                             </label>
                         </div>
                     </div>
+
+
+
 
                     <form name="frmdestfinder" novalidate>
                         <div aria-labelledby="collapseListGroupHeading1" role="tabpanel" class="panel-collapse collapse in" id="collapseListGroup1" aria-expanded="true" style="">

@@ -75,8 +75,21 @@
                                         scope.WeatherInfoNoDataFound = false;
                                         scope.weatherParams.WeatherInfoNoDataFound = false;
                                         scope.WeatherwidgetData = data;
-                                        if (scope.WeatherwidgetData != undefined && scope.WeatherwidgetData != "") {
 
+                                        if (scope.WeatherwidgetData != undefined && scope.WeatherwidgetData != "") {
+                                            
+                                            var participation = _.find(scope.WeatherwidgetData.WeatherChances, function (chances) { return chances.Name == 'Precipitation' });
+                                            var rain = _.find(scope.WeatherwidgetData.WeatherChances, function (chances) { return chances.Name == 'Rain' });
+                                            if (participation != undefined && rain != undefined) {
+                                                if (participation.Percentage > 60 && rain.Percentage > 60)
+                                                    scope.IsparticipationDisplay = false;
+                                                else
+                                                    scope.IsparticipationDisplay = true;
+                                            }
+                                            else {
+                                                scope.IsparticipationDisplay = true;
+                                            }
+                                            
                                             if (scope.WeatherwidgetData.TempHighAvg != undefined) {
                                                 scope.HighTempratureF = scope.WeatherwidgetData.TempHighAvg.Avg.F;
                                                 scope.HighTempratureC = scope.WeatherwidgetData.TempHighAvg.Avg.C;
