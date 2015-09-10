@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre.Response;
@@ -52,7 +53,7 @@ namespace Trippism.Areas.Weather.Controllers
         [ResponseType(typeof(TripWeather))]
         [Route("api/weather/history")]
         [HttpGet]
-        public HttpResponseMessage Get([FromUri]HistoryInput weatherInfo)
+        public async Task<HttpResponseMessage> Get([FromUri]HistoryInput weatherInfo)
         {
             string cacheKey = TrippismKey+string.Join(".", weatherInfo.City , weatherInfo.State , weatherInfo.DepartDate.ToShortDateString() , weatherInfo.ReturnDate.ToShortDateString());
             var tripWeather = _cacheService.GetByKey<TripWeather>(cacheKey);
@@ -65,7 +66,9 @@ namespace Trippism.Areas.Weather.Controllers
             string fromDate = weatherInfo.DepartDate.ToString("MMdd");
             string toDate = weatherInfo.ReturnDate.ToString("MMdd");
             string url = string.Format(WeatherHistoryUrl, fromDate, toDate, weatherInfo.State, weatherInfo.City);
-            return GetResponse(url, cacheKey);
+           return  await Task.Run(() => 
+             { return GetResponse(url, cacheKey); }); 
+
         }
 
 
@@ -74,7 +77,7 @@ namespace Trippism.Areas.Weather.Controllers
         [ResponseType(typeof(TripWeather))]
         [Route("api/weather/international/history")]
         [HttpGet]
-        public HttpResponseMessage Get([FromUri]InternationalWeatherInput weatherInfo)
+        public async Task<HttpResponseMessage> Get([FromUri]InternationalWeatherInput weatherInfo)
         {
             string cacheKey = TrippismKey + string.Join(".", weatherInfo.AirportCode, weatherInfo.CountryCode, weatherInfo.DepartDate.ToShortDateString(), weatherInfo.ReturnDate.ToShortDateString());
             var tripWeather = _cacheService.GetByKey<TripWeather>(cacheKey);
@@ -87,7 +90,9 @@ namespace Trippism.Areas.Weather.Controllers
             string fromDate = weatherInfo.DepartDate.ToString("MMdd");
             string toDate = weatherInfo.ReturnDate.ToString("MMdd");
             string url = string.Format(WeatherInternationalHistoryUrl, fromDate, toDate, weatherInfo.CountryCode, weatherInfo.AirportCode);
-            return GetResponse(url, cacheKey);
+            return  await Task.Run(() => 
+             { return GetResponse(url, cacheKey); }); 
+
         }
 
 

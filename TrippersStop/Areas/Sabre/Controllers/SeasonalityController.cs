@@ -12,6 +12,7 @@ using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
 using Trippism.APIExtention.Filters;
 using System.Configuration;
+using System.Threading.Tasks;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
@@ -42,10 +43,12 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// API rates weekly traffic volumes to certain destination airports. The API looks up the traffic volume booked 
         /// </summary>
         [ResponseType(typeof(VM.TravelSeasonality))]
-        public HttpResponseMessage Get(string destination)
+        public async Task<HttpResponseMessage> Get(string destination)
         {
             string url = string.Format(SabreSeasonalityUrl, destination);
-            return GetResponse(url);
+            return await Task.Run(() => 
+               { return GetResponse(url); }); 
+
         }
         /// <summary>
         /// Get response from api based on url.
