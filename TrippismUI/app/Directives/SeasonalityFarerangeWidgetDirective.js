@@ -116,7 +116,8 @@
                                         scope.FareRangeWidgetData = {
                                             MinimumFare: scope.fareRangeData.FareData[i].MinimumFare,
                                             MaximumFare: scope.fareRangeData.FareData[i].MaximumFare,
-                                            MedianFare: scope.fareRangeData.FareData[i].MedianFare
+                                            MedianFare: scope.fareRangeData.FareData[i].MedianFare,
+                                            CurrencyCode : scope.fareRangeData.FareData[i].CurrencyCode
                                         };
                                         scope.FareRangeWidgetDataFound = true;
                                         break;
