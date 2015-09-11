@@ -214,7 +214,7 @@
                                 tickInterval: 336 * 3600 * 1000,
                                 minTickInterval: 336 * 3600 * 1000,
                                 title: {
-                                    text: 'Historical Traffic pattern for [ ' + scope.seasonalityParams.DestinationairportName.airport_FullName + ' , ' + scope.seasonalityParams.DestinationairportName.airport_CityName + ']'
+                                    text: 'Historical Traffic Seasonality for [ ' + scope.seasonalityParams.DestinationairportName.airport_FullName + ' , ' + scope.seasonalityParams.DestinationairportName.airport_CityName + ']'
                                 }
                             },
                             yAxis: {

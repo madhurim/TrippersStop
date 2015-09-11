@@ -14,8 +14,9 @@
         <div class="col-lg-1">
             <div class="home-btn"><input type="submit" ng-click="ViewDestination()" value="Home" class="home-submit"></div>
         </div>
-
+        
         <div class="col-lg-9" ng-if="tabManager.tabItems.length > 0">
+
             <div tabs>
                 <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
                     <attraction-tab tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
@@ -47,10 +48,10 @@
             </div>
         </div>
     </div>
-
-    <div ng-hide="isSearching" ng-show="ShowDestinationView" ng-class="{'bgblack': topdestinationlist != null}" class="col-lg-3 col-xs-4 col-md-3 mainpagepopup mainpage-topmargin128">
-        <topdestination-popup destinations-params="topdestinationlist" destinations="destinationlist" airportlist="AvailableAirports"></topdestination-popup>
-        <div class="col-lg-12" ng-hide="!topdestinationlist">
+  
+    <div ng-hide="isSearching" ng-show="ShowDestinationView" ng-class="{'bgblack': topdestinationlist.length > 0 && IscalledFromIknowMyDest == false}" class="col-lg-3 col-xs-4 col-md-3 mainpagepopup mainpage-topmargin128">
+        <topdestination-popup destinations-params="topdestinationlist" ng-show="topdestinationlist.length > 0 && IscalledFromIknowMyDest == false" destinations="destinationlist" airportlist="AvailableAirports"></topdestination-popup>
+        <div class="col-lg-12" ng-show="topdestinationlist.length > 0 && IscalledFromIknowMyDest == false">
             <div class="col-lg-10 home padlr0">
                 <h3>Refine your search</h3>
             </div>
@@ -66,7 +67,7 @@
 
                     <div class="form-group">
                         <label>Theme <span ng-show="Theme">(Selected:{{Theme}}) <button type="button" class="btn btn-default btn-xs" ng-click="Theme = ''">clear</button></span> </label>
-                        <div class="cc-selector">   
+                        <div class="cc-selector">
                             <div class="join">
                                 <input id="BEACH" type="radio" ng-model="Theme" name="Theme" value="BEACH" />
                                 <label class="drinkcard-cc beach" style="" for="BEACH" title="BEACH"></label>
@@ -160,9 +161,9 @@
                         </div>
                     </div>
 
-                  
+
                     <button type="submit"
-                            ng-click="findDestinations('advenced')"
+                            ng-click="IscalledFromIknowMyDest= false; findDestinations('advenced')"
                             ng-disabled="SearchbuttonIsLoading"
                             class="submit" style="margin-bottom:15px;">
                         <i ng-if="SearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{SearchbuttonText}}
@@ -405,7 +406,7 @@
                                 <div class="col-xs-12">
                                     <div ng-if="selectedform == 'SuggestDestination'" class="contry" style="margin-bottom:0px;padding-bottom :5px;">
                                         <button type="submit"
-                                                ng-click="findDestinations()"
+                                                ng-click="IscalledFromIknowMyDest= false;  findDestinations()"
                                                 ng-disabled="SearchbuttonIsLoading"
                                                 class="submit">
                                             <i ng-if="SearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{SearchbuttonText}}
@@ -434,7 +435,7 @@
         </div>
 
         <div class="" style="height:auto;width:auto;" cg-busy="{promise:mappromise,message:'Please wait, we are getting cheapest destinations from ' + OrigintoDisp,templateUrl:'/app/Views/partials/cgbusyMessagePartial.html'}">
-            <div id="wrapper">
+            <div id="wrapper" cg-busy="{promise:destinationmappromise,message:'Please wait, we are getting destination details...'}">
                 <div google-map id="map_canvas" btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
             </div>
         </div>

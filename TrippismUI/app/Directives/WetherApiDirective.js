@@ -106,8 +106,14 @@
 
                         // if (scope.WeatherData.WeatherChances != undefined && scope.WeatherData.WeatherChances.length > 0) {
                         for (i = 0; i < scope.WeatherData.WeatherChances.length; i++) {
+                            var name = scope.WeatherData.WeatherChances[i].Name;
+                            if (name == 'Sweltering')
+                                name = 'Very Hot';
+                            else if (name == 'Rain')
+                                name = 'Rainy';
                             var datas = {
-                                name: (scope.WeatherData.WeatherChances[i].Name == 'Sweltering') ? 'Very Hot' : scope.WeatherData.WeatherChances[i].Name,
+
+                                name: name,
                                 y: scope.WeatherData.WeatherChances[i].Percentage
                             };
                             chartData.push(datas);

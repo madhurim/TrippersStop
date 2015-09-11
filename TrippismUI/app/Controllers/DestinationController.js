@@ -65,7 +65,7 @@
         $scope.isAdvancedSearch = false;
         $scope.isSearching = true;
         $scope.KnowSearchbuttonText = 'Get Destination Details';
-
+        $scope.IscalledFromIknowMyDest = false;
 
         $scope.tabManager.getTitle = function (tabInfo) {
             tabInfo.title.substr(0, 10);
@@ -146,6 +146,7 @@
         $scope.ViewDestination = function () {
             $scope.isSearching = false;
             $scope.ShowDestinationView = true;
+            $scope.IscalledFromIknowMyDest = false;
             $scope.tabManager.resetSelected();
             $scope.TabcontentView = false;
             $timeout(function () {
@@ -448,7 +449,7 @@
 
             var data = CreateSearchCriteria();
 
-            $scope.mappromise = DestinationFactory.findDestinations(data).then(function (data) {
+            $scope.destinationmappromise = DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.KnowSearchbuttonText = 'Get Destination Details';
                 $scope.KnowSearchbuttonIsLoading = false;
                 if (data.FareInfo != null) {
@@ -477,20 +478,32 @@
                             DestinationList: $scope.destinationlist,
                             AvailableAirports: $scope.AvailableAirports,
                         });
+                        $scope.KnownDestinationAirport = '';
                         UtilFactory.MapscrollTo('wrapper');
+                        $scope.IscalledFromIknowMyDest = true;
+                        findDestinations();
                     }
                     else {
+                        $scope.KnownDestinationAirport = '';
                         alertify.alert("Destination Finder", "");
                         alertify.alert('Opps! Sorry, entered destination not found, however we got other destinations for you!').set('onok', function (closeEvent) { });
+                        $scope.IscalledFromIknowMyDest = false;
                     }
 
 
                 }
                 else {
+                    $scope.KnownDestinationAirport = '';
                     alertify.alert("Destination Finder", "");
                     alertify.alert('Opps! Sorry, no suggestions are available from your origin on various destinations!').set('onok', function (closeEvent) { });
+                    $scope.IscalledFromIknowMyDest = false;
+                    findDestinations();
                 }
+                
                 $scope.inProgress = false;
+              
+               
+               
             });
 
         };

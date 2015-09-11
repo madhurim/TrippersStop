@@ -990,6 +990,9 @@ font-size:12px;
     text-align: center;
     width: 16%;
 }
+.join input {
+        display:none;
+    }
 /*Theme Ends*/
 
 .btn-customRadio:hover, .btn-customRadio:focus, .btn-customRadio.focus, .btn-customRadio:active, .btn-customRadio.active, .open > .dropdown-toggle.btn-customRadio {
