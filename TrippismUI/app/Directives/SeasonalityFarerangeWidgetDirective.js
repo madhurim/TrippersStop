@@ -36,8 +36,23 @@
                                     var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate);
                                     var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate)
                                     for (i = 0; i < chartrec.length; i++) {
+                                        
                                         var WeekStartDate = new Date(chartrec[i].WeekStartDate);
                                         if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) {
+                                            var NumberOfObervations = "";
+                                            if (chartrec[i].NumberOfObservations == "GreaterThan10000")
+                                                NumberOfObervations = 3;
+                                            if (chartrec[i].NumberOfObservations == "LessThan10000")
+                                                NumberOfObervations = 2;
+                                            if (chartrec[i].NumberOfObservations == "LessThan1000")
+                                                NumberOfObervations = 1;
+                                            scope.SeasonalityWidgetData = {
+                                                NoofIcons: NumberOfObervations
+                                            };
+                                            scope.SeasonalityWidgetDataFound = true;
+                                            break;
+                                        }
+                                        else if (WeekStartDate > FrmDate) {
                                             var NumberOfObervations = "";
                                             if (chartrec[i].NumberOfObservations == "GreaterThan10000")
                                                 NumberOfObervations = 3;
