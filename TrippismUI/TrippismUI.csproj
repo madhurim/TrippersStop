@@ -28,6 +28,7 @@
     <Content Include="app\Directives\AttractiontabFareForecastDirective.js" />
     <Content Include="app\Directives\AverageStarRatingDirective.js" />
     <Content Include="app\Directives\GoogleAttractionDirective.js" />
+    <Content Include="app\Directives\SeasonalityFarerangeWidgetDirective.js" />
     <Content Include="app\Directives\TopDestinationsDirective.js" />
     <Content Include="app\Directives\WetherApiDirective.js" />
     <Content Include="app\Directives\FareRangeDirective.js" />
@@ -79,6 +80,9 @@
     <Content Include="app\Styles\images\regions\icon-middle-east.png" />
     <Content Include="app\Styles\images\regions\latin-america.png" />
     <Content Include="app\Styles\images\regions\North_America.png" />
+    <Content Include="app\Styles\images\team.png" />
+    <Content Include="app\Styles\images\team1.png" />
+    <Content Include="app\Styles\images\team2.png" />
     <Content Include="app\Styles\images\themes\app-x-theme-icon.png" />
     <Content Include="app\Styles\images\themes\Beach-icon.png" />
     <Content Include="app\Styles\images\themes\games-icon.png" />
@@ -160,6 +164,7 @@
     <Content Include="app\Views\partials\cgbusyMessagePartial.html" />
     <Content Include="app\Views\partials\EmailDetFormPartial.html" />
     <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
+    <Content Include="app\Views\partials\SeasonalityFarerangeWidget.html" />
     <Content Include="app\Views\partials\TopDestinationsPartial.html" />
     <Content Include="app\Views\partials\WeatherPartial.html" />
     <Content Include="app\Views\partials\FareRangePartial.html" />

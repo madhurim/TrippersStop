@@ -17,7 +17,10 @@
                 UtilFactory.ReadStateJson().then(function (data) {
                     scope.StateList = data;
                 });
-
+                scope.IsWidgetClosed = true;
+                scope.closeWidget = function () {
+                    scope.IsWidgetClosed = false;
+                }
                 scope.$watchGroup(['weatherParams'], function (newValue, oldValue, scope) {
 
                     UtilFactory.ReadStateJson().then(function (data) {

@@ -32,8 +32,8 @@
     </div>
 
     <div ng-show="destinationlist">
-        <div ng-show="ShowDestinationView" ng-hide="isSearching" class="col-lg-9 col-xs-12 col-md-6 mainpagepopup-title mainpage-topmargin66">
-            <div class="col-lg-12 col-sm-12 col-md-12" style="text-align:center">
+        <div ng-show="ShowDestinationView " ng-hide="isSearching" class="col-lg-9 col-xs-12 col-md-6 mainpagepopup-title mainpage-topmargin66">
+            <div class="col-lg-12 col-sm-12 col-md-12" ng-show="IscalledFromIknowMyDest == false" style="text-align:center">
                 Your Searched : <span ng-show="Origin">Origin : {{OrigintoDisp}}</span>
                 <span ng-show="FromDate">, From Date : {{FromDate|date:'dd/MM/yyyy'}} </span>
                 <span ng-show="ToDate"> , To Date : {{ToDate |date:'MM/dd/yyyy'}}</span>
@@ -43,7 +43,7 @@
                 <span ng-show="Region.id && isAdvancedSearch"> ,Region:{{Region.id}} </span>
                 <span ng-show="Theme && isAdvancedSearch">, Theme:{{Theme}}</span>
             </div>
-            <div class="col-lg-12 col-sm-12 col-md-12" style="text-align:center">
+            <div class="col-lg-12 col-sm-12 col-md-12" ng-show="IscalledFromIknowMyDest == false" style="text-align:center">
                 Total number of top cheapest destinations found from {{Origin |uppercase}} : {{destinationlist.length}}
             </div>
         </div>
