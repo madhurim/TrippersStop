@@ -8,6 +8,7 @@ using TraveLayer.CustomTypes.Google.Response;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TrippismApi.TraveLayer;
 using AutoMapper;
+using System.Threading.Tasks;
 
 namespace Trippism.Areas.GooglePlace.Controllers
 {
@@ -26,7 +27,7 @@ namespace Trippism.Areas.GooglePlace.Controllers
         [ResponseType(typeof(TraveLayer.CustomTypes.Google.ViewModels.Google))]
         [Route("api/googleplace/locationsearch")]
         [HttpGet]
-        public HttpResponseMessage Get([FromUri]GoogleInput locationsearch)
+        public async Task<HttpResponseMessage> Get([FromUri]GoogleInput locationsearch)
         {
             string cacheKey = TrippismKey + string.Join(".", locationsearch.Latitude, locationsearch.Longitude);
             var tripGooglePlace = _cacheService.GetByKey<TraveLayer.CustomTypes.Google.ViewModels.Google>(cacheKey);
@@ -34,7 +35,8 @@ namespace Trippism.Areas.GooglePlace.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.OK, tripGooglePlace);
             }
-            return GetResponse(locationsearch.Latitude, locationsearch.Longitude, cacheKey);
+             return  await Task.Run(() =>
+             { return GetResponse(locationsearch.Latitude, locationsearch.Longitude, cacheKey); }); 
         }
 
         private HttpResponseMessage GetResponse(string Latitude, string Longitude, string cacheKey)

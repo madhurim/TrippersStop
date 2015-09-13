@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre.Response;
@@ -26,7 +27,7 @@ namespace Trippism.Areas.YouTube.Controllers
         [ResponseType(typeof(TraveLayer.CustomTypes.YouTube.ViewModels.YouTube))]
         [Route("api/youtube/locationsearch")]
         [HttpGet]
-        public HttpResponseMessage Get([FromUri]YouTubeInput locationsearch)
+        public async Task<HttpResponseMessage> Get([FromUri]YouTubeInput locationsearch)
         {
             string cacheKey = TrippismKey + string.Join(".", locationsearch.location);
             var tripYouTube = _cacheService.GetByKey<TraveLayer.CustomTypes.YouTube.ViewModels.YouTube>(cacheKey);
@@ -34,7 +35,8 @@ namespace Trippism.Areas.YouTube.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.OK, tripYouTube);
             }
-            return GetResponse(locationsearch.location, cacheKey);
+             return  await Task.Run(() =>
+             { return GetResponse(locationsearch.location, cacheKey); }); 
         }
 
         private HttpResponseMessage GetResponse(string Location, string cacheKey)
