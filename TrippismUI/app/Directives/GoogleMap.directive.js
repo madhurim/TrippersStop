@@ -34,9 +34,9 @@ angular.module('TrippismUIApp')
                   promises.push(getMapUrlData($scope.destinationslist[i]));
               }
               $q.all(promises).then(function (maps) {
-
-                  if (maps.length > 0)
+                  if (maps.length > 0) {
                       maps = _.compact(maps);
+                  }
                   RenderMap(maps);
               }.bind(this));
           }
@@ -81,65 +81,68 @@ angular.module('TrippismUIApp')
                   var airportName = _.find($scope.airportlist, function (airport) {
                       return airport.airport_Code == maps[x].DestinationLocation
                   });
-                  var marker = new MarkerWithLabel({
-                      position: latlng1,
-                      map: $scope.destinationMap,
-                      title: airportName.airport_FullName,
-                      labelContent: maps[x].CurrencyCode + ' ' + LowRate + ' <br/>' + maps[x].DestinationLocation + ' [ ' + airportName.airport_CityName + ' ]',
-                      labelAnchor: new google.maps.Point(12, 35),
-                      labelClass: "labelscolor", // the CSS class for the label
-                      labelInBackground: false,
-                      labelanimation: google.maps.Animation.DROP,
-                      animation: google.maps.Animation.DROP,
-                      CustomMarkerInfo: maps[x],
-                      labelStyle: { opacity: 1 },
-                      //icon: 'http://demo.crackerworld.in/images/map-blues.png',
-                      icon: 'app/Styles/images/mapicon.png'
-                  });
-                  bounds.extend(marker.position);
-                  $scope.bounds.extend(marker.position);
+                  
+                  if (LowRate != "N/A") {
+                      var marker = new MarkerWithLabel({
+                          position: latlng1,
+                          map: $scope.destinationMap,
+                          title: airportName.airport_FullName,
+                          labelContent: maps[x].CurrencyCode + ' ' + LowRate + ' <br/>' + maps[x].DestinationLocation + ' [ ' + airportName.airport_CityName + ' ]',
+                          labelAnchor: new google.maps.Point(12, 35),
+                          labelClass: "labelscolor", // the CSS class for the label
+                          labelInBackground: false,
+                          labelanimation: google.maps.Animation.DROP,
+                          animation: google.maps.Animation.DROP,
+                          CustomMarkerInfo: maps[x],
+                          labelStyle: { opacity: 1 },
+                          //icon: 'http://demo.crackerworld.in/images/map-blues.png',
+                          icon: 'app/Styles/images/mapicon.png'
+                      });
+                      bounds.extend(marker.position);
+                      $scope.bounds.extend(marker.position);
 
 
-                  var contentString = '<div style="min-width:100px;padding-top:5px;" id="content">' +
-                                          '<div class="col-sm-12 padleft0"><strong>'
-                                            + "(" + maps[x].DestinationLocation + ") " + airportName.airport_FullName + ', ' + airportName.airport_CityName + '</strong></div>' +
-                                            '<br /><div class="col-sm-12 padleft0">' +
-                                            '<label>Lowest fare: </label><strong class="text-success"> ' + maps[x].CurrencyCode + ' ' + maps[x].LowestFare + '</strong>' +
-                                    '</div> ';
+                      var contentString = '<div style="min-width:100px;padding-top:5px;" id="content">' +
+                                              '<div class="col-sm-12 padleft0"><strong>'
+                                                + "(" + maps[x].DestinationLocation + ") " + airportName.airport_FullName + ', ' + airportName.airport_CityName + '</strong></div>' +
+                                                '<br /><div class="col-sm-12 padleft0">' +
+                                                '<label>Lowest fare: </label><strong class="text-success"> ' + maps[x].CurrencyCode + ' ' + maps[x].LowestFare + '</strong>' +
+                                        '</div> ';
 
-                  $scope.InfoWindow = new google.maps.InfoWindow();
-                  var mapsdetails = maps[x];
+                      $scope.InfoWindow = new google.maps.InfoWindow();
+                      var mapsdetails = maps[x];
 
-                  google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
-                      return function () {
-                          var OriginairportName = _.find($scope.airportlist, function (airport) {
-                              return airport.airport_Code == $scope.$parent.Origin.toUpperCase()
-                          });
-                          var DestinationairportName = _.find($scope.airportlist, function (airport) {
-                              return airport.airport_Code == marker.CustomMarkerInfo.DestinationLocation
-                          });
+                      google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
+                          return function () {
+                              var OriginairportName = _.find($scope.airportlist, function (airport) {
+                                  return airport.airport_Code == $scope.$parent.Origin.toUpperCase()
+                              });
+                              var DestinationairportName = _.find($scope.airportlist, function (airport) {
+                                  return airport.airport_Code == marker.CustomMarkerInfo.DestinationLocation
+                              });
 
-                          var dataForecast = {
-                              "Origin": $scope.$parent.Origin,
-                              "DepartureDate": $filter('date')(marker.CustomMarkerInfo.DepartureDateTime, 'yyyy-MM-dd'),
-                              "ReturnDate": $filter('date')(marker.CustomMarkerInfo.ReturnDateTime, 'yyyy-MM-dd'),
-                              "Destination": marker.CustomMarkerInfo.DestinationLocation
+                              var dataForecast = {
+                                  "Origin": $scope.$parent.Origin,
+                                  "DepartureDate": $filter('date')(marker.CustomMarkerInfo.DepartureDateTime, 'yyyy-MM-dd'),
+                                  "ReturnDate": $filter('date')(marker.CustomMarkerInfo.ReturnDateTime, 'yyyy-MM-dd'),
+                                  "Destination": marker.CustomMarkerInfo.DestinationLocation
+                              };
+
+                              $rootScope.$broadcast('EmptyFareForcastInfo', {
+                                  Origin: OriginairportName.airport_CityName,
+                                  Destinatrion: DestinationairportName.airport_Code,
+                                  Fareforecastdata: dataForecast,
+                                  mapOptions: marker.CustomMarkerInfo, //mapsdetails,
+                                  OriginairportName: OriginairportName,
+                                  DestinationairportName: DestinationairportName,
+                                  DestinationList: $scope.destinations,
+                                  AvailableAirports: $scope.airportlist,
+                                  //tabIndex : 999  // used for popup
+                              });
                           };
-
-                          $rootScope.$broadcast('EmptyFareForcastInfo', {
-                              Origin: OriginairportName.airport_CityName,
-                              Destinatrion: DestinationairportName.airport_Code,
-                              Fareforecastdata: dataForecast,
-                              mapOptions: marker.CustomMarkerInfo, //mapsdetails,
-                              OriginairportName: OriginairportName,
-                              DestinationairportName: DestinationairportName,
-                              DestinationList: $scope.destinations,
-                              AvailableAirports: $scope.airportlist,
-                              //tabIndex : 999  // used for popup
-                          });
-                      };
-                  })(marker, contentString, $scope.InfoWindow));
-                  $scope.destinationMarkers.push(marker);
+                      })(marker, contentString, $scope.InfoWindow));
+                      $scope.destinationMarkers.push(marker);
+                  }
               }
           };
 
