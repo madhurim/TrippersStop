@@ -1,86 +1,94 @@
-﻿ <div class="col-lg-3 WeatherWidget " style="padding:0px; max-height: 264px;overflow-x: hidden;overflow-y: auto;" ng-if="!WeatherInfoNoDataFound && IsWidgetClosed ">
-    <div class="pull-right"><button class="close closebutton" style="color: white;opacity:2" ng-click="closeWidget()" type="button">×</button></div>
-     <div style="font-size:15px;font-weight:bold;"> {{DepartDate}} To {{ReturnDate}} </div>
-    <div class="col-lg-12 col-sm-12 col-md-6" style="padding:0px">
-        <div class="col-lg-12 col-sm-12 col-md-6">
-            <span style="font-size:100% !important;font-weight:bold;">Historical Weather</span>
-        </div>
-        <div class="col-lg-12 col-sm-9 col-md-9 home" style="padding-top: 5px;">
-            <div class="col-lg-6" style="padding-left:40px;"><div class="fontsize"><b>Avg. High  </b></div><h2 class="fnt20" style="margin-top:5px;margin-bottom:5px;">{{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103</h2></div>
-            <div class="col-lg-6" style="padding-left:40px;"><div class="fontsize"><b>Avg. Low </b></div><h2 class="fnt20" style="margin-top:5px;margin-bottom:5px;"> {{LowTempratureF}}&#x2109 {{LowTempratureC}}&#x2103</h2></div>
-        </div>
+﻿<div class="col-lg-3 WeatherWidget " style="padding:0px; max-height: 264px;overflow-x: hidden;overflow-y: auto;" ng-if="!WeatherInfoNoDataFound && IsWidgetClosed ">
+    <!--<div class="pull-right"><button class="close closebutton" style="color: white;opacity:2" ng-click="closeWidget()" type="button">×</button></div>-->
+    <div class="col-lg-9" style="padding:0px 0px 0px 5px">
+        <h3 style="font-size:12px;font-weight:bold;    margin: 4px 0px 0px 0px;">Historical Weather </h3>
+    </div>
+    <div class="col-lg-2">
+        <span style="margin-top:4px;line-height:20px;" class="glyphicon" aria-hidden="true" ng-click="attractiondispflg =!attractiondispflg" ng-class="attractiondispflg ?'glyphicon-menu-up' :'glyphicon-menu-down'"></span>
+    </div>
+    <div ng-show="!attractiondispflg" class="col-lg-12 mainpage-topdestination">
+        <div style="font-size:15px;font-weight:bold;"> {{DepartDate}} To {{ReturnDate}} </div>
+        <div class="col-lg-12 col-sm-12 col-md-6" style="padding:0px">
+            <div class="col-lg-12 col-sm-12 col-md-6">
+                <span style="font-size:100% !important;font-weight:bold;">Historical Weather</span>
+            </div>
+            <div class="col-lg-12 col-sm-9 col-md-9 home" style="padding-top: 5px;">
+                <div class="col-lg-6" style="padding-left:40px;"><div class="fontsize"><b>Avg. High  </b></div><h2 class="fnt20" style="margin-top:5px;margin-bottom:5px;">{{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103</h2></div>
+                <div class="col-lg-6" style="padding-left:40px;"><div class="fontsize"><b>Avg. Low </b></div><h2 class="fnt20" style="margin-top:5px;margin-bottom:5px;"> {{LowTempratureF}}&#x2109 {{LowTempratureC}}&#x2103</h2></div>
+            </div>
 
-        <div class="col-lg-12" style="margin-top:-10px;">
-            <div ng-repeat="item in  WeatherwidgetData.WeatherChances">
-                <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Cloudy' && item.Percentage > 60">
-                    <div style="text-align:center"> <img src="../app/Styles/images/weather/Cloudy.png" style="width:60px;height:60px" /><div class="fontsize">{{item.Name}}</div> </div>
-                </div>
+            <div class="col-lg-12" style="margin-top:-10px;">
+                <div ng-repeat="item in  WeatherwidgetData.WeatherChances">
+                    <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Cloudy' && item.Percentage >= 60">
+                        <div style="text-align:center"> <img src="../app/Styles/images/weather/Cloudy.png" style="width:60px;height:60px" /><div class="fontsize">{{item.Name}}</div> </div>
+                    </div>
 
-                <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Humid' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Humid.png" style="width:60px;height:60px" /><div class="fontsize">{{item.Name}}</div> </div>
+                    <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Humid' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Humid.png" style="width:60px;height:60px" /><div class="fontsize">{{item.Name}}</div> </div>
+
+                    </div>
+
+                    <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Partly Cloudy' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Partly Cloudy.png" style="width:60px;height:60px" /><div class="fontsize">{{item.Name}}</div> </div>
+                    </div>
+
+                    <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Precipitation' && item.Percentage >= 60 && IsparticipationDisplay">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Precipitation.png" style="width:60px;height:60px" /><div class="fontsize">{{item.Name}}</div></div>
+                    </div>
+
+                    <div class="col-lg-6" ng-if="item.Name=='Rain' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Rain.png" style="width:60px;height:60px" /><div class="fontsize">Rainy</div> </div>
+
+                    </div>
+
+                    <div class="col-lg-6" ng-if="item.Name=='Sweltering' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Sweltering.png" style="width:60px;height:60px" /> <div class="fontsize">Very Hot </div> </div>
+                    </div>
+                    <div class="col-lg-6" ng-if="item.Name=='Thunderstorms' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Thunderstorms.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
+                    </div>
+
+                    <div class="col-lg-6" ng-if="item.Name=='Warm' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/warm.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
+                    </div>
+
+                    <div class="col-lg-6" ng-if="item.Name=='Sunny' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Sunny.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
+                    </div>
+
+                    <div class="col-lg-6" ng-if="item.Name=='Hot' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Hot.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
+                    </div>
+                    <div class="col-lg-6" ng-if="item.Name=='Windy' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Windy.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
+                    </div>
+                    <div class="col-lg-6" ng-if="item.Name=='Fog' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Fog.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
+                    </div>
+
+                    <div class="col-lg-6" ng-if="item.Name=='Ground Snow' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Ground Snow.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
+                    </div>
+
+                    <div class="col-lg-6" ng-if="item.Name=='Tornado' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Tornado.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
+                    </div>
+
+                    <div class="col-lg-6" ng-if="item.Name=='Freezing' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Freezing.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
+                    </div>
+                    <div class="col-lg-6" ng-if="item.Name=='Cool' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Cool.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
+                    </div>
+
+                    <div class="col-lg-6" ng-if="item.Name=='Hail' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Hail.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
+                    </div>
+                    <div class="col-lg-6" ng-if="item.Name=='Snow' && item.Percentage >= 60">
+                        <div style="text-align:center"><img src="../app/Styles/images/weather/Snow.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
+                    </div>
 
                 </div>
-
-                <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Partly Cloudy' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Partly Cloudy.png" style="width:60px;height:60px" /><div class="fontsize">{{item.Name}}</div> </div>
-                </div>
-
-                <div class="col-lg-6" style="padding:0px" ng-if="item.Name=='Precipitation' && item.Percentage > 60 && IsparticipationDisplay">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Precipitation.png" style="width:60px;height:60px" /><div class="fontsize">{{item.Name}}</div></div>
-                </div>
-
-                <div class="col-lg-6" ng-if="item.Name=='Rain' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Rain.png" style="width:60px;height:60px" /><div class="fontsize">Rainy</div> </div>
-
-                </div>
-
-                <div class="col-lg-6" ng-if="item.Name=='Sweltering' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Sweltering.png" style="width:60px;height:60px" /> <div class="fontsize">Very Hot </div> </div>
-                </div>
-                <div class="col-lg-6" ng-if="item.Name=='Thunderstorms' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Thunderstorms.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
-                </div>
-
-                <div class="col-lg-6" ng-if="item.Name=='Warm' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/warm.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
-                </div>
-
-                <div class="col-lg-6" ng-if="item.Name=='Sunny' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Sunny.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
-                </div>
-
-                <div class="col-lg-6" ng-if="item.Name=='Hot' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Hot.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
-                </div>
-                <div class="col-lg-6" ng-if="item.Name=='Windy' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Windy.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
-                </div>
-                <div class="col-lg-6" ng-if="item.Name=='Fog' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Fog.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
-                </div>
-
-                <div class="col-lg-6" ng-if="item.Name=='Ground Snow' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Ground Snow.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
-                </div>
-
-                <div class="col-lg-6" ng-if="item.Name=='Tornado' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Tornado.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
-                </div>
-
-                <div class="col-lg-6" ng-if="item.Name=='Freezing' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Freezing.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
-                </div>
-                <div class="col-lg-6" ng-if="item.Name=='Cool' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Cool.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
-                </div>
-
-                <div class="col-lg-6" ng-if="item.Name=='Hail' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Hail.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
-                </div>
-                <div class="col-lg-6" ng-if="item.Name=='Snow' && item.Percentage > 60">
-                    <div style="text-align:center"><img src="../app/Styles/images/weather/Snow.png" style="width:60px;height:60px" /> <div class="fontsize">{{item.Name}} </div> </div>
-                </div>
-
             </div>
         </div>
     </div>

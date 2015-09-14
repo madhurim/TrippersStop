@@ -90,6 +90,30 @@
             }
         }
 
+        function FilterDestinations(destinations) {
+            var destinationstodisp = [];
+            for (var x = 0; x < destinations.length; x++) {
+                var LowestFarePrice = "N/A";
+                var LowestNonStopeFare = "N/A";
+                var LowRate = 'N/A';
+                if (destinations[x].LowestNonStopFare != "N/A") {
+                    LowestNonStopeFare = parseFloat(destinations[x].LowestNonStopFare).toFixed(2);
+                    if (LowestNonStopeFare == 0)
+                        LowestNonStopeFare = "N/A";
+
+                }
+                LowRate = LowestNonStopeFare;
+                if (destinations[x].LowestFare != "N/A") {
+                    LowestFarePrice = destinations[x].LowestFare.toFixed(2);
+                    if (LowestFarePrice == 0)
+                        LowestFarePrice = "N/A";
+                }
+                if (LowRate != "N/A")
+                    destinationstodisp.push(destinations[x]);
+            }
+            return destinationstodisp;
+        }
+
         $scope.tabManager.removeTab = function (i, $event) {
             if (typeof $event != 'undefined') {
                 $event.stopPropagation();
@@ -453,7 +477,7 @@
                 $scope.KnowSearchbuttonText = 'Get Destination Details';
                 $scope.KnowSearchbuttonIsLoading = false;
                 if (data.FareInfo != null) {
-                    $scope.destinationlist = data.FareInfo;
+                    $scope.destinationlist = FilterDestinations(data.FareInfo);
                     var DestinationairportName = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.KnownDestinationAirport.toUpperCase() });
 
                     var objDestinationairport = $scope.destinationlist[0];
@@ -535,6 +559,8 @@
 
             $scope.inProgress = true;
 
+          
+
             $scope.mappromise = DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.isSearching = false;
                 $scope.SearchbuttonText = "Suggest Destinations";
@@ -542,7 +568,8 @@
                 $scope.SearchbuttonIsLoading = false;
                 $scope.SearchbuttonChepestIsLoading = false;
                 if (data.FareInfo != null) {
-                    $scope.destinationlist = data.FareInfo;
+                    //$scope.destinationlist = data.FareInfo;
+                    $scope.destinationlist = FilterDestinations(data.FareInfo);
                     $scope.buttontext = "Cheapest";
                     //Get Top 5 cheapest Destination 
                     if ($scope.destinationlist != null) {
