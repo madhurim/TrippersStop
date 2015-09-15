@@ -14,6 +14,7 @@
                 scope.closeWidget = function () {
                     scope.IsWidgetClosed = false;
                 }
+
                 scope.SeasonalityWidgetData = undefined;
 
                 scope.loadSeasonalityInfo = function () {
@@ -23,59 +24,61 @@
                             "Destination": scope.widgetParams.Destinatrion, // JFK
                         };
 
-                        $timeout(function () {
-                            scope.seasonalitypromise = SeasonalityFactory.Seasonality(Seasonalitydata).then(function (data) {
-                                if (data.status == 404) {
-                                    scope.SeasonalityWidgetDataFound = false;
-                                    return;
-                                }
-                                scope.widgetParams.NoDataFound = false;
-                                scope.SeasonalityData = data.Seasonality;
-                                if (scope.SeasonalityData != undefined && scope.SeasonalityData != "") {
-                                    var chartrec = _.sortBy(scope.SeasonalityData, 'WeekStartDate');
-                                    var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate);
-                                    var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate)
-                                    for (i = 0; i < chartrec.length; i++) {
-                                        
-                                        var WeekStartDate = new Date(chartrec[i].WeekStartDate);
-                                        if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) {
-                                            var NumberOfObervations = "";
-                                            if (chartrec[i].NumberOfObservations == "GreaterThan10000")
-                                                NumberOfObervations = 3;
-                                            if (chartrec[i].NumberOfObservations == "LessThan10000")
-                                                NumberOfObervations = 2;
-                                            if (chartrec[i].NumberOfObservations == "LessThan1000")
-                                                NumberOfObervations = 1;
-                                            scope.SeasonalityWidgetData = {
-                                                NoofIcons: NumberOfObervations
-                                            };
-                                            scope.SeasonalityWidgetDataFound = true;
-                                            break;
-                                        }
-                                        else if (WeekStartDate > FrmDate) {
-                                            var NumberOfObervations = "";
-                                            if (chartrec[i].NumberOfObservations == "GreaterThan10000")
-                                                NumberOfObervations = 3;
-                                            if (chartrec[i].NumberOfObservations == "LessThan10000")
-                                                NumberOfObervations = 2;
-                                            if (chartrec[i].NumberOfObservations == "LessThan1000")
-                                                NumberOfObervations = 1;
-                                            scope.SeasonalityWidgetData = {
-                                                NoofIcons: NumberOfObervations
-                                            };
-                                            scope.SeasonalityWidgetDataFound = true;
-                                            break;
-                                        }
-                                        scope.$apply();
-                                    }
-                                }
 
-                            });
-                        }, 0, false);
+                        scope.seasonalitypromise = SeasonalityFactory.Seasonality(Seasonalitydata).then(function (data) {
+                            
+                            if (data.status == 404) {
+                                scope.SeasonalityWidgetDataFound = false;
+                                return;
+                            }
+                            scope.widgetParams.NoDataFound = false;
+                            scope.SeasonalityData = data.Seasonality;
+                            if (scope.SeasonalityData != undefined && scope.SeasonalityData != "")
+                                setSeasonalityData();
+                        });
+
                     }
 
                 };
-
+                function setSeasonalityData() {
+                    
+                    var chartrec = _.sortBy(scope.SeasonalityData, 'WeekStartDate');
+                    
+                    var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate);
+                    var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate)
+                    for (i = 0; i < chartrec.length; i++) {
+                        var WeekStartDate = new Date(chartrec[i].WeekStartDate);
+                        if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) {
+                            
+                            var SeasonalityIndicator = "";
+                            if (chartrec[i].SeasonalityIndicator == "High")
+                                NumberOfObervations = 3;
+                            if (chartrec[i].SeasonalityIndicator == "Medium")
+                                NumberOfObervations = 2;
+                            if (chartrec[i].SeasonalityIndicator == "Low")
+                                NumberOfObervations = 1;
+                            scope.SeasonalityWidgetData = {
+                                NoofIcons: NumberOfObervations
+                            };
+                            scope.SeasonalityWidgetDataFound = true;
+                            return;
+                        }
+                        else if (WeekStartDate > FrmDate) {
+                            var NumberOfObervations = "";
+                            if (chartrec[i].SeasonalityIndicator == "High")
+                                NumberOfObervations = 3;
+                            if (chartrec[i].SeasonalityIndicator == "Medium")
+                                NumberOfObervations = 2;
+                            if (chartrec[i].SeasonalityIndicator == "Low")
+                                NumberOfObervations = 1;
+                            scope.SeasonalityWidgetData = {
+                                NoofIcons: NumberOfObervations
+                            };
+                            scope.SeasonalityWidgetDataFound = true;
+                        }
+                        //scope.$apply();
+                    }
+                }
                 scope.FareRangeWidgetDataFound = false;
                 scope.loadfareRangeInfo = function () {
                     if (scope.widgetParams != undefined) {
@@ -107,23 +110,20 @@
                             if (scope.fareRangeData != undefined && scope.fareRangeData != "") {
 
                                 var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate);
-                                var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate)
-
+                                var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate);
                                 for (i = 0; i < scope.fareRangeData.FareData.length; i++) {
-
                                     var WeekStartDate = new Date(scope.fareRangeData.FareData[i].DepartureDateTime);
                                     if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) {
                                         scope.FareRangeWidgetData = {
                                             MinimumFare: scope.fareRangeData.FareData[i].MinimumFare,
                                             MaximumFare: scope.fareRangeData.FareData[i].MaximumFare,
                                             MedianFare: scope.fareRangeData.FareData[i].MedianFare,
-                                            CurrencyCode : scope.fareRangeData.FareData[i].CurrencyCode
+                                            CurrencyCode: scope.fareRangeData.FareData[i].CurrencyCode
                                         };
                                         scope.FareRangeWidgetDataFound = true;
                                         break;
                                     }
                                     scope.$apply();
-
                                 }
                             }
                         });

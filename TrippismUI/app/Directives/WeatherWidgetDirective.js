@@ -84,7 +84,7 @@
                                             var participation = _.find(scope.WeatherwidgetData.WeatherChances, function (chances) { return chances.Name == 'Precipitation' });
                                             var rain = _.find(scope.WeatherwidgetData.WeatherChances, function (chances) { return chances.Name == 'Rain' });
                                             if (participation != undefined && rain != undefined) {
-                                                if (participation.Percentage > 60 && rain.Percentage > 60)
+                                                if (participation.Percentage >= 60 && rain.Percentage >= 60)
                                                     scope.IsparticipationDisplay = false;
                                                 else
                                                     scope.IsparticipationDisplay = true;
