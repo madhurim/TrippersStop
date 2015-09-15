@@ -499,16 +499,6 @@
             API to retrieve data for city pairs.
             </summary>
         </member>
-        <member name="M:TrippismApi.Areas.IATA.Controllers.IATAController.#ctor(DataLayer.IDBService)">
-            <summary>
-            Set db service.
-            </summary>
-        </member>
-        <member name="M:TrippismApi.Areas.IATA.Controllers.IATAController.GetResponse">
-            <summary>
-            Get response from IATA service..
-            </summary>
-        </member>
         <member name="T:TrippismApi.Areas.Sabre.Controllers.AdvancedCalendarController">
             <summary>
             AdvancedCalendar is used for -

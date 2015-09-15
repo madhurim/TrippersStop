@@ -15,8 +15,6 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
@@ -25,18 +23,15 @@
     <Content Include="app\Controllers\EmailForDestinationDetController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
     <Content Include="app\Controllers\YouTubeController.js" />
-    <Content Include="app\Directives\attractionsListDirective.js" />
     <Content Include="app\Directives\AttractionTabDirective.js" />
     <Content Include="app\Directives\AttractiontabFareForecastDirective.js" />
     <Content Include="app\Directives\AverageStarRatingDirective.js" />
     <Content Include="app\Directives\GoogleAttractionDirective.js" />
-    <Content Include="app\Directives\SeasonalityFarerangeWidgetDirective.js" />
     <Content Include="app\Directives\TopDestinationsDirective.js" />
     <Content Include="app\Directives\WetherApiDirective.js" />
     <Content Include="app\Directives\FareRangeDirective.js" />
     <Content Include="app\Directives\GoogleMap.directive.js" />
     <Content Include="app\Directives\SeasonalityDirective.js" />
-    <Content Include="app\Directives\WeatherWidgetDirective.js" />
     <Content Include="app\Directives\YoutubeDirective.js" />
     <Content Include="app\Factory\DestinationFactory.js" />
     <Content Include="app\Factory\EmailForDestinationDetFactory.js" />
@@ -71,59 +66,12 @@
     <Content Include="app\Styles\images\adsection_2.jpg" />
     <Content Include="app\Styles\images\busy.gif" />
     <Content Include="app\Styles\images\circle-info.png" />
-    <Content Include="app\Styles\images\Cloudy.gif" />
     <Content Include="app\Styles\images\hor-loading.png" />
-    <Content Include="app\Styles\images\Humid.gif" />
     <Content Include="app\Styles\images\loader.gif" />
     <Content Include="app\Styles\images\noimageavailable.png" />
-    <Content Include="app\Styles\images\regions\africa-icon.png" />
-    <Content Include="app\Styles\images\regions\asia-icon.png" />
-    <Content Include="app\Styles\images\regions\europe.png" />
-    <Content Include="app\Styles\images\regions\icon-middle-east.png" />
-    <Content Include="app\Styles\images\regions\latin-america.png" />
-    <Content Include="app\Styles\images\regions\North_America.png" />
-    <Content Include="app\Styles\images\team.png" />
-    <Content Include="app\Styles\images\team1.png" />
-    <Content Include="app\Styles\images\team2.png" />
-    <Content Include="app\Styles\images\themes\app-x-theme-icon.png" />
-    <Content Include="app\Styles\images\themes\Beach-icon.png" />
-    <Content Include="app\Styles\images\themes\games-icon.png" />
-    <Content Include="app\Styles\images\themes\history-icon.png" />
-    <Content Include="app\Styles\images\themes\love-box-icon.png" />
-    <Content Include="app\Styles\images\themes\mickey-mouse-icon.png" />
-    <Content Include="app\Styles\images\themes\Mountain-48.png" />
-    <Content Include="app\Styles\images\themes\nature-icon.png" />
-    <Content Include="app\Styles\images\themes\Park-icon.png" />
-    <Content Include="app\Styles\images\themes\Shopping-icon.png" />
-    <Content Include="app\Styles\images\themes\Skiing-2-icon.png" />
-    <Content Include="app\Styles\images\themes\soccer-icon.png" />
-    <Content Include="app\Styles\images\themes\Trillian-icon.png" />
-    <Content Include="app\Styles\images\partly cloudy.gif" />
-    <Content Include="app\Styles\images\Precipitation.gif" />
-    <Content Include="app\Styles\images\Rain.gif" />
-    <Content Include="app\Styles\images\Sweltering.gif" />
     <Content Include="app\Styles\images\thumbs_up.png" />
-    <Content Include="app\Styles\images\Thunderstorms.gif" />
     <Content Include="app\Styles\images\time.png" />
     <Content Include="app\Styles\images\Trippismlogo.png" />
-    <Content Include="app\Styles\images\weather\Cloudy.png" />
-    <Content Include="app\Styles\images\weather\Cool.png" />
-    <Content Include="app\Styles\images\weather\Fog.png" />
-    <Content Include="app\Styles\images\weather\Freezing.png" />
-    <Content Include="app\Styles\images\weather\Ground Snow.png" />
-    <Content Include="app\Styles\images\weather\Hail.png" />
-    <Content Include="app\Styles\images\weather\Hot.png" />
-    <Content Include="app\Styles\images\weather\Humid.png" />
-    <Content Include="app\Styles\images\weather\Partly Cloudy.png" />
-    <Content Include="app\Styles\images\weather\Precipitation.png" />
-    <Content Include="app\Styles\images\weather\Rain.png" />
-    <Content Include="app\Styles\images\weather\Snow.png" />
-    <Content Include="app\Styles\images\weather\Sunny.png" />
-    <Content Include="app\Styles\images\weather\Sweltering.png" />
-    <Content Include="app\Styles\images\weather\Thunderstorms.png" />
-    <Content Include="app\Styles\images\weather\Tornado.png" />
-    <Content Include="app\Styles\images\weather\Warm.png" />
-    <Content Include="app\Styles\images\weather\Windy.png" />
     <Content Include="app\Styles\trippsimlatest.css" />
     <Content Include="app\Utility.js" />
     <Content Include="app\Views\GoogleMap.html" />
@@ -159,19 +107,20 @@
     <Content Include="app\Styles\alertifyjs\themes\semantic.min.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.min.css" />
-    <Content Include="app\Views\partials\attractionsList.html" />
     <Content Include="app\Views\partials\AttractiontabFareForecastPartial.html" />
     <Content Include="app\Views\partials\AttractionTabPartial.html" />
     <Content Include="app\Views\partials\avarageStarRatingPartial.html" />
     <Content Include="app\Views\partials\cgbusyMessagePartial.html" />
     <Content Include="app\Views\partials\EmailDetFormPartial.html" />
     <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
-    <Content Include="app\Views\partials\SeasonalityFarerangeWidget.html" />
+<<<<<<< HEAD
+=======
+    <Content Include="app\Views\partials\MarkerPhotoSlider.html" />
     <Content Include="app\Views\partials\TopDestinationsPartial.html" />
+>>>>>>> feature/UILayerBetaChange_MainPage_AddSearchResultDetail_3108
     <Content Include="app\Views\partials\WeatherPartial.html" />
     <Content Include="app\Views\partials\FareRangePartial.html" />
     <Content Include="app\Views\partials\SeasonalityPartial.html" />
-    <Content Include="app\Views\partials\WeatherWidgetPartial.html" />
     <Content Include="app\Views\partials\YoutubePartial.html" />
     <Content Include="app\Styles\css\angular-busy.css" />
     <Content Include="app\Styles\css\angular-busy.min.css" />
@@ -254,11 +203,4 @@
     <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets')" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
 </Project>
