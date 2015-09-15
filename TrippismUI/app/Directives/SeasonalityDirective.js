@@ -29,10 +29,6 @@
                 scope.SeasonalityDisplay = function () {
                     scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
                     scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
-
-                    // Setting up fare data for email
-                    //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = {};
-                    //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = data;
                     scope.Isviewmoredisplayed = true;
                 };
 
@@ -62,11 +58,10 @@
 
                                         if (data.status == 404) {
                                             scope.SeasonalityNoDataFound = true;
-                                            $rootScope.$broadcast('divSeasonalityEvent', false);
                                             return;
                                         }
                                         scope.SeasonalityData = data.Seasonality;
-                                        $rootScope.$broadcast('divSeasonalityEvent', true);
+                                        scope.seasonalityParams.SeasonalityData = data.Seasonality;
 
                                         var defaultSeasonality = data.Seasonality;
                                         var now = new Date();
@@ -86,12 +81,6 @@
                                         data.Seasonality = filteredSeasonalityData;
                                         scope.MarkerSeasonalityInfo = data;
                                         scope.mailmarkereasonalityInfo = data;
-
-
-                                        // Setting up fare data for email
-                                        //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = {};
-                                        //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = data;
-
 
                                         scope.inProgressSeasonalityinfo = false;
                                         scope.loadSeasonalityInfoLoaded = true;

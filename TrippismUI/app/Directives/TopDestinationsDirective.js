@@ -18,14 +18,14 @@
                      scope.topdestinationlist = scope.destinationsParams.slice(0, scope.recordshow);
              }
            );
-           
+
             scope.showallrecord = function () {
                 scope.recordshow = scope.destinationsParams.length;
                 scope.showAllDestinations = true;
                 scope.topdestinationlist = scope.destinationsParams.slice(0, scope.recordshow);
             };
             scope.topdestinationclick = function (item) {
-               
+
                 var OriginairportName = _.find(scope.airportlist, function (airport) {
                     return airport.airport_Code == scope.$parent.Origin.toUpperCase()
                 });
@@ -34,7 +34,7 @@
                 });
 
                 var dataForecast = {
-                    "Origin": scope.$parent.Origin,
+                    "Origin": scope.$parent.Origin.toUpperCase(),
                     "DepartureDate": $filter('date')(item.topdestinationFareInfo.DepartureDateTime, 'yyyy-MM-dd'),
                     "ReturnDate": $filter('date')(item.topdestinationFareInfo.ReturnDateTime, 'yyyy-MM-dd'),
                     "Destination": item.topdestinationFareInfo.DestinationLocation

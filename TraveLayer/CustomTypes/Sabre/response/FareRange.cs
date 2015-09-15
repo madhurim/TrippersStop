@@ -22,9 +22,11 @@ namespace TraveLayer.CustomTypes.Sabre
         public string DepartureDateTime { get; set; }
         public string ReturnDateTime { get; set; }
         public List<Link> Links { get; set; }
+        public string OriginLocation { get; set; }
+        public string DestinationLocation { get; set; }
     }
 
-   
+
     public class OTA_FareRange
     {
         public string OriginLocation { get; set; }
