@@ -18,7 +18,8 @@
             $rootScope.apiURLForGoogleAttraction = 'http://localhost:14606/api/googleplace/';
             $rootScope.apiURLForYouTube = 'http://localhost:14606/api/youtube/';
             $rootScope.apiURLForWeather = 'http://localhost:14606/api/weather/international/history';
-
+            $rootScope.apiURLForUSWeather = 'http://localhost:14606/api/weather/history';
+            $rootScope.apiURLForGoogleGeoReverseLookup = 'http://localhost:14606/api/googlegeocode/reverselookup/';
         }
         else
         {
@@ -28,6 +29,8 @@
             $rootScope.apiURLForWeather = 'http://' + $location.host() + '/api/weather/international/history';
             $rootScope.apiURLForGoogleAttraction = 'http://' + $location.host() + '/api/googleplace/';
             $rootScope.apiURLForYouTube = 'http://' + $location.host() + '/api/youtube/';
+            $rootScope.apiURLForUSWeather = 'http://' + $location.host() + '/api/weather/history';
+            $rootScope.apiURLForGoogleGeoReverseLookup = 'http://' + $location.host() + '/api/googlegeocode/reverselookup/';
         }
 
      

@@ -101,8 +101,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIServices\GoogleAPICaller.cs" />
+    <Compile Include="APIServices\GoogleReverseLookupAPICaller.cs" />
     <Compile Include="APIServices\IAPICaller.cs" />
     <Compile Include="APIServices\IAsyncGoogleAPICaller.cs" />
+    <Compile Include="APIServices\IAsyncGoogleReverseLookupAPICaller.cs" />
     <Compile Include="APIServices\IAsyncWeatherAPICaller.cs" />
     <Compile Include="APIServices\IAsyncSabreAPICaller.cs" />
     <Compile Include="APIServices\IAsyncYouTubeAPICaller.cs" />
@@ -113,7 +115,9 @@
     <Compile Include="CacheServices\MemoryCacheService.cs" />
     <Compile Include="CustomTypes\Google\Request\GoogleInput.cs" />
     <Compile Include="CustomTypes\Google\Response\GoogleOutput.cs" />
+    <Compile Include="CustomTypes\Google\Response\GoogleReverseLookupOutput.cs" />
     <Compile Include="CustomTypes\Google\ViewModels\Google.cs" />
+    <Compile Include="CustomTypes\Google\ViewModels\GoogleReverseLookup.cs" />
     <Compile Include="CustomTypes\IATA\ViewModels\Entity.cs" />
     <Compile Include="CustomTypes\IATA\ViewModels\IATACode.cs" />
     <Compile Include="CustomTypes\Sabre\Request\AdvancedCalendar.cs">

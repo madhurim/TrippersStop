@@ -1,5 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('weatherInfo', ['$compile', '$filter', '$timeout', '$rootScope', 'WeatherFactory', 'UtilFactory', 'TrippismConstants',
-    function ($compile, $filter, $timeout, $rootScope, WeatherFactory, UtilFactory, TrippismConstants) {
+﻿angular.module('TrippismUIApp').directive('weatherInfo', ['$compile', '$filter', '$timeout', '$rootScope', 'WeatherFactory', 'UtilFactory', 'TrippismConstants', 'GoogleGeoReverseLookupFactory',
+    function ($compile, $filter, $timeout, $rootScope, WeatherFactory, UtilFactory, TrippismConstants, GoogleGeoReverseLookupFactory) {
         return {
             restrict: 'E',
             scope: {
@@ -41,49 +41,64 @@
 
                 scope.WeatherRangeInfo = function () {
                     scope.WeatherInfoLoaded = false;
-
                     scope.HighTempratureC = "0";
                     scope.HighTempratureF = "0";
                     scope.LowTempratureC = "0";
                     scope.LowTempratureF = "0";
                     if (scope.weatherParams != undefined) {
-
-                        var statedata = _.find(scope.StateList, function (state) { return state.CityName == scope.weatherParams.DestinationairportName.airport_CityName });
-                        if (statedata == undefined) {
-                            scope.WeatherData = "";
-                            scope.WeatherInfoNoDataFound = true;
-                            scope.weatherParams.WeatherInfoNoDataFound = true;
+                        scope.WeatherData = "";
+                        var data = {};
+                        if (scope.weatherParams.DestinationairportName.airport_CountryCode == "US") {
+                            var request = { "Latitude": scope.weatherParams.DestinationairportName.airport_Lat, "Longitude": scope.weatherParams.DestinationairportName.airport_Lng };
+                            GoogleGeoReverseLookupFactory.googleGeoReverseLookup(request).then(function (data) {
+                                if (data == "" || data.status == 404) {
+                                    scope.WeatherwidgetData = "";
+                                    scope.WeatherInfoNoDataFound = true;
+                                    scope.weatherParams.WeatherInfoNoDataFound = true;
+                                    return null;
+                                }
+                                data = {
+                                    "State": data.StateCode,
+                                    "CountryCode": scope.weatherParams.DestinationairportName.airport_CountryCode,
+                                    "City": scope.weatherParams.DestinationairportName.airport_CityName,
+                                    "DepartDate": $filter('date')(scope.weatherParams.Fareforecastdata.DepartureDate, scope.format, null),
+                                    "ReturnDate": $filter('date')(scope.weatherParams.Fareforecastdata.ReturnDate, scope.format, null)
+                                };
+                                scope.getWeatherInformation(data);
+                            });
                         }
                         else {
-
-                            scope.WeatherData = "";
-                            var data = {
+                            data = {
+                                "CityName": scope.weatherParams.DestinationairportName.airport_CityName,
                                 "CountryCode": scope.weatherParams.DestinationairportName.airport_CountryCode,
                                 "AirportCode": scope.weatherParams.DestinationairportName.airport_Code,//scope.weatherParams.DestinationairportName.airport_CityName,
                                 "DepartDate": $filter('date')(scope.weatherParams.Fareforecastdata.DepartureDate, scope.format, null),
                                 "ReturnDate": $filter('date')(scope.weatherParams.Fareforecastdata.ReturnDate, scope.format, null)
                             };
-
-                            if (scope.WeatherInfoLoaded == false) {
-                                if (scope.WeatherData == "") {
-                                    scope.Weatherpromise = WeatherFactory.GetData(data).then(function (data) {
-                                        scope.WeatherInfoLoaded = false;
-                                        if (data == "" || data.status == 404) {
-                                            scope.WeatherInfoNoDataFound = true;
-                                            scope.weatherParams.WeatherInfoNoDataFound = false;
-                                            return;
-                                        }
-                                        scope.WeatherInfoNoDataFound = false;
-                                        scope.weatherParams.WeatherInfoNoDataFound = false;
-                                        scope.WeatherData = data;
-                                    });
-                                }
-                            }
+                            scope.getWeatherInformation(data);
                         }
-                        scope.WeatherInfoLoaded = true;
                     }
                 };
 
+                scope.getWeatherInformation = function (data) {
+                    if (scope.WeatherInfoLoaded == false) {
+                        if (scope.WeatherData == "") {
+                            scope.Weatherpromise = WeatherFactory.GetData(data).then(function (data) {
+                                scope.WeatherInfoLoaded = false;
+                                if (data == "" || data.status == 404) {
+                                    scope.WeatherInfoNoDataFound = true;
+                                    scope.weatherParams.WeatherInfoNoDataFound = false;
+                                    return;
+                                }
+                                scope.WeatherInfoNoDataFound = false;
+                                scope.weatherParams.WeatherInfoNoDataFound = false;
+                                scope.WeatherInfoLoaded = true;
+                                scope.WeatherData = data;
+                                scope.weatherParams.WeatherData = data;
+                            });
+                        }
+                    }
+                }
                 scope.$watch('WeatherData', function (newValue, oldValue) {
                     if (newValue != oldValue)
                         DisplayChart();
@@ -104,7 +119,6 @@
                             scope.LowTempratureF = scope.WeatherData.TempLowAvg.Avg.F;
                         }
 
-                        // if (scope.WeatherData.WeatherChances != undefined && scope.WeatherData.WeatherChances.length > 0) {
                         for (i = 0; i < scope.WeatherData.WeatherChances.length; i++) {
                             var name = scope.WeatherData.WeatherChances[i].Name;
                             if (name == 'Sweltering')
@@ -118,9 +132,6 @@
                             };
                             chartData.push(datas);
                         }
-                        //   }
-
-                        //$('#weatherChart').highcharts({
                         var options = {
                             chart: {
                                 height: scope.chartHeight,

@@ -40,6 +40,7 @@
     <Content Include="app\Factory\EmailForDestinationDetFactory.js" />
     <Content Include="app\Factory\FareforecastFactory.js" />
     <Content Include="app\Factory\GoogleAttractionFactory.js" />
+    <Content Include="app\Factory\GoogleGeoReverseLookupFactory.js" />
     <Content Include="app\Factory\WeatherFactory.js" />
     <Content Include="app\Factory\FareRangeFactory.js" />
     <Content Include="app\Factory\SeasonalityFactory.js" />
