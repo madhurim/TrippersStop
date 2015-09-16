@@ -47,7 +47,7 @@ namespace TrippismApi
             {
                    container.RegisterWebApiRequest<ICacheService, MemoryCacheService>();
             }         
-            container.RegisterWebApiRequest<IDBService, MongoService>();
+            //container.RegisterWebApiRequest<IDBService, MongoService>();
             container.RegisterWebApiRequest<IAsyncGoogleAPICaller, GoogleAPICaller>();
             container.RegisterWebApiRequest<IAsyncGoogleReverseLookupAPICaller, GoogleReverseLookupAPICaller>();
            

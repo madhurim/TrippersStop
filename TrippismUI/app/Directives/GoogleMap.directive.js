@@ -50,38 +50,37 @@ angular.module('TrippismUIApp')
 
 
           var RenderMap = function (maps) {
-              
+
               $scope.InfoWindow;
               var bounds = new google.maps.LatLngBounds();
               $scope.bounds = bounds;
               selected = maps;
-            
-           //   var maps = maps.sort(function (a, b) {  return ((a.LowestNonStopFare != "N/A" || a.LowestNonStopFare != 0) ? parseFloat(a.LowestNonStopFare) : a.LowestFare) < ((a.LowestNonStopFare != "N/A" || a.LowestNonStopFare != 0) ?  parseFloat(a.LowestNonStopFare) : a.LowestFare) ? 1 : -1;  }).reverse().slice(0, 1000);
+
+              //   var maps = maps.sort(function (a, b) {  return ((a.LowestNonStopFare != "N/A" || a.LowestNonStopFare != 0) ? parseFloat(a.LowestNonStopFare) : a.LowestFare) < ((a.LowestNonStopFare != "N/A" || a.LowestNonStopFare != 0) ?  parseFloat(a.LowestNonStopFare) : a.LowestFare) ? 1 : -1;  }).reverse().slice(0, 1000);
               for (var x = 0; x < maps.length; x++) {
                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
                   var LowestFarePrice = "N/A";
                   var LowestNonStopeFare = "N/A";
                   var LowRate = 'N/A';
-                  if (maps[x].LowestNonStopFare != "N/A")
-                  {
+                  if (maps[x].LowestNonStopFare != "N/A") {
                       LowestNonStopeFare = parseFloat(maps[x].LowestNonStopFare).toFixed(2);
                       if (LowestNonStopeFare == 0)
                           LowestNonStopeFare = "N/A";
-                      
+
                   }
                   LowRate = LowestNonStopeFare;
                   if (maps[x].LowestFare != "N/A") {
                       LowestFarePrice = maps[x].LowestFare.toFixed(2);
                       if (LowestFarePrice == 0)
                           LowestFarePrice = "N/A";
-                    //  LowestFarePrice = $filter('currency')(LowestFarePrice, maps[x].CurrencyCode + ' ', 0)
+                      //  LowestFarePrice = $filter('currency')(LowestFarePrice, maps[x].CurrencyCode + ' ', 0)
                   }
                   if (LowRate == "N/A")
                       LowRate = LowestFarePrice;
                   var airportName = _.find($scope.airportlist, function (airport) {
                       return airport.airport_Code == maps[x].DestinationLocation
                   });
-                  
+
                   if (LowRate != "N/A") {
                       var marker = new MarkerWithLabel({
                           position: latlng1,
@@ -122,7 +121,7 @@ angular.module('TrippismUIApp')
                               });
 
                               var dataForecast = {
-                                  "Origin": $scope.$parent.Origin,
+                                  "Origin": $scope.$parent.Origin.toUpperCase(),
                                   "DepartureDate": $filter('date')(marker.CustomMarkerInfo.DepartureDateTime, 'yyyy-MM-dd'),
                                   "ReturnDate": $filter('date')(marker.CustomMarkerInfo.ReturnDateTime, 'yyyy-MM-dd'),
                                   "Destination": marker.CustomMarkerInfo.DestinationLocation

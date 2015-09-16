@@ -137,12 +137,12 @@
             $rootScope.$broadcast('ontabClicked', $scope.tabManager.tabItems[i].parametersData.tabIndex);
         }
 
-       
+
         $scope.dateOptions = {
             formatYear: 'yy',
             startingDay: 1
         };
-     
+
 
         $scope.status = {
             isFirstOpen: true,
@@ -269,15 +269,15 @@
             _paramsdata.tabIndex = $scope.TabCreatedCount;
             var SearchCriteria = {
                 OrigintoDisp: $scope.OrigintoDisp,
-                Minfare : $scope.Minfare,
-                Maxfare : $scope.Maxfare,
-                Region: $scope.Region ,
+                Minfare: $scope.Minfare,
+                Maxfare: $scope.Maxfare,
+                Region: $scope.Region,
                 FromDate: $scope.FromDate,
                 ToDate: $scope.ToDate,
                 Origin: $scope.Origin,
                 Theme: $scope.Theme
             };
-            
+
             _paramsdata.dataforEmail = {};
             _paramsdata.SearchCriteria = SearchCriteria;
             $scope.tabManager.tabItems.push({
@@ -345,7 +345,7 @@
             }
         };
 
-        $scope.$watch('Origin', function (oldval, newValue) {
+        $scope.$watch('Origin', function (newValue, oldval) {
             if (newValue != undefined && newValue != "") {
                 $scope.OrigintoDisp = $scope.Origin.toUpperCase();
                 var originairportdata = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin.toUpperCase() });
@@ -402,7 +402,7 @@
         $scope.onKnowDestinationSelect = function ($item, $model, $label) {
             $scope.KnownDestinationAirport = $item.airport_Code;
         };
-        
+
         $scope.formatInput = function ($model) {
             if ($model == "" || $model == undefined) return "";
             var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $model });
@@ -450,7 +450,7 @@
             formatYear: 'yy',
             startingDay: 1
         };
-        
+
         $scope.getDestinationDetails = function (buttnText) {
             if ($scope.frmdestfinder.$invalid) {
                 $scope.hasError = true;
@@ -481,10 +481,11 @@
                     var DestinationairportName = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.KnownDestinationAirport.toUpperCase() });
 
                     var objDestinationairport = $scope.destinationlist[0];
-                    
+
                     if (objDestinationairport != undefined) {
                         var dataForecast = {
-                            "Origin": $scope.Origin,
+                            "Origin": $scope.Origin.toUpperCase(),
+
                             "DepartureDate": $filter('date')(objDestinationairport.DepartureDateTime, 'yyyy-MM-dd'),
                             "ReturnDate": $filter('date')(objDestinationairport.ReturnDateTime, 'yyyy-MM-dd'),
                             //"Destination": objDestinationairport.DestinationLocation
@@ -523,17 +524,17 @@
                     $scope.IscalledFromIknowMyDest = false;
                     findDestinations();
                 }
-                
+
                 $scope.inProgress = false;
-              
-               
-               
+
+
+
             });
 
         };
-        
+
         function findDestinations(buttnText) {
-            
+
             $scope.isAdvancedSearch = false;
             if (buttnText != undefined && buttnText == 'advenced')
                 $scope.isAdvancedSearch = true;
@@ -559,7 +560,7 @@
 
             $scope.inProgress = true;
 
-          
+
 
             $scope.mappromise = DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.isSearching = false;
@@ -633,7 +634,7 @@
                 "Minfare": $scope.Minfare,
                 "Maxfare": $scope.Maxfare,
                 "PointOfSaleCountry": PointOfsalesCountry,
-                "Region": $scope.Region ,
+                "Region": $scope.Region,
                 //"Destination": $scope.Destination
                 "Destination": $scope.KnownDestinationAirport
             };

@@ -30,9 +30,12 @@
                       scope.$parent.divFareRange = newValue;
                   }
                 );
+                scope.IsMacOrigin = false;
+
                 scope.loadfareRangeInfo = function () {
                     scope.fareRangeInfoLoaded = false;
                     scope.fareRangeInfoNoDataFound = false;
+                    scope.SelectedLocation = "";
                     scope.fareRangeData = "";
                     if (scope.farerangeParams != undefined) {
                         scope.staydaylength = 0;
@@ -42,12 +45,21 @@
                             var timeDiff = Math.abs(todt.getTime() - frdt.getTime());
                             scope.staydaylength = Math.ceil(timeDiff / (1000 * 3600 * 24));
                         }
-                       
+
+                        var LatestDepartureDate = new Date(scope.farerangeParams.Fareforecastdata.ReturnDate);
+                        LatestDepartureDate.setDate(LatestDepartureDate.getDate() + 5);
+                        
+                        var daydiff = getLengthOfStay(scope.farerangeParams.Fareforecastdata.DepartureDate, LatestDepartureDate);
+                        if (daydiff > 15) {
+                            LatestDepartureDate = new Date(scope.farerangeParams.Fareforecastdata.DepartureDate);
+                            LatestDepartureDate.setDate(LatestDepartureDate.getDate() + 14);
+                        }
+                        LatestDepartureDate = $filter('date')(LatestDepartureDate, 'yyyy-MM-dd')
                         var data = {
-                            "Origin": scope.farerangeParams.Fareforecastdata.Origin,
+                            "Origin": scope.farerangeParams.Fareforecastdata.Origin.toUpperCase(),
                             "Destination": scope.farerangeParams.Fareforecastdata.Destination,
                             "EarliestDepartureDate": scope.farerangeParams.Fareforecastdata.DepartureDate,
-                            "LatestDepartureDate": scope.farerangeParams.Fareforecastdata.ReturnDate,
+                            "LatestDepartureDate": LatestDepartureDate,
                             "Lengthofstay": scope.staydaylength  //TrippismConstants.DefaultLenghtOfStay
                         };
                         if (scope.fareRangeInfoLoaded == false) {
@@ -56,12 +68,44 @@
                                     scope.FareRangeLoading = false;
                                     if (data.status == 404 || data.status == 400) {
                                         scope.fareRangeInfoNoDataFound = true;
-                                        $rootScope.$broadcast('divFareRangeEvent', false, scope.Seasonalityresult);
                                         return;
                                     }
-                                    scope.fareRangeData = data;
+                                    var originairport = _.find(scope.farerangeParams.AvailableAirports, function (airport) { return airport.airport_Code == scope.farerangeParams.Fareforecastdata.Origin });
+                                    if (originairport != undefined) {
+                                        if (!originairport.airport_IsMAC) {
+                                            scope.IsMacOrigin = false;
+                                            data.IsMacOrigin = false
+                                            scope.fareRangeData = data;
+                                        }
+
+                                        else {
+                                            scope.IsMacOrigin = true;
+                                            var origins = _.groupBy(data.FareData, 'OriginLocation');
+                                            
+                                            if (origins != undefined) {
+                                                var MinimumLocation = [];
+                                                _.each(origins, function (wt) {
+                                                    MinimumLocation.push(_.min(wt, function (o) { return o.MinimumFare; }));
+                                                });
+                                                var MinSelectedLocation = _.min(MinimumLocation, function (o) { return o.MinimumFare; });
+
+                                                var locationairport = _.find(scope.farerangeParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.OriginLocation.toUpperCase() });
+                                                if (locationairport != undefined)
+                                                    scope.SelectedLocation = MinSelectedLocation.OriginLocation + ', ' + locationairport.airport_FullName + ", " + locationairport.airport_CityName;
+
+                                                var faredata = {
+                                                    DestinationLocation: MinSelectedLocation.DestinationLocation,
+                                                    OriginLocation: MinSelectedLocation.OriginLocation,
+                                                    IsMacOrigin: true,
+                                                    SelectedLocation : scope.SelectedLocation,
+                                                    FareData: origins[MinSelectedLocation.OriginLocation]
+                                                };
+                                                scope.fareRangeData = faredata;
+                                            }
+                                        }
+                                        scope.farerangeParams.FareRangeData = scope.fareRangeData;
+                                    }
                                     scope.fareRangeInfoLoaded = true;
-                                    $rootScope.$broadcast('divFareRangeEvent', true, scope.Seasonalityresult);
                                 });
                             }
                         }
@@ -69,10 +113,8 @@
                 };
 
                 scope.$watch('fareRangeData', function (newValue, oldValue) {
-                    if (newValue != oldValue) {
+                    if (newValue != oldValue)
                         DisplayChart();
-
-                    }
                 })
 
                 scope.Chart = [];
@@ -85,7 +127,6 @@
                         for (i = 0; i < scope.fareRangeData.FareData.length; i++) {
                             var DepartureDate = new Date(scope.fareRangeData.FareData[i].DepartureDateTime);
                             var returnDate = new Date(scope.fareRangeData.FareData[i].ReturnDateTime);
-
                             if (i == 0) {
                                 startdate = Date.UTC(DepartureDate.getFullYear(), DepartureDate.getMonth(), DepartureDate.getDate());
                                 firstCurrencyCode = scope.fareRangeData.FareData[i].CurrencyCode;
@@ -126,7 +167,7 @@
                                 renderTo: scope.TabIndex,
                             },
                             title: {
-                                text: ''
+                                text: (scope.IsMacOrigin) ? scope.SelectedLocation : ''
                             },
                             xAxis: {
                                 type: 'datetime',
@@ -134,7 +175,7 @@
                                     formatter: function () {
                                         var d = new Date(this.value);
                                         var returndate = new Date($filter('date')(this.value, scope.format, null));
-                                        returndate.setDate(returndate.getDate() + scope.staydaylength+1)
+                                        returndate.setDate(returndate.getDate() + scope.staydaylength + 1)
                                         return Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, this.value) + ' -<br> ' + Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, returndate);
                                     },
                                     rotation: -45
@@ -143,17 +184,12 @@
                                     text: 'Departure Date - Return Date'
                                 }
                             },
-                            yAxis: {
-                                title: {
-                                    text: 'Fare Rate in ' + firstCurrencyCode
-                                }
-                            },
+                            yAxis: { title: { text: 'Fare Rate in ' + firstCurrencyCode }  },
                             legend: {
                                 enabled: true
                             },
                             plotOptions: {
                                 series: {
-                                    
                                     borderWidth: 0,
                                     dataLabels: {
                                         //allowOverlap:true,
@@ -161,7 +197,7 @@
                                         overflow: 'none',
                                         enabled: true,
                                         align: 'right',
-                                        format:TrippismConstants.HighChartTwoDecimalCurrencyFormat ,
+                                        format: TrippismConstants.HighChartTwoDecimalCurrencyFormat,
                                         style: {
                                             fontWeight: 'bold',
                                             fontSize: '10px'

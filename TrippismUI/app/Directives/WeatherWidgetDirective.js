@@ -11,8 +11,6 @@
                 scope.formats = Dateformat();
                 scope.format = scope.formats[5];
                 scope.WeatherInfoNoDataFound = true;
-                scope.weatherParams.WeatherInfoNoDataFound = true;
-                scope.chartHeight = 300;
                 scope.StateList = [];
                 UtilFactory.ReadStateJson().then(function (data) {
                     scope.StateList = data;
