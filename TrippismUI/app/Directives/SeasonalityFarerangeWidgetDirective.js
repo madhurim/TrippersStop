@@ -28,42 +28,47 @@
                 };
 
                 function setSeasonalityData() {
-
-                    var chartrec = _.sortBy(scope.SeasonalityData, 'WeekStartDate');
-
                     var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate);
                     var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate)
-                    for (i = 0; i < chartrec.length; i++) {
+                    var Frmmonth = FrmDate.getMonth() + 1;
+                    var Tomonth = Todate.getMonth() + 1;
+                    var Fromweeks = _.filter(scope.SeasonalityData, function (dt) {
+                        return (new Date(dt.WeekStartDate).getMonth() + 1) == Frmmonth;
+                    });
 
+                    if (Frmmonth != Tomonth) {
+                        var ToWeeks = _.filter(scope.SeasonalityData, function (dt) {
+                            return (new Date(dt.WeekStartDate).getMonth() + 1) == Tomonth;
+                        });
+                        Fromweeks = Fromweeks.concat(ToWeeks);
+                    }
+
+                    var chartrec = _.sortBy(Fromweeks, 'WeekStartDate');
+
+                    for (i = 0; i < chartrec.length; i++) {
+                        
                         var WeekStartDate = new Date(chartrec[i].WeekStartDate);
-                        if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) {
-                            var SeasonalityIndicator = "";
-                            if (chartrec[i].SeasonalityIndicator == "High")
-                                NumberOfObervations = 3;
-                            if (chartrec[i].SeasonalityIndicator == "Medium")
-                                NumberOfObervations = 2;
-                            if (chartrec[i].SeasonalityIndicator == "Low")
-                                NumberOfObervations = 1;
-                            scope.SeasonalityWidgetData = {
-                                NoofIcons: NumberOfObervations
-                            };
-                            scope.SeasonalityWidgetDataFound = true;
-                            return;
+                        var WeekEndDate = new Date(chartrec[i].WeekEndDate);
+                        if (WeekStartDate.getMonth() + 1 >= FrmDate.getMonth() + 1) {
+                            
+                            //if (WeekStartDate.getDate() >= FrmDate.getDate()) {
+                            if (FrmDate.getDate() >= WeekStartDate.getDate() && (FrmDate.getDate() <= WeekEndDate.getDate() || FrmDate.getMonth() +1 < WeekEndDate.getMonth() + 1  ) ) {
+                            
+                                var SeasonalityIndicator = "";
+                                if (chartrec[i].SeasonalityIndicator == "High")
+                                    NumberOfObervations = 3;
+                                if (chartrec[i].SeasonalityIndicator == "Medium")
+                                    NumberOfObervations = 2;
+                                if (chartrec[i].SeasonalityIndicator == "Low")
+                                    NumberOfObervations = 1;
+                                scope.SeasonalityWidgetData = {
+                                    NoofIcons: NumberOfObervations
+                                };
+                                scope.SeasonalityWidgetDataFound = true;
+                                return;
+                            }
                         }
-                        else if (WeekStartDate > FrmDate) {
-                            var NumberOfObervations = "";
-                            if (chartrec[i].SeasonalityIndicator == "High")
-                                NumberOfObervations = 3;
-                            if (chartrec[i].SeasonalityIndicator == "Medium")
-                                NumberOfObervations = 2;
-                            if (chartrec[i].SeasonalityIndicator == "Low")
-                                NumberOfObervations = 1;
-                            scope.SeasonalityWidgetData = {
-                                NoofIcons: NumberOfObervations
-                            };
-                            scope.SeasonalityWidgetDataFound = true;
-                        }
-                        //scope.$apply();
+                      
                     }
                 }
 
@@ -72,7 +77,7 @@
                     scope.FareRangeWidgetDataFound = false;
                     if (scope.widgetParams != undefined) {
                         scope.fareRangeData = scope.widgetParams.FareRangeData;
-                        
+
                         if (scope.fareRangeData != undefined && scope.fareRangeData != "") {
 
                             var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate);
@@ -89,7 +94,7 @@
                                     scope.FareRangeWidgetDataFound = true;
                                     break;
                                 }
-                                scope.$apply();
+                              //  scope.$apply();
                             }
                         }
                     }

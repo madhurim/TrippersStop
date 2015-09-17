@@ -481,14 +481,11 @@
                     var DestinationairportName = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.KnownDestinationAirport.toUpperCase() });
 
                     var objDestinationairport = $scope.destinationlist[0];
-
                     if (objDestinationairport != undefined) {
                         var dataForecast = {
                             "Origin": $scope.Origin.toUpperCase(),
-
                             "DepartureDate": $filter('date')(objDestinationairport.DepartureDateTime, 'yyyy-MM-dd'),
                             "ReturnDate": $filter('date')(objDestinationairport.ReturnDateTime, 'yyyy-MM-dd'),
-                            //"Destination": objDestinationairport.DestinationLocation
                             "Destination": $scope.KnownDestinationAirport.toUpperCase()
                         };
                         objDestinationairport.objDestinationairport = $scope.KnownDestinationAirport.toUpperCase();
@@ -514,8 +511,6 @@
                         alertify.alert('Opps! Sorry, entered destination not found, however we got other destinations for you!').set('onok', function (closeEvent) { });
                         $scope.IscalledFromIknowMyDest = false;
                     }
-
-
                 }
                 else {
                     $scope.KnownDestinationAirport = '';
@@ -524,17 +519,11 @@
                     $scope.IscalledFromIknowMyDest = false;
                     findDestinations();
                 }
-
                 $scope.inProgress = false;
-
-
-
             });
-
         };
 
         function findDestinations(buttnText) {
-
             $scope.isAdvancedSearch = false;
             if (buttnText != undefined && buttnText == 'advenced')
                 $scope.isAdvancedSearch = true;
@@ -554,13 +543,8 @@
             else if (buttnText == 'Cheapest') { $scope.SearchbuttonChepestIsLoading = true; $scope.SearchbuttonCheapestText = $scope.LoadingText; }
 
             var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin.toUpperCase() });
-
-
             var data = CreateSearchCriteria();
-
             $scope.inProgress = true;
-
-
 
             $scope.mappromise = DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.isSearching = false;
@@ -569,7 +553,6 @@
                 $scope.SearchbuttonIsLoading = false;
                 $scope.SearchbuttonChepestIsLoading = false;
                 if (data.FareInfo != null) {
-                    //$scope.destinationlist = data.FareInfo;
                     $scope.destinationlist = FilterDestinations(data.FareInfo);
                     $scope.buttontext = "Cheapest";
                     //Get Top 5 cheapest Destination 
@@ -610,7 +593,6 @@
         }
 
         function CreateSearchCriteria() {
-
             if ($scope.KnownDestinationAirport != "" || $scope.KnownDestinationAirport != undefined) {
                 var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
                 var secondDate = new Date($scope.ToDate);
@@ -656,7 +638,6 @@
                             "LowestFare": data.FareInfo[x].LowestFare,
                             "topdestinationFareInfo": data.FareInfo[x]
                         };
-
                         $scope.topdestinationlist.push(topdestination);
                     }
                 }
