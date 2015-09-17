@@ -881,7 +881,7 @@
             Get response from api based on url.
             </summary>
         </member>
-        <member name="M:Trippism.Areas.Weather.Controllers.HistoryController.#ctor(TrippismApi.TraveLayer.IAsyncWeatherAPICaller,TrippismApi.TraveLayer.ICacheService)">
+        <member name="M:Trippism.Areas.Weather.Controllers.HistoryController.#ctor(TrippismApi.TraveLayer.IAsyncGoogleReverseLookupAPICaller,TrippismApi.TraveLayer.IAsyncWeatherAPICaller,TrippismApi.TraveLayer.ICacheService)">
             <summary>
             Returns a weather summary based on historical information between the specified dates (30 days max).
             </summary>

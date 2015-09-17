@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -24,21 +23,19 @@ namespace Trippism.Areas.Google.Controllers
         }
 
         [ResponseType(typeof(TraveLayer.CustomTypes.Google.ViewModels.GoogleReverseLookup))]
-        [Route("api/googlegeocode/reverselookup")]
         [HttpGet]
-        public async Task<HttpResponseMessage> Get([FromUri]GoogleInput locationsearch)
+        public async Task<GoogleReverseLookup> Get([FromUri]GoogleInput locationsearch)
         {
             string cacheKey = TrippismKey + string.Join(".", locationsearch.Latitude, locationsearch.Longitude);
             var tripGooglePlace = _cacheService.GetByKey<TraveLayer.CustomTypes.Google.ViewModels.GoogleReverseLookup>(cacheKey);
             if (tripGooglePlace != null)
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, tripGooglePlace);
-            }
+                return tripGooglePlace;
+
             return await Task.Run(() =>
             { return GetResponse(locationsearch.Latitude, locationsearch.Longitude, cacheKey); });
         }
 
-        private HttpResponseMessage GetResponse(string Latitude, string Longitude, string cacheKey)
+        private GoogleReverseLookup GetResponse(string Latitude, string Longitude, string cacheKey)
         {
             _apiCaller.Accept = "application/json";
             _apiCaller.ContentType = "application/json";
@@ -59,13 +56,12 @@ namespace Trippism.Areas.Google.Controllers
                         if (googleReverseLookup != null)
                         {
                             _cacheService.Save<GoogleReverseLookup>(cacheKey, googleReverseLookup);
-                            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, googleReverseLookup);
-                            return response;
+                            return googleReverseLookup;
                         }
                     }
                 }
             }
-            return Request.CreateResponse(result.StatusCode, result.Response);
+            return new GoogleReverseLookup();
         }
     }
 }

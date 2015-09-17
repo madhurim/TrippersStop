@@ -49,23 +49,16 @@
                         scope.WeatherData = "";
                         var data = {};
                         if (scope.weatherParams.DestinationairportName.airport_CountryCode == "US") {
-                            var request = { "Latitude": scope.weatherParams.DestinationairportName.airport_Lat, "Longitude": scope.weatherParams.DestinationairportName.airport_Lng };
-                            GoogleGeoReverseLookupFactory.googleGeoReverseLookup(request).then(function (data) {
-                                if (data == "" || data.status == 404) {
-                                    scope.WeatherwidgetData = "";
-                                    scope.WeatherInfoNoDataFound = true;
-                                    scope.weatherParams.WeatherInfoNoDataFound = true;
-                                    return null;
-                                }
-                                data = {
-                                    "State": data.StateCode,
-                                    "CountryCode": scope.weatherParams.DestinationairportName.airport_CountryCode,
-                                    "City": scope.weatherParams.DestinationairportName.airport_CityName,
-                                    "DepartDate": $filter('date')(scope.weatherParams.Fareforecastdata.DepartureDate, scope.format, null),
-                                    "ReturnDate": $filter('date')(scope.weatherParams.Fareforecastdata.ReturnDate, scope.format, null)
-                                };
-                                scope.getWeatherInformation(data);
-                            });
+                            data = {
+                                "State": data.StateCode,
+                                "CountryCode": scope.weatherParams.DestinationairportName.airport_CountryCode,
+                                "City": scope.weatherParams.DestinationairportName.airport_CityName,
+                                "DepartDate": $filter('date')(scope.weatherParams.Fareforecastdata.DepartureDate, scope.format, null),
+                                "ReturnDate": $filter('date')(scope.weatherParams.Fareforecastdata.ReturnDate, scope.format, null),
+                                "Latitude": scope.weatherParams.DestinationairportName.airport_Lat,
+                                "Longitude": scope.weatherParams.DestinationairportName.airport_Lng
+                            };
+                            scope.getWeatherInformation(data);
                         }
                         else {
                             data = {
@@ -80,11 +73,11 @@
                     }
                 };
 
-                scope.getWeatherInformation = function (data) {                    
+                scope.getWeatherInformation = function (data) {
                     if (scope.WeatherInfoLoaded == false) {
                         if (scope.WeatherData == "") {
                             scope.Weatherpromise = WeatherFactory.GetData(data).then(function (data) {
-                                scope.WeatherInfoLoaded = false;                                
+                                scope.WeatherInfoLoaded = false;
                                 if (data == "" || data.status == 404 || data.WeatherChances.length == 0) {
                                     scope.WeatherInfoNoDataFound = true;
                                     scope.weatherParams.WeatherInfoNoDataFound = false;

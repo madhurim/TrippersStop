@@ -30,7 +30,7 @@ namespace TrippismApi
         {
             AreaRegistration.RegisterAllAreas();
 
-           // WebApiConfig.Register(GlobalConfiguration.Configuration);
+            // WebApiConfig.Register(GlobalConfiguration.Configuration);
             GlobalConfiguration.Configure(WebApiConfig.Register); //Commented today
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -45,12 +45,12 @@ namespace TrippismApi
             }
             else
             {
-                   container.RegisterWebApiRequest<ICacheService, MemoryCacheService>();
-            }         
+                container.RegisterWebApiRequest<ICacheService, MemoryCacheService>();
+            }
             //container.RegisterWebApiRequest<IDBService, MongoService>();
             container.RegisterWebApiRequest<IAsyncGoogleAPICaller, GoogleAPICaller>();
             container.RegisterWebApiRequest<IAsyncGoogleReverseLookupAPICaller, GoogleReverseLookupAPICaller>();
-           
+
             container.RegisterWebApiRequest<IAsyncYouTubeAPICaller, YouTubeAPICaller>();
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
@@ -61,7 +61,7 @@ namespace TrippismApi
                 new SimpleInjectorWebApiDependencyResolver(container);
             ApiHelper.RegisterMappingEntities();
             //GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
-           // GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
+            // GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
         }
     }
 }

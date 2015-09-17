@@ -18,14 +18,15 @@ namespace Trippism.Areas.Weather.Controllers
         const string TrippismKey = "Trippism.Weather.";
         IAsyncWeatherAPICaller _apiCaller;
         ICacheService _cacheService;
-
+        IAsyncGoogleReverseLookupAPICaller _apiGoogleReverseLookupCaller;
         /// <summary>
         /// Returns a weather summary based on historical information between the specified dates (30 days max).
         /// </summary>
-        public HistoryController(IAsyncWeatherAPICaller apiCaller, ICacheService cacheService)
+        public HistoryController(IAsyncGoogleReverseLookupAPICaller apiGoogleReverseLookupCaller, IAsyncWeatherAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;
+            _apiGoogleReverseLookupCaller = apiGoogleReverseLookupCaller;
         }
         /// <summary>
         /// Returns a weather summary based on historical information between the specified dates (30 days max).
@@ -38,10 +39,17 @@ namespace Trippism.Areas.Weather.Controllers
             //http://localhost:14606/api/weather/history?State=CA&City=San_Francisco&DepartDate=2015-07-06&ReturnDate=2015-07-09
             // http://api.wunderground.com/api/Your_Key/planner_MMDDMMDD/q/CA/San_Francisco.json
 
-            string cacheKey = TrippismKey + string.Join(".", weatherInfo.City, weatherInfo.State, weatherInfo.DepartDate.ToShortDateString(), weatherInfo.ReturnDate.ToShortDateString());
+            string cacheKey = TrippismKey + string.Join(".", weatherInfo.Latitude, weatherInfo.Longitude, weatherInfo.DepartDate.ToShortDateString(), weatherInfo.ReturnDate.ToShortDateString());
             var tripWeather = _cacheService.GetByKey<TripWeather>(cacheKey);
             if (tripWeather != null)
                 return Request.CreateResponse(HttpStatusCode.OK, tripWeather);
+
+            #region Getting StateCode
+            Trippism.Areas.Google.Controllers.GoogleGeoCodeController googleGeoCode = new Google.Controllers.GoogleGeoCodeController(_apiGoogleReverseLookupCaller, _cacheService);
+            TraveLayer.CustomTypes.Google.Request.GoogleInput googleInput = new TraveLayer.CustomTypes.Google.Request.GoogleInput() { Latitude = weatherInfo.Latitude, Longitude = weatherInfo.Longitude };
+            TraveLayer.CustomTypes.Google.ViewModels.GoogleReverseLookup googleReverseLookup = await googleGeoCode.Get(googleInput);
+            weatherInfo.State = googleReverseLookup.StateCode;
+            #endregion
 
             string fromDate = weatherInfo.DepartDate.ToString("MMdd");
             string toDate = weatherInfo.ReturnDate.ToString("MMdd");
