@@ -28,7 +28,11 @@
         </div>
 
         <div ng-if="FareRangeWidgetDataFound" class="col-lg-12">
-            <div style="font-size:13px;font-weight:bold;">Fare Range Last 4 weeks <span ng-if="widgetParams.FareRangeData.IsMacOrigin">( {{widgetParams.FareRangeData.OriginLocation}} )</span></div>
+            <div style="font-size:13px;font-weight:bold;">Fare Range Last 4 weeks 
+                <span ng-if="widgetParams.FareRangeData.IsMacOrigin">( {{widgetParams.FareRangeData.OriginLocation}} )</span>
+                <span ng-if="widgetParams.FareRangeData.IsMacDestination">( {{widgetParams.FareRangeData.DestinationLocation}} )</span>
+                
+            </div>
 
 
             <div>Lowest Fare : {{FareRangeWidgetData.MinimumFare}}</div>

@@ -47,13 +47,11 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
                         };
 
                         if (scope.youtubeInfoLoaded == false) {
-                           // if (scope.youtubeData == "") {
                                 scope.youtubepromise = YouTubeFactory.youTube(data).then(function (data) {
                                     if (data.status == 404) {
                                         scope.youtubeInfoDataFound = false;
                                         return;
                                     }
-                                    
                                     scope.isDataLoadedFirstTime = true;
                                     scope.youtubeData = data;
                                    
@@ -71,7 +69,6 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
 
                                     scope.youtubeInfoDataFound = true;
                                 });
-                          //  }
                         }
                         scope.youtubeInfoLoaded = true;
                     }

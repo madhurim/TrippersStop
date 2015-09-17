@@ -71,23 +71,37 @@
                                         return;
                                     }
                                     var originairport = _.find(scope.farerangeParams.AvailableAirports, function (airport) { return airport.airport_Code == scope.farerangeParams.Fareforecastdata.Origin });
-                                    if (originairport != undefined) {
-                                        if (!originairport.airport_IsMAC) {
+                                    var destinationairport = _.find(scope.farerangeParams.AvailableAirports, function (airport) { return airport.airport_Code == scope.farerangeParams.Fareforecastdata.Destination });
+
+                                    // Done this code where citycode and airport code is same
+                                    var originList = _.where(scope.farerangeParams.AvailableAirports, { airport_CityCode: scope.farerangeParams.Fareforecastdata.Origin });
+                                    var originairportObj = _.find(originList, function (airport) { return airport.airport_IsMAC == true });
+                                    if (originairportObj != undefined ) originairport.airport_IsMAC = true;
+                                    else  originairport.airport_IsMAC = false; 
+
+                                    var desList = _.where(scope.farerangeParams.AvailableAirports, { airport_CityCode: scope.farerangeParams.Fareforecastdata.Destination });
+                                    var destinationairportObj = _.find(desList, function (airport) { return airport.airport_IsMAC == true });
+                                    if (destinationairportObj != undefined ) destinationairport.airport_IsMAC = true;
+                                    else destinationairport.airport_IsMAC = false; 
+
+                                    if (originairport != undefined && destinationairport != undefined) {
+                                        // If both airports are not MAC
+                                        if (!originairport.airport_IsMAC && !destinationairport.airport_IsMAC) {
                                             scope.IsMacOrigin = false;
                                             data.IsMacOrigin = false
                                             scope.fareRangeData = data;
                                         }
-
-                                        else {
+                                        // If Origin airport is MAC and Destination is not
+                                        else if ((originairport.airport_IsMAC && !destinationairport.airport_IsMAC) || (originairport.airport_IsMAC && destinationairport.airport_IsMAC)) {
+                                            
                                             scope.IsMacOrigin = true;
                                             var origins = _.groupBy(data.FareData, 'OriginLocation');
-                                            
                                             if (origins != undefined) {
                                                 var MinimumLocation = [];
-                                                _.each(origins, function (wt) {
-                                                    MinimumLocation.push(_.min(wt, function (o) { return o.MinimumFare; }));
+                                                _.each(origins, function (org) {
+                                                    MinimumLocation.push(_.min(org, function (loc) { return loc.MinimumFare; }));
                                                 });
-                                                var MinSelectedLocation = _.min(MinimumLocation, function (o) { return o.MinimumFare; });
+                                                var MinSelectedLocation = _.min(MinimumLocation, function (loc) { return loc.MinimumFare; });
 
                                                 var locationairport = _.find(scope.farerangeParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.OriginLocation.toUpperCase() });
                                                 if (locationairport != undefined)
@@ -97,12 +111,43 @@
                                                     DestinationLocation: MinSelectedLocation.DestinationLocation,
                                                     OriginLocation: MinSelectedLocation.OriginLocation,
                                                     IsMacOrigin: true,
-                                                    SelectedLocation : scope.SelectedLocation,
+                                                    SelectedLocation: scope.SelectedLocation,
                                                     FareData: origins[MinSelectedLocation.OriginLocation]
                                                 };
                                                 scope.fareRangeData = faredata;
                                             }
                                         }
+                                            // If Destination airport is MAC and Origin  is not
+                                        else if (!originairport.airport_IsMAC && destinationairport.airport_IsMAC) {
+                                            scope.IsMacDestination = true;
+                                            var destinations = _.groupBy(data.FareData, 'DestinationLocation');
+                                            if (destinations != undefined) {
+                                                var MinimumLocation = [];
+                                                _.each(destinations, function (org) {
+                                                    MinimumLocation.push(_.min(org, function (loc) { return loc.MinimumFare; }));
+                                                });
+                                                var MinSelectedLocation = _.min(MinimumLocation, function (loc) { return loc.MinimumFare; });
+
+                                                var locationairport = _.find(scope.farerangeParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.DestinationLocation.toUpperCase() });
+                                                if (locationairport != undefined)
+                                                    scope.SelectedDestinationLocation = MinSelectedLocation.DestinationLocation + ', ' + locationairport.airport_FullName + ", " + locationairport.airport_CityName;
+
+                                                var faredata = {
+                                                    DestinationLocation: MinSelectedLocation.DestinationLocation,
+                                                    OriginLocation: MinSelectedLocation.OriginLocation,
+                                                    IsMacOrigin: false,
+                                                    IsMacDestination : true,
+                                                    SelectedLocation: '',
+                                                    SelectedDestinationLocation : scope.SelectedDestinationLocation,
+                                                    FareData: destinations[MinSelectedLocation.DestinationLocation]
+                                                };
+                                                scope.fareRangeData = faredata;
+                                            }
+                                        }
+                                        else if (data.FareData != undefined && data.FareData[0].OriginLocation == undefined) {
+                                            scope.fareRangeData = data;
+                                        }
+                                       
                                         scope.farerangeParams.FareRangeData = scope.fareRangeData;
                                     }
                                     scope.fareRangeInfoLoaded = true;
@@ -167,7 +212,7 @@
                                 renderTo: scope.TabIndex,
                             },
                             title: {
-                                text: (scope.IsMacOrigin) ? scope.SelectedLocation : ''
+                                text: (scope.IsMacOrigin) ? scope.SelectedLocation : (scope.IsMacDestination ? 'dest ' + scope.SelectedDestinationLocation: '')
                             },
                             xAxis: {
                                 type: 'datetime',
