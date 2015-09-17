@@ -70,3 +70,9 @@ function getLengthOfStay(frdt, todt) {
     var timeDiff = Math.abs(todt.getTime() - frdt.getTime());
     return Math.ceil(timeDiff / (1000 * 3600 * 24));
 }
+
+function addDays(dt, noOfDays) {
+    var newDate = new Date(dt);
+    newDate.setDate(newDate.getDate() + noOfDays);
+    return newDate;
+}

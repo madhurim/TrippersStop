@@ -53,7 +53,7 @@
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
         $scope.IsHistoricalInfo = false;
-        $scope.MaximumFromDate = ConvertToRequiredDate(common.addDays(new Date(), 192), 'UI');
+        $scope.MaximumFromDate = ConvertToRequiredDate(addDays(new Date(), 192), 'UI');
         $scope.LoadingText = "Loading..";
         $scope.oneAtATime = true;
         $scope.SearchbuttonText = "Suggest Destinations";
@@ -198,9 +198,9 @@
                // Calculate datediff
                var diff = daydiff(new Date(newValue).setHours(0, 0, 0, 0), new Date($scope.Latestdeparturedate).setHours(0, 0, 0, 0));
                if (diff > 30)
-                   $scope.Latestdeparturedate = ConvertToRequiredDate(common.addDays(newDt, 30), 'UI');
+                   $scope.Latestdeparturedate = ConvertToRequiredDate(addDays(newDt, 30), 'UI');
 
-               $scope.MaximumLatestdeparturedate = common.addDays(newDt, 30);
+               $scope.MaximumLatestdeparturedate = addDays(newDt, 30);
            }
         );
 
@@ -225,7 +225,7 @@
                   //SET MINIMUN SELECTED DATE for TODATE
                   $scope.minFromDate = new Date(newValue);
                   $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
-                  $scope.MaximumToDate = common.addDays($scope.minFromDate, 16);
+                  $scope.MaximumToDate = addDays($scope.minFromDate, 16);
               }
        );
 
