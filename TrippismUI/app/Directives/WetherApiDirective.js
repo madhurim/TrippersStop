@@ -80,12 +80,12 @@
                     }
                 };
 
-                scope.getWeatherInformation = function (data) {
+                scope.getWeatherInformation = function (data) {                    
                     if (scope.WeatherInfoLoaded == false) {
                         if (scope.WeatherData == "") {
                             scope.Weatherpromise = WeatherFactory.GetData(data).then(function (data) {
-                                scope.WeatherInfoLoaded = false;
-                                if (data == "" || data.status == 404) {
+                                scope.WeatherInfoLoaded = false;                                
+                                if (data == "" || data.status == 404 || data.WeatherChances.length == 0) {
                                     scope.WeatherInfoNoDataFound = true;
                                     scope.weatherParams.WeatherInfoNoDataFound = false;
                                     return;

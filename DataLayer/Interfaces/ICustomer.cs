@@ -10,7 +10,7 @@ namespace DataLayer.Interfaces
     interface ICustomer
     {
         ObjectId _id { get; set; }
-        Guid CustomerGuid { get; set; }
+        //Guid CustomerGuid { get; set; }
         string FirstName { get; set; }
         string LastName { get; set; }
         DateTime DOB { get; set; }
