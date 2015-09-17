@@ -280,6 +280,7 @@
     <Compile Include="Areas\Sabre\Controllers\TopDestinationsController.cs" />
     <Compile Include="Areas\Sabre\SabreAreaRegistration.cs" />
     <Compile Include="APIExtention\AreaRegistrationContextExtensions.cs" />
+    <Compile Include="Areas\Weather\StaticMethods\WeatherAPIResponse.cs" />
     <Compile Include="Areas\YouTube\Controllers\YouTubeController.cs" />
     <Compile Include="Areas\YouTube\YouTubeAreaRegistration.cs" />
     <Compile Include="Controllers\Email\EmailController.cs" />
