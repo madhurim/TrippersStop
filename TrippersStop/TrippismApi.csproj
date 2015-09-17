@@ -258,6 +258,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Areas\IATA\Controllers\IATAController.cs" />
     <Compile Include="Areas\IATA\IATAAreaRegistration.cs" />
+    <Compile Include="APIHelper\CustomAuthorizeAttribute.cs" />
     <Compile Include="Areas\Profiles\Controllers\AuthenticationController.cs" />
     <Compile Include="Areas\Profiles\ProfilesAreaRegistration.cs" />
     <Compile Include="Areas\Sabre\Controllers\AdvancedCalendarController.cs" />
@@ -429,6 +430,7 @@
     <Folder Include="Areas\Google\Views\Shared\" />
     <Folder Include="Areas\IATA\Models\" />
     <Folder Include="Areas\IATA\Views\Shared\" />
+    <Folder Include="Areas\Profiles\APIMethod\" />
     <Folder Include="Areas\Profiles\Models\" />
     <Folder Include="Areas\Profiles\Views\Shared\" />
     <Folder Include="Areas\Sabre\Models\" />
