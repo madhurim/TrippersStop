@@ -78,6 +78,7 @@
     <Content Include="app\Styles\css\icon_top.png" />
     <Content Include="app\Styles\fonts\Gotham-Black.svg" />
     <Content Include="app\Styles\fonts\gotham-book.svg" />
+    <Content Include="app\Styles\images\loading.GIF" />
     <Content Include="app\Styles\images\adsection_1.jpg" />
     <Content Include="app\Styles\images\adsection_2.jpg" />
     <Content Include="app\Styles\images\africa-icon.png" />
