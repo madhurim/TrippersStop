@@ -1,14 +1,12 @@
 ﻿var TrippismUIApp = angular.module('TrippismUIApp',
                         [
-                            //'ngRoute',
-                            'ui.router',
+                            
+                          'ui.router',
                           'ui.bootstrap',
                           'ui.map',
                           'ui.event',
                           'cgBusy',
-                          //'ngAside' ,
-                          //'google-maps',
-
+                        
                         ]);
 
 TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
@@ -19,7 +17,7 @@ TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
         // HOME STATES AND NESTED VIEWS ========================================
          .state('destination', {
              url: '/destination',
-             templateUrl: '/app/Views/destination.html'
+             templateUrl: '/app/Views/destination1.html'
          })
 });
 

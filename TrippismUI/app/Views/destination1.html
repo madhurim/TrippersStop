@@ -1,0 +1,290 @@
+﻿   <!-- [S] MAP -->
+
+<div class="map-box">
+
+    <img src="app/Styles/images/map-img.jpg" alt="" />
+    <pre>{{destinationlist}}</pre>
+    <div class="" style="height:auto;width:auto;" cg-busy="{promise:mappromise,message:'Please wait, we are getting cheapest destinations from ' + OrigintoDisp,templateUrl:'/app/Views/partials/cgbusyMessagePartial.html'}">
+        <div style="height:200px;width:200px;" id="wrapper" cg-busy="{promise:destinationmappromise,message:'Please wait, we are getting destination details...'}">
+            <div google-map id="map_canvas" btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
+        </div>
+    </div>
+</div>
+
+<!-- [E] MAP -->
+<!-- [S] SEARCHCENTER -->
+
+<div class="searchcenter-box">
+    <div class="btn-box"><a ng-click="isSeachCollapsed = !isSeachCollapsed" class="toggle-btn search-btn red-bg" href="#"><i class="search-icon"></i>search</a></div>
+  
+    <div collapse="!isSeachCollapsed" class="destination-wp">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="destination-tab">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#suggest-destinations" aria-controls="suggest-destinations" role="tab" data-toggle="tab">Suggest Destinations</a></li>
+                            <li role="presentation"><a href="#i-know-my-destination" aria-controls="i-know-my-destination" role="tab" data-toggle="tab">I Know My Destination</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="suggest-destinations">
+
+                                <p>Give us your Origin airport and dates of travel , we will suggest you destinations !</p>
+
+                                <form class="airport-details-form">
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="input-box">
+                                                    <input type="text" class="form-control" name="title" placeholder="Origin Airport" />
+                                                    <i class="icon-box location"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="input-box">
+                                                    <input type="number" class="form-control" name="title" placeholder="Maximum Fare" disabled />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="input-box">
+                                                    <input type="text" class="form-control" name="title" placeholder="From Date" />
+                                                    <i class="icon-box calendar"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="input-box">
+                                                    <input type="text" class="form-control" name="title" placeholder="To  Date" />
+                                                    <i class="icon-box calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 text-center">
+
+                                                <button class="btn btn-danger btn-lg" type="submit">Suggest Destinations</button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="i-know-my-destination"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="line"></div>
+
+    </div>
+
+</div>
+
+<!-- [E] SEARCHCENTER -->
+<!-- [S] POPULAR-DESTINATIONS -->
+
+<div class="popular-destinations" ng-class="isPopDestCollapsed ? 'active' : ''">
+    <a href="#" ng-click="isPopDestCollapsed = !isPopDestCollapsed" class="toggle-btn destinations-btn red-bg"><i class="destinations-icon"></i>Top Popular Destinations</a>
+
+    <div id="examples" class="destinations-details">
+
+        <div class="content mCustomScrollbar">
+
+            <div class="destinations-list">
+
+                <h6>LAX [Los Angeles]</h6>
+
+                <ul class="destinations-details-list">
+
+                    <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
+                    <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
+
+                </ul>
+
+            </div>
+            <div class="destinations-list">
+
+                <h6>SNA [Santa Ana]</h6>
+
+                <ul class="destinations-details-list">
+
+                    <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
+                    <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
+
+                </ul>
+
+            </div>
+            <div class="destinations-list">
+
+                <h6>ONT [Ontario]</h6>
+
+                <ul class="destinations-details-list">
+
+                    <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
+                    <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
+
+                </ul>
+
+            </div>
+            <div class="destinations-list">
+
+                <h6>LAX [Los Angeles]</h6>
+
+                <ul class="destinations-details-list">
+
+                    <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
+                    <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
+
+                </ul>
+
+            </div>
+            <div class="destinations-list">
+
+                <h6>SNA [Santa Ana]</h6>
+
+                <ul class="destinations-details-list">
+
+                    <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
+                    <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
+
+                </ul>
+
+            </div>
+            <div class="destinations-list">
+
+                <h6>ONT [Ontario]</h6>
+
+                <ul class="destinations-details-list">
+
+                    <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
+                    <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
+
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- [E] POPULAR-DESTINATIONS -->
+<!-- [S] REFINE-YOUR-SEARCH-BOX -->
+
+<div class="refine-your-search-box">
+
+    <div class="btn-box"> <a href="#" ng-click="isRefineSeachCollapsed = !isRefineSeachCollapsed" class="toggle-btn your-search-btn red-bg"><i class="search-icon"></i>Refine your search</a></div>
+    <div collapse="!isRefineSeachCollapsed" class="advanced-search">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <form class="ng-pristine">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-box">
+                                        <input type="text" class="form-control" name="title" placeholder="Min Fare" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="col-md-5">
+
+                    <div class="selector-box">
+
+                        <h3>Theme :: (Selected:DISNEY) <a class="clear" href="#">|  clear</a></h3>
+
+                        <ul>
+
+                            <li><a href="#"><img src="app/Styles/images/palm-tree-icon.png" alt="" /></a></li>
+
+                            <li><a class="active" href="#"><img src="app/Styles/images/paris-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/dice-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/bank-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/camera-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/park-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/climbing-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/hearts-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/full-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/cruise-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/sport-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/holidays-icon.png" alt="" /></a></li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="selector-box region-box">
+
+                        <h3>Region</h3>
+
+                        <ul>
+
+                            <li><a href="#"><img src="app/Styles/images/africa-icon.png" alt="" /></a></li>
+
+                            <li><a class="active" href="#"><img src="app/Styles/images/europe-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/latin-america-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/north-america-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/icon-middle-east-icon.png" alt="" /></a></li>
+
+                            <li><a href="#"><img src="app/Styles/images/asia-icon.png" alt="" /></a></li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <div class="refine-btn-row"><button class="btn btn-danger btn-lg" type="submit">Suggest Destinations</button></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- [E] REFINE-YOUR-SEARCH-BOX -->
