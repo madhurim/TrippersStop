@@ -1,6 +1,5 @@
 ﻿<div ng-controller="DestinationController">
     <!-- [S] MAP -->
-
     <div class="map-box">
         <div class="" style="height:auto;width:auto;" cg-busy="{promise:mappromise,message:'Please wait, we are getting cheapest destinations from ' + OrigintoDisp,templateUrl:'/app/Views/partials/cgbusyMessagePartial.html'}">
             <div id="wrapper" cg-busy="{promise:destinationmappromise,message:'Please wait, we are getting destination details...'}">
@@ -8,39 +7,30 @@
             </div>
         </div>
     </div>
-
     <!-- [E] MAP -->
     <!-- [S] SEARCHCENTER -->
-
-   
-  
     <div class="searchcenter-box slide-top">
         <div class="btn-box">
-            <a ng-click="isSearchCollapsed = !isSearchCollapsed" ng-class="isSearchCollapsed ? 'active' : ''" class="toggle-btn search-btn red-bg" href="#"><i class="search-icon"></i>search</a>
+            <a ng-click="isSearchCollapsed = !isSearchCollapsed; isRefineSeachCollapsed = false;" ng-class="isSearchCollapsed ? 'active' : ''" class="toggle-btn search-btn red-bg" href="#"><i class="search-icon"></i>search</a>
         </div>
-
         <div collapse="isSearchCollapsed" class="destination-wp">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="destination-tab">
                             <!-- Nav tabs -->
-                             <span style="color:white;" >{{selectedform}}</span> 
+                            <span style="color:white;">{{selectedform}}</span>
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" ng-class="{'active' : selectedform == 'SuggestDestination'}" class="active">
                                     <a href="#suggest-destinations" ng-click="selectedform = 'SuggestDestination'" aria-controls="suggest-destinations" role="tab" data-toggle="tab">Suggest Destinations</a>
                                 </li>
                                 <li role="presentation" ng-class="{'active' : selectedform == 'KnowMyDestination'}"><a href="#" ng-click="selectedform = 'KnowMyDestination'" aria-controls="i-know-my-destination" role="tab" data-toggle="tab">I Know My Destination</a></li>
                             </ul>
-
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active">
-
-                                    <p>Give us your Origin airport and dates of travel , we will suggest you destinations !</p>
-
+                                    <p>Give us your Origin airport and dates of travel, we will suggest you destinations!</p>
                                     <form name="frmdestfinder" novalidate class="airport-details-form">
-
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-3">
@@ -58,8 +48,8 @@
                                                                typeahead="state as state for AvailableCodes in getMatchingStuffs($viewValue)"
                                                                type="text"
                                                                class="form-control" />
-                                                        
-                                                        <i ng-if="IsairportJSONLoading == true" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>
+                                                        <!--<i ng-if="IsairportJSONLoading == true" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>-->
+                                                        <i ng-if="IsairportJSONLoading == true"><img src="app/Styles/images/loading.gif" /></i>
                                                         <i ng-if="!IsairportJSONLoading" class="icon-box location"></i>
                                                     </div>
                                                     <div class="alert alert-danger triperror" role="alert" ng-show="hasError && frmdestfinder.$invalid && frmdestfinder.Origin.$error.required">
@@ -67,37 +57,32 @@
                                                         Please enter Origin.
                                                     </div>
                                                 </div>
-                                                
                                                 <div class="col-md-3" ng-show="selectedform == 'KnowMyDestination'">
                                                     <div class="input-box">
-                                                       
-                                                            <input type="text"
-                                                                   ng-model="KnownDestinationAirport"
-                                                                   typeahead-min-length="2"
-                                                                   ng-required="selectedform == 'KnowMyDestination'"
-                                                                   typeahead-input-formatter="formatInput($model)"
-                                                                   typeahead-editable="true"
-                                                                   typeahead-on-select="onKnowDestinationSelect($item, $model, $label)"
-                                                                   typeahead-template-url="customTemplate.html"
-                                                                   name="KnownDestinationAirport"
-                                                                   tabindex="1"
-                                                                   placeholder="Enter your Destination"
-                                                                   typeahead="state as state for AvailableCodes in getMatchingStuffs($viewValue)"
-                                                                   class="form-control input">
-                                                            
-                                                                <i ng-if="IsairportJSONLoading == true" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>
-                                                                <i ng-if="!IsairportJSONLoading" class="glyphicon glyphicon-map-marker"></i>
-                                                            
 
-                                                       
+                                                        <input type="text"
+                                                               ng-model="KnownDestinationAirport"
+                                                               typeahead-min-length="2"
+                                                               ng-required="selectedform == 'KnowMyDestination'"
+                                                               typeahead-input-formatter="formatInput($model)"
+                                                               typeahead-editable="true"
+                                                               typeahead-on-select="onKnowDestinationSelect($item, $model, $label)"
+                                                               typeahead-template-url="customTemplate.html"
+                                                               name="KnownDestinationAirport"
+                                                               tabindex="1"
+                                                               placeholder="Enter your Destination"
+                                                               typeahead="state as state for AvailableCodes in getMatchingStuffs($viewValue)"
+                                                               class="form-control input">
+
+                                                        <!--<i ng-if="IsairportJSONLoading == true" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>-->
+                                                        <i ng-if="IsairportJSONLoading == true"><img src="app/Styles/images/loading.gif" /></i>
+                                                        <i ng-if="!IsairportJSONLoading" class="glyphicon glyphicon-map-marker"></i>
                                                     </div>
                                                     <div class="alert alert-danger triperror" role="alert" ng-show="hasError && frmdestfinder.$invalid && frmdestfinder.KnownDestinationAirport.$error.required">
                                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                                         Please enter Destination Airport.
                                                     </div>
                                                 </div>
-
-
                                                 <div class="col-md-2">
                                                     <div class="input-box">
                                                         <input type="number" step="1" min="1" class="form-control" name="Maxfare" ng-model="Maxfare" placeholder="Enter Maxfare" />
@@ -145,150 +130,98 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-
                                             <div class="row">
-
                                                 <div ng-if="selectedform == 'SuggestDestination'" class="col-md-12 text-center">
-
                                                     <button type="submit"
-                                                            ng-click="IscalledFromIknowMyDest= false;  findDestinations()"
+                                                            ng-click="IscalledFromIknowMyDest= false;findDestinations()"
                                                             ng-disabled="SearchbuttonIsLoading"
                                                             class="btn btn-danger btn-lg">
                                                         <i ng-if="SearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{SearchbuttonText}}
                                                     </button>
-
                                                 </div>
-
                                                 <div ng-if="selectedform == 'KnowMyDestination'" class="col-md-12 text-center">
-
                                                     <button type="submit"
                                                             ng-click="getDestinationDetails()"
                                                             ng-disabled="KnowSearchbuttonIsLoading"
                                                             class="btn btn-danger btn-lg">
                                                         <i ng-if="KnowSearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{KnowSearchbuttonText}}
                                                     </button>
-
                                                 </div>
-
-
                                             </div>
-
                                         </div>
-
                                     </form>
-
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="i-know-my-destination"></div>
                             </div>
-
+                            <!--<div class="col-lg-9" ng-if="tabManager.tabItems.length > 0">
+                                <div tabs>
+                                    <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
+                                        <attraction-tab tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
+                                    </div>
+                                </div>
+                            </div>-->
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
             <div class="line"></div>
-
         </div>
-
     </div>
-
     <!-- [E] SEARCHCENTER -->
     <!-- [S] POPULAR-DESTINATIONS -->
-
     <div class="popular-destinations" ng-class="isPopDestCollapsed ? 'active' : ''">
         <a href="#" ng-click="isPopDestCollapsed = !isPopDestCollapsed" class="toggle-btn destinations-btn red-bg"><i class="destinations-icon"></i>Top Popular Destinations</a>
-
         <div id="examples" class="destinations-details">
-
             <div class="content mCustomScrollbar">
-
                 <div class="destinations-list">
-
                     <h6>LAX [Los Angeles]</h6>
-
                     <ul class="destinations-details-list">
-
                         <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
                         <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
-
                     </ul>
-
                 </div>
                 <div class="destinations-list">
-
                     <h6>SNA [Santa Ana]</h6>
-
                     <ul class="destinations-details-list">
-
                         <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
                         <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
-
                     </ul>
-
                 </div>
                 <div class="destinations-list">
-
                     <h6>ONT [Ontario]</h6>
-
                     <ul class="destinations-details-list">
-
                         <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
                         <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
-
                     </ul>
-
                 </div>
                 <div class="destinations-list">
-
                     <h6>LAX [Los Angeles]</h6>
-
                     <ul class="destinations-details-list">
-
                         <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
                         <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
-
                     </ul>
-
                 </div>
                 <div class="destinations-list">
-
                     <h6>SNA [Santa Ana]</h6>
-
                     <ul class="destinations-details-list">
-
                         <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
                         <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
-
                     </ul>
-
                 </div>
                 <div class="destinations-list">
-
                     <h6>ONT [Ontario]</h6>
-
                     <ul class="destinations-details-list">
-
                         <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
                         <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
-
                     </ul>
-
                 </div>
             </div>
-
         </div>
-
     </div>
-
     <!-- [E] POPULAR-DESTINATIONS -->
     <!-- [S] REFINE-YOUR-SEARCH-BOX -->
-
     <div class="refine-your-search-box slide-bottom">
-
-        <div class="btn-box"> <a href="#" ng-click="isRefineSeachCollapsed = !isRefineSeachCollapsed" class="toggle-btn your-search-btn red-bg"><i class="search-icon"></i>Refine your search</a></div>
+        <div class="btn-box"> <a href="#" ng-click="isRefineSeachCollapsed = !isRefineSeachCollapsed;isSearchCollapsed= true;" class="toggle-btn your-search-btn red-bg"><i class="search-icon"></i>Refine your search</a></div>
         <div collapse="!isRefineSeachCollapsed" class="advanced-search">
             <div class="container-fluid">
                 <div class="row">
@@ -304,89 +237,47 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
-
                     <div class="col-md-5">
-
                         <div class="selector-box">
-
                             <h3>Theme :: (Selected:DISNEY) <a class="clear" href="#">|  clear</a></h3>
-
                             <ul>
-
                                 <li><a href="#"><img src="app/Styles/images/palm-tree-icon.png" alt="" /></a></li>
-
                                 <li><a class="active" href="#"><img src="app/Styles/images/paris-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/dice-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/bank-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/camera-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/park-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/climbing-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/hearts-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/full-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/cruise-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/sport-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/holidays-icon.png" alt="" /></a></li>
-
                             </ul>
-
                         </div>
-
                     </div>
-
                     <div class="col-md-3">
-
                         <div class="selector-box region-box">
-
                             <h3>Region</h3>
-
                             <ul>
-
                                 <li><a href="#"><img src="app/Styles/images/africa-icon.png" alt="" /></a></li>
-
                                 <li><a class="active" href="#"><img src="app/Styles/images/europe-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/latin-america-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/north-america-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/icon-middle-east-icon.png" alt="" /></a></li>
-
                                 <li><a href="#"><img src="app/Styles/images/asia-icon.png" alt="" /></a></li>
-
                             </ul>
-
                         </div>
-
                     </div>
-
                     <div class="col-md-2">
-
                         <div class="refine-btn-row"><button class="btn btn-danger btn-lg" type="submit">Suggest Destinations</button></div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
 </div>
-
-
 <!-- [E] REFINE-YOUR-SEARCH-BOX -->
 
 <script type="text/ng-template" id="customTemplate.html">

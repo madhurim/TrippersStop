@@ -31,7 +31,7 @@
         $scope.ShowDestinationView = true;
         $scope.TabcontentView = true;
         $scope.TabCreatedCount = 0;
-        $scope.tabManager = {};
+        $scope.tabManager = {};        
         $scope.tabManager.tabItems = [];
         $scope.isSearching = true;
         $scope.MailMarkerSeasonalityInfo = {};
@@ -261,7 +261,7 @@
             CreateTab();
         });
 
-        function CreateTab() {
+        function CreateTab() {            
             $scope.tabManager.resetSelected();
             var i = ($scope.tabManager.tabItems.length + 1);
             $scope.TabCreatedCount = $scope.TabCreatedCount + 1;
@@ -456,6 +456,7 @@
                 $scope.hasError = true;
                 return;
             }
+            $scope.isSearchCollapsed = true;
             $scope.isSearching = false;
             $scope.isAdvancedSearch = false;
             $scope.topdestinationlist = [];
@@ -524,7 +525,7 @@
         };
 
         function findDestinations(buttnText) {
-            $scope.isAdvancedSearch = false;
+            $scope.isAdvancedSearch = false;            
             if (buttnText != undefined && buttnText == 'advenced')
                 $scope.isAdvancedSearch = true;
 
@@ -537,7 +538,7 @@
             $scope.destinationlist = "";
             $scope.faresList = [];
             $scope.IsHistoricalInfo = false;
-
+            $scope.isSearchCollapsed = true;
             $scope.isSearching = true;
             if (buttnText == 'All') { $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; }
             else if (buttnText == 'Cheapest') { $scope.SearchbuttonChepestIsLoading = true; $scope.SearchbuttonCheapestText = $scope.LoadingText; }
