@@ -31,7 +31,7 @@
         $scope.ShowDestinationView = true;
         $scope.TabcontentView = true;
         $scope.TabCreatedCount = 0;
-        $scope.tabManager = {};        
+        $scope.tabManager = {};
         $scope.tabManager.tabItems = [];
         $scope.isSearching = true;
         $scope.MailMarkerSeasonalityInfo = {};
@@ -260,8 +260,7 @@
             $scope.seasonalitydirectiveData = args;
             CreateTab();
         });
-
-        function CreateTab() {            
+        function CreateTab() {
             $scope.tabManager.resetSelected();
             var i = ($scope.tabManager.tabItems.length + 1);
             $scope.TabCreatedCount = $scope.TabCreatedCount + 1;
@@ -525,7 +524,7 @@
         };
 
         function findDestinations(buttnText) {
-            $scope.isAdvancedSearch = false;            
+            $scope.isAdvancedSearch = false;
             if (buttnText != undefined && buttnText == 'advenced')
                 $scope.isAdvancedSearch = true;
 

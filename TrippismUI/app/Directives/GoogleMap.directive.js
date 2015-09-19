@@ -86,9 +86,9 @@ angular.module('TrippismUIApp')
                           position: latlng1,
                           map: $scope.destinationMap,
                           title: airportName.airport_FullName,
-                          labelContent: maps[x].CurrencyCode + ' ' + LowRate + ' <br/>' + maps[x].DestinationLocation + ' [ ' + airportName.airport_CityName + ' ]',
+                          labelContent: '<div class="tooltip-arrow"></div><div class="tooltip-inner"> ' + maps[x].CurrencyCode + ' ' + LowRate + ' <br/>' + maps[x].DestinationLocation + ' [ ' + airportName.airport_CityName + ' ]' + '</div>',
                           labelAnchor: new google.maps.Point(12, 35),
-                          labelClass: "labelscolor", // the CSS class for the label
+                          labelClass: "tooltip top labelscolor", // the CSS class for the label
                           labelInBackground: false,
                           labelanimation: google.maps.Animation.DROP,
                           animation: google.maps.Animation.DROP,
