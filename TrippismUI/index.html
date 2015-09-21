@@ -5,80 +5,116 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <title>trippism</title>
+    <title>Trippism</title>
 
+   
+    <!--Custom CSS Start -->
+    
     <link href="app/Styles/css/fonts.css" rel="stylesheet">
     <link href="app/Styles/css/bootstrap.css" rel="stylesheet">
     <link href="app/Styles/css/jquery.mCustomScrollbar.css" rel="stylesheet">
+    
     <link href="app/Styles/css/trippismapp.css" rel="stylesheet" />
-    <link href="app/Styles/css/style.css" rel="stylesheet"
-          >
+    
+    <link href="app/Styles/css/style.css" rel="stylesheet"/>
     <link href="app/Styles/css/style-custom.css" rel="stylesheet" />
+    
+    <!--Custom CSS End-->
+
   
 </head>
 <body ng-controller="LandingPageController">
     <div ui-view class="content-wrapper">
     </div>
    
+   
+    
+    <!-- JS Start-->
+        <!--Angular JS-->
+        <script src="app/Scripts/angular.min.js"></script>
+        <script src="app/scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+        
+        <!--Angular Support JS-->
+        <script src="app/scripts/libs/event.js"></script>
+        <script src="app/scripts/libs/ui-map.min.js"></script>
+        <script src="app/scripts/angular-ui-router.min.js"></script>
+        <script src="app/scripts/libs/angular-block-ui.js"></script>
+        <script src="app/scripts/libs/underscore.js"></script>
+        <script src="app/Scripts/libs/angular-busy.js"></script>
+        <!--<script src="app/Scripts/libs/Loader.js"></script>-->
+        
+        <!--Angule Apps JS-->
+        <script src="/app/app.js"></script>
+        <script src="app/Utility.js"></script>
+
+        <!--Angular Factory-->
+        <script src="/app/Factory/DestinationFactory.js"></script>
+        <script src="app/Factory/FareforecastFactory.js"></script>
+        <script src="app/Factory/UtilFactory.js"></script>
+        <script src="app/Factory/FareRangeFactory.js"></script>
+        <script src="app/Factory/SeasonalityFactory.js"></script>
+        <script src="app/Factory/WeatherFactory.js"></script>
+        <script src="app/Factory/GoogleAttractionFactory.js"></script>
+        <script src="app/Factory/YouTubeFactory.js"></script>
+        <script src="app/Factory/GoogleGeoReverseLookupFactory.js"></script>
+        <script src="app/Factory/EmailForDestinationDetFactory.js"></script>
+
+        <!--App Directives-->    
+        <script src="app/Directives/GoogleMap.directive.js"></script>
+        <script src="app/Directives/SeasonalityDirective.js"></script>
+        <script src="app/Directives/FareRangeDirective.js"></script>
+        <script src="app/Directives/WetherApiDirective.js"></script>
+        <script src="app/Directives/GoogleAttractionDirective.js"></script>
+        <script src="app/Directives/YoutubeDirective.js"></script>
+        <script src="app/Directives/AverageStarRatingDirective.js"></script>
+        <script src="app/Directives/AttractionTabDirective.js"></script>
+        <script src="app/Directives/attractiontabFareForecastDirective.js"></script>
+        <script src="app/Directives/TopDestinationsDirective.js"></script>
+        <script src="app/Directives/attractionsListDirective.js"></script>
+        <script src="app/Directives/WeatherWidgetDirective.js"></script>
+        <script src="app/Directives/SeasonalityFarerangeWidgetDirective.js"></script>
+        
+        <!--Apps Controller-->
+        <script src="/app/Controllers/LandingPageController.js"></script>
+        <script src="/app/Controllers/DestinationController.js"></script>
+        <script src="app/Controllers/YouTubeController.js"></script>
+        <script src="app/Controllers/EmailForDestinationDetController.js"></script>
+
+        <!--  Party JS-->
+        <script src="app/Scripts/jquery-1.9.1.js"></script>
+        <script src="app/Scripts/highcharts.js"></script>
+        <script src="app/Scripts/highcharts-more.js"></script>
+        <script src="app/Scripts/exporting.js"></script>
+        <script src="app/Scripts/alertify/alertify.js"></script>
+        <script src="app/Scripts/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <!--Google Maps-->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places"></script>
+        <script src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.9/markerwithlabel/src/markerwithlabel.js"></script>
+    <!-- JS End-->
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
     <!--<script src="app/Scripts/jquery.min.js"></script>
     <script src="app/Scripts/bootstrap.min.js"></script>
-    <script src="app/Scripts/jquery.mCustomScrollbar.concat.min.js"></script>
+    
     <script src="app/Scripts/script.js"></script>-->
 
-    <script src="app/Scripts/angular.min.js"></script>
-    <script src="app/scripts/angular-ui/ui-bootstrap-tpls.js"></script>
-    <script src="app/scripts/libs/event.js"></script>
-    <script src="app/scripts/libs/ui-map.min.js"></script>
-    <script src="app/scripts/angular-ui-router.min.js"></script>
-    <script src="app/scripts/libs/angular-block-ui.js"></script>
-    <script src="/app/app.js"></script>
-    <script src="app/scripts/libs/underscore.js"></script>
-    <script src="/app/Factory/DestinationFactory.js"></script>
-    <script src="/app/Controllers/LandingPageController.js"></script>
-    <script src="/app/Controllers/DestinationController.js"></script>
-    <script src="app/Factory/FareforecastFactory.js"></script>
-    <script src="app/Directives/GoogleMap.directive.js"></script>
-    <script src="app/Utility.js"></script>
-    <script src="app/Factory/UtilFactory.js"></script>
-    <script src="app/Factory/FareRangeFactory.js"></script>
-    <script src="app/Controllers/YouTubeController.js"></script>
-    <script src="app/Factory/SeasonalityFactory.js"></script>
-    <script src="app/Controllers/EmailForDestinationDetController.js"></script>
-
-    <script src="app/Factory/EmailForDestinationDetFactory.js"></script>
-    <script src="app/Scripts/libs/angular-busy.js"></script>
-    <script src="app/Scripts/libs/Loader.js"></script>
+   
     
-    <script src="app/Directives/SeasonalityDirective.js"></script>
-    <script src="app/Directives/FareRangeDirective.js"></script>
-    <script src="app/Factory/WeatherFactory.js"></script>
-    <script src="app/Directives/WetherApiDirective.js"></script>
-    <script src="app/Factory/GoogleAttractionFactory.js"></script>
-    <script src="app/Factory/YouTubeFactory.js"></script>
-    <script src="app/Directives/GoogleAttractionDirective.js"></script>
-    <script src="app/Directives/YoutubeDirective.js"></script>
-    <script src="app/Directives/AverageStarRatingDirective.js"></script>
-    <script src="app/Directives/AttractionTabDirective.js"></script>
-    <script src="app/Directives/attractiontabFareForecastDirective.js"></script>
-    <script src="app/Directives/TopDestinationsDirective.js"></script>
-    <script src="app/Directives/attractionsListDirective.js"></script>
-    <script src="app/Directives/WeatherWidgetDirective.js"></script>
-    <script src="app/Directives/SeasonalityFarerangeWidgetDirective.js"></script>
+    
+    
 
-    <script src="app/Factory/GoogleGeoReverseLookupFactory.js"></script>
-    <script src="app/Scripts/jquery-1.9.1.js"></script>
-    <script src="app/Scripts/highcharts.js"></script>
-    <script src="app/Scripts/highcharts-more.js"></script>
-    <script src="app/Scripts/exporting.js"></script>
-    <script src="app/Scripts/alertify/alertify.js"></script>
+   
+  
+    
+   
 
-    <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places">
-    </script>
-    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.9/markerwithlabel/src/markerwithlabel.js"></script>
+    
+   
+   
+
+   
 
 </body>
 </html>

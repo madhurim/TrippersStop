@@ -60,9 +60,9 @@
                             <span style="color:white;">{{selectedform}}</span>
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" ng-class="{'active' : selectedform == 'SuggestDestination'}" class="active">
-                                    <a href="#suggest-destinations" ng-click="selectedform = 'SuggestDestination'" aria-controls="suggest-destinations" role="tab" data-toggle="tab">Suggest Destinations</a>
+                                    <a href="#suggest-destinations" ng-click="selectedform = 'SuggestDestination'; hasError = false;" aria-controls="suggest-destinations" role="tab" data-toggle="tab">Suggest Destinations</a>
                                 </li>
-                                <li role="presentation" ng-class="{'active' : selectedform == 'KnowMyDestination'}"><a href="#" ng-click="selectedform = 'KnowMyDestination'" aria-controls="i-know-my-destination" role="tab" data-toggle="tab">I Know My Destination</a></li>
+                                <li role="presentation" ng-class="{'active' : selectedform == 'KnowMyDestination'}"><a href="#" ng-click="selectedform = 'KnowMyDestination'; hasError = false" aria-controls="i-know-my-destination" role="tab" data-toggle="tab">I Know My Destination</a></li>
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
