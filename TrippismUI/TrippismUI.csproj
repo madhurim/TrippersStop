@@ -20,7 +20,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="app\Constants\UIConstants.js" />
     <Content Include="app\Controllers\DestinationController.js" />
     <Content Include="app\Controllers\EmailForDestinationDetController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
@@ -50,9 +49,7 @@
     <Content Include="app\Factory\YouTubeFactory.js" />
     <Content Include="app\Module\angular-youtube-embed.js" />
     <Content Include="app\Scripts\bootstrap.min.js" />
-    <Content Include="app\Scripts\common.js" />
     <Content Include="app\Scripts\exporting.js" />
-    <Content Include="app\Scripts\gmaps.js" />
     <Content Include="app\Scripts\highcharts-more.js" />
     <Content Include="app\Scripts\highcharts.js" />
     <Content Include="app\Scripts\jquery-1.9.1.js" />
