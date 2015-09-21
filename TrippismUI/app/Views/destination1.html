@@ -1,6 +1,4 @@
 ﻿<div ng-controller="DestinationController">
-
-
     <!-- [S] HEADER -->
     <div class="header">
         <div class="header-box">
@@ -49,7 +47,7 @@
     <!-- [S] SEARCHCENTER -->
     <div class="searchcenter-box slide-top" ng-show="ShowDestinationView">
         <div class="btn-box">
-            <a ng-click="isSearchCollapsed = !isSearchCollapsed; isRefineSeachCollapsed = false;" ng-class="isSearchCollapsed ? 'active' : ''" class="toggle-btn search-btn red-bg" href="#"><i class="search-icon"></i>search</a>
+            <a ng-click="isSearchCollapsed = !isSearchCollapsed; isRefineSeachCollapsed = false;" ng-class="isSearchCollapsed ? '' : 'active'" class="toggle-btn search-btn red-bg" href="#"><i class="search-icon"></i>search</a>
         </div>
         <div collapse="isSearchCollapsed" class="destination-wp">
             <div class="container-fluid">
@@ -57,12 +55,13 @@
                     <div class="col-md-12">
                         <div class="destination-tab">
                             <!-- Nav tabs -->
-                            <span style="color:white;">{{selectedform}}</span>
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" ng-class="{'active' : selectedform == 'SuggestDestination'}" class="active">
                                     <a href="#suggest-destinations" ng-click="selectedform = 'SuggestDestination'" aria-controls="suggest-destinations" role="tab" data-toggle="tab">Suggest Destinations</a>
                                 </li>
-                                <li role="presentation" ng-class="{'active' : selectedform == 'KnowMyDestination'}"><a href="#" ng-click="selectedform = 'KnowMyDestination'" aria-controls="i-know-my-destination" role="tab" data-toggle="tab">I Know My Destination</a></li>
+                                <li role="presentation" ng-class="{'active' : selectedform == 'KnowMyDestination'}">
+                                    <a href="#i-know-my-destination" ng-click="selectedform = 'KnowMyDestination'" aria-controls="i-know-my-destination" role="tab" data-toggle="tab">I Know My Destination</a>
+                                </li>
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
@@ -97,7 +96,6 @@
                                                 </div>
                                                 <div class="col-md-3" ng-show="selectedform == 'KnowMyDestination'">
                                                     <div class="input-box">
-
                                                         <input type="text"
                                                                ng-model="KnownDestinationAirport"
                                                                typeahead-min-length="2"
@@ -149,6 +147,16 @@
                                                                placeholder="Select From Date " />
                                                         <i ng-click="openFromDate($event)" class="icon-box calendar"></i>
                                                     </div>
+                                                    <div class="alert alert-danger" role="alert" ng-show="frmdestfinder.FromDate.$error.required">
+                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                        <span class="sr-only">Error:</span>
+                                                        Please select from date.
+                                                    </div>
+                                                    <div class="alert alert-danger" role="alert" ng-show="frmdestfinder.FromDate.$invalid && !frmdestfinder.FromDate.$error.required">
+                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                        <span class="sr-only">Error:</span>
+                                                        Please select valid from date.
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="input-box">
@@ -164,6 +172,16 @@
                                                                ng-required="!LenghtOfStay || FromDate" close-text="Close" placeholder="Select To Date "
                                                                ng-disabled="true" />
                                                         <i ng-click="openToDate($event)" class="icon-box calendar"></i>
+                                                    </div>
+                                                    <div class="alert alert-danger" role="alert" ng-show="frmdestfinder.ToDate.$error.required">
+                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                        <span class="sr-only">Error:</span>
+                                                        Please select to date.
+                                                    </div>
+                                                    <div class="alert alert-danger" role="alert" ng-show="frmdestfinder.ToDate.$invalid && !frmdestfinder.ToDate.$error.required">
+                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                        <span class="sr-only">Error:</span>
+                                                        Please select valid to date.
                                                     </div>
                                                 </div>
                                             </div>
@@ -198,72 +216,44 @@
             </div>
             <div class="line"></div>
         </div>
+
+        <div ng-show="destinationlist">
+            <div ng-show="ShowDestinationView " ng-hide="isSearching">
+                <p class="search-title-details" ng-show="IscalledFromIknowMyDest == false">
+                    Your Searched : <span ng-show="Origin">Origin : {{OrigintoDisp}}</span>
+                    <span ng-show="FromDate">, From Date : {{FromDate|date:'MM/dd/yyyy'}} </span>
+                    <span ng-show="ToDate">, To Date : {{ToDate |date:'MM/dd/yyyy'}}</span>
+                    <span ng-show="LenghtOfStay > 0">, LengthOfStay: {{LenghtOfStay}}</span>
+                    <span ng-show="Minfare > 0 && isAdvancedSearch">, Minimum Fare: {{Minfare}}</span>
+                    <span ng-show="Maxfare > 0"> Maximum Fare: {{Maxfare}}</span>
+                    <span ng-show="Region.id && isAdvancedSearch">, Region:{{Region.id}} </span>
+                    <span ng-show="Theme && isAdvancedSearch">, Theme:{{Theme}}</span>
+                    <br/>
+                    <span ng-show="IscalledFromIknowMyDest == false">Total number of top cheapest destinations found from {{Origin |uppercase}} : {{destinationlist.length}}</span>
+                </p>                
+            </div>
+        </div>
     </div>
     <!-- [E] SEARCHCENTER -->
     <!-- [S] POPULAR-DESTINATIONS -->
-    <div class="popular-destinations" ng-class="isPopDestCollapsed ? 'active' : ''">
+    <div class="popular-destinations" ng-class="isPopDestCollapsed ? 'active' : ''" ng-show="topdestinationlist.length > 0 && IscalledFromIknowMyDest == false">
         <a href="#" ng-click="isPopDestCollapsed = !isPopDestCollapsed" class="toggle-btn destinations-btn red-bg"><i class="destinations-icon"></i>Top Popular Destinations</a>
-        <div id="examples" class="destinations-details">
-            <div class="content mCustomScrollbar">
-                <div class="destinations-list">
-                    <h6>LAX [Los Angeles]</h6>
-                    <ul class="destinations-details-list">
-                        <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
-                        <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
-                    </ul>
-                </div>
-                <div class="destinations-list">
-                    <h6>SNA [Santa Ana]</h6>
-                    <ul class="destinations-details-list">
-                        <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
-                        <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
-                    </ul>
-                </div>
-                <div class="destinations-list">
-                    <h6>ONT [Ontario]</h6>
-                    <ul class="destinations-details-list">
-                        <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
-                        <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
-                    </ul>
-                </div>
-                <div class="destinations-list">
-                    <h6>LAX [Los Angeles]</h6>
-                    <ul class="destinations-details-list">
-                        <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
-                        <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
-                    </ul>
-                </div>
-                <div class="destinations-list">
-                    <h6>SNA [Santa Ana]</h6>
-                    <ul class="destinations-details-list">
-                        <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
-                        <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
-                    </ul>
-                </div>
-                <div class="destinations-list">
-                    <h6>ONT [Ontario]</h6>
-                    <ul class="destinations-details-list">
-                        <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
-                        <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <topdestination-popup destinations-params="topdestinationlist" destinations="destinationlist" airportlist="AvailableAirports"></topdestination-popup>
     </div>
     <!-- [E] POPULAR-DESTINATIONS -->
     <!-- [S] REFINE-YOUR-SEARCH-BOX -->
     <div class="refine-your-search-box slide-bottom" ng-show="ShowDestinationView">
-        <div class="btn-box"> <a href="#" ng-click="isRefineSeachCollapsed = !isRefineSeachCollapsed;isSearchCollapsed= true;" class="toggle-btn your-search-btn red-bg"><i class="search-icon"></i>Refine your search</a></div>
+        <div class="btn-box"> <a href="#" ng-click="isRefineSeachCollapsed = !isRefineSeachCollapsed;isSearchCollapsed= true;" ng-class="isRefineSeachCollapsed ? '' : 'active'" class="toggle-btn your-search-btn red-bg"><i class="search-icon"></i>Refine your search</a></div>
         <div collapse="!isRefineSeachCollapsed" class="advanced-search">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-2">
-                        <form class="ng-pristine">
+                        <form class="ng-pristine-form">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="input-box">
-                                            <input type="text" class="form-control" name="title" placeholder="Min Fare" />
+                                            <input min="1" type="number" name="Minfare" class="form-control" ng-model="Minfare" placeholder="Min Fare" />
                                         </div>
                                     </div>
                                 </div>
@@ -271,44 +261,141 @@
                         </form>
                     </div>
                     <div class="col-md-5">
-                        <div class="selector-box">
-                            <h3>Theme :: (Selected:{{Theme}}) <a class="clear" href="#" ng-click="Theme = ''">|  clear</a></h3>
+                        <div class="selector-box cc-selector">
+                            <h3>Theme :: {{Theme}} <a class="clear" href="#" ng-click="Theme = ''">|  clear</a></h3>
                             <ul>
-                                <li><a href="#" ng-model="Theme" name="Theme"><img src="app/Styles/images/palm-tree-icon.png" alt="" /></a></li>
-                                <li><a class="active" href="#" ng-model="Theme" name="Theme"><img src="app/Styles/images/paris-icon.png" alt="" /></a></li>
-                                <li><a href="#" ng-model="Theme" name="Theme"><img src="app/Styles/images/dice-icon.png" alt="" /></a></li>
-                                <li><a href="#" ng-model="Theme" name="Theme"><img src="app/Styles/images/bank-icon.png" alt="" /></a></li>
-                                <li><a href="#" ng-model="Theme" name="Theme"><img src="app/Styles/images/camera-icon.png" alt="" /></a></li>
-                                <li><a href="#" ng-model="Theme" name="Theme"><img src="app/Styles/images/park-icon.png" alt="" /></a></li>
-                                <li><a href="#" ng-model="Theme" name="Theme"><img src="app/Styles/images/climbing-icon.png" alt="" /></a></li>
-                                <li><a href="#" ng-model="Theme" name="Theme"><img src="app/Styles/images/hearts-icon.png" alt="" /></a></li>
-                                <li><a href="#" ng-model="Theme" name="Theme"><img src="app/Styles/images/full-icon.png" alt="" /></a></li>
-                                <li><a href="#" ng-model="Theme" name="Theme"><img src="app/Styles/images/cruise-icon.png" alt="" /></a></li>
-                                <li><a href="#" ng-model="Theme" name="Theme"><img src="app/Styles/images/sport-icon.png" alt="" /></a></li>
-                                <li><a href="#" ng-model="Theme" name="Theme"><img src="app/Styles/images/holidays-icon.png" alt="" /></a></li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input id="BEACH" type="radio" ng-model="Theme" name="Theme" value="BEACH" />
+                                        <label for="BEACH" title="BEACH"><img src="app/Styles/images/palm-tree-icon.png" alt="BEACH" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input type="radio" id="DISNEY" ng-model="Theme" name="Theme" value="DISNEY" />
+                                        <label for="DISNEY" title="DISNEY"><img src="app/Styles/images/paris-icon.png" alt="DISNEY" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input type="radio" id="GAMBLING" ng-model="Theme" name="Theme" value="GAMBLING" />
+                                        <label for="GAMBLING" title="GAMBLING"><img src="app/Styles/images/dice-icon.png" alt="GAMBLING" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input type="radio" id="HISTORIC" ng-model="Theme" name="Theme" value="HISTORIC" />
+                                        <label for="HISTORIC" title="HISTORIC"><img src="app/Styles/images/bank-icon.png" alt="HISTORIC" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input type="radio" id="MOUNTAINS" ng-model="Theme" name="Theme" value="MOUNTAINS" />
+                                        <label for="MOUNTAINS" title="MOUNTAINS"><img src="app/Styles/images/camera-icon.png" alt="MOUNTAINS" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input type="radio" id="NATIONAL-PARKS" name="Theme" ng-model="Theme" value="NATIONAL-PARKS" />
+                                        <label for="NATIONAL-PARKS" title="NATIONAL PARKS"><img src="app/Styles/images/park-icon.png" alt="NATIONAL-PARKS" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input type="radio" id="OUTDOORS" name="Theme" ng-model="Theme" value="OUTDOORS" />
+                                        <label for="OUTDOORS" title="OUTDOORS"><img src="app/Styles/images/climbing-icon.png" alt="OUTDOORS" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input type="radio" id="ROMANTIC" name="Theme" ng-model="Theme" value="ROMANTIC" />
+                                        <label for="ROMANTIC" title="ROMANTIC"><img src="app/Styles/images/hearts-icon.png" alt="ROMANTIC" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input type="radio" id="SHOPPING" name="Theme" ng-model="Theme" value="SHOPPING" />
+                                        <label for="SHOPPING" title="SHOPPING"><img src="app/Styles/images/full-icon.png" alt="SHOPPING" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input type="radio" id="THEME-PARK" name="Theme" ng-model="Theme" value="THEME-PARK" />
+                                        <label for="THEME-PARK" title="THEME PARK"><img src="app/Styles/images/cruise-icon.png" alt="THEME-PARK" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input type="radio" id="SKIING" name="Theme" ng-model="Theme" value="SKIING" />
+                                        <label for="SKIING" title="SKIING"><img src="app/Styles/images/sport-icon.png" alt="SKIING" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input type="radio" id="CARIBBEAN" name="Theme" ng-model="Theme" value="CARIBBEAN" />
+                                        <label for="CARIBBEAN" title="CARIBBEAN"><img src="app/Styles/images/holidays-icon.png" alt="CARIBBEAN" /></label>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="selector-box region-box">
-                            <h3>Region</h3>
+                        <div class="selector-box region-box cc-selector">
+                            <h3>Region :: {{Region}} <a class="clear" href="#" ng-click="Region = ''">|  clear</a></h3>
                             <ul>
-                                <li><a href="#"><img src="app/Styles/images/africa-icon.png" alt="" /></a></li>
-                                <li><a class="active" href="#"><img src="app/Styles/images/europe-icon.png" alt="" /></a></li>
-                                <li><a href="#"><img src="app/Styles/images/latin-america-icon.png" alt="" /></a></li>
-                                <li><a href="#"><img src="app/Styles/images/north-america-icon.png" alt="" /></a></li>
-                                <li><a href="#"><img src="app/Styles/images/icon-middle-east-icon.png" alt="" /></a></li>
-                                <li><a href="#"><img src="app/Styles/images/asia-icon.png" alt="" /></a></li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input id="Africa" type="radio" ng-model="Region" name="Region" value="Africa" />
+                                        <label for="Africa" title="Africa"><img src="app/Styles/images/africa-icon.png" alt="Africa" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input id="Europe" type="radio" ng-model="Region" name="Region" value="Europe" />
+                                        <label for="Europe" title="Europe"><img src="app/Styles/images/europe-icon.png" alt="Europe" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input id="LatinAmerica" type="radio" ng-model="Region" name="Region" value="Latin America" />
+                                        <label for="LatinAmerica" title="Latin America"><img src="app/Styles/images/latin-america-icon.png" alt="Latin America" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input id="NorthAmerica" type="radio" ng-model="Region" name="Region" value="North America" />
+                                        <label for="NorthAmerica" title="North America"><img src="app/Styles/images/north-america-icon.png" alt="North America" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input id="MiddleEast" type="radio" ng-model="Region" name="Region" value="Middle East" />
+                                        <label for="MiddleEast" title="Middle East"><img src="app/Styles/images/icon-middle-east-icon.png" alt="Middle East" /></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-all">
+                                        <input id="AsiaPacific" type="radio" ng-model="Region" name="Region" value="Asia Pacific" />
+                                        <label for="AsiaPacific" title="Asia Pacific"><img src="app/Styles/images/asia-icon.png" alt="Asia Pacific" /></label>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <div class="refine-btn-row"><button class="btn btn-danger btn-lg" type="submit">Suggest Destinations</button></div>
+                        <div class="refine-btn-row">
+                            <button class="btn btn-danger btn-lg" type="submit"
+                                    ng-click="IscalledFromIknowMyDest= false; findDestinations('advenced')"
+                                    ng-disabled="SearchbuttonIsLoading">
+                                Suggest Destinations
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- [E] REFINE-YOUR-SEARCH-BOX -->
     <!-- [S] FOOTER -->
     <footer>
         <div class="footer-box">
@@ -331,10 +418,8 @@
             </div>
         </div>
     </footer>
-
     <!-- [E] FOOTER -->
 </div>
-<!-- [E] REFINE-YOUR-SEARCH-BOX -->
 
 <script type="text/ng-template" id="customTemplate.html">
     <a style="padding-left:10px;" tabindex="-1" class="row-even1">

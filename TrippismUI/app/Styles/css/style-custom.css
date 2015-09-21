@@ -2,3 +2,8 @@
     margin-left: -50px !important;
     margin-top: -106px !important;
 }
+
+.cc-selector input[type="radio"] {
+    display: none;
+    -webkit-appearance: none;
+}

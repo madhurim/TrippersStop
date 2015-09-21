@@ -398,7 +398,7 @@
             $scope.OriginCityName = $item.airport_CityName;
         };
 
-        $scope.onKnowDestinationSelect = function ($item, $model, $label) {
+        $scope.onKnowDestinationSelect = function ($item, $model, $label) {            
             $scope.KnownDestinationAirport = $item.airport_Code;
         };
 
