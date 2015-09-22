@@ -19,21 +19,21 @@
                         </div>
                     </div>
                     <div class="col-md-8" ng-if="tabManager.tabItems.length > 0">
-                     
-                                <div tabs>
-                                    <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
-                                        <attraction-tab tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
-                                    </div>
-                                </div>
-                              
-                            </div>
-                            <div class="col-md-2 pull-right">
-                                <div class="logo">
-                                    <a href="#"> <img src="app/Styles/images/trippism.png" alt="" /></a>
-                                </div>
+
+                        <div tabs>
+                            <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
+                                <attraction-tab tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
                             </div>
                         </div>
+
                     </div>
+                    <div class="col-md-2 pull-right">
+                        <div class="logo">
+                            <a href="#"> <img src="app/Styles/images/trippism.png" alt="" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- [E] HEADER -->
@@ -215,7 +215,7 @@
             </div>
             <div class="line"></div>
         </div>
-        <div ng-show="destinationlist">
+        <div ng-show="destinationlist && isSearchCollapsed">
             <div ng-show="ShowDestinationView " ng-hide="isSearching">
                 <p class="search-title-details" ng-show="IscalledFromIknowMyDest == false">
                     You Searched : <span ng-show="Origin">Origin: {{OrigintoDisp}},</span>
@@ -228,7 +228,7 @@
                     <span ng-show="Region && isAdvancedSearch">, Region: {{Region}} </span>
                     <span ng-show="Theme && isAdvancedSearch">, Theme: {{Theme}}</span>
                     <br />
-                    <span ng-show="IscalledFromIknowMyDest == false">Total number of top cheapest destinations found from {{Origin |uppercase}} : {{destinationlist.length}}</span>
+                    <span>Total number of top cheapest destinations found from {{Origin |uppercase}} : {{destinationlist.length}}</span>
                 </p>
             </div>
         </div>
@@ -243,7 +243,7 @@
     </div>
     <!-- [E] POPULAR-DESTINATIONS -->
     <!-- [S] REFINE-YOUR-SEARCH-BOX -->
-    <div class="refine-your-search-box slide-bottom" ng-show="ShowDestinationView">
+    <div class="refine-your-search-box slide-bottom" ng-show="ShowDestinationView && IsRefineSearchShow">
         <div class="btn-box"> <a href="#" ng-click="isRefineSeachCollapsed = !isRefineSeachCollapsed;isSearchCollapsed= true;" ng-class="isRefineSeachCollapsed ? '' : 'active'" class="toggle-btn your-search-btn red-bg"><i class="search-icon"></i>Refine your search</a></div>
         <div collapse="!isRefineSeachCollapsed" class="advanced-search">
             <div class="container-fluid">
