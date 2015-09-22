@@ -53,8 +53,8 @@
     <Content Include="app\Scripts\highcharts-more.js" />
     <Content Include="app\Scripts\highcharts.js" />
     <Content Include="app\Scripts\jquery-1.9.1.js" />
+    <Content Include="app\Scripts\jquery-1.9.1.min.js" />
     <Content Include="app\Scripts\jquery.mCustomScrollbar.concat.min.js" />
-    <Content Include="app\Scripts\jquery.min.js" />
     <Content Include="app\Scripts\libs\angular-busy.js" />
     <Content Include="app\Scripts\libs\angular-busy.min.js" />
     <Content Include="app\Scripts\libs\event.js" />
@@ -75,7 +75,15 @@
     <Content Include="app\Styles\css\trippismapp.css" />
     <Content Include="app\Styles\css\icon_top.png" />
     <Content Include="app\Styles\fonts\Gotham-Black.svg" />
+    <Content Include="app\Styles\fonts\gotham-bold.svg" />
     <Content Include="app\Styles\fonts\gotham-book.svg" />
+    <Content Include="app\Styles\images\chart-1.jpg" />
+    <Content Include="app\Styles\images\chart-2.jpg" />
+    <Content Include="app\Styles\images\chart-3.jpg" />
+    <Content Include="app\Styles\images\clear-icon.png" />
+    <Content Include="app\Styles\images\globe-icon.png" />
+    <Content Include="app\Styles\images\humid-icon.png" />
+    <Content Include="app\Styles\images\like-icon.png" />
     <Content Include="app\Styles\images\loading.GIF" />
     <Content Include="app\Styles\images\adsection_1.jpg" />
     <Content Include="app\Styles\images\adsection_2.jpg" />
@@ -111,6 +119,8 @@
     <Content Include="app\Styles\images\palm-tree-icon.png" />
     <Content Include="app\Styles\images\paris-icon.png" />
     <Content Include="app\Styles\images\park-icon.png" />
+    <Content Include="app\Styles\images\post-img-1.jpg" />
+    <Content Include="app\Styles\images\rain-icon.png" />
     <Content Include="app\Styles\images\regions\africa-icon.png" />
     <Content Include="app\Styles\images\regions\asia-icon.png" />
     <Content Include="app\Styles\images\regions\europe.png" />
@@ -118,7 +128,11 @@
     <Content Include="app\Styles\images\regions\latin-america.png" />
     <Content Include="app\Styles\images\regions\North_America.png" />
     <Content Include="app\Styles\images\right-shadrow.png" />
+    <Content Include="app\Styles\images\share-icon.png" />
     <Content Include="app\Styles\images\sport-icon.png" />
+    <Content Include="app\Styles\images\sweltering-icon.png" />
+    <Content Include="app\Styles\images\team-icon1.png" />
+    <Content Include="app\Styles\images\team-icon2.png" />
     <Content Include="app\Styles\images\team.png" />
     <Content Include="app\Styles\images\team1.png" />
     <Content Include="app\Styles\images\team2.png" />
@@ -145,6 +159,7 @@
     <Content Include="app\Styles\images\trippism.png" />
     <Content Include="app\Styles\images\Trippismlogo.png" />
     <Content Include="app\Styles\images\user-img.jpg" />
+    <Content Include="app\Styles\images\view-headline-icon.png" />
     <Content Include="app\Styles\images\weather\Cloudy.png" />
     <Content Include="app\Styles\images\weather\Cool.png" />
     <Content Include="app\Styles\images\weather\Fog.png" />
@@ -250,6 +265,9 @@
     <Content Include="app\Styles\fonts\gotham-book.otf" />
     <Content Include="app\Styles\fonts\gotham-book.ttf" />
     <Content Include="app\Styles\fonts\gotham-book.woff" />
+    <Content Include="app\Styles\fonts\gotham-bold.otf" />
+    <Content Include="app\Styles\fonts\gotham-bold.ttf" />
+    <Content Include="app\Styles\fonts\gotham-bold.woff" />
     <None Include="Trippism.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>

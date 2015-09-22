@@ -1,20 +1,29 @@
 ﻿<div class="row" title="">
-    <div class="col-lg-12">
+    <div class="col-lg-12" style="margin-left:-25%; width:150%;">
         <attractiontab-fare-forecast attraction-params="attractionParams"></attractiontab-fare-forecast>
         <div class="col-lg-9 padleft0">
             <googleattraction-info googleattraction-params="attractionParams" is-open="openaccordiondata" class="googleattraction" style="clear:both;"></googleattraction-info>
 
-            <div class="col-md-12 padlr0" style="clear:both;">
+            <div class="row">
+
+                <weather-info weather-params="attractionParams"></weather-info>
+               
+                <farerange-info farerange-params="attractionParams" style="clear:both;"></farerange-info> 
+
+                
+
+            </div>
+            <!--<div class="col-md-12 padlr0" style="clear:both;">
                 <div class="col-md-5 padlr0" ng-hide="attractionParams.WeatherInfoNoDataFound">
                     <weather-info weather-params="attractionParams"></weather-info>
                 </div>
                 <div class="col-md-7 padlr0">
-                    <farerange-info farerange-params="attractionParams" style="clear:both;"></farerange-info> <!--is-open="openaccordiondata" mailfarerange-data="MailFareRangeData"-->
+                    <farerange-info farerange-params="attractionParams" style="clear:both;"></farerange-info> 
                 </div>
-                </div>
-            <div class="col-md-12 padlr0" style="clear:both;">
+            </div>-->
+            <!--<div class="col-md-12 padlr0" style="clear:both;">
                 <seasonality-info seasonality-params="attractionParams"></seasonality-info>
-            </div>
+            </div>-->
         </div>
 
         <div class="col-lg-3 padright0">
