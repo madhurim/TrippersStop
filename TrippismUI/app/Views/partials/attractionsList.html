@@ -20,11 +20,15 @@
                         <div class="destinations-list" ng-click="SelectPlace(item)" ng-repeat="item in attractionstoDisp">
                             <h6>{{item.name}}</h6>
                             <ul class="destinations-details-list">
-                                <li><p>Lowest Non Stop Fare  : <span>USD 700.20</span></p></li>
-                                <li><p>Lowest Fare : <span>USD 423.20</span></p></li>
+                                <li><p ng-bind-html="item.Placeaddress"></p></li>
+                                <li><p>{{item.PhoneNo}}</p></li>
                             </ul>
 
                         </div>
+                        <div class="mainpage-showall" style="min-height:20px;" ng-show="attractiondispflg && showmore">
+                            <a class="pull-right" ng-click="ShowMoreAttractions()">Show more</a>
+                        </div>
+
                     </div><div id="mCSB_2_scrollbar_horizontal" class="mCSB_scrollTools mCSB_2_scrollbar mCS-light mCSB_scrollTools_horizontal" style="display: block;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_horizontal" class="mCSB_dragger" style="position: absolute; min-width: 30px; display: block; width: 0px; left: 0px; max-width: 890px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div>
                 </div>
             </div>

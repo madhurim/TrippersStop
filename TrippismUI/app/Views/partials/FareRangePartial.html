@@ -11,72 +11,32 @@
 
 
 
-<div class="col-md-6" ng-show="!loadingFareRange">
+<div class="row">
 
-    <div class="popup-box overview">
+    <div ng-if="!loadingFareRange" class="col-md-12">
 
-        <div class="popup-header red-bg">
+        <div class="popup-box">
 
-            <h4 class="popup-title">Overview</h4>
+            <div class="popup-header balck-bg">
 
-        </div>
+                <h5 class="popup-title">Historical Fare Range for date of [ {{DepartDate}} to {{ReturnDate}} ]</h5>
 
-        <div class="popup-content">
+            </div>
 
-            <div class="overview-weather-box">
+            <div class="popup-content">
+                <p>
+                    Median, highest, and lowest published fares during the previous 4 weeks for each of the future departure dates in a range, using the specific origin, destination, and length of stay requested.
+                </p>
+                <div class="chart-box">
 
-                <ul class="gird-line">
 
-                    <li>
 
-                        <div class="overview-weather-content">
-                            <h6> 09/16/2015 To 09/21/2015 </h6>
-                            <p>Traffic Seasonality</p>
-                        </div>
-                        <div class="overview-weather-img">
-                            <img src="/app/Styles/images/team-icon1.png" alt="" />
-                        </div>
-
-                    </li>
-                    <li>
-
-                        <div class="overview-weather-content">
-                            <h6> 09/16/2015 To 09/21/2015 </h6>
-                            <p>Traffic Seasonality</p>
-                        </div>
-                        <div class="overview-weather-img">
-                            <img src="/app/Styles/images/team-icon2.png" alt="" />
-                        </div>
-                    </li>
-                    <li>
-
-                        <div class="overview-weather-content">
-                            <h6> 09/16/2015 To 09/21/2015 </h6>
-                            <p>Traffic Seasonality</p>
-                        </div>
-                        <div class="overview-weather-img">
-                            <img src="/app/Styles/images/team-icon1.png" alt="" />
-                        </div>
-
-                    </li>
-                    <li>
-
-                        <div class="overview-weather-content">
-                            <h6> 09/16/2015 To 09/21/2015 </h6>
-                            <p>Traffic Seasonality</p>
-                        </div>
-                        <div class="overview-weather-img">
-                            <img src="/app/Styles/images/team-icon2.png" alt="" />
-                        </div>
-                    </li>
-                </ul>
+                </div>
 
             </div>
 
         </div>
 
     </div>
-
-    <a id="popup_1" class=" popup-btn btn btn-danger btn-md">see more info</a>
 
 </div>

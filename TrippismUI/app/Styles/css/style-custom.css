@@ -7,3 +7,9 @@
     display: none;
     -webkit-appearance: none;
 }
+a.disabled {
+    pointer-events: none;
+}
+a[disabled] {
+    pointer-events: none;
+}
