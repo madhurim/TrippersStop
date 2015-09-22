@@ -119,17 +119,6 @@
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="input-box">
-                                                        <input type="number" step="1" min="1" class="form-control" name="Maxfare" ng-model="Maxfare" placeholder="Enter Maxfare" />
-                                                    </div>
-                                                    <div class="alert alert-danger" role="alert" ng-show="hasError && frmdestfinder.$invalid && frmdestfinder.Maxfare.$invalid">
-                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                                        <span class="sr-only">Error:</span>
-                                                        Please enter valid Maximum fare.
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="input-box">
                                                         <input type="text"
                                                                class="form-control"
                                                                ng-model="FromDate"
@@ -182,6 +171,16 @@
                                                         Please select valid to date.
                                                     </div>
                                                 </div>
+                                                <div class="col-md-2">
+                                                    <div class="input-box">
+                                                        <input type="number" step="1" min="1" class="form-control" name="Maxfare" ng-model="Maxfare" placeholder="Enter Maxfare" />
+                                                    </div>
+                                                    <div class="alert alert-danger" role="alert" ng-show="hasError && frmdestfinder.$invalid && frmdestfinder.Maxfare.$invalid">
+                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                        <span class="sr-only">Error:</span>
+                                                        Please enter valid Maximum fare.
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -214,29 +213,31 @@
             </div>
             <div class="line"></div>
         </div>
-
         <div ng-show="destinationlist">
             <div ng-show="ShowDestinationView " ng-hide="isSearching">
                 <p class="search-title-details" ng-show="IscalledFromIknowMyDest == false">
-                    Your Searched : <span ng-show="Origin">Origin : {{OrigintoDisp}}</span>
-                    <span ng-show="FromDate">, From Date : {{FromDate|date:'MM/dd/yyyy'}} </span>
-                    <span ng-show="ToDate">, To Date : {{ToDate |date:'MM/dd/yyyy'}}</span>
+                    You Searched : <span ng-show="Origin">Origin: {{OrigintoDisp}},</span>
+                    <span ng-show="FromDate">From Date: {{FromDate|date:'MM/dd/yyyy'}},</span>
+                    <br />
+                    <span ng-show="ToDate"> To Date: {{ToDate |date:'MM/dd/yyyy'}}</span>
                     <span ng-show="LenghtOfStay > 0">, LengthOfStay: {{LenghtOfStay}}</span>
                     <span ng-show="Minfare > 0 && isAdvancedSearch">, Minimum Fare: {{Minfare}}</span>
                     <span ng-show="Maxfare > 0"> Maximum Fare: {{Maxfare}}</span>
-                    <span ng-show="Region.id && isAdvancedSearch">, Region:{{Region.id}} </span>
-                    <span ng-show="Theme && isAdvancedSearch">, Theme:{{Theme}}</span>
-                    <br/>
+                    <span ng-show="Region && isAdvancedSearch">, Region: {{Region}} </span>
+                    <span ng-show="Theme && isAdvancedSearch">, Theme: {{Theme}}</span>
+                    <br />
                     <span ng-show="IscalledFromIknowMyDest == false">Total number of top cheapest destinations found from {{Origin |uppercase}} : {{destinationlist.length}}</span>
-                </p>                
+                </p>
             </div>
         </div>
     </div>
     <!-- [E] SEARCHCENTER -->
     <!-- [S] POPULAR-DESTINATIONS -->
-    <div class="popular-destinations" ng-class="isPopDestCollapsed ? 'active' : ''" ng-show="topdestinationlist.length > 0 && IscalledFromIknowMyDest == false">
-        <a href="#" ng-click="isPopDestCollapsed = !isPopDestCollapsed" class="toggle-btn destinations-btn red-bg"><i class="destinations-icon"></i>Top Popular Destinations</a>
-        <topdestination-popup destinations-params="topdestinationlist" destinations="destinationlist" airportlist="AvailableAirports"></topdestination-popup>
+    <div ng-hide="isSearching" ng-show="ShowDestinationView">
+        <div class="popular-destinations" ng-class="isPopDestCollapsed ? 'active' : ''" ng-show="topdestinationlist.length > 0 && IscalledFromIknowMyDest == false">
+            <a href="#" ng-click="isPopDestCollapsed = !isPopDestCollapsed" class="toggle-btn destinations-btn red-bg"><i class="destinations-icon"></i>Top Popular Destinations</a>
+            <topdestination-popup destinations-params="topdestinationlist" destinations="destinationlist" airportlist="AvailableAirports"></topdestination-popup>
+        </div>
     </div>
     <!-- [E] POPULAR-DESTINATIONS -->
     <!-- [S] REFINE-YOUR-SEARCH-BOX -->
