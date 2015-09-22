@@ -5,13 +5,17 @@
             <googleattraction-info googleattraction-params="attractionParams" is-open="openaccordiondata" class="googleattraction" style="clear:both;"></googleattraction-info>
 
             <div class="row">
+                <weatherwidget-info weather-params="attractionParams"></weatherwidget-info>
 
-                <weather-info weather-params="attractionParams"></weather-info>
+              
                
                 <farerange-info farerange-params="attractionParams" style="clear:both;"></farerange-info> 
 
                 
 
+            </div>
+            <div>
+                <weather-info weather-params="attractionParams"></weather-info>
             </div>
             <!--<div class="col-md-12 padlr0" style="clear:both;">
                 <div class="col-md-5 padlr0" ng-hide="attractionParams.WeatherInfoNoDataFound">

@@ -70,6 +70,7 @@
     <Content Include="app\Styles\css\font-awesome.css" />
     <Content Include="app\Styles\css\fonts.css" />
     <Content Include="app\Styles\css\jquery.mCustomScrollbar.css" />
+    <Content Include="app\Styles\css\jquery.sliderTabs.css" />
     <Content Include="app\Styles\css\style-custom.css" />
     <Content Include="app\Styles\css\style.css" />
     <Content Include="app\Styles\css\trippismapp.css" />
