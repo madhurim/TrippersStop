@@ -158,8 +158,8 @@
                 };
 
                 scope.$watch('fareRangeData', function (newValue, oldValue) {
-                    if (newValue != oldValue)
-                        DisplayChart();
+                    //if (newValue != oldValue)
+                       // DisplayChart();
                 })
 
                 scope.Chart = [];

@@ -1,4 +1,4 @@
-﻿<div class="col-md-12" style="clear:both;padding-top:5px;">
+﻿<!--<div class="col-md-12" style="clear:both;padding-top:5px;">
     <div class="" >
             <div ng-if="!WeatherInfoNoDataFound">
                 <span style="font-size:100% !important;font-weight:bold;text-decoration: underline;">Historical Weather pattern for [ {{weatherParams.DestinationairportName.airport_CityName}} ] for the week of [ {{DepartDate}} to {{ReturnDate}} ]</span>
@@ -7,4 +7,71 @@
                 </div>
             </div>
     </div>
+</div>-->
+
+<div class="col-md-6">
+
+    <div class="popup-box weather">
+
+        <div class="popup-header red-bg">
+
+            <h4 class="popup-title">Weather</h4>
+
+        </div>
+
+        <div class="popup-content">
+
+            <div class="overview-weather-box">
+
+                <ul class="list-line">
+
+                    <li>
+
+                        <div class="overview-weather-content">
+                            <h6> 09/16/2015 To 09/21/2015 </h6>
+                            <p>Traffic Seasonality</p>
+                        </div>
+
+                        <div class="avg-high-low-box">
+
+                            <div class="avg avg-high">
+                                <img src="app/Styles/images/rain-icon.png" alt="" />
+                                <span class="title">Humid</span>
+                                <span>Avg. High </span>
+                                <h5>74 F 24 C</h5>
+
+                            </div>
+                            <div class=" avg avg-low">
+                                <img src="app/Styles/images/humid-icon.png" alt="" />
+                                <span class="title">Rainy</span>
+                                <span>Avg. Low </span>
+                                <h5>59 F 15 C</h5>
+
+
+                            </div>
+                            <div class="avg">
+                                <img src="app/Styles/images/sweltering-icon.png" alt="" />
+                                <span class="title">Very Hot </span>
+                                <span>Avg. Low </span>
+                                <h5>59 F 15 C</h5>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <a id="popup_2" class=" popup-btn btn btn-danger btn-md">see more info</a>
+
+
 </div>

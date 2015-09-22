@@ -1,4 +1,90 @@
-﻿<div class="col-lg-12 padlr0">
+﻿<div class="ibox-wp">
+
+    <div class="ibox-title">
+        <a class="view-icon" href="#" ><img src="/app/Styles/images/view-headline-icon.png" alt="" /></a>
+        <h4>
+            {{attractionParams.DestinationairportName.airport_FullName + ', ' + attractionParams.DestinationairportName.airport_CityName + ', ' + attractionParams.DestinationairportName.airport_CountryName}}
+        </h4>
+        
+        <div class="share-btn">
+            <a class="icons red-bg" href="#"><img src="/app/Styles/images/share-icon.png" alt="" /></a>
+        </div>
+
+    </div>
+
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-2" ng-if="attractionParams.mapOptions.LowestNonStopFare != 'N/A' && attractionParams.mapOptions.LowestNonStopFare != 0">
+                <div class="ibox-box">
+                    <h4>{{attractionParams.mapOptions.CurrencyCode}} {{attractionParams.mapOptions.LowestNonStopFare | number : 2}}</h4>
+                    <p>Lowest Non Stop Fare</p>
+                </div>
+            </div>
+
+            <div class="col-md-2" ng-if="(attractionParams.mapOptions.LowestNonStopFare == 'N/A' || attractionParams.mapOptions.LowestNonStopFare == 0) && attractionParams.mapOptions.LowestFare != 'N/A' &&  attractionParams.mapOptions.LowestFare != 0">
+                <div class="ibox-box">
+                    <h4>{{attractionParams.mapOptions.CurrencyCode}} {{attractionParams.mapOptions.LowestFare | number : 2}}</h4>
+                    <p>Lowest Non Stop Fare</p>
+                </div>
+            </div>
+
+            
+
+            <div class="col-md-2" ng-show="FareNoDataFound && FareApiLoaded" ng-if="attractionParams.mapOptions.LowestFare != 'N/A' &&  attractionParams.mapOptions.LowestFare != 0">
+                <div class="ibox-box">
+                    <h4>{{attractionParams.mapOptions.CurrencyCode}} {{attractionParams.mapOptions.LowestFare | number : 2}}</h4>
+                    <p>Lowest Fare</p>
+                </div>
+            </div>
+
+            <div class="col-md-2" ng-show="!FareNoDataFound" ng-if="FareforecastData.LowestFare != 'N/A' &&  FareforecastData.LowestFare != 0">
+                <div class="ibox-box">
+                    <h4>{{attractionParams.mapOptions.CurrencyCode}} {{attractionParams.mapOptions.LowestFare | number : 2}}</h4>
+                    <p>Lowest Fare</p>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-2" ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0">
+                <div title="Forecasted price for next week for the same origin-destination pair and date combination selected"  class="ibox-box"><h4>{{FareforecastData.CurrencyCode}} {{FareforecastData.Forecast.LowestPredictedFare | number : 2 }}</h4><p>Lowest Predicted Fare for Next Week</p></div>
+
+            </div>
+
+            <div class="col-md-2" ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
+                <div class="ibox-box" ng-show="!FareNoDataFound">
+                    <img ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="/app/Styles/images/like-icon.png" />
+                    <i   ng-if="FareforecastData.Recommendation == 'wait'" class="glyphicon glyphicon-time text-warning" title="Wait"></i>
+                   
+                    <p>Recommendation</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="ibox-box">
+                    <h4>You Searched </h4>
+                    <p><span ng-show="attractionParams.SearchCriteria.OrigintoDisp">Origin : {{attractionParams.SearchCriteria.OrigintoDisp}}</span>
+<span ng-show="attractionParams.SearchCriteria.FromDate">, From Date : {{attractionParams.SearchCriteria.FromDate | date:'MM/dd/yyyy'}}</span>
+<span ng-show="attractionParams.SearchCriteria.ToDate">, To Date : {{attractionParams.SearchCriteria.ToDate |date:'MM/dd/yyyy'}}</span>
+<br />
+
+<span ng-show="attractionParams.SearchCriteria.Minfare > 0">Min Fare: {{attractionParams.SearchCriteria.Minfare}}</span>
+<span ng-show="attractionParams.SearchCriteria.Maxfare > 0">, Max Fare: {{attractionParams.SearchCriteria.Maxfare}}</span>
+<span ng-show="attractionParams.SearchCriteria.Region ">, Region:{{attractionParams.SearchCriteria.Region}} </span>
+<span ng-show="attractionParams.SearchCriteria.Theme">, Theme:{{attractionParams.SearchCriteria.Theme}}</span></p>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!--<div class="col-lg-12 padlr0">
     <div class="ibox float-e-margins">
         <div class="ibox-title">
 
@@ -30,7 +116,7 @@
                     <ul><li><strong>{{attractionParams.mapOptions.CurrencyCode}} {{attractionParams.mapOptions.LowestFare | number : 2}}</strong><span>Lowest Fare</span></li></ul>
                 </div>
             </div>
-            
+
             <div class="col-md-2" ng-show="!FareNoDataFound" ng-if="FareforecastData.LowestFare != 'N/A' &&  FareforecastData.LowestFare != 0">
                 <div class="social-box facebook">
                     <ul><li><strong>{{FareforecastData.CurrencyCode}} {{FareforecastData.LowestFare | number : 2}}</strong><span>Lowest Fare</span></li></ul>
@@ -73,5 +159,4 @@
                 <span ng-show="attractionParams.SearchCriteria.Theme">, Theme:{{attractionParams.SearchCriteria.Theme}}</span>
             </div>
     </div>
-</div></div>
-
+</div></div>-->
