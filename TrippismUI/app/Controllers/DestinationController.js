@@ -66,7 +66,7 @@
         $scope.isSearching = true;
         $scope.KnowSearchbuttonText = 'Get Destination Details';
         $scope.IscalledFromIknowMyDest = false;
-
+        $scope.isPopDestCollapsed = true;
         $scope.tabManager.getTitle = function (tabInfo) {
             tabInfo.title.substr(0, 10);
         };
@@ -170,6 +170,7 @@
         $scope.ViewDestination = function () {
             $scope.isSearching = false;
             $scope.ShowDestinationView = true;
+            $scope.isPopDestCollapsed = true;
             $scope.IscalledFromIknowMyDest = false;
             $scope.tabManager.resetSelected();
             $scope.TabcontentView = false;
@@ -398,7 +399,7 @@
             $scope.OriginCityName = $item.airport_CityName;
         };
 
-        $scope.onKnowDestinationSelect = function ($item, $model, $label) {            
+        $scope.onKnowDestinationSelect = function ($item, $model, $label) {
             $scope.KnownDestinationAirport = $item.airport_Code;
         };
 
@@ -456,6 +457,7 @@
                 return;
             }
             $scope.isSearchCollapsed = true;
+            $scope.IsRefineSearchShow = true;
             $scope.isSearching = false;
             $scope.isAdvancedSearch = false;
             $scope.topdestinationlist = [];
@@ -538,6 +540,8 @@
             $scope.faresList = [];
             $scope.IsHistoricalInfo = false;
             $scope.isSearchCollapsed = true;
+            $scope.isPopDestCollapsed = true;
+            $scope.IsRefineSearchShow = true;
             $scope.isSearching = true;
             if (buttnText == 'All') { $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; }
             else if (buttnText == 'Cheapest') { $scope.SearchbuttonChepestIsLoading = true; $scope.SearchbuttonCheapestText = $scope.LoadingText; }
