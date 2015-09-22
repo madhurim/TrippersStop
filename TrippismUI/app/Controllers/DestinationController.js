@@ -457,6 +457,7 @@
                 return;
             }
             $scope.isSearchCollapsed = true;
+            $scope.IsRefineSearchShow = true;
             $scope.isSearching = false;
             $scope.isAdvancedSearch = false;
             $scope.topdestinationlist = [];
@@ -540,6 +541,7 @@
             $scope.IsHistoricalInfo = false;
             $scope.isSearchCollapsed = true;
             $scope.isPopDestCollapsed = true;
+            $scope.IsRefineSearchShow = true;
             $scope.isSearching = true;
             if (buttnText == 'All') { $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; }
             else if (buttnText == 'Cheapest') { $scope.SearchbuttonChepestIsLoading = true; $scope.SearchbuttonCheapestText = $scope.LoadingText; }
@@ -626,7 +628,7 @@
         }
 
         function GetTopPopularDestinations(data) {
-            $scope.topdestination = DestinationFactory.findDestinations(data).then(function (data) {                
+            $scope.topdestination = DestinationFactory.findDestinations(data).then(function (data) {
                 $scope.topdestinationlist = [];
                 if (data.FareInfo != null) {
                     for (var x = 0; x < data.FareInfo.length; x++) {
@@ -642,7 +644,7 @@
                         };
                         $scope.topdestinationlist.push(topdestination);
                     }
-                }                
+                }
                 $scope.inProgress = false;
             });
         }
