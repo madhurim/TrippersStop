@@ -11,10 +11,6 @@
                 scope.formats = Dateformat();
                 scope.format = scope.formats[5];
                 scope.WeatherInfoNoDataFound = true;
-                //scope.StateList = [];
-                //UtilFactory.ReadStateJson().then(function (data) {
-                //    scope.StateList = data;
-                //});
                 scope.IsWidgetClosed = true;
                 scope.closeWidget = function () {
                     scope.IsWidgetClosed = false;
@@ -32,11 +28,7 @@
                     } else {
                         scope.WeatherwidgetData = "";
                     }
-                    //UtilFactory.ReadStateJson().then(function (data) {
-                    //    scope.StateList = data;
-                     
-                    //});
-                });
+                     });
                 scope.$watch('weatherParams.WeatherData', function (newValue, oldValue, scope) {                    
                     if (newValue == undefined) return;
                     scope.getWeatherInformation();
@@ -46,13 +38,11 @@
                 }
 
                 scope.getWeatherInformation = function () {
-                   // scope.WeatherInfoLoaded = false;
                     scope.HighTempratureC = "0";
                     scope.HighTempratureF = "0";
                     scope.LowTempratureC = "0";
                     scope.LowTempratureF = "0";
                     scope.WeatherInfoNoDataFound = false;
-                   // scope.weatherParams.WeatherInfoNoDataFound = false;
                     scope.WeatherwidgetData = scope.weatherParams.WeatherData;
                     if (scope.WeatherwidgetData != undefined && scope.WeatherwidgetData != "") {
                         var participation = _.find(scope.WeatherwidgetData.WeatherChances, function (chances) { return chances.Name == 'Precipitation' });
