@@ -107,18 +107,13 @@
         <div class="popup-content">
 
             <div class="overview-weather-box">
-
                 <ul class="list-line">
-
                     <li>
-
                         <div class="overview-weather-content">
                             <h6> 09/16/2015 To 09/21/2015 </h6>
                             <p>Historical Weather</p>
                         </div>
                         <div class="high-low-box">
-
-
                             <div class="avg-high">
                                 <span>Avg. High </span>
                                 <h5>{{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103</h5>
@@ -127,10 +122,8 @@
                                 <span>Avg. Low </span>
                                 <h5>{{LowTempratureF}}&#x2109 {{LowTempratureC}}&#x2103</h5>
                             </div>
-
                         </div>
                         <div class="avg-box">
-                           
                             <div ng-repeat="item in  WeatherwidgetData.WeatherChances">
                                 <div class="avg" ng-if="item.Name=='Cloudy' && item.Percentage >= 60">
                                     <img src="../app/Styles/images/weather/Cloudy.png" alt="" />
@@ -204,16 +197,11 @@
                                     <img src="../app/Styles/images/weather/Snow.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
- 
                             </div>
-                                
                             </div>
-
                     </li>
-
                 </ul>
-
-                <a id="popup_2" class=" popup-btn btn btn-danger btn-md">see more info</a>
+                <!--<a id="popup_2" class=" popup-btn btn btn-danger btn-md">see more info</a>-->
             </div>
 
         </div>
