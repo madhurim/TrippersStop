@@ -13,3 +13,6 @@ a.disabled {
 a[disabled] {
     pointer-events: none;
 }
+a {
+    cursor:pointer;
+}

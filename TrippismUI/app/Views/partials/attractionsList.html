@@ -1,37 +1,24 @@
-﻿<div class="total-attractions-found-box slide-bottom">
+﻿<div class="total-attractions-found-box ">
 
     <div class="btn-box">
-        <a class="toggle-btn total-attractions-btn balck-bg"
-           ng-class="isAttractionCollapsed ? '' : 'active'"
-           ng-click="isAttractionCollapsed = !isAttractionCollapsed;">
-            <i class="search-icon"></i>
-            Total Attractions Found : {{attractions.length}}
+        <a ng-class="isAttractionCollapsed ? '' : 'active'"
+           ng-click="isAttractionCollapsed = !isAttractionCollapsed;" class="toggle-btn total-attractions-btn balck-bg">
+            <i class="search-icon"></i>Total Attractions Found : {{attractions.length}}
         </a>
     </div>
-
-    <div collapse="isAttractionCollapsed" class="attractions-found collapse">
-        <!--style="display: none;"-->
-
+    <div class="attractions-found" collapse="isAttractionCollapsed">
         <div id="examples" class="max-width-example">
             <!-- content -->
             <div id="content-1" class="content">
-                <div class="destinations-list" ng-click="SelectPlace(item)" ng-repeat="item in attractionstoDisp">
+                <div ng-click="SelectPlace(item)" ng-repeat="item in attractionstoDisp" class="destinations-list">
                     <h6>{{item.name}}</h6>
                     <div class="placeaddress-list">
-                        <span>{{item.Placeaddress}}</span>
-                        <span>{{item.PhoneNo}}</span>
+                        <span ng-bind-html="item.Placeaddress"></span>,
+                        <span> {{item.PhoneNo}}</span>
                     </div>
+                </div>
 
-                </div>
-                <div class="mainpage-showall" style="min-height:20px;" ng-show="attractiondispflg && showmore">
-                    <a class="pull-right" ng-click="ShowMoreAttractions()">Show more</a>
-                </div>
             </div>
-
         </div>
-
-
     </div>
-
 </div>
-
