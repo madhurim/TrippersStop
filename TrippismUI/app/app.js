@@ -95,7 +95,9 @@ TrippismUIApp.directive('tabs', function () {
             '<div class="tabbable">' +
                 '<ul class="nav nav-tabs my-tab">' +
                 '<li ng-repeat="pane in panes" ng-class="{active:pane.$parent.tabInfo.selected}">' +
-        '<a href="" ng-click="pane.$parent.tabManager.select($index)">{{pane.title}}</a><i ng-click="pane.$parent.tabManager.removeTab($index);panes.splice($index, 1);" class="fa fa-times-circle close my-close"></i>' +
+        //'<a href="" ng-click="pane.$parent.tabManager.select($index)">{{pane.title}}</a><i ng-click="pane.$parent.tabManager.removeTab($index);panes.splice($index, 1);" class="fa fa-times-circle close my-close"></i>' +
+                '<a ng-click="pane.$parent.tabManager.select($index)">{{pane.title}}&nbsp;<span ng-click="pane.$parent.tabManager.removeTab($index);panes.splice($index, 1);" class="glyphicon glyphicon-remove"></span></a>' +
+        
                 '</li>' +
                 '</ul>' +
                 '<div class="tab-content padtop5" style="margin-top:15px;" ng-transclude></div>' +

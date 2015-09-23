@@ -1,42 +1,17 @@
-﻿<!--<div class="" style="clear:both;">
-
-    <div class="col-md-12" style="clear:both;padding-top:5px;">
-        <div ng-show="!loadingFareRange">
-            <span style="font-size:100% !important;font-weight:bold;text-decoration: underline;">Historical Fare Range for date of [ {{DepartDate}} to {{ReturnDate}} ]</span>
-            <br />
-            <h6 style="margin:0px;">Median, highest, and lowest published fares during the previous 4 weeks for each of the future departure dates in a range, using the specific origin, destination, and length of stay requested.</h6>
-        </div>
-    </div>
-</div>-->
-
-
-
-
-
-    <div ng-if="!loadingFareRange" class="col-md-12">
+﻿<div ng-if="!loadingFareRange" >
 
         <div class="popup-box">
-
             <div class="popup-header balck-bg">
-
                 <h5 class="popup-title">Historical Fare Range for date of [ {{DepartDate}} to {{ReturnDate}} ]</h5>
-
             </div>
-
             <div class="popup-content">
                 <p>
                     Median, highest, and lowest published fares during the previous 4 weeks for each of the future departure dates in a range, using the specific origin, destination, and length of stay requested.
                 </p>
                 <div class="chart-box">
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
 
