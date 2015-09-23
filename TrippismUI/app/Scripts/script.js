@@ -34,8 +34,10 @@ $(document).ready(function () {
 // Scrollbar
 //*************************
 (function ($) {
-    $(window).load(function () {
 
+
+    $(window).load(function () {
+        
         $("a[rel='load-content']").click(function (e) {
             e.preventDefault();
             var url = $(this).attr("href");
@@ -47,6 +49,7 @@ $(document).ready(function () {
         });
 
         $(".content").delegate("a[href='top']", "click", function (e) {
+            
             e.preventDefault();
             $(".content").mCustomScrollbar("scrollTo", $(this).attr("href"));
         });
@@ -57,6 +60,7 @@ $(document).ready(function () {
                 autoExpandHorizontalScroll: true
             }
         });
+    
 
     });
 })(jQuery);

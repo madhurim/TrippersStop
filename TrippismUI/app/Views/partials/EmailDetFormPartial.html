@@ -24,7 +24,7 @@
                     Please enter Subject.
                 </div>
             </div>
-            <form name="FormGetEmailDet" novalidate="novalidate">
+            <form name="FormGetEmailDet" novalidate="novalidate" class="sharenow-form">
                 <div class="form-group">
                     <label for="email">From email address</label>
                     <input type="email" ng-model="fromemail" class="form-control " style="color:black !important;" id="fromemail" name="fromemail" placeholder="Enter email" />
@@ -37,7 +37,7 @@
                     <label for="Subject">Subject</label>
                     <input type="text" ng-model="Subject" class="form-control" id="Subject" style="color:black !important;" name="Subject" placeholder="Subject" required />
                 </div>
-                <button type="submit" class="btn btn-info" ng-click="submitModal()">Share Now</button>
+                <button type="submit" class="btn btn-danger btn-sm" ng-click="submitModal()">Share Now</button>
             </form>
         </div>
     </div>

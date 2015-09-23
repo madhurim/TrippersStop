@@ -1,4 +1,4 @@
-﻿<div class="total-attractions-found-box ">
+﻿<div class="total-attractions-found-box slide-bottom">
 
     <div class="btn-box">
         <a ng-class="isAttractionCollapsed ? '' : 'active'"
@@ -6,10 +6,11 @@
             <i class="search-icon"></i>Total Attractions Found : {{attractions.length}}
         </a>
     </div>
-    <div class="attractions-found" collapse="isAttractionCollapsed">
+
+    <div class="attractions-found" collapse="!isAttractionCollapsed">
         <div id="examples" class="max-width-example">
             <!-- content -->
-            <div id="content-1" class="content">
+            <div id="content-1" class="content mCustomScrollbar">
                 <div ng-click="SelectPlace(item)" ng-repeat="item in attractionstoDisp" class="destinations-list">
                     <h6>{{item.name}}</h6>
                     <div class="placeaddress-list">

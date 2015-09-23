@@ -27,3 +27,4 @@ a {
     background: linear-gradient(to right, rgba(181,217,238,1) 0%, rgba(42,173,229,1) 50%, rgba(190,222,239,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5d9ee', endColorstr='#bedeef', GradientType=1 );
 }
+.modal-header { padding:0 15px;}

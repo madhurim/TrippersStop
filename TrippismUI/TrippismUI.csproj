@@ -129,6 +129,7 @@
     <Content Include="app\Styles\images\paris-icon.png" />
     <Content Include="app\Styles\images\park-icon.png" />
     <Content Include="app\Styles\images\Partly Cloudy.png" />
+    <Content Include="app\Styles\images\play-icon.png" />
     <Content Include="app\Styles\images\post-img-1.jpg" />
     <Content Include="app\Styles\images\Precipitation.png" />
     <Content Include="app\Styles\images\rain-icon.png" />
@@ -203,9 +204,9 @@
     <Content Include="app\Styles\images\Windy.png" />
     <Content Include="app\Styles\trippsimlatest.css" />
     <Content Include="app\Utility.js" />
-    <Content Include="app\Views\destination1.html" />
-    <Content Include="app\Views\GoogleMap.html" />
     <Content Include="app\Views\destination.html" />
+    <Content Include="app\Views\GoogleMap.html" />
+    <Content Include="app\Views\destination1.html" />
     <Content Include="app\Scripts\angular-mocks.js" />
     <Content Include="app\Scripts\angular-ui-router.js" />
     <Content Include="app\Scripts\angular-ui-router.min.js" />
