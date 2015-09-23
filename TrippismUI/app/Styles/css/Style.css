@@ -8,7 +8,7 @@ a,a:hover,a:focus,label,form-control,.form-control:focus,.btn,button,.popular-de
 .balck-bg{ background-color:#222221;}
 .icons {border-radius: 100%;box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.09);display: block;height: 45px;padding:10px;text-align: center;width: 45px;overflow:hidden;}
 .btn-box{margin: auto; text-align:center; position:absolute; left:0; right:0; top:100%;z-index: 2;}
-.toggle-btn { cursor:pointer; display:inline-block; border-radius: 0 0 2px 2px;color: #fff;font-family: "Conv_Gotham-Black"; font-size: 18px;padding: 8px 20px;text-transform: uppercase;}
+.toggle-btn { cursor:pointer; display:inline-block; border-radius: 0 0 2px 2px;color: #fff;font-family: "Conv_Gotham-Black"; font-size: 15px; line-height:25px; padding: 8px 20px;text-transform: uppercase;}
 .toggle-btn:hover,.toggle-btn:focus{color:#fff;}
 .toggle-btn i{	 background-image:url(../images/arrow.png);background-repeat:no-repeat;background-position:0 0;width:23px; height:23px; display:block; margin-right:15px;float:left;margin-top:1px;}
 .btn{ font-size:14px; text-transform:uppercase; border-radius:2px;}
@@ -90,7 +90,7 @@ input.form-control[type="number"]{ padding-right:15px;}
     }
 }
 
-.popular-destinations .toggle-btn{ bottom:100%; top:auto; width:100%;padding-right: 10px;border-radius: 2px; font-size:16px;}
+.popular-destinations .toggle-btn{ bottom:100%; top:auto; width:100%;padding-right: 10px;border-radius: 2px;}
 .toggle-btn i.destinations-icon{ background-position:-37px -37px; float:right; margin-left:15px; margin-right:0;}
 .popular-destinations.active .toggle-btn i.destinations-icon{ background-position:-37px 0px;}
 .popular-destinations { left:0;margin-left: -278px; top:35%;position: absolute;width: 318px;}
@@ -158,12 +158,11 @@ input.form-control[type="number"]{ padding-right:15px;}
 
 .ibox-wp{ margin-bottom:15px;}
 
-.ibox-title {position: relative;background-color: #fff;border-radius: 4px;box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);padding: 20px 70px 20px 50px ;}
-.ibox-title .view-icon {left: 20px;position: absolute;margin-top:-1px;}
+.ibox-title {position: relative;background-color: #fff;border-radius: 4px;box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);padding: 20px 70px 20px 20px ;}
 .ibox-title h4 {color: #585858;margin: 0;}
 .ibox-title .share-btn {position: absolute;right: 15px;top:7px;}
 .ibox-box {padding:15px 15px 0;text-align: center;min-height: 85px;margin-top:10px; }
-
+.searched { text-align:left;}
 .ibox-box h4{ margin-top:0; font-family: 'Conv_gotham-bold'; color:#585858;}
 .ibox-box img{ margin-bottom:10px;}
 .ibox-box p{ margin-bottom:0; text-transform:uppercase; color:#585858; font-size:12px;}
@@ -214,7 +213,7 @@ input.form-control[type="number"]{ padding-right:15px;}
 
 .right-sidebar{ background-color:#fff;border-radius:2px 2px 0 0; width:100%; float:left;}
 .news-wp .news-title{ padding:15px; border-radius:2px 2px 0 0;}
-.news-wp .news-title h6{ font-size:12px; color:#fff; margin:0;}
+.news-wp .news-title h6{ font-size:15px; color:#fff; margin:0;}
 .news-wp .news-list{ padding:15px; width:100%; float:left}
 
 .news-pagination .pager{ margin:10px 0;}
@@ -262,4 +261,4 @@ input.form-control[type="number"]{ padding-right:15px;}
 
 
 
-
+.googleattraction .attraction-slide { position:relative; width:100%; display:inline-block;}

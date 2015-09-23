@@ -33,57 +33,35 @@ $(document).ready(function () {
 //*************************
 // Scrollbar
 //*************************
+(function ($) {
+    $(window).load(function () {
 
-	(function($){
-		$(window).load(function(){
-			
-			$("a[rel='load-content']").click(function(e){
-				e.preventDefault();
-				var url=$(this).attr("href");
-				$.get(url,function(data){
-					$(".content .mCSB_container").append(data); //load new content inside .mCSB_container
-					//scroll-to appended content 
-					$(".content").mCustomScrollbar("scrollTo","h2:last");
-				});
-			});
-			
-			$(".content").delegate("a[href='top']","click",function(e){
-				e.preventDefault();
-				$(".content").mCustomScrollbar("scrollTo",$(this).attr("href"));
-			});
-			
-			$("#content-1").mCustomScrollbar({
-					axis:"x",
-					advanced:{
-						autoExpandHorizontalScroll:true
-					}
-				});
-				
-				var i=1,
-					imgs=["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg","img6.jpg","img7.jpg"];
-				
-				$("a[rel='add-content']").click(function(e){
-					e.preventDefault();
-					var markup="<li id='img-"+i+"-container'><img src='images/"+imgs[i]+"' /></li>";
-					$(".content .mCSB_container ul").append(markup);
-					if(i<imgs.length-1){
-						i++
-					}else{
-						i=0;
-					}
-				});
-				
-				$("a[rel='remove-content']").click(function(e){
-					e.preventDefault();
-					if($(".content .mCSB_container ul li").length<4){return;}
-					i--
-					if(i<0){i=imgs.length-1;}
-					$("#img-"+i+"-container").remove();
-				});
-			
-		});
-	})(jQuery);
-	
+        $("a[rel='load-content']").click(function (e) {
+            e.preventDefault();
+            var url = $(this).attr("href");
+            $.get(url, function (data) {
+                $(".content .mCSB_container").append(data); //load new content inside .mCSB_container
+                //scroll-to appended content 
+                $(".content").mCustomScrollbar("scrollTo", "h2:last");
+            });
+        });
+
+        $(".content").delegate("a[href='top']", "click", function (e) {
+            e.preventDefault();
+            $(".content").mCustomScrollbar("scrollTo", $(this).attr("href"));
+        });
+
+        $("#content-1").mCustomScrollbar({
+            axis: "x",
+            advanced: {
+                autoExpandHorizontalScroll: true
+            }
+        });
+
+    });
+})(jQuery);
+
+
 	
 	
 	  //    var map;

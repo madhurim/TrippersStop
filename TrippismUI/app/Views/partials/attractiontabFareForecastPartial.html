@@ -1,7 +1,7 @@
 ﻿<div class="ibox-wp">
 
     <div class="ibox-title">
-        <a class="view-icon" href="#" ><img src="/app/Styles/images/view-headline-icon.png" alt="" /></a>
+        <!--<a class="view-icon" href="#" ><img src="/app/Styles/images/view-headline-icon.png" alt="" /></a>-->
         <h4>
             {{attractionParams.DestinationairportName.airport_FullName + ', ' + attractionParams.DestinationairportName.airport_CityName + ', ' + attractionParams.DestinationairportName.airport_CountryName}}
         </h4>
@@ -61,17 +61,19 @@
             </div>
 
             <div class="col-md-4">
-                <div class="ibox-box">
+                <div class="ibox-box searched">
                     <h4>You Searched </h4>
-                    <p><span ng-show="attractionParams.SearchCriteria.OrigintoDisp">Origin : {{attractionParams.SearchCriteria.OrigintoDisp}}</span>
-<span ng-show="attractionParams.SearchCriteria.FromDate">, From Date : {{attractionParams.SearchCriteria.FromDate | date:'MM/dd/yyyy'}}</span>
-<span ng-show="attractionParams.SearchCriteria.ToDate">, To Date : {{attractionParams.SearchCriteria.ToDate |date:'MM/dd/yyyy'}}</span>
-<br />
+                    <p>
+                        <span ng-show="attractionParams.SearchCriteria.OrigintoDisp">Origin : {{attractionParams.SearchCriteria.OrigintoDisp}}</span>
+                        <span ng-show="attractionParams.SearchCriteria.FromDate">, From Date : {{attractionParams.SearchCriteria.FromDate | date:'MM/dd/yyyy'}}</span>
+                        <span ng-show="attractionParams.SearchCriteria.ToDate">, To Date : {{attractionParams.SearchCriteria.ToDate |date:'MM/dd/yyyy'}}</span>
+                        <br />
 
-<span ng-show="attractionParams.SearchCriteria.Minfare > 0">Min Fare: {{attractionParams.SearchCriteria.Minfare}}</span>
-<span ng-show="attractionParams.SearchCriteria.Maxfare > 0">, Max Fare: {{attractionParams.SearchCriteria.Maxfare}}</span>
-<span ng-show="attractionParams.SearchCriteria.Region ">, Region:{{attractionParams.SearchCriteria.Region}} </span>
-<span ng-show="attractionParams.SearchCriteria.Theme">, Theme:{{attractionParams.SearchCriteria.Theme}}</span></p>
+                        <span ng-show="attractionParams.SearchCriteria.Minfare > 0">Min Fare: {{attractionParams.SearchCriteria.Minfare}}</span>
+                        <span ng-show="attractionParams.SearchCriteria.Maxfare > 0">, Max Fare: {{attractionParams.SearchCriteria.Maxfare}}</span>
+                        <span ng-show="attractionParams.SearchCriteria.Region ">, Region:{{attractionParams.SearchCriteria.Region}} </span>
+                        <span ng-show="attractionParams.SearchCriteria.Theme">, Theme:{{attractionParams.SearchCriteria.Theme}}</span>
+                    </p>
                 </div>
             </div>
 
