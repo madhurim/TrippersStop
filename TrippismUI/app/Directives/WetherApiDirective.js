@@ -26,7 +26,7 @@
                             scope.DepartDate = $filter('date')(scope.weatherParams.Fareforecastdata.DepartureDate, scope.format, null);
                             scope.ReturnDate = $filter('date')(scope.weatherParams.Fareforecastdata.ReturnDate, scope.format, null);
                             scope.TabIndex = "weather" + scope.weatherParams.tabIndex;
-                            var mapHTML = "<div id='" + scope.TabIndex + "'></div>";
+                            var mapHTML = "<div style='float:left;width:100%;' id='" + scope.TabIndex + "'></div>";
                             elem.append($compile(mapHTML)(scope));
                             scope.WeatherRangeInfo();
 
