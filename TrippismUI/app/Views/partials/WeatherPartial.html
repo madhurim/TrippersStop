@@ -21,18 +21,27 @@
             <p>
                 [ {{DepartDate}} to {{ReturnDate}} ]
             </p>
-            <p>
+            <!--<p>
                 <b>
-                    <span> Avg. Hig Temprature : {{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103 </span>
-                    
+                    Temprature
                 </b>
             </p>
             <p>
                 <b>
-                    
-                    <span>Avg. Low Temprature : {{LowTempratureF}}&#x2109 </span>
+                    <span> Avg. Hig  {{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103 </span><br/>
+                    <span>Avg. Low  {{LowTempratureF}}&#x2109 {{LowTempratureC}}&#x2103</span>
                 </b>
-            </p>
+            </p>-->
+            <div class="high-low-box">
+                <div class="avg-high">
+                    <span>Avg. High </span>
+                    <h5>{{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103</h5>
+                </div>
+                <div class="avg-low">
+                    <span>Avg. Low </span>
+                    <h5>{{LowTempratureF}}&#x2109 {{LowTempratureC}}&#x2103</h5>
+                </div>
+            </div>
             <div class="chart-box">
             </div>
         </div>
