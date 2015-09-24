@@ -75,7 +75,7 @@
         
        
         $scope.aboutUs = function () {
-            alertify.alert('<div class="popup-header red-bg"><h4 class="popup-title">About Us</h4></div>', TrippismConstants.aboutUsText).set({'resizable': true , 'closable': false}).resizeTo('68%', '82%');
+            alertify.alert('<div class="popup-header red-bg"><h4 class="popup-title">About Us</h4></div>', TrippismConstants.aboutUsText).set({'resizable': true , 'closable': false}).resizeTo('50%', '64%');
         };
 
         $scope.tabManager.resetSelected = function () {
