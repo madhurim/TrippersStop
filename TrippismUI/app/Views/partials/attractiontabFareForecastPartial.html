@@ -54,8 +54,7 @@
             <div class="col-md-2 col-sm-3 col-xs-6" ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
                 <div class="ibox-box" ng-show="!FareNoDataFound">
                     <img ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="/app/Styles/images/like-icon.png" />
-                    <i ng-if="FareforecastData.Recommendation == 'wait'" class="glyphicon glyphicon-time text-warning" title="Wait"></i>
-
+                    <img ng-if="FareforecastData.Recommendation == 'wait'" title="Wait" src="/app/Styles/images/wait-icon.png" />
                     <p>Recommendation</p>
                 </div>
             </div>

@@ -182,6 +182,7 @@
     <Content Include="app\Styles\images\User-5.png" />
     <Content Include="app\Styles\images\user-img.jpg" />
     <Content Include="app\Styles\images\view-headline-icon.png" />
+    <Content Include="app\Styles\images\wait-icon.png" />
     <Content Include="app\Styles\images\Warm.png" />
     <Content Include="app\Styles\images\weather\Cloudy.png" />
     <Content Include="app\Styles\images\weather\Cool.png" />
