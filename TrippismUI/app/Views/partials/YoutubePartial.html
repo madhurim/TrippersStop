@@ -1,59 +1,42 @@
-﻿<div class="" style="clear:both;" ng-controller="YouTubeController">
-    <div id="ytubetabletbody" class="ytubetabletbody" cg-busy=" {promise:youtubepromise,message:'loading videos'}">
-        <div  style="height:100%;">
-             <div class="thumbnail thumbnailstyle" style="height:100%;">
-                <table class="table fontsize" style="clear:both; color:black; height:100%;">
-                    <tbody style="height:100%;overflow-y:hidden;">
-                        <tr class="bgblack">
-                            <td style="color:white;font-weight: bold; text-align:center;font-size:large"> {{youtubeParams.DestinationairportName.airport_CityName}} attraction videos in 30 Miles radius</h5></td>
-                        </tr>
-                        <tr ng-show="isDataLoadedFirstTime" style="text-align:center;">
-                            <td>
-                                <div class="divpagination pagination-centered">
-                                    <ul class="pagination-controle divpagination">
-                                        <li style="display:inline;">
-                                            <button style="float:left;" type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)"> &lt; PREV</button>
-                                        </li>
-                                        <li style="display:inline;">
-                                            <button style="float:right;" type="button" class="btnnextprev" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)"> NEXT &gt;</button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr  ng-repeat="data in youtubeData.items | limitTo: pageSize " id="container"> <!--ng-if="youtubeInfoDataFound"-->
-                            <td width="40%">
-                                <span class="imageclass">
+﻿<div ng-controller="YouTubeController">
+    <div class="right-sidebar">
+        <div class="news-wp">
+            <div class="news-title red-bg">
+                <h6>  {{youtubeParams.DestinationairportName.airport_CityName}} attraction videos in 30 Miles radius</h6>
+            </div>
+            <div class="news-list">
+                <div class="news-pagination" ng-show="isDataLoadedFirstTime">
+                    <nav>
+                        <ul class="pager">
+                            <li class="previous"><a style="cursor:pointer;" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Previous</a></li>
+                            <li class="next"><a style="cursor:pointer;" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)">Next<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div id="examples" class="news-block">
+                    <div class="content contentVertical" >
+                        <ul>
+                            <li ng-repeat="data in youtubeData.items | limitTo: pageSize ">
+                                <div class="news-img-block">
                                     <a ng-click="open(data.id.videoId)" style="cursor:pointer;">
-                                        <span class="play">&#9658;</span>
-                                        <img width="100" height="90" aria-hidden="true" alt="" src="{{data.snippet.thumbnails.default.url}}" style="position: relative;top: -11px;">
+                                        <span class="play"><img src="/app/Styles/images/play-icon.png" alt="" /></span>
+                                        <img src="{{data.snippet.thumbnails.default.url}}" alt="" />
                                     </a>
-                                </span>
-                            </td>
-                            <td width="60%">
-                                <span style="color: #167ac6 !important;font-size: 13px !important;font-weight: bold;">{{data.snippet.title}}</span>
-                            </td>
-                        </tr>
-                        <tr ng-show="isDataLoadedFirstTime" style="text-align:center;" >
-                            <td>
-                                <div class="divpagination pagination-centered">
-                                    <ul class="pagination-controle divpagination">
-                                        <li style="display:inline;">
-                                            <button style="float:left;" type="button" class="btnnextprev" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)"> &lt; PREV</button>
-                                        </li>
-                                        <li style="display:inline;">
-                                            <button style="float:right;" type="button" class="btnnextprev" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)"> NEXT &gt;</button>
-                                        </li>
-                                    </ul>
                                 </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                <div class="news-content-block">
+                                    <p>{{data.snippet.title}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 <script type="text/ng-template" id="YoutubePlayerPartial.html">
     <div class="modal-header head" style="padding-bottom: 24px !important;">
         <button class="close closebutton" ng-click="cancel()" type="button">×</button>

@@ -56,6 +56,7 @@ angular.module('TrippismUIApp').directive('attractionList', ['$compile', '$sce',
                 if (newValue != oldValue) {
                     scope.service = new google.maps.places.PlacesService(scope.attractionmap);
                     getAttractionsList(scope.attractionsCnt);
+                    loadScrollbars();
                 }
             });
             

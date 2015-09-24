@@ -65,7 +65,7 @@
 
                                         var defaultSeasonality = data.Seasonality;
                                         var now = new Date();
-                                        var NextDate = common.addDays(now, 30);
+                                        var NextDate = addDays(now, 30);
 
                                         var filteredSeasonalityData = [];
                                         for (var i = 0; i < defaultSeasonality.length; i++) {

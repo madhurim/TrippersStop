@@ -1,24 +1,24 @@
-﻿
-    <div class="col-xs-12 col-md-4 mainpagepopup bgblack mainpage-topmargin128"  style="margin-top:-300px">
-    <div class="col-lg-12" style="padding:0px">
-        <div class="col-lg-9 home" style="padding:7px 0px 0px 0px">
-            <h3>Total Attractions Found : {{attractions.length}} </h3>
-        </div>
-        <div class="col-lg-2">
-            <span style="margin-top:4px;" class="glyphicon" aria-hidden="true" ng-click="attractiondispflg =!attractiondispflg" ng-class="attractiondispflg ?'glyphicon-menu-up' :'glyphicon-menu-down'"></span>
-        </div>
-        <div ng-show="attractiondispflg" class="col-lg-12 mainpage-topdestination">
-            <div ng-click="SelectPlace(item)" class="mainpage-topdestinationsub" ng-repeat="item in attractionstoDisp">
-                <div style="color:white;font-size:12px;min-height:50px;">
-                    <div class="col-sm-12 padleft0"><strong>{{item.name}}</strong><br></div>
-                    <div style="word-wrap:break-word;" ng-bind-html="item.Placeaddress"></div>
-                    {{item.PhoneNo}}
-                </div>
-            </div>
-            <div class="mainpage-showall" style="min-height:20px;" ng-show="attractiondispflg && showmore">
-                <a class="pull-right" ng-click="ShowMoreAttractions()">Show more</a>
-            </div>
+﻿<div class="total-attractions-found-box slide-bottom">
 
+    <div class="btn-box">
+        <a ng-class="isAttractionCollapsed ? '' : 'active'"
+           ng-click="isAttractionCollapsed = !isAttractionCollapsed;" class="toggle-btn total-attractions-btn balck-bg">
+            <i class="search-icon"></i>Total Attractions Found : {{attractions.length}}
+        </a>
+    </div>
+
+    <div class="attractions-found" collapse="!isAttractionCollapsed">
+        <div id="examples">
+            <div class="content contentHorizontal">
+                <div ng-click="SelectPlace(item)" ng-repeat="item in attractionstoDisp" class="destinations-list">
+                    <h6>{{item.name}}</h6>
+                    <div class="placeaddress-list">
+                        <span ng-bind-html="item.Placeaddress"></span>,
+                        <span> {{item.PhoneNo}}</span>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

@@ -81,14 +81,14 @@ angular.module('TrippismUIApp')
                       return airport.airport_Code == maps[x].DestinationLocation
                   });
 
-                  if (LowRate != "N/A") {
+                  if (LowRate != "N/A") {                      
                       var marker = new MarkerWithLabel({
                           position: latlng1,
                           map: $scope.destinationMap,
                           title: airportName.airport_FullName,
-                          labelContent: maps[x].CurrencyCode + ' ' + LowRate + ' <br/>' + maps[x].DestinationLocation + ' [ ' + airportName.airport_CityName + ' ]',
+                          labelContent: '<div class="tooltip-arrow"></div><div class="tooltip-inner"> ' + maps[x].CurrencyCode + ' ' + LowRate + ' <br/>' + maps[x].DestinationLocation + ' [ ' + airportName.airport_CityName + ' ]' + '</div>',
                           labelAnchor: new google.maps.Point(12, 35),
-                          labelClass: "labelscolor", // the CSS class for the label
+                          labelClass: "tooltip top labelscolor", // the CSS class for the label
                           labelInBackground: false,
                           labelanimation: google.maps.Animation.DROP,
                           animation: google.maps.Animation.DROP,
@@ -112,7 +112,7 @@ angular.module('TrippismUIApp')
                       var mapsdetails = maps[x];
 
                       google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
-                          return function () {
+                          return function () {                              
                               var OriginairportName = _.find($scope.airportlist, function (airport) {
                                   return airport.airport_Code == $scope.$parent.Origin.toUpperCase()
                               });
