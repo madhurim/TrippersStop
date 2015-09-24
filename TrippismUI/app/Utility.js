@@ -76,3 +76,24 @@ function addDays(dt, noOfDays) {
     newDate.setDate(newDate.getDate() + noOfDays);
     return newDate;
 }
+
+function loadScrollbars() {
+    $(".contentHorizontal").mCustomScrollbar({
+        axis: "x",
+        advanced: {
+            autoExpandHorizontalScroll: true
+        }
+    });
+    $(".contentVertical").mCustomScrollbar({
+        axis: "y",
+        advanced: {
+            autoExpandVerticallScroll: true
+        }
+    });
+    $("#content-3").mCustomScrollbar({
+        axis: "y",
+        advanced: {
+            autoExpandVerticallScroll: true
+        }
+    });
+}

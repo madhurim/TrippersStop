@@ -1,4 +1,4 @@
-﻿/// <reference path="../Views/dirPagination.tpl.html" />
+﻿
 angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout', 'YouTubeFactory', '$sce', '$log',
     function ($compile, $timeout, YouTubeFactory, $sce, $log) {
         return {
@@ -11,7 +11,6 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
 
             },
             link: function (scope, elem, attrs) {
-
                 var youtubeTblheight = ($(window).height() - 100) + 'px';
                 $('.ytubetabletbody').each(function (i, obj) {
                     $(this).css('height', youtubeTblheight);
@@ -68,6 +67,8 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
                                         scope.isdisabled = 1;
 
                                     scope.youtubeInfoDataFound = true;
+
+                                    loadScrollbars();
                                 });
                         }
                         scope.youtubeInfoLoaded = true;

@@ -1,12 +1,12 @@
 ﻿<div id="examples" class="destinations-details" ng-hide="!destinationsParams">
-    <div class="content mCustomScrollbar" ng-show="topdestinationflg">
+    <div class="content contentVertical" ng-show="topdestinationflg">
         <div class="destinations-list" ng-repeat="item in topdestinationlist" ng-click="topdestinationclick(item)">
             <h6>{{item.AirportCode}} [{{item.Cityname}}]</h6>
             <ul class="destinations-details-list">
                 <li ng-if="item.LowestNonStopFare != 'N/A' && item.LowestNonStopFare != 0"><p>Lowest Non Stop Fare  : <span> {{item.topdestinationFareInfo.CurrencyCode}} {{item.LowestNonStopFare | number : 2}}</span></p></li>
                 <li ng-if="item.LowestFare != 'N/A' && item.LowestFare != 0"><p>Lowest Fare : <span>{{item.topdestinationFareInfo.CurrencyCode}} {{item.LowestFare | number : 2}}</span></p></li>
             </ul>
-        </div>        
+        </div>
         <div class="show-btn" ng-show="!showAllDestinations && topdestinationlist.length > 0"><a class="btn btn-danger btn-md" href="#" ng-click="showallrecord();"> Show All </a></div>
     </div>
 </div>
