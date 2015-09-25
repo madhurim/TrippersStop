@@ -70,7 +70,7 @@
                                         var filteredSeasonalityData = [];
                                         for (var i = 0; i < defaultSeasonality.length; i++) {
                                             scope.MarkerSeasonalityInfo.Seasonality = [];
-                                            var datetocheck = new Date(defaultSeasonality[i].WeekStartDate);
+                                            var datetocheck = new Date(defaultSeasonality[i].WeekStartDate.split('T')[0].replace(/-/g, "/"));
                                             if (datetocheck > now && datetocheck < NextDate)
                                                 filteredSeasonalityData.push(defaultSeasonality[i]);
                                         }
@@ -123,8 +123,8 @@
                         var chartrec = _.sortBy(scope.SeasonalityData, 'WeekStartDate');
 
                         for (i = 0; i < chartrec.length; i++) {
-                            var WeekStartDate = new Date(chartrec[i].WeekStartDate);
-                            var WeekEndDate = new Date(chartrec[i].WeekEndDate);
+                            var WeekStartDate = new Date(chartrec[i].WeekStartDate.split('T')[0].replace(/-/g, "/"));
+                            var WeekEndDate = new Date(chartrec[i].WeekEndDate.split('T')[0].replace(/-/g, "/"));
                             if (i == 0)
                             { startdate = Date.UTC(WeekStartDate.getFullYear(), WeekStartDate.getMonth(), WeekStartDate.getDate()); }
 
@@ -195,7 +195,6 @@
                                             result = '<span>'
 
                                         var d = new Date(this.value);
-
                                         return result += Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, this.value) + '</span><b>';
                                     },
                                     rotation: -45
@@ -266,7 +265,7 @@
 
                                     else
                                         zresult = '<span> ' + '' + ' </span>';
-
+                                    debugger;
                                     return '<span style="color:#87ceeb">Year Week :</span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, new Date(this.point.enddate)) + ' ] </b><br>' +
                                         '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
                                         '<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult + '</b>';

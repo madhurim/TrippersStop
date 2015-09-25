@@ -40,18 +40,18 @@
                     if (scope.farerangeParams != undefined) {
                         scope.staydaylength = 0;
                         if (scope.farerangeParams.SearchCriteria.FromDate != null && scope.farerangeParams.SearchCriteria.ToDate != null) {
+                            // replace(/-/g, "/") used because of safari date convert problem                            
                             var frdt = new Date(scope.farerangeParams.SearchCriteria.FromDate);
                             var todt = new Date(scope.farerangeParams.SearchCriteria.ToDate);
                             var timeDiff = Math.abs(todt.getTime() - frdt.getTime());
                             scope.staydaylength = Math.ceil(timeDiff / (1000 * 3600 * 24));
                         }
-
-                        var LatestDepartureDate = new Date(scope.farerangeParams.Fareforecastdata.ReturnDate);
+                        var LatestDepartureDate = new Date(scope.farerangeParams.Fareforecastdata.ReturnDate.split('T')[0].replace(/-/g, "/"));
                         LatestDepartureDate.setDate(LatestDepartureDate.getDate() + 5);
-                        
+
                         var daydiff = getLengthOfStay(scope.farerangeParams.Fareforecastdata.DepartureDate, LatestDepartureDate);
                         if (daydiff > 15) {
-                            LatestDepartureDate = new Date(scope.farerangeParams.Fareforecastdata.DepartureDate);
+                            LatestDepartureDate = new Date(scope.farerangeParams.Fareforecastdata.DepartureDate.split('T')[0].replace(/-/g, "/"));
                             LatestDepartureDate.setDate(LatestDepartureDate.getDate() + 14);
                         }
                         LatestDepartureDate = $filter('date')(LatestDepartureDate, 'yyyy-MM-dd')
@@ -76,13 +76,13 @@
                                     // Done this code where citycode and airport code is same
                                     var originList = _.where(scope.farerangeParams.AvailableAirports, { airport_CityCode: scope.farerangeParams.Fareforecastdata.Origin });
                                     var originairportObj = _.find(originList, function (airport) { return airport.airport_IsMAC == true });
-                                    if (originairportObj != undefined ) originairport.airport_IsMAC = true;
-                                    else  originairport.airport_IsMAC = false; 
+                                    if (originairportObj != undefined) originairport.airport_IsMAC = true;
+                                    else originairport.airport_IsMAC = false;
 
                                     var desList = _.where(scope.farerangeParams.AvailableAirports, { airport_CityCode: scope.farerangeParams.Fareforecastdata.Destination });
                                     var destinationairportObj = _.find(desList, function (airport) { return airport.airport_IsMAC == true });
-                                    if (destinationairportObj != undefined ) destinationairport.airport_IsMAC = true;
-                                    else destinationairport.airport_IsMAC = false; 
+                                    if (destinationairportObj != undefined) destinationairport.airport_IsMAC = true;
+                                    else destinationairport.airport_IsMAC = false;
 
                                     if (originairport != undefined && destinationairport != undefined) {
                                         // If both airports are not MAC
@@ -91,9 +91,9 @@
                                             data.IsMacOrigin = false
                                             scope.fareRangeData = data;
                                         }
-                                        // If Origin airport is MAC and Destination is not
+                                            // If Origin airport is MAC and Destination is not
                                         else if ((originairport.airport_IsMAC && !destinationairport.airport_IsMAC) || (originairport.airport_IsMAC && destinationairport.airport_IsMAC)) {
-                                            
+
                                             scope.IsMacOrigin = true;
                                             var origins = _.groupBy(data.FareData, 'OriginLocation');
                                             if (origins != undefined) {
@@ -136,9 +136,9 @@
                                                     DestinationLocation: MinSelectedLocation.DestinationLocation,
                                                     OriginLocation: MinSelectedLocation.OriginLocation,
                                                     IsMacOrigin: false,
-                                                    IsMacDestination : true,
+                                                    IsMacDestination: true,
                                                     SelectedLocation: '',
-                                                    SelectedDestinationLocation : scope.SelectedDestinationLocation,
+                                                    SelectedDestinationLocation: scope.SelectedDestinationLocation,
                                                     FareData: destinations[MinSelectedLocation.DestinationLocation]
                                                 };
                                                 scope.fareRangeData = faredata;
@@ -147,7 +147,7 @@
                                         else if (data.FareData != undefined && data.FareData[0].OriginLocation == undefined) {
                                             scope.fareRangeData = data;
                                         }
-                                       
+
                                         scope.farerangeParams.FareRangeData = scope.fareRangeData;
                                     }
                                     scope.fareRangeInfoLoaded = true;
@@ -170,8 +170,9 @@
                     var startdate;
                     if (scope.fareRangeData != undefined && scope.fareRangeData != "") {
                         for (i = 0; i < scope.fareRangeData.FareData.length; i++) {
-                            var DepartureDate = new Date(scope.fareRangeData.FareData[i].DepartureDateTime);
-                            var returnDate = new Date(scope.fareRangeData.FareData[i].ReturnDateTime);
+                            // replace(/-/g, "/") used because of safari date convert problem                               
+                            var DepartureDate = new Date(scope.fareRangeData.FareData[i].DepartureDateTime.split('T')[0].replace(/-/g, "/"));
+                            var returnDate = new Date(scope.fareRangeData.FareData[i].ReturnDateTime.split('T')[0].replace(/-/g, "/"));
                             if (i == 0) {
                                 startdate = Date.UTC(DepartureDate.getFullYear(), DepartureDate.getMonth(), DepartureDate.getDate());
                                 firstCurrencyCode = scope.fareRangeData.FareData[i].CurrencyCode;
@@ -212,13 +213,12 @@
                                 renderTo: scope.TabIndex,
                             },
                             title: {
-                                text: (scope.IsMacOrigin) ? scope.SelectedLocation : (scope.IsMacDestination ? 'dest ' + scope.SelectedDestinationLocation: '')
+                                text: (scope.IsMacOrigin) ? scope.SelectedLocation : (scope.IsMacDestination ? 'dest ' + scope.SelectedDestinationLocation : '')
                             },
                             xAxis: {
                                 type: 'datetime',
                                 labels: {
                                     formatter: function () {
-                                        var d = new Date(this.value);
                                         var returndate = new Date($filter('date')(this.value, scope.format, null));
                                         returndate.setDate(returndate.getDate() + scope.staydaylength + 1)
                                         return Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, this.value) + ' -<br> ' + Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, returndate);
@@ -229,7 +229,7 @@
                                     text: 'Departure Date - Return Date'
                                 }
                             },
-                            yAxis: { title: { text: 'Fare Rate in ' + firstCurrencyCode }  },
+                            yAxis: { title: { text: 'Fare Rate in ' + firstCurrencyCode } },
                             legend: {
                                 enabled: true
                             },

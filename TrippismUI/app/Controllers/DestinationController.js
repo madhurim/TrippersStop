@@ -72,10 +72,10 @@
         $scope.tabManager.getTitle = function (tabInfo) {
             tabInfo.title.substr(0, 10);
         };
-        
-       
+
+
         $scope.aboutUs = function () {
-            alertify.alert('<div class="popup-header red-bg"><h4 class="popup-title">About Us</h4></div>', TrippismConstants.aboutUsText).set({'resizable': true , 'closable': false}).resizeTo('68%', '82%');
+            alertify.alert('<div class="popup-header red-bg"><h4 class="popup-title">About Us</h4></div>', TrippismConstants.aboutUsText).set({ 'resizable': true, 'closable': false }).resizeTo('68%', '82%');
         };
 
         $scope.tabManager.resetSelected = function () {
@@ -603,7 +603,7 @@
                 $scope.CalledOnPageLoad = false;
         }
 
-        function CreateSearchCriteria() {
+        function CreateSearchCriteria() {            
             if ($scope.KnownDestinationAirport != "" || $scope.KnownDestinationAirport != undefined) {
                 var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
                 var secondDate = new Date($scope.ToDate);

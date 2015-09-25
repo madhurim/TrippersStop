@@ -28,17 +28,18 @@
                 };
 
                 function setSeasonalityData() {
-                    var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate);
-                    var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate)
+                    // replace(/-/g, "/") used because of safari date convert problem
+                    var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate.split('T')[0].replace(/-/g, "/"));
+                    var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate.split('T')[0].replace(/-/g, "/"))
                     var Frmmonth = FrmDate.getMonth() + 1;
                     var Tomonth = Todate.getMonth() + 1;
                     var Fromweeks = _.filter(scope.SeasonalityData, function (dt) {
-                        return (new Date(dt.WeekStartDate).getMonth() + 1) == Frmmonth;
+                        return (new Date(dt.WeekStartDate.split('T')[0].replace(/-/g, "/")).getMonth() + 1) == Frmmonth;
                     });
 
                     if (Frmmonth != Tomonth) {
                         var ToWeeks = _.filter(scope.SeasonalityData, function (dt) {
-                            return (new Date(dt.WeekStartDate).getMonth() + 1) == Tomonth;
+                            return (new Date(dt.WeekStartDate.split('T')[0].replace(/-/g, "/")).getMonth() + 1) == Tomonth;
                         });
                         Fromweeks = Fromweeks.concat(ToWeeks);
                     }
@@ -46,14 +47,14 @@
                     var chartrec = _.sortBy(Fromweeks, 'WeekStartDate');
 
                     for (i = 0; i < chartrec.length; i++) {
-                        
-                        var WeekStartDate = new Date(chartrec[i].WeekStartDate);
-                        var WeekEndDate = new Date(chartrec[i].WeekEndDate);
+                        // replace(/-/g, "/") used because of safari date convert problem
+                        var WeekStartDate = new Date(chartrec[i].WeekStartDate.split('T')[0].replace(/-/g, "/"));
+                        var WeekEndDate = new Date(chartrec[i].WeekEndDate.split('T')[0].replace(/-/g, "/"));
                         if (WeekStartDate.getMonth() + 1 >= FrmDate.getMonth() + 1) {
-                            
+
                             //if (WeekStartDate.getDate() >= FrmDate.getDate()) {
-                            if (FrmDate.getDate() >= WeekStartDate.getDate() && (FrmDate.getDate() <= WeekEndDate.getDate() || FrmDate.getMonth() +1 < WeekEndDate.getMonth() + 1  ) ) {
-                            
+                            if (FrmDate.getDate() >= WeekStartDate.getDate() && (FrmDate.getDate() <= WeekEndDate.getDate() || FrmDate.getMonth() + 1 < WeekEndDate.getMonth() + 1)) {
+
                                 var SeasonalityIndicator = "";
                                 if (chartrec[i].SeasonalityIndicator == "High")
                                     NumberOfObervations = 3;
@@ -68,7 +69,7 @@
                                 return;
                             }
                         }
-                      
+
                     }
                 }
 
@@ -79,11 +80,11 @@
                         scope.fareRangeData = scope.widgetParams.FareRangeData;
 
                         if (scope.fareRangeData != undefined && scope.fareRangeData != "") {
-
-                            var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate);
-                            var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate);
+                            // replace(/-/g, "/") used because of safari date convert problem
+                            var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate.split('T')[0].replace(/-/g, "/"));
+                            var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate.split('T')[0].replace(/-/g, "/"));
                             for (i = 0; i < scope.fareRangeData.FareData.length; i++) {
-                                var WeekStartDate = new Date(scope.fareRangeData.FareData[i].DepartureDateTime);
+                                var WeekStartDate = new Date(scope.fareRangeData.FareData[i].DepartureDateTime.split('T')[0].replace(/-/g, "/"));
                                 if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) {
                                     scope.FareRangeWidgetData = {
                                         MinimumFare: scope.fareRangeData.FareData[i].MinimumFare,
@@ -94,7 +95,7 @@
                                     scope.FareRangeWidgetDataFound = true;
                                     break;
                                 }
-                              //  scope.$apply();
+                                //  scope.$apply();
                             }
                         }
                     }
