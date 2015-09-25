@@ -1,12 +1,13 @@
 ﻿
 <div class="col-md-6 col-sm-6 col-xs-12" ng-if="(FareRangeWidgetDataFound || SeasonalityWidgetDataFound ) && IsWidgetClosed ">
 
-    <div class="popup-box overview">
+    <div class="popup-box">
 
         <div class="popup-header red-bg">
 
-            <h4 class="popup-title">Seasonality/Fare Range</h4>
-
+            <div ng-if="SeasonalityWidgetDataFound"><h6 class="popup-title">Traffic Seasonality</h6></div>
+            <div ng-if="FareRangeWidgetDataFound"><h6 class="popup-title">Fare Range</h6></div>
+            <div ng-if="SeasonalityWidgetDataFound || FareRangeWidgetDataFound"><h6 class="popup-title">Summary</h6></div>
         </div>
 
         <div class="popup-content">
@@ -18,7 +19,7 @@
                     <li>
 
                         <div class="overview-weather-content" ng-if="SeasonalityWidgetDataFound">
-                            <h6> {{DepartDate}} To {{ReturnDate}} </h6>
+                            <h6> [ {{DepartDate}} To {{ReturnDate}} ]</h6>
                             <p>Traffic Seasonality</p>
                             <img title="High" ng-if="SeasonalityWidgetData.NoofIcons == 3" src="/app/Styles/images/User-12.png" alt="" />
                             <img title="Medium" ng-if="SeasonalityWidgetData.NoofIcons == 2" src="/app/Styles/images/User-5.png" alt="" />
