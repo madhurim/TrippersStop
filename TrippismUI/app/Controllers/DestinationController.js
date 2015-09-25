@@ -464,7 +464,7 @@
                 return;
             }
             $scope.isSearchCollapsed = true;
-            $scope.IsRefineSearchShow = true;
+            $scope.IsRefineSearchShow = true;            
             $scope.isSearching = false;
             $scope.isAdvancedSearch = false;
             $scope.topdestinationlist = [];
@@ -532,7 +532,7 @@
             });
         };
 
-        function findDestinations(buttnText) {
+        function findDestinations(buttnText) {            
             $scope.isAdvancedSearch = false;
             if (buttnText != undefined && buttnText == 'advenced')
                 $scope.isAdvancedSearch = true;
@@ -548,8 +548,8 @@
             $scope.IsHistoricalInfo = false;
             $scope.isSearchCollapsed = true;
             $scope.isPopDestCollapsed = true;
-            $scope.IsRefineSearchShow = true;
-            $scope.isSearching = true;
+            $scope.IsRefineSearchShow = true;            
+            $scope.isSearching = true;            
             if (buttnText == 'All') { $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; }
             else if (buttnText == 'Cheapest') { $scope.SearchbuttonChepestIsLoading = true; $scope.SearchbuttonCheapestText = $scope.LoadingText; }
 
@@ -585,6 +585,7 @@
                         }
                     }
                     UtilFactory.MapscrollTo('wrapper');
+                    $scope.isRefineSeachCollapsed = true;
                 }
                 else {
                     $scope.buttontext = $scope.buttontext == "All" ? "Cheapest" : "All";
