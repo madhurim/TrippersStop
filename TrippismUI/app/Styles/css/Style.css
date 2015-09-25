@@ -366,7 +366,12 @@ input.form-control[type="number"]{ padding-right:15px;}
 }
 
 
-@-moz-document url-prefix() { 
+/*@-moz-document url-prefix() { 
  .dropdown-menu{ min-width:280px; width:100%;}
 .dropdown-menu table{ width:100%;}
-}
+}*/
+.dropdown-menu{ min-width:280px; padding:5px;}
+.dropdown-menu > li{ width:100%; float:left;}
+.dropdown-menu table{ width:100%;}
+.dropdown-menu table .ng-scope.btn{  padding:5px;}
+.dropdown-menu table .btn{font-size:12px;}
