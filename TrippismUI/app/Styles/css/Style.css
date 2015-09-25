@@ -46,8 +46,7 @@ input.form-control[type="number"]{ padding-right:15px;}
 .dropdown-menu > li > a {color: #585858;font-weight: inherit;padding: 10px 20px; cursor:pointer;}
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{background-color:#b90005; color:#e8e8e8;}
 .logo {float: right; position:relative; z-index:1; width:100%;}
-.logo img {max-width: 100%; float:right;}
-
+.logo img {max-width: 100%; float:right;margin-top:-10px;}
 
 .searchcenter-box .destination-wp {background-color:rgba(34, 34, 33,0.75);padding:15xp 0;padding:15px 0 0; width:100%;}
 .toggle-btn i.search-icon {background-position: left -37px;}
