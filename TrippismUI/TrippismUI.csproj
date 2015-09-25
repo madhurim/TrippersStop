@@ -177,6 +177,7 @@
     <Content Include="app\Styles\images\Thunderstorms.png" />
     <Content Include="app\Styles\images\time.png" />
     <Content Include="app\Styles\images\Tornado.png" />
+    <Content Include="app\Styles\images\trippism-logo.png" />
     <Content Include="app\Styles\images\trippism.png" />
     <Content Include="app\Styles\images\Trippismlogo.png" />
     <Content Include="app\Styles\images\User-12.png" />
