@@ -13,7 +13,7 @@ angular.module('TrippismUIApp').directive('attractionList', ['$compile', '$sce',
             scope.showmore = true;
             scope.attractionstoDisp = [];
             scope.attractionsCnt = 0;
-
+            scope.isAttractionCollapsed = true;
             function getAttractionsList(index) {
                 if (scope.attractions != undefined && scope.attractions.length > 0) {
                     if (scope.attractionsCnt + 10 >= scope.attractions.length)
