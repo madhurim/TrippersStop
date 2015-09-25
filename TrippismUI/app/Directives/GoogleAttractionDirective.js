@@ -110,6 +110,11 @@
                     center: new google.maps.LatLng(0, 0),
                     zoom: 2,
                     minZoom: 2,
+                    zoomControl: true,
+                    zoomControlOptions: {
+                        position: google.maps.ControlPosition.RIGHT_CENTER,
+                        style: google.maps.ZoomControlStyle.LARGE
+                    },
                     styles: mapStyle,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };

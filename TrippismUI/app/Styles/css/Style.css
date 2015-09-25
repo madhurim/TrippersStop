@@ -369,8 +369,16 @@ input.form-control[type="number"]{ padding-right:15px;}
  .dropdown-menu{ min-width:280px; width:100%;}
 .dropdown-menu table{ width:100%;}
 }*/
-.dropdown-menu{ min-width:280px; padding:5px;}
+/*.dropdown-menu{ min-width:280px; padding:5px;}
 .dropdown-menu > li{ width:100%; float:left;}
 .dropdown-menu table{ width:100%;}
 .dropdown-menu table .ng-scope.btn{  padding:5px;}
+.dropdown-menu table .btn{font-size:12px;}*/
+
+.dropdown-menu{ min-width:280px; padding:5px;}
+.dropdown-menu  li{ width:100%; float:left;}
+.dropdown-menu table{ width:100%; float:left;}
+.dropdown-menu table thead .btn{ width:100%;}
+.dropdown-menu table .ng-scope.btn{  padding:5px;}
+em.ng-binding {padding: 6px;}
 .dropdown-menu table .btn{font-size:12px;}
