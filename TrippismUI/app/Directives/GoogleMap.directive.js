@@ -19,12 +19,24 @@ angular.module('TrippismUIApp')
           $scope.bounds;
           var mapStyle = TrippismConstants.destinationSearchMapSyle;
           $scope.mapOptions = {
-              center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng),
-              zoom: 2,
+              //center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng),
+              //zoom: 2,
+              //minZoom: 2,
+              //backgroundColor: "#BCCFDE",
+              //styles: mapStyle,
+              //mapTypeId: google.maps.MapTypeId.ROADMAP
+              zoom:2,
               minZoom: 2,
+              zoomControl: true,
+              zoomControlOptions: {
+                  position: google.maps.ControlPosition.RIGHT_CENTER,
+                  style: google.maps.ZoomControlStyle.LARGE
+              },
               backgroundColor: "#BCCFDE",
               styles: mapStyle,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
+              mapTypeId: google.maps.MapTypeId.ROADMAP,
+              center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng)
+
           };
 
           $scope.showPosition = function (destinations) {

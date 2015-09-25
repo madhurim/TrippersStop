@@ -42,9 +42,10 @@
                     scope.HighTempratureF = "0";
                     scope.LowTempratureC = "0";
                     scope.LowTempratureF = "0";
-                    scope.WeatherInfoNoDataFound = false;
+                    scope.WeatherInfoNoDataFound = true;
                     scope.WeatherwidgetData = scope.weatherParams.WeatherData;
                     if (scope.WeatherwidgetData != undefined && scope.WeatherwidgetData != "") {
+                        scope.WeatherInfoNoDataFound = false;
                         var participation = _.find(scope.WeatherwidgetData.WeatherChances, function (chances) { return chances.Name == 'Precipitation' });
                         var rain = _.find(scope.WeatherwidgetData.WeatherChances, function (chances) { return chances.Name == 'Rain' });
                         if (participation != undefined && rain != undefined) {

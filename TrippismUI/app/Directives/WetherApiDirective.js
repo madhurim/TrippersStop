@@ -80,7 +80,7 @@
                                 scope.WeatherInfoLoaded = false;
                                 if (data == "" || data.status == 404 || data.WeatherChances.length == 0) {
                                     scope.WeatherInfoNoDataFound = true;
-                                    scope.weatherParams.WeatherInfoNoDataFound = false;
+                                    scope.weatherParams.WeatherInfoNoDataFound = true;
                                     return;
                                 }
                                 scope.WeatherInfoNoDataFound = false;
