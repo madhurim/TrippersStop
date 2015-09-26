@@ -382,3 +382,5 @@ input.form-control[type="number"]{ padding-right:15px;}
 .dropdown-menu table .ng-scope.btn{  padding:5px;}
 em.ng-binding {padding: 6px;}
 .dropdown-menu table .btn{font-size:12px;}
+
+.p-text-align {text-align: justify;text-indent: 50px;}
