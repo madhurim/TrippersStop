@@ -23,7 +23,7 @@
             }
             else {
                 $scope.hasError = false;
-                var subject = "New user feedback";
+                var subject = "User feedback";
                 var contentString = "<p>Hello, you have got one new user feedback!</p>"
                     + "<p>What kind of website feedback do you have? :<b> " + ($scope.feedbackType == "0" ? '' : $scope.feedbackType) + "</b></p>"
                 + "<p>Feedback Detail:</b> " + $scope.feedbackDetail + "</p>"
@@ -31,8 +31,10 @@
                 + "<p>Would you tell your friends to use Trippism? :<b> " + ($scope.tellFriend == "0" ? '' : $scope.tellFriend) + "</b></p>";
 
                 var email = {
-                    From: 'noreply@trippism.com',
-                    To: 'noreply@trippism.com',
+                    //From: 'noreply@trippism.com',
+                    //To: 'noreply@trippism.com',
+                    From: 'ravi.p@trivenitechnologies.in',
+                    To: 'ravi.p@trivenitechnologies.in',
                     subject: subject,
                     body: contentString
                 };                
