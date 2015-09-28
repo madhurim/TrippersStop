@@ -73,11 +73,6 @@
             tabInfo.title.substr(0, 10);
         };
 
-
-        $scope.aboutUs = function () {
-            alertify.alert('<div class="popup-header red-bg"><h4 class="popup-title">About Us</h4></div>', TrippismConstants.aboutUsText).set({'resizable': true , 'closable': false}).resizeTo('50%', '64%');
-        };
-
         $scope.tabManager.resetSelected = function () {
             angular.forEach($scope.tabManager.tabItems, function (pane) {
                 pane.TabcontentView = false; // Custom
@@ -464,7 +459,7 @@
                 return;
             }
             $scope.isSearchCollapsed = true;
-            $scope.IsRefineSearchShow = true;            
+            $scope.IsRefineSearchShow = true;
             $scope.isSearching = false;
             $scope.isAdvancedSearch = false;
             $scope.topdestinationlist = [];
@@ -532,7 +527,7 @@
             });
         };
 
-        function findDestinations(buttnText) {            
+        function findDestinations(buttnText) {
             $scope.isAdvancedSearch = false;
             if (buttnText != undefined && buttnText == 'advenced')
                 $scope.isAdvancedSearch = true;
@@ -548,8 +543,8 @@
             $scope.IsHistoricalInfo = false;
             $scope.isSearchCollapsed = true;
             $scope.isPopDestCollapsed = true;
-            $scope.IsRefineSearchShow = true;            
-            $scope.isSearching = true;            
+            $scope.IsRefineSearchShow = true;
+            $scope.isSearching = true;
             if (buttnText == 'All') { $scope.SearchbuttonIsLoading = true; $scope.SearchbuttonText = $scope.LoadingText; }
             else if (buttnText == 'Cheapest') { $scope.SearchbuttonChepestIsLoading = true; $scope.SearchbuttonCheapestText = $scope.LoadingText; }
 
@@ -604,7 +599,7 @@
                 $scope.CalledOnPageLoad = false;
         }
 
-        function CreateSearchCriteria() {            
+        function CreateSearchCriteria() {
             if ($scope.KnownDestinationAirport != "" || $scope.KnownDestinationAirport != undefined) {
                 var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
                 var secondDate = new Date($scope.ToDate);
@@ -656,6 +651,25 @@
                 $scope.inProgress = false;
             });
         }
+
+        $scope.feedback = function () {
+            var GetFeedbackPopupInstance = $modal.open({
+                templateUrl: '/app/Views/Partials/FeedbackDetailFormPartial.html',
+                controller: 'FeedbackController',
+                scope: $scope,
+            });
+        }
+
+        //$scope.aboutUs = function () {
+        //    alertify.alert('<div class="popup-header red-bg"><h4 class="popup-title">About Us</h4></div>', TrippismConstants.aboutUsText).set({ 'resizable': true, 'closable': false }).resizeTo('50%', '64%');
+        //};
+
+        $scope.aboutUs = function () {
+            var GetFeedbackPopupInstance = $modal.open({
+                templateUrl: '/app/Views/Partials/AboutUsPartial.html',
+                controller: 'FeedbackController',
+            });
+        };
     }
 })();
 

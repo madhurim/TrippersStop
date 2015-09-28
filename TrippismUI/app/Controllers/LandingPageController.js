@@ -17,6 +17,7 @@
             $rootScope.apiURLForWeather = 'http://localhost:14606/api/weather/international/history';
             $rootScope.apiURLForUSWeather = 'http://localhost:14606/api/weather/history';
             $rootScope.apiURLForGoogleGeoReverseLookup = 'http://localhost:14606/api/googlegeocode/reverselookup/';
+            $rootScope.apiURLForFeedback = 'http://localhost:14606/api/Email/SendFeedback';
         }
         else {
             //live url
@@ -27,6 +28,7 @@
             $rootScope.apiURLForYouTube = 'http://' + $location.host() + '/api/youtube/';
             $rootScope.apiURLForUSWeather = 'http://' + $location.host() + '/api/weather/history';
             $rootScope.apiURLForGoogleGeoReverseLookup = 'http://' + $location.host() + '/api/googlegeocode/reverselookup/';
+            $rootScope.apiURLForFeedback = 'http://' + $location.host() + '/api/Email/SendFeedback';
         }
         $scope.getClass = function (path) {
             if ($location.path().substr(0, path.length) == path) {
@@ -40,7 +42,7 @@
             $location.hash('top');
             $anchorScroll();
             $location.hash(old);
-        }    
+        }
     }
 })();
 

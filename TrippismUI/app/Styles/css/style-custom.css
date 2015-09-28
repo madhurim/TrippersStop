@@ -7,17 +7,20 @@
     display: none;
     -webkit-appearance: none;
 }
+
 a.disabled {
     pointer-events: none;
 }
+
 a[disabled] {
     pointer-events: none;
 }
+
 a {
-    cursor:pointer;
+    cursor: pointer;
 }
- .slidercarsoul
-    {
+
+.slidercarsoul {
     background-image: background: rgba(181,217,238,1);
     background: -moz-linear-gradient(left, rgba(181,217,238,1) 0%, rgba(42,173,229,1) 50%, rgba(190,222,239,1) 100%);
     background: -webkit-gradient(left top, right top, color-stop(0%, rgba(181,217,238,1)), color-stop(50%, rgba(42,173,229,1)), color-stop(100%, rgba(190,222,239,1)));
@@ -27,4 +30,20 @@ a {
     background: linear-gradient(to right, rgba(181,217,238,1) 0%, rgba(42,173,229,1) 50%, rgba(190,222,239,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5d9ee', endColorstr='#bedeef', GradientType=1 );
 }
-.modal-header { padding:0 15px;}
+
+.modal-header {
+    padding: 0 15px;
+}
+
+.form-box input, .form-box textarea, .form-box select, .form-box input:focus, .form-box textarea:focus, .form-box select:focus {
+    color: black;
+    border: 1px solid #ccc;
+}
+
+.clear {
+    clear: both;
+}
+
+.panel-margin {
+    margin-bottom: 0px;
+}
