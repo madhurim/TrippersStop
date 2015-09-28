@@ -31,13 +31,11 @@
                 + "<p>Would you tell your friends to use Trippism? :<b> " + ($scope.tellFriend == "0" ? '' : $scope.tellFriend) + "</b></p>";
 
                 var email = {
-                    //From: 'noreply@trippism.com',
-                    //To: 'noreply@trippism.com',
-                    From: 'ravi.p@trivenitechnologies.in',
-                    To: 'ravi.p@trivenitechnologies.in',
+                    From: 'noreply@trippism.com',
+                    To: 'noreply@trippism.com',
                     subject: subject,
                     body: contentString
-                };                
+                };
                 $scope.sendFeedbackPromise = FeedbackFactory.SendEmail(email).then(function (data) {
                     if (data.Data.status == "ok") {
                         $scope.dismiss();
@@ -59,7 +57,7 @@
                 addition = newLines.length;
             }
             var charRemaining = 1000 - $scope.feedbackDetail.length - addition;
-            $scope.charactersRemaining = charRemaining < 0 ? 0 : charRemaining;            
+            $scope.charactersRemaining = charRemaining < 0 ? 0 : charRemaining;
         }
     }
 })();
