@@ -35,8 +35,7 @@
                     To: 'noreply@trippism.com',
                     subject: subject,
                     body: contentString
-                };
-
+                };                
                 $scope.sendFeedbackPromise = FeedbackFactory.SendEmail(email).then(function (data) {
                     if (data.Data.status == "ok") {
                         $scope.dismiss();
