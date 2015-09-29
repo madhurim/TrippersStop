@@ -185,12 +185,14 @@
     <Content Include="app\Styles\alertifyjs\themes\semantic.min.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.css" />
     <Content Include="app\Styles\alertifyjs\themes\semantic.rtl.min.css" />
+    <Content Include="app\Views\partials\AboutUsPartial.html" />
     <Content Include="app\Views\partials\attractionsList.html" />
     <Content Include="app\Views\partials\AttractiontabFareForecastPartial.html" />
     <Content Include="app\Views\partials\AttractionTabPartial.html" />
     <Content Include="app\Views\partials\avarageStarRatingPartial.html" />
     <Content Include="app\Views\partials\cgbusyMessagePartial.html" />
     <Content Include="app\Views\partials\EmailDetFormPartial.html" />
+    <Content Include="app\Views\partials\FeedbackDetailFormPartial.html" />
     <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
     <Content Include="app\Views\partials\SeasonalityFarerangeWidget.html" />
     <Content Include="app\Views\partials\TopDestinationsPartial.html" />
