@@ -39,7 +39,7 @@
                 $scope.sendFeedbackPromise = FeedbackFactory.SendEmail(email).then(function (data) {
                     if (data.Data.status == "ok") {
                         $scope.dismiss();
-                        alertify.alert("Sucess", "");
+                        alertify.alert("Success", "");
                         alertify.alert('Feedback sent sucessfully.').set('onok', function (closeEvent) { });
                     }
                     else {
