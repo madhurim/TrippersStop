@@ -80,15 +80,18 @@ angular.module('TrippismUIApp')
                           LowestNonStopeFare = "N/A";
 
                   }
-                  LowRate = LowestNonStopeFare;
+                 // Riversing the logic. Show LowestFare on markers as opposed to LowestNonStopFare
+                 // LowRate = LowestNonStopeFare; // MAM : New logic
                   if (maps[x].LowestFare != "N/A") {
                       LowestFarePrice = maps[x].LowestFare.toFixed(2);
                       if (LowestFarePrice == 0)
                           LowestFarePrice = "N/A";
                       //  LowestFarePrice = $filter('currency')(LowestFarePrice, maps[x].CurrencyCode + ' ', 0)
                   }
+                  // MAM: New logic
+                  LowRate = LowestFarePrice;
                   if (LowRate == "N/A")
-                      LowRate = LowestFarePrice;
+                      LowRate = LowestNonStopeFare; // MAM : New logic
                   var airportName = _.find($scope.airportlist, function (airport) {
                       return airport.airport_Code == maps[x].DestinationLocation
                   });
