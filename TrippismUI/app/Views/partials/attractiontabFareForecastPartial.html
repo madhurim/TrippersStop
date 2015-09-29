@@ -5,7 +5,9 @@
         <h4>
             {{attractionParams.DestinationairportName.airport_FullName + ', ' + attractionParams.DestinationairportName.airport_CityName + ', ' + attractionParams.DestinationairportName.airport_CountryName}}
         </h4>
-        
+        <div class="share-link" >
+            <a href="#" ng-click="homeFn()">See All Destintions</a>
+        </div>
         <div class="share-btn">
             <a title="Share via email" ng-click="SendEmailToUser()" class="icons red-bg" ><img src="/app/Styles/images/share-icon.png" alt="" /></a>
         </div>

@@ -99,7 +99,7 @@ TrippismUIApp.directive('tabs', function () {
 
                 '</li>' +
                 '</ul>' +
-                '<div class="tab-content padtop5" style="margin-top:15px;" ng-transclude></div>' +
+                '<div class="tab-content padtop5" style="margin-top:5px;" ng-transclude></div>' +
                 '</div>',
 
         //template:

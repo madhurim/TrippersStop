@@ -3,6 +3,7 @@
         restrict: 'E',
         scope: {
             attractionParams: '=',
+            homeFn:'&'
         },
         templateUrl: '/app/Views/Partials/AttractionTabPartial.html',
         link: function (scope, elem, attrs) {

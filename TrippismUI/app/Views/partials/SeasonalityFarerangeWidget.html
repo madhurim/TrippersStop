@@ -22,9 +22,9 @@
                                 <span ng-if="widgetParams.FareRangeData.IsMacOrigin">({{widgetParams.FareRangeData.OriginLocation}})</span>
                                 <span ng-if="widgetParams.FareRangeData.IsMacDestination">({{widgetParams.FareRangeData.DestinationLocation}})</span>
                             </p>
-                            <p>Lowest Fare : {{FareRangeWidgetData.MinimumFare}}</p>
-                            <p>Median Fare : {{FareRangeWidgetData.MedianFare}}</p>
-                            <p>Highest Fare : {{FareRangeWidgetData.MaximumFare}}</p>
+                            <p>Lowest Fare : {{FareRangeWidgetData.MinimumFare | number : 2}}</p>
+                            <p>Median Fare : {{FareRangeWidgetData.MedianFare | number : 2}}</p>
+                            <p>Highest Fare : {{FareRangeWidgetData.MaximumFare | number : 2}}</p>
                         </div>
                     </li>
                 </ul>

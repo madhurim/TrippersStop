@@ -36,6 +36,9 @@
                     var Fromweeks = _.filter(scope.SeasonalityData, function (dt) {
                         return (new Date(dt.WeekStartDate.split('T')[0].replace(/-/g, "/")).getMonth() + 1) == Frmmonth;
                     });
+                    Fromweeks = Fromweeks.concat(_.filter(scope.SeasonalityData, function (dt) {
+                        return (new Date(dt.WeekStartDate.split('T')[0].replace(/-/g, "/")).getMonth() + 1) == Frmmonth-1;
+                    }));
 
                     if (Frmmonth != Tomonth) {
                         var ToWeeks = _.filter(scope.SeasonalityData, function (dt) {
@@ -50,11 +53,16 @@
                         // replace(/-/g, "/") used because of safari date convert problem
                         var WeekStartDate = new Date(chartrec[i].WeekStartDate.split('T')[0].replace(/-/g, "/"));
                         var WeekEndDate = new Date(chartrec[i].WeekEndDate.split('T')[0].replace(/-/g, "/"));
+                        FrmDate.setFullYear(2001);
+                        WeekStartDate.setFullYear(2001);
+                        WeekEndDate.setFullYear(2001);
+                        //condition for year last moth where year part will change
+                        if (FrmDate.getDate() > Todate.getDate() && Todate.getMonth() < FrmDate.getMonth())
+                            Todate.setFullYear(2002);
                         if (WeekStartDate.getMonth() + 1 >= FrmDate.getMonth() + 1) {
-
-                            //if (WeekStartDate.getDate() >= FrmDate.getDate()) {
-                            if (FrmDate.getDate() >= WeekStartDate.getDate() && (FrmDate.getDate() <= WeekEndDate.getDate() || FrmDate.getMonth() + 1 < WeekEndDate.getMonth() + 1)) {
-
+                             if (WeekStartDate > FrmDate && WeekStartDate < Todate)
+                                //  if (FrmDate.getDate() >= WeekStartDate.getDate() && (FrmDate.getDate() <= WeekEndDate.getDate() || FrmDate.getMonth() + 1 < WeekEndDate.getMonth() + 1)) 
+                                {
                                 var SeasonalityIndicator = "";
                                 if (chartrec[i].SeasonalityIndicator == "High")
                                     NumberOfObervations = 3;
@@ -85,6 +93,7 @@
                             var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate.split('T')[0].replace(/-/g, "/"));
                             for (i = 0; i < scope.fareRangeData.FareData.length; i++) {
                                 var WeekStartDate = new Date(scope.fareRangeData.FareData[i].DepartureDateTime.split('T')[0].replace(/-/g, "/"));
+                                debugger;
                                 if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) {
                                     scope.FareRangeWidgetData = {
                                         MinimumFare: scope.fareRangeData.FareData[i].MinimumFare,

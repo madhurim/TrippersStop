@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-2">
-                        <div class="home-btn">
+                        <div class="home-btn" title=" Click to see all destinations">
                             <a class="icons red-bg" href="#" ng-click="ViewDestination();"><img src="app/Styles/images/fa-globe.png" alt="" /></a>
                         </div>
                         <!--<div class="user-btn dropdown">
@@ -29,7 +29,7 @@
 
                         <div tabs>
                             <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
-                                <attraction-tab tabs-loading="loadingTab" attraction-params="tabInfo.parametersData"></attraction-tab>
+                                <attraction-tab tabs-loading="loadingTab" attraction-params="tabInfo.parametersData" home-fn="ViewDestination()"></attraction-tab>
                             </div>
                         </div>
 

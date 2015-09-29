@@ -269,11 +269,11 @@
                             var MapDet = maps[x];
 
                             //google.maps.event.addListener(marker, 'mouseover', (function (marker, MapDet, x, contentString, $compile, infowindow, $scope) {
-                            google.maps.event.addListener(marker, 'mouseover', (function (MapDet) {
+                            google.maps.event.addListener(marker, 'click', (function (MapDet) {
                                 return function () {
                                     SetMarkerSlider(MapDet);
                                 };
-                            })(MapDet));
+                            })(MapDet)); 
                             //})(marker, MapDet, x, contentString, $compile, $scope.InfoWindow, $scope));
                             $scope.AttractionMarkers.push(marker);
                         }

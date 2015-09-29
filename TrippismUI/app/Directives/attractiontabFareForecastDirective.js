@@ -4,6 +4,7 @@
         restrict: 'E',
         scope: {
             attractionParams: '=',
+            homeFn: '&'
         },
         templateUrl: '/app/Views/Partials/AttractiontabFareForecastPartial.html',
         link: function (scope, elem, attrs) {
