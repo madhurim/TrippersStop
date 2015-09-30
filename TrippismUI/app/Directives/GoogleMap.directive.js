@@ -19,12 +19,6 @@ angular.module('TrippismUIApp')
           $scope.bounds;
           var mapStyle = TrippismConstants.destinationSearchMapSyle;
           $scope.mapOptions = {
-              //center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng),
-              //zoom: 2,
-              //minZoom: 2,
-              //backgroundColor: "#BCCFDE",
-              //styles: mapStyle,
-              //mapTypeId: google.maps.MapTypeId.ROADMAP
               zoom:2,
               minZoom: 2,
               zoomControl: true,
@@ -67,8 +61,6 @@ angular.module('TrippismUIApp')
               var bounds = new google.maps.LatLngBounds();
               $scope.bounds = bounds;
               selected = maps;
-
-              //   var maps = maps.sort(function (a, b) {  return ((a.LowestNonStopFare != "N/A" || a.LowestNonStopFare != 0) ? parseFloat(a.LowestNonStopFare) : a.LowestFare) < ((a.LowestNonStopFare != "N/A" || a.LowestNonStopFare != 0) ?  parseFloat(a.LowestNonStopFare) : a.LowestFare) ? 1 : -1;  }).reverse().slice(0, 1000);
               for (var x = 0; x < maps.length; x++) {
                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
                   var LowestFarePrice = "N/A";
@@ -80,18 +72,14 @@ angular.module('TrippismUIApp')
                           LowestNonStopeFare = "N/A";
 
                   }
-                 // Riversing the logic. Show LowestFare on markers as opposed to LowestNonStopFare
-                 // LowRate = LowestNonStopeFare; // MAM : New logic
                   if (maps[x].LowestFare != "N/A") {
                       LowestFarePrice = maps[x].LowestFare.toFixed(2);
                       if (LowestFarePrice == 0)
                           LowestFarePrice = "N/A";
-                      //  LowestFarePrice = $filter('currency')(LowestFarePrice, maps[x].CurrencyCode + ' ', 0)
                   }
-                  // MAM: New logic
                   LowRate = LowestFarePrice;
                   if (LowRate == "N/A")
-                      LowRate = LowestNonStopeFare; // MAM : New logic
+                      LowRate = LowestNonStopeFare; 
                   var airportName = _.find($scope.airportlist, function (airport) {
                       return airport.airport_Code == maps[x].DestinationLocation
                   });

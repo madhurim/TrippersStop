@@ -239,10 +239,12 @@
     </div>
     <!-- [E] SEARCHCENTER -->
     <!-- [S] POPULAR-DESTINATIONS -->
-    <div ng-hide="isSearching" ng-show="ShowDestinationView">
-        <div class="popular-destinations" ng-class="isPopDestCollapsed ? 'active' : ''" ng-show="topdestinationlist.length > 0 && IscalledFromIknowMyDest == false">
-            <a href="#" ng-click="isPopDestCollapsed = !isPopDestCollapsed" class="toggle-btn destinations-btn red-bg"><i class="destinations-icon"></i>Top Popular Destinations</a>
-            <topdestination-popup destinations-params="topdestinationlist" destinations="destinationlist" airportlist="AvailableAirports"></topdestination-popup>
+    <div ng-show="isSearchCollapsed">
+        <div ng-hide="isSearching" ng-show="ShowDestinationView">
+            <div class="popular-destinations" ng-class="isPopDestCollapsed ? 'active' : ''" ng-show="topdestinationlist.length > 0 && IscalledFromIknowMyDest == false">
+                <a href="#" ng-click="isPopDestCollapsed = !isPopDestCollapsed" class="toggle-btn destinations-btn red-bg"><i class="destinations-icon"></i>Top Popular Destinations</a>
+                <topdestination-popup destinations-params="topdestinationlist" destinations="destinationlist" airportlist="AvailableAirports"></topdestination-popup>
+            </div>
         </div>
     </div>
     <!-- [E] POPULAR-DESTINATIONS -->
