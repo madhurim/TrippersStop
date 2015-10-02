@@ -235,8 +235,12 @@
         $scope.getMatchingStuffs = function ($viewValue) {
             var matchingStuffs = [];
             for (var i = 0; i < $scope.AvailableCodes.length; i++) {
-                if ($scope.AvailableCodes[i].airport_CityName.toLowerCase().indexOf($viewValue.toLowerCase()) != -1 ||
-                    $scope.AvailableCodes[i].airport_Code.toLowerCase().indexOf($viewValue.toLowerCase()) != -1)
+                //if ($scope.AvailableCodes[i].airport_CityName.toLowerCase().indexOf($viewValue.toLowerCase()) != -1 ||
+                //    $scope.AvailableCodes[i].airport_Code.toLowerCase().indexOf($viewValue.toLowerCase()) != -1)
+                if (
+                  $scope.AvailableCodes[i].airport_CityName.substr(0, $viewValue.length).toLowerCase() == $viewValue.toLowerCase() ||
+                  $scope.AvailableCodes[i].airport_Code.substr(0, $viewValue.length).toLowerCase() == $viewValue.toLowerCase())
+
                     matchingStuffs.push($scope.AvailableCodes[i]);
             }
             return matchingStuffs;
