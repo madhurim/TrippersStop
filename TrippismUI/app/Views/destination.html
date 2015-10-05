@@ -258,9 +258,14 @@
                         <form class="ng-pristine-form">
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="input-box">
                                             <input min="1" type="number" name="Minfare" class="form-control" ng-model="Minfare" placeholder="Min Fare" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="input-box">
+                                            <input min="1" type="number" name="Maxfare" class="form-control" ng-model="Maxfare" placeholder="Max Fare" />
                                         </div>
                                     </div>
                                 </div>
@@ -269,7 +274,7 @@
                     </div>
                     <div class="col-md-5 col-sm-4 col-xs-12">
                         <div class="selector-box cc-selector">
-                            <h3>Theme :: {{Theme}} <a class="clear" href="#" ng-click="Theme = ''">|  clear</a></h3>
+                            <h3><img src="app/Styles/images/help-icon.png" class="tool-tips"  data-toggle="tooltip" data-placement="top" title="Select any one Theme from the list" />Theme : {{Theme}} <a class="clear" href="#" ng-click="Theme = ''" ng-show="Theme.length > 0">|  clear</a></h3>
                             <ul>
                                 <li>
                                     <div class="radio-all">
@@ -348,7 +353,7 @@
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="selector-box region-box cc-selector">
-                            <h3>Region :: {{Region}} <a class="clear" href="#" ng-click="Region = ''">|  clear</a></h3>
+                            <h3><img src="app/Styles/images/help-icon.png" class="tool-tips" data-toggle="tooltip" data-placement="top" title="Select any one Region from the list" />Region : {{Region}} <a class="clear" href="#" ng-click="Region = ''" ng-show="Region.length > 0">|  clear</a></h3>
                             <ul>
                                 <li>
                                     <div class="radio-all">
