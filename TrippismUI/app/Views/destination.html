@@ -431,10 +431,12 @@
 
 <script type="text/ng-template" id="customTemplate.html">
     <a style="padding-left:10px;" tabindex="-1" class="row-even1">
-        <i ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
-        <span>{{match.model.airport_Code}}</span>,
-        <span>{{match.model.airport_FullName.toLowerCase().indexOf("airport") >= 0 ? match.model.airport_FullName : match.model.airport_FullName + " Airport"}}</span>,
-        <span>{{match.model.airport_CityName}}</span>,
-        <span>{{match.model.airport_CountryName}}</span>
+        <div>
+            <i ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
+            <span bind-html-unsafe="match.model.airport_Code | typeaheadHighlight:query"></span>,
+            <span bind-html-unsafe="match.model.airport_FullName | typeaheadHighlight:query">{{match.model.airport_FullName.toLowerCase().indexOf("airport") >= 0 ? "" : "" + " Airport"}}</span>,
+            <span bind-html-unsafe="match.model.airport_CityName | typeaheadHighlight:query"></span>,
+            <span bind-html-unsafe="match.model.airport_CountryName | typeaheadHighlight:query"></span>
+        </div>
     </a>
 </script>
