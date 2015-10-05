@@ -32,7 +32,7 @@
 
                 var email = {
                     From: 'noreply@trippism.com',
-                    To: 'noreply@trippism.com',
+                    To: 'madhuri.mittal@gmail.com',
                     subject: subject,
                     body: contentString
                 };

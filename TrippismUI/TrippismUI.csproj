@@ -83,6 +83,7 @@
     <Content Include="app\Styles\images\clear-icon.png" />
     <Content Include="app\Styles\images\fa-globe.png" />
     <Content Include="app\Styles\images\globe-icon.png" />
+    <Content Include="app\Styles\images\help-icon.png" />
     <Content Include="app\Styles\images\like-icon.png" />
     <Content Include="app\Styles\images\loading.GIF" />
     <Content Include="app\Styles\images\arrow.png" />
