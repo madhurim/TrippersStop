@@ -55,8 +55,8 @@
 
             <div class="col-md-2 col-sm-3 col-xs-6" ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
                 <div class="ibox-box" ng-show="!FareNoDataFound">
-                    <img ng-if="FareforecastData.Recommendation == 'buy'" title="Buy" src="/app/Styles/images/like-icon.png" />
-                    <img ng-if="FareforecastData.Recommendation == 'wait'" title="Wait" src="/app/Styles/images/wait-icon.png" />
+                    <img ng-if="FareforecastData.Recommendation == 'buy'" title="Go ahead, Buy !" src="/app/Styles/images/like-icon.png" />
+                    <img ng-if="FareforecastData.Recommendation == 'wait'" title="Wait , price may drop !" src="/app/Styles/images/wait-icon.png" />
                     <p>Recommendation</p>
                 </div>
             </div>
@@ -70,10 +70,10 @@
                         <span ng-show="attractionParams.SearchCriteria.ToDate">, To Date : {{attractionParams.SearchCriteria.ToDate |date:'MM/dd/yyyy'}}</span>
                         <br />
 
-                        <span ng-show="attractionParams.SearchCriteria.Minfare > 0">Min Fare: {{attractionParams.SearchCriteria.Minfare}}</span>
-                        <span ng-show="attractionParams.SearchCriteria.Maxfare > 0">, Max Fare: {{attractionParams.SearchCriteria.Maxfare}}</span>
-                        <span ng-show="attractionParams.SearchCriteria.Region ">, Region:{{attractionParams.SearchCriteria.Region}} </span>
-                        <span ng-show="attractionParams.SearchCriteria.Theme">, Theme:{{attractionParams.SearchCriteria.Theme}}</span>
+                        <span ng-show="attractionParams.SearchCriteria.Minfare > 0">Min Fare : {{attractionParams.SearchCriteria.Minfare}}</span>
+                        <span ng-show="attractionParams.SearchCriteria.Maxfare > 0">, Max Fare : {{attractionParams.SearchCriteria.Maxfare}}</span>
+                        <span ng-show="attractionParams.SearchCriteria.Region ">, Region : {{attractionParams.SearchCriteria.Region}} </span>
+                        <span ng-show="attractionParams.SearchCriteria.Theme">, Theme : {{attractionParams.SearchCriteria.Theme}}</span>
                     </p>
                 </div>
             </div>

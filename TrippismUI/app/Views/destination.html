@@ -222,15 +222,15 @@
         <div ng-show="destinationlist && isSearchCollapsed">
             <div ng-show="ShowDestinationView " ng-hide="isSearching">
                 <p class="search-title-details" ng-show="IscalledFromIknowMyDest == false">
-                    You Searched : <span ng-show="Origin">Origin: {{OrigintoDisp}},</span>
-                    <span ng-show="FromDate">From Date: {{FromDate|date:'MM/dd/yyyy'}},</span>
+                    You Searched : <span ng-show="Origin">Origin : {{OrigintoDisp}},</span>
+                    <span ng-show="FromDate">From Date : {{FromDate|date:'MM/dd/yyyy'}},</span>
                     <br />
-                    <span ng-show="ToDate"> To Date: {{ToDate |date:'MM/dd/yyyy'}}</span>
-                    <span ng-show="LenghtOfStay > 0">, LengthOfStay: {{LenghtOfStay}}</span>
-                    <span ng-show="Minfare > 0 && isAdvancedSearch">, Minimum Fare: {{Minfare}}</span>
-                    <span ng-show="Maxfare > 0"> Maximum Fare: {{Maxfare}}</span>
-                    <span ng-show="Region && isAdvancedSearch">, Region: {{Region}} </span>
-                    <span ng-show="Theme && isAdvancedSearch">, Theme: {{Theme}}</span>
+                    <span ng-show="ToDate"> To Date : {{ToDate |date:'MM/dd/yyyy'}}</span>
+                   <!-- <span ng-show="LenghtOfStay > 0">, LengthOfStay : {{LenghtOfStay}}</span>-->
+                    <span ng-show="Minfare > 0 && isAdvancedSearch">, Minimum Fare : {{Minfare}}</span>
+                    <span ng-show="Maxfare > 0"> Maximum Fare : {{Maxfare}}</span>
+                    <span ng-show="Region && isAdvancedSearch">, Region : {{Region}} </span>
+                    <span ng-show="Theme && isAdvancedSearch">, Theme : {{Theme}}</span>
                     <br />
                     <span>Total number of top cheapest destinations found from {{Origin |uppercase}} : {{destinationlist.length}}</span>
                 </p>
@@ -274,7 +274,7 @@
                     </div>
                     <div class="col-md-5 col-sm-4 col-xs-12">
                         <div class="selector-box cc-selector">
-                            <h3><img src="app/Styles/images/help-icon.png" class="tool-tips"  data-toggle="tooltip" data-placement="top" title="Filter destinations theme wise, select any one theme from the list" />Theme : {{Theme}} <a class="clear" href="#" ng-click="Theme = ''" ng-show="Theme.length > 0">|  clear</a></h3>
+                            <h3><img src="app/Styles/images/help-icon.png" class="tool-tips" data-toggle="tooltip" data-placement="top" title="Click on any theme icon to select a theme. Filters results by selected theme. Click clear to unselect. " />Theme : {{Theme}} <a class="clear" href="#" ng-click="Theme = ''" ng-show="Theme.length > 0">|  clear</a></h3>
                             <ul>
                                 <li>
                                     <div class="radio-all">
@@ -353,7 +353,8 @@
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="selector-box region-box cc-selector">
-                            <h3><img src="app/Styles/images/help-icon.png" class="tool-tips" data-toggle="tooltip" data-placement="top" title="Filter destinations Region wise,Select any one Region from the list" />Region : {{Region}} <a class="clear" href="#" ng-click="Region = ''" ng-show="Region.length > 0">|  clear</a></h3>
+                            <h3><img src="app/Styles/images/help-icon.png" class="tool-tips" data-toggle="tooltip" data-placement="top"
+     title="Click on any region icon to select a region. Filters results by selected region. Click clear to unselect. " />Region : {{Region}} <a class="clear" href="#" ng-click="Region = ''" ng-show="Region.length > 0">|  clear</a></h3>
                             <ul>
                                 <li>
                                     <div class="radio-all">

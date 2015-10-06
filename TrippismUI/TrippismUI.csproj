@@ -226,7 +226,7 @@
     <Content Include="app\Constants\countries.json" />
     <Content Include="app\Constants\cities.json" />
     <Content Include="app\Constants\airports.json" />
-    <Content Include="app\Constants\State.json" />
+    <Content Include="app\Controllers\State.json" />
     <Content Include="app\Styles\fonts\fontawesome-webfont.eot" />
     <Content Include="app\Styles\fonts\fontawesome-webfont.ttf" />
     <Content Include="app\Styles\fonts\fontawesome-webfont.woff" />
