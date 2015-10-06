@@ -349,7 +349,7 @@ input.form-control[type="number"]{ padding-right:15px;}
 .list-line .overview-weather-content{ padding:0;}
 .list-line .overview-weather-content p{ position:static;}
 .destination-tab .tab-content {height: 135px;margin-bottom: 15px;overflow-x: hidden;overflow-y: auto;padding-right: 15px;}
-
+.advanced-search .advanced-content {height: 220px !important;overflow-x: hidden;overflow-y: scroll;}
 }
 @media only screen and (max-width: 330px) {
 .destination-tab .nav-tabs > li{ width:50%;}

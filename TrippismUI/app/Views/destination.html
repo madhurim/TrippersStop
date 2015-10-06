@@ -252,156 +252,160 @@
     <div class="refine-your-search-box slide-bottom" ng-show="ShowDestinationView && IsRefineSearchShow">
         <div class="btn-box"> <a href="#" ng-click="isRefineSeachCollapsed = !isRefineSeachCollapsed;isSearchCollapsed= true;" ng-class="isRefineSeachCollapsed ? '' : 'active'" class="toggle-btn your-search-btn red-bg"><i class="search-icon"></i>Refine your search</a></div>
         <div collapse="!isRefineSeachCollapsed" class="advanced-search">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-2 col-md-2 col-sm-2 col-xs-12">
-                        <form class="ng-pristine-form">
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="input-box">
-                                            <input min="1" type="number" name="Minfare" class="form-control" ng-model="Minfare" placeholder="Min Fare" />
+            <div class="advanced-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2 col-md-2 col-sm-2 col-xs-12">
+                            <form class="ng-pristine-form">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="input-box">
+                                                <input min="1" type="number" name="Minfare" class="form-control" ng-model="Minfare" placeholder="Min Fare" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="input-box">
-                                            <input min="1" type="number" name="Maxfare" class="form-control" ng-model="Maxfare" placeholder="Max Fare" />
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="input-box">
+                                                <input min="1" type="number" name="Maxfare" class="form-control" ng-model="Maxfare" placeholder="Max Fare" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </form>
+                        </div>
+                        <div class="col-md-5 col-sm-4 col-xs-12">
+                            <div class="selector-box cc-selector">
+                                <h3><img src="app/Styles/images/help-icon.png" class="tool-tips" data-toggle="tooltip" data-placement="top" title="Click on any theme icon to select a theme. Filters results by selected theme. Click clear to unselect. " />Theme : {{Theme}} <a class="clear" href="#" ng-click="Theme = ''" ng-show="Theme.length > 0">|  clear</a></h3>
+                                <ul>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input id="BEACH" type="radio" ng-model="Theme" name="Theme" value="BEACH" />
+                                            <label for="BEACH" title="BEACH"><img src="app/Styles/images/themes/palm-tree-icon.png" alt="BEACH" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input type="radio" id="DISNEY" ng-model="Theme" name="Theme" value="DISNEY" />
+                                            <label for="DISNEY" title="DISNEY"><img src="app/Styles/images/themes/paris-icon.png" alt="DISNEY" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input type="radio" id="GAMBLING" ng-model="Theme" name="Theme" value="GAMBLING" />
+                                            <label for="GAMBLING" title="GAMBLING"><img src="app/Styles/images/themes/dice-icon.png" alt="GAMBLING" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input type="radio" id="HISTORIC" ng-model="Theme" name="Theme" value="HISTORIC" />
+                                            <label for="HISTORIC" title="HISTORIC"><img src="app/Styles/images/themes/bank-icon.png" alt="HISTORIC" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input type="radio" id="MOUNTAINS" ng-model="Theme" name="Theme" value="MOUNTAINS" />
+                                            <label for="MOUNTAINS" title="MOUNTAINS"><img src="app/Styles/images/themes/camera-icon.png" alt="MOUNTAINS" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input type="radio" id="NATIONAL-PARKS" name="Theme" ng-model="Theme" value="NATIONAL-PARKS" />
+                                            <label for="NATIONAL-PARKS" title="NATIONAL PARKS"><img src="app/Styles/images/themes/park-icon.png" alt="NATIONAL-PARKS" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input type="radio" id="OUTDOORS" name="Theme" ng-model="Theme" value="OUTDOORS" />
+                                            <label for="OUTDOORS" title="OUTDOORS"><img src="app/Styles/images/themes/climbing-icon.png" alt="OUTDOORS" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input type="radio" id="ROMANTIC" name="Theme" ng-model="Theme" value="ROMANTIC" />
+                                            <label for="ROMANTIC" title="ROMANTIC"><img src="app/Styles/images/themes/hearts-icon.png" alt="ROMANTIC" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input type="radio" id="SHOPPING" name="Theme" ng-model="Theme" value="SHOPPING" />
+                                            <label for="SHOPPING" title="SHOPPING"><img src="app/Styles/images/themes/full-icon.png" alt="SHOPPING" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input type="radio" id="THEME-PARK" name="Theme" ng-model="Theme" value="THEME-PARK" />
+                                            <label for="THEME-PARK" title="THEME PARK"><img src="app/Styles/images/themes/cruise-icon.png" alt="THEME-PARK" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input type="radio" id="SKIING" name="Theme" ng-model="Theme" value="SKIING" />
+                                            <label for="SKIING" title="SKIING"><img src="app/Styles/images/themes/sport-icon.png" alt="SKIING" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input type="radio" id="CARIBBEAN" name="Theme" ng-model="Theme" value="CARIBBEAN" />
+                                            <label for="CARIBBEAN" title="CARIBBEAN"><img src="app/Styles/images/themes/holidays-icon.png" alt="CARIBBEAN" /></label>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
-                        </form>
-                    </div>
-                    <div class="col-md-5 col-sm-4 col-xs-12">
-                        <div class="selector-box cc-selector">
-                            <h3><img src="app/Styles/images/help-icon.png" class="tool-tips" data-toggle="tooltip" data-placement="top" title="Click on any theme icon to select a theme. Filters results by selected theme. Click clear to unselect. " />Theme : {{Theme}} <a class="clear" href="#" ng-click="Theme = ''" ng-show="Theme.length > 0">|  clear</a></h3>
-                            <ul>
-                                <li>
-                                    <div class="radio-all">
-                                        <input id="BEACH" type="radio" ng-model="Theme" name="Theme" value="BEACH" />
-                                        <label for="BEACH" title="BEACH"><img src="app/Styles/images/themes/palm-tree-icon.png" alt="BEACH" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input type="radio" id="DISNEY" ng-model="Theme" name="Theme" value="DISNEY" />
-                                        <label for="DISNEY" title="DISNEY"><img src="app/Styles/images/themes/paris-icon.png" alt="DISNEY" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input type="radio" id="GAMBLING" ng-model="Theme" name="Theme" value="GAMBLING" />
-                                        <label for="GAMBLING" title="GAMBLING"><img src="app/Styles/images/themes/dice-icon.png" alt="GAMBLING" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input type="radio" id="HISTORIC" ng-model="Theme" name="Theme" value="HISTORIC" />
-                                        <label for="HISTORIC" title="HISTORIC"><img src="app/Styles/images/themes/bank-icon.png" alt="HISTORIC" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input type="radio" id="MOUNTAINS" ng-model="Theme" name="Theme" value="MOUNTAINS" />
-                                        <label for="MOUNTAINS" title="MOUNTAINS"><img src="app/Styles/images/themes/camera-icon.png" alt="MOUNTAINS" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input type="radio" id="NATIONAL-PARKS" name="Theme" ng-model="Theme" value="NATIONAL-PARKS" />
-                                        <label for="NATIONAL-PARKS" title="NATIONAL PARKS"><img src="app/Styles/images/themes/park-icon.png" alt="NATIONAL-PARKS" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input type="radio" id="OUTDOORS" name="Theme" ng-model="Theme" value="OUTDOORS" />
-                                        <label for="OUTDOORS" title="OUTDOORS"><img src="app/Styles/images/themes/climbing-icon.png" alt="OUTDOORS" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input type="radio" id="ROMANTIC" name="Theme" ng-model="Theme" value="ROMANTIC" />
-                                        <label for="ROMANTIC" title="ROMANTIC"><img src="app/Styles/images/themes/hearts-icon.png" alt="ROMANTIC" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input type="radio" id="SHOPPING" name="Theme" ng-model="Theme" value="SHOPPING" />
-                                        <label for="SHOPPING" title="SHOPPING"><img src="app/Styles/images/themes/full-icon.png" alt="SHOPPING" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input type="radio" id="THEME-PARK" name="Theme" ng-model="Theme" value="THEME-PARK" />
-                                        <label for="THEME-PARK" title="THEME PARK"><img src="app/Styles/images/themes/cruise-icon.png" alt="THEME-PARK" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input type="radio" id="SKIING" name="Theme" ng-model="Theme" value="SKIING" />
-                                        <label for="SKIING" title="SKIING"><img src="app/Styles/images/themes/sport-icon.png" alt="SKIING" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input type="radio" id="CARIBBEAN" name="Theme" ng-model="Theme" value="CARIBBEAN" />
-                                        <label for="CARIBBEAN" title="CARIBBEAN"><img src="app/Styles/images/themes/holidays-icon.png" alt="CARIBBEAN" /></label>
-                                    </div>
-                                </li>
-                            </ul>
                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <div class="selector-box region-box cc-selector">
-                            <h3><img src="app/Styles/images/help-icon.png" class="tool-tips" data-toggle="tooltip" data-placement="top"
-     title="Click on any region icon to select a region. Filters results by selected region. Click clear to unselect. " />Region : {{Region}} <a class="clear" href="#" ng-click="Region = ''" ng-show="Region.length > 0">|  clear</a></h3>
-                            <ul>
-                                <li>
-                                    <div class="radio-all">
-                                        <input id="Africa" type="radio" ng-model="Region" name="Region" value="Africa" />
-                                        <label for="Africa" title="Africa"><img src="app/Styles/images/regions/africa-icon.png" alt="Africa" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input id="Europe" type="radio" ng-model="Region" name="Region" value="Europe" />
-                                        <label for="Europe" title="Europe"><img src="app/Styles/images/regions/europe-icon.png" alt="Europe" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input id="LatinAmerica" type="radio" ng-model="Region" name="Region" value="Latin America" />
-                                        <label for="LatinAmerica" title="Latin America"><img src="app/Styles/images/regions/latin-america-icon.png" alt="Latin America" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input id="NorthAmerica" type="radio" ng-model="Region" name="Region" value="North America" />
-                                        <label for="NorthAmerica" title="North America"><img src="app/Styles/images/regions/north-america-icon.png" alt="North America" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input id="MiddleEast" type="radio" ng-model="Region" name="Region" value="Middle East" />
-                                        <label for="MiddleEast" title="Middle East"><img src="app/Styles/images/regions/icon-middle-east-icon.png" alt="Middle East" /></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="radio-all">
-                                        <input id="AsiaPacific" type="radio" ng-model="Region" name="Region" value="Asia Pacific" />
-                                        <label for="AsiaPacific" title="Asia Pacific"><img src="app/Styles/images/regions/asia-icon.png" alt="Asia Pacific" /></label>
-                                    </div>
-                                </li>
-                            </ul>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="selector-box region-box cc-selector">
+                                <h3>
+                                    <img src="app/Styles/images/help-icon.png" class="tool-tips" data-toggle="tooltip" data-placement="top"
+                                         title="Click on any region icon to select a region. Filters results by selected region. Click clear to unselect. " />Region : {{Region}} <a class="clear" href="#" ng-click="Region = ''" ng-show="Region.length > 0">|  clear</a>
+                                </h3>
+                                <ul>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input id="Africa" type="radio" ng-model="Region" name="Region" value="Africa" />
+                                            <label for="Africa" title="Africa"><img src="app/Styles/images/regions/africa-icon.png" alt="Africa" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input id="Europe" type="radio" ng-model="Region" name="Region" value="Europe" />
+                                            <label for="Europe" title="Europe"><img src="app/Styles/images/regions/europe-icon.png" alt="Europe" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input id="LatinAmerica" type="radio" ng-model="Region" name="Region" value="Latin America" />
+                                            <label for="LatinAmerica" title="Latin America"><img src="app/Styles/images/regions/latin-america-icon.png" alt="Latin America" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input id="NorthAmerica" type="radio" ng-model="Region" name="Region" value="North America" />
+                                            <label for="NorthAmerica" title="North America"><img src="app/Styles/images/regions/north-america-icon.png" alt="North America" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input id="MiddleEast" type="radio" ng-model="Region" name="Region" value="Middle East" />
+                                            <label for="MiddleEast" title="Middle East"><img src="app/Styles/images/regions/icon-middle-east-icon.png" alt="Middle East" /></label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="radio-all">
+                                            <input id="AsiaPacific" type="radio" ng-model="Region" name="Region" value="Asia Pacific" />
+                                            <label for="AsiaPacific" title="Asia Pacific"><img src="app/Styles/images/regions/asia-icon.png" alt="Asia Pacific" /></label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 col-xs-12">
-                        <div class="refine-btn-row">
-                            <button class="btn btn-danger btn-lg" type="submit"
-                                    ng-click="IscalledFromIknowMyDest= false; findDestinations('advenced')"
-                                    ng-disabled="SearchbuttonIsLoading">
-                                Suggest Destinations
-                            </button>
+                        <div class="col-md-2 col-sm-3 col-xs-12">
+                            <div class="refine-btn-row">
+                                <button class="btn btn-danger btn-lg" type="submit"
+                                        ng-click="IscalledFromIknowMyDest= false; findDestinations('advenced')"
+                                        ng-disabled="SearchbuttonIsLoading">
+                                    Suggest Destinations
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
