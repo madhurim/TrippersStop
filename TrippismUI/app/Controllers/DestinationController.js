@@ -655,25 +655,6 @@
                 $scope.inProgress = false;
             });
         }
-
-        $scope.feedback = function () {
-            var GetFeedbackPopupInstance = $modal.open({
-                templateUrl: '/app/Views/Partials/FeedbackDetailFormPartial.html',
-                controller: 'FeedbackController',
-                scope: $scope,
-            });
-        }
-
-        //$scope.aboutUs = function () {
-        //    alertify.alert('<div class="popup-header red-bg"><h4 class="popup-title">About Us</h4></div>', TrippismConstants.aboutUsText).set({ 'resizable': true, 'closable': false }).resizeTo('50%', '64%');
-        //};
-
-        $scope.aboutUs = function () {
-            var GetFeedbackPopupInstance = $modal.open({
-                templateUrl: '/app/Views/Partials/AboutUsPartial.html',
-                controller: 'FeedbackController',
-            });
-        };
     }
 })();
 

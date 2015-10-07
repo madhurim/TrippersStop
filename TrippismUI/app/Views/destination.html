@@ -275,7 +275,7 @@
                         </div>
                         <div class="col-md-5 col-sm-4 col-xs-12">
                             <div class="selector-box cc-selector">
-                                <h3><img src="app/Styles/images/help-icon.png" class="tool-tips" data-toggle="tooltip" data-placement="top" title="Click on any theme icon to select a theme. Filters results by selected theme. Click clear to unselect. " />Theme : {{Theme}} <a class="clear" href="#" ng-click="Theme = ''" ng-show="Theme.length > 0">|  clear</a></h3>
+                                <h3><img src="app/Styles/images/help-icon.png" class="tool-tips" data-toggle="tooltip" data-placement="top" popover="Click on any theme icon to select a theme. Filters results by selected theme. Click clear to unselect. " popover-trigger="mouseenter" />Theme : {{Theme}} <a class="clear" href="#" ng-click="Theme = ''" ng-show="Theme.length > 0">|  clear</a></h3>
                                 <ul>
                                     <li>
                                         <div class="radio-all">
@@ -356,7 +356,7 @@
                             <div class="selector-box region-box cc-selector">
                                 <h3>
                                     <img src="app/Styles/images/help-icon.png" class="tool-tips" data-toggle="tooltip" data-placement="top"
-                                         title="Click on any region icon to select a region. Filters results by selected region. Click clear to unselect. " />Region : {{Region}} <a class="clear" href="#" ng-click="Region = ''" ng-show="Region.length > 0">|  clear</a>
+                                         popover="Click on any region icon to select a region. Filters results by selected region. Click clear to unselect. " popover-trigger="mouseenter" />Region : {{Region}} <a class="clear" href="#" ng-click="Region = ''" ng-show="Region.length > 0">|  clear</a>
                                 </h3>
                                 <ul>
                                     <li>
@@ -413,30 +413,7 @@
         </div>
     </div>
     <!-- [E] REFINE-YOUR-SEARCH-BOX -->
-    <!-- [S] FOOTER -->
-    <footer>
-        <div class="footer-box">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class="footer-menu">
-                            <ul>
-                                <!--<li><a href="#">Home</a></li>-->
-                                <li><a ng-click="aboutUs()" href="#">About</a></li>
-                                <li><a ng-click="feedback()" href="#">Feedback</a></li>
-                                <!--<li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Privacy</a></li>-->
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <p class="copyright">© 2015 - Trippism All rights reserved.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- [E] FOOTER -->
+  
 </div>
 
 <script type="text/ng-template" id="customTemplate.html">

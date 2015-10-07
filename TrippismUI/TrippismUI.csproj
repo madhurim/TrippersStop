@@ -154,7 +154,6 @@
     <Content Include="app\Utility.js" />
     <Content Include="app\Views\destination.html" />
     <Content Include="app\Views\GoogleMap.html" />
-    <Content Include="app\Views\destination1.html" />
     <Content Include="app\Scripts\angular-mocks.js" />
     <Content Include="app\Scripts\angular-ui-router.js" />
     <Content Include="app\Scripts\angular-ui-router.min.js" />
@@ -207,7 +206,6 @@
     <Content Include="index.html" />
     <Content Include="app\Scripts\alertify\alertify.js" />
     <Content Include="app\Scripts\alertify\alertify.min.js" />
-    <Content Include="index1.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
