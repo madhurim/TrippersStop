@@ -5,9 +5,9 @@
     'use strict';
     var controllerId = 'LandingPageController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$rootScope', '$location', '$anchorScroll', LandingPageController]);
+        ['$scope', '$modal', '$rootScope', '$location', '$anchorScroll', LandingPageController]);
 
-    function LandingPageController($scope, $rootScope, $location, $anchorScroll) {
+    function LandingPageController($scope, $modal, $rootScope, $location, $anchorScroll) {
         if (angular.lowercase($location.host()) == "localhost") {
             //devlopment url
             $rootScope.apiURL = 'http://localhost:14606/api/Sabre/';
@@ -42,6 +42,19 @@
             $location.hash('top');
             $anchorScroll();
             $location.hash(old);
+        }
+        $scope.aboutUs = function () {
+            var GetFeedbackPopupInstance = $modal.open({
+                templateUrl: '/app/Views/Partials/AboutUsPartial.html',
+                controller: 'FeedbackController',
+            });
+        };
+        $scope.feedback = function () {
+            var GetFeedbackPopupInstance = $modal.open({
+                templateUrl: '/app/Views/Partials/FeedbackDetailFormPartial.html',
+                controller: 'FeedbackController',
+                scope: $scope,
+            });
         }
     }
 })();

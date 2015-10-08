@@ -133,7 +133,7 @@ input.form-control[type="number"]{ padding-right:15px;}
 .refine-btn-row {padding: 20px 0;text-align: center;width: 100%;}
 
 
-.footer-box{ position:fixed; left:0; right:0; bottom:0; padding:10px 0; background-color:rgba(34, 34, 33, 0.75);}
+.footer-box{ position:fixed; left:0; right:0; bottom:0; padding:10px 0; background-color:rgba(34, 34, 33, 0.75); z-index:1;}
 .footer-menu ul li{ display:inline-block; margin-left:15px;}
 .footer-menu ul li:first-child{ margin-left:0;}
 .footer-menu ul li a{ font-size:14px; color:#fff;}
@@ -172,11 +172,10 @@ input.form-control[type="number"]{ padding-right:15px;}
 .short-desperation-box .tab-content{ background-color:#f4f5f9;padding: 15px 15px 0; margin-bottom:40px;}
 
 .ibox-wp{ margin-bottom:15px; padding:0 15px;}
-
-.ibox-title {position: relative;background-color: #fff;border-radius: 4px;box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);padding: 10px 50px 10px 10px ;}
+.ibox-title {position: relative;background-color: #fff;border-radius: 4px;box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);padding: 10px 170px 10px 10px ; float:left; width:100%;}
 .ibox-title h4 {color: #585858;margin: 0; font-size:15px}
 .ibox-title .share-btn {position: absolute;right: 10px;top:50%; margin-top:-15px;}
-.ibox-title .share-link {position: absolute;right: 50px;top:50%; margin-top:-11px;}
+.ibox-title .share-link {position: absolute;right: 50px;top:50%; margin-top:-11px;font-size: 12px;}
 .share-btn .icons {height: 30px;padding: 4px 6px 6px 4px;width: 30px;}
 .ibox-box {padding:5px 15px 0;text-align: center;min-height: 5px;margin-top:10px; }
 .searched { text-align:left;}
@@ -350,6 +349,18 @@ input.form-control[type="number"]{ padding-right:15px;}
 .list-line .overview-weather-content p{ position:static;}
 .destination-tab .tab-content {height: 135px;margin-bottom: 15px;overflow-x: hidden;overflow-y: auto;padding-right: 15px;}
 .advanced-search .advanced-content {height: 220px !important;overflow-x: hidden;overflow-y: scroll;}
+.ibox-title {padding: 10px;}
+.ibox-title .share-link {
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+    position: static;
+}
+.ibox-title .share-btn {
+    float: left;
+    margin-top: 7px;
+    position: static;
+}
 }
 @media only screen and (max-width: 330px) {
 .destination-tab .nav-tabs > li{ width:50%;}

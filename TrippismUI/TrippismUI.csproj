@@ -80,27 +80,22 @@
     <Content Include="app\Styles\fonts\Gotham-Black.svg" />
     <Content Include="app\Styles\fonts\gotham-bold.svg" />
     <Content Include="app\Styles\fonts\gotham-book.svg" />
-    <Content Include="app\Styles\images\clear-icon.png" />
     <Content Include="app\Styles\images\fa-globe.png" />
-    <Content Include="app\Styles\images\globe-icon.png" />
     <Content Include="app\Styles\images\help-icon.png" />
     <Content Include="app\Styles\images\like-icon.png" />
     <Content Include="app\Styles\images\loading.GIF" />
     <Content Include="app\Styles\images\arrow.png" />
-    <Content Include="app\Styles\images\busy.gif" />
     <Content Include="app\Styles\images\calendar-icon-hover.png" />
     <Content Include="app\Styles\images\calendar-icon.png" />
     <Content Include="app\Styles\images\circle-info.png" />
-    <Content Include="app\Styles\images\home-icon.png" />
     <Content Include="app\Styles\images\hor-loading.png" />
     <Content Include="app\Styles\images\left-shadrow.png" />
     <Content Include="app\Styles\images\loader.gif" />
     <Content Include="app\Styles\images\location-icon-hover.png" />
     <Content Include="app\Styles\images\location-icon.png" />
-    <Content Include="app\Styles\images\map-img.jpg" />
+    <Content Include="app\Styles\images\mapicon.png" />
     <Content Include="app\Styles\images\noimageavailable.png" />
     <Content Include="app\Styles\images\play-icon.png" />
-    <Content Include="app\Styles\images\post-img-1.jpg" />
     <Content Include="app\Styles\images\regions\africa-icon.png" />
     <Content Include="app\Styles\images\regions\asia-icon.png" />
     <Content Include="app\Styles\images\regions\europe-icon.png" />
@@ -125,12 +120,10 @@
     <Content Include="app\Styles\images\thumbs_up.png" />
     <Content Include="app\Styles\images\time.png" />
     <Content Include="app\Styles\images\trippism-logo.png" />
-    <Content Include="app\Styles\images\trippism.png" />
     <Content Include="app\Styles\images\User-12.png" />
     <Content Include="app\Styles\images\User-3.png" />
     <Content Include="app\Styles\images\User-5.png" />
     <Content Include="app\Styles\images\user-img.jpg" />
-    <Content Include="app\Styles\images\view-headline-icon.png" />
     <Content Include="app\Styles\images\wait-icon.png" />
     <Content Include="app\Styles\images\weather\Cloudy.png" />
     <Content Include="app\Styles\images\weather\Cool.png" />
@@ -154,7 +147,6 @@
     <Content Include="app\Utility.js" />
     <Content Include="app\Views\destination.html" />
     <Content Include="app\Views\GoogleMap.html" />
-    <Content Include="app\Views\destination1.html" />
     <Content Include="app\Scripts\angular-mocks.js" />
     <Content Include="app\Scripts\angular-ui-router.js" />
     <Content Include="app\Scripts\angular-ui-router.min.js" />
@@ -207,7 +199,6 @@
     <Content Include="index.html" />
     <Content Include="app\Scripts\alertify\alertify.js" />
     <Content Include="app\Scripts\alertify\alertify.min.js" />
-    <Content Include="index1.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
