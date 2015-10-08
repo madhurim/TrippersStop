@@ -376,14 +376,14 @@
                 $scope.AvailableCodes = angular.copy($scope.AvailableAirports);
 
                 if (org == undefined || org == '') {
-                    UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
+                   /* UtilFactory.getIpinfo($scope.AvailableAirports).then(function (data) {
                         if (data == undefined)
                             return;
                         else {
                             $scope.Origin = data.airport_Code;
                             $scope.findDestinations();
                         }
-                    });
+                    });*/
                 }
                 else {
                     if (_qFromDate != undefined && _qFromDate != '')
