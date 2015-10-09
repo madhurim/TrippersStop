@@ -98,15 +98,14 @@
                 var LowestFarePrice = "N/A";
                 var LowestNonStopeFare = "N/A";
                 var LowRate = 'N/A';
-                if (destinations[x].LowestNonStopFare != "N/A") {
-                    LowestNonStopeFare = parseFloat(destinations[x].LowestNonStopFare).toFixed(2);
+                if (destinations[x].LowestNonStopFare != null && destinations[x].LowestNonStopFare.Fare != "N/A") {
+                    LowestNonStopeFare = parseFloat(destinations[x].LowestNonStopFare.Fare).toFixed(2);
                     if (LowestNonStopeFare == 0)
                         LowestNonStopeFare = "N/A";
-
                 }
                 LowRate = LowestNonStopeFare;
-                if (destinations[x].LowestFare != "N/A") {
-                    LowestFarePrice = destinations[x].LowestFare.toFixed(2);
+                if (destinations[x].LowestFare != null && destinations[x].LowestFare.Fare != "N/A") {
+                    LowestFarePrice = parseFloat(destinations[x].LowestFare.Fare).toFixed(2);
                     if (LowestFarePrice == 0)
                         LowestFarePrice = "N/A";
                 }
@@ -282,6 +281,15 @@
 
             _paramsdata.dataforEmail = {};
             _paramsdata.SearchCriteria = SearchCriteria;
+            _paramsdata.instaFlightSearchData = {
+                OriginAirportName: $scope.seasonalitydirectiveData.OriginairportName.airport_Code,
+                DestinationaArportName: $scope.seasonalitydirectiveData.DestinationairportName.airport_Code,
+                FromDate: $scope.FromDate,
+                ToDate: $scope.ToDate,
+                Minfare: $scope.Minfare,
+                Maxfare: $scope.Maxfare,
+                IncludedCarriers: $scope.seasonalitydirectiveData.mapOptions.LowestFare.AirlineCodes
+            };
             $scope.tabManager.tabItems.push({
                 parametersData: _paramsdata,
                 title: $scope.seasonalitydirectiveData.OriginairportName.airport_Code + ' - ' + $scope.seasonalitydirectiveData.DestinationairportName.airport_Code,
@@ -454,6 +462,11 @@
         };
 
         $scope.getDestinationDetails = function (buttnText) {
+            // for showing info message to wait until airport data fetched to dropdown
+            $scope.isSearchbuttonClicked = true;
+            if ($scope.IsairportJSONLoading)
+                return;
+
             if ($scope.frmdestfinder.$invalid) {
                 $scope.hasError = true;
                 return;
@@ -528,6 +541,11 @@
         };
 
         function findDestinations(buttnText) {
+            // for showing info message to wait until airport data fetched to dropdown            
+            $scope.isSearchbuttonClicked = true;
+            if ($scope.IsairportJSONLoading)
+                return;
+
             $scope.isAdvancedSearch = false;
             if (buttnText != undefined && buttnText == 'advenced')
                 $scope.isAdvancedSearch = true;

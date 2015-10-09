@@ -265,7 +265,6 @@
 
                                     else
                                         zresult = '<span> ' + '' + ' </span>';
-                                    debugger;
                                     return '<span style="color:#87ceeb">Year Week :</span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, new Date(this.point.enddate)) + ' ] </b><br>' +
                                         '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
                                         '<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult + '</b>';

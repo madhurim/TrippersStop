@@ -78,12 +78,11 @@
                     scope.FareRangeWidgetDataFound = false;
                     if (scope.widgetParams != undefined) {
                         scope.fareRangeData = scope.widgetParams.FareRangeData;
-
                         if (scope.fareRangeData != undefined && scope.fareRangeData != "") {
                             // replace(/-/g, "/") used because of safari date convert problem
                             var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate.split('T')[0].replace(/-/g, "/"));
                             var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate.split('T')[0].replace(/-/g, "/"));
-                            for (i = 0; i < scope.fareRangeData.FareData.length; i++) {
+                            for (i = 0; i < scope.fareRangeData.FareData.length; i++) {                                
                                 var WeekStartDate = new Date(scope.fareRangeData.FareData[i].DepartureDateTime.split('T')[0].replace(/-/g, "/"));
                                 if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) {
                                     scope.FareRangeWidgetData = {
@@ -95,7 +94,6 @@
                                     scope.FareRangeWidgetDataFound = true;
                                     break;
                                 }
-                                //  scope.$apply();
                             }
                         }
                     }

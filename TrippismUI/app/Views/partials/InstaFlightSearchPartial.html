@@ -1,0 +1,107 @@
+﻿<div class="panel panel-default panel-margin no-border">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-3 col-sm-12 panel-header-insta">{{instaFlightSearch.Origin}} - {{instaFlightSearch.Destination}}</div>
+            <div class="col-md-1 col-sm-12 insta-code">{{instaFlightSearch.IncludedCarriers}}</div>
+            <div class="col-md-3 col-sm-12">
+                <div class="dep-and-ret">
+                    <div class="dep">Departure : </div>
+                    <div class="dep-two"> {{instaFlightSearch.DepartureDate}} </div>
+                    <div class="clearfix"></div>
+                    <div class="dep">Return : </div>
+                    <div class="dep-two"> {{instaFlightSearch.ReturnDate}}</div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12 text-center padd-7">
+                Lowest Fare:
+                <span ng-if="!lowestFare && isInstaFlightDataFound != false" class="glyphicon glyphicon-refresh glyphicon-spin margin-left-5"></span>
+                <span ng-if="lowestFare" class="insta-num">{{lowestFare | number : 2}} {{currencyCode}}</span>
+            </div>
+            <div class="col-md-1 button-right cross-btn">
+                <a class="close-panel-button" ng-click="dismiss()" role="button" tabindex="0">X</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div ng-if="isSearchingFlights == true && isInstaFlightDataFound != false;" class="panel-body no-border">Gathering flight's informations...</div>
+    <div class="panel-body no-border" ng-hide="isInstaFlightDataFound == true || isInstaFlightDataFound == null"><strong>Flight details not found!</strong></div>
+</div>
+<div class="margin-top-10">
+    <accordion close-others="true" ng-show="isInstaFlightDataFound == true">
+        <div class="font-lato panel-wrapper" ng-repeat="pricedItineraries in (instaFlightSearchResult.PricedItineraries | limitTo:instaFlightSearchLimit)">
+            <accordion-group is-open="status.open">
+                <accordion-heading>
+                    <div class="col-md-12 acc-heading">
+                        <div class="col-md-2 insta-num-big">{{pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount | number : 2}} {{pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode}}</div>
+                        <div class="col-md-10 insta-padding">
+                            <div class="col-md-12" ng-repeat="originDestinationOption in pricedItineraries.OriginDestinationOption">
+                                <div ng-if="originDestinationOption.FlightSegment.length == 1">
+                                    <div class="col-md-12 font-15" ng-repeat="flightSegment in originDestinationOption.FlightSegment">
+                                        <div class="col-md-7">
+                                            <div class="plane-set">
+                                                <b>{{flightSegment.DepartureDateTime | date : 'yyyy-MM-dd HH:mm'}}</b>
+                                                {{flightSegment.DepartureAirport.LocationCode}}
+                                            </div>
+                                            <span class="glyphicon glyphicon-plane rotate-right plane-ico"></span>
+                                            <b> {{flightSegment.ArrivalDateTime | date : 'yyyy-MM-dd HH:mm'}}</b> {{flightSegment.ArrivalAirport.LocationCode}}
+                                        </div>
+                                        <div class="col-md-3">{{flightSegment.ElapsedTime / 60 | floor | twoDigit}} h {{flightSegment.ElapsedTime % 60 | twoDigit}} min</div>
+                                        <div class="col-md-2 insta-stop media-text-left"><span>non</span> stop</div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div ng-if="originDestinationOption.FlightSegment.length > 1">
+                                    <div class="col-md-12 font-15">
+                                        <div class="col-md-7">
+                                            <div class="plane-set">
+                                                <b>{{originDestinationOption.FlightSegment[0].DepartureDateTime | date : 'yyyy-MM-dd HH:mm'}}</b>
+                                                {{originDestinationOption.FlightSegment[0].DepartureAirport.LocationCode}}
+                                            </div>
+                                            <span class="glyphicon glyphicon-plane rotate-right plane-ico"></span>
+                                            <b> {{originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalDateTime | date : 'yyyy-MM-dd HH:mm'}}</b>
+                                            {{originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalAirport.LocationCode}}
+                                        </div>
+                                        <div class="col-md-3">{{originDestinationOption.ElapsedTime / 60 | floor | twoDigit}} h {{originDestinationOption.ElapsedTime % 60 | twoDigit}} min</div>
+                                        <div class="col-md-2 insta-stop media-text-left"><span>{{originDestinationOption.FlightSegment.length - 1}}</span> stop</div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1 padding-10 position-abs top-0 right-0">
+                            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </accordion-heading>
+                <div class="col-md-12 insta-details">
+                    <div class="col-md-2 insta-curr">{{pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount | number : 2}} {{pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode}}</div>
+                    <div class="col-md-10">
+                        <div class="col-md-12" ng-repeat="originDestinationOption in pricedItineraries.OriginDestinationOption">
+                            <div class="col-md-12 insta-location">{{originDestinationOption.FlightSegment[0].DepartureAirport.LocationCode}} - {{originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalAirport.LocationCode}}</div>
+                            <div ng-repeat="flightSegment in originDestinationOption.FlightSegment">
+                                <div class="col-md-12">
+                                    <div>{{flightSegment.OperatingAirline.Code}}{{flightSegment.OperatingAirline.FlightNumber}}</div>
+                                </div>
+                                <div class="font-details" style="font-size:16px;">
+                                    <div class="col-md-4">D: <b>{{flightSegment.DepartureDateTime | date : 'yyyy-MM-dd HH:mm'}}</b> {{flightSegment.DepartureAirport.LocationCode}}</div>
+                                    <div class="col-md-4">A: <b>{{flightSegment.ArrivalDateTime | date : 'yyyy-MM-dd HH:mm'}}</b> {{flightSegment.ArrivalAirport.LocationCode}}</div>
+                                    <div class="col-md-4">{{flightSegment.ElapsedTime / 60 | floor | twoDigit}} h {{flightSegment.ElapsedTime % 60 | twoDigit}} min</div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </accordion-group>
+        </div>
+        <div class="col-md-12 text-center" ng-if="instaFlightSearchLimit< instaFlightSearchResult.PricedItineraries.length">
+            <button class="btn btn-primary" ng-click="increaseLimit();">Show more</button>
+        </div>
+        <div class="clear"></div>
+    </accordion>
+</div>

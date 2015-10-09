@@ -18,7 +18,7 @@
                             </ul>
                         </div>-->
                     </div>
-                    
+
                     <div class="col-md-2 col-sm-2 col-xs-7 pull-right">
                         <div class="logo">
                             <a href="#"> <img src="app/Styles/images/trippism-logo.png" alt="" /></a>
@@ -97,6 +97,11 @@
                                                         <span class="sr-only">Error:</span>
                                                         Please enter Origin.
                                                     </div>
+                                                    <div class="alert alert-info" role="alert" ng-show="IsairportJSONLoading && isSearchbuttonClicked">
+                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                        <span class="sr-only">Info:</span>
+                                                        Loading airport's details...
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-3 col-sm-2 col-xs-12" ng-show="selectedform == 'KnowMyDestination'">
                                                     <div class="input-box">
@@ -121,6 +126,11 @@
                                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                                         <span class="sr-only">Error:</span>
                                                         Please enter Destination Airport.
+                                                    </div>
+                                                    <div class="alert alert-info" role="alert" ng-show="IsairportJSONLoading && isSearchbuttonClicked">
+                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                        <span class="sr-only">Info:</span>
+                                                        Loading airport's details...
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2  col-sm-3 col-xs-12">

@@ -19,18 +19,27 @@ namespace TraveLayer.CustomTypes.Sabre
         public string href { get; set; }
     }
 
-
+    public class LowestFare
+    {
+        public List<string> AirlineCodes { get; set; }
+        public double Fare { get; set; }
+    }
+    public class LowestNonStopFare
+    {
+        public List<string> AirlineCodes { get; set; }
+        public double Fare { get; set; }
+    }
     // Move to bargain finder response
     public class FareInfo
     {
-        public double LowestFare { get; set; }
+        public LowestFare LowestFare { get; set; }
         public string CurrencyCode { get; set; }
-        public object LowestNonStopFare { get; set; }
+        public LowestNonStopFare LowestNonStopFare { get; set; }
         public string DepartureDateTime { get; set; }
         public string ReturnDateTime { get; set; }
         public List<Link> Links { get; set; }
-        public string DestinationLocation { get; set; } 
-        
+        public string DestinationLocation { get; set; }
+
         // Copying from BF REsponse.
         public string FareReference { get; set; }
         public TPAExtensions4 TPA_Extensions { get; set; }
@@ -41,7 +50,7 @@ namespace TraveLayer.CustomTypes.Sabre
     //    public string rel { get; set; }
     //    public string href { get; set; }
     //}
-//=======
+    //=======
     //public class FareInfo
     //{
     //    public object LowestFare { get; set; }
@@ -52,7 +61,7 @@ namespace TraveLayer.CustomTypes.Sabre
     //    public List<Link> Links { get; set; }
     //    public string DestinationLocation { get; set; } // Copying from DestinationFinder.
     //}   
-//>>>>>>> feature/AdvancedCalendarTestCases:TraveLayer/CustomTypes/Sabre/response/LeadPriceCalendar.cs
+    //>>>>>>> feature/AdvancedCalendarTestCases:TraveLayer/CustomTypes/Sabre/response/LeadPriceCalendar.cs
 
     public class OTA_LeadPriceCalendar
     {
@@ -124,5 +133,5 @@ namespace TraveLayer.CustomTypes.Sabre
 //        }
 //    ]
 //}
-    
+
 

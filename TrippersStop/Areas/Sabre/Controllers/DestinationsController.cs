@@ -6,8 +6,6 @@ using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre;
 using TrippismApi.TraveLayer;
-using ServiceStack;
-using System.Reflection;
 using System.Text;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 //using AutoMapper;
@@ -314,7 +312,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
                 Fares fares = Mapper.Map<OTA_DestinationFinder, Fares>(cities);
                 if (count != 0)
                 {
-                    fares.FareInfo = fares.FareInfo.OrderBy(f => f.LowestFare).Take(count).ToList();
+                    fares.FareInfo = fares.FareInfo.OrderBy(f => f.LowestFare.Fare).Take(count).ToList();
                 }
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
                 return response;

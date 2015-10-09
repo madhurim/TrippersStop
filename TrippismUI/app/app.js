@@ -1,14 +1,9 @@
-﻿
-
-var TrippismUIApp = angular.module('TrippismUIApp',
-                        [
-                            
-                          'ui.router',
+﻿var TrippismUIApp = angular.module('TrippismUIApp',
+                        ['ui.router',
                           'ui.bootstrap',
                           'ui.map',
                           'ui.event',
                           'cgBusy',
-                        
                         ]);
 
 TrippismUIApp.config(function ($stateProvider, $urlRouterProvider) {
@@ -41,6 +36,18 @@ TrippismUIApp.filter('limit', function () {
         return input.substr(0, value);
     }
 });
+// filter for getting floor value
+TrippismUIApp.filter('floor', function () {
+    return function (input) {
+        return Math.floor(input);
+    };
+});
+// pad 0 if 1 digit number
+TrippismUIApp.filter('twoDigit', function () {
+    return function (input) {
+        return input < 10 ? '0' + input : input;
+    };
+});
 TrippismUIApp.directive('infowindow', function () {
     return {
         restrict: 'E',
@@ -69,7 +76,8 @@ TrippismUIApp.directive('onCarouselChange', function ($parse) {
                 return origSelect.apply(this, arguments);
             };
         }
-    }});
+    }
+});
 
 TrippismUIApp.directive('tabs', function () {
     return {
@@ -101,17 +109,6 @@ TrippismUIApp.directive('tabs', function () {
                 '</ul>' +
                 '<div class="tab-content padtop5" style="margin-top:15px;" ng-transclude></div>' +
                 '</div>',
-
-        //template:
-        //    '<div class="tabbable">' +
-        //        '<ul class="nav nav-tabs my-tab">' +
-        //        '<li ng-repeat="pane in panes" ng-class="{active:pane.$parent.tabInfo.selected}">' +
-        //        '<a ng-click="pane.$parent.tabManager.select($index)">{{pane.title}}&nbsp;<span ng-click="pane.$parent.tabManager.removeTab($index);panes.splice($index, 1);" class="glyphicon glyphicon-remove"></span></a>' +
-        
-        //        '</li>' +
-        //        '</ul>' +
-        //        '<div class="tab-content padtop5" style="margin-top:15px;" ng-transclude></div>' +
-        //        '</div>',
         replace: true
     };
 });

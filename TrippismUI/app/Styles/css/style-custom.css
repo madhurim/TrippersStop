@@ -47,3 +47,176 @@ a {
 .panel-margin {
     margin-bottom: 0px;
 }
+/*----- InstaFlightSearchPartial ----------*/
+.no-border {
+    border: none !important;
+}
+
+.panel-header-insta {
+    font-size: 1.3em;
+    font-weight: 700;
+    padding: 7px 35px;
+}
+
+.margin-left-5 {
+    margin-left: 5px;
+}
+
+.insta-num {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.font-lato {
+    font-family: Lato,sans-serif;
+}
+
+.acc-heading {
+    opacity: 0.8;
+    padding: 0;
+}
+
+.insta-num-big {
+    text-align: center;
+    margin: auto;
+    vertical-align: baseline;
+    font-size: 18px;
+    color: #7dcdcd;
+    padding: 11px 9px;
+    font-weight: bold;
+}
+
+.insta-padding {
+    padding: 3px 0;
+}
+
+.padding-10 {
+    padding: 10px;
+}
+
+.insta-details {
+    opacity: 0.8;
+    font-family: Lato,sans-serif;
+    padding: 10px 0;
+    font-size: 15px;
+}
+
+.insta-curr {
+    text-align: center;
+    margin: auto;
+    vertical-align: baseline;
+    font-size: 23px;
+    color: #ff0b5c;
+    padding: 25px 9px;
+    font-weight: bold;
+}
+
+.insta-location {
+    color: #7dcdcd;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.font-details {
+    font-size: 1.3em;
+}
+
+.panel-wrapper .panel.panel-default {
+    border-left: none;
+    border-right: none;
+    margin-bottom: 5px;
+}
+
+.rotate-right {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.insta-code {
+    padding: 7px 0;
+    font-size: 1.3em;
+}
+
+.padd-7 {
+    padding: 7px 0;
+}
+
+.position-abs {
+    position: absolute;
+}
+
+.top-0 {
+    top: 0;
+}
+
+.right-0 {
+    right: 0;
+}
+
+.dep {
+    float: left;
+    text-align: right;
+    width: 80px;
+}
+
+.dep-two {
+    float: left;
+    text-align: left;
+    margin-left: 5px;
+}
+
+.plane-set {
+    float: left;
+    min-width: 156px;
+    text-align: left;
+}
+
+.plane-ico {
+    margin: 0 6px;
+}
+
+.font-15 {
+    font-size: 15px;
+}
+
+.insta-stop {
+    text-align: right;
+    width: 86px;
+}
+
+.cross-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px 20px;
+}
+
+@media only screen and (max-width: 991px) {
+    .panel-header-insta {
+        text-align: center;
+    }
+
+    .insta-code {
+        text-align: center;
+    }
+
+    .dep-and-ret {
+        display: table;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .media-text-left {
+        text-align: left;
+    }
+}
+
+/*---------------Ends ---------------------*/
