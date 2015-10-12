@@ -1,5 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('weatherwidgetInfo', ['$compile', '$filter', '$timeout', '$rootScope', 'WeatherFactory', 'UtilFactory', 'TrippismConstants', 'GoogleGeoReverseLookupFactory',
-    function ($compile, $filter, $timeout, $rootScope, WeatherFactory, UtilFactory, TrippismConstants, GoogleGeoReverseLookupFactory) {
+﻿angular.module('TrippismUIApp').directive('weatherwidgetInfo', ['$compile', '$filter', '$timeout', '$rootScope', 'WeatherFactory', 'UtilFactory', 'TrippismConstants',
+    function ($compile, $filter, $timeout, $rootScope, WeatherFactory, UtilFactory, TrippismConstants) {
         return {
             restrict: 'E',
             scope: {
