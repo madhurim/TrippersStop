@@ -288,7 +288,7 @@
                 ToDate: $scope.ToDate,
                 Minfare: $scope.Minfare,
                 Maxfare: $scope.Maxfare,
-                IncludedCarriers: $scope.seasonalitydirectiveData.mapOptions.LowestFare.AirlineCodes
+                //IncludedCarriers: $scope.seasonalitydirectiveData.mapOptions.LowestFare.AirlineCodes
             };
             $scope.tabManager.tabItems.push({
                 parametersData: _paramsdata,

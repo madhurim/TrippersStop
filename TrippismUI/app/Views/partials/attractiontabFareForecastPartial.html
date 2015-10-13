@@ -15,7 +15,16 @@
                 <div class="ibox-box">
                     <h4>{{attractionParams.mapOptions.CurrencyCode}} {{attractionParams.mapOptions.LowestNonStopFare.Fare | number : 2}}</h4>
                     <p>Lowest Non Stop Fare</p>
-                    <p>{{attractionParams.mapOptions.LowestNonStopFare.AirlineCodes.join(', ')}}</p>
+                    <p class="hover-line">
+                        <a href="" ng-click="InstaFlightSearch(attractionParams.mapOptions.LowestNonStopFare.AirlineCodes,attractionParams.mapOptions.LowestNonStopFare.Fare);">
+                            <span ng-if="attractionParams.mapOptions.LowestNonStopFare.AirlineCodes.length == 1">
+                                Airline : {{attractionParams.mapOptions.LowestNonStopFare.AirlineCodes.join(', ')}}
+                            </span>
+                            <span ng-if="attractionParams.mapOptions.LowestNonStopFare.AirlineCodes.length > 1">
+                                Airlines : {{attractionParams.mapOptions.LowestNonStopFare.AirlineCodes.join(', ')}}
+                            </span>
+                        </a>
+                    </p>
                 </div>
             </div>
 
@@ -23,7 +32,23 @@
                 <div class="ibox-box">
                     <h4>{{attractionParams.mapOptions.CurrencyCode}} {{attractionParams.mapOptions.LowestFare.Fare | number : 2}}</h4>
                     <p>Lowest Non Stop Fare</p>
-                    <p>{{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}</p>
+                    <p class="hover-line">
+                        <a href="" ng-click="InstaFlightSearch((attractionParams.mapOptions.LowestFare.AirlineCodes,attractionParams.mapOptions.LowestFare.Fare);">
+                            <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length == 1">
+                                Airline : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                            </span>
+                            <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length > 1">
+                                Airlines : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                            </span>
+                        </a>
+                    </p>
+                    <!--<p class="hover-line">
+                        <a href="" ng-click="InstaFlightSearch(attractionParams.mapOptions.LowestFare.AirlineCodes,attractionParams.mapOptions.LowestFare.Fare);">
+                            Airline
+                            <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length == 1">Code</span>
+                            <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length > 1">Codes</span> : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                        </a>
+                    </p>-->
                 </div>
             </div>
 
@@ -31,7 +56,23 @@
                 <div class="ibox-box">
                     <h4>{{attractionParams.mapOptions.CurrencyCode}} {{attractionParams.mapOptions.LowestFare.Fare | number : 2}}</h4>
                     <p>Lowest Fare</p>
-                    <p>{{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}</p>
+                    <p class="hover-line">
+                        <a href="" ng-click="InstaFlightSearch(attractionParams.mapOptions.LowestFare.AirlineCodes,attractionParams.mapOptions.LowestFare.Fare)">
+                            <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length == 1">
+                                Airline : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                            </span>
+                            <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length > 1">
+                                Airlines : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                            </span>
+                        </a>
+                    </p>
+                    <!--<p class="hover-line">
+                        <a href="" ng-click="InstaFlightSearch(attractionParams.mapOptions.LowestFare.AirlineCodes,attractionParams.mapOptions.LowestFare.Fare);">
+                            Airline
+                            <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length == 1">Code</span>
+                            <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length > 1">Codes</span> : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                        </a>
+                    </p>-->
                 </div>
             </div>
 
@@ -39,7 +80,23 @@
                 <div class="ibox-box">
                     <h4>{{attractionParams.mapOptions.CurrencyCode}} {{attractionParams.mapOptions.LowestFare.Fare | number : 2}}</h4>
                     <p>Lowest Fare</p>
-                    <p>{{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}</p>
+                    <p class="hover-line">
+                        <a href="" ng-click="InstaFlightSearch(attractionParams.mapOptions.LowestFare.AirlineCodes,attractionParams.mapOptions.LowestFare.Fare);">
+                            <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length == 1">
+                                Airline : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                            </span>
+                            <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length > 1">
+                                Airlines : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                            </span>
+                        </a>
+                    </p>
+                    <!--<p class="hover-line">
+                        <a href="" ng-click="InstaFlightSearch(attractionParams.mapOptions.LowestFare.AirlineCodes,attractionParams.mapOptions.LowestFare.Fare);">
+                            Airline
+                            <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length == 1">Code</span>
+                            <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length > 1">Codes</span> : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                        </a>
+                    </p>-->
                 </div>
             </div>
 
@@ -54,13 +111,6 @@
                     <p>Recommendation</p>
                 </div>
             </div>
-
-            <div class="col-md-1 col-sm-3 col-xs-6" ng-if="IsRequestCompleted">
-                <a href="" ng-click="InstaFlightSearch();">
-                    <img title="Book Now" src="/app/Styles/images/book-now.png" width="60" height="70" />
-                </a>
-            </div>
-
             <!--<div class="col-md-4 col-sm-12 col-xs-12 searched-box">-->
             <div class="col-md-3 col-sm-12 col-xs-12 searched-box">
                 <div class="ibox-box searched">

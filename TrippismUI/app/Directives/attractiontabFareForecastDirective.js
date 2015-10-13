@@ -48,7 +48,9 @@
                      activate();
                  });
 
-                scope.InstaFlightSearch = function () {
+                scope.InstaFlightSearch = function (airlines, lowestFare) {
+                    scope.attractionParams.instaFlightSearchData.IncludedCarriers = airlines;
+                    scope.attractionParams.instaFlightSearchData.LowestFare = lowestFare;
                     var InstaFlightSearchPopupInstance = $modal.open({
                         templateUrl: '/app/Views/Partials/InstaFlightSearchPartial.html',
                         controller: 'InstaFlightSearchController',
