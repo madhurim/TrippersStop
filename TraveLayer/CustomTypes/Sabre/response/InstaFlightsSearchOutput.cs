@@ -1,14 +1,7 @@
 ﻿/// <summary>
 ///  This class retrives  round-trip flight itineraries with published fares and fare breakdowns available from the Sabre cache for a certain origin, destination, and round-trip travel dates.
 /// </summary>
-
-
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace TraveLayer.CustomTypes.Sabre
 {
     public class InstaCabin
@@ -90,7 +83,7 @@ namespace TraveLayer.CustomTypes.Sabre
     {
         public List<FareBasisCode> FareBasisCode { get; set; }
     }
-    
+
     public class TotalTax
     {
         public double Amount { get; set; }
@@ -295,6 +288,6 @@ namespace TraveLayer.CustomTypes.Sabre
     //    public List<Link> Links { get; set; }
     //}
 
-   
+
 }
 

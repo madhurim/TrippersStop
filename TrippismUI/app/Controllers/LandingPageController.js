@@ -18,6 +18,7 @@
             $rootScope.apiURLForUSWeather = 'http://localhost:14606/api/weather/history';
             $rootScope.apiURLForGoogleGeoReverseLookup = 'http://localhost:14606/api/googlegeocode/reverselookup/';
             $rootScope.apiURLForFeedback = 'http://localhost:14606/api/Email/SendFeedback';
+            $rootScope.apiURLForInstaFlightSearch = 'http://localhost:14606/api/instaflight/search';
         }
         else {
             //live url
@@ -29,6 +30,7 @@
             $rootScope.apiURLForUSWeather = 'http://' + $location.host() + '/api/weather/history';
             $rootScope.apiURLForGoogleGeoReverseLookup = 'http://' + $location.host() + '/api/googlegeocode/reverselookup/';
             $rootScope.apiURLForFeedback = 'http://' + $location.host() + '/api/Email/SendFeedback';
+            $rootScope.apiURLForInstaFlightSearch = 'http://' + $location.host() + '/api/instaflight/search';
         }
         $scope.getClass = function (path) {
             if ($location.path().substr(0, path.length) == path) {

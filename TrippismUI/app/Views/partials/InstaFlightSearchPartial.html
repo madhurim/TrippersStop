@@ -1,0 +1,163 @@
+﻿<div class="panel panel-default panel-margin no-border">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-3 col-sm-12 panel-header-insta">
+                <span class="tool-tips cursor-help" data-toggle="tooltip" data-placement="bottom" popover="{{::getHTMLTooltip(instaFlightSearch.Origin);}}" popover-trigger="mouseenter"> {{instaFlightSearch.Origin}}</span>
+                -
+                <span class="tool-tips cursor-help" data-toggle="tooltip" data-placement="bottom" popover="{{::getHTMLTooltip(instaFlightSearch.Destination);}}" popover-trigger="mouseenter">{{instaFlightSearch.Destination}}</span>
+            </div>
+            <div class="col-md-6 col-sm-12 dep-and-ret">
+                <div class="col-md-6">Departure : {{instaFlightSearch.DepartureDate}}</div>
+                <div class="col-md-6">Return : {{instaFlightSearch.ReturnDate}}</div>
+            </div>
+            <div class="col-md-2 col-sm-12 text-center">
+                <span ng-if="!lowestFare && isInstaFlightDataFound != false" class="glyphicon glyphicon-refresh glyphicon-spin margin-left-5"></span>
+                <span ng-if="lowestFare" class="insta-num">{{lowestFare | number : 2}} {{currencyCode}}</span>
+            </div>
+            <div class="col-md-1 button-right cross-btn">
+                <a class="close-panel-button" ng-click="dismiss()" role="button" tabindex="0">X</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div ng-if="isSearchingFlights == true && isInstaFlightDataFound != false;" class="panel-body no-border">Gathering flight's informations...</div>
+    <div class="panel-body no-border" ng-hide="isInstaFlightDataFound == true || isInstaFlightDataFound == null"><strong>Flight details not found!</strong></div>
+</div>
+<div class="margin-top-10">
+    <accordion close-others="true" ng-show="isInstaFlightDataFound == true">
+        <div class="font-lato panel-wrapper" ng-repeat="pricedItineraries in (instaFlightSearchResult.PricedItineraries | limitTo:instaFlightSearchLimit)">
+            <accordion-group is-open="status.open">
+                <accordion-heading>
+                    <div class="col-md-12 acc-heading">
+                        <div class="col-md-2 insta-num-big">{{pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount | number : 2}} {{pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode}}</div>
+                        <div class="col-md-10 insta-padding">
+                            <div class="col-md-12" ng-repeat="originDestinationOption in pricedItineraries.OriginDestinationOption">
+                                <div ng-if="originDestinationOption.FlightSegment.length == 1">
+                                    <div class="col-md-8 font-15 margin-bottom-15" ng-repeat="flightSegment in originDestinationOption.FlightSegment">
+                                        <!--<div class="col-md-12"><img ng-src="http://pics.avs.io/150/50/{{flightSegment.OperatingAirline.Code}}.png" /></div>-->
+                                        <div class="col-md-12">
+                                            <div class="col-xs-4 col-sm-4 col-md-4"><b>{{flightSegment.DepartureDateTime | date : 'HH:mm'}}</b></div>
+                                            <div class="col-xs-4 col-sm-4 col-md-4">{{flightSegment.ElapsedTime / 60 | floor | twoDigit}} h {{flightSegment.ElapsedTime % 60 | twoDigit}}</div>
+                                            <div class="col-xs-4 col-sm-4 col-md-4"><b>{{flightSegment.ArrivalDateTime | date : 'HH:mm'}}</b></div>
+                                        </div>
+                                        <div class="clear"></div>
+                                        <div class="col-xs-7 col-sm-6 col-md-6 insta-arrow">
+                                            <ul class="stop-line">
+                                                <li class="stop-line"></li>
+                                            </ul>
+                                        </div>
+                                        <div class="clear"></div>
+                                        <div class="col-md-12">
+                                            <div class="col-xs-4 col-sm-4 col-md-4 leg-stops leg-stops-1 cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(flightSegment.DepartureAirport.LocationCode);}}" popover-trigger="mouseenter">
+                                                {{flightSegment.DepartureAirport.LocationCode}}
+                                            </div>
+                                            <div class="col-xs-4 col-sm-4 col-md-4 leg-stops">
+                                                <span class="leg-stops-green">Direct</span>
+                                            </div>
+                                            <div class="col-xs-4 col-sm-4 col-md-4 leg-stops leg-stops-1 cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(flightSegment.ArrivalAirport.LocationCode);}}" popover-trigger="mouseenter">
+                                                {{flightSegment.ArrivalAirport.LocationCode}}
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <!--<div class="col-md-3">
+                                        <a class="btn btn-primary" href="">ebookers</a><br />
+                                        <a class="btn btn-primary" href="">orbitz</a>
+                                    </div>-->
+                                </div>
+                                <div ng-if="originDestinationOption.FlightSegment.length > 1">
+                                    <div class="col-md-8 font-15 margin-bottom-15">
+                                        <!--<div class="col-md-12"><img ng-src="http://pics.avs.io/150/50/{{flightSegment.OperatingAirline.Code}}.png" /></div>-->
+                                        <div class="col-md-12">
+                                            <div class="col-xs-4 col-sm-4 col-md-4"><b>{{originDestinationOption.FlightSegment[0].DepartureDateTime | date : 'HH:mm'}}</b></div>
+                                            <div class="col-xs-4 col-sm-4 col-md-4">{{originDestinationOption.ElapsedTime / 60 | floor | twoDigit}} h {{originDestinationOption.ElapsedTime % 60 | twoDigit}}</div>
+                                            <div class="col-xs-4 col-sm-4 col-md-4"><b>{{originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalDateTime | date : 'HH:mm'}}</b></div>
+                                        </div>
+                                        <div class="clear"></div>
+                                        <div class="col-xs-7 col-sm-6 col-md-6 insta-arrow">
+                                            <ul class="stop-line">
+                                                <li class="stop-dot"></li>
+                                                <li class="stop-line"></li>
+                                            </ul>
+                                        </div>
+                                        <div class="clear"></div>
+                                        <div class="col-md-12">
+                                            <div class="col-xs-4 col-sm-4 col-md-4 leg-stops leg-stops-1 cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(originDestinationOption.FlightSegment[0].DepartureAirport.LocationCode);}}" popover-trigger="mouseenter">
+                                                {{originDestinationOption.FlightSegment[0].DepartureAirport.LocationCode}}
+                                            </div>
+                                            <div class="col-xs-4 col-sm-4 col-md-4 leg-stops">
+                                                <span class="leg-stops-red">{{originDestinationOption.FlightSegment.length - 1}} stop</span>
+                                                <span class="leg-stops-station">
+                                                    {{getStopsFromFlightSegment(originDestinationOption.FlightSegment);}}
+                                                </span>
+                                            </div>
+                                            <div class="col-xs-4 col-sm-4 col-md-4 leg-stops leg-stops-1 cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalAirport.LocationCode);}}" popover-trigger="mouseenter">
+                                                {{originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalAirport.LocationCode}}
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <!--<div class="col-md-3">
+                                        <a class="btn btn-primary" href="">ebookers</a><br />
+                                        <a class="btn btn-primary" href="">orbitz</a>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1 padding-10 position-abs top-0 right-0">
+                            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </accordion-heading>
+                <div class="col-md-12 insta-details">
+                    <!--<div class="col-md-2 insta-curr">{{pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount | number : 2}} {{pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode}}</div>-->
+
+                    <div class="col-md-12 margin-bottom-15" ng-repeat="originDestinationOption in pricedItineraries.OriginDestinationOption">
+                        <div class="col-md-12 insta-location">
+                            <span class="cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(originDestinationOption.FlightSegment[0].DepartureAirport.LocationCode);}}" popover-trigger="mouseenter"> {{originDestinationOption.FlightSegment[0].DepartureAirport.LocationCode}} </span>
+                            -
+                            <span class="cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalAirport.LocationCode);}}" popover-trigger="mouseenter"> {{originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalAirport.LocationCode}} </span>
+                        </div>
+                        <div ng-repeat="flightSegment in originDestinationOption.FlightSegment">
+                            <div class="col-md-12">
+                                <div class="col-xs-12 col-sm-3 col-md-3"><img ng-src="http://pics.avs.io/100/50/{{flightSegment.OperatingAirline.Code}}.png" /></div>
+                                <div class="col-md-9">
+                                    <div class="col-md-12">
+                                        <div>{{flightSegment.OperatingAirline.Code}}{{flightSegment.OperatingAirline.FlightNumber}}</div>
+                                    </div>
+                                    <div class="font-details">
+                                        <div class="col-xs-3 col-sm-3 col-md-3">
+                                            <b>{{flightSegment.DepartureDateTime | date : 'HH:mm'}}</b>
+                                            <span class="cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(flightSegment.DepartureAirport.LocationCode);}}" popover-trigger="mouseenter"> {{flightSegment.DepartureAirport.LocationCode}}</span>
+                                        </div>
+                                        <div class="col-xs-3 col-sm-3 col-md-3">
+                                            <b>{{flightSegment.ArrivalDateTime | date : 'HH:mm'}}</b>
+                                            <span class="cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(flightSegment.ArrivalAirport.LocationCode);}}" popover-trigger="mouseenter"> {{flightSegment.ArrivalAirport.LocationCode}}</span>
+                                        </div>
+                                        <div class="col-xs-3 col-sm-3 col-md-3">{{flightSegment.ElapsedTime / 60 | floor | twoDigit}} h {{flightSegment.ElapsedTime % 60 | twoDigit}} min</div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9 connect-detail" ng-if="originDestinationOption.FlightSegment.indexOf(flightSegment) != originDestinationOption.FlightSegment.length - 1" ng-init="::airportConnectionDetails = airportConnectionData(originDestinationOption.FlightSegment, flightSegment);">
+                                    <div class="col-md-3" style="font-size: 13px;" ng-if="airportConnectionDetails.isAirportChanged">CHANGE AIRPORT</div>
+                                    <div class="col-md-3" style="font-size: 13px;" ng-if="airportConnectionDetails.isConnectInAirport">Connect in airport</div>
+                                    <div class="col-md-3" ng-if="airportConnectionDetails.isLongWait"><b>Long wait</b></div>
+                                    <div class="col-md-3" ng-class="{'col-md-offset-3' : !airportConnectionDetails.isLongWait}">{{airportConnectionDetails.waitingTime}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+                <div class="clear"></div>
+            </accordion-group>
+        </div>
+        <div class="col-md-12 text-center" ng-if="instaFlightSearchLimit< instaFlightSearchResult.PricedItineraries.length">
+            <button class="btn btn-primary" ng-click="increaseLimit();">Show more</button>
+        </div>
+        <div class="clear"></div>
+    </accordion>
+</div>

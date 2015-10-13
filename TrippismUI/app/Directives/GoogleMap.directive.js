@@ -66,25 +66,25 @@ angular.module('TrippismUIApp')
                   var LowestFarePrice = "N/A";
                   var LowestNonStopeFare = "N/A";
                   var LowRate = 'N/A';
-                  if (maps[x].LowestNonStopFare != "N/A") {
-                      LowestNonStopeFare = parseFloat(maps[x].LowestNonStopFare).toFixed(2);
+                  if (maps[x].LowestNonStopFare != null && maps[x].LowestNonStopFare.Fare != "N/A") {
+                      LowestNonStopeFare = parseFloat(maps[x].LowestNonStopFare.Fare).toFixed(2);
                       if (LowestNonStopeFare == 0)
                           LowestNonStopeFare = "N/A";
-
                   }
-                  if (maps[x].LowestFare != "N/A") {
-                      LowestFarePrice = maps[x].LowestFare.toFixed(2);
+
+                  LowRate = LowestNonStopeFare;
+                  if (maps[x].LowestFare != null && maps[x].LowestFare.Fare != "N/A") {
+                      LowestFarePrice = parseFloat(maps[x].LowestFare.Fare).toFixed(2);
                       if (LowestFarePrice == 0)
                           LowestFarePrice = "N/A";
                   }
-                  LowRate = LowestFarePrice;
                   if (LowRate == "N/A")
-                      LowRate = LowestNonStopeFare; 
+                      LowRate = LowestFarePrice;
                   var airportName = _.find($scope.airportlist, function (airport) {
                       return airport.airport_Code == maps[x].DestinationLocation
                   });
 
-                  if (LowRate != "N/A") {                      
+                  if (LowRate != "N/A") {
                       var marker = new MarkerWithLabel({
                           position: latlng1,
                           map: $scope.destinationMap,
@@ -115,7 +115,7 @@ angular.module('TrippismUIApp')
                       var mapsdetails = maps[x];
 
                       google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
-                          return function () {                              
+                          return function () {
                               var OriginairportName = _.find($scope.airportlist, function (airport) {
                                   return airport.airport_Code == $scope.$parent.Origin.toUpperCase()
                               });

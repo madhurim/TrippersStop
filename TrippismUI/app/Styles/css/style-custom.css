@@ -47,3 +47,233 @@ a {
 .panel-margin {
     margin-bottom: 0px;
 }
+
+.hover-line:hover {
+    text-decoration: underline;
+}
+/*----- InstaFlightSearchPartial ----------*/
+.no-border {
+    border: none !important;
+}
+
+.panel-header-insta {
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+.margin-left-5 {
+    margin-left: 5px;
+}
+
+.insta-num {
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.font-lato {
+    font-family: Lato,sans-serif;
+}
+
+.acc-heading {
+    opacity: 0.8;
+    padding: 0;
+}
+
+.insta-num-big {
+    text-align: center;
+    margin: auto;
+    vertical-align: baseline;
+    font-size: 18px;
+    color: #7dcdcd;
+    padding: 11px 9px;
+    font-weight: bold;
+}
+
+.insta-padding {
+    padding: 3px 0;
+}
+
+.padding-10 {
+    padding: 10px;
+}
+
+.insta-details {
+    opacity: 0.8;
+    font-family: Lato,sans-serif;
+    padding: 10px 0;
+    font-size: 15px;
+}
+
+.insta-curr {
+    text-align: center;
+    margin: auto;
+    vertical-align: baseline;
+    font-size: 23px;
+    color: #ff5c4d;
+    padding: 25px 9px;
+    font-weight: bold;
+}
+
+.insta-location {
+    color: #7dcdcd;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.font-details {
+    font-size: 16px;
+}
+
+.panel-wrapper .panel.panel-default {
+    border-left: none;
+    border-right: none;
+    margin-bottom: 5px;
+}
+
+.rotate-right {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.insta-code {
+    padding: 7px 0;
+    font-size: 1.3em;
+}
+
+.position-abs {
+    position: absolute;
+}
+
+.top-0 {
+    top: 0;
+}
+
+.right-0 {
+    right: 0;
+}
+
+.plane-set {
+    float: left;
+    text-align: left;
+}
+
+.plane-ico {
+    margin: 0 6px;
+}
+
+.font-15 {
+    font-size: 15px;
+}
+
+.margin-bottom-15 {
+    margin-bottom: 15px;
+}
+
+.insta-stop {
+    text-align: right;
+    width: 86px;
+}
+
+.cross-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px 20px;
+}
+
+.stops {
+    text-align: center;
+}
+
+ul.stop-line {
+    height: 2px;
+    background-color: #a2a4ac;
+    margin: 5px auto;
+    position: relative;
+    padding: 0;
+}
+
+li.stop-dot {
+    width: 8px;
+    height: 8px;
+    background-image: url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%208%208%22%20enable-background%3D%22new%200%200%208%208%22%3E%3Ccircle%20fill%3D%22%23fff%22%20cx%3D%224%22%20cy%3D%224%22%20r%3D%223%22/%3E%3Cpath%20fill%3D%22%23a2a4ac%22%20d%3D%22M4%202c1.1%200%202%20.9%202%202s-.9%202-2%202-2-.9-2-2%20.9-2%202-2m0-2c-2.2%200-4%201.8-4%204s1.8%204%204%204%204-1.8%204-4-1.8-4-4-4z%22/%3E%3C/svg%3E);
+    line-height: 0;
+    position: relative;
+    top: -8px;
+    text-indent: 0;
+    display: inline-block;
+    zoom: 1;
+    margin: 0 3%;
+}
+
+ul .stop-line {
+    content: ' ';
+    width: 21px;
+    height: 12px;
+    background-image: url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2021%2012%22%3E%3Cpath%20fill%3D%22%23a2a4ac%22%20d%3D%22M12.9%200l5.1%206-5.1%206h3l5.1-6-5.1-6z%22/%3E%3C/svg%3E);
+    position: absolute;
+    right: -1px;
+    top: -5px;
+}
+
+.leg-stops-red {
+    color: #ff5c4d;
+}
+
+.leg-stops-station {
+    color: #80828b;
+}
+
+.insta-arrow {
+    text-align: center;
+    margin: 0 auto;
+    margin-left: 17%;
+}
+
+.leg-stops-1 {
+    padding-left: 20px;
+}
+
+.leg-stops-green {
+    color: #55bd00;
+}
+
+.connect-detail {
+    color: #ff5c4d;
+    padding: 0;
+    font-size: 16px;
+}
+
+.cursor-help {
+    cursor: help;
+}
+
+@media only screen and (max-width: 991px) {
+    .panel-header-insta {
+        text-align: center;
+    }
+
+    .insta-code {
+        text-align: center;
+    }
+
+    .dep-and-ret {
+        display: table;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0;
+    }
+
+    .media-text-left {
+        text-align: left;
+    }
+}
+/*---------------Ends ---------------------*/

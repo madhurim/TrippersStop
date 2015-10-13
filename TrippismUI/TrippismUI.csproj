@@ -23,6 +23,7 @@
     <Content Include="app\Controllers\DestinationController.js" />
     <Content Include="app\Controllers\EmailForDestinationDetController.js" />
     <Content Include="app\Controllers\FeedbackController.js" />
+    <Content Include="app\Controllers\InstaFlightSearchController.js" />
     <Content Include="app\Controllers\LandingPageController.js" />
     <Content Include="app\Controllers\YouTubeController.js" />
     <Content Include="app\Directives\attractionsListDirective.js" />
@@ -44,6 +45,7 @@
     <Content Include="app\Factory\FeedbackFactory.js" />
     <Content Include="app\Factory\GoogleAttractionFactory.js" />
     <Content Include="app\Factory\GoogleGeoReverseLookupFactory.js" />
+    <Content Include="app\Factory\InstaFlightSearchFactory.js" />
     <Content Include="app\Factory\WeatherFactory.js" />
     <Content Include="app\Factory\FareRangeFactory.js" />
     <Content Include="app\Factory\SeasonalityFactory.js" />
@@ -80,6 +82,7 @@
     <Content Include="app\Styles\fonts\Gotham-Black.svg" />
     <Content Include="app\Styles\fonts\gotham-bold.svg" />
     <Content Include="app\Styles\fonts\gotham-book.svg" />
+    <Content Include="app\Styles\images\clear-icon.png" />
     <Content Include="app\Styles\images\fa-globe.png" />
     <Content Include="app\Styles\images\help-icon.png" />
     <Content Include="app\Styles\images\like-icon.png" />
@@ -187,6 +190,7 @@
     <Content Include="app\Views\partials\EmailDetFormPartial.html" />
     <Content Include="app\Views\partials\FeedbackDetailFormPartial.html" />
     <Content Include="app\Views\partials\GoogleAttractionPartial.html" />
+    <Content Include="app\Views\partials\InstaFlightSearchPartial.html" />
     <Content Include="app\Views\partials\SeasonalityFarerangeWidget.html" />
     <Content Include="app\Views\partials\TopDestinationsPartial.html" />
     <Content Include="app\Views\partials\WeatherPartial.html" />

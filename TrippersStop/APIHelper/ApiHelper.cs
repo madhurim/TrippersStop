@@ -1,9 +1,5 @@
 using ExpressMapper;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Weather;
@@ -24,7 +20,7 @@ namespace TrippismApi
                 string sabreAuthenticationUrl = ConfigurationManager.AppSettings["SabreAuthenticationUrl"];
                 apiCaller.LongTermToken = apiCaller.GetToken(sabreAuthenticationUrl).Result;
                 SaveTokenInCache(apiCaller, cacheService);
-            }       
+            }
             apiCaller.Authorization = "bearer";
             apiCaller.ContentType = "application/json";
         }
@@ -129,8 +125,21 @@ namespace TrippismApi
 
         public static void RegisterMappingEntities()
         {
-           // ConfigurationManager.AppSettings["SabreDestinationsUrl"];
-            Mapper.Register<InstaFlightsSearchOutput, InstaFlightSearch>();
+            // ConfigurationManager.AppSettings["SabreDestinationsUrl"];
+            //Mapper.Register<InstaFlightsSearchOutput, InstaFlightSearch>();
+
+            //Mapper.Register<PricedItinerary, PricedItineraryViewModel>();
+            //Mapper.Register<AirItinerary, AirItineraryViewModel>();
+            //Mapper.Register<FlightSegment, FlightSegmentViewModel>();
+            //Mapper.Register<OriginDestinationOptions, OriginDestinationOptionsViewModel>();
+            //Mapper.Register<OriginDestinationOption, OriginDestinationOptionViewModel>();
+            //Mapper.Register<ItinTotalFare, ItinTotalFareViewModel>();
+            //Mapper.Register<PTCFareBreakdowns, PTCFareBreakdownsViewModel>();
+            //Mapper.Register<FareInfo, FareInfoViewModel>();
+            //Mapper.Register<AirItineraryPricingInfo, AirItineraryPricingInfoViewModel>();
+            //Mapper.Register<PTCFareBreakdown, PTCFareBreakdownViewModel>();
+            //Mapper.Register<InstaFlightsSearchOutput, InstaFlightSearch>();
+
             Mapper.Register<OTA_DestinationFinder, Fares>();
             Mapper.Register<OTA_FareRange, VM.FareRange>();
             Mapper.Register<OTA_TravelSeasonality, VM.TravelSeasonality>();
