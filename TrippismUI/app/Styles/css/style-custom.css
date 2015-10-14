@@ -80,7 +80,7 @@ a {
 }
 
 .acc-heading {
-    opacity: 0.8;
+    /*opacity: 0.8;*/
     padding: 0;
 }
 
@@ -89,7 +89,7 @@ a {
     margin: auto;
     vertical-align: baseline;
     font-size: 18px;
-    color: #7dcdcd;
+    /*color: #7dcdcd;*/
     padding: 11px 9px;
     font-weight: bold;
 }
@@ -108,6 +108,17 @@ a {
     padding: 10px 0;
     font-size: 15px;
 }
+.instaflight .panel-heading {
+    background-color :white;
+}
+.instaflight-scroll {
+    height: 400px;
+    overflow-y: scroll;
+}
+.instaflight-center {
+    text-align:center
+}
+
 
 .insta-curr {
     text-align: center;

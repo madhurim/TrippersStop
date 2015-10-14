@@ -76,6 +76,14 @@
             }
             return result;
         }
+        $scope.amountBifercation = function (TotalfareAmount)
+        {
+            var result = {
+                BeforeDecimal: Math.floor(TotalfareAmount),
+                AfterDecimal: "."+(TotalfareAmount + "").split(".")[1]
+            };
+            return result;
+        }
         var getAirportNameFromCode = function (airportCode) {
             var airportName = airportCode;
             var airportData = $filter('filter')($scope.$parent.attractionParams.AvailableAirports, { airport_Code: airportCode });
