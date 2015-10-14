@@ -102,6 +102,10 @@ a {
     padding: 10px;
 }
 
+.padding-0 {
+    padding: 0;
+}
+
 .insta-details {
     opacity: 0.8;
     font-family: Lato,sans-serif;
@@ -235,11 +239,11 @@ ul .stop-line {
 .insta-arrow {
     text-align: center;
     margin: 0 auto;
-    margin-left: 17%;
+    margin-left: 16%;
 }
 
 .leg-stops-1 {
-    padding-left: 20px;
+    padding-left: 17px;
 }
 
 .leg-stops-green {
@@ -254,6 +258,22 @@ ul .stop-line {
 
 .cursor-help {
     cursor: help;
+}
+
+.btn-book {
+    display: block;
+    width: 115px;
+    height: 33px;
+    margin: 5px auto;
+}
+
+.font-13 {
+    font-size: 13px;
+}
+
+.text-book {
+    font-size: 12px;
+    font-weight: bold;
 }
 
 @media only screen and (max-width: 991px) {

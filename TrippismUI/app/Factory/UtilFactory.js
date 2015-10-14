@@ -11,6 +11,7 @@
             getIpinfo: getIpinfo,
             MapscrollTo: MapscrollTo,
             ReadStateJson: ReadStateJson,
+            ReadAirlinesJson: ReadAirlinesJson
         };
         return service;
 
@@ -50,7 +51,7 @@
                             AvailableCodes.push(objtopush);
                         }
                     }
-                    
+
                 }
 
 
@@ -77,6 +78,12 @@
             $anchorScroll();
             $location.hash(old);
             return;
+        }
+
+        function ReadAirlinesJson() {
+            return $http.get('../app/Constants/airlines.json').then(function (_airlines) {
+                return _airlines.data.response;
+            });
         }
     }
 })();

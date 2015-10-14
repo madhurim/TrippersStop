@@ -18,7 +18,7 @@
             return str.join("&");
         }
 
-        function GetData(data) {            
+        function GetData(data) {
             var dataURL = '?' + serialize(data);
             var url = $rootScope.apiURLForInstaFlightSearch + dataURL;
             return $http.get(url)

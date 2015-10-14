@@ -8,6 +8,7 @@ angular.module('TrippismUIApp')
           btntext: "=btntext",
           destinations: "=destinations",
           airportlist: "=airportlist",
+          airlineJsonData: "=airlinejsondata",
           defaultlat: "@",
           defaultlng: "@"
       }
@@ -139,6 +140,7 @@ angular.module('TrippismUIApp')
                                   DestinationairportName: DestinationairportName,
                                   DestinationList: $scope.destinations,
                                   AvailableAirports: $scope.airportlist,
+                                  AvailableAirline: $scope.airlineJsonData
                                   //tabIndex : 999  // used for popup
                               });
                           };

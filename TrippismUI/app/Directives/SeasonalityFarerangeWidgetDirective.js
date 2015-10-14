@@ -92,7 +92,6 @@
                             var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate.split('T')[0].replace(/-/g, "/"));
                             for (i = 0; i < scope.fareRangeData.FareData.length; i++) {                                
                                 var WeekStartDate = new Date(scope.fareRangeData.FareData[i].DepartureDateTime.split('T')[0].replace(/-/g, "/"));
-                                debugger;
                                 if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) {
                                     scope.FareRangeWidgetData = {
                                         MinimumFare: scope.fareRangeData.FareData[i].MinimumFare,
