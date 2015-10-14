@@ -18,6 +18,7 @@ using System;
 namespace Trippism.Areas.Sabre.Controllers
 {
     [GZipCompressionFilter]
+    [ServiceStackFormatterConfigAttribute]
     public class InstaFlightSearchController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
@@ -76,8 +77,8 @@ namespace Trippism.Areas.Sabre.Controllers
 
         private HttpResponseMessage GetResponse(string url, int count = 0)
         {
-            ApiHelper.SetApiToken(_apiCaller, _cacheService);            
-            APIResponse result = _apiCaller.Get(url).Result;                        
+            ApiHelper.SetApiToken(_apiCaller, _cacheService);
+            APIResponse result = _apiCaller.Get(url).Result;
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
                 ApiHelper.RefreshApiToken(_cacheService, _apiCaller);

@@ -237,6 +237,7 @@
     <Content Include="app\Styles\fonts\gotham-bold.otf" />
     <Content Include="app\Styles\fonts\gotham-bold.ttf" />
     <Content Include="app\Styles\fonts\gotham-bold.woff" />
+    <Content Include="app\Constants\airlines.json" />
     <None Include="Trippism.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>

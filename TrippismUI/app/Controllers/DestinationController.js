@@ -92,6 +92,13 @@
             }
         }
 
+        function LoadAirlineJson() {
+            UtilFactory.ReadAirlinesJson().then(function (data) {
+                $scope.airlineJsonData = data;
+            });
+        }
+        LoadAirlineJson();
+
         function FilterDestinations(destinations) {
             var destinationstodisp = [];
             for (var x = 0; x < destinations.length; x++) {
@@ -510,7 +517,6 @@
                             "Destination": $scope.KnownDestinationAirport.toUpperCase()
                         };
                         objDestinationairport.objDestinationairport = $scope.KnownDestinationAirport.toUpperCase();
-
                         $rootScope.$broadcast('EmptyFareForcastInfo', {
                             Origin: originairport.airport_CityName,
                             Destinatrion: DestinationairportName.airport_Code,
@@ -520,6 +526,7 @@
                             DestinationairportName: DestinationairportName,
                             DestinationList: $scope.destinationlist,
                             AvailableAirports: $scope.AvailableAirports,
+                            AvailableAirline: $scope.airlineJsonData
                         });
                         $scope.KnownDestinationAirport = '';
                         UtilFactory.MapscrollTo('wrapper');

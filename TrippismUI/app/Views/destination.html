@@ -34,7 +34,7 @@
     <div class="map-box">
         <div class="" style="height:100%;width:auto;" cg-busy="{promise:mappromise,message:'Please wait, we are getting cheapest destinations from ' + OrigintoDisp,templateUrl:'/app/Views/partials/cgbusyMessagePartial.html'}">
             <div id="wrapper" cg-busy="{promise:destinationmappromise,message:'Please wait, we are getting destination details...'}">
-                <div google-map id="map_canvas" btntext="buttontext" destinations="destinationlist" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
+                <div google-map id="map_canvas" btntext="buttontext" destinations="destinationlist" airlinejsondata="airlineJsonData" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
             </div>
         </div>
     </div>
