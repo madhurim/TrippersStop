@@ -78,11 +78,11 @@
             }
             return result;
         }
-        $scope.amountBifercation = function (TotalfareAmount)
-        {
+        $scope.amountBifercation = function (TotalfareAmount) {
+            var afterDec = (TotalfareAmount + "").split(".")[1];
             var result = {
                 BeforeDecimal: Math.floor(TotalfareAmount),
-                AfterDecimal: "."+(TotalfareAmount + "").split(".")[1]
+                AfterDecimal: "." + (afterDec.length == 1 ? afterDec + '0' : afterDec)
             };
             return result;
         }
@@ -116,7 +116,7 @@
         $scope.getStopArray = function (length) {
             return new Array(length);
         }
-        $scope.getAirlineName = function (airlineCode) {            
+        $scope.getAirlineName = function (airlineCode) {
             var result = airlineCode;
             if ($scope.$parent.attractionParams.AvailableAirline) {
                 var data = $filter('filter')($scope.$parent.attractionParams.AvailableAirline, { code: airlineCode });
