@@ -13,7 +13,7 @@
             <div class="col-md-2 col-sm-12 text-center">
                 <span ng-if="!lowestFare && isInstaFlightDataFound != false" class="glyphicon glyphicon-refresh glyphicon-spin margin-left-5"></span>
                 <span ng-if="lowestFare" class="insta-num" ng-init="::amtbifercation = amountBifercation(lowestFare);">
-                    {{currencyCode}} 
+                    {{currencyCode}}
                     {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
                 </span>
             </div>
@@ -23,8 +23,8 @@
             <div class="clear"></div>
         </div>
         <div class="row">
-            <div class="col-sm-7 header-text">Congratulations ! you found a destination.<br /> We are not a booking engine. We recommend booking through :</div>
-            <div class="col-md-2 paddingtop7" >
+            <div class="col-sm-7 header-text">Congratulations! you found a destination.<br /> We are not a booking engine. We recommend booking through :</div>
+            <div class="col-md-2 paddingtop7">
                 <a class="btn btn-warning btn-book" target="_blank" ng-href="http://www.ebookers.com/shop/home?type=air&ar.type=roundTrip&strm=true&ar.rt.leaveSlice.orig.key={{::instaFlightSearch.Origin}}&ar.rt.leaveSlice.dest.key={{::instaFlightSearch.Destination}}&ar.rt.leaveSlice.date={{::instaFlightSearch.DepartureDate | date : 'dd/MM/yy'}}&ar.rt.leaveSlice.time=Anytime&ar.rt.returnSlice.date={{::instaFlightSearch.ReturnDate | date : 'dd/MM/yy'}}&ar.rt.returnSlice.time=Anytime&_ar.rt.flexAirSearch=0&ar.rt.numAdult=1&ar.rt.numSenior=0&ar.rt.numChild=0&ar.rt.child%5B0%5D=&ar.rt.child%5B1%5D=&ar.rt.child%5B2%5D=&ar.rt.child%5B3%5D=&ar.rt.child%5B4%5D=&ar.rt.child%5B5%5D=&ar.rt.child%5B6%5D=&ar.rt.child%5B7%5D=&_ar.rt.nonStop=0&search=Search+Flights&_ar.rt.narrowSel=0&ar.rt.narrow=airlines{{::getAirlineQueryString();}}&ar.rt.cabin=C">
                     <img class="img-responsive" src="http://www.tnetnoc.com/static/28.230/image/pos/ebuk/en-gb/logo-header.png" alt="ebookers">
                 </a>
@@ -38,11 +38,11 @@
         </div>
         <div class="clear"></div>
     </div>
-    <div ng-if="isSearchingFlights == true && isInstaFlightDataFound != false;" class="panel-body no-border">Gathering flight's informations...</div>
-    <div class="panel-body no-border" ng-hide="isInstaFlightDataFound == true || isInstaFlightDataFound == null"><strong>Flight details not found!</strong></div>
 </div>
 <div class="margin-top-10">
     <div class="instaflight instaflight-scroll">
+        <div ng-if="isSearchingFlights == true && isInstaFlightDataFound != false;" class="panel-body no-border">Bringing itineraries...</div>
+        <div class="panel-body no-border" ng-hide="isInstaFlightDataFound == true || isInstaFlightDataFound == null"><strong>No itineraries were found!</strong></div>
         <accordion close-others="true" ng-show="isInstaFlightDataFound == true">
             <div class="font-lato panel-wrapper" ng-repeat="pricedItineraries in (instaFlightSearchResult.PricedItineraries | limitTo:instaFlightSearchLimit)">
                 <accordion-group is-open="status.open">
@@ -117,13 +117,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--<div class="col-md-2 padding-0">
-                                <div class="col-md-12 ng-scope text-center text-book">Book With</div>
-                                <div ng-click="$event.stopPropagation();" class="col-xs-12">
-
-
-                                </div>
-                            </div>-->
                             <div class="col-md-1 padding-10 position-abs top-0 right-0">
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                             </div>
@@ -145,9 +138,11 @@
                                         <div>{{flightSegment.OperatingAirline.Code}}{{flightSegment.OperatingAirline.FlightNumber}}</div>
                                     </div>
                                     <div class="col-md-9">
-                                        <!--<div class="col-md-12">
-                                            <div>{{flightSegment.OperatingAirline.Code}}{{flightSegment.OperatingAirline.FlightNumber}}</div>
-                                        </div>-->
+                                        <div class="font-details insta-title" ng-if="$index == 0">
+                                            <div class="col-xs-3 col-sm-3 col-md-3">Departure</div>
+                                            <div class="col-xs-3 col-sm-3 col-md-3">Arrival</div>
+                                            <div class="clear"></div>
+                                        </div>
                                         <div class="font-details">
                                             <div class="col-xs-3 col-sm-3 col-md-3">
                                                 <b>{{flightSegment.DepartureDateTime | date : 'HH:mm'}}</b>
@@ -163,15 +158,11 @@
                                     </div>
                                     <div class="col-md-9 connect-detail" ng-if="originDestinationOption.FlightSegment.indexOf(flightSegment) != originDestinationOption.FlightSegment.length - 1" ng-init="::airportConnectionDetails = airportConnectionData(originDestinationOption.FlightSegment, flightSegment);">
                                         <div class="col-md-8 col-sm-offset-3">
-                                            <span ng-if="airportConnectionDetails.isAirportChanged"> Change airport : </span>
-                                            <span ng-if="airportConnectionDetails.isConnectInAirport"> Connect in airport : </span>
-                                            <span ng-if="airportConnectionDetails.isLongWait"><b> Long wait</b> : </span>
+                                            <span ng-if="airportConnectionDetails.isAirportChanged"> Change airport </span>
+                                            <span ng-if="airportConnectionDetails.isLongWait"> Long </span>
+                                            <span ng-if="airportConnectionDetails.isConnectInAirport"> Layover </span>
                                             <span> {{airportConnectionDetails.waitingTime}}</span>
                                         </div>
-                                        <!--<div class="col-md-3" ng-if="airportConnectionDetails.isAirportChanged">Change airport</div>
-                                        <div class="col-md-3">Connect in airport</div>
-                                        <div class="col-md-3" ng-if="airportConnectionDetails.isLongWait">Long wait</div>
-                                        <div class="col-md-3" ng-class="{'col-md-offset-3' : !airportConnectionDetails.isLongWait}">{{airportConnectionDetails.waitingTime}}</div>-->
                                     </div>
                                 </div>
                             </div>
@@ -182,8 +173,10 @@
                     <div class="clear"></div>
                 </accordion-group>
             </div>
-            <div class="col-md-12 text-center" ng-if="instaFlightSearchLimit< instaFlightSearchResult.PricedItineraries.length">
-                <button class="btn btn-primary" ng-click="increaseLimit();">Show more</button>
+            <div class="col-md-12 text-center" ng-if="instaFlightSearchLimit < instaFlightSearchResult.PricedItineraries.length">
+                <button class="btn btn-primary" ng-click="increaseLimit();">
+                    Show more
+                </button>
             </div>
             <div class="clear"></div>
         </accordion>
