@@ -207,6 +207,11 @@ a {
     padding: 10px 20px;
 }
 
+    .cross-btn a {
+        color: #f0ad4e;
+        outline: none;
+    }
+
 .stops {
     text-align: center;
 }
@@ -261,7 +266,7 @@ ul .stop-line {
 }
 
 .leg-stops-green {
-    color: #55bd00;
+    color: green;
 }
 
 .connect-detail {
@@ -305,8 +310,15 @@ ul .stop-line {
 .vertical-top {
     vertical-align: top;
 }
+
 .paddingtop7 {
-padding-top:7px;
+    padding-top: 7px;
+}
+
+.insta-title {
+    font-weight: bold;
+    color: green;
+    font-size: 15px;
 }
 
 @media only screen and (max-width: 991px) {

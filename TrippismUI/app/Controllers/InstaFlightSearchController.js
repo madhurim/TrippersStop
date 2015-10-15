@@ -5,14 +5,14 @@
     function InstaFlightSearchController($scope, $filter, $modal, InstaFlightSearchFactory, UtilFactory, instaFlightSearchData) {
         $scope.isInstaFlightDataFound = null;
         $scope.instaFlightSearchData = instaFlightSearchData;
-        $scope.airportNamesList = [];
+        var airportNameCache = [];
+        var airlinesNameCache = [];
         function active() {
             if ($scope.instaFlightSearchData != undefined) {
                 $scope.isSearchingFlights = true;
                 var departureDate = $filter('date')(angular.isString($scope.instaFlightSearchData.FromDate) ? new Date($scope.instaFlightSearchData.FromDate.split('T')[0].replace(/-/g, "/")) : $scope.instaFlightSearchData.FromDate, 'yyyy-MM-dd');
                 var returnDate = $filter('date')(angular.isString($scope.instaFlightSearchData.ToDate) ? new Date($scope.instaFlightSearchData.ToDate.split('T')[0].replace(/-/g, "/")) : $scope.instaFlightSearchData.ToDate, 'yyyy-MM-dd');
                 var lowestFare = instaFlightSearchData.LowestFare;
-
                 $scope.instaFlightSearch = {
                     Origin: $scope.instaFlightSearchData.OriginAirportName,
                     Destination: $scope.instaFlightSearchData.DestinationaArportName,
@@ -23,6 +23,7 @@
                     IncludedCarriers: $scope.instaFlightSearchData.IncludedCarriers,
                     //LowestFare: instaFlightSearchData.LowestFare
                 };
+                $scope.includedCarriers = $scope.instaFlightSearch.IncludedCarriers;
                 if ($scope.instaFlightSearch.IncludedCarriers != '' && $scope.instaFlightSearch.IncludedCarriers.length > 0)
                     $scope.instaFlightSearch.IncludedCarriers = $scope.instaFlightSearch.IncludedCarriers.join(',');
                 InstaFlightSearchFactory.GetData($scope.instaFlightSearch).then(function (data) {
@@ -88,27 +89,35 @@
         }
         var getAirportNameFromCode = function (airportCode) {
             var airportName = airportCode;
+            var cacheValue = $filter('filter')(airportNameCache, { airport_Code: airportCode })[0];
+            if (cacheValue)
+                return cacheValue.airportName;
+
             var airportData = $filter('filter')($scope.$parent.attractionParams.AvailableAirports, { airport_Code: airportCode });
             if (airportData) {
-                if (angular.isArray(airportData))
-                    airportData = airportData[0];
-                //airportData = $filter('filter')(airportData, { airport_IsMAC: false });
-
-                if (airportData && airportData.airport_FullName) {
-                    airportName = airportData.airport_FullName;
+                if (angular.isArray(airportData)) {
+                    var airportDataFiltered = $filter('filter')(airportData, { airport_IsMAC: false })[0];
+                    if (!airportDataFiltered)
+                        airportData = airportData[0];
+                    else
+                        airportData = airportDataFiltered;
                 }
-                return airportName;
+                if (airportData) {
+                    airportName = airportData.airport_FullName + ', ' + airportData.airport_CityName + ', ' + airportData.airport_CountryName;
+                    airportNameCache.push({ airport_Code: airportCode, airportName: airportName });
+                }
             }
+            return airportName;
         }
-        $scope.getHTMLTooltip = function (airportCode) {
+        $scope.getHTMLTooltip = function (airportCode, a) {
             var airportName = getAirportNameFromCode(airportCode);
             return airportName;
         }
         $scope.getAirlineQueryString = function () {
             var query = '';
-            if ($scope.instaFlightSearch.IncludedCarriers != '' && $scope.instaFlightSearch.IncludedCarriers.length > 0) {
-                for (var i = 0; i < ($scope.instaFlightSearch.IncludedCarriers - 1) ; i++) {
-                    query += '&ar.rt.carriers%5B' + i + '%5D=' + $scope.instaFlightSearch.IncludedCarriers[i];
+            if ($scope.includedCarriers != undefined) {
+                for (var i = 0; i < ($scope.includedCarriers.length) ; i++) {
+                    query += '&ar.rt.carriers%5B' + i + '%5D=' + $scope.includedCarriers[i];
                 }
             }
             return query;
@@ -118,10 +127,15 @@
         }
         $scope.getAirlineName = function (airlineCode) {
             var result = airlineCode;
+            var cacheValue = $filter('filter')(airlinesNameCache, { code: airlineCode })[0];
+            if (cacheValue)
+                return cacheValue.name;
             if ($scope.$parent.attractionParams.AvailableAirline) {
                 var data = $filter('filter')($scope.$parent.attractionParams.AvailableAirline, { code: airlineCode });
-                if (data.length == 1)
+                if (data.length == 1) {
+                    airlinesNameCache.push({ code: airlineCode, name: data[0].name });
                     return data[0].name;
+                }
             }
             return result;
         }
