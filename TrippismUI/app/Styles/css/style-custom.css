@@ -109,7 +109,7 @@ a {
 .insta-details {
     opacity: 0.8;
     font-family: Lato,sans-serif;
-    padding: 10px 0;
+    /*padding: 10px 0;*/
     font-size: 15px;
 }
 
@@ -118,7 +118,7 @@ a {
 }
 
 .instaflight-scroll {
-    height: 400px;
+    height: 450px;
     overflow-y: scroll;
 }
 
