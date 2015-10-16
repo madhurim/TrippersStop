@@ -69,6 +69,7 @@
         $scope.KnowSearchbuttonText = 'Get Destination Details';
         $scope.IscalledFromIknowMyDest = false;
         $scope.isPopDestCollapsed = true;
+        var PointOfsalesCountry;
         $scope.tabManager.getTitle = function (tabInfo) {
             tabInfo.title.substr(0, 10);
         };
@@ -299,6 +300,7 @@
                 ToDate: $scope.ToDate,
                 Minfare: $scope.Minfare,
                 Maxfare: $scope.Maxfare,
+                PointOfSaleCountry: PointOfsalesCountry
                 //IncludedCarriers: $scope.seasonalitydirectiveData.mapOptions.LowestFare.AirlineCodes
             };
             $scope.tabManager.tabItems.push({
@@ -495,9 +497,9 @@
 
             var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin.toUpperCase() });
 
-            var PointOfsalesCountry;
-            if (originairport != undefined)
-                PointOfsalesCountry = originairport.airport_CountryCode;
+            //var PointOfsalesCountry;
+            //if (originairport != undefined)
+            //    PointOfsalesCountry = originairport.airport_CountryCode;
 
             var data = CreateSearchCriteria();
 
@@ -636,7 +638,7 @@
                 $scope.LenghtOfStay = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
             }
             var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.Origin.toUpperCase() });
-            var PointOfsalesCountry;
+            //var PointOfsalesCountry;      //moved to top
             if (originairport != undefined)
                 PointOfsalesCountry = originairport.airport_CountryCode;
 
