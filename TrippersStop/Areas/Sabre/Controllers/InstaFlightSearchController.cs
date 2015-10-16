@@ -72,6 +72,10 @@ namespace Trippism.Areas.Sabre.Controllers
             {
                 url.Append("&includedcarriers=" + instaflightRequest.IncludedCarriers);
             }
+            if (!string.IsNullOrWhiteSpace(instaflightRequest.PointOfSaleCountry))
+            {
+                url.Append("&pointofsalecountry=" + instaflightRequest.PointOfSaleCountry);
+            }
             return url.ToString();
         }
 

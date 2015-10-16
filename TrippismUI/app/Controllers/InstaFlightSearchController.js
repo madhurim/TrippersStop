@@ -21,6 +21,7 @@
                     //Minfare: $scope.instaFlightSearchData.Minfare,
                     //Maxfare: $scope.instaFlightSearchData.Maxfare,
                     IncludedCarriers: $scope.instaFlightSearchData.IncludedCarriers,
+                    PointOfSaleCountry: $scope.instaFlightSearchData.PointOfSaleCountry,
                     //LowestFare: instaFlightSearchData.LowestFare
                 };
                 $scope.includedCarriers = $scope.instaFlightSearch.IncludedCarriers;
