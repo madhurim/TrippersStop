@@ -81,6 +81,8 @@
         }
         $scope.amountBifercation = function (TotalfareAmount) {
             var afterDec = (TotalfareAmount + "").split(".")[1];
+            if (afterDec == undefined)
+                afterDec = '00';
             var result = {
                 BeforeDecimal: Math.floor(TotalfareAmount),
                 AfterDecimal: "." + (afterDec.length == 1 ? afterDec + '0' : afterDec)
