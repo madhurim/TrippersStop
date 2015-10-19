@@ -122,6 +122,7 @@
     <Content Include="app\Styles\images\themes\sport-icon.png" />
     <Content Include="app\Styles\images\thumbs_up.png" />
     <Content Include="app\Styles\images\time.png" />
+    <Content Include="app\Styles\images\trippism-logo.ico" />
     <Content Include="app\Styles\images\trippism-logo.png" />
     <Content Include="app\Styles\images\User-12.png" />
     <Content Include="app\Styles\images\User-3.png" />
