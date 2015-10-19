@@ -41,7 +41,7 @@
                 activate();
             }
         }
-        
+
         $scope.dismiss = function () {
             $scope.$dismiss('cancel')
         };
@@ -68,12 +68,12 @@
             var basicDetinationDetlist = $scope.eMailData.DestinationList;
 
             var basicDetinationDetlist = _.filter(basicDetinationDetlist, function (item) {
-                return item.LowestNonStopFare !== 'N/A';
-            });
-            var basicDetinationDetlist = basicDetinationDetlist.sort(function (a, b) { return (parseFloat(a.LowestNonStopFare) < parseFloat(b.LowestNonStopFare)) ? 1 : -1; }).reverse().slice(0, 20);
-            
+                return item.LowestNonStopFare.Fare !== 'N/A';
+            });            
+            var basicDetinationDetlist = basicDetinationDetlist.sort(function (a, b) { return (parseFloat(a.LowestNonStopFare.Fare) < parseFloat(b.LowestNonStopFare.Fare)) ? 1 : -1; }).reverse().slice(0, 20);
+
             var airportlist = $scope.eMailData.AvailableAirports;
-            
+
             var Origin = $scope.eMailData.SearchCriteria.Origin.toUpperCase();
 
             var OriginairportName = _.find(airportlist, function (airport) {
@@ -82,9 +82,9 @@
             var destinationfareinfo = _.find($scope.eMailData.DestinationList, function (Destination) {
                 return Destination.DestinationLocation == $scope.eMailData.DestinationairportName.airport_Code.toUpperCase()
             });
-            
+
             var FareData = eMailDataFareForeCast;
-            
+
             var sortedObjs = _.filter(basicDetinationDetlist, function (item) {
                 return item.LowestFare !== 'N/A';
             });
@@ -94,11 +94,11 @@
             var ToDate = ConvertToRequiredDate($scope.eMailData.SearchCriteria.ToDate, 'API');
             var OriginName = OriginairportName.airport_CityCode.toUpperCase();
 
-            
+
             var url = 'http://' + window.document.location.host;
             var tripissm_rdrURL = '<a href="' + url + '/#/destination?Origin=' + OriginName + '&DepartureDate=' + FromDate + '&ReturnDate=' + ToDate + '">www.trippism.com</a>';
 
-            
+
             var contentString = '<div style="font-family: arial,sans-serif;color: black;">' +
                            '<p>Hi,</p><p>I got following from ' + tripissm_rdrURL + '</p><p>From our orgin <strong>' + OriginairportName.airport_CityName + '</strong> during ' + ConvertToRequiredDate(sortedObjs[0].DepartureDateTime, 'UI') + ' to ' + ConvertToRequiredDate(sortedObjs[0].ReturnDateTime, 'UI') + ' , we have following options to fly.</p>' +
                           '<table class="table" style="color: #333;font-family: Helvetica, Arial, sans-serif;width:90%%; border-collapse:collapse; border-spacing: 0;"><tr><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Destination</th><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Lowest Fare</th><th style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #DFDFDF;">Lowest Non Stop Fare</th></tr>';
@@ -111,8 +111,8 @@
 
                 var lowestnonfare = "";
                 var lowestfare = "";
-                if (sortedObjs[x].LowestNonStopFare != "N/A") { lowestnonfare = sortedObjs[x].CurrencyCode + " " + $filter('number')(sortedObjs[x].LowestNonStopFare, '2'); } else { lowestnonfare = "N/A"; }
-                if (sortedObjs[x].LowestFare != "N/A") { lowestfare = sortedObjs[x].CurrencyCode + " " + $filter('number')(sortedObjs[x].LowestFare, '2'); } else { lowestfare = "N/A"; }
+                if (sortedObjs[x].LowestNonStopFare != undefined && sortedObjs[x].LowestNonStopFare.Fare != "N/A") { lowestnonfare = sortedObjs[x].CurrencyCode + " " + $filter('number')(sortedObjs[x].LowestNonStopFare.Fare, '2'); } else { lowestnonfare = "N/A"; }
+                if (sortedObjs[x].LowestFare != undefined && sortedObjs[x].LowestFare.Fare != "N/A") { lowestfare = sortedObjs[x].CurrencyCode + " " + $filter('number')(sortedObjs[x].LowestFare.Fare, '2'); } else { lowestfare = "N/A"; }
 
                 contentString += '<tr><td style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #FAFAFA;text-align: left;word-wrap: break-word;">' + airportName.airport_CityName + '</td>' +
                                     '<td style="border: 1px solid transparent;height: 30px;transition: all 0.3s;background: #FAFAFA;text-align: right;word-wrap: break-word;">' + lowestfare + '</td>' +
@@ -132,20 +132,20 @@
                 if (FareData.CurrencyCode != undefined)
                     CurrencyCode = FareData.CurrencyCode;
             }
-            if ((LowestFare == "N/A" || LowestFare == 0) && destinationfareinfo.LowestFare != "N/A") {
-                LowestFare = destinationfareinfo.LowestFare.toFixed(2)
+            if ((LowestFare == "N/A" || LowestFare == 0) && (destinationfareinfo.LowestFare != undefined && destinationfareinfo.LowestFare.Fare != "N/A")) {
+                LowestFare = destinationfareinfo.LowestFare.Fare.toFixed(2)
                 CurrencyCode = destinationfareinfo.CurrencyCode;
 
             }
 
             if ($scope.eMailData.mapOptions != undefined) {
 
-                var LowestNonStopFare = ($scope.eMailData.mapOptions.LowestNonStopFare == 'N/A') ? 'N/A' : Number($scope.eMailData.mapOptions.LowestNonStopFare).toFixed(2);
+                var LowestNonStopFare = (($scope.eMailData.mapOptions.LowestNonStopFare == undefined || $scope.eMailData.mapOptions.LowestNonStopFare.Fare == 'N/A')) ? 'N/A' : Number($scope.eMailData.mapOptions.LowestNonStopFare.Fare).toFixed(2);
 
                 var DepartureDate = ConvertToRequiredDate($scope.eMailData.mapOptions.DepartureDateTime, 'UI');
                 var ReturnDate = ConvertToRequiredDate($scope.eMailData.mapOptions.ReturnDateTime, 'UI');
 
-                
+
                 contentString += '<br/><div style="font-size : 13px;"><b style=" text-decoration: underline;">Destination Details</b></div><br/> <div style="width:100%;" >' +
                               '<div style="width:25%;float:left;" >' +
                                   '<span>Destination : </span><br><strong >'
