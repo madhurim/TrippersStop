@@ -5,6 +5,7 @@
             destinationsParams: '=',
             destinations: "=destinations",
             airportlist: "=airportlist",
+            airlineJsonData: "=airlinejsondata"
         },
         templateUrl: '/app/Views/Partials/TopDestinationsPartial.html',
         link: function (scope, elem, attrs) {
@@ -39,7 +40,6 @@
                     "ReturnDate": $filter('date')(item.topdestinationFareInfo.ReturnDateTime, 'yyyy-MM-dd'),
                     "Destination": item.topdestinationFareInfo.DestinationLocation
                 };
-
                 $rootScope.$broadcast('EmptyFareForcastInfo', {
                     Origin: OriginairportName.airport_CityName,
                     Destinatrion: DestinationairportName.airport_Code,
@@ -49,6 +49,7 @@
                     DestinationairportName: DestinationairportName,
                     DestinationList: scope.destinations,
                     AvailableAirports: scope.airportlist,
+                    AvailableAirline: scope.airlineJsonData
                 });
             };
         }
