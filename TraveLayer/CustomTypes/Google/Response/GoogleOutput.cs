@@ -14,12 +14,13 @@ namespace TraveLayer.CustomTypes.Google.Response
 
     public class results
     {
-        public results() {
+        public results()
+        {
             photos = new List<Photos>();
         }
 
         public Geometry geometry { get; set; }
-        public string icon { get; set; }
+        //public string icon { get; set; }
         public string id { get; set; }
         public string name { get; set; }
         public List<Photos> photos { get; set; }
@@ -52,7 +53,8 @@ namespace TraveLayer.CustomTypes.Google.Response
 
     public class Photos
     {
-        public Photos() {
+        public Photos()
+        {
             html_attributions = new List<string>();
         }
 
