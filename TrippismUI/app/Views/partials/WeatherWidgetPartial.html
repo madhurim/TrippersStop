@@ -1,0 +1,104 @@
+﻿<div class="col-md-6 col-sm-6 col-xs-12" ng-if="!WeatherInfoNoDataFound && IsWidgetClosed ">
+    <div class="popup-box weather">
+        <div class="popup-header red-bg">
+            <h6 class="popup-title">Historical weather pattern summary</h6>
+        </div>
+        <div class="popup-content">
+            <div class="overview-weather-box">
+                <ul class="list-line">
+                    <li>
+                        <div class="overview-weather-content">
+                            <h6>[ {{DepartDate}} to {{ReturnDate}} ] </h6>
+                        </div>
+                        <div class="high-low-box">
+                            <div class="avg-high">
+                                <span>Avg. High </span>
+                                <h5>{{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103</h5>
+                            </div>
+                            <div class="avg-low">
+                                <span>Avg. Low </span>
+                                <h5>{{LowTempratureF}}&#x2109 {{LowTempratureC}}&#x2103</h5>
+                            </div>
+                        </div>
+                        <div class="avg-box">
+                            <div ng-repeat="item in  WeatherwidgetData.WeatherChances">
+                                <div class="avg" ng-if="item.Name=='Cloudy' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Cloudy.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Humid' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Humid.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Partly Cloudy' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Partly Cloudy.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Precipitation' && item.Percentage >= 60 && IsparticipationDisplay">
+                                    <img src="../app/Styles/images/weather/Precipitation.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Rain' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Rain.png" alt="" />
+                                    <span class="title">Rainy</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Sweltering' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Sweltering.png" alt="" />
+                                    <span class="title">Very Hot</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Thunderstorms' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Thunderstorms.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Warm' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/warm.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Sunny' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Sunny.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Hot' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Hot.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Windy' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Windy.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Fog' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Fog.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Ground Snow' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Ground Snow.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Tornado' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Tornado.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Freezing' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Freezing.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Cool' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Cool.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Hail' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Hail.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                                <div class="avg" ng-if="item.Name=='Snow' && item.Percentage >= 60">
+                                    <img src="../app/Styles/images/weather/Snow.png" alt="" />
+                                    <span class="title">{{item.Name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

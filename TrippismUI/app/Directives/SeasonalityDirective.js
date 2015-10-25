@@ -29,10 +29,6 @@
                 scope.SeasonalityDisplay = function () {
                     scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
                     scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
-
-                    // Setting up fare data for email
-                    //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = {};
-                    //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = data;
                     scope.Isviewmoredisplayed = true;
                 };
 
@@ -62,20 +58,19 @@
 
                                         if (data.status == 404) {
                                             scope.SeasonalityNoDataFound = true;
-                                            $rootScope.$broadcast('divSeasonalityEvent', false);
                                             return;
                                         }
                                         scope.SeasonalityData = data.Seasonality;
-                                        $rootScope.$broadcast('divSeasonalityEvent', true);
+                                        scope.seasonalityParams.SeasonalityData = data.Seasonality;
 
                                         var defaultSeasonality = data.Seasonality;
                                         var now = new Date();
-                                        var NextDate = common.addDays(now, 30);
+                                        var NextDate = addDays(now, 30);
 
                                         var filteredSeasonalityData = [];
                                         for (var i = 0; i < defaultSeasonality.length; i++) {
                                             scope.MarkerSeasonalityInfo.Seasonality = [];
-                                            var datetocheck = new Date(defaultSeasonality[i].WeekStartDate);
+                                            var datetocheck = new Date(defaultSeasonality[i].WeekStartDate.split('T')[0].replace(/-/g, "/"));
                                             if (datetocheck > now && datetocheck < NextDate)
                                                 filteredSeasonalityData.push(defaultSeasonality[i]);
                                         }
@@ -86,12 +81,6 @@
                                         data.Seasonality = filteredSeasonalityData;
                                         scope.MarkerSeasonalityInfo = data;
                                         scope.mailmarkereasonalityInfo = data;
-
-
-                                        // Setting up fare data for email
-                                        //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = {};
-                                        //scope.attractionParams.dataforEmail.SeasonalityDataForEmail = data;
-
 
                                         scope.inProgressSeasonalityinfo = false;
                                         scope.loadSeasonalityInfoLoaded = true;
@@ -134,8 +123,8 @@
                         var chartrec = _.sortBy(scope.SeasonalityData, 'WeekStartDate');
 
                         for (i = 0; i < chartrec.length; i++) {
-                            var WeekStartDate = new Date(chartrec[i].WeekStartDate);
-                            var WeekEndDate = new Date(chartrec[i].WeekEndDate);
+                            var WeekStartDate = new Date(chartrec[i].WeekStartDate.split('T')[0].replace(/-/g, "/"));
+                            var WeekEndDate = new Date(chartrec[i].WeekEndDate.split('T')[0].replace(/-/g, "/"));
                             if (i == 0)
                             { startdate = Date.UTC(WeekStartDate.getFullYear(), WeekStartDate.getMonth(), WeekStartDate.getDate()); }
 
@@ -206,7 +195,6 @@
                                             result = '<span>'
 
                                         var d = new Date(this.value);
-
                                         return result += Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, this.value) + '</span><b>';
                                     },
                                     rotation: -45
@@ -214,7 +202,7 @@
                                 tickInterval: 336 * 3600 * 1000,
                                 minTickInterval: 336 * 3600 * 1000,
                                 title: {
-                                    text: 'Historical Traffic pattern for [ ' + scope.seasonalityParams.DestinationairportName.airport_FullName + ' , ' + scope.seasonalityParams.DestinationairportName.airport_CityName + ']'
+                                    text: 'Historical Traffic Seasonality for [ ' + scope.seasonalityParams.DestinationairportName.airport_FullName + ' , ' + scope.seasonalityParams.DestinationairportName.airport_CityName + ']'
                                 }
                             },
                             yAxis: {
@@ -277,7 +265,6 @@
 
                                     else
                                         zresult = '<span> ' + '' + ' </span>';
-
                                     return '<span style="color:#87ceeb">Year Week :</span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, new Date(this.point.enddate)) + ' ] </b><br>' +
                                         '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b><br>' +
                                         '<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult + '</b>';

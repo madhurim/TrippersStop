@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -25,6 +26,27 @@ namespace TrippismApi.Areas.Sabre.Controllers
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        public string SabreAirSearchCityPairsUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreAirSearchCityPairsUrl"];
+            }
+        }
+        public string SabreFareRangeCityPairsUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreFareRangeCityPairsUrl"];
+            }
+        }
+        public string SabreLowFareForecastCityPairsUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreLowFareForecastCityPairsUrl"];
+            }
+        }
         /// <summary>
         /// Set api class and cache service.
         /// </summary>
@@ -43,13 +65,13 @@ namespace TrippismApi.Areas.Sabre.Controllers
             switch (type)
             {
                 case "AirSearch":
-                    url="v1/lists/airports/supported/origins-destinations";
+                    url = SabreAirSearchCityPairsUrl;
                     break;
                 case "FareRange":
-                    url="v1/lists/supported/historical/flights/origins-destinations";
+                    url = SabreFareRangeCityPairsUrl;
                     break;
                 case "LowFareForecast":
-                    url="v1/lists/supported/forecast/flights/origins-destinations";
+                    url = SabreLowFareForecastCityPairsUrl;
                     break;
                 default:
                    return Request.CreateResponse(HttpStatusCode.BadRequest);

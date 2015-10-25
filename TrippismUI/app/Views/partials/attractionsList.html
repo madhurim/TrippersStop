@@ -1,0 +1,21 @@
+﻿<div class="total-attractions-found-box slide-bottom">
+    <div class="btn-box">
+        <a ng-class="isAttractionCollapsed ? '' : 'active'"
+           ng-click="isAttractionCollapsed = !isAttractionCollapsed;" class="toggle-btn total-attractions-btn balck-bg">
+            <i class="search-icon"></i>Total Attractions Found : {{attractions.length}}
+        </a>
+    </div>
+    <div class="attractions-found" collapse="!isAttractionCollapsed">
+        <div id="examples">
+            <div class="content contentHorizontal">
+                <div ng-click="SelectPlace(item)" ng-repeat="item in attractionstoDisp" class="destinations-list">
+                    <h6>{{item.name}}</h6>
+                    <div class="placeaddress-list">
+                        <span ng-bind-html="item.Placeaddress"></span>,
+                        <span> {{item.PhoneNo}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

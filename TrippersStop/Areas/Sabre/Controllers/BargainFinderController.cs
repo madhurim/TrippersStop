@@ -17,6 +17,7 @@ using System.Web.Hosting;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
 using Trippism.APIExtention.Filters;
+using System.Configuration;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
@@ -28,6 +29,13 @@ namespace TrippismApi.Areas.Sabre.Controllers
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        public string SabreBargainFinderUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreBargainFinderUrl"];
+            }
+        }
         /// <summary>
         /// Set api class and cache service.
         /// </summary>
@@ -48,12 +56,12 @@ namespace TrippismApi.Areas.Sabre.Controllers
             bargainFinder.OTA_AirLowFareSearchRQ.POS = pos;
             //TBD : URL configurable using XML
             ApiHelper.SetApiToken(_apiCaller, _cacheService);
-            
-            APIResponse result = _apiCaller.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
+
+            APIResponse result = _apiCaller.Post(SabreBargainFinderUrl, ServiceStackSerializer.Serialize(bargainFinder)).Result;
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
                 ApiHelper.RefreshApiToken(_cacheService, _apiCaller);
-                result = _apiCaller.Post("v1.8.2/shop/flights?mode=live", ServiceStackSerializer.Serialize(bargainFinder)).Result;
+                result = _apiCaller.Post(SabreBargainFinderUrl, ServiceStackSerializer.Serialize(bargainFinder)).Result;
             }
             if (result.StatusCode == HttpStatusCode.OK)
             {

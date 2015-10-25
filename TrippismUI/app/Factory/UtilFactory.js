@@ -11,6 +11,7 @@
             getIpinfo: getIpinfo,
             MapscrollTo: MapscrollTo,
             ReadStateJson: ReadStateJson,
+            ReadAirlinesJson: ReadAirlinesJson
         };
         return service;
 
@@ -25,18 +26,7 @@
             return $http.get('../app/Constants/airports.json').then(function (_arrairports) {
                 _arrairports = _arrairports.data;
                 for (var i = 0; i < _arrairports.length; i++) {
-                    if (_arrairports[i].Airports != undefined) {
-                        for (var cntAirport = 0; cntAirport < _arrairports[i].Airports.length ; cntAirport++) {
-                            var objtopush = _.omit(_arrairports[i], "Airports");
-                            objtopush['airport_Code'] = _arrairports[i].Airports[cntAirport].airport_Code;
-                            objtopush['airport_FullName'] = _arrairports[i].Airports[cntAirport].airport_FullName;
-                            objtopush['airport_Lat'] = _arrairports[i].Airports[cntAirport].airport_Lat;
-                            objtopush['airport_Lng'] = _arrairports[i].Airports[cntAirport].airport_Lng;
-                            objtopush['airport_IsMAC'] = false;
 
-                            AvailableCodes.push(objtopush);
-                        }
-                    }
                     if (_arrairports[i].Airports != undefined && _arrairports[i].Airports.length > 1) {
                         var objtopush = _.omit(_arrairports[i], "Airports");
                         objtopush['airport_Code'] = _arrairports[i].airport_CityCode;
@@ -49,6 +39,19 @@
                         objtopush['airport_IsMAC'] = true;
                         AvailableCodes.push(objtopush);
                     }
+                    if (_arrairports[i].Airports != undefined) {
+                        for (var cntAirport = 0; cntAirport < _arrairports[i].Airports.length ; cntAirport++) {
+                            var objtopush = _.omit(_arrairports[i], "Airports");
+                            objtopush['airport_Code'] = _arrairports[i].Airports[cntAirport].airport_Code;
+                            objtopush['airport_FullName'] = _arrairports[i].Airports[cntAirport].airport_FullName;
+                            objtopush['airport_Lat'] = _arrairports[i].Airports[cntAirport].airport_Lat;
+                            objtopush['airport_Lng'] = _arrairports[i].Airports[cntAirport].airport_Lng;
+                            objtopush['airport_IsMAC'] = false;
+
+                            AvailableCodes.push(objtopush);
+                        }
+                    }
+
                 }
 
 
@@ -75,6 +78,12 @@
             $anchorScroll();
             $location.hash(old);
             return;
+        }
+
+        function ReadAirlinesJson() {
+            return $http.get('../app/Constants/airlines.json').then(function (_airlines) {
+                return _airlines.data.response;
+            });
         }
     }
 })();

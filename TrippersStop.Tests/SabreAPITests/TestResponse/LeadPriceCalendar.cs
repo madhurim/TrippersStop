@@ -23,7 +23,7 @@ namespace TrippismApi.Tests.SabreAPITests
             apiWrapper.Accept = "application/json";
             apiWrapper.ContentType = "application/x-www-form-urlencoded";
 
-            string token = apiWrapper.GetToken().Result;
+            string token = apiWrapper.GetToken("v2/auth/token/").Result;
 
             apiWrapper.Authorization = "bearer";
 

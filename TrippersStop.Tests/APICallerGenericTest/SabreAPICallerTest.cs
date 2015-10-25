@@ -23,7 +23,7 @@ namespace TrippismApi.Tests.Controllers
             apiWrapper.ContentType = "application/x-www-form-urlencoded";
 
             // Act
-            string result = apiWrapper.GetToken().Result;
+            string result = apiWrapper.GetToken("v2/auth/token/").Result;
 
             // Assert
             Assert.IsNotNull(result);
@@ -39,7 +39,7 @@ namespace TrippismApi.Tests.Controllers
             apiWrapper.ContentType = "application/x-www-form-urlencoded";
 
             // Act
-            string token = apiWrapper.GetToken().Result;
+            string token = apiWrapper.GetToken("v2/auth/token/").Result;
 
             //GET https://api.sabre.com/v1/historical/flights/JFK/seasonality HTTP/1.1
 
@@ -61,7 +61,7 @@ namespace TrippismApi.Tests.Controllers
             apiWrapper.ContentType = "application/x-www-form-urlencoded";
 
             // Act
-            string token = apiWrapper.GetToken().Result;
+            string token = apiWrapper.GetToken("v2/auth/token/").Result;
 
             //post https://api.sabre.com/v1.8.2/shop/flights?mode=live HTTP/1.1
 
@@ -92,7 +92,7 @@ namespace TrippismApi.Tests.Controllers
             apicaller.ContentType = "application/x-www-form-urlencoded";
 
             // Act
-            string result = apicaller.GetToken().Result;
+            string result = apicaller.GetToken("v2/auth/token/").Result;
 
             // Assert
             Assert.IsNotNull(result);

@@ -42,7 +42,7 @@ namespace TrippismApi.Tests.SabreAPITests
             ds.Destination= "LAS";
             //ds.Lengthofstay = "4";
             var response = controller.Get(ds);
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, response.Result.StatusCode);
         }
     }
 }

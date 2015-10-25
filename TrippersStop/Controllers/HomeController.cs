@@ -31,7 +31,11 @@ namespace TrippismApi.Controllers
         //}
 
 
-
+        public void Index()
+        {
+            GenerateAirports();
+            return; 
+        }
 
         public void GenerateAirports()
         {
@@ -51,7 +55,8 @@ namespace TrippismApi.Controllers
             var _allcities = JsonConvert.DeserializeObject<Cities>(_citiesjson, _jsonSettings);
 
             List<CityWithAirports> _objCitywithairports = new List<CityWithAirports>();
-            string[] stringArray = { "Railway", "Railroad", "Rail" };
+            // added by madhuri
+            string[] stringArray = { "Railway", "Railroad", "Rail" , "Municipal" ,"municipal" , "Heliport","heliport","Stn" , "stn","Station", "station" , "county", "County","regional","Regional"};
 
             //To be uncomment later
             //var requiredCities = new string[] {"PAR", "LON", "NYC", "QSF", "MOW", "CHI", "SHA", "BOM"};

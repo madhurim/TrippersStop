@@ -1,4 +1,4 @@
-﻿/// <reference path="../Views/dirPagination.tpl.html" />
+﻿
 angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout', 'YouTubeFactory', '$sce', '$log',
     function ($compile, $timeout, YouTubeFactory, $sce, $log) {
         return {
@@ -11,7 +11,6 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
 
             },
             link: function (scope, elem, attrs) {
-
                 var youtubeTblheight = ($(window).height() - 100) + 'px';
                 $('.ytubetabletbody').each(function (i, obj) {
                     $(this).css('height', youtubeTblheight);
@@ -25,6 +24,7 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
 
                 scope.curPage = 0;
                 scope.pageSize = 10;
+                scope.isDataLoadedFirstTime = false;
 
                 scope.loadyoutubeInfo = function (nextTokenID,prevTokenID) {
                     scope.youtubeInfoLoaded = false;
@@ -46,13 +46,12 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
                         };
 
                         if (scope.youtubeInfoLoaded == false) {
-                           // if (scope.youtubeData == "") {
                                 scope.youtubepromise = YouTubeFactory.youTube(data).then(function (data) {
                                     if (data.status == 404) {
                                         scope.youtubeInfoDataFound = false;
                                         return;
                                     }
-                                    
+                                    scope.isDataLoadedFirstTime = true;
                                     scope.youtubeData = data;
                                    
                                     if (scope.youtubeData.nextPageToken != null)
@@ -68,8 +67,9 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout'
                                         scope.isdisabled = 1;
 
                                     scope.youtubeInfoDataFound = true;
+
+                                    loadScrollbars();
                                 });
-                          //  }
                         }
                         scope.youtubeInfoLoaded = true;
                     }

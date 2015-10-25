@@ -64,3 +64,36 @@ function checkEmail(email) {
         return true;
 }
 
+function getLengthOfStay(frdt, todt) {
+    frdt = new Date(frdt);
+    todt = new Date(todt);
+    var timeDiff = Math.abs(todt.getTime() - frdt.getTime());
+    return Math.ceil(timeDiff / (1000 * 3600 * 24));
+}
+
+function addDays(dt, noOfDays) {
+    var newDate = new Date(dt);
+    newDate.setDate(newDate.getDate() + noOfDays);
+    return newDate;
+}
+
+function loadScrollbars() {
+    $(".contentHorizontal").mCustomScrollbar({
+        axis: "x",
+        advanced: {
+            autoExpandHorizontalScroll: true
+        }
+    });
+    $(".contentVertical").mCustomScrollbar({
+        axis: "y",
+        advanced: {
+            autoExpandVerticallScroll: true
+        }
+    });
+    $("#content-3").mCustomScrollbar({
+        axis: "y",
+        advanced: {
+            autoExpandVerticallScroll: true
+        }
+    });
+}

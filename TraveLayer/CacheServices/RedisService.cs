@@ -97,6 +97,23 @@ namespace TrippismApi.TraveLayer
             }
         }
 
+        public bool IsConnected()
+        {
+            bool isSuccess = false;
+            try
+            {
+                using (var redisClient = new RedisClient(RedisHost))
+                {
+                    isSuccess=redisClient.IsSocketConnected();
+                }
+            }
+            catch
+            {
+                isSuccess = false;
+            }
+            return isSuccess;
+        }
+
     } 
 
 }

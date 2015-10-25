@@ -1,10 +1,27 @@
-﻿<div class="col-md-12" style="clear:both;padding-top:5px;">
-    <div class="" >
-            <div ng-if="!WeatherInfoNoDataFound">
-                <span style="font-size:100% !important;font-weight:bold;text-decoration: underline;">Historical Weather pattern for [ {{weatherParams.DestinationairportName.airport_CityName}} ] for the week of [ {{DepartDate}} to {{ReturnDate}} ]</span>
-                <div class="thumbnail thumbnailstyle">
-                    <span class="fontsize"><b>Avg. Hig Temprature : {{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103</b></span><span class="fontsize padleft10"><b>Avg. Low Temprature : {{LowTempratureF}}&#x2109 {{LowTempratureC}}&#x2103</b></span>
+﻿<div ng-if="!WeatherInfoNoDataFound">
+    <div class="popup-box">
+        <div class="popup-header red-bg">
+            <h6 class="popup-title">Historical Weather pattern detail </h6>
+        </div>
+        <div class="popup-content">
+            <p>
+                [ {{DepartDate}} to {{ReturnDate}} ]
+            </p>
+            <div class="high-low-box">
+                <div class="avg-high">
+                    <span>Avg. High </span>
+                    <h5>{{HighTempratureF}}&#x2109 {{HighTempratureC}}&#x2103</h5>
+                </div>
+                <div class="avg-low">
+                    <span>Avg. Low </span>
+                    <h5>{{LowTempratureF}}&#x2109 {{LowTempratureC}}&#x2103</h5>
                 </div>
             </div>
+            <div class="chart-box">
+            </div>
+        </div>
     </div>
 </div>
+
+
+

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -22,6 +23,14 @@ namespace TrippismApi.Areas.Sabre.Controllers
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        public string SabreThemeAirportUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreThemeAirportUrl"];
+            }
+        }
+        
         /// <summary>
         /// Set api class and cache service.
         /// </summary>
@@ -36,7 +45,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(ThemeAirport))]
         public HttpResponseMessage Get(string theme)
         {
-            string url = string.Format("v1/shop/themes/{0}", theme);
+            string url = string.Format(SabreThemeAirportUrl, theme);
             return GetResponse(url);
         }
         /// <summary>

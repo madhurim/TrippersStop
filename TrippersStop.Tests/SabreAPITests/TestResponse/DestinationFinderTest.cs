@@ -40,7 +40,7 @@ namespace TrippismApi.Tests.SabreAPITests
             ds.ReturnDate = "2015-04-26T00:00:00";
             ds.Lengthofstay = "4";
             var response = controller.Get(ds);
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, response.Result.StatusCode);
 
           
         }
@@ -68,7 +68,7 @@ namespace TrippismApi.Tests.SabreAPITests
             ds.Lengthofstay = "4";
             ds.Maxfare = "450";
             var response = controller.Get(ds);
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, response.Result.StatusCode);
 
 
         }

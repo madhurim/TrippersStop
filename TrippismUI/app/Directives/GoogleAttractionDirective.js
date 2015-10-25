@@ -14,6 +14,8 @@
             templateUrl: '/app/Views/Partials/GoogleAttractionPartial.html',
             controller: function ($scope) {
 
+                $scope.DisplayattractionsInfo = false;
+
                 $scope.googleMapId = "googleMapId_" + $scope.googleattractionParams.tabIndex;
                 $scope.gMapId = "gMapId_" + $scope.googleattractionParams.tabIndex;
 
@@ -36,6 +38,65 @@
                     }
                 });
 
+
+                $scope.$on('onMarkerPopup', function (event, args) {
+                    if (args.tabIndex == $scope.googleattractionParams.tabIndex)
+                        SetMarkerSlider(args.place)
+                });
+
+
+                function SetMarkerSlider(MapDet) {
+                    $scope.slides = [];
+                    $scope.IsMarkerSelected = false;
+                    $scope.IsMapPopupLoading = true;
+                    $scope.PhoneNo = "";
+                    $scope.raitingToAppend = "";
+                    $scope.PlaceName = "";
+                    $scope.Placeaddress = "";
+                    var service = new google.maps.places.PlacesService($scope.googleattractionsMap);
+                    var request = { placeId: MapDet.place_id };
+                    $scope.SelectedPlaceId = MapDet.place_id;
+                    service.getDetails(request, function (place, status) {
+                        $scope.IsMapPopupLoading = false;
+                        if (status == google.maps.places.PlacesServiceStatus.OK) {
+
+                            // Multi photo
+                            if (place.photos != null && place.photos.length > 0) {
+                                var photos = [];
+                                for (var photoidx = 0; photoidx < place.photos.length; photoidx++) {
+                                    //var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 440, 'maxHeight': 270 });
+                                    var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 570, 'maxHeight': 400 });
+                                    var objtopush = { image: Imgsrc, text: "" };
+                                    photos.push(objtopush);
+                                }
+                                $scope.addSlides(photos);
+                            }
+                            $scope.PlaceName = place.name;
+                            $scope.Placeaddress = $sce.trustAsHtml(place.adr_address);
+                            if (place.formatted_phone_number != undefined)
+                                $scope.PhoneNo = place.formatted_phone_number;
+
+                            $scope.raitingToAppend = "";
+                            if (place.rating != undefined)
+                                $scope.raitingToAppend = $sce.trustAsHtml(getRatings(place.rating));
+
+                            $scope.IsMapPopupLoading = false;
+                            $scope.$apply();
+                        }
+
+                    });
+
+                    var mapheight = $('#' + $scope.gMapId).height() - 400;
+                    var mapWidth = $('#' + $scope.gMapId).width() - 600;
+
+                    $("#" + $scope.googleMapId).css('top', '-25px');
+                    $("#" + $scope.googleMapId).css('left', mapWidth / 2);
+
+                    $scope.IsMarkerSelected = true;
+
+                }
+
+
                 $scope.FittoScreen = function () {
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
                     var latlng = new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng);
@@ -43,302 +104,18 @@
                     $scope.googleattractionsMap.fitBounds($scope.bounds);
                 };
 
-                var styleArray = [
-    {
-        "featureType": "all",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#444444"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#f2f2f2"
-            },
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#fbd09d"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.natural.landcover",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.natural.landcover",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.natural.landcover",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.natural.terrain",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#ff0000"
-            },
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 45
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "lightness": "-75"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels.text.stroke",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#f7931e"
-            },
-            {
-                "weight": "2"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "labels.text.stroke",
-        "stylers": [
-            {
-                "visibility": "off"
-            },
-            {
-                "color": "#f7931e"
-            },
-            {
-                "weight": "2.29"
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "lightness": "-3"
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road.local",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#81cfce"
-            },
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#ff0000"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#4cc2c1"
-            },
-            {
-                "lightness": "13"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#020000"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "labels.text.stroke",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    }
-                ];
+                var mapStyle = TrippismConstants.attractionTabMapStyle;
 
                 $scope.attractionmapOptions = {
                     center: new google.maps.LatLng(0, 0),
                     zoom: 2,
                     minZoom: 2,
-                    styles: styleArray,
+                    zoomControl: true,
+                    zoomControlOptions: {
+                        position: google.maps.ControlPosition.RIGHT_CENTER,
+                        style: google.maps.ZoomControlStyle.LARGE
+                    },
+                    styles: mapStyle,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
 
@@ -353,7 +130,7 @@
                     });
                 }
 
-                 
+
 
                 $timeout(function () {
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
@@ -376,6 +153,7 @@
                         $scope.googleattractionInfoLoaded = false;
                         $scope.googleattractionInfoNoDataFound = false;
                         $scope.googleattractionData = "";
+                        $scope.attractionsplaces = [];
                         if ($scope.googleattractionParams != undefined) {
                             var data = {
                                 "Latitude": $scope.googleattractionParams.DestinationairportName.airport_Lat,//$scope.googleattractionParams.airport_Lat,
@@ -399,6 +177,7 @@
                                         }
                                         RenderMap(data.results);
                                         $scope.MapLoaded = true;
+                                        $scope.attractionsplaces = data.results;
                                         $scope.googleattractionData = data;
                                         $scope.quantity = 5;
                                         $scope.googleattractionInfoLoaded = true;
@@ -410,7 +189,7 @@
                     }
                 };
 
-              
+
                 $scope.cancel = function () {
                     $scope.IsMarkerSelected = false;
                 };
@@ -427,20 +206,19 @@
 
                     var ratingDiv = "<div class='average-rating-container'>";
                     if (stars.length > 0) {
+
                         ratingDiv += "<ul class='rating background' class='readonly'>";
-                        for (var starIdx = 0; starIdx < stars.length; starIdx++) {
+
+                        for (var starIdx = 0; starIdx < stars.length; starIdx++)
                             ratingDiv += "<li class='star'><i class='fa fa-star'></i></li>";
-                        }
+
                         ratingDiv += "</ul>";
                         ratingDiv += "<ul class='rating foreground readonly'  style='width:" + filledInStarsContainerWidth + "%'>";
 
-                        for (var starIdx = 0; starIdx < stars.length; starIdx++) {
+                        for (var starIdx = 0; starIdx < stars.length; starIdx++)
                             ratingDiv += "<li class='star filled'><i class='fa fa-star'></i></li>";
-
-                        }
                     }
                     ratingDiv += "  </ul></div>";
-
                     return ratingDiv;
                 }
 
@@ -449,26 +227,17 @@
 
                 var slides = [];
                 $scope.slides = [];
-                
-                //$scope.addSlides = function (id, photos) {
-                //    debugger;
-                //    if($scope.slides[id] == undefined)
-                //        $scope.slides[id] = new Array();
-
-                //    $scope.slides[id].push(photos);
-                //    $scope.$apply();
-                //};
 
                 $scope.addSlides = function (photos) {
-                    for (var photoidex = 0; photoidex < photos.length; photoidex++) {
+                    for (var photoidex = 0; photoidex < photos.length; photoidex++)
                         $scope.slides.push(photos[photoidex]);
-                    }
-                    //$scope.slides.push(photos);
                     $scope.$apply();
                 };
                 $scope.SelectedPlaceId = "";
                 function RenderMap(maps) {
                     if (maps != undefined && maps.length > 0) {
+
+                        $scope.DisplayattractionsInfo = true;
                         $scope.InfoWindow;
                         selected = maps;
                         for (var x = 0; x < maps.length; x++) {
@@ -498,61 +267,14 @@
                             $scope.InfoWindow = new google.maps.InfoWindow();
 
                             var MapDet = maps[x];
-                            google.maps.event.addListener(marker, 'mouseover', (function (marker, MapDet, x, contentString, $compile, infowindow, $scope) {
+
+                            //google.maps.event.addListener(marker, 'mouseover', (function (marker, MapDet, x, contentString, $compile, infowindow, $scope) {
+                            google.maps.event.addListener(marker, 'click', (function (MapDet) {
                                 return function () {
-                                    $scope.slides = [];
-                                    $scope.IsMarkerSelected = false;
-                                    $scope.IsMapPopupLoading = true;
-                                    $scope.PhoneNo = "";
-                                    $scope.raitingToAppend = "";
-                                    $scope.PlaceName = "";
-                                    $scope.Placeaddress = "";
-
-                                    var service = new google.maps.places.PlacesService($scope.googleattractionsMap);
-                                    var request = { placeId: MapDet.place_id };
-                                    $scope.SelectedPlaceId = MapDet.place_id;
-                                    service.getDetails(request, function (place, status) {
-                                        $scope.IsMapPopupLoading = false;
-                                        if (status == google.maps.places.PlacesServiceStatus.OK) {
-
-                                            // Multi photo
-                                            if (place.photos != null && place.photos.length > 0) {
-                                                var photos = [];
-                                                for (var photoidx = 0; photoidx < place.photos.length; photoidx++) {
-                                                    var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 400, 'maxHeight': 250 });
-                                                    var objtopush = { image: Imgsrc, text: "" };
-                                                    photos.push(objtopush);
-                                                    //$scope.addSlides(objtopush);
-                                                    //$scope.addSlides(MapDet.place_id , objtopush);
-                                                    
-                                                }
-                                                $scope.addSlides(photos);
-                                            }
-                                            $scope.PlaceName = MapDet.name;
-                                            $scope.Placeaddress = $sce.trustAsHtml(place.adr_address);
-                                            if (place.formatted_phone_number != undefined)
-                                                $scope.PhoneNo = place.formatted_phone_number;
-
-                                            $scope.raitingToAppend = "";
-                                            if (place.rating != undefined) 
-                                                $scope.raitingToAppend = $sce.trustAsHtml(getRatings(place.rating));
-                                            
-                                            $scope.IsMapPopupLoading = false;
-
-                                        }
-
-                                    });
-
-                                    var mapheight = $('#' + $scope.gMapId).height() - 300;
-                                    var mapWidth = $('#' + $scope.gMapId).width() - 400;
-
-                                    $("#" + $scope.googleMapId).css('top', mapheight / 2);
-                                    $("#" + $scope.googleMapId).css('left', mapWidth / 2);
-
-                                    $scope.IsMarkerSelected = true;
-                                    return;
+                                    SetMarkerSlider(MapDet);
                                 };
-                            })(marker, MapDet, x, contentString, $compile, $scope.InfoWindow, $scope));
+                            })(MapDet)); 
+                            //})(marker, MapDet, x, contentString, $compile, $scope.InfoWindow, $scope));
                             $scope.AttractionMarkers.push(marker);
                         }
 

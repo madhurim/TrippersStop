@@ -14,5 +14,6 @@ namespace TrippismApi.TraveLayer
         T GetByKey<T>(string key);
 
         bool Expire(string key);
+        bool IsConnected();
     }
 }

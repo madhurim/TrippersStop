@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -23,6 +24,14 @@ namespace TrippismApi.Areas.Sabre.Controllers
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
+        public string SabreSaleCountryUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreSaleCountryUrl"];
+            }
+        }
+
         /// <summary>
         /// Set api class and cache service.
         /// </summary>
@@ -37,8 +46,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(PointofSaleCountryCode))]
         public HttpResponseMessage Get()
         {
-            string url = "v1/lists/supported/pointofsalecountries";
-            return GetResponse(url);
+            return GetResponse(SabreSaleCountryUrl);
         }
         /// <summary>
         /// Get response from api based on url.

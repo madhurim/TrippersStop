@@ -20,9 +20,9 @@
             return str.join("&");
         }
 
-        function GetData(data) {
+        function GetData(data) {            
             var dataURL = '?' + serialize(data);
-            var url = $rootScope.apiURLForWeather + dataURL;
+            var url = (data.CountryCode == 'US' ? $rootScope.apiURLForUSWeather : $rootScope.apiURLForWeather) + dataURL;
             return $http.get(url)
                 .then(function (data) {
                     return data.data;
