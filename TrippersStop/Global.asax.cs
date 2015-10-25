@@ -34,7 +34,7 @@ namespace TrippismApi
             GlobalConfiguration.Configure(WebApiConfig.Register); //Commented today
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+          //  BundleConfig.RegisterBundles(BundleTable.Bundles);
             //JsConfig.EmitLowercaseUnderscoreNames = true;
             var container = new Container();
             container.RegisterWebApiRequest<IAsyncSabreAPICaller, SabreAPICaller>();
