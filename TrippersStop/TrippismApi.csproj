@@ -223,8 +223,11 @@
     <Compile Include="APIExtention\MediaTypeFormatter\ServiceStackTextFormatter.cs" />
     <Compile Include="APIHelper\ApiHelper.cs" />
     <Compile Include="APIHelper\CompressedContent.cs" />
+    <Compile Include="APIHelper\ConstantsReader.cs" />
     <Compile Include="APIHelper\MailgunEmail.cs" />
     <Compile Include="APIHelper\TripperLog.cs" />
+    <Compile Include="Areas\Constants\ConstantsAreaRegistration.cs" />
+    <Compile Include="Areas\Constants\Controllers\ConstantsController.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleController.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleGeoCodeController.cs" />
     <Compile Include="Areas\Google\GoogleAreaRegistration.cs" />
@@ -335,6 +338,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APIExtention\Handler\" />
+    <Folder Include="Areas\Constants\Models\" />
+    <Folder Include="Areas\Constants\Views\Shared\" />
     <Folder Include="Areas\Google\Models\" />
     <Folder Include="Areas\Google\Views\Shared\" />
     <Folder Include="Areas\IATA\Models\" />
@@ -359,6 +364,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Constants\CurrencySymbols.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

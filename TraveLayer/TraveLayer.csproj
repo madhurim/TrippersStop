@@ -115,6 +115,8 @@
     <Compile Include="APIServices\WeatherAPICaller.cs" />
     <Compile Include="APIServices\YouTubeAPICaller.cs" />
     <Compile Include="CacheServices\MemoryCacheService.cs" />
+    <Compile Include="CustomTypes\Constants\Response\CurrencySymbols.cs" />
+    <Compile Include="CustomTypes\Constants\ViewModels\CurrencySymbolsViewModel.cs" />
     <Compile Include="CustomTypes\Google\Request\GoogleInput.cs" />
     <Compile Include="CustomTypes\Google\Response\GoogleOutput.cs" />
     <Compile Include="CustomTypes\Google\Response\GoogleReverseLookupOutput.cs" />
