@@ -312,8 +312,6 @@ namespace TrippismApi.Areas.Sabre.Controllers
                 {
                     fares.FareInfo = fares.FareInfo.OrderBy(f => f.LowestFare.Fare).Take(count).ToList();
                 }
-                if (fares.FareInfo.Any())
-                    fares.CurrencySymbol = Trippism.ConstantsReader.GetCurrencySymbolFromCode(fares.FareInfo[0].CurrencyCode);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
                 return response;
             }

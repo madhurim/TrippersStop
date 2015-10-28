@@ -36,8 +36,11 @@ namespace Trippism.Areas.Constants.Controllers
         }
         private HttpResponseMessage GetCurrencySymbolsResponse(string jsonPath)
         {
-            StreamReader readerCurrencySymbolJson = new StreamReader(jsonPath);
-            string currencySymbolJsonString = readerCurrencySymbolJson.ReadToEnd();
+            string currencySymbolJsonString = string.Empty;
+            using (StreamReader readerCurrencySymbolJson = new StreamReader(jsonPath))
+            {
+                currencySymbolJsonString = readerCurrencySymbolJson.ReadToEnd();
+            }
 
             CurrencySymbols currencySymbols = new CurrencySymbols();
             currencySymbols = ServiceStackSerializer.DeSerialize<CurrencySymbols>(currencySymbolJsonString);

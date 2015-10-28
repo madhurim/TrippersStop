@@ -223,7 +223,6 @@
     <Compile Include="APIExtention\MediaTypeFormatter\ServiceStackTextFormatter.cs" />
     <Compile Include="APIHelper\ApiHelper.cs" />
     <Compile Include="APIHelper\CompressedContent.cs" />
-    <Compile Include="APIHelper\ConstantsReader.cs" />
     <Compile Include="APIHelper\MailgunEmail.cs" />
     <Compile Include="APIHelper\TripperLog.cs" />
     <Compile Include="Areas\Constants\ConstantsAreaRegistration.cs" />
@@ -367,6 +366,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Constants\CurrencySymbols.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Constants\CurrencySymbols1.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
