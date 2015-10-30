@@ -370,6 +370,12 @@
   <ItemGroup>
     <Content Include="Constants\CurrencySymbols1.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Constants\airports.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Constants\airports_Ori.json" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

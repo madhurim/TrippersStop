@@ -4,7 +4,7 @@
             {
                 "symbol": "$",
                 "code": "USD"
-            },
+            },                        
             {
                 "symbol": "€",
                 "code": "EUR"
@@ -56,8 +56,7 @@
             {
                 "symbol": "$",
                 "code": "MXN"
-            },
-            ,
+            },            
             {
                 "symbol": "L",
                 "code": "ALL"
@@ -237,11 +236,7 @@
             {
                 "symbol": "£",
                 "code": "JEP"
-            },
-            {
-                "symbol": "₸",
-                "code": "KZT"
-            },
+            },          
             {
                 "symbol": "₩",
                 "code": "KPW"

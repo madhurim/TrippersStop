@@ -1,4 +1,5 @@
 ﻿using ExpressMapper;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Net;
@@ -17,12 +18,14 @@ namespace Trippism.Areas.Constants.Controllers
     {
         ICacheService _cacheService;
         string _expireTime = ConfigurationManager.AppSettings["RedisExpireInMin"].ToString();
-        const string TrippismCurrencySymbolsKey = "Trippism.CurrencySymbols";
+        private const string TrippismCurrencySymbolsKey = "Trippism.Constants.CurrencySymbols";
+        private const string TrippismAirportsKey = "Trippism.Constants.Airports";
         public ConstantsController(ICacheService cacheService)
         {
             _cacheService = cacheService;
         }
 
+        [Route("api/Constants/GetCurrencySymbols")]
         [ResponseType(typeof(TraveLayer.CustomTypes.Constants.ViewModels.CurrencySymbolsViewModel))]
         public async Task<HttpResponseMessage> GetCurrencySymbols()
         {
@@ -48,6 +51,32 @@ namespace Trippism.Areas.Constants.Controllers
             _cacheService.Save<TraveLayer.CustomTypes.Constants.ViewModels.CurrencySymbolsViewModel>(TrippismCurrencySymbolsKey, currencySymbolViewModel);
             return Request.CreateResponse(HttpStatusCode.OK, currencySymbolViewModel);
         }
+
+        [Route("api/Constants/GetAirports")]
+        [ResponseType(typeof(List<TraveLayer.CustomTypes.Constants.Response.AirportsDetail>))]
+        public async Task<HttpResponseMessage> GetAirports()
+        {
+            var tripCurrencySymbols = _cacheService.GetByKey<TraveLayer.CustomTypes.Constants.Response.AirportRoot>(TrippismAirportsKey);
+            if (tripCurrencySymbols != null)
+                return Request.CreateResponse(HttpStatusCode.OK, tripCurrencySymbols.AirportsRoot.AirportsDetail);
+
+            string jsonPath = GetFullPath(ConfigurationManager.AppSettings["AirportsJsonPath"].ToString());
+            return await Task.Run(() =>
+            { return GetAirportsResponse(jsonPath); });
+        }
+
+        private HttpResponseMessage GetAirportsResponse(string jsonPath)
+        {
+            string currencySymbolJsonString = string.Empty;
+            using (StreamReader readerCurrencySymbolJson = new StreamReader(jsonPath))
+            {
+                currencySymbolJsonString = readerCurrencySymbolJson.ReadToEnd();
+            }
+            var airports = ServiceStackSerializer.DeSerialize<AirportRoot>(currencySymbolJsonString);
+            _cacheService.Save<TraveLayer.CustomTypes.Constants.Response.AirportRoot>(TrippismAirportsKey, airports);
+            return Request.CreateResponse(HttpStatusCode.OK, airports.AirportsRoot.AirportsDetail);
+        }
+
         private string GetFullPath(string path)
         {
             return System.Web.HttpContext.Current.Server.MapPath(path);
