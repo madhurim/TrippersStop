@@ -29,9 +29,9 @@ namespace Trippism.Areas.Constants.Controllers
         [ResponseType(typeof(TraveLayer.CustomTypes.Constants.ViewModels.CurrencySymbolsViewModel))]
         public async Task<HttpResponseMessage> GetCurrencySymbols()
         {
-            var tripCurrencySymbols = _cacheService.GetByKey<TraveLayer.CustomTypes.Constants.ViewModels.CurrencySymbolsViewModel>(TrippismCurrencySymbolsKey);
-            if (tripCurrencySymbols != null)
-                return Request.CreateResponse(HttpStatusCode.OK, tripCurrencySymbols);
+            //var tripCurrencySymbols = _cacheService.GetByKey<TraveLayer.CustomTypes.Constants.ViewModels.CurrencySymbolsViewModel>(TrippismCurrencySymbolsKey);
+            //if (tripCurrencySymbols != null)
+            //    return Request.CreateResponse(HttpStatusCode.OK, tripCurrencySymbols);
 
             string jsonPath = GetFullPath(ConfigurationManager.AppSettings["CurrencySymbolsJsonPath"].ToString());
             return await Task.Run(() =>
@@ -48,7 +48,7 @@ namespace Trippism.Areas.Constants.Controllers
             CurrencySymbols currencySymbols = new CurrencySymbols();
             currencySymbols = ServiceStackSerializer.DeSerialize<CurrencySymbols>(currencySymbolJsonString);
             TraveLayer.CustomTypes.Constants.ViewModels.CurrencySymbolsViewModel currencySymbolViewModel = Mapper.Map<CurrencySymbols, TraveLayer.CustomTypes.Constants.ViewModels.CurrencySymbolsViewModel>(currencySymbols);
-            _cacheService.Save<TraveLayer.CustomTypes.Constants.ViewModels.CurrencySymbolsViewModel>(TrippismCurrencySymbolsKey, currencySymbolViewModel);
+           // _cacheService.Save<TraveLayer.CustomTypes.Constants.ViewModels.CurrencySymbolsViewModel>(TrippismCurrencySymbolsKey, currencySymbolViewModel);
             return Request.CreateResponse(HttpStatusCode.OK, currencySymbolViewModel);
         }
 
