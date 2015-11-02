@@ -37,7 +37,7 @@ namespace TraveLayer.CustomTypes.Sabre
         public LowestNonStopFare LowestNonStopFare { get; set; }
         public string DepartureDateTime { get; set; }
         public string ReturnDateTime { get; set; }
-        public List<Link> Links { get; set; }
+        //public List<Link> Links { get; set; }
         public string DestinationLocation { get; set; }
 
         // Copying from BF REsponse.

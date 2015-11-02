@@ -368,13 +368,14 @@
     <Content Include="Constants\CurrencySymbols.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Constants\CurrencySymbols1.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Constants\airports.json" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Constants\airports_Ori.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Constants\airports_alternatenames.json" />
+    <Content Include="Constants\airports_downsized.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Constants\CurrencySymbols_Ori.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
