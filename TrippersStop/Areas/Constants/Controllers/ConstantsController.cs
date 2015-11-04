@@ -1,4 +1,5 @@
 ﻿using ExpressMapper;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -74,6 +75,21 @@ namespace Trippism.Areas.Constants.Controllers
             var airports = ServiceStackSerializer.DeSerialize<AirportRoot>(currencySymbolJsonString);
             //_cacheService.Save<TraveLayer.CustomTypes.Constants.Response.AirportRoot>(TrippismAirportsKey, airports);
             return Request.CreateResponse(HttpStatusCode.OK, airports.AirportsRoot.AirportsDetail);
+        }
+        [HttpGet]
+        [Route("api/Constants/MissingAirportLog")]
+        public async Task MaintanAirportLog(string Airportcode)
+        {
+            string path = GetFullPath(ConfigurationManager.AppSettings["MissingAirportcodePath"].ToString());
+            await Task.Run(() => { MissingAirportLog(Airportcode, path); });
+        }
+        private void MissingAirportLog(string Airportcode ,string filepath)
+        {
+
+               string data = DateTime.UtcNow.ToString() + " : " + Airportcode;
+
+               System.IO.File.AppendAllText(filepath, data + Environment.NewLine);
+           
         }
 
         private string GetFullPath(string path)
