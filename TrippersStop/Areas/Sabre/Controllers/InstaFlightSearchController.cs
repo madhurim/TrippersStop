@@ -45,7 +45,7 @@ namespace Trippism.Areas.Sabre.Controllers
         {
             string url = GetURL(instaflightRequest);
             return await Task.Run(() =>
-            { return GetResponse(url); });
+            { return GetResponse(url, instaflightRequest); });
         }
 
         private string GetURL(InstaFlightSearchInput instaflightRequest)
@@ -76,18 +76,28 @@ namespace Trippism.Areas.Sabre.Controllers
             {
                 url.Append("&pointofsalecountry=" + instaflightRequest.PointOfSaleCountry);
             }
+            if (instaflightRequest.outboundflightstops != null)
+            {
+                url.Append("&outboundflightstops=" + instaflightRequest.outboundflightstops);
+            }
+            if (instaflightRequest.inboundflightstops != null)
+            {
+                url.Append("&inboundflightstops=" + instaflightRequest.inboundflightstops);
+            }
             return url.ToString();
         }
-
-        private HttpResponseMessage GetResponse(string url, int count = 0)
+       
+        private HttpResponseMessage GetResponse(string url, InstaFlightSearchInput instaflightRequest, int count = 0)
         {
-            ApiHelper.SetApiToken(_apiCaller, _cacheService);
-            APIResponse result = _apiCaller.Get(url).Result;
-            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            APIResponse result = GetAPIResponse(url);
+            if (result.StatusCode == HttpStatusCode.NotFound && instaflightRequest.inboundflightstops != null && instaflightRequest.outboundflightstops != null)
             {
-                ApiHelper.RefreshApiToken(_cacheService, _apiCaller);
-                result = _apiCaller.Get(url).Result;
+                instaflightRequest.inboundflightstops = null;
+                instaflightRequest.outboundflightstops = null;
+                url = GetURL(instaflightRequest);
+                result = GetAPIResponse(url);
             }
+
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 InstaFlightsSearchOutput flights = new InstaFlightsSearchOutput();
@@ -184,6 +194,18 @@ namespace Trippism.Areas.Sabre.Controllers
                 return response;
             }
             return Request.CreateResponse(result.StatusCode, result.Response);
+        }
+
+        private APIResponse GetAPIResponse(string url)
+        {
+            ApiHelper.SetApiToken(_apiCaller, _cacheService);
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                ApiHelper.RefreshApiToken(_cacheService, _apiCaller);
+                result = _apiCaller.Get(url).Result;
+            }
+            return result;
         }
     }
 }
