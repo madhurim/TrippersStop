@@ -1,19 +1,20 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using Trippism.APIExtention.Filters;
-using TraveLayer.CustomTypes.Sabre;
-using TrippismApi.TraveLayer;
+﻿using ServiceStack.Text;
+using System.Collections.Generic;
 using System.Configuration;
-using System.Web.Http.Description;
-using TraveLayer.CustomTypes.Sabre.ViewModels;
-using System.Threading.Tasks;
-using TraveLayer.CustomTypes.Sabre.Request;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
-using TrippismApi;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Description;
+using TraveLayer.CustomTypes.Sabre;
+using TraveLayer.CustomTypes.Sabre.Request;
 using TraveLayer.CustomTypes.Sabre.Response;
-using ServiceStack.Text;
-using System;
+using TraveLayer.CustomTypes.Sabre.ViewModels;
+using Trippism.APIExtention.Filters;
+using TrippismApi;
+using TrippismApi.TraveLayer;
 
 namespace Trippism.Areas.Sabre.Controllers
 {
@@ -168,16 +169,47 @@ namespace Trippism.Areas.Sabre.Controllers
             string urlMultiStop = GetDestinationUrl(destinationsRequest);
             APIResponse resultNonStop = GetAPIResponse(urlNonStop);
             APIResponse resultStop = GetAPIResponse(urlMultiStop);
+            Fares fares = new Fares();
             FareInfo fareInfo = new FareInfo();
             if (resultNonStop.StatusCode == HttpStatusCode.OK)
             {
-                var instaFlightSearch = GetInstaFlightOutput(resultNonStop.Response);
-                if (instaFlightSearch != null)
+                var instaFlightNonStop = GetInstaFlightOutput(resultNonStop.Response);
+                if (instaFlightNonStop != null)
                 {
-
+                    fareInfo.LowestNonStopFare = new LowestNonStopFare();
+                    var pricedItineraries = instaFlightNonStop.PricedItineraries[0];
+                    fareInfo.LowestNonStopFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
+                        .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
+                    fareInfo.LowestNonStopFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
+                    
+                    fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
+                    fareInfo.DepartureDateTime = instaFlightNonStop.DepartureDateTime;
+                    fareInfo.ReturnDateTime = instaFlightNonStop.ReturnDateTime;
+                    fareInfo.DestinationLocation = instaFlightNonStop.DestinationLocation;
+                    fares.OriginLocation = instaFlightNonStop.OriginLocation;
                 }
-            }            
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fareInfo);
+            }
+            if (resultStop.StatusCode == HttpStatusCode.OK)
+            {
+                var instaFlightStop = GetInstaFlightOutput(resultStop.Response);
+                if (instaFlightStop != null)
+                {
+                    fareInfo.LowestFare = new LowestFare();
+                    var pricedItineraries = instaFlightStop.PricedItineraries[0];
+                    fareInfo.LowestFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
+                        .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
+                    fareInfo.LowestFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
+                    
+                    fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
+                    fareInfo.DepartureDateTime = instaFlightStop.DepartureDateTime;
+                    fareInfo.ReturnDateTime = instaFlightStop.ReturnDateTime;
+                    fareInfo.DestinationLocation = instaFlightStop.DestinationLocation;
+                    fares.OriginLocation = instaFlightStop.OriginLocation;
+                }
+            }
+            fares.FareInfo = new List<FareInfo>();
+            fares.FareInfo.Add(fareInfo);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
             return response;
         }
 
@@ -186,6 +218,10 @@ namespace Trippism.Areas.Sabre.Controllers
             var result = JsonObject.Parse(response)
                 .ConvertTo(instaFlightSearch => new InstaFlightSearch
                 {
+                    DepartureDateTime = instaFlightSearch.Get<string>("DepartureDateTime"),
+                    ReturnDateTime = instaFlightSearch.Get<string>("ReturnDateTime"),
+                    DestinationLocation = instaFlightSearch.Get<string>("DestinationLocation"),
+                    OriginLocation = instaFlightSearch.Get<string>("OriginLocation"),
                     PricedItineraries = instaFlightSearch.ArrayObjects("PricedItineraries").ConvertAll<PricedItineraryViewModel>(pricedItinerary => new PricedItineraryViewModel()
                     {
                         OriginDestinationOption = pricedItinerary.Object("AirItinerary").Object("OriginDestinationOptions").ArrayObjects("OriginDestinationOption")
@@ -226,37 +262,21 @@ namespace Trippism.Areas.Sabre.Controllers
             StringBuilder url = new StringBuilder();
             url.Append(SabreInstaFlightUrl + "?");
             if (!string.IsNullOrWhiteSpace(instaflightRequest.Origin))
-            {
                 url.Append("origin=" + instaflightRequest.Origin);
-            }
             if (!string.IsNullOrWhiteSpace(instaflightRequest.Destination))
-            {
                 url.Append("&destination=" + instaflightRequest.Destination);
-            }
             if (!string.IsNullOrWhiteSpace(instaflightRequest.DepartureDate))
-            {
                 url.Append("&departuredate=" + instaflightRequest.DepartureDate);
-            }
             if (!string.IsNullOrWhiteSpace(instaflightRequest.ReturnDate))
-            {
                 url.Append("&returndate=" + instaflightRequest.ReturnDate);
-            }
             if (!string.IsNullOrWhiteSpace(instaflightRequest.IncludedCarriers))
-            {
                 url.Append("&includedcarriers=" + instaflightRequest.IncludedCarriers);
-            }
             if (!string.IsNullOrWhiteSpace(instaflightRequest.PointOfSaleCountry))
-            {
                 url.Append("&pointofsalecountry=" + instaflightRequest.PointOfSaleCountry);
-            }
             if (instaflightRequest.outboundflightstops != null)
-            {
                 url.Append("&outboundflightstops=" + instaflightRequest.outboundflightstops);
-            }
             if (instaflightRequest.inboundflightstops != null)
-            {
                 url.Append("&inboundflightstops=" + instaflightRequest.inboundflightstops);
-            }
             return url.ToString();
         }
         private string GetDestinationUrl(Destinations destinationsRequest, bool isNonStop = false)
@@ -264,30 +284,17 @@ namespace Trippism.Areas.Sabre.Controllers
             StringBuilder url = new StringBuilder();
             url.Append(SabreInstaFlightUrl + "?");
             if (!string.IsNullOrWhiteSpace(destinationsRequest.Origin))
-            {
                 url.Append("origin=" + destinationsRequest.Origin);
-            }
             if (!string.IsNullOrWhiteSpace(destinationsRequest.Destination))
-            {
                 url.Append("&destination=" + destinationsRequest.Destination);
-            }
             if (!string.IsNullOrWhiteSpace(destinationsRequest.DepartureDate))
-            {
                 url.Append("&departuredate=" + destinationsRequest.DepartureDate);
-            }
             if (!string.IsNullOrWhiteSpace(destinationsRequest.ReturnDate))
-            {
                 url.Append("&returndate=" + destinationsRequest.ReturnDate);
-            }
             if (!string.IsNullOrWhiteSpace(destinationsRequest.PointOfSaleCountry))
-            {
                 url.Append("&pointofsalecountry=" + destinationsRequest.PointOfSaleCountry);
-            }
             if (isNonStop == true)
-            {
-                url.Append("&outboundflightstops=0");
-                url.Append("&inboundflightstops=0");
-            }
+                url.Append("&outboundflightstops=0&inboundflightstops=0");
             url.Append("&limit=1");
             return url.ToString();
         }

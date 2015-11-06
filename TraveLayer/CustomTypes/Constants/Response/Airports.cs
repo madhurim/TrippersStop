@@ -23,7 +23,7 @@ namespace TraveLayer.CustomTypes.Constants.Response
         public string airport_CountryCode { get; set; }
         public string airport_CountryName { get; set; }
         public string airport_RegionName { get; set; }
-        public bool ismultiairport { get; set; }
+        public bool isMultiAirport { get; set; }
         public List<Airport> Airports { get; set; }
     }
     public class Airport
