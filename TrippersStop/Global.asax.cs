@@ -50,6 +50,7 @@ namespace TrippismApi
             //container.RegisterWebApiRequest<IDBService, MongoService>();
             container.RegisterWebApiRequest<IAsyncGoogleAPICaller, GoogleAPICaller>();
             container.RegisterWebApiRequest<IAsyncGoogleReverseLookupAPICaller, GoogleReverseLookupAPICaller>();
+            container.RegisterWebApiRequest<IAsyncYelpAPICaller, YelpAPICaller>();
 
             container.RegisterWebApiRequest<IAsyncYouTubeAPICaller, YouTubeAPICaller>();
             // This is an extension method from the integration package.
