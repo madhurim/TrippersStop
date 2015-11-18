@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -35,18 +34,18 @@ namespace Trippism.Areas.GooglePlace.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.OK, tripGooglePlace);
             }
-             return  await Task.Run(() =>
-             { return GetResponse(locationsearch.Latitude, locationsearch.Longitude, cacheKey); }); 
+            return await Task.Run(() =>
+            { return GetResponse(locationsearch.Latitude, locationsearch.Longitude, locationsearch.NextPageToken, cacheKey); });
         }
 
-        private HttpResponseMessage GetResponse(string Latitude, string Longitude, string cacheKey)
+        private HttpResponseMessage GetResponse(string Latitude, string Longitude, string NextPageToken, string cacheKey)
         {
             _apiCaller.Accept = "application/json";
             _apiCaller.ContentType = "application/json";
 
-            string strLatitudeandsLongitude = Latitude + "," + Longitude;
-
-            APIResponse result = _apiCaller.Get(strLatitudeandsLongitude).Result;
+            //string strLatitudeandsLongitude = Latitude + "," + Longitude;
+            string url = GetURL(Latitude, Longitude, NextPageToken);
+            APIResponse result = _apiCaller.Get(url).Result;
 
             if (result.StatusCode == HttpStatusCode.OK)
             {
@@ -61,7 +60,8 @@ namespace Trippism.Areas.GooglePlace.Controllers
 
                 TraveLayer.CustomTypes.Google.ViewModels.Google lstLocations = Mapper.Map<GoogleOutput, TraveLayer.CustomTypes.Google.ViewModels.Google>(googleplace);
 
-                _cacheService.Save<TraveLayer.CustomTypes.Google.ViewModels.Google>(cacheKey, lstLocations);
+                if (string.IsNullOrWhiteSpace(NextPageToken))
+                    _cacheService.Save<TraveLayer.CustomTypes.Google.ViewModels.Google>(cacheKey, lstLocations);
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lstLocations);
 
@@ -69,6 +69,15 @@ namespace Trippism.Areas.GooglePlace.Controllers
             }
 
             return Request.CreateResponse(result.StatusCode, result.Response);
+        }
+        private string GetURL(string Latitude, string Longitude, string nextPageToken)
+        {
+            string url = string.Empty;
+            if (!string.IsNullOrWhiteSpace(nextPageToken))
+                url += string.Format("&pagetoken={0}", nextPageToken);
+            if (!string.IsNullOrWhiteSpace(Latitude) && !string.IsNullOrWhiteSpace(Longitude))
+                url += string.Format("&location={0}", Latitude + "," + Longitude);
+            return url;
         }
     }
 }

@@ -8,8 +8,8 @@ namespace TraveLayer.CustomTypes.Google.Response
 {
     public class GoogleOutput
     {
+        public string next_page_token { get; set; }
         public List<results> results { get; set; }
-
     }
 
     public class results

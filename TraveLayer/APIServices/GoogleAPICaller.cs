@@ -54,13 +54,12 @@ namespace TrippismApi.TraveLayer
             _BaseAPIUri = new Uri(ConfigurationManager.AppSettings["GooglePlaceApiUri"].ToString() + "&key=" + _ClientId);
         }
 
-        public async Task<APIResponse> Get(string strSearchLatitudeandsLongitude)
+        public async Task<APIResponse> Get(string url)
         {
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_Accept));
-
-                HttpResponseMessage googleplaceResponse = await client.GetAsync(this.BaseAPIUri + "&location=" + strSearchLatitudeandsLongitude).ConfigureAwait(false);
+                HttpResponseMessage googleplaceResponse = await client.GetAsync(this.BaseAPIUri + url).ConfigureAwait(false);
 
                 if (!googleplaceResponse.IsSuccessStatusCode)
                 {
