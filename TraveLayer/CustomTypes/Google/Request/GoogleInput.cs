@@ -5,5 +5,7 @@
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public string NextPageToken { get; set; }
+        public string Types { get; set; }
+        public string Keywords { get; set; }
     }
 }
