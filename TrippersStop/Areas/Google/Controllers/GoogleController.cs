@@ -8,7 +8,7 @@ using TraveLayer.CustomTypes.Sabre.Response;
 using TrippismApi.TraveLayer;
 using AutoMapper;
 using System.Threading.Tasks;
-
+using System.Linq;
 namespace Trippism.Areas.GooglePlace.Controllers
 {
     public class GooglePlaceController : ApiController
@@ -51,17 +51,19 @@ namespace Trippism.Areas.GooglePlace.Controllers
             {
                 GoogleOutput googleplace = new GoogleOutput();
                 googleplace = ServiceStackSerializer.DeSerialize<GoogleOutput>(result.Response);
+                if (locationsearch.ExcludeTypes != null)
+                    googleplace.results = googleplace.results.Where(x => !x.types.Intersect(locationsearch.ExcludeTypes).Any()).ToList();
 
                 Mapper.CreateMap<GoogleOutput, TraveLayer.CustomTypes.Google.ViewModels.Google>();
                 Mapper.CreateMap<results, TraveLayer.CustomTypes.Google.ViewModels.results>();
                 Mapper.CreateMap<Geometry, TraveLayer.CustomTypes.Google.ViewModels.Geometry>();
                 Mapper.CreateMap<Location, TraveLayer.CustomTypes.Google.ViewModels.Location>();
-                Mapper.CreateMap<Photos, TraveLayer.CustomTypes.Google.ViewModels.Photos>();
+                //Mapper.CreateMap<Photos, TraveLayer.CustomTypes.Google.ViewModels.Photos>();
 
                 TraveLayer.CustomTypes.Google.ViewModels.Google lstLocations = Mapper.Map<GoogleOutput, TraveLayer.CustomTypes.Google.ViewModels.Google>(googleplace);
 
                 //if (string.IsNullOrWhiteSpace(locationsearch.NextPageToken))
-                  //  _cacheService.Save<TraveLayer.CustomTypes.Google.ViewModels.Google>(cacheKey, lstLocations);
+                //  _cacheService.Save<TraveLayer.CustomTypes.Google.ViewModels.Google>(cacheKey, lstLocations);
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lstLocations);
 
