@@ -12,6 +12,7 @@ namespace Trippism.APIHelper
         public async static void SaveNLogData(string logData)
         {
             Logger logger = LogManager.GetCurrentClassLogger();
+            //Logger logger = LogManager.GetLogger("dbLogger");
             await Task.Run(() =>
             { logger.Trace(logData); });
         }
