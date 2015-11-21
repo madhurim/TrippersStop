@@ -1,4 +1,5 @@
 ﻿using ServiceStack.Text;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -56,9 +57,10 @@ namespace Trippism.Areas.Sabre.Controllers
             { return GetDestinationResponse(destinationsRequest); });
         }
 
-        private HttpResponseMessage GetResponse(string url, InstaFlightSearchInput instaflightRequest, int count = 0)
+        private HttpResponseMessage GetResponse(string url, InstaFlightSearchInput instaflightRequest)
         {
             APIResponse result = GetAPIResponse(url);
+            string dateFormat = "yyyy-MM-dd";
             if (result.StatusCode == HttpStatusCode.NotFound && instaflightRequest.inboundflightstops != null && instaflightRequest.outboundflightstops != null)
             {
                 instaflightRequest.inboundflightstops = null;
@@ -69,99 +71,134 @@ namespace Trippism.Areas.Sabre.Controllers
 
             if (result.StatusCode == HttpStatusCode.OK)
             {
-                var fares = JsonObject.Parse(result.Response)
-                    .ConvertTo(instaFlightSearch => new InstaFlightSearch
-                    {
-                        DepartureDateTime = instaFlightSearch.Get<string>("DepartureDateTime"),
-                        ReturnDateTime = instaFlightSearch.Get<string>("ReturnDateTime"),
-                        DestinationLocation = instaFlightSearch.Get<string>("DestinationLocation"),
-                        OriginLocation = instaFlightSearch.Get<string>("OriginLocation"),
-                        PricedItineraries = instaFlightSearch.ArrayObjects("PricedItineraries").ConvertAll<PricedItineraryViewModel>(pricedItinerary => new PricedItineraryViewModel()
-                        {
-                            OriginDestinationOption = pricedItinerary.Object("AirItinerary").Object("OriginDestinationOptions").ArrayObjects("OriginDestinationOption")
-                                                        .ConvertAll<OriginDestinationOptionViewModel>(originDestOpt => new OriginDestinationOptionViewModel()
-                                                        {
-                                                            #region OriginDestinationOption
-                                                            ElapsedTime = originDestOpt.Get<int>("ElapsedTime"),
-                                                            FlightSegment = originDestOpt.ArrayObjects("FlightSegment").ConvertAll<FlightSegmentViewModel>(flightSeg => new FlightSegmentViewModel()
-                                                            {
-                                                                DepartureAirport = flightSeg.Get<DepartureAirport>("DepartureAirport"),
-                                                                ArrivalAirport = flightSeg.Get<ArrivalAirport>("ArrivalAirport"),
-                                                                OperatingAirline = flightSeg.Get<OperatingAirline>("OperatingAirline"),
-                                                                //DepartureTimeZone = flightSeg.Get<DepartureTimeZone>("DepartureTimeZone"),
-                                                                // ArrivalTimeZone = flightSeg.Get<ArrivalTimeZone>("ArrivalTimeZone"),
-                                                                DepartureDateTime = flightSeg.Get<string>("DepartureDateTime"),
-                                                                ArrivalDateTime = flightSeg.Get<string>("ArrivalDateTime"),
-                                                                StopQuantity = flightSeg.Get<int>("StopQuantity"),
-                                                                FlightNumber = flightSeg.Get<string>("FlightNumber"),
-                                                                ElapsedTime = flightSeg.Get<int>("ElapsedTime"),
-                                                                StopAirport = flightSeg.Object("StopAirports") == null ? null : flightSeg.Object("StopAirports").ArrayObjects("StopAirport").ConvertAll<StopAirport>(stopAirport => new StopAirport()
-                                                                {
-                                                                    DepartureDateTime = stopAirport.Get<string>("DepartureDateTime"),
-                                                                    ArrivalDateTime = stopAirport.Get<string>("ArrivalDateTime"),
-                                                                    LocationCode = stopAirport.Get<string>("LocationCode"),
-                                                                    ElapsedTime = stopAirport.Get<int>("ElapsedTime"),
-                                                                    Duration = stopAirport.Get<int>("Duration"),
-                                                                })
-                                                            })
-                                                            #endregion
-                                                        }),
-                            #region AirItineraryPricingInfo
-                            AirItineraryPricingInfo = pricedItinerary.ArrayObjects("AirItineraryPricingInfo")
-                            .ConvertAll<AirItineraryPricingInfoViewModel>(airItineraryPricingInfo => new AirItineraryPricingInfoViewModel()
-                            {
-                                TotalFare = airItineraryPricingInfo.Object("ItinTotalFare").Object("TotalFare").ConvertTo<TotalFare>(totalFare => new TotalFare()
-                                {
-                                    Amount = totalFare.Get<double>("Amount"),
-                                    DecimalPlaces = totalFare.Get<int>("DecimalPlaces"),
-                                    CurrencyCode = totalFare.Get<string>("CurrencyCode")
-                                }),
-                                #region COMMENTED
-                                //PTC_FareBreakdown = airItineraryPricingInfo.Object("PTC_FareBreakdowns").ArrayObjects("PTC_FareBreakdown").ConvertAll<PTCFareBreakdownViewModel>(ptcFareBreakdown => new PTCFareBreakdownViewModel()
-                                //{
-                                //    #region PTC_FareBreakdown                          
-                                //    PassengerTypeQuantity = ptcFareBreakdown.Object("PassengerTypeQuantity").ConvertTo<PassengerTypeQuantity>(passengerTypeQuant => new PassengerTypeQuantity()
-                                //    {
-                                //        Code = passengerTypeQuant.Get<string>("Code"),
-                                //        Quantity = passengerTypeQuant.Get<int>("Quantity")
-                                //    }),
-                                //    PassengerFare = ptcFareBreakdown.Object("PassengerFare").ConvertTo<PassengerFare>(passengerFare => new PassengerFare()
-                                //    {
-                                //        #region PassengerFare
-                                //        BaseFare = passengerFare.Get<BaseFare2>("BaseFare"),
-                                //        FareConstruction = passengerFare.Get<FareConstruction2>("FareConstruction"),
-                                //        EquivFare = passengerFare.Get<EquivFare2>("EquivFare"),
-                                //        Taxes = ptcFareBreakdown.Object("Taxes").ConvertTo<Taxes2>(taxes => new Taxes2() { }),
-                                //        TotalFare = passengerFare.Get<TotalFare2>("TotalFare"),
-                                //        TPA_Extensions = ptcFareBreakdown.Object("TPA_Extensions").ConvertTo<TPAExtensions2>(TPAExt => new TPAExtensions2() { })
-                                //        #endregion
-                                //    })
-                                //    #endregion
-                                //}),
-                                //FareInfo = airItineraryPricingInfo.ArrayObjects("FareInfo").ConvertAll<FareInfoViewModel>(fareInfo => new FareInfoViewModel()
-                                //{
-                                //    #region FareInfo
-                                //    LowestFare = fareInfo.Get<LowestFare>("LowestFare"),
-                                //    CurrencyCode = fareInfo.Get<string>("CurrencyCode"),
-                                //    LowestNonStopFare = fareInfo.Get<LowestNonStopFare>("LowestNonStopFare"),
-                                //    DepartureDateTime = fareInfo.Get<string>("DepartureDateTime"),
-                                //    ReturnDateTime = fareInfo.Get<string>("ReturnDateTime"),
-                                //    //public List<Link> Links { get; set; }
-                                //    DestinationLocation = fareInfo.Get<string>("DestinationLocation"),
-                                //    FareReference = fareInfo.Get<string>("FareReference"),
-                                //    TPA_Extensions = fareInfo.Get<TPAExtensions4>("TPA_Extensions"),
-                                //    #endregion
-                                //})
-                                #endregion
-                            })
-                            #endregion
-                        })
-                    });
-
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
+                var instaFlight = GetInstaFlightSearchData(result);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, instaFlight);
                 return response;
             }
+            else if (result.StatusCode == HttpStatusCode.NotFound && instaflightRequest.DepartureDate == DateTime.Now.ToString(dateFormat))
+            {
+                // Getting insta flight data for next day after departure date.                
+                DateTime departureDate = DateTime.ParseExact(instaflightRequest.DepartureDate, dateFormat, null);
+                DateTime returnDate = DateTime.ParseExact(instaflightRequest.ReturnDate, dateFormat, null);
+                instaflightRequest.DepartureDate = departureDate.AddDays(1).ToString(dateFormat);
+                instaflightRequest.ReturnDate = returnDate.AddDays(1).ToString(dateFormat);
+                url = GetURL(instaflightRequest);
+                result = GetAPIResponse(url);
+                if (result.StatusCode == HttpStatusCode.OK)
+                {
+                    var instaFlight = GetInstaFlightSearchData(result);
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, instaFlight);
+                    return response;
+                }
+                else if (result.StatusCode == HttpStatusCode.NotFound)
+                {
+                    // Getting insta flight data for 2 days after departure date.
+                    instaflightRequest.DepartureDate = departureDate.AddDays(2).ToString(dateFormat);
+                    instaflightRequest.ReturnDate = returnDate.AddDays(2).ToString(dateFormat);
+                    url = GetURL(instaflightRequest);
+                    result = GetAPIResponse(url);
+                    if (result.StatusCode == HttpStatusCode.OK)
+                    {
+                        var instaFlight = GetInstaFlightSearchData(result);
+                        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, instaFlight);
+                        return response;
+                    }
+                }
+            }
             return Request.CreateResponse(result.StatusCode, result.Response);
+        }
+
+        private InstaFlightSearch GetInstaFlightSearchData(APIResponse result)
+        {
+            var instaFlight = JsonObject.Parse(result.Response)
+                        .ConvertTo(instaFlightSearch => new InstaFlightSearch
+                        {
+                            DepartureDateTime = instaFlightSearch.Get<string>("DepartureDateTime"),
+                            ReturnDateTime = instaFlightSearch.Get<string>("ReturnDateTime"),
+                            DestinationLocation = instaFlightSearch.Get<string>("DestinationLocation"),
+                            OriginLocation = instaFlightSearch.Get<string>("OriginLocation"),
+                            PricedItineraries = instaFlightSearch.ArrayObjects("PricedItineraries").ConvertAll<PricedItineraryViewModel>(pricedItinerary => new PricedItineraryViewModel()
+                            {
+                                OriginDestinationOption = pricedItinerary.Object("AirItinerary").Object("OriginDestinationOptions").ArrayObjects("OriginDestinationOption")
+                                                            .ConvertAll<OriginDestinationOptionViewModel>(originDestOpt => new OriginDestinationOptionViewModel()
+                                                            {
+                                                                #region OriginDestinationOption
+                                                                ElapsedTime = originDestOpt.Get<int>("ElapsedTime"),
+                                                                FlightSegment = originDestOpt.ArrayObjects("FlightSegment").ConvertAll<FlightSegmentViewModel>(flightSeg => new FlightSegmentViewModel()
+                                                                {
+                                                                    DepartureAirport = flightSeg.Get<DepartureAirport>("DepartureAirport"),
+                                                                    ArrivalAirport = flightSeg.Get<ArrivalAirport>("ArrivalAirport"),
+                                                                    OperatingAirline = flightSeg.Get<OperatingAirline>("OperatingAirline"),
+                                                                    //DepartureTimeZone = flightSeg.Get<DepartureTimeZone>("DepartureTimeZone"),
+                                                                    // ArrivalTimeZone = flightSeg.Get<ArrivalTimeZone>("ArrivalTimeZone"),
+                                                                    DepartureDateTime = flightSeg.Get<string>("DepartureDateTime"),
+                                                                    ArrivalDateTime = flightSeg.Get<string>("ArrivalDateTime"),
+                                                                    StopQuantity = flightSeg.Get<int>("StopQuantity"),
+                                                                    FlightNumber = flightSeg.Get<string>("FlightNumber"),
+                                                                    ElapsedTime = flightSeg.Get<int>("ElapsedTime"),
+                                                                    StopAirport = flightSeg.Object("StopAirports") == null ? null : flightSeg.Object("StopAirports").ArrayObjects("StopAirport").ConvertAll<StopAirport>(stopAirport => new StopAirport()
+                                                                    {
+                                                                        DepartureDateTime = stopAirport.Get<string>("DepartureDateTime"),
+                                                                        ArrivalDateTime = stopAirport.Get<string>("ArrivalDateTime"),
+                                                                        LocationCode = stopAirport.Get<string>("LocationCode"),
+                                                                        ElapsedTime = stopAirport.Get<int>("ElapsedTime"),
+                                                                        Duration = stopAirport.Get<int>("Duration"),
+                                                                    })
+                                                                })
+                                                                #endregion
+                                                            }),
+                                #region AirItineraryPricingInfo
+                                AirItineraryPricingInfo = pricedItinerary.ArrayObjects("AirItineraryPricingInfo")
+                                .ConvertAll<AirItineraryPricingInfoViewModel>(airItineraryPricingInfo => new AirItineraryPricingInfoViewModel()
+                                {
+                                    TotalFare = airItineraryPricingInfo.Object("ItinTotalFare").Object("TotalFare").ConvertTo<TotalFare>(totalFare => new TotalFare()
+                                    {
+                                        Amount = totalFare.Get<double>("Amount"),
+                                        DecimalPlaces = totalFare.Get<int>("DecimalPlaces"),
+                                        CurrencyCode = totalFare.Get<string>("CurrencyCode")
+                                    }),
+                                    #region COMMENTED
+                                    //PTC_FareBreakdown = airItineraryPricingInfo.Object("PTC_FareBreakdowns").ArrayObjects("PTC_FareBreakdown").ConvertAll<PTCFareBreakdownViewModel>(ptcFareBreakdown => new PTCFareBreakdownViewModel()
+                                    //{
+                                    //    #region PTC_FareBreakdown                          
+                                    //    PassengerTypeQuantity = ptcFareBreakdown.Object("PassengerTypeQuantity").ConvertTo<PassengerTypeQuantity>(passengerTypeQuant => new PassengerTypeQuantity()
+                                    //    {
+                                    //        Code = passengerTypeQuant.Get<string>("Code"),
+                                    //        Quantity = passengerTypeQuant.Get<int>("Quantity")
+                                    //    }),
+                                    //    PassengerFare = ptcFareBreakdown.Object("PassengerFare").ConvertTo<PassengerFare>(passengerFare => new PassengerFare()
+                                    //    {
+                                    //        #region PassengerFare
+                                    //        BaseFare = passengerFare.Get<BaseFare2>("BaseFare"),
+                                    //        FareConstruction = passengerFare.Get<FareConstruction2>("FareConstruction"),
+                                    //        EquivFare = passengerFare.Get<EquivFare2>("EquivFare"),
+                                    //        Taxes = ptcFareBreakdown.Object("Taxes").ConvertTo<Taxes2>(taxes => new Taxes2() { }),
+                                    //        TotalFare = passengerFare.Get<TotalFare2>("TotalFare"),
+                                    //        TPA_Extensions = ptcFareBreakdown.Object("TPA_Extensions").ConvertTo<TPAExtensions2>(TPAExt => new TPAExtensions2() { })
+                                    //        #endregion
+                                    //    })
+                                    //    #endregion
+                                    //}),
+                                    //FareInfo = airItineraryPricingInfo.ArrayObjects("FareInfo").ConvertAll<FareInfoViewModel>(fareInfo => new FareInfoViewModel()
+                                    //{
+                                    //    #region FareInfo
+                                    //    LowestFare = fareInfo.Get<LowestFare>("LowestFare"),
+                                    //    CurrencyCode = fareInfo.Get<string>("CurrencyCode"),
+                                    //    LowestNonStopFare = fareInfo.Get<LowestNonStopFare>("LowestNonStopFare"),
+                                    //    DepartureDateTime = fareInfo.Get<string>("DepartureDateTime"),
+                                    //    ReturnDateTime = fareInfo.Get<string>("ReturnDateTime"),
+                                    //    //public List<Link> Links { get; set; }
+                                    //    DestinationLocation = fareInfo.Get<string>("DestinationLocation"),
+                                    //    FareReference = fareInfo.Get<string>("FareReference"),
+                                    //    TPA_Extensions = fareInfo.Get<TPAExtensions4>("TPA_Extensions"),
+                                    //    #endregion
+                                    //})
+                                    #endregion
+                                })
+                                #endregion
+                            })
+                        });
+            return instaFlight;
         }
         private HttpResponseMessage GetDestinationResponse(Destinations destinationsRequest)
         {
@@ -181,7 +218,7 @@ namespace Trippism.Areas.Sabre.Controllers
                     fareInfo.LowestNonStopFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
                         .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
                     fareInfo.LowestNonStopFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
-                    
+
                     fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
                     fareInfo.DepartureDateTime = instaFlightNonStop.DepartureDateTime;
                     fareInfo.ReturnDateTime = instaFlightNonStop.ReturnDateTime;
@@ -199,7 +236,7 @@ namespace Trippism.Areas.Sabre.Controllers
                     fareInfo.LowestFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
                         .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
                     fareInfo.LowestFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
-                    
+
                     fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
                     fareInfo.DepartureDateTime = instaFlightStop.DepartureDateTime;
                     fareInfo.ReturnDateTime = instaFlightStop.ReturnDateTime;
@@ -212,7 +249,6 @@ namespace Trippism.Areas.Sabre.Controllers
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
             return response;
         }
-
         private InstaFlightSearch GetInstaFlightOutput(string response)
         {
             var result = JsonObject.Parse(response)
