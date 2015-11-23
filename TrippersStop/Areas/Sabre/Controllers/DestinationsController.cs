@@ -297,7 +297,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// </summary>
         private HttpResponseMessage GetResponse(string url, int count = 0)
         {
-            TrippismNLog.SaveNLogData(url);
+            //TrippismNLog.SaveNLogData(url);
             ApiHelper.SetApiToken(_apiCaller, _cacheService);
             APIResponse result = _apiCaller.Get(url).Result;
             if (result.StatusCode == HttpStatusCode.Unauthorized)
@@ -315,7 +315,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
                     fares.FareInfo = fares.FareInfo.OrderBy(f => f.LowestFare.Fare).Take(count).ToList();
                 }
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
-                TrippismNLog.SaveNLogData(result.Response);
+                //TrippismNLog.SaveNLogData(result.Response);
                 return response;
             }
             return Request.CreateResponse(result.StatusCode, result.Response);
