@@ -15,6 +15,7 @@ using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using Trippism.APIExtention.Filters;
 using TrippismApi;
+using TrippismApi.Areas.Sabre.Controllers;
 using TrippismApi.TraveLayer;
 
 namespace Trippism.Areas.Sabre.Controllers
@@ -31,6 +32,14 @@ namespace Trippism.Areas.Sabre.Controllers
             get
             {
                 return ConfigurationManager.AppSettings["SabreInstaFlightUrl"];
+            }
+        }
+
+        public string SabreCountriesUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreSaleCountryUrl"];
             }
         }
 
@@ -206,48 +215,61 @@ namespace Trippism.Areas.Sabre.Controllers
             string urlMultiStop = GetDestinationUrl(destinationsRequest);
             APIResponse resultNonStop = GetAPIResponse(urlNonStop);
             APIResponse resultStop = GetAPIResponse(urlMultiStop);
-            Fares fares = new Fares();
-            FareInfo fareInfo = new FareInfo();
-            if (resultNonStop.StatusCode == HttpStatusCode.OK)
+            string posResponse = "Parameter 'pointofsalecountry' has an unsupported value";
+            if (resultNonStop.StatusCode == HttpStatusCode.BadRequest
+                && resultNonStop.Response.ToString() == posResponse 
+                && resultStop.StatusCode == HttpStatusCode.BadRequest 
+                && resultStop.Response.ToString() == posResponse)
             {
-                var instaFlightNonStop = GetInstaFlightOutput(resultNonStop.Response);
-                if (instaFlightNonStop != null)
-                {
-                    fareInfo.LowestNonStopFare = new LowestNonStopFare();
-                    var pricedItineraries = instaFlightNonStop.PricedItineraries[0];
-                    fareInfo.LowestNonStopFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
-                        .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
-                    fareInfo.LowestNonStopFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
-
-                    fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
-                    fareInfo.DepartureDateTime = instaFlightNonStop.DepartureDateTime;
-                    fareInfo.ReturnDateTime = instaFlightNonStop.ReturnDateTime;
-                    fareInfo.DestinationLocation = instaFlightNonStop.DestinationLocation;
-                    fares.OriginLocation = instaFlightNonStop.OriginLocation;
-                }
+                APIResponse supportedPOSCountries = GetAPIResponse(SabreCountriesUrl);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, supportedPOSCountries.Response);
+                return response;
             }
-            if (resultStop.StatusCode == HttpStatusCode.OK)
+            else
             {
-                var instaFlightStop = GetInstaFlightOutput(resultStop.Response);
-                if (instaFlightStop != null)
+                Fares fares = new Fares();
+                FareInfo fareInfo = new FareInfo();
+                if (resultNonStop.StatusCode == HttpStatusCode.OK)
                 {
-                    fareInfo.LowestFare = new LowestFare();
-                    var pricedItineraries = instaFlightStop.PricedItineraries[0];
-                    fareInfo.LowestFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
-                        .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
-                    fareInfo.LowestFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
+                    var instaFlightNonStop = GetInstaFlightOutput(resultNonStop.Response);
+                    if (instaFlightNonStop != null)
+                    {
+                        fareInfo.LowestNonStopFare = new LowestNonStopFare();
+                        var pricedItineraries = instaFlightNonStop.PricedItineraries[0];
+                        fareInfo.LowestNonStopFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
+                            .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
+                        fareInfo.LowestNonStopFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
 
-                    fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
-                    fareInfo.DepartureDateTime = instaFlightStop.DepartureDateTime;
-                    fareInfo.ReturnDateTime = instaFlightStop.ReturnDateTime;
-                    fareInfo.DestinationLocation = instaFlightStop.DestinationLocation;
-                    fares.OriginLocation = instaFlightStop.OriginLocation;
+                        fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
+                        fareInfo.DepartureDateTime = instaFlightNonStop.DepartureDateTime;
+                        fareInfo.ReturnDateTime = instaFlightNonStop.ReturnDateTime;
+                        fareInfo.DestinationLocation = instaFlightNonStop.DestinationLocation;
+                        fares.OriginLocation = instaFlightNonStop.OriginLocation;
+                    }
                 }
+                if (resultStop.StatusCode == HttpStatusCode.OK)
+                {
+                    var instaFlightStop = GetInstaFlightOutput(resultStop.Response);
+                    if (instaFlightStop != null)
+                    {
+                        fareInfo.LowestFare = new LowestFare();
+                        var pricedItineraries = instaFlightStop.PricedItineraries[0];
+                        fareInfo.LowestFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
+                            .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
+                        fareInfo.LowestFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
+
+                        fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
+                        fareInfo.DepartureDateTime = instaFlightStop.DepartureDateTime;
+                        fareInfo.ReturnDateTime = instaFlightStop.ReturnDateTime;
+                        fareInfo.DestinationLocation = instaFlightStop.DestinationLocation;
+                        fares.OriginLocation = instaFlightStop.OriginLocation;
+                    }
+                }
+                fares.FareInfo = new List<FareInfo>();
+                fares.FareInfo.Add(fareInfo);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
+                return response;
             }
-            fares.FareInfo = new List<FareInfo>();
-            fares.FareInfo.Add(fareInfo);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
-            return response;
         }
         private InstaFlightSearch GetInstaFlightOutput(string response)
         {
