@@ -125,6 +125,7 @@
     <Compile Include="CustomTypes\Google\ViewModels\GoogleReverseLookup.cs" />
     <Compile Include="CustomTypes\IATA\ViewModels\Entity.cs" />
     <Compile Include="CustomTypes\IATA\ViewModels\IATACode.cs" />
+    <Compile Include="CustomTypes\NLog\InstaFlightNLog.cs" />
     <Compile Include="CustomTypes\Sabre\Request\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>

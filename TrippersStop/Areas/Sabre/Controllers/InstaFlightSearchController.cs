@@ -9,11 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using TraveLayer.CustomTypes.NLog;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Request;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using Trippism.APIExtention.Filters;
+using Trippism.APIHelper;
 using TrippismApi;
 using TrippismApi.TraveLayer;
 
@@ -25,7 +27,7 @@ namespace Trippism.Areas.Sabre.Controllers
     {
         IAsyncSabreAPICaller _apiCaller;
         ICacheService _cacheService;
-
+        private const string _nLoggerName = "InstaFlightLogger";
         public string SabreInstaFlightUrl
         {
             get
@@ -63,6 +65,8 @@ namespace Trippism.Areas.Sabre.Controllers
             string dateFormat = "yyyy-MM-dd";
             if (result.StatusCode == HttpStatusCode.NotFound && instaflightRequest.inboundflightstops != null && instaflightRequest.outboundflightstops != null)
             {
+                InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = result.RequestUrl, Response = result.OriginalResponse };
+                TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
                 instaflightRequest.inboundflightstops = null;
                 instaflightRequest.outboundflightstops = null;
                 url = GetURL(instaflightRequest);
@@ -75,26 +79,17 @@ namespace Trippism.Areas.Sabre.Controllers
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, instaFlight);
                 return response;
             }
-            else if (result.StatusCode == HttpStatusCode.NotFound && instaflightRequest.DepartureDate == DateTime.Now.ToString(dateFormat))
+            else if (result.StatusCode == HttpStatusCode.NotFound)
             {
-                // Getting insta flight data for next day after departure date.                
-                DateTime departureDate = DateTime.ParseExact(instaflightRequest.DepartureDate, dateFormat, null);
-                DateTime returnDate = DateTime.ParseExact(instaflightRequest.ReturnDate, dateFormat, null);
-                instaflightRequest.DepartureDate = departureDate.AddDays(1).ToString(dateFormat);
-                instaflightRequest.ReturnDate = returnDate.AddDays(1).ToString(dateFormat);
-                url = GetURL(instaflightRequest);
-                result = GetAPIResponse(url);
-                if (result.StatusCode == HttpStatusCode.OK)
+                InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = result.RequestUrl, Response = result.OriginalResponse };
+                TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
+                if (instaflightRequest.DepartureDate == DateTime.Now.ToString(dateFormat))
                 {
-                    var instaFlight = GetInstaFlightSearchData(result);
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, instaFlight);
-                    return response;
-                }
-                else if (result.StatusCode == HttpStatusCode.NotFound)
-                {
-                    // Getting insta flight data for 2 days after departure date.
-                    instaflightRequest.DepartureDate = departureDate.AddDays(2).ToString(dateFormat);
-                    instaflightRequest.ReturnDate = returnDate.AddDays(2).ToString(dateFormat);
+                    // Getting insta flight data for next day after departure date.                
+                    DateTime departureDate = DateTime.ParseExact(instaflightRequest.DepartureDate, dateFormat, null);
+                    DateTime returnDate = DateTime.ParseExact(instaflightRequest.ReturnDate, dateFormat, null);
+                    instaflightRequest.DepartureDate = departureDate.AddDays(1).ToString(dateFormat);
+                    instaflightRequest.ReturnDate = returnDate.AddDays(1).ToString(dateFormat);
                     url = GetURL(instaflightRequest);
                     result = GetAPIResponse(url);
                     if (result.StatusCode == HttpStatusCode.OK)
@@ -102,6 +97,22 @@ namespace Trippism.Areas.Sabre.Controllers
                         var instaFlight = GetInstaFlightSearchData(result);
                         HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, instaFlight);
                         return response;
+                    }
+                    else if (result.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        instaFlightNLog = new InstaFlightNLog { Request = result.RequestUrl, Response = result.OriginalResponse };
+                        TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
+                        // Getting insta flight data for 2 days after departure date.
+                        instaflightRequest.DepartureDate = departureDate.AddDays(2).ToString(dateFormat);
+                        instaflightRequest.ReturnDate = returnDate.AddDays(2).ToString(dateFormat);
+                        url = GetURL(instaflightRequest);
+                        result = GetAPIResponse(url);
+                        if (result.StatusCode == HttpStatusCode.OK)
+                        {
+                            var instaFlight = GetInstaFlightSearchData(result);
+                            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, instaFlight);
+                            return response;
+                        }
                     }
                 }
             }
@@ -226,6 +237,12 @@ namespace Trippism.Areas.Sabre.Controllers
                     fares.OriginLocation = instaFlightNonStop.OriginLocation;
                 }
             }
+            else if (resultNonStop.StatusCode == HttpStatusCode.NotFound)
+            {
+                InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = resultNonStop.RequestUrl, Response = resultNonStop.OriginalResponse };
+                TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
+            }
+
             if (resultStop.StatusCode == HttpStatusCode.OK)
             {
                 var instaFlightStop = GetInstaFlightOutput(resultStop.Response);
@@ -243,6 +260,11 @@ namespace Trippism.Areas.Sabre.Controllers
                     fareInfo.DestinationLocation = instaFlightStop.DestinationLocation;
                     fares.OriginLocation = instaFlightStop.OriginLocation;
                 }
+            }
+            else if (resultStop.StatusCode == HttpStatusCode.NotFound)
+            {
+                InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = resultStop.RequestUrl, Response = resultStop.OriginalResponse };
+                TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
             }
             fares.FareInfo = new List<FareInfo>();
             fares.FareInfo.Add(fareInfo);
