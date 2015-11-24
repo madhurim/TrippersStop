@@ -17,6 +17,7 @@ using TraveLayer.CustomTypes.Sabre.ViewModels;
 using Trippism.APIExtention.Filters;
 using Trippism.APIHelper;
 using TrippismApi;
+using TrippismApi.Areas.Sabre.Controllers;
 using TrippismApi.TraveLayer;
 
 namespace Trippism.Areas.Sabre.Controllers
@@ -33,6 +34,14 @@ namespace Trippism.Areas.Sabre.Controllers
             get
             {
                 return ConfigurationManager.AppSettings["SabreInstaFlightUrl"];
+            }
+        }
+
+        public string SabreCountriesUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreSaleCountryUrl"];
             }
         }
 
@@ -217,18 +226,30 @@ namespace Trippism.Areas.Sabre.Controllers
             string urlMultiStop = GetDestinationUrl(destinationsRequest);
             APIResponse resultNonStop = GetAPIResponse(urlNonStop);
             APIResponse resultStop = GetAPIResponse(urlMultiStop);
-            Fares fares = new Fares();
-            FareInfo fareInfo = new FareInfo();
-            if (resultNonStop.StatusCode == HttpStatusCode.OK)
+            string posResponse = "Parameter 'pointofsalecountry' has an unsupported value";
+            if (resultNonStop.StatusCode == HttpStatusCode.BadRequest
+                && resultNonStop.Response.ToString() == posResponse 
+                && resultStop.StatusCode == HttpStatusCode.BadRequest 
+                && resultStop.Response.ToString() == posResponse)
             {
-                var instaFlightNonStop = GetInstaFlightOutput(resultNonStop.Response);
-                if (instaFlightNonStop != null)
+                APIResponse supportedPOSCountries = GetAPIResponse(SabreCountriesUrl);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, supportedPOSCountries.Response);
+                return response;
+            }
+            else
+            {
+                Fares fares = new Fares();
+                FareInfo fareInfo = new FareInfo();
+                if (resultNonStop.StatusCode == HttpStatusCode.OK)
                 {
-                    fareInfo.LowestNonStopFare = new LowestNonStopFare();
-                    var pricedItineraries = instaFlightNonStop.PricedItineraries[0];
-                    fareInfo.LowestNonStopFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
-                        .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
-                    fareInfo.LowestNonStopFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
+                    var instaFlightNonStop = GetInstaFlightOutput(resultNonStop.Response);
+                    if (instaFlightNonStop != null)
+                    {
+                        fareInfo.LowestNonStopFare = new LowestNonStopFare();
+                        var pricedItineraries = instaFlightNonStop.PricedItineraries[0];
+                        fareInfo.LowestNonStopFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
+                            .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
+                        fareInfo.LowestNonStopFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
 
                     fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
                     fareInfo.DepartureDateTime = instaFlightNonStop.DepartureDateTime;

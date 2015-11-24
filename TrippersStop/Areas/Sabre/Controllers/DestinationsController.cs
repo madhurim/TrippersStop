@@ -69,6 +69,14 @@ namespace TrippismApi.Areas.Sabre.Controllers
                 return ConfigurationManager.AppSettings["WeatherHistoryUrl"];
             }
         }
+        public string SabreCountriesUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreSaleCountryUrl"];
+            }
+        }
+
 
         /// <summary>
         /// Set api class and cache service.
@@ -300,6 +308,13 @@ namespace TrippismApi.Areas.Sabre.Controllers
             //TrippismNLog.SaveNLogData(url);
             ApiHelper.SetApiToken(_apiCaller, _cacheService);
             APIResponse result = _apiCaller.Get(url).Result;
+            string posResponse = "Parameter 'pointofsalecountry' has an unsupported value";
+            if (result.StatusCode == HttpStatusCode.BadRequest && result.Response.ToString() == posResponse)
+            {
+                APIResponse supportedPOSCountries = GetAPIResponse(SabreCountriesUrl);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, supportedPOSCountries.Response);
+                return response;
+            }
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
                 ApiHelper.RefreshApiToken(_cacheService, _apiCaller);
@@ -320,7 +335,17 @@ namespace TrippismApi.Areas.Sabre.Controllers
             }
             return Request.CreateResponse(result.StatusCode, result.Response);
         }
-
+        private APIResponse GetAPIResponse(string url)
+        {
+            ApiHelper.SetApiToken(_apiCaller, _cacheService);
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                ApiHelper.RefreshApiToken(_cacheService, _apiCaller);
+                result = _apiCaller.Get(url).Result;
+            }
+            return result;
+        }
         private HttpResponseMessage GetResponse(string seasonality, string weather)
         {
             ApiHelper.SetApiToken(_apiCaller, _cacheService);
