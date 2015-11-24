@@ -228,8 +228,8 @@ namespace Trippism.Areas.Sabre.Controllers
             APIResponse resultStop = GetAPIResponse(urlMultiStop);
             string posResponse = "Parameter 'pointofsalecountry' has an unsupported value";
             if (resultNonStop.StatusCode == HttpStatusCode.BadRequest
-                && resultNonStop.Response.ToString() == posResponse 
-                && resultStop.StatusCode == HttpStatusCode.BadRequest 
+                && resultNonStop.Response.ToString() == posResponse
+                && resultStop.StatusCode == HttpStatusCode.BadRequest
                 && resultStop.Response.ToString() == posResponse)
             {
                 APIResponse supportedPOSCountries = GetAPIResponse(SabreCountriesUrl);
@@ -251,46 +251,47 @@ namespace Trippism.Areas.Sabre.Controllers
                             .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
                         fareInfo.LowestNonStopFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
 
-                    fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
-                    fareInfo.DepartureDateTime = instaFlightNonStop.DepartureDateTime;
-                    fareInfo.ReturnDateTime = instaFlightNonStop.ReturnDateTime;
-                    fareInfo.DestinationLocation = instaFlightNonStop.DestinationLocation;
-                    fares.OriginLocation = instaFlightNonStop.OriginLocation;
+                        fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
+                        fareInfo.DepartureDateTime = instaFlightNonStop.DepartureDateTime;
+                        fareInfo.ReturnDateTime = instaFlightNonStop.ReturnDateTime;
+                        fareInfo.DestinationLocation = instaFlightNonStop.DestinationLocation;
+                        fares.OriginLocation = instaFlightNonStop.OriginLocation;
+                    }
                 }
-            }
-            else if (resultNonStop.StatusCode == HttpStatusCode.NotFound)
-            {
-                InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = resultNonStop.RequestUrl, Response = resultNonStop.OriginalResponse };
-                TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
-            }
-
-            if (resultStop.StatusCode == HttpStatusCode.OK)
-            {
-                var instaFlightStop = GetInstaFlightOutput(resultStop.Response);
-                if (instaFlightStop != null)
+                else if (resultNonStop.StatusCode == HttpStatusCode.NotFound)
                 {
-                    fareInfo.LowestFare = new LowestFare();
-                    var pricedItineraries = instaFlightStop.PricedItineraries[0];
-                    fareInfo.LowestFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
-                        .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
-                    fareInfo.LowestFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
-
-                    fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
-                    fareInfo.DepartureDateTime = instaFlightStop.DepartureDateTime;
-                    fareInfo.ReturnDateTime = instaFlightStop.ReturnDateTime;
-                    fareInfo.DestinationLocation = instaFlightStop.DestinationLocation;
-                    fares.OriginLocation = instaFlightStop.OriginLocation;
+                    InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = resultNonStop.RequestUrl, Response = resultNonStop.OriginalResponse };
+                    TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
                 }
+
+                if (resultStop.StatusCode == HttpStatusCode.OK)
+                {
+                    var instaFlightStop = GetInstaFlightOutput(resultStop.Response);
+                    if (instaFlightStop != null)
+                    {
+                        fareInfo.LowestFare = new LowestFare();
+                        var pricedItineraries = instaFlightStop.PricedItineraries[0];
+                        fareInfo.LowestFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
+                            .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
+                        fareInfo.LowestFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
+
+                        fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
+                        fareInfo.DepartureDateTime = instaFlightStop.DepartureDateTime;
+                        fareInfo.ReturnDateTime = instaFlightStop.ReturnDateTime;
+                        fareInfo.DestinationLocation = instaFlightStop.DestinationLocation;
+                        fares.OriginLocation = instaFlightStop.OriginLocation;
+                    }
+                }
+                else if (resultStop.StatusCode == HttpStatusCode.NotFound)
+                {
+                    InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = resultStop.RequestUrl, Response = resultStop.OriginalResponse };
+                    TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
+                }
+                fares.FareInfo = new List<FareInfo>();
+                fares.FareInfo.Add(fareInfo);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
+                return response;
             }
-            else if (resultStop.StatusCode == HttpStatusCode.NotFound)
-            {
-                InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = resultStop.RequestUrl, Response = resultStop.OriginalResponse };
-                TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
-            }
-            fares.FareInfo = new List<FareInfo>();
-            fares.FareInfo.Add(fareInfo);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
-            return response;
         }
         private InstaFlightSearch GetInstaFlightOutput(string response)
         {
