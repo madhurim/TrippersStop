@@ -17,9 +17,7 @@ using TraveLayer.CustomTypes.Sabre.ViewModels;
 using Trippism.APIExtention.Filters;
 using Trippism.APIHelper;
 using TrippismApi;
-using TrippismApi.Areas.Sabre.Controllers;
 using TrippismApi.TraveLayer;
-
 namespace Trippism.Areas.Sabre.Controllers
 {
     [GZipCompressionFilter]
@@ -56,30 +54,63 @@ namespace Trippism.Areas.Sabre.Controllers
         [ResponseType(typeof(InstaFlightSearch))]
         public async Task<HttpResponseMessage> Get([FromUri]InstaFlightSearchInput instaflightRequest)
         {
-            string url = GetURL(instaflightRequest);
             return await Task.Run(() =>
-            { return GetResponse(url, instaflightRequest); });
+            { return GetResponse(instaflightRequest); });
         }
-
         [Route("api/instaflight/GetDestination")]
         public async Task<HttpResponseMessage> GetDestination([FromUri]Destinations destinationsRequest)
         {
             return await Task.Run(() =>
             { return GetDestinationResponse(destinationsRequest); });
         }
-
-        private HttpResponseMessage GetResponse(string url, InstaFlightSearchInput instaflightRequest)
+        private HttpResponseMessage GetResponse(InstaFlightSearchInput instaflightRequest)
         {
+            string url = GetURL(instaflightRequest);
             APIResponse result = GetAPIResponse(url);
             string dateFormat = "yyyy-MM-dd";
             if (result.StatusCode == HttpStatusCode.NotFound && instaflightRequest.inboundflightstops != null && instaflightRequest.outboundflightstops != null)
             {
-                InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = result.RequestUrl, Response = result.OriginalResponse };
-                TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
-                instaflightRequest.inboundflightstops = null;
-                instaflightRequest.outboundflightstops = null;
-                url = GetURL(instaflightRequest);
-                result = GetAPIResponse(url);
+                #region Non stop flight
+                if (instaflightRequest.DepartureDate == DateTime.Now.ToString(dateFormat))
+                {
+                    var requestObject = new InstaFlightSearchInput();
+                    ApiHelper.CopyPropertiesTo<InstaFlightSearchInput, InstaFlightSearchInput>(instaflightRequest, requestObject);
+                    DateTime departureDate = DateTime.ParseExact(instaflightRequest.DepartureDate, dateFormat, null);
+                    DateTime returnDate = DateTime.ParseExact(instaflightRequest.ReturnDate, dateFormat, null);
+                    requestObject.DepartureDate = departureDate.AddDays(1).ToString(dateFormat);
+                    requestObject.ReturnDate = returnDate.AddDays(1).ToString(dateFormat);
+                    url = GetURL(requestObject);
+                    result = GetAPIResponse(url);
+                    if (result.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = result.RequestUrl, Response = result.OriginalResponse };
+                        TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
+                        requestObject.DepartureDate = departureDate.AddDays(2).ToString(dateFormat);
+                        requestObject.ReturnDate = returnDate.AddDays(2).ToString(dateFormat);
+                        url = GetURL(requestObject);
+                        result = GetAPIResponse(url);
+                    }
+
+                    if (result.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = result.RequestUrl, Response = result.OriginalResponse };
+                        TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
+                        instaflightRequest.inboundflightstops = null;
+                        instaflightRequest.outboundflightstops = null;
+                        url = GetURL(instaflightRequest);
+                        result = GetAPIResponse(url);
+                    }
+                }
+                else
+                {
+                    InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = result.RequestUrl, Response = result.OriginalResponse };
+                    TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
+                    instaflightRequest.inboundflightstops = null;
+                    instaflightRequest.outboundflightstops = null;
+                    url = GetURL(instaflightRequest);
+                    result = GetAPIResponse(url);
+                }
+                #endregion
             }
 
             if (result.StatusCode == HttpStatusCode.OK)
@@ -90,6 +121,7 @@ namespace Trippism.Areas.Sabre.Controllers
             }
             else if (result.StatusCode == HttpStatusCode.NotFound)
             {
+                #region Multi stop flight
                 InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = result.RequestUrl, Response = result.OriginalResponse };
                 TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
                 if (instaflightRequest.DepartureDate == DateTime.Now.ToString(dateFormat))
@@ -124,10 +156,10 @@ namespace Trippism.Areas.Sabre.Controllers
                         }
                     }
                 }
+                #endregion
             }
             return Request.CreateResponse(result.StatusCode, result.Response);
         }
-
         private InstaFlightSearch GetInstaFlightSearchData(APIResponse result)
         {
             var instaFlight = JsonObject.Parse(result.Response)
@@ -222,10 +254,9 @@ namespace Trippism.Areas.Sabre.Controllers
         }
         private HttpResponseMessage GetDestinationResponse(Destinations destinationsRequest)
         {
-            string urlNonStop = GetDestinationUrl(destinationsRequest, true);
-            string urlMultiStop = GetDestinationUrl(destinationsRequest);
-            APIResponse resultNonStop = GetAPIResponse(urlNonStop);
-            APIResponse resultStop = GetAPIResponse(urlMultiStop);
+            APIResponse resultNonStop = GetDestinationResponse(destinationsRequest, true);
+            APIResponse resultStop = GetDestinationResponse(destinationsRequest, false);
+
             string posResponse = "Parameter 'pointofsalecountry' has an unsupported value";
             if (resultNonStop.StatusCode == HttpStatusCode.BadRequest
                 && resultNonStop.Response.ToString() == posResponse
@@ -258,11 +289,6 @@ namespace Trippism.Areas.Sabre.Controllers
                         fares.OriginLocation = instaFlightNonStop.OriginLocation;
                     }
                 }
-                else if (resultNonStop.StatusCode == HttpStatusCode.NotFound)
-                {
-                    InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = resultNonStop.RequestUrl, Response = resultNonStop.OriginalResponse };
-                    TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
-                }
 
                 if (resultStop.StatusCode == HttpStatusCode.OK)
                 {
@@ -282,16 +308,50 @@ namespace Trippism.Areas.Sabre.Controllers
                         fares.OriginLocation = instaFlightStop.OriginLocation;
                     }
                 }
-                else if (resultStop.StatusCode == HttpStatusCode.NotFound)
-                {
-                    InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = resultStop.RequestUrl, Response = resultStop.OriginalResponse };
-                    TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
-                }
+
                 fares.FareInfo = new List<FareInfo>();
                 fares.FareInfo.Add(fareInfo);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
                 return response;
             }
+        }
+
+        // All the next day related coding is done here. It will just give final response
+        private APIResponse GetDestinationResponse(Destinations destinationsRequest, bool isNonStop)
+        {
+            string dateFormat = "yyyy-MM-dd";
+            var requestObject = new Destinations();
+            ApiHelper.CopyPropertiesTo<Destinations, Destinations>(destinationsRequest, requestObject);
+            string url = GetDestinationUrl(requestObject, isNonStop);
+            APIResponse response = GetAPIResponse(url);
+            if (response.StatusCode == HttpStatusCode.NotFound && requestObject.DepartureDate == DateTime.Now.ToString(dateFormat))
+            {
+                InstaFlightNLog instaFlightNLog = new InstaFlightNLog { Request = response.RequestUrl, Response = response.OriginalResponse };
+                TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
+
+                DateTime departureDate = DateTime.ParseExact(requestObject.DepartureDate, dateFormat, null);
+                DateTime returnDate = DateTime.ParseExact(requestObject.ReturnDate, dateFormat, null);
+                requestObject.DepartureDate = departureDate.AddDays(1).ToString(dateFormat);
+                requestObject.ReturnDate = returnDate.AddDays(1).ToString(dateFormat);
+                url = GetDestinationUrl(requestObject, isNonStop);
+                response = GetAPIResponse(url);
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    instaFlightNLog = new InstaFlightNLog { Request = response.RequestUrl, Response = response.OriginalResponse };
+                    TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
+
+                    requestObject.DepartureDate = departureDate.AddDays(2).ToString(dateFormat);
+                    requestObject.ReturnDate = returnDate.AddDays(2).ToString(dateFormat);
+                    url = GetDestinationUrl(requestObject, isNonStop);
+                    response = GetAPIResponse(url);
+                    if (response.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        instaFlightNLog = new InstaFlightNLog { Request = response.RequestUrl, Response = response.OriginalResponse };
+                        TrippismNLog.SaveNLogData(instaFlightNLog.ToJson(), _nLoggerName);
+                    }
+                }
+            }
+            return response;
         }
         private InstaFlightSearch GetInstaFlightOutput(string response)
         {

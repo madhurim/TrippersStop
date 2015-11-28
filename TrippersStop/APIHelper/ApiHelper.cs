@@ -7,6 +7,7 @@ using TrippismApi.TraveLayer;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Constants.ViewModels;
 using TraveLayer.CustomTypes.Constants.Response;
+using System.Linq;
 namespace TrippismApi
 {
     public static class ApiHelper
@@ -36,7 +37,6 @@ namespace TrippismApi
                 cacheService.Save<string>(apiCaller.SabreTokenExpireKey, apiCaller.TokenExpireIn, expireTimeInSec / 60);
             }
         }
-
 
         public static void RefreshApiToken(ICacheService _cacheService, IAsyncSabreAPICaller _apiCaller)
         {
@@ -165,6 +165,26 @@ namespace TrippismApi
             RedisService redisService = new RedisService();
             isRedisAvailable = redisService.IsConnected();
             return isRedisAvailable;
+        }
+
+        public static void CopyPropertiesTo<T, TU>(this T source, TU dest)
+        {
+
+            var sourceProps = typeof(T).GetProperties().Where(x => x.CanRead).ToList();
+            var destProps = typeof(TU).GetProperties()
+                    .Where(x => x.CanWrite)
+                    .ToList();
+
+            foreach (var sourceProp in sourceProps)
+            {
+                if (destProps.Any(x => x.Name == sourceProp.Name))
+                {
+                    var p = destProps.First(x => x.Name == sourceProp.Name);
+                    p.SetValue(dest, sourceProp.GetValue(source, null), null);
+                }
+
+            }
+
         }
     }
 }
