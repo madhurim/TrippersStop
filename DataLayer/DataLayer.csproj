@@ -83,10 +83,12 @@
     <Compile Include="Entities\AuthDetails.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\CustomerActivity.cs" />
+    <Compile Include="Entities\DefaultLog.cs" />
     <Compile Include="Interfaces\IAnonymous.cs" />
     <Compile Include="Interfaces\IAuthDetails.cs" />
     <Compile Include="Interfaces\ICustomer.cs" />
     <Compile Include="Interfaces\ICustomerActivity.cs" />
+    <Compile Include="Interfaces\IDefaultLog.cs" />
     <Compile Include="Interfaces\INoSqlConnector.cs" />
     <Compile Include="MongoDBProperty.cs" />
     <Compile Include="NoSqlConnector.cs" />
@@ -96,10 +98,12 @@
     <Compile Include="Repositories\Interfaces\IRepositoryAnonymous.cs" />
     <Compile Include="Repositories\Interfaces\IRepositoryAuthDetails.cs" />
     <Compile Include="Repositories\Interfaces\IRepositoryCustomerActivity.cs" />
+    <Compile Include="Repositories\Interfaces\IRepositoryDefaultLog.cs" />
     <Compile Include="Repositories\MongoDBRepository.cs" />
     <Compile Include="Repositories\RepositoryAnonymous.cs" />
     <Compile Include="Repositories\RepositoryAuthDetails.cs" />
     <Compile Include="Repositories\RepositoryCustomerActivity.cs" />
+    <Compile Include="Repositories\RepositoryDefaultLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

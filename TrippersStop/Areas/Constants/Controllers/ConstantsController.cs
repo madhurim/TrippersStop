@@ -1,6 +1,6 @@
-﻿using DataLayer.Repositories;
+﻿using DataLayer.Entities;
+using DataLayer.Repositories;
 using ExpressMapper;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -86,12 +86,11 @@ namespace Trippism.Areas.Constants.Controllers
         }
         private void SaveAirportCode(string Airportcode)
         {
-            RepositoryAuthDetails objRepositoryAuthDetails = new RepositoryAuthDetails();
+            RepositoryDefaultLog objRepositoryDefaultLog = new RepositoryDefaultLog();
             string loggerName = "MissingAirportLogger";
-            var data = objRepositoryAuthDetails.FindOne<MissingAirport>(x => x.Message == Airportcode && x.Logger == loggerName);
+            var data = objRepositoryDefaultLog.FindOne<DefaultLog>(x => x.Message == Airportcode && x.Logger == loggerName);
             if (data == null)
                 TrippismNLog.SaveNLogData(Airportcode, loggerName);
-            TrippismNLog.SaveNLogData
         }
 
         private string GetFullPath(string path)

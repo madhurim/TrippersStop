@@ -2,7 +2,7 @@
 
 namespace DataLayer.Repositories.Interfaces
 {
-    public interface IRepositoryDefaultLog : IMongoDBRepository<CustomerActivity>
+    public interface IRepositoryCustomerActivity : IMongoDBRepository<CustomerActivity>
     {
 
     }
