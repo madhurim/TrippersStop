@@ -3,7 +3,7 @@ using DataLayer.Repositories.Interfaces;
 
 namespace DataLayer.Repositories
 {
-    public class RepositoryCustomerActivity : MongoDBRepository<CustomerActivity>,IRepositoryDefaultLog
+    public class RepositoryCustomerActivity : MongoDBRepository<CustomerActivity>,IRepositoryCustomerActivity
     {
 
     }
