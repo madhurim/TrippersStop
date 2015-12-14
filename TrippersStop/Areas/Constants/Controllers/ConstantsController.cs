@@ -86,12 +86,12 @@ namespace Trippism.Areas.Constants.Controllers
         }
         private void SaveAirportCode(string Airportcode)
         {
-            DefaultLog defaultLog = new DefaultLog();
-            RepositoryDefaultLog objRepositoryDefaultLog = new RepositoryDefaultLog();
             string loggerName = "MissingAirportLogger";
-            var data = objRepositoryDefaultLog.FindOne<DefaultLog>(x => x.Message == Airportcode && x.Logger == loggerName);
-            if (data == null)
-                TrippismNLog.SaveNLogData(Airportcode, loggerName);
+            //DefaultLog defaultLog = new DefaultLog();
+            //RepositoryDefaultLog objRepositoryDefaultLog = new RepositoryDefaultLog();
+            //var data = objRepositoryDefaultLog.FindOne<DefaultLog>(x => x.Message == Airportcode && x.Logger == loggerName);
+            //if (data == null)
+            TrippismNLog.SaveNLogData(Airportcode, loggerName);
         }
 
         private string GetFullPath(string path)
