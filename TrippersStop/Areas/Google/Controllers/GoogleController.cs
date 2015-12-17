@@ -28,7 +28,7 @@ namespace Trippism.Areas.GooglePlace.Controllers
         [HttpGet]
         public async Task<HttpResponseMessage> Get([FromUri]GoogleInput locationsearch)
         {
-            string cacheKey = TrippismKey + string.Join(".", locationsearch.Latitude, locationsearch.Longitude, locationsearch.Types);
+            string cacheKey = TrippismKey + string.Join(".", locationsearch.Latitude, locationsearch.Longitude, locationsearch.Types, locationsearch.Keywords);
             var tripGooglePlace = _cacheService.GetByKey<TraveLayer.CustomTypes.Google.ViewModels.Google>(cacheKey);
             if (tripGooglePlace != null)
             {
@@ -82,7 +82,7 @@ namespace Trippism.Areas.GooglePlace.Controllers
             if (!string.IsNullOrWhiteSpace(locationsearch.Types))
                 url += locationsearch.Types;
             if (!string.IsNullOrWhiteSpace(locationsearch.Keywords))
-                url += locationsearch.Keywords;
+                url += string.Format("&keyword={0}", locationsearch.Keywords);
             return url;
         }
     }
