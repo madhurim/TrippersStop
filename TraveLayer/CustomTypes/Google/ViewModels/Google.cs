@@ -28,7 +28,7 @@ namespace TraveLayer.CustomTypes.Google.ViewModels
         public string rating { get; set; }
         public string reference { get; set; }
         public string scope { get; set; }
-        public string types { get; set; }
+        public string[] types { get; set; }
         public string vicinity { get; set; }
     }
 
