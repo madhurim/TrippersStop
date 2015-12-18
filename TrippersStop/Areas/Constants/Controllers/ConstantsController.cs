@@ -1,5 +1,6 @@
-﻿using ExpressMapper;
-using System;
+﻿using DataLayer.Entities;
+using DataLayer.Repositories;
+using ExpressMapper;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -10,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Constants.Response;
 using Trippism.APIExtention.Filters;
+using Trippism.APIHelper;
 using TrippismApi.TraveLayer;
 namespace Trippism.Areas.Constants.Controllers
 {
@@ -78,18 +80,18 @@ namespace Trippism.Areas.Constants.Controllers
         }
         [HttpGet]
         [Route("api/Constants/MissingAirportLog")]
-        public async Task MaintanAirportLog(string Airportcode)
+        public async Task MissingAirportLog(string Airportcode)
         {
-            string path = GetFullPath(ConfigurationManager.AppSettings["MissingAirportcodePath"].ToString());
-            await Task.Run(() => { MissingAirportLog(Airportcode, path); });
+            await Task.Run(() => { SaveAirportCode(Airportcode); });
         }
-        private void MissingAirportLog(string Airportcode ,string filepath)
+        private void SaveAirportCode(string Airportcode)
         {
-
-               string data = DateTime.UtcNow.ToString() + " : " + Airportcode;
-
-               System.IO.File.AppendAllText(filepath, data + Environment.NewLine);
-           
+            string loggerName = "MissingAirportLogger";
+            //DefaultLog defaultLog = new DefaultLog();
+            //RepositoryDefaultLog objRepositoryDefaultLog = new RepositoryDefaultLog();
+            //var data = objRepositoryDefaultLog.FindOne<DefaultLog>(x => x.Message == Airportcode && x.Logger == loggerName);
+            //if (data == null)
+            TrippismNLog.SaveNLogData(Airportcode, loggerName);
         }
 
         private string GetFullPath(string path)
