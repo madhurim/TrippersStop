@@ -868,6 +868,31 @@
             Get response from api based on url.
             </summary>
         </member>
+        <member name="T:Trippism.Areas.TripAdvisor.Controllers.LocationController">
+            <summary>
+            The response provides data such as:  name, address, overall traveler rating, number of reviews, link to read all reviews, link to write reviews, recent review snippets, along with additional data elements.
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.LocationController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set Api caller and Cache service
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.LocationController.Get">
+            <summary>
+            The response provides data for all location
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.LocationController.GetLocationByLang(System.String)">
+             <summary>
+            The response provides data for location based on Locale
+             </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.LocationController.GetLocationByCurrencyCode(System.String)">
+             <summary>
+            The response provides data for location based on CurrencyCode
+             </summary>
+        </member>
         <member name="M:Trippism.Areas.Weather.Controllers.HistoryController.#ctor(TrippismApi.TraveLayer.IAsyncGoogleReverseLookupAPICaller,TrippismApi.TraveLayer.IAsyncWeatherAPICaller,TrippismApi.TraveLayer.ICacheService)">
             <summary>
             Returns a weather summary based on historical information between the specified dates (30 days max).

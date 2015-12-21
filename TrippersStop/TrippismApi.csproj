@@ -288,6 +288,8 @@
     <Compile Include="Areas\Sabre\Controllers\TopDestinationsController.cs" />
     <Compile Include="Areas\Sabre\SabreAreaRegistration.cs" />
     <Compile Include="APIExtention\AreaRegistrationContextExtensions.cs" />
+    <Compile Include="Areas\TripAdvisor\Controllers\LocationController.cs" />
+    <Compile Include="Areas\TripAdvisor\TripAdvisorAreaRegistration.cs" />
     <Compile Include="Areas\Weather\StaticMethods\WeatherAPIResponse.cs" />
     <Compile Include="Areas\YouTube\Controllers\YouTubeController.cs" />
     <Compile Include="Areas\YouTube\YouTubeAreaRegistration.cs" />
@@ -354,6 +356,8 @@
     <Folder Include="Areas\IATA\Views\Shared\" />
     <Folder Include="Areas\Sabre\Models\" />
     <Folder Include="Areas\Sabre\Views\Shared\" />
+    <Folder Include="Areas\TripAdvisor\Models\" />
+    <Folder Include="Areas\TripAdvisor\Views\Shared\" />
     <Folder Include="Areas\Weather\Models\" />
     <Folder Include="Areas\Weather\Views\Shared\" />
     <Folder Include="Areas\YouTube\Models\" />
@@ -387,6 +391,7 @@
     <Content Include="Constants\CurrencySymbols_Ori.json" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\TripAdvisor\Views\web.config" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
