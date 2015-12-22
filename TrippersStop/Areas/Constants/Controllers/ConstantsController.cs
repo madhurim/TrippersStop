@@ -69,12 +69,12 @@ namespace Trippism.Areas.Constants.Controllers
 
         private HttpResponseMessage GetAirportsResponse(string jsonPath)
         {
-            string currencySymbolJsonString = string.Empty;
-            using (StreamReader readerCurrencySymbolJson = new StreamReader(jsonPath))
+            string airportJsonString = string.Empty;
+            using (StreamReader readerAirportJson = new StreamReader(jsonPath))
             {
-                currencySymbolJsonString = readerCurrencySymbolJson.ReadToEnd();
+                airportJsonString = readerAirportJson.ReadToEnd();
             }
-            var airports = ServiceStackSerializer.DeSerialize<AirportRoot>(currencySymbolJsonString);
+            var airports = ServiceStackSerializer.DeSerialize<AirportRoot>(airportJsonString);
             //_cacheService.Save<TraveLayer.CustomTypes.Constants.Response.AirportRoot>(TrippismAirportsKey, airports);
             return Request.CreateResponse(HttpStatusCode.OK, airports.AirportsRoot.AirportsDetail);
         }
