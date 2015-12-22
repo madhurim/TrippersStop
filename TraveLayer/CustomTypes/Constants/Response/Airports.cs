@@ -33,5 +33,6 @@ namespace TraveLayer.CustomTypes.Constants.Response
         public string airport_Lat { get; set; }
         public string airport_Lng { get; set; }
         public string alternatenames { get; set; }
+        public string[] themes { get; set; }
     }
 }
