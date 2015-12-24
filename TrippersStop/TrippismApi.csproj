@@ -288,7 +288,10 @@
     <Compile Include="Areas\Sabre\Controllers\TopDestinationsController.cs" />
     <Compile Include="Areas\Sabre\SabreAreaRegistration.cs" />
     <Compile Include="APIExtention\AreaRegistrationContextExtensions.cs" />
-    <Compile Include="Areas\TripAdvisor\Controllers\LocationController.cs" />
+    <Compile Include="Areas\TripAdvisor\Controllers\HotelController.cs" />
+    <Compile Include="Areas\TripAdvisor\Controllers\MapController.cs" />
+    <Compile Include="Areas\TripAdvisor\Models\HotelMapRequest.cs" />
+    <Compile Include="Areas\TripAdvisor\Models\MapRequest.cs" />
     <Compile Include="Areas\TripAdvisor\TripAdvisorAreaRegistration.cs" />
     <Compile Include="Areas\Weather\StaticMethods\WeatherAPIResponse.cs" />
     <Compile Include="Areas\YouTube\Controllers\YouTubeController.cs" />
@@ -356,7 +359,6 @@
     <Folder Include="Areas\IATA\Views\Shared\" />
     <Folder Include="Areas\Sabre\Models\" />
     <Folder Include="Areas\Sabre\Views\Shared\" />
-    <Folder Include="Areas\TripAdvisor\Models\" />
     <Folder Include="Areas\TripAdvisor\Views\Shared\" />
     <Folder Include="Areas\Weather\Models\" />
     <Folder Include="Areas\Weather\Views\Shared\" />

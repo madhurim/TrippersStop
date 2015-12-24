@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace TraveLayer.CustomTypes.TripAdvisor.Response
 {
 
-
-    public class UserLocation
+    public class RootObject
     {
-        public string name { get; set; }
-        public string id { get; set; }
+        public List<Datum> data { get; set; }
+        public Paging paging { get; set; }
     }
+
 }

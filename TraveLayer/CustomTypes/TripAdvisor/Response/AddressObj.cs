@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.TripAdvisor.Response
 {
-
     public class AddressObj
     {
         public string street1 { get; set; }
@@ -17,5 +16,7 @@ namespace TraveLayer.CustomTypes.TripAdvisor.Response
         public string postalcode { get; set; }
         public string address_string { get; set; }
     }
+
+
 
 }

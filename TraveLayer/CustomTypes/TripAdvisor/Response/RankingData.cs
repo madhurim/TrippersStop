@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.TripAdvisor.Response
 {
-
     public class RankingData
     {
         public string ranking_string { get; set; }
