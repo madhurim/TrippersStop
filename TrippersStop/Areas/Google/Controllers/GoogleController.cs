@@ -82,7 +82,35 @@ namespace Trippism.Areas.GooglePlace.Controllers
             if (!string.IsNullOrWhiteSpace(locationsearch.Types))
                 url += locationsearch.Types;
             if (!string.IsNullOrWhiteSpace(locationsearch.Keywords))
-                url += string.Format("&keyword={0}", locationsearch.Keywords);
+            {
+                if (locationsearch.Keywords == "CARIBBEAN" || locationsearch.Keywords == "BEACH")
+                    url += string.Format("&keyword={0}", locationsearch.Keywords + "|BEACH|BEACHES|WATERSPORTS|SCUBA|SNORKELING");
+                else if (locationsearch.Keywords == "GAMBLING")
+                {
+                    url += string.Format("&keyword={0}", locationsearch.Keywords + "|GAMING|CASINO|CARDGAME");
+                }
+                else if (locationsearch.Keywords == "DISNEY")
+                {
+                    url += string.Format("&keyword={0}", locationsearch.Keywords + "|DISNEY|FUNPARK|MICKEYMOUSE|CARNIVAL|FUNFAIR|PLEASUREGROUND|SAFARIPARK|THEMEPARK|WATERPARK");
+                }
+                else if (locationsearch.Keywords == "HISTORIC")
+                {
+                    url += string.Format("&keyword={0}", locationsearch.Keywords + "|MONUMENTS|FORT|HERITAGE|PYRAMIDS|CAVES|PALACE");
+                }
+                else if (locationsearch.Keywords == "NATIONAL-PARKS" || locationsearch.Keywords == "THEME-PARK")
+                {
+                    url += string.Format("&keyword={0}", locationsearch.Keywords + "|FUNPARK|MICKEYMOUSE|CARNIVAL|FUNFAIR|PLEASUREGROUND|SAFARIPARK|THEMEPARK|WATERPARK");
+                }
+                else if (locationsearch.Keywords == "MOUNTAINS" )
+                {
+                    url += string.Format("&keyword={0}", locationsearch.Keywords + "|HILLSTATION|TREKKING|SKIING|WATERRAFTING|WATERSPORTS|RIVERSPORTS|SNOWSPORTS|HELISKIING");
+                }
+                else
+                {
+                    url += string.Format("&keyword={0}", locationsearch.Keywords);
+                }
+            }
+
             return url;
         }
     }
