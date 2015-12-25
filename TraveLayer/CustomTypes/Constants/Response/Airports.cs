@@ -22,7 +22,7 @@ namespace TraveLayer.CustomTypes.Constants.Response
         public string airport_CityName { get; set; }
         public string airport_CountryCode { get; set; }
         public string airport_CountryName { get; set; }
-        public string airport_RegionName { get; set; }
+        public string region { get; set; }
         public bool isMultiAirport { get; set; }
         public List<Airport> Airports { get; set; }
     }
@@ -33,5 +33,6 @@ namespace TraveLayer.CustomTypes.Constants.Response
         public string airport_Lat { get; set; }
         public string airport_Lng { get; set; }
         public string alternatenames { get; set; }
+        public string[] themes { get; set; }
     }
 }
