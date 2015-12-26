@@ -289,7 +289,9 @@
     <Compile Include="Areas\Sabre\SabreAreaRegistration.cs" />
     <Compile Include="APIExtention\AreaRegistrationContextExtensions.cs" />
     <Compile Include="Areas\TripAdvisor\Controllers\HotelController.cs" />
-    <Compile Include="Areas\TripAdvisor\Controllers\MapController.cs" />
+    <Compile Include="Areas\TripAdvisor\Controllers\AttractionsController.cs" />
+    <Compile Include="Areas\TripAdvisor\Controllers\RestaurantsController.cs" />
+    <Compile Include="Areas\TripAdvisor\Models\RestaurantMapRequest.cs" />
     <Compile Include="Areas\TripAdvisor\Models\HotelMapRequest.cs" />
     <Compile Include="Areas\TripAdvisor\Models\MapRequest.cs" />
     <Compile Include="Areas\TripAdvisor\TripAdvisorAreaRegistration.cs" />

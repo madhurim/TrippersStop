@@ -30,7 +30,7 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         {
             get
             {
-                return ConfigurationManager.AppSettings["TripAdvisorMapHotelUrl"];
+                return ConfigurationManager.AppSettings["TripAdvisorHotelUrl"];
             }
         }
 
@@ -44,7 +44,7 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         /// </param>
         /// </summary>
         //[ResponseType(typeof(TripWeather))]
-        [Route("api/map/hotel")]
+        [Route("api/tripadvisor/hotel")]
         [HttpGet]
         public async Task<IHttpActionResult> Get([FromUri]HotelMapRequest hotelMapRequest)
         {
