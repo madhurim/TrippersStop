@@ -72,15 +72,17 @@ namespace Trippism.Areas.TripAdvisor.Controllers
 
         private IHttpActionResult GetMapAttractions(AttractionsRequest attractionsRequest)
         {
-            string urlAPI = GetApiURL(attractionsRequest);
-            return Ok("TBD");
+            string urlAPI = GetAttractionsApiURL(attractionsRequest);
+            var response = _apiCaller.Get(urlAPI);
+            return Ok(response);
         }
 
 
         private IHttpActionResult GetTripAdvisorProperties(PropertiesRequest propertiesRequest)
         {
             string urlAPI = GetApiURL(propertiesRequest);
-            return Ok("TBD");
+            var response =_apiCaller.Get(urlAPI);
+            return Ok(response);
         }
         private string GetAttractionsApiURL(AttractionsRequest attractionsRequest)
         {
