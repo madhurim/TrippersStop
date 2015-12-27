@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.TripAdvisor.Response
 {
-
-    public class RootObject
+    public class Subcategory
     {
-        public List<Datum> data { get; set; }
-        public Paging paging { get; set; }
+        public string name { get; set; }
+        public string localized_name { get; set; }
     }
-
 }

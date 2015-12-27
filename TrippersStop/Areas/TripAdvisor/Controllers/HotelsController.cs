@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExpressMapper;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -7,6 +8,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using TraveLayer.CustomTypes.Sabre.Response;
+using TraveLayer.CustomTypes.TripAdvisor.Response;
+using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
 using Trippism.Areas.TripAdvisor.Models;
 using TrippismApi.TraveLayer;
 
@@ -56,7 +60,14 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         private IHttpActionResult GetHotels(HotelsRequest hotelMapRequest)
         {
             string urlAPI = GetApiURL(hotelMapRequest);
-            return Ok("TBD");
+            APIResponse result = _apiCaller.Get(urlAPI).Result;
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                var properties = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
+                var locations = Mapper.Map<LocationInfo, Location>(properties);
+                return Ok(locations);
+            }
+            return ResponseMessage(new HttpResponseMessage(result.StatusCode));
         }
 
         private string GetApiURL(HotelsRequest hotelsRequest)

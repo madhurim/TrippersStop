@@ -175,11 +175,20 @@
     <Compile Include="CustomTypes\Sabre\ViewModels\TripOutput.cs" />
     <Compile Include="CustomTypes\TripAdvisor\Response\AddressObj.cs" />
     <Compile Include="CustomTypes\TripAdvisor\Response\Ancestor.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\AttractionType.cs" />
     <Compile Include="CustomTypes\TripAdvisor\Response\Category.cs" />
     <Compile Include="CustomTypes\TripAdvisor\Response\Datum.cs" />
-    <Compile Include="CustomTypes\TripAdvisor\Response\Map.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\LocationInfo.cs" />
     <Compile Include="CustomTypes\TripAdvisor\Response\Paging.cs" />
     <Compile Include="CustomTypes\TripAdvisor\Response\RankingData.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\Subcategory.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\WikipediaInfo.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Address.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Attraction.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\AttractionType.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Category.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Location.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Rank.cs" />
     <Compile Include="CustomTypes\Weather\Request\HistoryInput.cs" />
     <Compile Include="CustomTypes\Weather\Request\InternationalWeatherInput.cs" />
     <Compile Include="CustomTypes\Weather\Response\HistoryOutput.cs" />
@@ -195,9 +204,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CustomTypes\TripAdvisor\ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

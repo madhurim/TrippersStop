@@ -11,13 +11,13 @@ namespace TraveLayer.CustomTypes.TripAdvisor.Response
         public AddressObj address_obj { get; set; }
         public string distance { get; set; }
         public object percent_recommended { get; set; }
-        public string bearing { get; set; }
+        public string bearing { get; set; } 
         public string latitude { get; set; }
         public string rating { get; set; }
         public List<object> cuisine { get; set; }
         public string location_id { get; set; }
         public RankingData ranking_data { get; set; }
-        public string api_detail_url { get; set; }
+        public string api_detail_url { get; set; }  
         public string location_string { get; set; }
         public string web_url { get; set; }
         public string price_level { get; set; }
@@ -31,6 +31,10 @@ namespace TraveLayer.CustomTypes.TripAdvisor.Response
         public List<Ancestor> ancestors { get; set; }
         public string see_all_photos { get; set; }
         public string longitude { get; set; }
+
+        // Added for attractions
+        public List<AttractionType> attraction_types { get; set; }
+        public WikipediaInfo wikipedia_info { get; set; }
     }
 
 }
