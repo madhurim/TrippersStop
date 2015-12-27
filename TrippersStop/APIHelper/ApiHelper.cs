@@ -166,50 +166,53 @@ namespace TrippismApi
 
         public static void RegisterTripAdvisorMapping()
         {
-            Mapper.Register<RS.LocationInfo, TAVM.Location>()
-                 .Member(h => h.Attractions, m => m.data);
-            Mapper.Register<RS.Datum, TAVM.Attraction>()
-                 .Member(h => h.Address, m => m.address_obj)
-                 .Member(h => h.Distance, m => m.distance)
-                 .Member(h => h.RecommendedPercentage, m => m.percent_recommended)
-                 .Member(h => h.Latitude, m => m.latitude)
-                 .Member(h => h.Rating, m => m.rating)
-                 .Member(h => h.LocationId, m => m.location_id)
-                 .Member(h => h.Ranking, m => m.ranking_data)
-                 .Member(h => h.ApiDetailUrl, m => m.api_detail_url)
-                 .Member(h => h.Location, m => m.location_string)
-                 .Member(h => h.WebUrl, m => m.web_url)
-                 .Member(h => h.PriceLevel, m => m.price_level)
-                 .Member(h => h.RatingImageUrl, m => m.rating_image_url)
-                 .Member(h => h.Name, m => m.name)
-                 .Member(h => h.NumReviews, m => m.num_reviews)
-                 .Member(h => h.Category, m => m.category)
-                 .Member(h => h.SeeAllPhotos, m => m.see_all_photos)
-                 .Member(h => h.Longitude, m => m.longitude)
-                 .Member(h => h.AttractionTypes, m => m.attraction_types);
-            Mapper.Register<RS.AddressObj, TAVM.Address>()
-                 .Member(h => h.Street1, m => m.street1)
-                 .Member(h => h.Street2, m => m.street2)
-                 .Member(h => h.City, m => m.city)
-                 .Member(h => h.State, m => m.state)
-                 .Member(h => h.Country, m => m.country)
-                 .Member(h => h.PostalCode, m => m.postalcode);
-
-            Mapper.Register<RS.RankingData, TAVM.Rank>()
-                 .Member(h => h.RankingInfo, m => m.ranking_string)
-                 .Member(h => h.RankingOutOf, m => m.ranking_out_of)
-                 .Member(h => h.GeoLocationId, m => m.geo_location_id)
-                 .Member(h => h.Ranking, m => m.ranking)
-                 .Member(h => h.GeoLocationName, m => m.geo_location_name);
-
-            Mapper.Register<RS.Category, TAVM.Category>()
-                 .Member(h => h.Name, m => m.name)
-                 .Member(h => h.LocalizedName, m => m.localized_name);
-
 
             Mapper.Register<RS.AttractionType, TAVM.AttractionType>()
-                 .Member(h => h.Name, m => m.name)
-                 .Member(h => h.LocalizedName, m => m.localized_name);
+               .Member(h => h.Name, m => m.name)
+               .Member(h => h.LocalizedName, m => m.localized_name);
+
+            Mapper.Register<RS.Category, TAVM.Category>()
+               .Member(h => h.Name, m => m.name)
+               .Member(h => h.LocalizedName, m => m.localized_name);
+
+            Mapper.Register<RS.RankingData, TAVM.Rank>()
+               .Member(h => h.RankingInfo, m => m.ranking_string)
+               .Member(h => h.RankingOutOf, m => m.ranking_out_of)
+               .Member(h => h.GeoLocationId, m => m.geo_location_id)
+               .Member(h => h.Ranking, m => m.ranking)
+               .Member(h => h.GeoLocationName, m => m.geo_location_name);
+
+            Mapper.Register<RS.AddressObj, TAVM.Address>()
+                .Member(h => h.Street1, m => m.street1)
+                .Member(h => h.Street2, m => m.street2)
+                .Member(h => h.City, m => m.city)
+                .Member(h => h.State, m => m.state)
+                .Member(h => h.Country, m => m.country)
+                .Member(h => h.PostalCode, m => m.postalcode);
+
+            Mapper.Register<RS.Datum, TAVM.Attraction>()
+                .Member(h => h.Address, m => m.address_obj)
+                .Member(h => h.Distance, m => m.distance)
+                .Member(h => h.RecommendedPercentage, m => m.percent_recommended)
+                .Member(h => h.Latitude, m => m.latitude)
+                .Member(h => h.Rating, m => m.rating)
+                .Member(h => h.LocationId, m => m.location_id)
+                .Member(h => h.Ranking, m => m.ranking_data)
+                .Member(h => h.ApiDetailUrl, m => m.api_detail_url)
+                .Member(h => h.Location, m => m.location_string)
+                .Member(h => h.WebUrl, m => m.web_url)
+                .Member(h => h.PriceLevel, m => m.price_level)
+                .Member(h => h.RatingImageUrl, m => m.rating_image_url)
+                .Member(h => h.Name, m => m.name)
+                .Member(h => h.NumReviews, m => m.num_reviews)
+                .Member(h => h.Category, m => m.category)
+                .Member(h => h.SeeAllPhotos, m => m.see_all_photos)
+                .Member(h => h.Longitude, m => m.longitude)
+                .Member(h => h.AttractionTypes, m => m.attraction_types);
+
+            Mapper.Register<RS.LocationInfo, TAVM.Location>()
+                .Member(h => h.Attractions, m => m.data);
+
         }
         public static bool IsRedisAvailable()
         {

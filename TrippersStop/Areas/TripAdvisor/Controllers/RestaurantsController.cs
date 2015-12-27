@@ -11,6 +11,7 @@ using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.TripAdvisor.Response;
 using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
+using Trippism.APIExtention.Filters;
 using Trippism.Areas.TripAdvisor.Models;
 using TrippismApi.TraveLayer;
 
@@ -19,6 +20,8 @@ namespace Trippism.Areas.TripAdvisor.Controllers
     /// <summary>
     /// When specifying a Lat/Long point, returns a list of 10 properties found within a given distance from that point. If there are more than 10 properties within the radius requested, the 10 nearest properties will be returned.   In lieu of lat long, can specify a location ID and the output will return nearest POIs
     /// </summary>
+    [GZipCompressionFilter]
+    [ServiceStackFormatterConfigAttribute]
     public class RestaurantsController : ApiController
     {
         const string TrippismKey = "Trippism.TripAdvisor.Restaurants.";
@@ -58,8 +61,8 @@ namespace Trippism.Areas.TripAdvisor.Controllers
             APIResponse result = _apiCaller.Get(urlAPI).Result;
             if (result.StatusCode == HttpStatusCode.OK)
             {
-                var properties = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
-                var locations = Mapper.Map<LocationInfo, Location>(properties);
+                var restaurants = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
+                var locations = Mapper.Map<LocationInfo, Location>(restaurants);
                 return Ok(locations);
             }
             return ResponseMessage(new HttpResponseMessage(result.StatusCode));

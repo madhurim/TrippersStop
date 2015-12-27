@@ -10,7 +10,9 @@ namespace TraveLayer.CustomTypes.TripAdvisor.Response
     {
         public AddressObj address_obj { get; set; }
         public string distance { get; set; }
-        public object percent_recommended { get; set; }
+        //public object percent_recommended { get; set; }
+
+        public string percent_recommended { get; set; }
         public string bearing { get; set; } 
         public string latitude { get; set; }
         public string rating { get; set; }

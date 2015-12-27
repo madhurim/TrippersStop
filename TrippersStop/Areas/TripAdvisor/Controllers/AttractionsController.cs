@@ -11,6 +11,7 @@ using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.TripAdvisor.Response;
 using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
+using Trippism.APIExtention.Filters;
 using Trippism.Areas.TripAdvisor.Models;
 using TrippismApi.TraveLayer;
 
@@ -19,6 +20,8 @@ namespace Trippism.Areas.TripAdvisor.Controllers
     /// <summary>
     /// When specifying a Lat/Long point, returns a list of 10 properties found within a given distance from that point. If there are more than 10 properties within the radius requested, the 10 nearest properties will be returned.   In lieu of lat long, can specify a location ID and the output will return nearest POIs
     /// </summary>
+    [GZipCompressionFilter]
+    [ServiceStackFormatterConfigAttribute]
     public class AttractionsController : ApiController
     {
         const string TrippismKey = "Trippism.TripAdvisor.Attractions.";
@@ -41,7 +44,7 @@ namespace Trippism.Areas.TripAdvisor.Controllers
             }
         }
 
-        private string APIAttractions
+        private string APIAttractionsUrl
         {
             get
             {
@@ -102,8 +105,17 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         }
         private string GetAttractionsApiURL(AttractionsRequest attractionsRequest)
         {
-            StringBuilder apiUrl = new StringBuilder();
-            apiUrl.Append(GetApiURL(attractionsRequest));
+            string location = string.Join(",", attractionsRequest.Latitude, attractionsRequest.Longitude);
+            StringBuilder apiUrl = new StringBuilder(string.Format(APIAttractionsUrl, location));
+            apiUrl.Append("?key={0}");
+            if (!string.IsNullOrWhiteSpace(attractionsRequest.Locale))
+                apiUrl.Append("&lang=" + attractionsRequest.Locale);
+            if (!string.IsNullOrWhiteSpace(attractionsRequest.Currency))
+                apiUrl.Append("&lang=" + attractionsRequest.Locale);
+            if (!string.IsNullOrWhiteSpace(attractionsRequest.LengthUnit))
+                apiUrl.Append("&lang=" + attractionsRequest.Locale);
+            if (!string.IsNullOrWhiteSpace(attractionsRequest.Distance))
+                apiUrl.Append("&lang=" + attractionsRequest.Locale);
             if (!string.IsNullOrWhiteSpace(attractionsRequest.SubCategory))
                 apiUrl.Append("&subcategory=" + attractionsRequest.SubCategory);
             return apiUrl.ToString();

@@ -11,6 +11,7 @@ using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.TripAdvisor.Response;
 using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
+using Trippism.APIExtention.Filters;
 using Trippism.Areas.TripAdvisor.Models;
 using TrippismApi.TraveLayer;
 
@@ -23,6 +24,8 @@ namespace Trippism.Areas.TripAdvisor.Controllers
     /// Length unit (either 'mi' or 'km') which overrides the default length units used in input and output
     /// Distance in miles (unless another unit is specified using lunit) defining thewidth and height of the bounding rectangle around the center when specified. Defaults to 10 miles. The maximum is 25 miles or 50 kilometers.
     /// </summary>
+    [GZipCompressionFilter]
+    [ServiceStackFormatterConfigAttribute]
     public class HotelsController : ApiController
     {
         const string TrippismKey = "Trippism.TripAdvisor.Hotel.";
@@ -63,8 +66,8 @@ namespace Trippism.Areas.TripAdvisor.Controllers
             APIResponse result = _apiCaller.Get(urlAPI).Result;
             if (result.StatusCode == HttpStatusCode.OK)
             {
-                var properties = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
-                var locations = Mapper.Map<LocationInfo, Location>(properties);
+                var hotels = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
+                var locations = Mapper.Map<LocationInfo, Location>(hotels);
                 return Ok(locations);
             }
             return ResponseMessage(new HttpResponseMessage(result.StatusCode));
