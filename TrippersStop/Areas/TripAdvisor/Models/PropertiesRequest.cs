@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Trippism.Areas.TripAdvisor.Models
 {
-    public class MapRequest
+    public class PropertiesRequest
     {
         public string Locale { get; set; }
         public string Currency { get; set; }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Trippism.Areas.TripAdvisor.Models
 {
-    public class HotelMapRequest : MapRequest
+    public class HotelsRequest : PropertiesRequest
     {
         public string SubCategory { get; set; }
     }

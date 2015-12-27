@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Trippism.Areas.TripAdvisor.Models;
@@ -28,19 +29,19 @@ namespace Trippism.Areas.TripAdvisor.Controllers
             _apiCaller = apiCaller;
             _cacheService = cacheService;
         }
-        private string APIAllAttractionsUrl
+        private string APIPropertiesUrl
         {
             get
             {
-                return ConfigurationManager.AppSettings["TripAdvisorAllAttractionsUrl"];
+                return ConfigurationManager.AppSettings["TripAdvisorPropertiesUrl"];
             }
         }
 
-        private string APITopAttractions
+        private string APIAttractions
         {
             get
             {
-                return ConfigurationManager.AppSettings["TripAdvisorTopAttractionsUrl"];
+                return ConfigurationManager.AppSettings["TripAdvisorAttractionsUrl"];
             }
         }
 
@@ -49,12 +50,12 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         /// The response provides all available attractions
         /// </summary>
         //[ResponseType(typeof(TripWeather))]
-        [Route("api/tripadvisor/attractions/all")]
+        [Route("api/tripadvisor/properties")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetAll([FromUri]MapRequest mapRequest)
+        public async Task<IHttpActionResult> GetProperties([FromUri]PropertiesRequest propertiesRequest)
         {
             return await Task.Run(() =>
-            { return GetAllAttractions(mapRequest); });
+            { return GetTripAdvisorProperties(propertiesRequest); });
         }
 
         /// <summary>
@@ -63,42 +64,46 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         //[ResponseType(typeof(TripWeather))]
         [Route("api/tripadvisor/attractions")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetTopAttractions([FromUri]MapRequest mapRequest)
+        public async Task<IHttpActionResult> GetAttractions([FromUri]AttractionsRequest attractionsRequest)
         {
             return await Task.Run(() =>
-            { return GetTopMapAttractions(mapRequest); });
+            { return GetMapAttractions(attractionsRequest); });
         }
 
-        private IHttpActionResult GetTopMapAttractions(MapRequest mapRequest)
+        private IHttpActionResult GetMapAttractions(AttractionsRequest attractionsRequest)
         {
-            throw new NotImplementedException();
-        }
-
-
-        private IHttpActionResult GetAllAttractions(MapRequest hotelMapRequest)
-        {
-            string urlAPI = GetApiURL(hotelMapRequest);
+            string urlAPI = GetApiURL(attractionsRequest);
             return Ok("TBD");
         }
 
-        private string GetApiURL(MapRequest hotelMapRequest)
+
+        private IHttpActionResult GetTripAdvisorProperties(PropertiesRequest propertiesRequest)
         {
-            if (!string.IsNullOrWhiteSpace(hotelMapRequest.Latitude) && !string.IsNullOrWhiteSpace(hotelMapRequest.Longitude))
-                
-            {
-                string location = string.Join(",",hotelMapRequest.Latitude, hotelMapRequest.Longitude);
-                string url = string.Format(APIAllAttractionsUrl, location);       
-                //    if (!string.IsNullOrWhiteSpace(hotelMapRequest.Locale))
-                //        url += string.Format("&pagetoken={0}", hotelMapRequest.Locale);
-           
-                //    if (!string.IsNullOrWhiteSpace(hotelMapRequest.Distance))
-                //        url += hotelMapRequest.Distance;
-                //    if (!string.IsNullOrWhiteSpace(hotelMapRequest.LengthUnit))
-                //        url += hotelMapRequest.LengthUnit;
-                    return url;
-            }
-            return string.Empty;
-         
+            string urlAPI = GetApiURL(propertiesRequest);
+            return Ok("TBD");
+        }
+        private string GetAttractionsApiURL(AttractionsRequest attractionsRequest)
+        {
+            StringBuilder apiUrl = new StringBuilder();
+            apiUrl.Append(GetApiURL(attractionsRequest));
+            if (!string.IsNullOrWhiteSpace(attractionsRequest.SubCategory))
+                apiUrl.Append("&subcategory=" + attractionsRequest.SubCategory);
+            return apiUrl.ToString();
+        }
+        private string GetApiURL(PropertiesRequest propertiesRequest)
+        {
+            string location = string.Join(",", propertiesRequest.Latitude, propertiesRequest.Longitude);
+            StringBuilder apiUrl = new StringBuilder(string.Format(APIPropertiesUrl, location));
+            apiUrl.Append("?key={0}");
+            if (!string.IsNullOrWhiteSpace(propertiesRequest.Locale))
+                apiUrl.Append("&lang=" + propertiesRequest.Locale);
+            if (!string.IsNullOrWhiteSpace(propertiesRequest.Currency))
+                apiUrl.Append("&lang=" + propertiesRequest.Locale);
+            if (!string.IsNullOrWhiteSpace(propertiesRequest.LengthUnit))
+                apiUrl.Append("&lang=" + propertiesRequest.Locale);
+            if (!string.IsNullOrWhiteSpace(propertiesRequest.Distance))
+                apiUrl.Append("&lang=" + propertiesRequest.Locale);
+            return apiUrl.ToString();
         }
     }
 }
