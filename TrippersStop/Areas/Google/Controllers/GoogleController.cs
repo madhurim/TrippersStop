@@ -83,6 +83,8 @@ namespace Trippism.Areas.GooglePlace.Controllers
                 url += locationsearch.Types;
             if (!string.IsNullOrWhiteSpace(locationsearch.Keywords))
             {
+                url += string.Format("&keyword={0}", locationsearch.Keywords);
+                /*
                 if (locationsearch.Keywords == "CARIBBEAN" || locationsearch.Keywords == "BEACH")
                     url += string.Format("&keyword={0}", locationsearch.Keywords + "|BEACH|BEACHES|WATERSPORTS|SCUBA|SNORKELING");
                 else if (locationsearch.Keywords == "GAMBLING")
@@ -109,6 +111,7 @@ namespace Trippism.Areas.GooglePlace.Controllers
                 {
                     url += string.Format("&keyword={0}", locationsearch.Keywords);
                 }
+                 */
             }
 
             return url;
