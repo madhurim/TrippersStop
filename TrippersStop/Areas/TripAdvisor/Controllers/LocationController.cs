@@ -26,66 +26,57 @@ namespace Trippism.Areas.TripAdvisor.Controllers
     /// </summary>
     [GZipCompressionFilter]
     [ServiceStackFormatterConfigAttribute]
-    public class HotelsController : ApiController
+    public class LocationController : ApiController
     {
-
         readonly ITripAdvisorAPIAsyncCaller _apiCaller;
-
         /// <summary>
         /// Set Api caller and Cache service
         /// </summary>
-        public HotelsController(ITripAdvisorAPIAsyncCaller apiCaller)
+        public LocationController(ITripAdvisorAPIAsyncCaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
         }
 
-        private string APIHotelsUrl
+        private string APILocationUrl
         {
             get
             {
-                return ConfigurationManager.AppSettings["TripAdvisorHotelUrl"];
+                return ConfigurationManager.AppSettings["TripAdvisorLocationPropertiesUrl"];
             }
         }
 
         /// <summary>
         /// The response provides results to a maximum of 10 hotels/accommodations  
         /// </summary>
-        //[ResponseType(typeof(TripWeather))]
-        [Route("api/tripadvisor/hotels")]
+        [Route("api/tripadvisor/location")]
         [HttpGet]
-        public async Task<IHttpActionResult> Get([FromUri]HotelsRequest hotelMapRequest)
+        public async Task<IHttpActionResult> Get([FromUri]LocationRequest locationRequest)
         {
             return await Task.Run(() =>
-            { return GetHotels(hotelMapRequest); });
+            { return GetLocationDetail(locationRequest); });
         }
-        private IHttpActionResult GetHotels(HotelsRequest hotelMapRequest)
+        private IHttpActionResult GetLocationDetail(LocationRequest locationRequest)
         {
-            string urlAPI = GetApiURL(hotelMapRequest);
+            string urlAPI = GetApiURL(locationRequest);
             APIResponse result = _apiCaller.Get(urlAPI).Result;
             if (result.StatusCode == HttpStatusCode.OK)
             {
-                var hotels = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
-                var locations = Mapper.Map<LocationInfo, LocationAttraction>(hotels);
-                return Ok(locations);
+                var locationDetail = ServiceStackSerializer.DeSerialize<Datum>(result.Response);
+                var location = Mapper.Map<Datum, Location>(locationDetail);
+                return Ok(location);
             }
             return ResponseMessage(new HttpResponseMessage(result.StatusCode));
         }
 
-        private string GetApiURL(HotelsRequest hotelsRequest)
+        private string GetApiURL(LocationRequest locationRequest)
         {
-            string location = string.Join(",", hotelsRequest.Latitude, hotelsRequest.Longitude);
-            StringBuilder apiUrl = new StringBuilder(string.Format(APIHotelsUrl, location));
+            string location = string.Join(",", locationRequest.LocationId);
+            StringBuilder apiUrl = new StringBuilder(string.Format(APILocationUrl, location));
             apiUrl.Append("?key={0}");
-            if (!string.IsNullOrWhiteSpace(hotelsRequest.Locale))
-                apiUrl.Append("&lang=" + hotelsRequest.Locale);
-            if (!string.IsNullOrWhiteSpace(hotelsRequest.Currency))
-                apiUrl.Append("&lang=" + hotelsRequest.Locale);
-            if (!string.IsNullOrWhiteSpace(hotelsRequest.LengthUnit))
-                apiUrl.Append("&lang=" + hotelsRequest.Locale);
-            if (!string.IsNullOrWhiteSpace(hotelsRequest.Distance))
-                apiUrl.Append("&lang=" + hotelsRequest.Locale);
-            if (!string.IsNullOrWhiteSpace(hotelsRequest.SubCategory))
-                apiUrl.Append("&subcategory=" + hotelsRequest.SubCategory);
+            if (!string.IsNullOrWhiteSpace(locationRequest.Locale))
+                apiUrl.Append("&lang=" + locationRequest.Locale);
+            if (!string.IsNullOrWhiteSpace(locationRequest.Currency))
+                apiUrl.Append("&lang=" + locationRequest.Locale);
             return apiUrl.ToString();
         }
     }

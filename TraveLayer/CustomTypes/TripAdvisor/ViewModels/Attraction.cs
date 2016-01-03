@@ -15,7 +15,7 @@ namespace TraveLayer.CustomTypes.TripAdvisor.ViewModels
        // public string Bearing { get; set; }
         public string Latitude { get; set; }
         public string Rating { get; set; }
-        //public List<object> cuisine { get; set; }
+        public List<object> Cuisine { get; set; }
        // public List<Category> Cuisine { get; set; }
         
         public string LocationId { get; set; }
@@ -38,7 +38,7 @@ namespace TraveLayer.CustomTypes.TripAdvisor.ViewModels
 
         // Added for attractions
         public List<AttractionType> AttractionTypes { get; set; }
-        //public WikipediaInfo wikipedia_info { get; set; }
+        public WikiPediaInfo WikiPediaInfo { get; set; }
     }
 
 

@@ -24,17 +24,15 @@ namespace Trippism.Areas.TripAdvisor.Controllers
     [ServiceStackFormatterConfigAttribute]
     public class AttractionsController : ApiController
     {
-        const string TrippismKey = "Trippism.TripAdvisor.Attractions.";
+ 
         readonly ITripAdvisorAPIAsyncCaller _apiCaller;
-        readonly ICacheService _cacheService;
 
         /// <summary>
         /// Set Api caller and Cache service
         /// </summary>
-        public AttractionsController(ITripAdvisorAPIAsyncCaller apiCaller, ICacheService cacheService)
+        public AttractionsController(ITripAdvisorAPIAsyncCaller apiCaller)
         {
             _apiCaller = apiCaller;
-            _cacheService = cacheService;
         }
         private string APIPropertiesUrl
         {
@@ -84,7 +82,7 @@ namespace Trippism.Areas.TripAdvisor.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 var attractions = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
-                var locations = Mapper.Map<LocationInfo, Location>(attractions);
+                var locations = Mapper.Map<LocationInfo, LocationAttraction>(attractions);
                 return Ok(locations);
             }
             return ResponseMessage(new HttpResponseMessage(result.StatusCode));
@@ -98,7 +96,7 @@ namespace Trippism.Areas.TripAdvisor.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 var properties = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
-                var locations = Mapper.Map<LocationInfo, Location>(properties);
+                var locations = Mapper.Map<LocationInfo, LocationAttraction>(properties);
                 return Ok(locations);
             }
             return ResponseMessage(new HttpResponseMessage(result.StatusCode));

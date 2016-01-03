@@ -24,17 +24,16 @@ namespace Trippism.Areas.TripAdvisor.Controllers
     [ServiceStackFormatterConfigAttribute]
     public class RestaurantsController : ApiController
     {
-        const string TrippismKey = "Trippism.TripAdvisor.Restaurants.";
+
         readonly ITripAdvisorAPIAsyncCaller _apiCaller;
-        readonly ICacheService _cacheService;
 
         /// <summary>
         /// Set Api caller and Cache service
         /// </summary>
-        public RestaurantsController(ITripAdvisorAPIAsyncCaller apiCaller, ICacheService cacheService)
+        public RestaurantsController(ITripAdvisorAPIAsyncCaller apiCaller)
         {
             _apiCaller = apiCaller;
-            _cacheService = cacheService;
+
         }
         private string APIRestaurantsUrl
         {
@@ -62,7 +61,7 @@ namespace Trippism.Areas.TripAdvisor.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 var restaurants = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
-                var locations = Mapper.Map<LocationInfo, Location>(restaurants);
+                var locations = Mapper.Map<LocationInfo, LocationAttraction>(restaurants);
                 return Ok(locations);
             }
             return ResponseMessage(new HttpResponseMessage(result.StatusCode));

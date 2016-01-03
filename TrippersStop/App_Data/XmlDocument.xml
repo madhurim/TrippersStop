@@ -868,6 +868,25 @@
             Get response from api based on url.
             </summary>
         </member>
+        <member name="T:Trippism.Areas.TripAdvisor.Controllers.LocationController">
+            <summary>
+            The response provides Hotel data for all location
+            The desired language locale
+            Currency code to use for request and response 
+            Length unit (either 'mi' or 'km') which overrides the default length units used in input and output
+            Distance in miles (unless another unit is specified using lunit) defining thewidth and height of the bounding rectangle around the center when specified. Defaults to 10 miles. The maximum is 25 miles or 50 kilometers.
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.LocationController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set Api caller and Cache service
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.LocationController.Get(Trippism.Areas.TripAdvisor.Models.LocationRequest)">
+            <summary>
+            The response provides results to a maximum of 10 hotels/accommodations  
+            </summary>
+        </member>
         <member name="T:Trippism.Areas.TripAdvisor.Controllers.HotelsController">
             <summary>
             The response provides Hotel data for all location
@@ -877,7 +896,7 @@
             Distance in miles (unless another unit is specified using lunit) defining thewidth and height of the bounding rectangle around the center when specified. Defaults to 10 miles. The maximum is 25 miles or 50 kilometers.
             </summary>
         </member>
-        <member name="M:Trippism.Areas.TripAdvisor.Controllers.HotelsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller,TrippismApi.TraveLayer.ICacheService)">
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.HotelsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller)">
             <summary>
             Set Api caller and Cache service
             </summary>
@@ -892,7 +911,7 @@
             When specifying a Lat/Long point, returns a list of 10 properties found within a given distance from that point. If there are more than 10 properties within the radius requested, the 10 nearest properties will be returned.   In lieu of lat long, can specify a location ID and the output will return nearest POIs
             </summary>
         </member>
-        <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller,TrippismApi.TraveLayer.ICacheService)">
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller)">
             <summary>
             Set Api caller and Cache service
             </summary>
@@ -912,7 +931,7 @@
             When specifying a Lat/Long point, returns a list of 10 properties found within a given distance from that point. If there are more than 10 properties within the radius requested, the 10 nearest properties will be returned.   In lieu of lat long, can specify a location ID and the output will return nearest POIs
             </summary>
         </member>
-        <member name="M:Trippism.Areas.TripAdvisor.Controllers.RestaurantsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller,TrippismApi.TraveLayer.ICacheService)">
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.RestaurantsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller)">
             <summary>
             Set Api caller and Cache service
             </summary>
