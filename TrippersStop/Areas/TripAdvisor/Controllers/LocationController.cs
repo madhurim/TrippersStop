@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.TripAdvisor.Response;
 using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
@@ -18,17 +19,14 @@ using TrippismApi.TraveLayer;
 namespace Trippism.Areas.TripAdvisor.Controllers
 {
     /// <summary>
-    /// The response provides Hotel data for all location
-    /// The desired language locale
-    /// Currency code to use for request and response 
-    /// Length unit (either 'mi' or 'km') which overrides the default length units used in input and output
-    /// Distance in miles (unless another unit is specified using lunit) defining thewidth and height of the bounding rectangle around the center when specified. Defaults to 10 miles. The maximum is 25 miles or 50 kilometers.
+    ///Call the API with the unique ID for a hotel, restaurant, attraction or destination.  The response provides data such as:  name, address, overall traveler rating, number of reviews, link to read all reviews, link to write reviews, recent review snippets, along with additional data elements.  Some data elements may not output if they do not apply to the particular type of location
     /// </summary>
     [GZipCompressionFilter]
     [ServiceStackFormatterConfigAttribute]
     public class LocationController : ApiController
     {
         readonly ITripAdvisorAPIAsyncCaller _apiCaller;
+        const string LocationCacheKey = "TripAdvisor.Location";
         /// <summary>
         /// Set Api caller and Cache service
         /// </summary>
@@ -46,10 +44,12 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         }
 
         /// <summary>
-        /// The response provides results to a maximum of 10 hotels/accommodations  
+        /// The response provides results to location detail based on id  
         /// </summary>
         [Route("api/tripadvisor/location")]
+        [TrippismCache(LocationCacheKey)]
         [HttpGet]
+        [ResponseType(typeof(Location))]
         public async Task<IHttpActionResult> Get([FromUri]LocationRequest locationRequest)
         {
             return await Task.Run(() =>

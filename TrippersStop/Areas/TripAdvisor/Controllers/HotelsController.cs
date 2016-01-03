@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.TripAdvisor.Response;
 using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
@@ -30,6 +31,7 @@ namespace Trippism.Areas.TripAdvisor.Controllers
     {
 
         readonly ITripAdvisorAPIAsyncCaller _apiCaller;
+        const string HotelsCacheKey = "TripAdvisor.Hotels";
 
         /// <summary>
         /// Set Api caller and Cache service
@@ -52,7 +54,9 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         /// </summary>
         //[ResponseType(typeof(TripWeather))]
         [Route("api/tripadvisor/hotels")]
+        [TrippismCache(HotelsCacheKey)]
         [HttpGet]
+        [ResponseType(typeof(LocationAttraction))]
         public async Task<IHttpActionResult> Get([FromUri]HotelsRequest hotelMapRequest)
         {
             return await Task.Run(() =>

@@ -869,13 +869,9 @@
             </summary>
         </member>
         <member name="T:Trippism.Areas.TripAdvisor.Controllers.LocationController">
-            <summary>
-            The response provides Hotel data for all location
-            The desired language locale
-            Currency code to use for request and response 
-            Length unit (either 'mi' or 'km') which overrides the default length units used in input and output
-            Distance in miles (unless another unit is specified using lunit) defining thewidth and height of the bounding rectangle around the center when specified. Defaults to 10 miles. The maximum is 25 miles or 50 kilometers.
-            </summary>
+             <summary>
+            Call the API with the unique ID for a hotel, restaurant, attraction or destination.  The response provides data such as:  name, address, overall traveler rating, number of reviews, link to read all reviews, link to write reviews, recent review snippets, along with additional data elements.  Some data elements may not output if they do not apply to the particular type of location
+             </summary>
         </member>
         <member name="M:Trippism.Areas.TripAdvisor.Controllers.LocationController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller,TrippismApi.TraveLayer.ICacheService)">
             <summary>
@@ -884,7 +880,7 @@
         </member>
         <member name="M:Trippism.Areas.TripAdvisor.Controllers.LocationController.Get(Trippism.Areas.TripAdvisor.Models.LocationRequest)">
             <summary>
-            The response provides results to a maximum of 10 hotels/accommodations  
+            The response provides results to location detail based on id  
             </summary>
         </member>
         <member name="T:Trippism.Areas.TripAdvisor.Controllers.HotelsController">
@@ -913,12 +909,12 @@
         </member>
         <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller)">
             <summary>
-            Set Api caller and Cache service
+            Set Api caller service
             </summary>
         </member>
         <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.GetProperties(Trippism.Areas.TripAdvisor.Models.PropertiesRequest)">
             <summary>
-            The response provides all available attractions
+            The response provides available properties
             </summary>
         </member>
         <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.GetAttractions(Trippism.Areas.TripAdvisor.Models.AttractionsRequest)">

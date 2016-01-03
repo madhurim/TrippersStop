@@ -15,5 +15,6 @@ namespace TraveLayer.CustomTypes.TripAdvisor.ViewModels
         public List<TripType> TripTypes { get; set; }
         public List<Review> Reviews { get; set; }
         public List<Award> Awards { get; set; }
+        public string GoogleImageUrl { get; set; }
     }
 }

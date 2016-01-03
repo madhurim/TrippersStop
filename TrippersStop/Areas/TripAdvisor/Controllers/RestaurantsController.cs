@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.TripAdvisor.Response;
 using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
@@ -26,7 +27,7 @@ namespace Trippism.Areas.TripAdvisor.Controllers
     {
 
         readonly ITripAdvisorAPIAsyncCaller _apiCaller;
-
+        const string RestaurantsCacheKey = "TripAdvisor.Restaurants";
         /// <summary>
         /// Set Api caller and Cache service
         /// </summary>
@@ -47,7 +48,9 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         /// The response provides results to a maximum of 10 restaurants  
         /// </summary>
         [Route("api/tripadvisor/restaurants")]
+        [TrippismCache(RestaurantsCacheKey)]
         [HttpGet]
+        [ResponseType(typeof(LocationAttraction))]
         public async Task<IHttpActionResult> Get([FromUri]RestaurantsRequest restaurantMapRequest)
         {
             return await Task.Run(() =>

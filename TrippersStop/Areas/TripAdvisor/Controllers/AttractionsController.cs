@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.TripAdvisor.Response;
 using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
@@ -26,9 +27,11 @@ namespace Trippism.Areas.TripAdvisor.Controllers
     {
  
         readonly ITripAdvisorAPIAsyncCaller _apiCaller;
+        const string PropertiesCacheKey = "TripAdvisor.Properties";
+        const string AttractionsCacheKey = "TripAdvisor.Attractions";
 
         /// <summary>
-        /// Set Api caller and Cache service
+        /// Set Api caller service
         /// </summary>
         public AttractionsController(ITripAdvisorAPIAsyncCaller apiCaller)
         {
@@ -52,11 +55,12 @@ namespace Trippism.Areas.TripAdvisor.Controllers
 
 
         /// <summary>
-        /// The response provides all available attractions
+        /// The response provides available properties
         /// </summary>
-        //[ResponseType(typeof(TripWeather))]
         [Route("api/tripadvisor/properties")]
         [HttpGet]
+        [TrippismCache(PropertiesCacheKey)]
+        [ResponseType(typeof(LocationAttraction))]
         public async Task<IHttpActionResult> GetProperties([FromUri]PropertiesRequest propertiesRequest)
         {
             return await Task.Run(() =>
@@ -66,9 +70,10 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         /// <summary>
         /// The response provides top 10 attractions
         /// </summary>
-        //[ResponseType(typeof(TripWeather))]
+        [ResponseType(typeof(LocationAttraction))]
         [Route("api/tripadvisor/attractions")]
         [HttpGet]
+        [TrippismCache(AttractionsCacheKey)]
         public async Task<IHttpActionResult> GetAttractions([FromUri]AttractionsRequest attractionsRequest)
         {
             return await Task.Run(() =>
