@@ -25,14 +25,16 @@ namespace Trippism.Areas.TripAdvisor.Controllers
     [ServiceStackFormatterConfigAttribute]
     public class LocationController : ApiController
     {
-        readonly ITripAdvisorAPIAsyncCaller _apiCaller;
+        readonly ITripAdvisorAPIAsyncCaller _tripAdvisorApiCaller;
+        readonly IAsyncGoogleAPICaller _googleAPICaller;
         const string LocationCacheKey = "TripAdvisor.Location";
         /// <summary>
         /// Set Api caller and Cache service
         /// </summary>
-        public LocationController(ITripAdvisorAPIAsyncCaller apiCaller, ICacheService cacheService)
+        public LocationController(ITripAdvisorAPIAsyncCaller tripAdvisorApiCaller, ICacheService cacheService, IAsyncGoogleAPICaller googleAPICaller)
         {
-            _apiCaller = apiCaller;
+            _tripAdvisorApiCaller = tripAdvisorApiCaller;
+            _googleAPICaller= googleAPICaller;
         }
 
         private string APILocationUrl
@@ -47,7 +49,7 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         /// The response provides results to location detail based on id  
         /// </summary>
         [Route("api/tripadvisor/location")]
-        [TrippismCache(LocationCacheKey)]
+        //[TrippismCache(LocationCacheKey)]
         [HttpGet]
         [ResponseType(typeof(Location))]
         public async Task<IHttpActionResult> Get([FromUri]LocationRequest locationRequest)
@@ -57,15 +59,50 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         }
         private IHttpActionResult GetLocationDetail(LocationRequest locationRequest)
         {
+            Location location = null;
+            string placeId = string.Empty;
+            Parallel.Invoke(
+                () => { location = GetTripAdvisorResponse(locationRequest); },
+                () => { placeId = GetGoogleResponse(locationRequest); }
+              );
+            if (location != null)
+            {
+                location.GooglePlaceId = placeId;
+                return Ok(location);
+            }
+            else
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.BadRequest));
+            }
+        }
+
+        private Location GetTripAdvisorResponse(LocationRequest locationRequest)
+        {
             string urlAPI = GetApiURL(locationRequest);
-            APIResponse result = _apiCaller.Get(urlAPI).Result;
+            APIResponse result = _tripAdvisorApiCaller.Get(urlAPI).Result;
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 var locationDetail = ServiceStackSerializer.DeSerialize<Datum>(result.Response);
                 var location = Mapper.Map<Datum, Location>(locationDetail);
-                return Ok(location);
+                return location;
             }
-            return ResponseMessage(new HttpResponseMessage(result.StatusCode));
+            return null;
+        }
+        private string GetGoogleResponse(LocationRequest locationRequest)
+        {
+            _googleAPICaller.Accept = "application/json";
+            _googleAPICaller.ContentType = "application/json";
+            string googleUrl = GetGoogleApiURL(locationRequest);
+            APIResponse result = _googleAPICaller.Get(googleUrl).Result;
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                var googleResponse = ServiceStackSerializer.DeSerialize<TraveLayer.CustomTypes.Google.Response.GoogleOutput>(result.Response);
+                if (googleResponse != null && googleResponse.results.Count >0)
+               {
+                   return (googleResponse.results.FirstOrDefault()).place_id;
+               }
+            }
+            return null;
         }
 
         private string GetApiURL(LocationRequest locationRequest)
@@ -78,6 +115,20 @@ namespace Trippism.Areas.TripAdvisor.Controllers
             if (!string.IsNullOrWhiteSpace(locationRequest.Currency))
                 apiUrl.Append("&lang=" + locationRequest.Locale);
             return apiUrl.ToString();
+        }
+
+        private string GetGoogleApiURL(LocationRequest locationRequest)
+        {
+            StringBuilder url = new StringBuilder();
+
+            if (!string.IsNullOrWhiteSpace(locationRequest.Latitude) && !string.IsNullOrWhiteSpace(locationRequest.Longitude))
+                url.Append(string.Format("&location={0}", locationRequest.Latitude + "," + locationRequest.Longitude));
+            if (!string.IsNullOrWhiteSpace(locationRequest.Name))
+            {
+                url.Append(string.Format("&name={0}", locationRequest.Name));
+                url.Append(string.Format("&keyword={0}", locationRequest.Name));
+            }                      
+            return url.ToString();
         }
     }
 }
