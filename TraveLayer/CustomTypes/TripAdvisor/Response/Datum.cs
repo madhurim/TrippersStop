@@ -20,7 +20,8 @@ namespace TraveLayer.CustomTypes.TripAdvisor.Response
         public List<object> cuisine { get; set; }
         public string location_id { get; set; }
         //
-        public ReviewRatingCount review_rating_count { get; set; }
+        //public ReviewRatingCount review_rating_count { get; set; }
+        public object review_rating_count { get; set; }
         public List<Subrating> subratings { get; set; }
         public string photo_count { get; set; }
         public string location_string { get; set; }

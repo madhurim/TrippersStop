@@ -8,7 +8,8 @@ namespace TraveLayer.CustomTypes.TripAdvisor.ViewModels
 {
     public class Location : Attraction
     {
-        public ReviewRatingCount ReviewRatingCount { get; set; }
+       // public ReviewRatingCount ReviewRatingCount { get; set; }
+        public object ReviewRatingCount { get; set; }
         public List<Subrating> SubRatings { get; set; }
         public string PhotoCount { get; set; }
         public string LocationDetail { get; set; }

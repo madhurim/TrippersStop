@@ -231,13 +231,6 @@ namespace TrippismApi
            .Member(h => h.RatingImageUrl, m => m.rating_image_url)
            .Member(h => h.Value, m => m.value);
 
-            Mapper.Register<RS.ReviewRatingCount, TAVM.ReviewRatingCount>()
-        .Member(h => h.__invalid_name__1, m => m.__invalid_name__1)
-        .Member(h => h.__invalid_name__2, m => m.__invalid_name__2)
-        .Member(h => h.__invalid_name__3, m => m.__invalid_name__3)
-            .Member(h => h.__invalid_name__4, m => m.__invalid_name__4)
-        .Member(h => h.__invalid_name__5, m => m.__invalid_name__5);
-
 
             Mapper.Register<RS.Review, TAVM.Review>()
                .Member(h => h.HelpfulVotes, m => m.helpful_votes)
