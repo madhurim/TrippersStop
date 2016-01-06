@@ -1,15 +1,15 @@
-﻿using System.Net;
+﻿using AutoMapper;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Google.Request;
 using TraveLayer.CustomTypes.Google.Response;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TrippismApi.TraveLayer;
-using AutoMapper;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace Trippism.Areas.GooglePlace.Controllers
 {
@@ -45,9 +45,6 @@ namespace Trippism.Areas.GooglePlace.Controllers
             _apiCaller.Accept = "application/json";
             _apiCaller.ContentType = "application/json";
 
-           
-
-            //string strLatitudeandsLongitude = Latitude + "," + Longitude;
             string url = GetURL(locationsearch);
             //let's just get English language results
             url = url + "&language=en";
@@ -58,24 +55,20 @@ namespace Trippism.Areas.GooglePlace.Controllers
                 GoogleOutput googleplace = new GoogleOutput();
                 googleplace = ServiceStackSerializer.DeSerialize<GoogleOutput>(result.Response);
 
-                if (locationsearch.ExcludeTypes != null)
-                    googleplace.results = googleplace.results.Where(x => !x.types.Intersect(locationsearch.ExcludeTypes).Any()).ToList();                   
-
                 //if next_page_token exists get the next set of results , combine.
                 if (!string.IsNullOrWhiteSpace(googleplace.next_page_token))
                 {
                     result = _apiCaller.Get(url + "&pagetoken=" + googleplace.next_page_token).Result;
                     GoogleOutput nextResult = ServiceStackSerializer.DeSerialize<GoogleOutput>(result.Response);
-                    if (locationsearch.ExcludeTypes != null)
-                        nextResult.results = nextResult.results.Where(x => !x.types.Intersect(locationsearch.ExcludeTypes).Any()).ToList();
-                    googleplace.results.AddRange(nextResult.results);  
+                    googleplace.results.AddRange(nextResult.results);
                 }
 
-                //Filter : the types returned by Google should have the types in the request
-                //Exclude lodging from restaurants
+                if (locationsearch.ExcludeTypes != null)
+                    googleplace.results = googleplace.results.Where(x => !x.types.Intersect(locationsearch.ExcludeTypes).Any()).ToList();
+
+                //Filter : the types returned by Google should have the types in the request                
                 //Keyword=Beach : the name in the result should have "beach" , "resort" or "resorts"
-                CleanUpGoogleData(locationsearch, googleplace);              
-                
+                googleplace = CleanUpGoogleData(locationsearch, googleplace);
 
                 Mapper.CreateMap<GoogleOutput, TraveLayer.CustomTypes.Google.ViewModels.Google>();
                 Mapper.CreateMap<results, TraveLayer.CustomTypes.Google.ViewModels.results>();
@@ -84,9 +77,7 @@ namespace Trippism.Areas.GooglePlace.Controllers
                 //Mapper.CreateMap<Photos, TraveLayer.CustomTypes.Google.ViewModels.Photos>();
 
                 TraveLayer.CustomTypes.Google.ViewModels.Google lstLocations = Mapper.Map<GoogleOutput, TraveLayer.CustomTypes.Google.ViewModels.Google>(googleplace);
-                //is this a bug ? 
-                if (string.IsNullOrWhiteSpace(locationsearch.NextPageToken))
-                    _cacheService.Save<TraveLayer.CustomTypes.Google.ViewModels.Google>(cacheKey, lstLocations);
+                _cacheService.Save<TraveLayer.CustomTypes.Google.ViewModels.Google>(cacheKey, lstLocations);
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lstLocations);
 
@@ -96,8 +87,10 @@ namespace Trippism.Areas.GooglePlace.Controllers
             return Request.CreateResponse(result.StatusCode, result.Response);
         }
 
-        private static void CleanUpGoogleData(GoogleInput locationsearch, GoogleOutput googleplace)
+        private static GoogleOutput CleanUpGoogleData(GoogleInput locationsearch, GoogleOutput googleplace)
         {
+            List<results> results = new List<results>();
+
             string[] types = null;
 
             // &types=restaurant|cafe 
@@ -105,58 +98,43 @@ namespace Trippism.Areas.GooglePlace.Controllers
             {
                 types = locationsearch.Types.Replace("&types=", System.String.Empty).Split('|');
             }
-                       
-            //only if result is acquired with types. if the result is not acquired with types : for ex: Keyword=beach skip this logic
+
             if (types != null && types.Length > 0 && !types[0].Contains("keyword"))
             {
-                var tempcollection = new List<TraveLayer.CustomTypes.Google.Response.results>();
-
-                foreach (var output in googleplace.results)
+                foreach (var item in googleplace.results)
                 {
-                    bool matchfound = false;
-
-                    foreach (string match in types)
+                    var itemTypes = item.types;
+                    foreach (string type in types)
                     {
-                        if (output.types.Contains(match))
-                        { matchfound = true; break; }
+                        if (itemTypes.Any(x => x.ToLower().Contains(type)))
+                        {
+                            results.Add(item);
+                            break;
+                        }
                     }
-
-                    if (matchfound == false)
-                    { tempcollection.Add(output); }
-
-                }
-                foreach (var output in tempcollection)
-                {
-                    if (googleplace.results.Contains(output)) googleplace.results.Remove(output);
                 }
             }
+
             //&keyword=beach
             if (locationsearch.Types == "&keyword=beach")
             {
-                var tempcollection = new List<TraveLayer.CustomTypes.Google.Response.results>();
-
-                foreach (var output in googleplace.results)
+                string[] beachKeywords = { "beach", "resort", "resorts" };
+                foreach (var item in googleplace.results)
                 {
-                    bool matchfound = false;
-
-                    if ((output.name.ToLower().Contains("beach") | output.name.ToLower().Contains("resort")
-                        | output.name.ToLower().Contains("resorts")))
+                    foreach (string keyword in beachKeywords)
                     {
-                        matchfound = true;
+                        if (item.name.ToLower().Contains(keyword))
+                        {
+                            results.Add(item);
+                            break;
+                        }
                     }
-
-                    if (matchfound == false)
-                    { tempcollection.Add(output); }
-
-                }
-                foreach (var output in tempcollection)
-                {
-                    if (googleplace.results.Contains(output)) googleplace.results.Remove(output);
                 }
             }
 
-            //Order by rank : The highest ranked first -
-            googleplace.results = googleplace.results.OrderByDescending(x => x.rating).ToList();
+            //Order by rank : The highest ranked first -            
+            googleplace.results = results.OrderByDescending(x => x.rating).ToList();
+            return googleplace;
         }
         private string GetURL(GoogleInput locationsearch)
         {
