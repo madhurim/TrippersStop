@@ -77,7 +77,8 @@ namespace Trippism.Areas.GooglePlace.Controllers
                 //Mapper.CreateMap<Photos, TraveLayer.CustomTypes.Google.ViewModels.Photos>();
 
                 TraveLayer.CustomTypes.Google.ViewModels.Google lstLocations = Mapper.Map<GoogleOutput, TraveLayer.CustomTypes.Google.ViewModels.Google>(googleplace);
-                _cacheService.Save<TraveLayer.CustomTypes.Google.ViewModels.Google>(cacheKey, lstLocations);
+                if (lstLocations.results.Any())
+                    _cacheService.Save<TraveLayer.CustomTypes.Google.ViewModels.Google>(cacheKey, lstLocations);
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lstLocations);
 
