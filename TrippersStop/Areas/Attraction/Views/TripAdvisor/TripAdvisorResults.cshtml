@@ -1,0 +1,132 @@
+﻿@model IEnumerable<travelayer.customtypes.tripadvisor.response.datum>
+
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@ Trip Advisor results
+    </p>
+                      <table class="table">
+                          <tr>
+                              <th>
+                                  @Html.DisplayNameFor(model => model.name)
+                              </th>
+                              <th>
+                                  @Html.DisplayNameFor(model => model.address_obj)
+                              </th>
+                              <th>
+                                  @Html.DisplayNameFor(model => model.distance)
+                              </th>
+                              @*<th>
+                    @Html.DisplayNameFor(model => model.percent_recommended)
+                </th>*@
+                              @*<th>
+                    @Html.DisplayNameFor(model => model.bearing)
+                </th>*@
+                              <th>
+                                  @Html.DisplayNameFor(model => model.latitude)
+                              </th>
+                              <th>
+                                  @Html.DisplayNameFor(model => model.rating)
+                              </th>
+                              <th>
+                                  @Html.DisplayNameFor(model => model.location_id)
+                              </th>
+                              <th>
+                                  @Html.DisplayNameFor(model => model.photo_count)
+                              </th>
+                              <th>
+                                  @Html.DisplayNameFor(model => model.location_string)
+                              </th>
+                              @*<th>
+                    @Html.DisplayNameFor(model => model.api_detail_url)
+                </th>*@
+                              <th>
+                                  @Html.DisplayNameFor(model => model.web_url)
+                              </th>
+                              @*<th>
+                    @Html.DisplayNameFor(model => model.price_level)
+                </th>*@
+                              @*<th>
+                    @Html.DisplayNameFor(model => model.rating_image_url)
+                </th>*@
+
+                              <th>
+                                  @Html.DisplayNameFor(model => model.num_reviews)
+                              </th>
+                              @*<th>
+                    @Html.DisplayNameFor(model => model.write_review)
+                </th>*@
+                              @*<th>
+                    @Html.DisplayNameFor(model => model.see_all_photos)
+                </th>*@
+                              <th>
+                                  @Html.DisplayNameFor(model => model.longitude)
+                              </th>
+
+                          </tr>
+
+                          @foreach (var item in Model)
+                          {
+                              <tr>
+                                  <td>
+                                      @Html.DisplayFor(modelItem => item.name)
+                                  </td>
+                                  <td>
+                                      @Html.DisplayFor(modelItem => item.address_obj)
+                                  </td>
+                                  <td>
+                                      @Html.DisplayFor(modelItem => item.distance)
+                                  </td>
+                                  @*<td>
+                        @Html.DisplayFor(modelItem => item.percent_recommended)
+                    </td>*@
+                                  @*<td>
+                        @Html.DisplayFor(modelItem => item.bearing)
+                    </td>*@
+                                  <td>
+                                      @Html.DisplayFor(modelItem => item.latitude)
+                                  </td>
+                                  <td>
+                                      @Html.DisplayFor(modelItem => item.rating)
+                                  </td>
+                                  <td>
+                                      @Html.DisplayFor(modelItem => item.location_id)
+                                  </td>
+                                  <td>
+                                      @Html.DisplayFor(modelItem => item.photo_count)
+                                  </td>
+                                  <td>
+                                      @Html.DisplayFor(modelItem => item.location_string)
+                                  </td>
+                                  @*<td>
+                        @Html.DisplayFor(modelItem => item.api_detail_url)
+                    </td>*@
+                                  <td>
+                                      @Html.DisplayFor(modelItem => item.web_url)
+                                  </td>
+                                  @*<td>
+                        @Html.DisplayFor(modelItem => item.price_level)
+                    </td>*@
+                                  @*<td>
+                        @Html.DisplayFor(modelItem => item.rating_image_url)
+                    </td>*@
+
+                                  <td>
+                                      @Html.DisplayFor(modelItem => item.num_reviews)
+                                  </td>
+                                  @*<td>
+                        @Html.DisplayFor(modelItem => item.write_review)
+                    </td>*@
+                                  @*<td>
+                        @Html.DisplayFor(modelItem => item.see_all_photos)
+                    </td>*@
+                                  <td>
+                                      @Html.DisplayFor(modelItem => item.longitude)
+                                  </td>
+                                  @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>*@
+                              </tr>
+                          }
+
+                      </table>

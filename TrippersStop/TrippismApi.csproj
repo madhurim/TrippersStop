@@ -233,6 +233,7 @@
     <Compile Include="APIHelper\TrippismNLog.cs" />
     <Compile Include="Areas\Attraction\AttractionAreaRegistration.cs" />
     <Compile Include="Areas\Attraction\Controllers\TripAdvisorController.cs" />
+    <Compile Include="Areas\Attraction\Models\Request.cs" />
     <Compile Include="Areas\Constants\ConstantsAreaRegistration.cs" />
     <Compile Include="Areas\Constants\Controllers\ConstantsController.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleController.cs" />
@@ -362,7 +363,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APIExtention\Handler\" />
-    <Folder Include="Areas\Attraction\Models\" />
     <Folder Include="Areas\Constants\Models\" />
     <Folder Include="Areas\Constants\Views\Shared\" />
     <Folder Include="Areas\Google\Models\" />

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TraveLayer.CustomTypes.TripAdvisor.Response;
+using Trippism.Areas.Attraction.Models;
 using Trippism.Areas.TripAdvisor.Models;
 using TrippismApi.TraveLayer;
 
@@ -18,6 +19,39 @@ namespace Trippism.Areas.Attraction.Controllers
             ViewData["Types"] = items;
             return View();
         }
+
+
+        public ActionResult CompareResults()
+        {
+            Request r = new Request();
+            return View(r);
+        }
+        [HttpPost]
+
+        public ActionResult CompareResults(Request model, string returnUrl)
+        {
+
+            //List<SelectListItem> items = GetTypes();
+
+            //ViewData["Types"] = items;
+            TripAdvisorAPICaller ta = new TripAdvisorAPICaller();
+            string url = GetAttractionsApiURL(model);
+            var result = ta.Get(url).Result;
+
+            var attractions = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
+
+
+            if (ModelState.IsValid)
+            {
+                model.TAResults = attractions.data;
+                return View( model);
+
+            }
+
+            return View(model);
+
+        }
+
         [HttpPost]
 
         public ActionResult Index(AttractionsRequest model, string returnUrl)
