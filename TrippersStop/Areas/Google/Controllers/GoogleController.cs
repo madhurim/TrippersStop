@@ -96,7 +96,7 @@ namespace Trippism.Areas.GooglePlace.Controllers
             {
                 var locationDetail = ServiceStackSerializer.DeSerialize<TraveLayer.CustomTypes.TripAdvisor.Response.Datum>(result.Response);
                 var location = ExpressMapper.Mapper.Map<TraveLayer.CustomTypes.TripAdvisor.Response.Datum, TraveLayer.CustomTypes.TripAdvisor.ViewModels.Location>(locationDetail);
-                Ok( location);
+               return Ok( location);
             }
             return null;           
         }
