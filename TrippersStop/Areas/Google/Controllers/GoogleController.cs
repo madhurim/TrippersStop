@@ -73,14 +73,14 @@ namespace Trippism.Areas.GooglePlace.Controllers
         private IHttpActionResult GetMapAttractions(AttractionsRequest attractionsRequest)
         {
             string urlAPI = GetAttractionsApiURL(attractionsRequest);
-            APIResponse result = _apiCaller.Get(urlAPI).Result;
+            APIResponse result = _tripAdvisorApiCaller.Get(urlAPI).Result;
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 var attractions = ServiceStackSerializer.DeSerialize<TraveLayer.CustomTypes.TripAdvisor.Response.LocationInfo>(result.Response);
                 if (attractions != null && attractions.data != null && attractions.data.Count>0)
                 {
                     var location=attractions.data.FirstOrDefault();
-                    GetLocationDetail(location.location_id);
+                   return GetLocationDetail(location.location_id);
                 }
               
 
@@ -95,7 +95,7 @@ namespace Trippism.Areas.GooglePlace.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 var locationDetail = ServiceStackSerializer.DeSerialize<TraveLayer.CustomTypes.TripAdvisor.Response.Datum>(result.Response);
-                var location = Mapper.Map<TraveLayer.CustomTypes.TripAdvisor.Response.Datum, TraveLayer.CustomTypes.TripAdvisor.ViewModels.Location>(locationDetail);
+                var location = ExpressMapper.Mapper.Map<TraveLayer.CustomTypes.TripAdvisor.Response.Datum, TraveLayer.CustomTypes.TripAdvisor.ViewModels.Location>(locationDetail);
                 Ok( location);
             }
             return null;           
