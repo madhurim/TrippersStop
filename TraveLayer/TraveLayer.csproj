@@ -115,6 +115,9 @@
     <Compile Include="APIServices\WeatherAPICaller.cs" />
     <Compile Include="APIServices\YouTubeAPICaller.cs" />
     <Compile Include="CacheServices\MemoryCacheService.cs" />
+    <Compile Include="CustomTypes\Constants\Response\Airports.cs" />
+    <Compile Include="CustomTypes\Constants\Response\CurrencySymbols.cs" />
+    <Compile Include="CustomTypes\Constants\ViewModels\CurrencySymbolsViewModel.cs" />
     <Compile Include="CustomTypes\Google\Request\GoogleInput.cs" />
     <Compile Include="CustomTypes\Google\Response\GoogleOutput.cs" />
     <Compile Include="CustomTypes\Google\Response\GoogleReverseLookupOutput.cs" />
@@ -122,6 +125,7 @@
     <Compile Include="CustomTypes\Google\ViewModels\GoogleReverseLookup.cs" />
     <Compile Include="CustomTypes\IATA\ViewModels\Entity.cs" />
     <Compile Include="CustomTypes\IATA\ViewModels\IATACode.cs" />
+    <Compile Include="CustomTypes\NLog\InstaFlightNLog.cs" />
     <Compile Include="CustomTypes\Sabre\Request\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>

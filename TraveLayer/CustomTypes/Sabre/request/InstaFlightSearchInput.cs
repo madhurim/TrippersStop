@@ -14,5 +14,7 @@ namespace TraveLayer.CustomTypes.Sabre.Request
         public string ReturnDate { get; set; }
         public string IncludedCarriers { get; set; }
         public string PointOfSaleCountry { get; set; }
+        public short? outboundflightstops { get; set; }
+        public short? inboundflightstops { get; set; }
     }
 }

@@ -8,12 +8,14 @@ namespace TraveLayer.CustomTypes.Google.ViewModels
 {
     public class Google
     {
+        public string next_page_token { get; set; }
         public List<results> results { get; set; }
     }
 
     public class results
     {
-        public results() {
+        public results()
+        {
 
             photos = new List<Photos>();
         }
@@ -21,12 +23,12 @@ namespace TraveLayer.CustomTypes.Google.ViewModels
         public string icon { get; set; }
         public string id { get; set; }
         public string name { get; set; }
-        public List< Photos > photos { get; set; }
+        public List<Photos> photos { get; set; }
         public string place_id { get; set; }
         public string rating { get; set; }
         public string reference { get; set; }
         public string scope { get; set; }
-        public string types { get; set; }
+        public string[] types { get; set; }
         public string vicinity { get; set; }
     }
 

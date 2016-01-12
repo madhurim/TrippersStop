@@ -12,6 +12,7 @@ namespace TraveLayer.CustomTypes.Sabre.ViewModels
     public class Fares
     {
         public string OriginLocation { get; set; }
+        public string CurrencySymbol { get; set; }
         public List<FareInfo> FareInfo { get; set; }
     }
 }

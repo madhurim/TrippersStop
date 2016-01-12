@@ -76,21 +76,21 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Bson, Version=2.0.0.828, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MongoDB.Bson, Version=2.1.1.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MongoDB.Bson.2.0.0\lib\net45\MongoDB.Bson.dll</HintPath>
+      <HintPath>..\packages\MongoDB.Bson.2.1.1\lib\net45\MongoDB.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Driver, Version=2.0.0.828, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MongoDB.Driver, Version=2.1.1.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MongoDB.Driver.2.0.0\lib\net45\MongoDB.Driver.dll</HintPath>
+      <HintPath>..\packages\MongoDB.Driver.2.1.1\lib\net45\MongoDB.Driver.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Driver.Core, Version=2.0.0.828, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MongoDB.Driver.Core, Version=2.1.1.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MongoDB.Driver.Core.2.0.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+      <HintPath>..\packages\MongoDB.Driver.Core.2.1.1\lib\net45\MongoDB.Driver.Core.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Driver.Legacy, Version=2.0.0.828, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MongoDB.Driver.Legacy, Version=2.1.1.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\mongocsharpdriver.2.0.0\lib\net45\MongoDB.Driver.Legacy.dll</HintPath>
+      <HintPath>..\packages\mongocsharpdriver.2.1.1\lib\net45\MongoDB.Driver.Legacy.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -99,6 +99,12 @@
     <Reference Include="Newtonsoft.JsonResult, Version=1.0.5369.19299, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.JsonResult.1.0.5369.19299\lib\net40\Newtonsoft.JsonResult.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.4.2.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog.Mongo">
+      <HintPath>..\packages\NLog.Mongo.4.0.0.35\lib\net45\NLog.Mongo.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.105.1.0\lib\net451\RestSharp.dll</HintPath>
@@ -224,7 +230,9 @@
     <Compile Include="APIHelper\ApiHelper.cs" />
     <Compile Include="APIHelper\CompressedContent.cs" />
     <Compile Include="APIHelper\MailgunEmail.cs" />
-    <Compile Include="APIHelper\TripperLog.cs" />
+    <Compile Include="APIHelper\TrippismNLog.cs" />
+    <Compile Include="Areas\Constants\ConstantsAreaRegistration.cs" />
+    <Compile Include="Areas\Constants\Controllers\ConstantsController.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleController.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleGeoCodeController.cs" />
     <Compile Include="Areas\Google\GoogleAreaRegistration.cs" />
@@ -321,6 +329,9 @@
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Weather\Views\web.config" />
     <Content Include="Areas\YouTube\Views\Web.config" />
+    <Content Include="NLog.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UrlSettings.config" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -335,6 +346,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APIExtention\Handler\" />
+    <Folder Include="Areas\Constants\Models\" />
+    <Folder Include="Areas\Constants\Views\Shared\" />
     <Folder Include="Areas\Google\Models\" />
     <Folder Include="Areas\Google\Views\Shared\" />
     <Folder Include="Areas\IATA\Models\" />
@@ -359,6 +372,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Constants\CurrencySymbols.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Constants\airports_Ori.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Constants\airports_alternatenames.json" />
+    <Content Include="Constants\airports_downsized.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Constants\CurrencySymbols_Ori.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

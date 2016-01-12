@@ -8,7 +8,6 @@ using TraveLayer.CustomTypes.Sabre;
 using TrippismApi.TraveLayer;
 using System.Text;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
-//using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Configuration;
 using System.Web.Http.Description;
@@ -18,7 +17,7 @@ using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 using Trippism.APIHelper;
 using ExpressMapper;
 using Trippism.APIExtention.Filters;
-
+using NLog;
 namespace TrippismApi.Areas.Sabre.Controllers
 {
     /// <summary>
@@ -70,6 +69,14 @@ namespace TrippismApi.Areas.Sabre.Controllers
                 return ConfigurationManager.AppSettings["WeatherHistoryUrl"];
             }
         }
+        public string SabreCountriesUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreSaleCountryUrl"];
+            }
+        }
+
 
         /// <summary>
         /// Set api class and cache service.
@@ -91,8 +98,8 @@ namespace TrippismApi.Areas.Sabre.Controllers
         public async Task<HttpResponseMessage> Get([FromUri]Destinations destinationsRequest)
         {
             string url = GetURL(destinationsRequest);
-            return await  Task.Run(() => 
-             { return GetResponse(url); }); 
+            return await Task.Run(() =>
+             { return GetResponse(url); });
         }
 
         // GET api/DestinationFinder
@@ -105,7 +112,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(Fares))]
         public async Task<HttpResponseMessage> GetDestinationsByTheme(string theme, string origin, string departuredate, string returndate, string lengthofstay)
         {
-            string url = string.Format(SabreDestinationsUrl+"?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}&theme={4}", origin, departuredate, returndate, lengthofstay, theme);
+            string url = string.Format(SabreDestinationsUrl + "?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}&theme={4}", origin, departuredate, returndate, lengthofstay, theme);
             return await Task.Run(() =>
             { return GetResponse(url); });
         }
@@ -119,9 +126,9 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(Fares))]
         public async Task<HttpResponseMessage> GetTopCheapestDestinations(int count, string origin, string departuredate, string returndate, string lengthofstay)
         {
-            string url = string.Format(SabreDestinationsUrl+"?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", origin, departuredate, returndate, lengthofstay);
-             return await  Task.Run(() => 
-             { return GetResponse(url, count);}); 
+            string url = string.Format(SabreDestinationsUrl + "?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", origin, departuredate, returndate, lengthofstay);
+            return await Task.Run(() =>
+            { return GetResponse(url, count); });
 
         }
         // GET api/DestinationFinder
@@ -134,7 +141,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(Fares))]
         public async Task<HttpResponseMessage> GetDestinationsByMaxFare(double maxfare, string origin, string departuredate, string returndate, string lengthofstay)
         {
-            string url = string.Format(SabreDestinationsUrl+"?origin={0}&departuredate={1}&returndate={2}&maxfare={3}&lengthofstay={4}", origin, departuredate, returndate, maxfare, lengthofstay);
+            string url = string.Format(SabreDestinationsUrl + "?origin={0}&departuredate={1}&returndate={2}&maxfare={3}&lengthofstay={4}", origin, departuredate, returndate, maxfare, lengthofstay);
             return await Task.Run(() =>
             { return GetResponse(url); });
         }
@@ -147,7 +154,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(Fares))]
         public async Task<HttpResponseMessage> GetDestinationsByCountry(string country, string origin, string departuredate, string returndate, string lengthofstay)
         {
-            string url = string.Format(SabreDestinationsUrl+"?origin={0}&departuredate={1}&returndate={2}&maxfare={3}&lengthofstay={4}&location={4}", origin, departuredate, returndate, lengthofstay, country);
+            string url = string.Format(SabreDestinationsUrl + "?origin={0}&departuredate={1}&returndate={2}&maxfare={3}&lengthofstay={4}&location={4}", origin, departuredate, returndate, lengthofstay, country);
             return await Task.Run(() =>
             { return GetResponse(url); });
         }
@@ -160,17 +167,17 @@ namespace TrippismApi.Areas.Sabre.Controllers
         public async Task<HttpResponseMessage> Insights([FromUri]TripInput tripInput)
         {
             string lengthOfStay = (Convert.ToDateTime(tripInput.ReturnDate) - Convert.ToDateTime(tripInput.DepartureDate)).Days.ToString();
-            string destinationUrl = string.Format(SabreDestinationsUrl+"?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", tripInput.Origin, tripInput.DepartureDate, tripInput.ReturnDate, lengthOfStay);
-            string fareForecast = string.Format(SabreFareForecastUrl+"?origin={0}&destination={1}&departuredate={2}&returndate={3}", tripInput.Origin, tripInput.Destination, tripInput.DepartureDate, tripInput.ReturnDate);
-            string fareRange = string.Format(SabreFareRangeUrl+"?origin={0}&destination={1}&earliestdeparturedate={2}&latestdeparturedate={3}&lengthofstay={4}", tripInput.Origin, tripInput.Destination, tripInput.DepartureDate, tripInput.ReturnDate, lengthOfStay);
+            string destinationUrl = string.Format(SabreDestinationsUrl + "?origin={0}&departuredate={1}&returndate={2}&lengthofstay={3}", tripInput.Origin, tripInput.DepartureDate, tripInput.ReturnDate, lengthOfStay);
+            string fareForecast = string.Format(SabreFareForecastUrl + "?origin={0}&destination={1}&departuredate={2}&returndate={3}", tripInput.Origin, tripInput.Destination, tripInput.DepartureDate, tripInput.ReturnDate);
+            string fareRange = string.Format(SabreFareRangeUrl + "?origin={0}&destination={1}&earliestdeparturedate={2}&latestdeparturedate={3}&lengthofstay={4}", tripInput.Origin, tripInput.Destination, tripInput.DepartureDate, tripInput.ReturnDate, lengthOfStay);
             string seasonality = string.Format(SabreSeasonalityUrl, tripInput.Destination);
 
             string fromDate = Convert.ToDateTime(tripInput.DepartureDate).ToString("MMdd");
             string toDate = Convert.ToDateTime(tripInput.ReturnDate).ToString("MMdd");
 
-            string weather = string.Format(WeatherHistoryUrl, fromDate, toDate, tripInput.State, tripInput.City);          
-            return await Task.Run(() => 
-             { return GetResponse(destinationUrl, fareForecast, fareRange, seasonality, weather); }); 
+            string weather = string.Format(WeatherHistoryUrl, fromDate, toDate, tripInput.State, tripInput.City);
+            return await Task.Run(() =>
+             { return GetResponse(destinationUrl, fareForecast, fareRange, seasonality, weather); });
 
         }
 
@@ -182,10 +189,10 @@ namespace TrippismApi.Areas.Sabre.Controllers
         public async Task<HttpResponseMessage> Fares([FromUri]TravelInfo tripInput)
         {
             string lengthOfStay = (Convert.ToDateTime(tripInput.ReturnDate) - Convert.ToDateTime(tripInput.DepartureDate)).Days.ToString();
-            string fareForecast = string.Format(SabreFareForecastUrl+"?origin={0}&destination={1}&departuredate={2}&returndate={3}", tripInput.Origin, tripInput.Destination, tripInput.DepartureDate, tripInput.ReturnDate);
-            string fareRange = string.Format(SabreFareRangeUrl+"?origin={0}&destination={1}&earliestdeparturedate={2}&latestdeparturedate={3}&lengthofstay={4}", tripInput.Origin, tripInput.Destination, tripInput.DepartureDate, tripInput.ReturnDate, lengthOfStay);
-             return await Task.Run(() => 
-             { return GetFareResponse(fareForecast, fareRange); }); 
+            string fareForecast = string.Format(SabreFareForecastUrl + "?origin={0}&destination={1}&departuredate={2}&returndate={3}", tripInput.Origin, tripInput.Destination, tripInput.DepartureDate, tripInput.ReturnDate);
+            string fareRange = string.Format(SabreFareRangeUrl + "?origin={0}&destination={1}&earliestdeparturedate={2}&latestdeparturedate={3}&lengthofstay={4}", tripInput.Origin, tripInput.Destination, tripInput.DepartureDate, tripInput.ReturnDate, lengthOfStay);
+            return await Task.Run(() =>
+            { return GetFareResponse(fareForecast, fareRange); });
 
         }
 
@@ -200,10 +207,11 @@ namespace TrippismApi.Areas.Sabre.Controllers
             string fromDate = Convert.ToDateTime(tripInput.DepartureDate).ToString("MMdd");
             string toDate = Convert.ToDateTime(tripInput.ReturnDate).ToString("MMdd");
             string weather = string.Format(WeatherHistoryUrl, fromDate, toDate, tripInput.State, tripInput.City);
-            return await  Task.Run(() => 
-             { return GetResponse(seasonality, weather); }); 
+            return await Task.Run(() =>
+             { return GetResponse(seasonality, weather); });
         }
 
+       
         private HttpResponseMessage GetFareResponse(string fareForecast, string fareRange)
         {
             ApiHelper.SetApiToken(_apiCaller, _cacheService);
@@ -220,7 +228,6 @@ namespace TrippismApi.Areas.Sabre.Controllers
             if (result[1].StatusCode == HttpStatusCode.OK)
                 fareOutput.FareRange = GetFareRangeResponse(result[1].Response);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fareOutput);
-
             return response;
         }
 
@@ -230,7 +237,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         private string GetURL(Destinations destinationsRequest)
         {
             StringBuilder url = new StringBuilder();
-            url.Append(SabreDestinationsUrl+"?");
+            url.Append(SabreDestinationsUrl + "?");
             if (!string.IsNullOrWhiteSpace(destinationsRequest.Origin))
             {
                 url.Append("origin=" + destinationsRequest.Origin);
@@ -298,8 +305,16 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// </summary>
         private HttpResponseMessage GetResponse(string url, int count = 0)
         {
+            //TrippismNLog.SaveNLogData(url);
             ApiHelper.SetApiToken(_apiCaller, _cacheService);
             APIResponse result = _apiCaller.Get(url).Result;
+            string posResponse = "Parameter 'pointofsalecountry' has an unsupported value";
+            if (result.StatusCode == HttpStatusCode.BadRequest && result.Response.ToString() == posResponse)
+            {
+                APIResponse supportedPOSCountries = GetAPIResponse(SabreCountriesUrl);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, supportedPOSCountries.Response);
+                return response;
+            }
             if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
                 ApiHelper.RefreshApiToken(_cacheService, _apiCaller);
@@ -315,11 +330,22 @@ namespace TrippismApi.Areas.Sabre.Controllers
                     fares.FareInfo = fares.FareInfo.OrderBy(f => f.LowestFare.Fare).Take(count).ToList();
                 }
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fares);
+                //TrippismNLog.SaveNLogData(result.Response);
                 return response;
             }
             return Request.CreateResponse(result.StatusCode, result.Response);
         }
-
+        private APIResponse GetAPIResponse(string url)
+        {
+            ApiHelper.SetApiToken(_apiCaller, _cacheService);
+            APIResponse result = _apiCaller.Get(url).Result;
+            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                ApiHelper.RefreshApiToken(_cacheService, _apiCaller);
+                result = _apiCaller.Get(url).Result;
+            }
+            return result;
+        }
         private HttpResponseMessage GetResponse(string seasonality, string weather)
         {
             ApiHelper.SetApiToken(_apiCaller, _cacheService);
@@ -334,14 +360,13 @@ namespace TrippismApi.Areas.Sabre.Controllers
             if (result[0].StatusCode == HttpStatusCode.OK)
                 seasonalityOutput.TravelSeasonality = GetTravelSeasonalityResponse(result[0].Response);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, seasonalityOutput);
-
             return response;
         }
 
-        private  HttpResponseMessage GetResponse(string destinationUrl, string fareForecast, string fareRange, string seasonality,string weather)
+        private HttpResponseMessage GetResponse(string destinationUrl, string fareForecast, string fareRange, string seasonality, string weather)
         {
             ApiHelper.SetApiToken(_apiCaller, _cacheService);
-            var responses =  Task.WhenAll(
+            var responses = Task.WhenAll(
             new[]
             {
               destinationUrl,
@@ -351,9 +376,9 @@ namespace TrippismApi.Areas.Sabre.Controllers
             }.Select(url => _apiCaller.Get(url)));
             var result = responses.Result;
             TripOutput tripOutput = new TripOutput();
-            tripOutput.TripWeather=GetWeatherResponse(weather);
-            if(result[0].StatusCode==HttpStatusCode.OK )
-            tripOutput.Fares = GetDestinationResponse(result[0].Response);
+            tripOutput.TripWeather = GetWeatherResponse(weather);
+            if (result[0].StatusCode == HttpStatusCode.OK)
+                tripOutput.Fares = GetDestinationResponse(result[0].Response);
             if (result[1].StatusCode == HttpStatusCode.OK)
                 tripOutput.LowFareForecast = GetFareForecastResponse(result[1].Response);
             if (result[2].StatusCode == HttpStatusCode.OK)
@@ -361,7 +386,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
             if (result[3].StatusCode == HttpStatusCode.OK)
                 tripOutput.TravelSeasonality = GetTravelSeasonalityResponse(result[3].Response);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, tripOutput);
-            
+
             return response;
         }
 
@@ -371,12 +396,12 @@ namespace TrippismApi.Areas.Sabre.Controllers
             OTA_TravelSeasonality seasonality = new OTA_TravelSeasonality();
             seasonality = ServiceStackSerializer.DeSerialize<OTA_TravelSeasonality>(jsonResponse);
             watch.Stop();
-            TripperLog.LogMethodTime("TravelSeasonality Response-DeSerialize ", watch.ElapsedMilliseconds);
+            //TripperLog.LogMethodTime("TravelSeasonality Response-DeSerialize ", watch.ElapsedMilliseconds);
             watch = System.Diagnostics.Stopwatch.StartNew();
             //Mapper.CreateMap<OTA_TravelSeasonality, VM.TravelSeasonality>();
             VM.TravelSeasonality travelSeasonality = Mapper.Map<OTA_TravelSeasonality, VM.TravelSeasonality>(seasonality);
             watch.Stop();
-            TripperLog.LogMethodTime("TravelSeasonality Response-Mapping ", watch.ElapsedMilliseconds);
+            //TripperLog.LogMethodTime("TravelSeasonality Response-Mapping ", watch.ElapsedMilliseconds);
             return travelSeasonality;
         }
 
@@ -386,12 +411,12 @@ namespace TrippismApi.Areas.Sabre.Controllers
             OTA_LowFareForecast fares = new OTA_LowFareForecast();
             fares = ServiceStackSerializer.DeSerialize<OTA_LowFareForecast>(jsonResponse);
             watch.Stop();
-            TripperLog.LogMethodTime("FareForecast Response-DeSerialize ", watch.ElapsedMilliseconds);
+            //TripperLog.LogMethodTime("FareForecast Response-DeSerialize ", watch.ElapsedMilliseconds);
             watch = System.Diagnostics.Stopwatch.StartNew();
 
             LowFareForecast lowFareForecast = Mapper.Map<OTA_LowFareForecast, LowFareForecast>(fares);
             watch.Stop();
-            TripperLog.LogMethodTime("FareForecast Response-Mapping ", watch.ElapsedMilliseconds);
+            //TripperLog.LogMethodTime("FareForecast Response-Mapping ", watch.ElapsedMilliseconds);
             return lowFareForecast;
         }
 
@@ -401,25 +426,25 @@ namespace TrippismApi.Areas.Sabre.Controllers
             OTA_FareRange fares = new OTA_FareRange();
             fares = ServiceStackSerializer.DeSerialize<OTA_FareRange>(jsonResponse);
             watch.Stop();
-            TripperLog.LogMethodTime("FareRange Response-DeSerialize ", watch.ElapsedMilliseconds);
+            //TripperLog.LogMethodTime("FareRange Response-DeSerialize ", watch.ElapsedMilliseconds);
             watch = System.Diagnostics.Stopwatch.StartNew();
             VM.FareRange fareRange = Mapper.Map<OTA_FareRange, VM.FareRange>(fares);
             watch.Stop();
-            TripperLog.LogMethodTime("FareRange Response-Mapping ", watch.ElapsedMilliseconds);
+            //TripperLog.LogMethodTime("FareRange Response-Mapping ", watch.ElapsedMilliseconds);
             return fareRange;
         }
 
         private Fares GetDestinationResponse(string jsonResponse)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            OTA_DestinationFinder cities = new OTA_DestinationFinder();     
+            OTA_DestinationFinder cities = new OTA_DestinationFinder();
             cities = ServiceStackSerializer.DeSerialize<OTA_DestinationFinder>(jsonResponse);
             watch.Stop();
-            TripperLog.LogMethodTime("Destination Response-DeSerialize ", watch.ElapsedMilliseconds);
+            //TripperLog.LogMethodTime("Destination Response-DeSerialize ", watch.ElapsedMilliseconds);
             watch = System.Diagnostics.Stopwatch.StartNew();
             Fares fares = Mapper.Map<OTA_DestinationFinder, Fares>(cities);
             watch.Stop();
-            TripperLog.LogMethodTime("Destination Response-Mapping ", watch.ElapsedMilliseconds);
+            //TripperLog.LogMethodTime("Destination Response-Mapping ", watch.ElapsedMilliseconds);
             return fares;
         }
 
@@ -435,7 +460,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
                 watch = System.Diagnostics.Stopwatch.StartNew();
                 weather = ServiceStackSerializer.DeSerialize<HistoryOutput>(result.Response);
                 watch.Stop();
-                TripperLog.LogMethodTime("GetWeatherResponse-DeSerialize ", watch.ElapsedMilliseconds);
+                //TripperLog.LogMethodTime("GetWeatherResponse-DeSerialize ", watch.ElapsedMilliseconds);
                 watch = System.Diagnostics.Stopwatch.StartNew();
                 TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(weather.trip);
                 tripWeather.WeatherChances = new List<WeatherChance>();
@@ -444,7 +469,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
                     ApiHelper.FilterChanceRecord(weather.trip, tripWeather);
                 }
                 watch.Stop();
-                TripperLog.LogMethodTime("GetWeatherResponse-Mapping ", watch.ElapsedMilliseconds);
+                //TripperLog.LogMethodTime("GetWeatherResponse-Mapping ", watch.ElapsedMilliseconds);
                 return tripWeather;
             }
             return null;
