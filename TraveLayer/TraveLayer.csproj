@@ -173,6 +173,11 @@
     <Compile Include="CacheServices\RedisService.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TripInput.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TripOutput.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Request\AttractionsRequest.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Request\HotelsRequest.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Request\LocationRequest.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Request\PropertiesRequest.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Request\RestaurantsRequest.cs" />
     <Compile Include="CustomTypes\TripAdvisor\Response\AddressObj.cs" />
     <Compile Include="CustomTypes\TripAdvisor\Response\Ancestor.cs" />
     <Compile Include="CustomTypes\TripAdvisor\Response\AttractionType.cs" />

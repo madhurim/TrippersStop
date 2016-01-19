@@ -13,7 +13,7 @@ using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.TripAdvisor.Response;
 using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
 using Trippism.APIExtention.Filters;
-using Trippism.Areas.TripAdvisor.Models;
+using TraveLayer.CustomTypes.TripAdvisor.Request;
 using TrippismApi.TraveLayer;
 
 namespace Trippism.Areas.TripAdvisor.Controllers

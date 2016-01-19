@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TraveLayer.CustomTypes.TripAdvisor.Response;
 using Trippism.Areas.Attraction.Models;
-using Trippism.Areas.TripAdvisor.Models;
+using TraveLayer.CustomTypes.TripAdvisor.Request;
 using TrippismApi.TraveLayer;
 
 namespace Trippism.Areas.Attraction.Controllers

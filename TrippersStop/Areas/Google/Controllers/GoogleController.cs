@@ -10,7 +10,7 @@ using AutoMapper;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Configuration;
-using Trippism.Areas.TripAdvisor.Models;
+using TraveLayer.CustomTypes.TripAdvisor.Request;
 using System.Text;
 namespace Trippism.Areas.GooglePlace.Controllers
 {

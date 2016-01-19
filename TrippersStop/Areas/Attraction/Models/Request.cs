@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Trippism.Areas.TripAdvisor.Models;
+using TraveLayer.CustomTypes.TripAdvisor.Request;
 
 namespace Trippism.Areas.Attraction.Models
 {

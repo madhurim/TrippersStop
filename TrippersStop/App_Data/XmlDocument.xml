@@ -4,7 +4,7 @@
         <name>Trippism</name>
     </assembly>
     <members>
-        <member name="M:Trippism.Areas.GooglePlace.Controllers.GooglePlaceController.GetAttractions(Trippism.Areas.TripAdvisor.Models.AttractionsRequest)">
+        <member name="M:Trippism.Areas.GooglePlace.Controllers.GooglePlaceController.GetAttractions(TraveLayer.CustomTypes.TripAdvisor.Request.AttractionsRequest)">
             <summary>
             The response provides review comments of attractions
             </summary>
@@ -883,7 +883,7 @@
             Set Api caller and Cache service
             </summary>
         </member>
-        <member name="M:Trippism.Areas.TripAdvisor.Controllers.LocationController.Get(Trippism.Areas.TripAdvisor.Models.LocationRequest)">
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.LocationController.Get(TraveLayer.CustomTypes.TripAdvisor.Request.LocationRequest)">
             <summary>
             The response provides results to location detail based on id  
             </summary>
@@ -902,7 +902,7 @@
             Set Api caller and Cache service
             </summary>
         </member>
-        <member name="M:Trippism.Areas.TripAdvisor.Controllers.HotelsController.Get(Trippism.Areas.TripAdvisor.Models.HotelsRequest)">
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.HotelsController.Get(TraveLayer.CustomTypes.TripAdvisor.Request.HotelsRequest)">
             <summary>
             The response provides results to a maximum of 10 hotels/accommodations  
             </summary>
@@ -917,12 +917,12 @@
             Set Api caller service
             </summary>
         </member>
-        <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.GetProperties(Trippism.Areas.TripAdvisor.Models.PropertiesRequest)">
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.GetProperties(TraveLayer.CustomTypes.TripAdvisor.Request.PropertiesRequest)">
             <summary>
             The response provides available properties
             </summary>
         </member>
-        <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.GetAttractions(Trippism.Areas.TripAdvisor.Models.AttractionsRequest)">
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.GetAttractions(TraveLayer.CustomTypes.TripAdvisor.Request.AttractionsRequest)">
             <summary>
             The response provides top 10 attractions
             </summary>
@@ -937,7 +937,7 @@
             Set Api caller and Cache service
             </summary>
         </member>
-        <member name="M:Trippism.Areas.TripAdvisor.Controllers.RestaurantsController.Get(Trippism.Areas.TripAdvisor.Models.RestaurantsRequest)">
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.RestaurantsController.Get(TraveLayer.CustomTypes.TripAdvisor.Request.RestaurantsRequest)">
             <summary>
             The response provides results to a maximum of 10 restaurants  
             </summary>

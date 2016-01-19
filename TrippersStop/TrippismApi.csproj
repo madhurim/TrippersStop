@@ -295,11 +295,6 @@
     <Compile Include="Areas\TripAdvisor\Controllers\HotelsController.cs" />
     <Compile Include="Areas\TripAdvisor\Controllers\AttractionsController.cs" />
     <Compile Include="Areas\TripAdvisor\Controllers\RestaurantsController.cs" />
-    <Compile Include="Areas\TripAdvisor\Models\HotelsRequest.cs" />
-    <Compile Include="Areas\TripAdvisor\Models\AttractionsRequest.cs" />
-    <Compile Include="Areas\TripAdvisor\Models\LocationRequest.cs" />
-    <Compile Include="Areas\TripAdvisor\Models\RestaurantsRequest.cs" />
-    <Compile Include="Areas\TripAdvisor\Models\PropertiesRequest.cs" />
     <Compile Include="Areas\TripAdvisor\TripAdvisorAreaRegistration.cs" />
     <Compile Include="Areas\Weather\StaticMethods\WeatherAPIResponse.cs" />
     <Compile Include="Areas\YouTube\Controllers\YouTubeController.cs" />
@@ -371,6 +366,7 @@
     <Folder Include="Areas\IATA\Views\Shared\" />
     <Folder Include="Areas\Sabre\Models\" />
     <Folder Include="Areas\Sabre\Views\Shared\" />
+    <Folder Include="Areas\TripAdvisor\Models\" />
     <Folder Include="Areas\TripAdvisor\Views\Shared\" />
     <Folder Include="Areas\Weather\Models\" />
     <Folder Include="Areas\Weather\Views\Shared\" />
