@@ -19,7 +19,13 @@ using TrippismApi.TraveLayer;
 namespace Trippism.Areas.TripAdvisor.Controllers
 {
     /// <summary>
-    ///Call the API with the unique ID for a hotel, restaurant, attraction or destination.  The response provides data such as:  name, address, overall traveler rating, number of reviews, link to read all reviews, link to write reviews, recent review snippets, along with additional data elements.  Some data elements may not output if they do not apply to the particular type of location
+    ///Call the API with the unique ID for a hotel, restaurant, attraction or destination.  
+    ///The response provides data such as:  name, address, overall traveler rating, number of reviews, 
+    ///link to read all reviews, link to write reviews, recent review snippets, along with additional data elements.  
+    ///Some data elements may not output if they do not apply to the particular type of location
+    ///This api call is made after a call from TripAdvisor AttractionController , HotelsController or RestaurantsController
+    ///These 3 controllers will return a LocationId from TripAdvisor , which will further help us in getting the reviews and rankings from TripAdvisor.
+    ///Since TripAdvisor does not return photos, we pass name , lat , long to Google Api to get the photos data + more data from google.
     /// </summary>
     [GZipCompressionFilter]
     [ServiceStackFormatterConfigAttribute]
