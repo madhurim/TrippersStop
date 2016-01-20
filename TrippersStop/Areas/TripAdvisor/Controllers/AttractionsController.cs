@@ -55,7 +55,8 @@ namespace Trippism.Areas.TripAdvisor.Controllers
 
 
         /// <summary>
-        /// The response provides available properties
+        /// The response provides available properties . Locations are properties in TripAdvisor. Attractions simply represent a
+        /// subcategory of properties. 
         /// </summary>
         [Route("api/tripadvisor/properties")]
         [HttpGet]
@@ -68,7 +69,7 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         }
 
         /// <summary>
-        /// The response provides top 10 attractions
+        /// The response provides top 10 attractions . To get attractions you provide a subcategory of properties.
         /// </summary>
         [ResponseType(typeof(LocationAttraction))]
         [Route("api/tripadvisor/attractions")]
