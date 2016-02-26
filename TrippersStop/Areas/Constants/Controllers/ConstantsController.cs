@@ -67,6 +67,15 @@ namespace Trippism.Areas.Constants.Controllers
             { return GetAirportsResponse(jsonPath); });
         }
 
+        [Route("api/Constants/GetHighRankedAirports")]
+        [ResponseType(typeof(List<TraveLayer.CustomTypes.Constants.Response.AirportsDetail>))]
+        public async Task<HttpResponseMessage> GetHighRankedAirports()
+        {
+            string jsonPath = GetFullPath(ConfigurationManager.AppSettings["HighRankedAirportsJsonPath"].ToString());
+            return await Task.Run(() =>
+            { return GetAirportsResponse(jsonPath); });
+        }
+
         private HttpResponseMessage GetAirportsResponse(string jsonPath)
         {
             string airportJsonString = string.Empty;
