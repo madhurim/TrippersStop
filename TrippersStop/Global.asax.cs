@@ -52,6 +52,7 @@ namespace TrippismApi
             container.RegisterWebApiRequest<IAsyncGoogleReverseLookupAPICaller, GoogleReverseLookupAPICaller>();
 
             container.RegisterWebApiRequest<IAsyncYouTubeAPICaller, YouTubeAPICaller>();
+            container.RegisterWebApiRequest<ITripAdvisorAPIAsyncCaller, TripAdvisorAPICaller>();
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 
@@ -60,6 +61,7 @@ namespace TrippismApi
             GlobalConfiguration.Configuration.DependencyResolver =
                 new SimpleInjectorWebApiDependencyResolver(container);
             ApiHelper.RegisterMappingEntities();
+            ApiHelper.RegisterTripAdvisorMapping();
             //GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
             // GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
         }

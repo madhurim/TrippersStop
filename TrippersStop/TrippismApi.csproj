@@ -231,6 +231,9 @@
     <Compile Include="APIHelper\CompressedContent.cs" />
     <Compile Include="APIHelper\MailgunEmail.cs" />
     <Compile Include="APIHelper\TrippismNLog.cs" />
+    <Compile Include="Areas\Attraction\AttractionAreaRegistration.cs" />
+    <Compile Include="Areas\Attraction\Controllers\TripAdvisorController.cs" />
+    <Compile Include="Areas\Attraction\Models\Request.cs" />
     <Compile Include="Areas\Constants\ConstantsAreaRegistration.cs" />
     <Compile Include="Areas\Constants\Controllers\ConstantsController.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleController.cs" />
@@ -288,6 +291,11 @@
     <Compile Include="Areas\Sabre\Controllers\TopDestinationsController.cs" />
     <Compile Include="Areas\Sabre\SabreAreaRegistration.cs" />
     <Compile Include="APIExtention\AreaRegistrationContextExtensions.cs" />
+    <Compile Include="Areas\TripAdvisor\Controllers\LocationController.cs" />
+    <Compile Include="Areas\TripAdvisor\Controllers\HotelsController.cs" />
+    <Compile Include="Areas\TripAdvisor\Controllers\AttractionsController.cs" />
+    <Compile Include="Areas\TripAdvisor\Controllers\RestaurantsController.cs" />
+    <Compile Include="Areas\TripAdvisor\TripAdvisorAreaRegistration.cs" />
     <Compile Include="Areas\Weather\StaticMethods\WeatherAPIResponse.cs" />
     <Compile Include="Areas\YouTube\Controllers\YouTubeController.cs" />
     <Compile Include="Areas\YouTube\YouTubeAreaRegistration.cs" />
@@ -303,6 +311,8 @@
   <ItemGroup>
     <Content Include="App_Data\XmlDocument.xml" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Sabre\Views\Web.config" />
     <Content Include="Areas\IATA\Views\Web.config" />
@@ -332,6 +342,8 @@
     <Content Include="NLog.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="UrlSettings.config" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -354,6 +366,8 @@
     <Folder Include="Areas\IATA\Views\Shared\" />
     <Folder Include="Areas\Sabre\Models\" />
     <Folder Include="Areas\Sabre\Views\Shared\" />
+    <Folder Include="Areas\TripAdvisor\Models\" />
+    <Folder Include="Areas\TripAdvisor\Views\Shared\" />
     <Folder Include="Areas\Weather\Models\" />
     <Folder Include="Areas\Weather\Views\Shared\" />
     <Folder Include="Areas\YouTube\Models\" />
@@ -387,8 +401,20 @@
     <Content Include="Constants\CurrencySymbols_Ori.json" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="Constants\airports_highranked.json" />
     <Content Include="Constants\airlines_downsized.json" />
+=======
+    <Content Include="Areas\TripAdvisor\Views\web.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Attraction\Views\web.config" />
+    <Content Include="Areas\Attraction\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Attraction\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Attraction\Views\TripAdvisor\Display.cshtml" />
+    <Content Include="Areas\Attraction\Views\TripAdvisor\Index.cshtml" />
+>>>>>>> feature/TripAdvisor
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

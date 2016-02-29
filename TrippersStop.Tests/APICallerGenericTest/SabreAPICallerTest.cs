@@ -173,9 +173,9 @@ namespace TrippismApi.Tests.Controllers
             FareInfo fareInfo_ = new FareInfo();
             fareInfo_.CurrencyCode = "USD";
             fareInfo_.DepartureDateTime = "2015-03-05";
-            fareInfo_.LowestFare = 342.0;
+            //fareInfo_.LowestFare = 342.0;
             fareInfo_.ReturnDateTime = "2013-04-08";
-            fareInfo_.LowestNonStopFare = "349.8";
+            //fareInfo_.LowestNonStopFare = "349.8";
 
             lpc.OTA_LeadPriceCalendar.Links = new List<Link>();
             Link links_ = new Link();

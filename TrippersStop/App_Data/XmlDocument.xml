@@ -4,6 +4,11 @@
         <name>Trippism</name>
     </assembly>
     <members>
+        <member name="M:Trippism.Areas.GooglePlace.Controllers.GooglePlaceController.GetAttractions(TraveLayer.CustomTypes.TripAdvisor.Request.AttractionsRequest)">
+            <summary>
+            The response provides review comments of attractions
+            </summary>
+        </member>
         <member name="M:TrippismApi.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
             Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
@@ -866,6 +871,75 @@
         <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.GetResponse(System.String)">
             <summary>
             Get response from api based on url.
+            </summary>
+        </member>
+        <member name="T:Trippism.Areas.TripAdvisor.Controllers.LocationController">
+             <summary>
+            Call the API with the unique ID for a hotel, restaurant, attraction or destination.  The response provides data such as:  name, address, overall traveler rating, number of reviews, link to read all reviews, link to write reviews, recent review snippets, along with additional data elements.  Some data elements may not output if they do not apply to the particular type of location
+             </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.LocationController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller,TrippismApi.TraveLayer.ICacheService,TrippismApi.TraveLayer.IAsyncGoogleAPICaller)">
+            <summary>
+            Set Api caller and Cache service
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.LocationController.Get(TraveLayer.CustomTypes.TripAdvisor.Request.LocationRequest)">
+            <summary>
+            The response provides results to location detail based on id  
+            </summary>
+        </member>
+        <member name="T:Trippism.Areas.TripAdvisor.Controllers.HotelsController">
+            <summary>
+            The response provides Hotel data for all location
+            The desired language locale
+            Currency code to use for request and response 
+            Length unit (either 'mi' or 'km') which overrides the default length units used in input and output
+            Distance in miles (unless another unit is specified using lunit) defining thewidth and height of the bounding rectangle around the center when specified. Defaults to 10 miles. The maximum is 25 miles or 50 kilometers.
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.HotelsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller)">
+            <summary>
+            Set Api caller and Cache service
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.HotelsController.Get(TraveLayer.CustomTypes.TripAdvisor.Request.HotelsRequest)">
+            <summary>
+            The response provides results to a maximum of 10 hotels/accommodations  
+            </summary>
+        </member>
+        <member name="T:Trippism.Areas.TripAdvisor.Controllers.AttractionsController">
+            <summary>
+            When specifying a Lat/Long point, returns a list of 10 properties found within a given distance from that point. If there are more than 10 properties within the radius requested, the 10 nearest properties will be returned.   In lieu of lat long, can specify a location ID and the output will return nearest POIs
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller)">
+            <summary>
+            Set Api caller service
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.GetProperties(TraveLayer.CustomTypes.TripAdvisor.Request.PropertiesRequest)">
+            <summary>
+            The response provides available properties
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.GetAttractions(TraveLayer.CustomTypes.TripAdvisor.Request.AttractionsRequest)">
+            <summary>
+            The response provides top 10 attractions
+            </summary>
+        </member>
+        <member name="T:Trippism.Areas.TripAdvisor.Controllers.RestaurantsController">
+            <summary>
+            When specifying a Lat/Long point, returns a list of 10 properties found within a given distance from that point. If there are more than 10 properties within the radius requested, the 10 nearest properties will be returned.   In lieu of lat long, can specify a location ID and the output will return nearest POIs
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.RestaurantsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller)">
+            <summary>
+            Set Api caller and Cache service
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.RestaurantsController.Get(TraveLayer.CustomTypes.TripAdvisor.Request.RestaurantsRequest)">
+            <summary>
+            The response provides results to a maximum of 10 restaurants  
             </summary>
         </member>
         <member name="M:Trippism.Areas.Weather.Controllers.HistoryController.#ctor(TrippismApi.TraveLayer.IAsyncGoogleReverseLookupAPICaller,TrippismApi.TraveLayer.IAsyncWeatherAPICaller,TrippismApi.TraveLayer.ICacheService)">
