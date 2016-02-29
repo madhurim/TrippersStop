@@ -388,6 +388,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Constants\airports_highranked.json" />
+    <Content Include="Constants\airlines.json" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
