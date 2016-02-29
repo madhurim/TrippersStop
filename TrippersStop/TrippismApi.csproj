@@ -388,7 +388,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Constants\airports_highranked.json" />
-    <Content Include="Constants\airlines.json" />
+    <Content Include="Constants\airlines_downsized.json" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
