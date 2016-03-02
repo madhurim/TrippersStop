@@ -659,6 +659,19 @@
             Get response from api based on url.
             </summary>
         </member>
+        <member name="M:Trippism.Areas.Sabre.Controllers.LeadPriceCalendarController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.Sabre.Controllers.LeadPriceCalendarController.Get(TraveLayer.CustomTypes.Sabre.Request.LeadPrIceCalendarInput)">
+            <summary>
+            Returns the current nonstop lead fare and an overall lead fare available to destinations from a specific origin on roundtrip travel dates
+            for 192 days
+            </summary>
+            <param name="leadPriceRequest">
+            Return record based on destinations Request Type</param>
+        </member>
         <member name="T:TrippismApi.Areas.Sabre.Controllers.MultiAirportCityController">
             <summary>
             API retrieves a list of multi-airport city (MAC) codes.
