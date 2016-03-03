@@ -24,7 +24,7 @@ namespace Trippism.Areas.Sabre.Controllers
     public class LeadPriceCalendarController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
-        
+
         ICacheService _cacheService;
         const string _leadpriceKey = "Trippism.LeadPrice";
         string _expireTime = ConfigurationManager.AppSettings["RedisExpireInMin"].ToString();
@@ -36,7 +36,7 @@ namespace Trippism.Areas.Sabre.Controllers
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;
-            
+
         }
         private string GetURL(LeadPrIceCalendarInput leadPriceRequest)
         {
@@ -54,7 +54,7 @@ namespace Trippism.Areas.Sabre.Controllers
                 url.Append("&pointofsalecountry=" + leadPriceRequest.PointOfSaleCountry);
             if (leadPriceRequest.LengthOfStay > 0)
                 url.Append("&lengthofstay=" + leadPriceRequest.LengthOfStay);
-           
+
             return url.ToString();
         }
         private HttpResponseMessage GetResponse(string url, int count = 0)
@@ -82,10 +82,10 @@ namespace Trippism.Areas.Sabre.Controllers
                 prices = ServiceStackSerializer.DeSerialize<LeadPriceCalendarOutput>(result.Response);
                 LeadFare fares = new LeadFare();
                 fares.DestinationLocation = prices.DestinationLocation;
-                fares.OriginLocation = prices.DestinationLocation;
+                fares.OriginLocation = prices.OriginLocation;
                 fares.CurrencyCode = prices.FareInfo[0].CurrencyCode;
                 fares.Price = new List<Price>();
-                foreach( FareInfo info in prices.FareInfo)
+                foreach (FareInfo info in prices.FareInfo)
                 {
                     Price thisprice = new Price();
                     thisprice.LowestFare = info.LowestFare;
@@ -114,14 +114,14 @@ namespace Trippism.Areas.Sabre.Controllers
             return await Task.Run(() =>
             { return GetResponse(url); });
         }
-        
-        public string SabreLeadPriceUrl 
-        {  
+
+        public string SabreLeadPriceUrl
+        {
             get
             {
                 return ConfigurationManager.AppSettings["SabreLeadPriceUrl"];
             }
-        
+
         }
     }
 }
