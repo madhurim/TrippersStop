@@ -1,9 +1,5 @@
-﻿using AutoMapper;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Google.Request;
@@ -16,6 +12,7 @@ using System.Linq;
 using System.Configuration;
 using TraveLayer.CustomTypes.TripAdvisor.Request;
 using System.Text;
+using System.Collections.Generic;
 namespace Trippism.Areas.GooglePlace.Controllers
 {
     public class GooglePlaceController : ApiController
@@ -25,7 +22,21 @@ namespace Trippism.Areas.GooglePlace.Controllers
         ICacheService _cacheService;
         readonly ITripAdvisorAPIAsyncCaller _tripAdvisorApiCaller;
 
-        public GooglePlaceController(IAsyncGoogleAPICaller apiCaller, ICacheService cacheService)
+        private string APILocationUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["TripAdvisorLocationPropertiesUrl"];
+            }
+        }
+        private string APIAttractionsUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["TripAdvisorAttractionsUrl"];
+            }
+        }
+        public GooglePlaceController(IAsyncGoogleAPICaller apiCaller, ICacheService cacheService, ITripAdvisorAPIAsyncCaller tripAdvisorApiCaller)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;
@@ -67,12 +78,12 @@ namespace Trippism.Areas.GooglePlace.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 var attractions = ServiceStackSerializer.DeSerialize<TraveLayer.CustomTypes.TripAdvisor.Response.LocationInfo>(result.Response);
-                if (attractions != null && attractions.data != null && attractions.data.Count>0)
+                if (attractions != null && attractions.data != null && attractions.data.Count > 0)
                 {
-                    var location=attractions.data.FirstOrDefault();
-                   return GetLocationDetail(location.location_id);
+                    var location = attractions.data.FirstOrDefault();
+                    return GetLocationDetail(location.location_id);
                 }
-              
+
 
             }
             return ResponseMessage(new HttpResponseMessage(result.StatusCode));
@@ -86,9 +97,9 @@ namespace Trippism.Areas.GooglePlace.Controllers
             {
                 var locationDetail = ServiceStackSerializer.DeSerialize<TraveLayer.CustomTypes.TripAdvisor.Response.Datum>(result.Response);
                 var location = ExpressMapper.Mapper.Map<TraveLayer.CustomTypes.TripAdvisor.Response.Datum, TraveLayer.CustomTypes.TripAdvisor.ViewModels.Location>(locationDetail);
-               return Ok( location);
+                return Ok(location);
             }
-            return null;           
+            return null;
         }
 
         private string GetLocationApiURL(string locationId)
@@ -119,7 +130,6 @@ namespace Trippism.Areas.GooglePlace.Controllers
             _apiCaller.Accept = "application/json";
             _apiCaller.ContentType = "application/json";
 
-            //string strLatitudeandsLongitude = Latitude + "," + Longitude;
             string url = GetURL(locationsearch);
             //let's just get English language results
             url = url + "&language=en";
@@ -152,8 +162,7 @@ namespace Trippism.Areas.GooglePlace.Controllers
                 //Mapper.CreateMap<Photos, TraveLayer.CustomTypes.Google.ViewModels.Photos>();
 
                 TraveLayer.CustomTypes.Google.ViewModels.Google lstLocations = Mapper.Map<GoogleOutput, TraveLayer.CustomTypes.Google.ViewModels.Google>(googleplace);
-
-                if (string.IsNullOrWhiteSpace(locationsearch.NextPageToken))
+                if (lstLocations.results.Any())
                     _cacheService.Save<TraveLayer.CustomTypes.Google.ViewModels.Google>(cacheKey, lstLocations);
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lstLocations);
@@ -163,7 +172,6 @@ namespace Trippism.Areas.GooglePlace.Controllers
 
             return Request.CreateResponse(result.StatusCode, result.Response);
         }
-
         private static GoogleOutput CleanUpGoogleData(GoogleInput locationsearch, GoogleOutput googleplace)
         {
             List<results> results = new List<results>();
@@ -223,39 +231,7 @@ namespace Trippism.Areas.GooglePlace.Controllers
             if (!string.IsNullOrWhiteSpace(locationsearch.Types))
                 url += locationsearch.Types;
             if (!string.IsNullOrWhiteSpace(locationsearch.Keywords))
-            {
                 url += locationsearch.Keywords;
-                /* url += string.Format("&keyword={0}", locationsearch.Keywords);
-               
-                if (locationsearch.Keywords == "CARIBBEAN" || locationsearch.Keywords == "BEACH")
-                    url += string.Format("&keyword={0}", locationsearch.Keywords + "|BEACH|BEACHES|WATERSPORTS|SCUBA|SNORKELING");
-                else if (locationsearch.Keywords == "GAMBLING")
-                {
-                    url += string.Format("&keyword={0}", locationsearch.Keywords + "|GAMING|CASINO|CARDGAME");
-                }
-                else if (locationsearch.Keywords == "DISNEY")
-                {
-                    url += string.Format("&keyword={0}", locationsearch.Keywords + "|DISNEY|FUNPARK|MICKEYMOUSE|CARNIVAL|FUNFAIR|PLEASUREGROUND|SAFARIPARK|THEMEPARK|WATERPARK");
-                }
-                else if (locationsearch.Keywords == "HISTORIC")
-                {
-                    url += string.Format("&keyword={0}", locationsearch.Keywords + "|MONUMENTS|FORT|HERITAGE|PYRAMIDS|CAVES|PALACE");
-                }
-                else if (locationsearch.Keywords == "NATIONAL-PARKS" || locationsearch.Keywords == "THEME-PARK")
-                {
-                    url += string.Format("&keyword={0}", locationsearch.Keywords + "|FUNPARK|MICKEYMOUSE|CARNIVAL|FUNFAIR|PLEASUREGROUND|SAFARIPARK|THEMEPARK|WATERPARK");
-                }
-                else if (locationsearch.Keywords == "MOUNTAINS" )
-                {
-                    url += string.Format("&keyword={0}", locationsearch.Keywords + "|HILLSTATION|TREKKING|SKIING|WATERRAFTING|WATERSPORTS|RIVERSPORTS|SNOWSPORTS|HELISKIING");
-                }
-                else
-                {
-                    url += string.Format("&keyword={0}", locationsearch.Keywords);
-                }
-                 */
-            }
-
             return url;
         }
     }

@@ -274,6 +274,7 @@
     <Compile Include="Areas\Sabre\Controllers\AirportsAtCitiesController.cs" />
     <Compile Include="Areas\Sabre\Controllers\CityPairsController.cs" />
     <Compile Include="Areas\Sabre\Controllers\CountriesController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\DestinationController.cs" />
     <Compile Include="Areas\Sabre\Controllers\DestinationsController.cs" />
     <Compile Include="Areas\Sabre\Controllers\FareRangeController.cs" />
     <Compile Include="Areas\Sabre\Controllers\InstaFlightSearchController.cs" />
@@ -401,10 +402,8 @@
     <Content Include="Constants\CurrencySymbols_Ori.json" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Content Include="Constants\airports_highranked.json" />
     <Content Include="Constants\airlines_downsized.json" />
-=======
     <Content Include="Areas\TripAdvisor\Views\web.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -414,7 +413,6 @@
     <Content Include="Areas\Attraction\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Attraction\Views\TripAdvisor\Display.cshtml" />
     <Content Include="Areas\Attraction\Views\TripAdvisor\Index.cshtml" />
->>>>>>> feature/TripAdvisor
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

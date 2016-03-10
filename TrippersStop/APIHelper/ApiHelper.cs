@@ -148,6 +148,7 @@ namespace TrippismApi
 
             Mapper.Register<OTA_DestinationFinder, Fares>();
             Mapper.Register<OTA_FareRange, VM.FareRange>();
+            Mapper.Register<FareData, VM.RecentlyPaid>();
             Mapper.Register<OTA_TravelSeasonality, VM.TravelSeasonality>();
             Mapper.Register<OTA_LowFareForecast, LowFareForecast>();
             Mapper.Register<TempHigh, TempHighAvg>()
