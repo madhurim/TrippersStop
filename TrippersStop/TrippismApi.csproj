@@ -290,6 +290,7 @@
     <Compile Include="Areas\Sabre\Controllers\BargainFinderController.cs" />
     <Compile Include="Areas\Sabre\Controllers\FareForecastController.cs" />
     <Compile Include="Areas\Sabre\Controllers\TopDestinationsController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\InsightsController.cs" />
     <Compile Include="Areas\Sabre\SabreAreaRegistration.cs" />
     <Compile Include="APIExtention\AreaRegistrationContextExtensions.cs" />
     <Compile Include="Areas\TripAdvisor\Controllers\LocationController.cs" />
@@ -312,8 +313,6 @@
   <ItemGroup>
     <Content Include="App_Data\XmlDocument.xml" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="Content\Site.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Sabre\Views\Web.config" />
     <Content Include="Areas\IATA\Views\Web.config" />
@@ -343,8 +342,6 @@
     <Content Include="NLog.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="UrlSettings.config" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -405,9 +402,6 @@
     <Content Include="Constants\airports_highranked.json" />
     <Content Include="Constants\airlines_downsized.json" />
     <Content Include="Areas\TripAdvisor\Views\web.config" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Areas\Attraction\Views\web.config" />
     <Content Include="Areas\Attraction\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Attraction\Views\_ViewStart.cshtml" />

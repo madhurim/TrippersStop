@@ -650,21 +650,6 @@
             Filters the response for destinations in the country or countries you specify
             </summary>
         </member>
-        <member name="M:TrippismApi.Areas.Sabre.Controllers.DestinationsController.Insights(TraveLayer.CustomTypes.Sabre.ViewModels.TripInput)">
-            <summary>
-            Filters the response for destinations in the country or countries you specify
-            </summary>
-        </member>
-        <member name="M:TrippismApi.Areas.Sabre.Controllers.DestinationsController.Fares(TraveLayer.CustomTypes.Sabre.ViewModels.TravelInfo)">
-            <summary>
-            Fet farerange and fare forcast based on dates and destinations
-            </summary>
-        </member>
-        <member name="M:TrippismApi.Areas.Sabre.Controllers.DestinationsController.GetSeasonalWeather(TraveLayer.CustomTypes.Sabre.ViewModels.TripInput)">
-            <summary>
-            Filters the response for destinations in the country or countries you specify
-            </summary>
-        </member>
         <member name="M:TrippismApi.Areas.Sabre.Controllers.DestinationsController.GetURL(TraveLayer.CustomTypes.Sabre.ViewModels.Destinations)">
             <summary>
             Format url based on request.
@@ -902,6 +887,22 @@
         <member name="M:TrippismApi.Areas.Sabre.Controllers.TopDestinationsController.GetResponse(System.String)">
             <summary>
             Get response from api based on url.
+            </summary>
+        </member>
+        <member name="F:TrippismApi.Areas.Sabre.Controllers.InsightsController._apiCaller">
+            <summary>
+            Set api class and cache service.
+            </summary>
+            
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.InsightsController.Insights(TraveLayer.CustomTypes.Sabre.ViewModels.TripInput)">
+            <summary>
+            Filters the response for destinations in the country or countries you specify
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.InsightsController.Fares(TraveLayer.CustomTypes.Sabre.ViewModels.TravelInfo)">
+            <summary>
+            Fet farerange and fare forcast based on dates and destinations
             </summary>
         </member>
         <member name="T:Trippism.Areas.TripAdvisor.Controllers.LocationController">
