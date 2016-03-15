@@ -295,6 +295,8 @@
     <Compile Include="Areas\TripAdvisor\Controllers\RestaurantsController.cs" />
     <Compile Include="Areas\TripAdvisor\TripAdvisorAreaRegistration.cs" />
     <Compile Include="Areas\Weather\StaticMethods\WeatherAPIResponse.cs" />
+    <Compile Include="Areas\Yelp\Controllers\YelpController.cs" />
+    <Compile Include="Areas\Yelp\YelpAreaRegistration.cs" />
     <Compile Include="Areas\YouTube\Controllers\YouTubeController.cs" />
     <Compile Include="Areas\YouTube\YouTubeAreaRegistration.cs" />
     <Compile Include="Controllers\Email\EmailController.cs" />
@@ -364,6 +366,8 @@
     <Folder Include="Areas\TripAdvisor\Views\Shared\" />
     <Folder Include="Areas\Weather\Models\" />
     <Folder Include="Areas\Weather\Views\Shared\" />
+    <Folder Include="Areas\Yelp\Models\" />
+    <Folder Include="Areas\Yelp\Views\Shared\" />
     <Folder Include="Areas\YouTube\Models\" />
     <Folder Include="Areas\YouTube\Views\Shared\" />
     <Folder Include="Models\" />
@@ -395,12 +399,7 @@
     <Content Include="Constants\CurrencySymbols_Ori.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Constants\airports_highranked.json" />
-    <Content Include="Constants\airlines_downsized.json" />
-    <Content Include="Areas\TripAdvisor\Views\web.config" />
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <Content Include="Areas\Yelp\Views\web.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

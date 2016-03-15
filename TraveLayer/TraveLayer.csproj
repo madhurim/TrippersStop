@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommandLine">
+      <HintPath>bin\CommandLine.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -48,6 +51,16 @@
     <Reference Include="MongoDB.Driver.Legacy">
       <HintPath>..\packages\mongocsharpdriver.2.0.0\lib\net45\MongoDB.Driver.Legacy.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.JsonResult">
+      <HintPath>bin\Newtonsoft.JsonResult.dll</HintPath>
+    </Reference>
+    <Reference Include="OAuth">
+      <HintPath>bin\OAuth.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
@@ -61,6 +74,9 @@
     </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleOAuth">
+      <HintPath>bin\SimpleOAuth.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -110,11 +126,13 @@
     <Compile Include="APIServices\ITripAdvisorAPIAsyncCaller.cs" />
     <Compile Include="APIServices\IAsyncWeatherAPICaller.cs" />
     <Compile Include="APIServices\IAsyncSabreAPICaller.cs" />
+    <Compile Include="APIServices\IAsyncYelpAPICaller.cs" />
     <Compile Include="APIServices\IAsyncYouTubeAPICaller.cs" />
     <Compile Include="APIServices\SabreAPICaller.cs" />
     <Compile Include="APIServices\ServiceStackSerializer.cs" />
     <Compile Include="APIServices\TripAdvisorAPICaller.cs" />
     <Compile Include="APIServices\WeatherAPICaller.cs" />
+    <Compile Include="APIServices\YelpAPICaller.cs" />
     <Compile Include="APIServices\YouTubeAPICaller.cs" />
     <Compile Include="CacheServices\MemoryCacheService.cs" />
     <Compile Include="CustomTypes\Constants\Response\Airlines.cs" />
@@ -217,6 +235,9 @@
     <Compile Include="CustomTypes\Weather\Request\InternationalWeatherInput.cs" />
     <Compile Include="CustomTypes\Weather\Response\HistoryOutput.cs" />
     <Compile Include="CustomTypes\Weather\ViewModels\TripWeather.cs" />
+    <Compile Include="CustomTypes\Yelp\Request\YelpInput.cs" />
+    <Compile Include="CustomTypes\Yelp\Response\YelpOutput.cs" />
+    <Compile Include="CustomTypes\Yelp\ViewModels\Yelp.cs" />
     <Compile Include="CustomTypes\YouTube\Request\YouTubeInput.cs" />
     <Compile Include="CustomTypes\YouTube\Response\YouTubeOutput.cs" />
     <Compile Include="CustomTypes\YouTube\ViewModels\YouTube.cs" />

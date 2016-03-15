@@ -50,6 +50,7 @@ namespace TrippismApi
             //container.RegisterWebApiRequest<IDBService, MongoService>();
             container.RegisterWebApiRequest<IAsyncGoogleAPICaller, GoogleAPICaller>();
             container.RegisterWebApiRequest<IAsyncGoogleReverseLookupAPICaller, GoogleReverseLookupAPICaller>();
+            container.RegisterWebApiRequest<IAsyncYelpAPICaller, YelpAPICaller>();
 
             container.RegisterWebApiRequest<IAsyncYouTubeAPICaller, YouTubeAPICaller>();
             container.RegisterWebApiRequest<ITripAdvisorAPIAsyncCaller, TripAdvisorAPICaller>();
