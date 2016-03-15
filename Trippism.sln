@@ -1,15 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrippismApi", "TrippersStop\TrippismApi.csproj", "{0B9A31F4-4AD2-4BA0-A265-F24F97F1159D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrippismApi.Tests", "TrippersStop.Tests\TrippismApi.Tests.csproj", "{433A9777-2DE8-446B-A944-233993DA4833}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraveLayer", "TraveLayer\TraveLayer.csproj", "{C5BAAB69-8D1D-4402-9573-4B6F2939B7EF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrippismUI", "TrippismUI\TrippismUI.csproj", "{B01EA087-5828-4FFE-9226-1BC14884F180}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{765AD6B1-B668-438D-8264-788C4A1F6EF3}"
 EndProject
@@ -32,18 +28,10 @@ Global
 		{0B9A31F4-4AD2-4BA0-A265-F24F97F1159D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B9A31F4-4AD2-4BA0-A265-F24F97F1159D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B9A31F4-4AD2-4BA0-A265-F24F97F1159D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{433A9777-2DE8-446B-A944-233993DA4833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{433A9777-2DE8-446B-A944-233993DA4833}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{433A9777-2DE8-446B-A944-233993DA4833}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{433A9777-2DE8-446B-A944-233993DA4833}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C5BAAB69-8D1D-4402-9573-4B6F2939B7EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C5BAAB69-8D1D-4402-9573-4B6F2939B7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5BAAB69-8D1D-4402-9573-4B6F2939B7EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5BAAB69-8D1D-4402-9573-4B6F2939B7EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B01EA087-5828-4FFE-9226-1BC14884F180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B01EA087-5828-4FFE-9226-1BC14884F180}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B01EA087-5828-4FFE-9226-1BC14884F180}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B01EA087-5828-4FFE-9226-1BC14884F180}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14B3909B-3036-4A7C-BC81-E56941952B43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{14B3909B-3036-4A7C-BC81-E56941952B43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14B3909B-3036-4A7C-BC81-E56941952B43}.Release|Any CPU.ActiveCfg = Release|Any CPU
