@@ -582,37 +582,6 @@
             Get response from api based on url.
             </summary>
         </member>
-        <member name="F:TrippismApi.Areas.Sabre.Controllers.DestinationController._apiCaller">
-            <summary>
-            Set api class and cache service.
-            </summary>
-            
-        </member>
-        <member name="M:TrippismApi.Areas.Sabre.Controllers.DestinationController.Insights(TraveLayer.CustomTypes.Sabre.ViewModels.TripInput)">
-            <summary>
-            Filters the response for destinations in the country or countries you specify
-            </summary>
-        </member>
-        <member name="M:TrippismApi.Areas.Sabre.Controllers.DestinationController.Fares(TraveLayer.CustomTypes.Sabre.ViewModels.TravelInfo)">
-            <summary>
-            Fet farerange and fare forcast based on dates and destinations
-            </summary>
-        </member>
-        <member name="M:TrippismApi.Areas.Sabre.Controllers.DestinationController.GetSeasonalWeather(TraveLayer.CustomTypes.Sabre.ViewModels.TripInput)">
-            <summary>
-            Filters the response for destinations in the country or countries you specify
-            </summary>
-        </member>
-        <member name="M:TrippismApi.Areas.Sabre.Controllers.DestinationController.GetURL(TraveLayer.CustomTypes.Sabre.ViewModels.Destinations)">
-            <summary>
-            Format url based on request.
-            </summary>
-        </member>
-        <member name="M:TrippismApi.Areas.Sabre.Controllers.DestinationController.GetResponse(System.String,System.Int32)">
-            <summary>
-            Get response from api based on url.
-            </summary>
-        </member>
         <member name="T:TrippismApi.Areas.Sabre.Controllers.DestinationsController">
             <summary>
             Return the current nonstop lead fare and an overall lead fare available to destinations
