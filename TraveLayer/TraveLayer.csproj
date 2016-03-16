@@ -151,6 +151,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CustomTypes\Sabre\Request\InstaFlightSearchInput.cs" />
+    <Compile Include="CustomTypes\Sabre\Request\LeadPrIceCalendarInput.cs" />
     <Compile Include="CustomTypes\Sabre\Response\APIResponse.cs" />
     <Compile Include="CustomTypes\Sabre\Response\BargainFinder.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\AdvancedCalendar.cs" />
@@ -163,9 +164,11 @@
     <Compile Include="CustomTypes\Sabre\ViewModels\Destinations.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\FareForecast.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\InstaFlightSearch.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\LeadFare.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\LowFareForecast.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\MultiAirportCity.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\PointofSaleCountryCode.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\Price.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\ThemeAirport.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TopDestination.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TravelInfo.cs" />
