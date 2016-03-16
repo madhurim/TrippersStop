@@ -399,7 +399,16 @@
     <Content Include="Constants\CurrencySymbols_Ori.json" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <Content Include="Constants\airports_highranked.json" />
+    <Content Include="Constants\airlines_downsized.json" />
+    <Content Include="Areas\TripAdvisor\Views\web.config" />
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+=======
     <Content Include="Areas\Yelp\Views\web.config" />
+>>>>>>> feature/YelpAttraction#44
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
