@@ -54,5 +54,6 @@ namespace TrippismTests
             Assert.Equal("US", outPut.CurrencyCode);
 
         }
+
     }
 }
