@@ -6,13 +6,13 @@ using TraveLayer.CustomTypes.Google.Request;
 using TraveLayer.CustomTypes.Google.Response;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TrippismApi.TraveLayer;
-using AutoMapper;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Configuration;
 using TraveLayer.CustomTypes.TripAdvisor.Request;
 using System.Text;
 using System.Collections.Generic;
+using ExpressMapper;
 namespace Trippism.Areas.GooglePlace.Controllers
 {
     public class GooglePlaceController : ApiController
@@ -96,7 +96,7 @@ namespace Trippism.Areas.GooglePlace.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 var locationDetail = ServiceStackSerializer.DeSerialize<TraveLayer.CustomTypes.TripAdvisor.Response.Datum>(result.Response);
-                var location = ExpressMapper.Mapper.Map<TraveLayer.CustomTypes.TripAdvisor.Response.Datum, TraveLayer.CustomTypes.TripAdvisor.ViewModels.Location>(locationDetail);
+                var location = Mapper.Map<TraveLayer.CustomTypes.TripAdvisor.Response.Datum, TraveLayer.CustomTypes.TripAdvisor.ViewModels.Location>(locationDetail);
                 return Ok(location);
             }
             return null;
@@ -155,10 +155,10 @@ namespace Trippism.Areas.GooglePlace.Controllers
                 //Keyword=Beach : the name in the result should have "beach" , "resort" or "resorts"
                 googleplace = CleanUpGoogleData(locationsearch, googleplace);
 
-                Mapper.CreateMap<GoogleOutput, TraveLayer.CustomTypes.Google.ViewModels.Google>();
-                Mapper.CreateMap<results, TraveLayer.CustomTypes.Google.ViewModels.results>();
-                Mapper.CreateMap<Geometry, TraveLayer.CustomTypes.Google.ViewModels.Geometry>();
-                Mapper.CreateMap<Location, TraveLayer.CustomTypes.Google.ViewModels.Location>();
+                //Mapper.CreateMap<GoogleOutput, TraveLayer.CustomTypes.Google.ViewModels.Google>();
+                //Mapper.CreateMap<results, TraveLayer.CustomTypes.Google.ViewModels.results>();
+                //Mapper.CreateMap<Geometry, TraveLayer.CustomTypes.Google.ViewModels.Geometry>();
+                //Mapper.CreateMap<Location, TraveLayer.CustomTypes.Google.ViewModels.Location>();
                 //Mapper.CreateMap<Photos, TraveLayer.CustomTypes.Google.ViewModels.Photos>();
 
                 TraveLayer.CustomTypes.Google.ViewModels.Google lstLocations = Mapper.Map<GoogleOutput, TraveLayer.CustomTypes.Google.ViewModels.Google>(googleplace);

@@ -8,9 +8,11 @@ using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Constants.ViewModels;
 using TraveLayer.CustomTypes.Constants.Response;
 using System.Linq;
-using TAVM=TraveLayer.CustomTypes.TripAdvisor.ViewModels;
-using RS=TraveLayer.CustomTypes.TripAdvisor.Response;
+using TAVM = TraveLayer.CustomTypes.TripAdvisor.ViewModels;
+using RS = TraveLayer.CustomTypes.TripAdvisor.Response;
 using Trippism.APIHelper;
+using TraveLayer.CustomTypes.Google.Response;
+using TGV = TraveLayer.CustomTypes.Google.ViewModels;
 
 namespace TrippismApi
 {
@@ -161,6 +163,15 @@ namespace TrippismApi
             .Member(h => h.CloudCover, m => m.cloud_cover);
             Mapper.Register<CurrencySymbols, CurrencySymbolsViewModel>()
                 .Member(h => h.Currency, m => m.Currencies.Currency);
+
+            Mapper.Register<GoogleOutput, TGV.Google>();
+            Mapper.Register<results, TGV.results>();
+            Mapper.Register<Geometry, TGV.Geometry>();
+            Mapper.Register<Location, TGV.Location>();
+
+            Mapper.Register<BargainFinderReponse, LowFareSearch>()
+                 .Member(h => h.AirLowFareSearchRS, m => m.OTA_AirLowFareSearchRS); ;
+
             Mapper.Compile();
         }
 
@@ -211,7 +222,7 @@ namespace TrippismApi
              .Member(h => h.UserName, m => m.username);
 
 
-          
+
 
             Mapper.Register<RS.Award, TAVM.Award>()
                .Member(h => h.AwardType, m => m.award_type)
@@ -258,7 +269,7 @@ namespace TrippismApi
                 .Member(h => h.Latitude, m => m.latitude)
                 .Member(h => h.Rating, m => m.rating)
                 .Member(h => h.LocationId, m => m.location_id)
-                .Member(h => h.Ranking, m => m.ranking_data)      
+                .Member(h => h.Ranking, m => m.ranking_data)
                 .Member(h => h.Location, m => m.location_string)
                 .Member(h => h.WebUrl, m => m.web_url)
                 .Member(h => h.PriceLevel, m => m.price_level)

@@ -7,7 +7,6 @@ using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre;
 using TrippismApi.TraveLayer;
 using ServiceStack;
-using AutoMapper;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
@@ -18,13 +17,14 @@ using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
 using Trippism.APIExtention.Filters;
 using System.Configuration;
+using ExpressMapper;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
     /// <summary>
     /// Search for the lowest available priced itineraries based upon a travel date
     /// </summary>
-     [GZipCompressionFilter]
+    [GZipCompressionFilter]
     public class BargainFinderController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
@@ -42,7 +42,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         public BargainFinderController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
-            _cacheService = cacheService;          
+            _cacheService = cacheService;
         }
         // POST api/bargainfinder
         /// <summary>
@@ -52,8 +52,8 @@ namespace TrippismApi.Areas.Sabre.Controllers
         public HttpResponseMessage Post(BargainFinder bargainFinder)
         {
             var pos = GetPOS();
-            if (bargainFinder != null && bargainFinder.OTA_AirLowFareSearchRQ!=null && pos != null)
-            bargainFinder.OTA_AirLowFareSearchRQ.POS = pos;
+            if (bargainFinder != null && bargainFinder.OTA_AirLowFareSearchRQ != null && pos != null)
+                bargainFinder.OTA_AirLowFareSearchRQ.POS = pos;
             //TBD : URL configurable using XML
             ApiHelper.SetApiToken(_apiCaller, _cacheService);
 
@@ -69,7 +69,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, bargainResponse);
                 return response;
             }
-            return Request.CreateResponse(result.StatusCode, result.Response); 
+            return Request.CreateResponse(result.StatusCode, result.Response);
         }
         /// <summary>
         /// Get Point of sale settings from config
@@ -79,14 +79,14 @@ namespace TrippismApi.Areas.Sabre.Controllers
             XElement xelement = XElement.Load(HostingEnvironment.MapPath("/Areas/Sabre/POS/PointOfSales.xml"));
 
             IEnumerable<XElement> ps = xelement.Elements("POS")
-                   .Where(x => x.Attribute("IsActive").Value == "true" && x.Attribute("RequestType").Value == "BargainFinder"); 
+                   .Where(x => x.Attribute("IsActive").Value == "true" && x.Attribute("RequestType").Value == "BargainFinder");
             if (ps != null)
             {
                 POS pos = new POS()
                 {
                     Source = new List<Source>()
                 };
-                foreach(XElement p in ps)
+                foreach (XElement p in ps)
                 {
                     pos.Source.Add(new Source()
                     {
@@ -101,7 +101,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
                         }
                     });
                 }
-             
+
                 return pos;
             }
             return null;
@@ -113,8 +113,8 @@ namespace TrippismApi.Areas.Sabre.Controllers
         {
             BargainFinderReponse reponse = new BargainFinderReponse();
             reponse = ServiceStackSerializer.DeSerialize<BargainFinderReponse>(result);
-            Mapper.CreateMap<BargainFinderReponse, LowFareSearch>()
-                    .ForMember(o => o.AirLowFareSearchRS, m => m.MapFrom(s => s.OTA_AirLowFareSearchRS));
+            //Mapper.CreateMap<BargainFinderReponse, LowFareSearch>()
+            //        .ForMember(o => o.AirLowFareSearchRS, m => m.MapFrom(s => s.OTA_AirLowFareSearchRS));
             LowFareSearch lowFareSearch = Mapper.Map<BargainFinderReponse, LowFareSearch>(reponse);
             return lowFareSearch;
         }
