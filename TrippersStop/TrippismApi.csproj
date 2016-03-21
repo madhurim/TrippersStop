@@ -228,7 +228,7 @@
     <Compile Include="Areas\Constants\Controllers\ConstantsController.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleController.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleGeoCodeController.cs" />
- <Compile Include="Areas\Google\Controllers\GooglePlaceDetailsController.cs" />
+    <Compile Include="Areas\Google\Controllers\GooglePlaceDetailsController.cs" />
     <Compile Include="Areas\Google\GoogleAreaRegistration.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -395,6 +395,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Yelp\Views\web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Constants\airports_highranked.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
