@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -12,12 +10,8 @@ using TraveLayer.CustomTypes.Sabre.Response;
 using System.Configuration;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
-using TraveLayer.CustomTypes.Weather;
-using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
-using Trippism.APIHelper;
 using ExpressMapper;
 using Trippism.APIExtention.Filters;
-using NLog;
 namespace TrippismApi.Areas.Sabre.Controllers
 {
     /// <summary>

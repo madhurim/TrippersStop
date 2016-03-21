@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
+﻿using ExpressMapper;
 using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -12,7 +9,6 @@ using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using Trippism.APIExtention.Filters;
 using TrippismApi.TraveLayer;
-using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
@@ -71,9 +67,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         private LowFareSearch DeSerializeResponse(string result)
         {
             BargainFinderReponse reponse = new BargainFinderReponse();
-            reponse = ServiceStackSerializer.DeSerialize<BargainFinderReponse>(result);
-            Mapper.CreateMap<BargainFinderReponse, LowFareSearch>()
-                    .ForMember(o => o.AirLowFareSearchRS, m => m.MapFrom(s => s.OTA_AirLowFareSearchRS));
+            reponse = ServiceStackSerializer.DeSerialize<BargainFinderReponse>(result);            
             LowFareSearch lowFareSearch = Mapper.Map<BargainFinderReponse, LowFareSearch>(reponse);
             return lowFareSearch;
         }

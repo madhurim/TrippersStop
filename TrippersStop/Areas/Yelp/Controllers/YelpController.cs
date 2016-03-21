@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using System.Collections.Generic;
+﻿using ExpressMapper;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -50,14 +49,6 @@ namespace Trippism.Areas.Yelp.Controllers
             {
                 YelpOutput yelp = new YelpOutput();
                 yelp = ServiceStackSerializer.DeSerialize<YelpOutput>(result.Response);
-
-                Mapper.CreateMap<YelpOutput, TraveLayer.CustomTypes.Yelp.ViewModels.Yelp>();
-                Mapper.CreateMap<Businesses, TraveLayer.CustomTypes.Yelp.ViewModels.Businesses>();
-                Mapper.CreateMap<Location, TraveLayer.CustomTypes.Yelp.ViewModels.Location>();
-                Mapper.CreateMap<Region, TraveLayer.CustomTypes.Yelp.ViewModels.Region>();
-                Mapper.CreateMap<Span, TraveLayer.CustomTypes.Yelp.ViewModels.Span>();
-                Mapper.CreateMap<Center, TraveLayer.CustomTypes.Yelp.ViewModels.Center>();
-
                 TraveLayer.CustomTypes.Yelp.ViewModels.Yelp lstLocations = Mapper.Map<YelpOutput, TraveLayer.CustomTypes.Yelp.ViewModels.Yelp>(yelp);
                 _cacheService.Save<TraveLayer.CustomTypes.Yelp.ViewModels.Yelp>(cacheKey, lstLocations);
 

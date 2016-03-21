@@ -1,6 +1,4 @@
-﻿using DataLayer.Entities;
-using DataLayer.Repositories;
-using ExpressMapper;
+﻿using ExpressMapper;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;

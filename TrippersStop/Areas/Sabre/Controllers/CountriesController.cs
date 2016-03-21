@@ -1,13 +1,9 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
+﻿using ExpressMapper;
 using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using TraveLayer;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
@@ -79,8 +75,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 OTA_CountriesLookup cities = new OTA_CountriesLookup();
-                cities = ServiceStackSerializer.DeSerialize<OTA_CountriesLookup>(result.Response);
-                Mapper.CreateMap<OTA_CountriesLookup, Countries>();
+                cities = ServiceStackSerializer.DeSerialize<OTA_CountriesLookup>(result.Response);                
                 Countries countries = Mapper.Map<OTA_CountriesLookup, Countries>(cities);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, countries);
                 return response;
