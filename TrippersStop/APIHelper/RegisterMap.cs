@@ -50,7 +50,7 @@ namespace Trippism.APIHelper
             Mapper.Register<OTA_ThemeAirportLookup, ThemeAirport>();
             Mapper.Register<TopDestinations, TopDestination>();
             Mapper.Register<OTA_TravelThemeLookup, TravelTheme>();
-            
+
             Mapper.Register<YelpOutput, TraveLayer.CustomTypes.Yelp.ViewModels.Yelp>();
             Mapper.Register<Businesses, TraveLayer.CustomTypes.Yelp.ViewModels.Businesses>();
             Mapper.Register<TraveLayer.CustomTypes.Yelp.Response.Location, TraveLayer.CustomTypes.Yelp.ViewModels.Location>();
@@ -67,6 +67,12 @@ namespace Trippism.APIHelper
             Mapper.Register<Medium, TraveLayer.CustomTypes.YouTube.ViewModels.Medium>();
             Mapper.Register<High, TraveLayer.CustomTypes.YouTube.ViewModels.High>();
             Mapper.Register<pageInfo, TraveLayer.CustomTypes.YouTube.ViewModels.pageInfo>();
+
+            Mapper.Register<GooglePlaceDetailsOutput, TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceDetails>();
+            Mapper.Register<GooglePlaceresults, TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceresults>();
+            Mapper.Register<GooglePlaceGeometry, TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceGeometry>();
+            Mapper.Register<GooglePlaceLocation, TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceLocation>();
+            Mapper.Register<GooglePlacePhotos, TraveLayer.CustomTypes.Google.ViewModels.GooglePlacePhotos>();
 
             Mapper.Compile();
         }

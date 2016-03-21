@@ -8,15 +8,20 @@ namespace TraveLayer.CustomTypes.Google.ViewModels
 {
     public class GooglePlaceDetails
     {
-        public List<GooglePlaceresults> result = new List<GooglePlaceresults>();
+        public GooglePlaceDetails()
+        {
+            result = new List<GooglePlaceresults>();
+        }
+        public List<GooglePlaceresults> result { get; set; }
     }
 
     public class GooglePlaceresults
     {
-        public GooglePlaceresults() {
+        public GooglePlaceresults()
+        {
             photos = new List<GooglePlacePhotos>();
         }
-        
+
         public string adr_address { get; set; }
         public string formatted_address { get; set; }
         public string formatted_phone_number { get; set; }

@@ -5,11 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TrippismApi.TraveLayer;
-using AutoMapper;
 using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Google.Request;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TraveLayer.CustomTypes.Google.Response;
+using ExpressMapper;
 
 namespace Trippism.Areas.Google.Controllers
 {
@@ -33,11 +33,11 @@ namespace Trippism.Areas.Google.Controllers
         {
             string cacheKey = TrippismKey + string.Join(".", locationsearch.PlaceId);
             var tripGooglePlace = _cacheService.GetByKey<TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceDetails>(cacheKey);
-            if (tripGooglePlace != null && tripGooglePlace.result.Count > 0 )
+            if (tripGooglePlace != null && tripGooglePlace.result.Count > 0)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, tripGooglePlace);
             }
-            return GetResponse(locationsearch.PlaceId,cacheKey);
+            return GetResponse(locationsearch.PlaceId, cacheKey);
         }
 
         private HttpResponseMessage GetResponse(string PlaceId, string cacheKey)
@@ -51,12 +51,6 @@ namespace Trippism.Areas.Google.Controllers
             {
                 GooglePlaceDetailsOutput googleplace = new GooglePlaceDetailsOutput();
                 googleplace = ServiceStackSerializer.DeSerialize<GooglePlaceDetailsOutput>(result.Response);
-
-                Mapper.CreateMap<GooglePlaceDetailsOutput, TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceDetails>();
-                Mapper.CreateMap<GooglePlaceresults, TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceresults>();
-                Mapper.CreateMap<GooglePlaceGeometry, TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceGeometry>();
-                Mapper.CreateMap<GooglePlaceLocation, TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceLocation>();
-                Mapper.CreateMap<GooglePlacePhotos, TraveLayer.CustomTypes.Google.ViewModels.GooglePlacePhotos>();
 
                 TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceDetails lstLocations = Mapper.Map<GooglePlaceDetailsOutput, TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceDetails>(googleplace);
 
