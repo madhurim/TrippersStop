@@ -107,9 +107,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         private LowFareSearch DeSerializeResponse(string result)
         {
             BargainFinderReponse reponse = new BargainFinderReponse();
-            reponse = ServiceStackSerializer.DeSerialize<BargainFinderReponse>(result);
-            //Mapper.CreateMap<BargainFinderReponse, LowFareSearch>()
-            //        .ForMember(o => o.AirLowFareSearchRS, m => m.MapFrom(s => s.OTA_AirLowFareSearchRS));
+            reponse = ServiceStackSerializer.DeSerialize<BargainFinderReponse>(result);            
             LowFareSearch lowFareSearch = Mapper.Map<BargainFinderReponse, LowFareSearch>(reponse);
             return lowFareSearch;
         }

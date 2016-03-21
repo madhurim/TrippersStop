@@ -154,13 +154,7 @@ namespace Trippism.Areas.GooglePlace.Controllers
                 //Filter : the types returned by Google should have the types in the request                
                 //Keyword=Beach : the name in the result should have "beach" , "resort" or "resorts"
                 googleplace = CleanUpGoogleData(locationsearch, googleplace);
-
-                //Mapper.CreateMap<GoogleOutput, TraveLayer.CustomTypes.Google.ViewModels.Google>();
-                //Mapper.CreateMap<results, TraveLayer.CustomTypes.Google.ViewModels.results>();
-                //Mapper.CreateMap<Geometry, TraveLayer.CustomTypes.Google.ViewModels.Geometry>();
-                //Mapper.CreateMap<Location, TraveLayer.CustomTypes.Google.ViewModels.Location>();
-                //Mapper.CreateMap<Photos, TraveLayer.CustomTypes.Google.ViewModels.Photos>();
-
+                
                 TraveLayer.CustomTypes.Google.ViewModels.Google lstLocations = Mapper.Map<GoogleOutput, TraveLayer.CustomTypes.Google.ViewModels.Google>(googleplace);
                 if (lstLocations.results.Any())
                     _cacheService.Save<TraveLayer.CustomTypes.Google.ViewModels.Google>(cacheKey, lstLocations);

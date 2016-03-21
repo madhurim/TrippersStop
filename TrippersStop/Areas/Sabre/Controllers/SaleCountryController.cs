@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using ExpressMapper;
 using System.Configuration;
 using System.Net;
 using System.Net.Http;
@@ -60,8 +60,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 OTA_PointofSaleCountryCodeLookup countryCodes = new OTA_PointofSaleCountryCodeLookup();
-                countryCodes = ServiceStackSerializer.DeSerialize<OTA_PointofSaleCountryCodeLookup>(result.Response);
-                Mapper.CreateMap<OTA_PointofSaleCountryCodeLookup, PointofSaleCountryCode>();
+                countryCodes = ServiceStackSerializer.DeSerialize<OTA_PointofSaleCountryCodeLookup>(result.Response);                
                 PointofSaleCountryCode pointofSaleCountryCode = Mapper.Map<OTA_PointofSaleCountryCodeLookup, PointofSaleCountryCode>(countryCodes);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, pointofSaleCountryCode);
                 return response;

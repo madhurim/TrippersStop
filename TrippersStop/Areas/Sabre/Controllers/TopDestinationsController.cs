@@ -3,12 +3,12 @@ using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre;
 using TrippismApi.TraveLayer;
-using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
 using Trippism.APIExtention.Filters;
 using System.Configuration;
+using ExpressMapper;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
@@ -135,8 +135,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 TopDestinations destinations = new TopDestinations();
-                destinations = ServiceStackSerializer.DeSerialize<TopDestinations>(result.Response);
-                Mapper.CreateMap<TopDestinations, TopDestination>();
+                destinations = ServiceStackSerializer.DeSerialize<TopDestinations>(result.Response);                
                 TopDestination topDestinations = Mapper.Map<TopDestinations, TopDestination>(destinations);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, topDestinations);
                 return response;

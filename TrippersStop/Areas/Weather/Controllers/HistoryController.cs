@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using ExpressMapper;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -97,15 +97,7 @@ namespace Trippism.Areas.Weather.Controllers
             weather = ServiceStackSerializer.DeSerialize<HistoryOutput>(Response);
             if (weather != null && weather.trip != null)
             {
-                Trip trip = weather.trip;
-                Mapper.CreateMap<Trip, TripWeather>()
-                   .ForMember(h => h.TempHighAvg, m => m.MapFrom(s => s.temp_high))
-                   .ForMember(h => h.TempLowAvg, m => m.MapFrom(s => s.temp_low))
-                   .ForMember(h => h.CloudCover, m => m.MapFrom(s => s.cloud_cover));
-                Mapper.CreateMap<TempHigh, TempHighAvg>()
-                    .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
-                Mapper.CreateMap<TempLow, TempLowAvg>()
-                   .ForMember(h => h.Avg, m => m.MapFrom(s => s.avg));
+                Trip trip = weather.trip;                
                 TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(trip);
                 tripWeather.WeatherChances = new List<WeatherChance>();
                 if (trip.chance_of != null)

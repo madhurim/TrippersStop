@@ -9,6 +9,8 @@ using TraveLayer.CustomTypes.Constants.Response;
 using TraveLayer.CustomTypes.Constants.ViewModels;
 using TraveLayer.CustomTypes.Google.Response;
 using RS = TraveLayer.CustomTypes.TripAdvisor.Response;
+using TraveLayer.CustomTypes.Yelp.Response;
+using TraveLayer.CustomTypes.YouTube.Response;
 
 namespace Trippism.APIHelper
 {
@@ -35,10 +37,36 @@ namespace Trippism.APIHelper
             Mapper.Register<GoogleOutput, TGV.Google>();
             Mapper.Register<results, TGV.results>();
             Mapper.Register<Geometry, TGV.Geometry>();
-            Mapper.Register<Location, TGV.Location>();
+            Mapper.Register<TraveLayer.CustomTypes.Google.Response.Location, TGV.Location>();
 
             Mapper.Register<BargainFinderReponse, LowFareSearch>()
-                 .Member(h => h.AirLowFareSearchRS, m => m.OTA_AirLowFareSearchRS); ;
+                 .Member(h => h.AirLowFareSearchRS, m => m.OTA_AirLowFareSearchRS);
+
+            Mapper.Register<OTA_AirportsAtCitiesLookup, AirportsAtCities>();
+            Mapper.Register<OTA_AirportsAtCitiesLookup, CityPairs>();
+            Mapper.Register<OTA_CountriesLookup, Countries>();
+            Mapper.Register<OTA_MultiAirportCityLookup, MultiAirportCity>();
+            Mapper.Register<OTA_PointofSaleCountryCodeLookup, PointofSaleCountryCode>();
+            Mapper.Register<OTA_ThemeAirportLookup, ThemeAirport>();
+            Mapper.Register<TopDestinations, TopDestination>();
+            Mapper.Register<OTA_TravelThemeLookup, TravelTheme>();
+            
+            Mapper.Register<YelpOutput, TraveLayer.CustomTypes.Yelp.ViewModels.Yelp>();
+            Mapper.Register<Businesses, TraveLayer.CustomTypes.Yelp.ViewModels.Businesses>();
+            Mapper.Register<TraveLayer.CustomTypes.Yelp.Response.Location, TraveLayer.CustomTypes.Yelp.ViewModels.Location>();
+            Mapper.Register<Region, TraveLayer.CustomTypes.Yelp.ViewModels.Region>();
+            Mapper.Register<Span, TraveLayer.CustomTypes.Yelp.ViewModels.Span>();
+            Mapper.Register<Center, TraveLayer.CustomTypes.Yelp.ViewModels.Center>();
+
+            Mapper.Register<YouTubeOutput, TraveLayer.CustomTypes.YouTube.ViewModels.YouTube>();
+            Mapper.Register<Items, TraveLayer.CustomTypes.YouTube.ViewModels.Items>();
+            Mapper.Register<Snippet, TraveLayer.CustomTypes.YouTube.ViewModels.Snippet>();
+            Mapper.Register<Id, TraveLayer.CustomTypes.YouTube.ViewModels.Id>();
+            Mapper.Register<Thumbnails, TraveLayer.CustomTypes.YouTube.ViewModels.Thumbnails>();
+            Mapper.Register<Default, TraveLayer.CustomTypes.YouTube.ViewModels.Default>();
+            Mapper.Register<Medium, TraveLayer.CustomTypes.YouTube.ViewModels.Medium>();
+            Mapper.Register<High, TraveLayer.CustomTypes.YouTube.ViewModels.High>();
+            Mapper.Register<pageInfo, TraveLayer.CustomTypes.YouTube.ViewModels.pageInfo>();
 
             Mapper.Compile();
         }

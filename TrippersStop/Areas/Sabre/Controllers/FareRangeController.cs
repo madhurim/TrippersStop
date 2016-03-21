@@ -3,13 +3,13 @@ using System.Net.Http;
 using System.Web.Http;
 using TrippismApi.TraveLayer;
 using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
-using AutoMapper;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
 using Trippism.APIExtention.Filters;
 using System.Configuration;
 using System.Threading.Tasks;
+using ExpressMapper;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
@@ -63,8 +63,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 OTA_FareRange fares = new OTA_FareRange();
-                fares = ServiceStackSerializer.DeSerialize<OTA_FareRange>(result.Response);
-                Mapper.CreateMap<OTA_FareRange, VM.FareRange>();
+                fares = ServiceStackSerializer.DeSerialize<OTA_FareRange>(result.Response);                
                 VM.FareRange fareRange = Mapper.Map<OTA_FareRange, VM.FareRange>(fares);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, fareRange);
                 return response;

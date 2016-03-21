@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using ExpressMapper;
 using System.Configuration;
 using System.Net;
 using System.Net.Http;
@@ -58,8 +58,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 OTA_TravelThemeLookup travelThemeLookup = new OTA_TravelThemeLookup();
-                travelThemeLookup = ServiceStackSerializer.DeSerialize<OTA_TravelThemeLookup>(result.Response);
-                Mapper.CreateMap<OTA_TravelThemeLookup, TravelTheme>();
+                travelThemeLookup = ServiceStackSerializer.DeSerialize<OTA_TravelThemeLookup>(result.Response);                
                 TravelTheme travelTheme = Mapper.Map<OTA_TravelThemeLookup, TravelTheme>(travelThemeLookup);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, travelTheme);
                 return response;

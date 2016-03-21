@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using ExpressMapper;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -51,17 +51,6 @@ namespace Trippism.Areas.YouTube.Controllers
             {
                 YouTubeOutput youtube = new YouTubeOutput();
                 youtube = ServiceStackSerializer.DeSerialize<YouTubeOutput>(result.Response);
-
-                Mapper.CreateMap<YouTubeOutput, TraveLayer.CustomTypes.YouTube.ViewModels.YouTube>();
-                Mapper.CreateMap<Items, TraveLayer.CustomTypes.YouTube.ViewModels.Items>();
-                Mapper.CreateMap<Snippet, TraveLayer.CustomTypes.YouTube.ViewModels.Snippet>();
-                Mapper.CreateMap<Id, TraveLayer.CustomTypes.YouTube.ViewModels.Id>();
-                Mapper.CreateMap<Thumbnails, TraveLayer.CustomTypes.YouTube.ViewModels.Thumbnails>();
-                Mapper.CreateMap<Default, TraveLayer.CustomTypes.YouTube.ViewModels.Default>();
-                Mapper.CreateMap<Medium, TraveLayer.CustomTypes.YouTube.ViewModels.Medium>();
-                Mapper.CreateMap<High, TraveLayer.CustomTypes.YouTube.ViewModels.High>();
-                Mapper.CreateMap<pageInfo, TraveLayer.CustomTypes.YouTube.ViewModels.pageInfo>();
-
                 TraveLayer.CustomTypes.YouTube.ViewModels.YouTube lstVideos = Mapper.Map<YouTubeOutput, TraveLayer.CustomTypes.YouTube.ViewModels.YouTube>(youtube);
 
                 _cacheService.Save<TraveLayer.CustomTypes.YouTube.ViewModels.YouTube>(cacheKey, lstVideos);
