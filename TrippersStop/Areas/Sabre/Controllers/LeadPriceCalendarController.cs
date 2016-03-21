@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Trippism.APIExtention.Filters;
-using Trippism.APIHelper;
 using TrippismApi.TraveLayer;
 using TraveLayer.CustomTypes.Sabre;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
@@ -15,7 +12,6 @@ using TrippismApi;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
-using ExpressMapper;
 
 namespace Trippism.Areas.Sabre.Controllers
 {

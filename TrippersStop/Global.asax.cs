@@ -1,23 +1,11 @@
-﻿using DataLayer;
-using ExpressMapper;
-using ServiceStack.Text;
-using SimpleInjector;
+﻿using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
-using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
-using System.Web.Optimization;
 using System.Web.Routing;
 using TraveLayer.CacheServices;
-using TraveLayer.CustomTypes.Sabre;
-using TraveLayer.CustomTypes.Sabre.ViewModels;
-using TraveLayer.CustomTypes.Weather;
+using Trippism.APIHelper;
 using TrippismApi.TraveLayer;
-using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
 
 namespace TrippismApi
 {
@@ -34,7 +22,7 @@ namespace TrippismApi
             GlobalConfiguration.Configure(WebApiConfig.Register); //Commented today
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-          //  BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //  BundleConfig.RegisterBundles(BundleTable.Bundles);
             //JsConfig.EmitLowercaseUnderscoreNames = true;
             var container = new Container();
             container.RegisterWebApiRequest<IAsyncSabreAPICaller, SabreAPICaller>();
@@ -61,8 +49,11 @@ namespace TrippismApi
 
             GlobalConfiguration.Configuration.DependencyResolver =
                 new SimpleInjectorWebApiDependencyResolver(container);
-            ApiHelper.RegisterMappingEntities();
-            ApiHelper.RegisterTripAdvisorMapping();
+
+            RegisterMap registerMap = new RegisterMap();
+            registerMap.RegisterMappingEntities();
+            registerMap.RegisterTripAdvisorMapping();
+
             //GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
             // GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
         }

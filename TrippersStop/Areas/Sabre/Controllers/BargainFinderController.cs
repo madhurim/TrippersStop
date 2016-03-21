@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre;
 using TrippismApi.TraveLayer;
-using ServiceStack;
-using Newtonsoft.Json;
-using System.Runtime.Serialization;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
-using System.Xml;
 using System.Xml.Linq;
 using System.Web.Hosting;
 using TraveLayer.CustomTypes.Sabre.Response;

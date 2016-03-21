@@ -230,6 +230,7 @@
     <Compile Include="APIHelper\ApiHelper.cs" />
     <Compile Include="APIHelper\CompressedContent.cs" />
     <Compile Include="APIHelper\MailgunEmail.cs" />
+    <Compile Include="APIHelper\RegisterMap.cs" />
     <Compile Include="APIHelper\TrippismNLog.cs" />
     <Compile Include="Areas\Constants\ConstantsAreaRegistration.cs" />
     <Compile Include="Areas\Constants\Controllers\ConstantsController.cs" />
