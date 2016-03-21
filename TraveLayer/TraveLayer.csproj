@@ -120,10 +120,12 @@
   <ItemGroup>
     <Compile Include="APIServices\GoogleAPICaller.cs" />
     <Compile Include="APIServices\GoogleReverseLookupAPICaller.cs" />
+    <Compile Include="APIServices\GooglePlaceAPICaller.cs" />
     <Compile Include="APIServices\IAPICaller.cs" />
     <Compile Include="APIServices\IAsyncGoogleAPICaller.cs" />
     <Compile Include="APIServices\IAsyncGoogleReverseLookupAPICaller.cs" />
     <Compile Include="APIServices\ITripAdvisorAPIAsyncCaller.cs" />
+    <Compile Include="APIServices\IAsyncGooglePlaceAPICaller.cs" />
     <Compile Include="APIServices\IAsyncWeatherAPICaller.cs" />
     <Compile Include="APIServices\IAsyncSabreAPICaller.cs" />
     <Compile Include="APIServices\IAsyncYelpAPICaller.cs" />
@@ -140,10 +142,13 @@
     <Compile Include="CustomTypes\Constants\Response\CurrencySymbols.cs" />
     <Compile Include="CustomTypes\Constants\ViewModels\CurrencySymbolsViewModel.cs" />
     <Compile Include="CustomTypes\Google\Request\GoogleInput.cs" />
+    <Compile Include="CustomTypes\Google\Request\GooglePlaceInput.cs" />
     <Compile Include="CustomTypes\Google\Response\GoogleOutput.cs" />
     <Compile Include="CustomTypes\Google\Response\GoogleReverseLookupOutput.cs" />
+    <Compile Include="CustomTypes\Google\Response\GooglePlaceDetailsOutput.cs" />
     <Compile Include="CustomTypes\Google\ViewModels\Google.cs" />
     <Compile Include="CustomTypes\Google\ViewModels\GoogleReverseLookup.cs" />
+    <Compile Include="CustomTypes\Google\ViewModels\GooglePlaceDetails.cs" />
     <Compile Include="CustomTypes\IATA\ViewModels\Entity.cs" />
     <Compile Include="CustomTypes\IATA\ViewModels\IATACode.cs" />
     <Compile Include="CustomTypes\NLog\InstaFlightNLog.cs" />

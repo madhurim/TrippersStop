@@ -51,6 +51,7 @@ namespace TrippismApi
             container.RegisterWebApiRequest<IAsyncGoogleAPICaller, GoogleAPICaller>();
             container.RegisterWebApiRequest<IAsyncGoogleReverseLookupAPICaller, GoogleReverseLookupAPICaller>();
             container.RegisterWebApiRequest<IAsyncYelpAPICaller, YelpAPICaller>();
+            container.RegisterWebApiRequest<IAsyncGooglePlaceAPICaller, GooglePlaceAPICaller>();
 
             container.RegisterWebApiRequest<IAsyncYouTubeAPICaller, YouTubeAPICaller>();
             container.RegisterWebApiRequest<ITripAdvisorAPIAsyncCaller, TripAdvisorAPICaller>();
