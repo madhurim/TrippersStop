@@ -1,36 +1,29 @@
-﻿ using System; 
- using System.Collections.Generic; 
- using System.Linq; 
- using System.Net; 
- using System.Net.Http; 
- using System.Net.Http.Headers; 
- using System.Runtime.CompilerServices; 
- using System.Text; 
- using System.Web.Http; 
- using System.Web.Http.Controllers; 
- using System.Web.Http.Filters; 
- using TrippismApi.TraveLayer; 
- 
- 
- 
- 
- 
+﻿using System;
+using System.Configuration;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
+using TrippismApi.TraveLayer; 
  
  namespace Trippism.APIExtention.Filters 
  { 
      public class TrippismCache : ActionFilterAttribute 
      { 
-         int _duration; 
+         int _duration=60; 
          string _key; 
-         string TrippismKey = "Trippism.Sabre."; 
-         public TrippismCache(int duration, string key) 
+         string TrippismKey = "Trippism.ApiContent."; 
+         public TrippismCache(string key) 
          { 
-             if (duration <= 0) 
-                 throw new InvalidOperationException("Invalid Duration"); 
              if (string.IsNullOrWhiteSpace(key)) 
                  throw new InvalidOperationException("Invalid Key"); 
-             _key = TrippismKey+key; 
-             _duration = duration; 
+             _key = TrippismKey+key;
+             if (!string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["ContentCacheExpireInMin"]))
+             _duration = Convert.ToInt32(ConfigurationManager.AppSettings["ContentCacheExpireInMin"]); ; 
          } 
  
  
@@ -74,14 +67,12 @@
              } 
              Callback = (actionExecutedContext) => 
              { 
-                 //var output = actionExecutedContext.Result.Content.ReadAsStringAsync().Result; 
                  if (actionExecutedContext.Response != null && actionExecutedContext.Response.StatusCode==HttpStatusCode.OK) 
                  { 
                      var output = actionExecutedContext.Response.Content.ReadAsStringAsync().Result; 
                      if (Cache != null) 
                      { 
                          Cache.Save<string>(_key + GetQueryString(actionContext), output, _duration); 
-                         //Cache.Save<string>(_key + "+ContentType", actionExecutedContext.Result.Content.Headers.ContentType.MediaType, DateTimeOffset.UtcNow.AddSeconds(_duration)); 
                          Cache.Save<string>(_key + GetQueryString(actionContext) + "+ContentType", actionExecutedContext.Response.Content.Headers.ContentType.MediaType, _duration); 
                      } 
                  }               

@@ -48,6 +48,18 @@
     <Reference Include="MongoDB.Driver.Legacy">
       <HintPath>..\packages\mongocsharpdriver.2.0.0\lib\net45\MongoDB.Driver.Legacy.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.JsonResult, Version=1.0.5369.19299, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.JsonResult.1.0.5369.19299\lib\net40\Newtonsoft.JsonResult.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OAuth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75b3c62967edc2a2, processorArchitecture=MSIL">
+      <HintPath>..\packages\OAuth.1.0.3\lib\net40\OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
@@ -61,6 +73,10 @@
     </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleOAuth, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleOAuth.Net.1.0.1\lib\net20\SimpleOAuth.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -104,25 +120,35 @@
   <ItemGroup>
     <Compile Include="APIServices\GoogleAPICaller.cs" />
     <Compile Include="APIServices\GoogleReverseLookupAPICaller.cs" />
+    <Compile Include="APIServices\GooglePlaceAPICaller.cs" />
     <Compile Include="APIServices\IAPICaller.cs" />
     <Compile Include="APIServices\IAsyncGoogleAPICaller.cs" />
     <Compile Include="APIServices\IAsyncGoogleReverseLookupAPICaller.cs" />
+    <Compile Include="APIServices\ITripAdvisorAPIAsyncCaller.cs" />
+    <Compile Include="APIServices\IAsyncGooglePlaceAPICaller.cs" />
     <Compile Include="APIServices\IAsyncWeatherAPICaller.cs" />
     <Compile Include="APIServices\IAsyncSabreAPICaller.cs" />
+    <Compile Include="APIServices\IAsyncYelpAPICaller.cs" />
     <Compile Include="APIServices\IAsyncYouTubeAPICaller.cs" />
     <Compile Include="APIServices\SabreAPICaller.cs" />
     <Compile Include="APIServices\ServiceStackSerializer.cs" />
+    <Compile Include="APIServices\TripAdvisorAPICaller.cs" />
     <Compile Include="APIServices\WeatherAPICaller.cs" />
+    <Compile Include="APIServices\YelpAPICaller.cs" />
     <Compile Include="APIServices\YouTubeAPICaller.cs" />
     <Compile Include="CacheServices\MemoryCacheService.cs" />
+    <Compile Include="CustomTypes\Constants\Response\Airlines.cs" />
     <Compile Include="CustomTypes\Constants\Response\Airports.cs" />
     <Compile Include="CustomTypes\Constants\Response\CurrencySymbols.cs" />
     <Compile Include="CustomTypes\Constants\ViewModels\CurrencySymbolsViewModel.cs" />
     <Compile Include="CustomTypes\Google\Request\GoogleInput.cs" />
+    <Compile Include="CustomTypes\Google\Request\GooglePlaceInput.cs" />
     <Compile Include="CustomTypes\Google\Response\GoogleOutput.cs" />
     <Compile Include="CustomTypes\Google\Response\GoogleReverseLookupOutput.cs" />
+    <Compile Include="CustomTypes\Google\Response\GooglePlaceDetailsOutput.cs" />
     <Compile Include="CustomTypes\Google\ViewModels\Google.cs" />
     <Compile Include="CustomTypes\Google\ViewModels\GoogleReverseLookup.cs" />
+    <Compile Include="CustomTypes\Google\ViewModels\GooglePlaceDetails.cs" />
     <Compile Include="CustomTypes\IATA\ViewModels\Entity.cs" />
     <Compile Include="CustomTypes\IATA\ViewModels\IATACode.cs" />
     <Compile Include="CustomTypes\NLog\InstaFlightNLog.cs" />
@@ -130,6 +156,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CustomTypes\Sabre\Request\InstaFlightSearchInput.cs" />
+    <Compile Include="CustomTypes\Sabre\Request\LeadPrIceCalendarInput.cs" />
     <Compile Include="CustomTypes\Sabre\Response\APIResponse.cs" />
     <Compile Include="CustomTypes\Sabre\Response\BargainFinder.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\AdvancedCalendar.cs" />
@@ -142,9 +169,11 @@
     <Compile Include="CustomTypes\Sabre\ViewModels\Destinations.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\FareForecast.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\InstaFlightSearch.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\LeadFare.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\LowFareForecast.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\MultiAirportCity.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\PointofSaleCountryCode.cs" />
+    <Compile Include="CustomTypes\Sabre\ViewModels\Price.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\ThemeAirport.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TopDestination.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TravelInfo.cs" />
@@ -171,10 +200,52 @@
     <Compile Include="CacheServices\RedisService.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TripInput.cs" />
     <Compile Include="CustomTypes\Sabre\ViewModels\TripOutput.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Request\AttractionsRequest.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Request\HotelsRequest.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Request\LocationRequest.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Request\PropertiesRequest.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Request\RestaurantsRequest.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\AddressObj.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\Ancestor.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\AttractionType.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\Award.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\Category.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\Datum.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\Images.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\LocationInfo.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\Paging.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\RankingData.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\Review.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\ReviewRatingCount.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\Subcategory.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\Subrating.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\TripType.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\User.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\UserLocation.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\Response\WikipediaInfo.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Address.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Attraction.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\AttractionType.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Award.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Category.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Images.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Location.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\LocationAttraction.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Rank.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Review.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\ReviewRatingCount.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\Subrating.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\TripType.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\User.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\UserLocation.cs" />
+    <Compile Include="CustomTypes\TripAdvisor\ViewModels\WikiPediaInfo.cs" />
     <Compile Include="CustomTypes\Weather\Request\HistoryInput.cs" />
     <Compile Include="CustomTypes\Weather\Request\InternationalWeatherInput.cs" />
     <Compile Include="CustomTypes\Weather\Response\HistoryOutput.cs" />
     <Compile Include="CustomTypes\Weather\ViewModels\TripWeather.cs" />
+    <Compile Include="CustomTypes\Yelp\Request\YelpInput.cs" />
+    <Compile Include="CustomTypes\Yelp\Response\YelpOutput.cs" />
+    <Compile Include="CustomTypes\Yelp\ViewModels\Yelp.cs" />
     <Compile Include="CustomTypes\YouTube\Request\YouTubeInput.cs" />
     <Compile Include="CustomTypes\YouTube\Response\YouTubeOutput.cs" />
     <Compile Include="CustomTypes\YouTube\ViewModels\YouTube.cs" />

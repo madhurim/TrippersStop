@@ -1,14 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.IO;
-using Newtonsoft.Json.Linq;
-using ServiceStack.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
 //using System.Web.Http;
 
 namespace TrippismApi.Controllers

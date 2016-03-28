@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TraveLayer.CustomTypes.Sabre;
@@ -13,13 +9,14 @@ using System.Web.Http.Description;
 using Trippism.APIExtention.Filters;
 using System.Configuration;
 using System.Threading.Tasks;
+using ExpressMapper;
 
 namespace TrippismApi.Areas.Sabre.Controllers
 {
     /// <summary>
     /// API rates weekly traffic volumes to certain destination airports. The API looks up the traffic volume booked 
     /// </summary>
-     [GZipCompressionFilter]
+    [GZipCompressionFilter]
     public class SeasonalityController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
@@ -37,7 +34,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         public SeasonalityController(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             _apiCaller = apiCaller;
-            _cacheService = cacheService;       
+            _cacheService = cacheService;
         }
         /// <summary>
         /// API rates weekly traffic volumes to certain destination airports. The API looks up the traffic volume booked 
@@ -46,8 +43,8 @@ namespace TrippismApi.Areas.Sabre.Controllers
         public async Task<HttpResponseMessage> Get(string destination)
         {
             string url = string.Format(SabreSeasonalityUrl, destination);
-            return await Task.Run(() => 
-               { return GetResponse(url); }); 
+            return await Task.Run(() =>
+               { return GetResponse(url); });
 
         }
         /// <summary>
@@ -66,8 +63,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 OTA_TravelSeasonality seasonality = new OTA_TravelSeasonality();
-                seasonality = ServiceStackSerializer.DeSerialize<OTA_TravelSeasonality>(result.Response);
-                Mapper.CreateMap<OTA_TravelSeasonality, VM.TravelSeasonality>();
+                seasonality = ServiceStackSerializer.DeSerialize<OTA_TravelSeasonality>(result.Response);                
                 VM.TravelSeasonality travelSeasonality = Mapper.Map<OTA_TravelSeasonality, VM.TravelSeasonality>(seasonality);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, travelSeasonality);
                 return response;

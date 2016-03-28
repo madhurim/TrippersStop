@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TrippismApi.TraveLayer;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Sabre;
-using AutoMapper;
 using TraveLayer.CustomTypes.Sabre.Response;
 using System.Web.Http.Description;
 using Trippism.APIExtention.Filters;
 using System.Configuration;
 using System.Threading.Tasks;
+using ExpressMapper;
 
 
 namespace TrippismApi.Areas.Sabre.Controllers
@@ -67,8 +64,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 OTA_LowFareForecast fares = new OTA_LowFareForecast();
-                fares = ServiceStackSerializer.DeSerialize<OTA_LowFareForecast>(result.Response);
-                Mapper.CreateMap<OTA_LowFareForecast, LowFareForecast>();
+                fares = ServiceStackSerializer.DeSerialize<OTA_LowFareForecast>(result.Response);                
                 LowFareForecast lowFareForecast = Mapper.Map<OTA_LowFareForecast, LowFareForecast>(fares);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, lowFareForecast);
                 return response;

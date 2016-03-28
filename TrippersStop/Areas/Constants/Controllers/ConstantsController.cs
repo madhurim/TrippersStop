@@ -1,6 +1,4 @@
-﻿using DataLayer.Entities;
-using DataLayer.Repositories;
-using ExpressMapper;
+﻿using ExpressMapper;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -23,6 +21,8 @@ namespace Trippism.Areas.Constants.Controllers
         string _expireTime = ConfigurationManager.AppSettings["RedisExpireInMin"].ToString();
         private const string TrippismCurrencySymbolsKey = "Trippism.Constants.CurrencySymbols";
         private const string TrippismAirportsKey = "Trippism.Constants.Airports";
+        private const string TrippismHighRankedAirportsKey = "Trippism.Constants.HighRankedAirports";
+        private const string TrippismAirlinesKey = "Trippism.Constants.Airlines";
         public ConstantsController(ICacheService cacheService)
         {
             _cacheService = cacheService;
@@ -59,24 +59,29 @@ namespace Trippism.Areas.Constants.Controllers
         [ResponseType(typeof(List<TraveLayer.CustomTypes.Constants.Response.AirportsDetail>))]
         public async Task<HttpResponseMessage> GetAirports()
         {
-            //var tripCurrencySymbols = _cacheService.GetByKey<TraveLayer.CustomTypes.Constants.Response.AirportRoot>(TrippismAirportsKey);
-            //if (tripCurrencySymbols != null)
-            //    return Request.CreateResponse(HttpStatusCode.OK, tripCurrencySymbols.AirportsRoot.AirportsDetail);
+            var tripAirports = _cacheService.GetByKey<TraveLayer.CustomTypes.Constants.Response.AirportRoot>(TrippismAirportsKey);
+            if (tripAirports != null)
+                return Request.CreateResponse(HttpStatusCode.OK, tripAirports.AirportsRoot.AirportsDetail);
+
             string jsonPath = GetFullPath(ConfigurationManager.AppSettings["AirportsJsonPath"].ToString());
             return await Task.Run(() =>
-            { return GetAirportsResponse(jsonPath); });
+            { return GetAirportsResponse(jsonPath, TrippismAirportsKey); });
         }
 
         [Route("api/Constants/GetHighRankedAirports")]
         [ResponseType(typeof(List<TraveLayer.CustomTypes.Constants.Response.AirportsDetail>))]
         public async Task<HttpResponseMessage> GetHighRankedAirports()
         {
+            var tripAirports = _cacheService.GetByKey<TraveLayer.CustomTypes.Constants.Response.AirportRoot>(TrippismHighRankedAirportsKey);
+            if (tripAirports != null)
+                return Request.CreateResponse(HttpStatusCode.OK, tripAirports.AirportsRoot.AirportsDetail);
+
             string jsonPath = GetFullPath(ConfigurationManager.AppSettings["HighRankedAirportsJsonPath"].ToString());
             return await Task.Run(() =>
-            { return GetAirportsResponse(jsonPath); });
+            { return GetAirportsResponse(jsonPath, TrippismHighRankedAirportsKey); });
         }
 
-        private HttpResponseMessage GetAirportsResponse(string jsonPath)
+        private HttpResponseMessage GetAirportsResponse(string jsonPath, string cacheKey)
         {
             string airportJsonString = string.Empty;
             using (StreamReader readerAirportJson = new StreamReader(jsonPath))
@@ -84,9 +89,34 @@ namespace Trippism.Areas.Constants.Controllers
                 airportJsonString = readerAirportJson.ReadToEnd();
             }
             var airports = ServiceStackSerializer.DeSerialize<AirportRoot>(airportJsonString);
-            //_cacheService.Save<TraveLayer.CustomTypes.Constants.Response.AirportRoot>(TrippismAirportsKey, airports);
+            _cacheService.Save<TraveLayer.CustomTypes.Constants.Response.AirportRoot>(cacheKey, airports);
             return Request.CreateResponse(HttpStatusCode.OK, airports.AirportsRoot.AirportsDetail);
         }
+
+        [Route("api/Constants/GetAirlines")]
+        [ResponseType(typeof(List<TraveLayer.CustomTypes.Constants.Response.Airlines>))]
+        public async Task<HttpResponseMessage> GetAirlines()
+        {
+            var tripAirlines = _cacheService.GetByKey<TraveLayer.CustomTypes.Constants.Response.Airlines>(TrippismAirlinesKey);
+            if (tripAirlines != null)
+                return Request.CreateResponse(HttpStatusCode.OK, tripAirlines.response);
+            string jsonPath = GetFullPath(ConfigurationManager.AppSettings["AirlinesJsonPath"].ToString());
+            return await Task.Run(() =>
+            { return GetAirlinesResponse(jsonPath); });
+        }
+
+        private HttpResponseMessage GetAirlinesResponse(string jsonPath)
+        {
+            string airlinesJsonString = string.Empty;
+            using (StreamReader readerAirlinesJson = new StreamReader(jsonPath))
+            {
+                airlinesJsonString = readerAirlinesJson.ReadToEnd();
+            }
+            var airlines = ServiceStackSerializer.DeSerialize<Airlines>(airlinesJsonString);
+            _cacheService.Save<TraveLayer.CustomTypes.Constants.Response.Airlines>(TrippismAirlinesKey, airlines);
+            return Request.CreateResponse(HttpStatusCode.OK, airlines.response);
+        }
+
         [HttpGet]
         [Route("api/Constants/MissingAirportLog")]
         public async Task MissingAirportLog(string Airportcode)

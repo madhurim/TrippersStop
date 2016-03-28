@@ -1,14 +1,4 @@
-﻿using DataLayer;
-using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
-using TraveLayer.CustomTypes.IATA.ViewModels;
-using Trippism.APIExtention.Filters;
+﻿using System.Web.Http;
 
 namespace TrippismApi.Areas.IATA.Controllers
 {

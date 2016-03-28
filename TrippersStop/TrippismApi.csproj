@@ -48,14 +48,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -230,11 +222,13 @@
     <Compile Include="APIHelper\ApiHelper.cs" />
     <Compile Include="APIHelper\CompressedContent.cs" />
     <Compile Include="APIHelper\MailgunEmail.cs" />
+    <Compile Include="APIHelper\RegisterMap.cs" />
     <Compile Include="APIHelper\TrippismNLog.cs" />
     <Compile Include="Areas\Constants\ConstantsAreaRegistration.cs" />
     <Compile Include="Areas\Constants\Controllers\ConstantsController.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleController.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleGeoCodeController.cs" />
+    <Compile Include="Areas\Google\Controllers\GooglePlaceDetailsController.cs" />
     <Compile Include="Areas\Google\GoogleAreaRegistration.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -274,6 +268,7 @@
     <Compile Include="Areas\Sabre\Controllers\DestinationsController.cs" />
     <Compile Include="Areas\Sabre\Controllers\FareRangeController.cs" />
     <Compile Include="Areas\Sabre\Controllers\InstaFlightSearchController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\LeadPriceCalendarController.cs" />
     <Compile Include="Areas\Sabre\Controllers\MultiAirportCityController.cs" />
     <Compile Include="Areas\Sabre\Controllers\SaleCountryController.cs" />
     <Compile Include="Areas\Sabre\Controllers\SeasonalityController.cs" />
@@ -286,9 +281,17 @@
     <Compile Include="Areas\Sabre\Controllers\BargainFinderController.cs" />
     <Compile Include="Areas\Sabre\Controllers\FareForecastController.cs" />
     <Compile Include="Areas\Sabre\Controllers\TopDestinationsController.cs" />
+    <Compile Include="Areas\Sabre\Controllers\InsightsController.cs" />
     <Compile Include="Areas\Sabre\SabreAreaRegistration.cs" />
     <Compile Include="APIExtention\AreaRegistrationContextExtensions.cs" />
+    <Compile Include="Areas\TripAdvisor\Controllers\LocationController.cs" />
+    <Compile Include="Areas\TripAdvisor\Controllers\HotelsController.cs" />
+    <Compile Include="Areas\TripAdvisor\Controllers\AttractionsController.cs" />
+    <Compile Include="Areas\TripAdvisor\Controllers\RestaurantsController.cs" />
+    <Compile Include="Areas\TripAdvisor\TripAdvisorAreaRegistration.cs" />
     <Compile Include="Areas\Weather\StaticMethods\WeatherAPIResponse.cs" />
+    <Compile Include="Areas\Yelp\Controllers\YelpController.cs" />
+    <Compile Include="Areas\Yelp\YelpAreaRegistration.cs" />
     <Compile Include="Areas\YouTube\Controllers\YouTubeController.cs" />
     <Compile Include="Areas\YouTube\YouTubeAreaRegistration.cs" />
     <Compile Include="Controllers\Email\EmailController.cs" />
@@ -354,8 +357,12 @@
     <Folder Include="Areas\IATA\Views\Shared\" />
     <Folder Include="Areas\Sabre\Models\" />
     <Folder Include="Areas\Sabre\Views\Shared\" />
+    <Folder Include="Areas\TripAdvisor\Models\" />
+    <Folder Include="Areas\TripAdvisor\Views\Shared\" />
     <Folder Include="Areas\Weather\Models\" />
     <Folder Include="Areas\Weather\Views\Shared\" />
+    <Folder Include="Areas\Yelp\Models\" />
+    <Folder Include="Areas\Yelp\Views\Shared\" />
     <Folder Include="Areas\YouTube\Models\" />
     <Folder Include="Areas\YouTube\Views\Shared\" />
     <Folder Include="Models\" />
@@ -387,10 +394,10 @@
     <Content Include="Constants\CurrencySymbols_Ori.json" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Yelp\Views\web.config" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Constants\airports_highranked.json" />
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

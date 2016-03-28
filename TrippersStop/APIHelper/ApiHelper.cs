@@ -1,13 +1,8 @@
-using ExpressMapper;
 using System.Configuration;
-using TraveLayer.CustomTypes.Sabre;
-using TraveLayer.CustomTypes.Sabre.ViewModels;
 using TraveLayer.CustomTypes.Weather;
 using TrippismApi.TraveLayer;
-using VM = TraveLayer.CustomTypes.Sabre.ViewModels;
-using TraveLayer.CustomTypes.Constants.ViewModels;
-using TraveLayer.CustomTypes.Constants.Response;
 using System.Linq;
+
 namespace TrippismApi
 {
     public static class ApiHelper
@@ -125,39 +120,6 @@ namespace TrippismApi
             return false;
         }
 
-        public static void RegisterMappingEntities()
-        {
-            // ConfigurationManager.AppSettings["SabreDestinationsUrl"];
-            //Mapper.Register<InstaFlightsSearchOutput, InstaFlightSearch>();
-
-            //Mapper.Register<PricedItinerary, PricedItineraryViewModel>();
-            //Mapper.Register<AirItinerary, AirItineraryViewModel>();
-            //Mapper.Register<FlightSegment, FlightSegmentViewModel>();
-            //Mapper.Register<OriginDestinationOptions, OriginDestinationOptionsViewModel>();
-            //Mapper.Register<OriginDestinationOption, OriginDestinationOptionViewModel>();
-            //Mapper.Register<ItinTotalFare, ItinTotalFareViewModel>();
-            //Mapper.Register<PTCFareBreakdowns, PTCFareBreakdownsViewModel>();
-            //Mapper.Register<FareInfo, FareInfoViewModel>();
-            //Mapper.Register<AirItineraryPricingInfo, AirItineraryPricingInfoViewModel>();
-            //Mapper.Register<PTCFareBreakdown, PTCFareBreakdownViewModel>();
-            //Mapper.Register<InstaFlightsSearchOutput, InstaFlightSearch>();
-
-            Mapper.Register<OTA_DestinationFinder, Fares>();
-            Mapper.Register<OTA_FareRange, VM.FareRange>();
-            Mapper.Register<OTA_TravelSeasonality, VM.TravelSeasonality>();
-            Mapper.Register<OTA_LowFareForecast, LowFareForecast>();
-            Mapper.Register<TempHigh, TempHighAvg>()
-                  .Member(h => h.Avg, m => m.avg);
-            Mapper.Register<TempLow, TempLowAvg>()
-               .Member(h => h.Avg, m => m.avg);
-            Mapper.Register<Trip, TripWeather>()
-            .Member(h => h.TempHighAvg, m => m.temp_high)
-            .Member(h => h.TempLowAvg, m => m.temp_low)
-            .Member(h => h.CloudCover, m => m.cloud_cover);
-            Mapper.Register<CurrencySymbols, CurrencySymbolsViewModel>()
-                .Member(h => h.Currency, m => m.Currencies.Currency);
-            Mapper.Compile();
-        }
 
         public static bool IsRedisAvailable()
         {

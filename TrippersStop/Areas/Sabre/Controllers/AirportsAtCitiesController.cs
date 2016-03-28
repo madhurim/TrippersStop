@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
+﻿using ExpressMapper;
 using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -18,7 +15,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
     /// <summary>
     /// API to retrieve data for multiple major airports, as opposed to data for a single airport code
     /// </summary>
-     [GZipCompressionFilter]
+    [GZipCompressionFilter]
     public class AirportsAtCitiesController : ApiController
     {
         IAsyncSabreAPICaller _apiCaller;
@@ -44,7 +41,7 @@ namespace TrippismApi.Areas.Sabre.Controllers
         [ResponseType(typeof(AirportsAtCities))]
         public HttpResponseMessage Get(string city)
         {
-            string url = string.Format(SabreAirportsAtCitiesUrl, city);           
+            string url = string.Format(SabreAirportsAtCitiesUrl, city);
             return GetResponse(url);
         }
         /// <summary>
@@ -63,12 +60,12 @@ namespace TrippismApi.Areas.Sabre.Controllers
             {
                 OTA_AirportsAtCitiesLookup airportsAtCities = new OTA_AirportsAtCitiesLookup();
                 airportsAtCities = ServiceStackSerializer.DeSerialize<OTA_AirportsAtCitiesLookup>(result.Response);
-                Mapper.CreateMap<OTA_AirportsAtCitiesLookup, AirportsAtCities>();
+
                 AirportsAtCities airports = Mapper.Map<OTA_AirportsAtCitiesLookup, AirportsAtCities>(airportsAtCities);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, airports);
                 return response;
             }
-            return Request.CreateResponse(result.StatusCode, result.Response);              
+            return Request.CreateResponse(result.StatusCode, result.Response);
         }
     }
 }

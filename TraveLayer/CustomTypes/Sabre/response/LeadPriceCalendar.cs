@@ -44,36 +44,13 @@ namespace TraveLayer.CustomTypes.Sabre
         public string FareReference { get; set; }
         public TPAExtensions4 TPA_Extensions { get; set; }
     }
-
-    //public class Link2
-    //{
-    //    public string rel { get; set; }
-    //    public string href { get; set; }
-    //}
-    //=======
-    //public class FareInfo
-    //{
-    //    public object LowestFare { get; set; }
-    //    public string CurrencyCode { get; set; }
-    //    public object LowestNonStopFare { get; set; }
-    //    public string DepartureDateTime { get; set; }
-    //    public string ReturnDateTime { get; set; }
-    //    public List<Link> Links { get; set; }
-    //    public string DestinationLocation { get; set; } // Copying from DestinationFinder.
-    //}   
-    //>>>>>>> feature/AdvancedCalendarTestCases:TraveLayer/CustomTypes/Sabre/response/LeadPriceCalendar.cs
-
-    public class OTA_LeadPriceCalendar
+    
+    public class LeadPriceCalendarOutput
     {
         public string OriginLocation { get; set; }
         public string DestinationLocation { get; set; }
         public List<FareInfo> FareInfo { get; set; }
-        public List<Link> Links { get; set; }
-    }
-
-    public class LeadPriceCalendar //: ICustomType
-    {
-        public OTA_LeadPriceCalendar OTA_LeadPriceCalendar { get; set; }
+       
     }
 
 }
