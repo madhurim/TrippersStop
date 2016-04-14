@@ -261,6 +261,8 @@
     <Compile Include="Areas\IATA\Controllers\IATAController.cs" />
     <Compile Include="Areas\IATA\IATAAreaRegistration.cs" />
     <Compile Include="APIHelper\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Areas\SabreSoap\Controllers\HotelController.cs" />
+    <Compile Include="Areas\SabreSoap\SabreSoapAreaRegistration.cs" />
     <Compile Include="Areas\Sabre\Controllers\AdvancedCalendarController.cs" />
     <Compile Include="Areas\Sabre\Controllers\AirportsAtCitiesController.cs" />
     <Compile Include="Areas\Sabre\Controllers\CityPairsController.cs" />
@@ -355,6 +357,8 @@
     <Folder Include="Areas\Google\Views\Shared\" />
     <Folder Include="Areas\IATA\Models\" />
     <Folder Include="Areas\IATA\Views\Shared\" />
+    <Folder Include="Areas\SabreSoap\Models\" />
+    <Folder Include="Areas\SabreSoap\Views\Shared\" />
     <Folder Include="Areas\Sabre\Models\" />
     <Folder Include="Areas\Sabre\Views\Shared\" />
     <Folder Include="Areas\TripAdvisor\Models\" />
@@ -397,7 +401,10 @@
     <Content Include="Areas\Yelp\Views\web.config" />
   </ItemGroup>
   <ItemGroup>
+
     <Content Include="Constants\airports_highranked.json" />
+    <Content Include="Areas\SabreSoap\Views\web.config" />
+
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

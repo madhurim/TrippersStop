@@ -2,6 +2,13 @@ using System.Configuration;
 using TraveLayer.CustomTypes.Weather;
 using TrippismApi.TraveLayer;
 using System.Linq;
+using TAVM=TraveLayer.CustomTypes.TripAdvisor.ViewModels;
+using RS=TraveLayer.CustomTypes.TripAdvisor.Response;
+using Trippism.APIHelper;
+using TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels;
+using TraveLayer.SoapServices.Hotel.Sabre.HotelAvailabilityRequest;
+using TraveLayer.SoapServices.Hotel.Sabre;
+using TraveLayer.SoapServices.Hotel;
 
 namespace TrippismApi
 {
@@ -22,7 +29,21 @@ namespace TrippismApi
             apiCaller.Authorization = "bearer";
             apiCaller.ContentType = "application/json";
         }
-
+        public static void SetSabreSoapApiToken(ISabreHotel apiCaller, ICacheService cacheService)
+        {
+            apiCaller.SecurityToken = cacheService.GetByKey<string>(apiCaller.SabreSessionTokenKey);
+            if (string.IsNullOrWhiteSpace(apiCaller.SecurityToken))
+            {
+                SabreSessionCaller sabreSessionCaller = new SabreSessionCaller();
+                apiCaller.SecurityToken = sabreSessionCaller.GetToken();
+                string expireTime = ConfigurationManager.AppSettings.Get("SabreSoapSessionExpireInMin");
+                if(!string.IsNullOrWhiteSpace(expireTime))
+                {
+                    cacheService.Save<string>(apiCaller.SabreSessionTokenKey, apiCaller.SecurityToken, double.Parse(expireTime));
+                }
+              
+            }
+        }
         private static void SaveTokenInCache(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             double expireTimeInSec;
@@ -148,5 +169,7 @@ namespace TrippismApi
             }
 
         }
+
+   
     }
 }

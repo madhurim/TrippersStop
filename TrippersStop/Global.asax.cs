@@ -5,6 +5,12 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using TraveLayer.CacheServices;
 using Trippism.APIHelper;
+using TraveLayer.CustomTypes.Sabre;
+using TraveLayer.CustomTypes.Sabre.ViewModels;
+using TraveLayer.CustomTypes.Weather;
+using TraveLayer.SoapServices.Hotel;
+using TraveLayer.SoapServices.Hotel.Sabre;
+
 using TrippismApi.TraveLayer;
 
 namespace TrippismApi
@@ -43,6 +49,8 @@ namespace TrippismApi
 
             container.RegisterWebApiRequest<IAsyncYouTubeAPICaller, YouTubeAPICaller>();
             container.RegisterWebApiRequest<ITripAdvisorAPIAsyncCaller, TripAdvisorAPICaller>();
+            container.RegisterWebApiRequest<ISabreHotel, SabreHotelCaller>();
+            
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 
@@ -54,6 +62,7 @@ namespace TrippismApi
             RegisterMap registerMap = new RegisterMap();
             registerMap.RegisterMappingEntities();
             registerMap.RegisterTripAdvisorMapping();
+            RegisterMap.RegisterSabreSoapMapping();
 
             //GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
             // GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));

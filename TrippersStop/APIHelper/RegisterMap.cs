@@ -11,6 +11,8 @@ using TraveLayer.CustomTypes.Google.Response;
 using RS = TraveLayer.CustomTypes.TripAdvisor.Response;
 using TraveLayer.CustomTypes.Yelp.Response;
 using TraveLayer.CustomTypes.YouTube.Response;
+using TraveLayer.SoapServices.Hotel.Sabre.HotelAvailabilityRequest;
+using TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels;
 
 namespace Trippism.APIHelper
 {
@@ -206,6 +208,37 @@ namespace Trippism.APIHelper
                 .Member(h => h.TripTypes, m => m.trip_types)
                 .Member(h => h.Reviews, m => m.reviews)
                 .Member(h => h.Awards, m => m.awards);
+        }
+
+        public static void RegisterSabreSoapMapping()
+        {
+
+            Mapper.Register<OTA_HotelAvailRSAvailabilityOptionBasicPropertyInfoProperty, HotelRating>()
+             .Member(h => h.Rating, m => m.Rating)
+             .Member(h => h.RatingText, m => m.Text);
+
+            Mapper.Register<OTA_HotelAvailRSAvailabilityOptionBasicPropertyInfoRateRange, RateRange>()
+             .Member(h => h.CurrencyCode, m => m.CurrencyCode)
+             .Member(h => h.Min, m => m.Min)
+             .Member(h => h.Max, m => m.Max);
+
+            Mapper.Register<OTA_HotelAvailRSAvailabilityOptionBasicPropertyInfo, HotelDetail>()
+             .Member(h => h.Address, m => m.Address)
+             .Member(h => h.HotelCityCode, m => m.HotelCityCode)
+             .Member(h => h.HotelCode, m => m.HotelCode)
+             .Member(h => h.HotelName, m => m.HotelName)
+             .Member(h => h.Latitude, m => m.Latitude)
+             .Member(h => h.HotelRating, m => m.Property)
+             .Member(h => h.RateRange, m => m.RateRange)
+             .Member(h => h.Longitude, m => m.Longitude);
+
+
+            Mapper.Register<OTA_HotelAvailRSAvailabilityOption, HotelAvailability>()
+                .Member(h => h.HotelDetail, m => m.BasicPropertyInfo);
+
+
+            Mapper.Register<OTA_HotelAvailRS, Hotels>()
+           .Member(h => h.HotelAvailability, m => m.AvailabilityOptions);
         }
     }
 }
