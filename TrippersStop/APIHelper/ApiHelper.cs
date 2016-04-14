@@ -11,6 +11,10 @@ using System.Linq;
 using TAVM=TraveLayer.CustomTypes.TripAdvisor.ViewModels;
 using RS=TraveLayer.CustomTypes.TripAdvisor.Response;
 using Trippism.APIHelper;
+using TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels;
+using TraveLayer.SoapServices.Hotel.Sabre.HotelAvailabilityRequest;
+using TraveLayer.SoapServices.Hotel.Sabre;
+using TraveLayer.SoapServices.Hotel;
 
 namespace TrippismApi
 {
@@ -31,7 +35,21 @@ namespace TrippismApi
             apiCaller.Authorization = "bearer";
             apiCaller.ContentType = "application/json";
         }
-
+        public static void SetSabreSoapApiToken(ISabreHotel apiCaller, ICacheService cacheService)
+        {
+            apiCaller.SecurityToken = cacheService.GetByKey<string>(apiCaller.SabreSessionTokenKey);
+            if (string.IsNullOrWhiteSpace(apiCaller.SecurityToken))
+            {
+                SabreSessionCaller sabreSessionCaller = new SabreSessionCaller();
+                apiCaller.SecurityToken = sabreSessionCaller.GetToken();
+                string expireTime = ConfigurationManager.AppSettings.Get("SabreSoapSessionExpireInMin");
+                if(!string.IsNullOrWhiteSpace(expireTime))
+                {
+                    cacheService.Save<string>(apiCaller.SabreSessionTokenKey, apiCaller.SecurityToken, double.Parse(expireTime));
+                }
+              
+            }
+        }
         private static void SaveTokenInCache(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             double expireTimeInSec;
@@ -329,6 +347,37 @@ namespace TrippismApi
 
             }
 
+        }
+
+        public static void RegisterSabreSoapMapping()
+        {
+
+            Mapper.Register<OTA_HotelAvailRSAvailabilityOptionBasicPropertyInfoProperty, HotelRating>()
+             .Member(h => h.Rating, m => m.Rating)
+             .Member(h => h.RatingText, m => m.Text);
+
+            Mapper.Register<OTA_HotelAvailRSAvailabilityOptionBasicPropertyInfoRateRange, RateRange>()
+             .Member(h => h.CurrencyCode, m => m.CurrencyCode)
+             .Member(h => h.Min, m => m.Min)
+             .Member(h => h.Max, m => m.Max);
+
+            Mapper.Register<OTA_HotelAvailRSAvailabilityOptionBasicPropertyInfo, HotelDetail>()
+             .Member(h => h.Address, m => m.Address)
+             .Member(h => h.HotelCityCode, m => m.HotelCityCode)
+             .Member(h => h.HotelCode, m => m.HotelCode)
+             .Member(h => h.HotelName, m => m.HotelName)
+             .Member(h => h.Latitude, m => m.Latitude)
+             .Member(h => h.HotelRating, m => m.Property)
+             .Member(h => h.RateRange, m => m.RateRange)
+             .Member(h => h.Longitude, m => m.Longitude);
+
+
+            Mapper.Register<OTA_HotelAvailRSAvailabilityOption, HotelAvailability>()
+                .Member(h => h.HotelDetail, m => m.BasicPropertyInfo);
+
+
+            Mapper.Register<OTA_HotelAvailRS, Hotels>()
+           .Member(h => h.HotelAvailability, m => m.AvailabilityOptions);
         }
     }
 }

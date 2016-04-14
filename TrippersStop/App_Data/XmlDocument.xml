@@ -491,6 +491,11 @@
             API to retrieve data for city pairs.
             </summary>
         </member>
+        <member name="M:Trippism.Areas.SabreSoap.Controllers.HotelController.#ctor(TraveLayer.SoapServices.Hotel.Sabre.ISabreHotel,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
         <member name="T:TrippismApi.Areas.Sabre.Controllers.AdvancedCalendarController">
             <summary>
             AdvancedCalendar is used for -

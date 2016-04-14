@@ -99,6 +99,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
@@ -147,6 +148,15 @@
     <Compile Include="CustomTypes\IATA\ViewModels\Entity.cs" />
     <Compile Include="CustomTypes\IATA\ViewModels\IATACode.cs" />
     <Compile Include="CustomTypes\NLog\InstaFlightNLog.cs" />
+    <Compile Include="CustomTypes\SabreSoap\Request\HotelRequest.cs" />
+    <Compile Include="CustomTypes\SabreSoap\ViewModels\Hotel.cs" />
+    <Compile Include="CustomTypes\SabreSoap\ViewModels\HotelAvailability.cs" />
+    <Compile Include="CustomTypes\SabreSoap\ViewModels\HotelDetail.cs" />
+    <Compile Include="CustomTypes\SabreSoap\ViewModels\HotelOutput.cs" />
+    <Compile Include="CustomTypes\SabreSoap\ViewModels\HotelRating.cs" />
+    <Compile Include="CustomTypes\SabreSoap\ViewModels\HotelResponse.cs" />
+    <Compile Include="CustomTypes\SabreSoap\ViewModels\Hotels.cs" />
+    <Compile Include="CustomTypes\SabreSoap\ViewModels\RateRange.cs" />
     <Compile Include="CustomTypes\Sabre\Request\AdvancedCalendar.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -245,6 +255,11 @@
     <Compile Include="CustomTypes\YouTube\Response\YouTubeOutput.cs" />
     <Compile Include="CustomTypes\YouTube\ViewModels\YouTube.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoapServices\Hotel\Sabre\ProxyFiles\HotelAvailabilityRequest\OTA_HotelAvailLLSRQProxy.cs" />
+    <Compile Include="SoapServices\Hotel\Sabre\ProxyFiles\SessionCreateRequest\SessionCreateRQProxy.cs" />
+    <Compile Include="SoapServices\Hotel\Sabre\Services\ISabreHotel.cs" />
+    <Compile Include="SoapServices\Hotel\Sabre\Services\SabreHotelCaller.cs" />
+    <Compile Include="SoapServices\Hotel\Sabre\Services\SabreSessionCaller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
