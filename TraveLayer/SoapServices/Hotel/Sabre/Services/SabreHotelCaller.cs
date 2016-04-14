@@ -22,6 +22,13 @@ namespace TraveLayer.SoapServices.Hotel.Sabre
             }
         }
 
+        private string SabreSoapBaseServiceURL
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreSoapBaseServiceURL"];
+            }
+        }
         private string IPCC
         {
             get
@@ -58,28 +65,33 @@ namespace TraveLayer.SoapServices.Hotel.Sabre
                 GuestCounts = GetGuestCount(hotelRequest),
                 HotelSearchCriteria = GetHotelSearchCriteria(hotelRequest),
                 TimeSpan = GetTimeSpan(hotelRequest),
-                RatePlanCandidates = new OTA_HotelAvailRQAvailRequestSegmentRatePlanCandidates()
-                {
-                    RateRange = new OTA_HotelAvailRQAvailRequestSegmentRatePlanCandidatesRateRange()
-                    {
-                        CurrencyCode = hotelRequest.CurrencyCode,
-                    }
-                }
+                RatePlanCandidates = GetRatePlan(hotelRequest)
             };
 
-            TraveLayer.SoapServices.Hotel.Sabre.HotelAvailabilityRequest.OTA_HotelAvailService serviceObj = new TraveLayer.SoapServices.Hotel.Sabre.HotelAvailabilityRequest.OTA_HotelAvailService();
-            serviceObj.MessageHeaderValue = msgHeader;
-            serviceObj.Security = new Security1()
+            OTA_HotelAvailService hotelAvailService = new OTA_HotelAvailService()
                 {
-                    BinarySecurityToken = this.SecurityToken,
+                    Url = SabreSoapBaseServiceURL,
+                    MessageHeaderValue = msgHeader,
+                    Security = new Security1()
+                    {
+                        BinarySecurityToken = this.SecurityToken,
+                    }
                 };
 
-            OTA_HotelAvailRS response = serviceObj.OTA_HotelAvailRQ(hotelAvailRQ);
+            OTA_HotelAvailRS response = hotelAvailService.OTA_HotelAvailRQ(hotelAvailRQ);
 
-            // if (resp..Errors != null && resp.Errors.Error != null)
-            // {
-            // }
             return response;
+        }
+
+        private OTA_HotelAvailRQAvailRequestSegmentRatePlanCandidates GetRatePlan(HotelRequest hotelRequest)
+        {
+            return new OTA_HotelAvailRQAvailRequestSegmentRatePlanCandidates()
+                 {
+                     RateRange = new OTA_HotelAvailRQAvailRequestSegmentRatePlanCandidatesRateRange()
+                     {
+                         CurrencyCode = hotelRequest.CurrencyCode,
+                     }
+                 };
         }
         private To GetToMessageHeader()
         {

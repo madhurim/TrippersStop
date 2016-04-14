@@ -15,6 +15,16 @@ namespace TraveLayer.SoapServices.Hotel.Sabre
         const string SessionService = "SessionCreate";
         const string SessionPartyTo = "WebServiceSupplier";
         const string SessionPartyFrom = "WebServiceClient";
+
+        private string SabreSoapBaseServiceURL
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["SabreSoapBaseServiceURL"];
+            }
+        }
+
+
         private string UserName
         {
             get
@@ -90,6 +100,7 @@ namespace TraveLayer.SoapServices.Hotel.Sabre
 
                 SessionCreateRQService sessionCreateRQService = new SessionCreateRQService()
                 {
+                    Url=SabreSoapBaseServiceURL,
                     MessageHeaderValue = msgHeader,
                     SecurityValue = security
                 };
@@ -100,7 +111,8 @@ namespace TraveLayer.SoapServices.Hotel.Sabre
                 {
                     throw new HttpRequestException(string.Format("Sabre request failed: {0}", sessionCreateRS.Errors.Error.ErrorInfo.Message));
                 }
-
+                msgHeader = sessionCreateRQService.MessageHeaderValue;
+                security = sessionCreateRQService.SecurityValue;
                 return security.BinarySecurityToken;
 
             }
