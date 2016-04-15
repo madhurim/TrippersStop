@@ -17,18 +17,31 @@ namespace TrippismApi.TraveLayer
 
     public class RedisService : ICacheService
     {
+        String _RedisServer = WebConfigurationManager.AppSettings["RedisServer"];
+
+        double _RedisExpireInMin = 0;
+            //double.Parse(WebConfigurationManager.AppSettings["RedisExpireInMin"].ToString());
+
         public double RedisExpireInMin 
         {
             get 
             {
-                return double.Parse(WebConfigurationManager.AppSettings["RedisExpireInMin"].ToString()); 
+                return _RedisExpireInMin; 
+            }
+            set
+            {
+                _RedisExpireInMin = value;
             }
         }
         public string RedisHost
         {
             get
             {
-                return WebConfigurationManager.AppSettings["RedisServer"];
+                return _RedisServer;
+            }
+            set 
+            {
+                _RedisServer = value;
             }
         }
 
@@ -104,7 +117,8 @@ namespace TrippismApi.TraveLayer
             {
                 using (var redisClient = new RedisClient(RedisHost))
                 {
-                    isSuccess=redisClient.IsSocketConnected();
+
+                    isSuccess = redisClient.Ping();
                 }
             }
             catch

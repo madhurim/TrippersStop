@@ -37,5 +37,18 @@ namespace TrippismTests
 
             Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode); // <5>*/
         }
+        [Fact]
+        public void RedisAwsTest()
+        {
+            RedisService redis = new RedisService();
+            redis.RedisHost = "ec2-54-187-128-185.us-west-2.compute.amazonaws.com";
+           // redis.RedisHost = "localhost";
+            redis.RedisExpireInMin = 10;
+            
+            if(redis.IsConnected())
+            {
+                redis.Save<String>("Test", "Aws");
+            }
+        }
     }
 }
