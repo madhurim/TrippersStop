@@ -2,13 +2,7 @@ using System.Configuration;
 using TraveLayer.CustomTypes.Weather;
 using TrippismApi.TraveLayer;
 using System.Linq;
-using TAVM=TraveLayer.CustomTypes.TripAdvisor.ViewModels;
-using RS=TraveLayer.CustomTypes.TripAdvisor.Response;
-using Trippism.APIHelper;
-using TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels;
-using TraveLayer.SoapServices.Hotel.Sabre.HotelAvailabilityRequest;
-using TraveLayer.SoapServices.Hotel.Sabre;
-using TraveLayer.SoapServices.Hotel;
+using TrippismApi.TraveLayer.Hotel.Sabre;
 
 namespace TrippismApi
 {
@@ -29,7 +23,7 @@ namespace TrippismApi
             apiCaller.Authorization = "bearer";
             apiCaller.ContentType = "application/json";
         }
-        public static void SetSabreSoapApiToken(ISabreHotel apiCaller, ICacheService cacheService)
+        public static void SetSabreSoapApiToken(ISabreHotelSoapCaller apiCaller, ICacheService cacheService)
         {
             apiCaller.SecurityToken = cacheService.GetByKey<string>(apiCaller.SabreSessionTokenKey);
             if (string.IsNullOrWhiteSpace(apiCaller.SecurityToken))

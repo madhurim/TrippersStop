@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SabreHotelSoapCallerBusinessLayer.cs" />
     <Compile Include="GoogleAttractionsBusinessLayer.cs" />
     <Compile Include="IBusinessLayer.cs" />
     <Compile Include="FareInsightsBusinessLayer.cs" />

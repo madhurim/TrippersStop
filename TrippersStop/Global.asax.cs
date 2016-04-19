@@ -1,17 +1,15 @@
-﻿using SimpleInjector;
+﻿using BusinessLogic;
+using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using TraveLayer.CacheServices;
+using TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels;
+using TraveLayer.CustomTypes.SabreSoap.ViewModels;
 using Trippism.APIHelper;
-using TraveLayer.CustomTypes.Sabre;
-using TraveLayer.CustomTypes.Sabre.ViewModels;
-using TraveLayer.CustomTypes.Weather;
-using TraveLayer.SoapServices.Hotel;
-using TraveLayer.SoapServices.Hotel.Sabre;
-
 using TrippismApi.TraveLayer;
+using TrippismApi.TraveLayer.Hotel.Sabre;
 
 namespace TrippismApi
 {
@@ -49,7 +47,8 @@ namespace TrippismApi
 
             container.RegisterWebApiRequest<IAsyncYouTubeAPICaller, YouTubeAPICaller>();
             container.RegisterWebApiRequest<ITripAdvisorAPIAsyncCaller, TripAdvisorAPICaller>();
-            container.RegisterWebApiRequest<ISabreHotel, SabreHotelCaller>();
+            container.RegisterWebApiRequest<ISabreHotelSoapCaller, SabreHotelCaller>();
+            container.RegisterWebApiRequest<IBusinessLayer<Hotels, HotelOutput>, SabreHotelSoapCallerBusinessLayer>();
             
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);

@@ -11,8 +11,8 @@ using TraveLayer.CustomTypes.Google.Response;
 using RS = TraveLayer.CustomTypes.TripAdvisor.Response;
 using TraveLayer.CustomTypes.Yelp.Response;
 using TraveLayer.CustomTypes.YouTube.Response;
-using TraveLayer.SoapServices.Hotel.Sabre.HotelAvailabilityRequest;
 using TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels;
+using TrippismApi.TraveLayer.Hotel.Sabre.HotelAvailabilityRequest;
 
 namespace Trippism.APIHelper
 {

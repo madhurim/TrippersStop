@@ -48,6 +48,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="BusinessLogic">
+      <HintPath>..\BusinessLogic\bin\Debug\BusinessLogic.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -261,8 +264,7 @@
     <Compile Include="Areas\IATA\Controllers\IATAController.cs" />
     <Compile Include="Areas\IATA\IATAAreaRegistration.cs" />
     <Compile Include="APIHelper\CustomAuthorizeAttribute.cs" />
-    <Compile Include="Areas\SabreSoap\Controllers\HotelController.cs" />
-    <Compile Include="Areas\SabreSoap\SabreSoapAreaRegistration.cs" />
+    <Compile Include="Areas\Sabre\Controllers\HotelController.cs" />
     <Compile Include="Areas\Sabre\Controllers\AdvancedCalendarController.cs" />
     <Compile Include="Areas\Sabre\Controllers\AirportsAtCitiesController.cs" />
     <Compile Include="Areas\Sabre\Controllers\CityPairsController.cs" />
@@ -357,8 +359,6 @@
     <Folder Include="Areas\Google\Views\Shared\" />
     <Folder Include="Areas\IATA\Models\" />
     <Folder Include="Areas\IATA\Views\Shared\" />
-    <Folder Include="Areas\SabreSoap\Models\" />
-    <Folder Include="Areas\SabreSoap\Views\Shared\" />
     <Folder Include="Areas\Sabre\Models\" />
     <Folder Include="Areas\Sabre\Views\Shared\" />
     <Folder Include="Areas\TripAdvisor\Models\" />
@@ -401,10 +401,7 @@
     <Content Include="Areas\Yelp\Views\web.config" />
   </ItemGroup>
   <ItemGroup>
-
     <Content Include="Constants\airports_highranked.json" />
-    <Content Include="Areas\SabreSoap\Views\web.config" />
-
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

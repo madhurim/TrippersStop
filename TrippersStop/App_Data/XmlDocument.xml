@@ -491,9 +491,14 @@
             API to retrieve data for city pairs.
             </summary>
         </member>
-        <member name="M:Trippism.Areas.SabreSoap.Controllers.HotelController.#ctor(TraveLayer.SoapServices.Hotel.Sabre.ISabreHotel,TrippismApi.TraveLayer.ICacheService)">
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.HotelController.#ctor(TrippismApi.TraveLayer.Hotel.Sabre.ISabreHotelSoapCaller,TrippismApi.TraveLayer.ICacheService,BusinessLogic.IBusinessLayer{TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels.Hotels,TraveLayer.CustomTypes.SabreSoap.ViewModels.HotelOutput})">
             <summary>
             Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.HotelController.Get(TraveLayer.CustomTypes.Sabre.SoapServices.Request.HotelRequest)">
+            <summary>
+            API returns the hoatel range based on city code and date 
             </summary>
         </member>
         <member name="T:TrippismApi.Areas.Sabre.Controllers.AdvancedCalendarController">

@@ -125,6 +125,7 @@
     <Compile Include="APIServices\IAPICaller.cs" />
     <Compile Include="APIServices\IAsyncGoogleAPICaller.cs" />
     <Compile Include="APIServices\IAsyncGoogleReverseLookupAPICaller.cs" />
+    <Compile Include="APIServices\ISabreSoapCaller.cs" />
     <Compile Include="APIServices\ITripAdvisorAPIAsyncCaller.cs" />
     <Compile Include="APIServices\IAsyncGooglePlaceAPICaller.cs" />
     <Compile Include="APIServices\IAsyncWeatherAPICaller.cs" />
@@ -260,11 +261,11 @@
     <Compile Include="CustomTypes\YouTube\Response\YouTubeOutput.cs" />
     <Compile Include="CustomTypes\YouTube\ViewModels\YouTube.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SoapServices\Hotel\Sabre\ProxyFiles\HotelAvailabilityRequest\OTA_HotelAvailLLSRQProxy.cs" />
-    <Compile Include="SoapServices\Hotel\Sabre\ProxyFiles\SessionCreateRequest\SessionCreateRQProxy.cs" />
-    <Compile Include="SoapServices\Hotel\Sabre\Services\ISabreHotel.cs" />
-    <Compile Include="SoapServices\Hotel\Sabre\Services\SabreHotelCaller.cs" />
-    <Compile Include="SoapServices\Hotel\Sabre\Services\SabreSessionCaller.cs" />
+    <Compile Include="APIServices\ProxyFiles\HotelAvailabilityRequest\OTA_HotelAvailLLSRQProxy.cs" />
+    <Compile Include="APIServices\ProxyFiles\SessionCreateRequest\SessionCreateRQProxy.cs" />
+    <Compile Include="APIServices\ISabreHotelSoapCaller.cs" />
+    <Compile Include="APIServices\SabreHotelCaller.cs" />
+    <Compile Include="APIServices\SabreSessionCaller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
