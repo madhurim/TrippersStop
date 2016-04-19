@@ -51,6 +51,7 @@ namespace Trippism.Areas.SabreSoap.Controllers
             return hotelResponse;
         }
 
+
         private Hotel GetHotel(TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels.Hotels response,string star)
         {
             Hotel hotel = new Hotel()
