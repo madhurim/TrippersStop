@@ -17,10 +17,8 @@ namespace TrippismApi.TraveLayer
 
     public class RedisService : ICacheService
     {
-        String _RedisServer = WebConfigurationManager.AppSettings["RedisServer"];
-
-        double _RedisExpireInMin = 0;
-            //double.Parse(WebConfigurationManager.AppSettings["RedisExpireInMin"].ToString());
+        String _RedisServer ;
+        double _RedisExpireInMin;
 
         public double RedisExpireInMin 
         {
