@@ -43,6 +43,14 @@ namespace TrippismApi.TraveLayer
             }
         }
 
+        public RedisService()
+        {
+
+            _RedisServer = WebConfigurationManager.AppSettings["RedisHost"].ToString();
+            _RedisExpireInMin = double.Parse(WebConfigurationManager.AppSettings["RedisExpireInMin"]);
+
+        }
+
         public bool Save<T>(string key, T keyData, double expireInMin)
         {
             bool isSuccess = false;
