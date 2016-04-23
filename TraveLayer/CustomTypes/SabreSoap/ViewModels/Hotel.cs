@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TraveLayer.CustomTypes.SabreSoap.ViewModels
 {
-    public class Hotel
+    public class  Hotel
     {
         public string Star { get; set; }
         public decimal MinimumPriceAvg { get; set; }
