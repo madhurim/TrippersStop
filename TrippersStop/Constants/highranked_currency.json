@@ -1,0 +1,2802 @@
+[
+  {
+    "aCode": "AAL",
+    "cCode": "DKK"
+  },
+  {
+    "aCode": "AES",
+    "cCode": "NOK"
+  },
+  {
+    "aCode": "AAR",
+    "cCode": "DKK"
+  },
+  {
+    "aCode": "ABA",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "ABZ",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "AHB",
+    "cCode": "SAR"
+  },
+  {
+    "aCode": "ABJ",
+    "cCode": "XOF"
+  },
+  {
+    "aCode": "AUH",
+    "cCode": "AED"
+  },
+  {
+    "aCode": "ACA",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "ADK",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "ADA",
+    "cCode": "TRY"
+  },
+  {
+    "aCode": "ADD",
+    "cCode": "ETB"
+  },
+  {
+    "aCode": "ADL",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "AER",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "AGA",
+    "cCode": "MAD"
+  },
+  {
+    "aCode": "IXA",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "AMD",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "AJA",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "AEY",
+    "cCode": "ISK"
+  },
+  {
+    "aCode": "ALY",
+    "cCode": "EGP"
+  },
+  {
+    "aCode": "AXD",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "AHO",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "ALG",
+    "cCode": "DZD"
+  },
+  {
+    "aCode": "ALC",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "ASP",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "LEI",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "AMM",
+    "cCode": "JOD"
+  },
+  {
+    "aCode": "ATQ",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "AMS",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "DYR",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "AAQ",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "ANC",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "AZN",
+    "cCode": "UZS"
+  },
+  {
+    "aCode": "AGH",
+    "cCode": "SEK"
+  },
+  {
+    "aCode": "ANK",
+    "cCode": "TRY"
+  },
+  {
+    "aCode": "AYT",
+    "cCode": "TRY"
+  },
+  {
+    "aCode": "ANU",
+    "cCode": "XCD"
+  },
+  {
+    "aCode": "APW",
+    "cCode": "WST"
+  },
+  {
+    "aCode": "AQJ",
+    "cCode": "JOD"
+  },
+  {
+    "aCode": "AJU",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "ARH",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "ARM",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "AUA",
+    "cCode": "AWG"
+  },
+  {
+    "aCode": "YEK",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "AVL",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "ASB",
+    "cCode": "TMT"
+  },
+  {
+    "aCode": "ASE",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "TSE",
+    "cCode": "KZT"
+  },
+  {
+    "aCode": "ASF",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "OVD",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "ASU",
+    "cCode": "PYG"
+  },
+  {
+    "aCode": "ATH",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "ATL",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "AKL",
+    "cCode": "NZD"
+  },
+  {
+    "aCode": "MUC",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "IXU",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "BJZ",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "IXB",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "BAH",
+    "cCode": "BHD"
+  },
+  {
+    "aCode": "BPN",
+    "cCode": "IDR"
+  },
+  {
+    "aCode": "BWI",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "BDO",
+    "cCode": "IDR"
+  },
+  {
+    "aCode": "BLR",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "BKK",
+    "cCode": "THB"
+  },
+  {
+    "aCode": "BCN",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "BRI",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "BAX",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "BAQ",
+    "cCode": "COP"
+  },
+  {
+    "aCode": "EAP",
+    "cCode": "CHF"
+  },
+  {
+    "aCode": "BUS",
+    "cCode": "GEL"
+  },
+  {
+    "aCode": "BJS",
+    "cCode": "CNY"
+  },
+  {
+    "aCode": "BEY",
+    "cCode": "LBP"
+  },
+  {
+    "aCode": "BEL",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "BFS",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "EGO",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "BEG",
+    "cCode": "RSD"
+  },
+  {
+    "aCode": "BZE",
+    "cCode": "BZD"
+  },
+  {
+    "aCode": "BHZ",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "BGO",
+    "cCode": "NOK"
+  },
+  {
+    "aCode": "BER",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "BDA",
+    "cCode": "BMD"
+  },
+  {
+    "aCode": "BRN",
+    "cCode": "CHF"
+  },
+  {
+    "aCode": "BHO",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "BBI",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "BHJ",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "BIO",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "BLL",
+    "cCode": "DKK"
+  },
+  {
+    "aCode": "BIM",
+    "cCode": "BSD"
+  },
+  {
+    "aCode": "BHX",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "FRU",
+    "cCode": "KGS"
+  },
+  {
+    "aCode": "BQS",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "BOO",
+    "cCode": "NOK"
+  },
+  {
+    "aCode": "BJV",
+    "cCode": "TRY"
+  },
+  {
+    "aCode": "BOG",
+    "cCode": "COP"
+  },
+  {
+    "aCode": "BOM",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "BOB",
+    "cCode": "XPF"
+  },
+  {
+    "aCode": "BOD",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "BOS",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "WBU",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "BOJ",
+    "cCode": "BGN"
+  },
+  {
+    "aCode": "BSB",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "BTS",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "BTK",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "BRE",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "BGI",
+    "cCode": "BBD"
+  },
+  {
+    "aCode": "BDS",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "BNE",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "BRS",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "BRU",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "BGA",
+    "cCode": "COP"
+  },
+  {
+    "aCode": "BUH",
+    "cCode": "RON"
+  },
+  {
+    "aCode": "BUD",
+    "cCode": "HUF"
+  },
+  {
+    "aCode": "BUE",
+    "cCode": "ARS"
+  },
+  {
+    "aCode": "BUF",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "BHK",
+    "cCode": "UZS"
+  },
+  {
+    "aCode": "SJD",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "CAG",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "CAI",
+    "cCode": "EGP"
+  },
+  {
+    "aCode": "CCU",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "YYC",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "CLO",
+    "cCode": "COP"
+  },
+  {
+    "aCode": "CGR",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "CAS",
+    "cCode": "MAD"
+  },
+  {
+    "aCode": "CBR",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "CUN",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "CEQ",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "CPT",
+    "cCode": "ZAR"
+  },
+  {
+    "aCode": "CCS",
+    "cCode": "VEF"
+  },
+  {
+    "aCode": "CWL",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "SAN",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "CNM",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "CTG",
+    "cCode": "COP"
+  },
+  {
+    "aCode": "CTA",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "CEB",
+    "cCode": "PHP"
+  },
+  {
+    "aCode": "CMI",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "IXC",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "CHQ",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "CHS",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "CLT",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "CEK",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "MAA",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "CTU",
+    "cCode": "CNY"
+  },
+  {
+    "aCode": "CYS",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "CNX",
+    "cCode": "THB"
+  },
+  {
+    "aCode": "CHI",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "CIX",
+    "cCode": "PEN"
+  },
+  {
+    "aCode": "KCL",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "CUU",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "KIV",
+    "cCode": "MDL"
+  },
+  {
+    "aCode": "HTA",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "CGP",
+    "cCode": "BDT"
+  },
+  {
+    "aCode": "CHC",
+    "cCode": "NZD"
+  },
+  {
+    "aCode": "CVG",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "TPA",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "CFE",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "CLE",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "CLJ",
+    "cCode": "RON"
+  },
+  {
+    "aCode": "COK",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "CJB",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "CGN",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "CMB",
+    "cCode": "LKR"
+  },
+  {
+    "aCode": "CPH",
+    "cCode": "DKK"
+  },
+  {
+    "aCode": "CPO",
+    "cCode": "CLP"
+  },
+  {
+    "aCode": "COR",
+    "cCode": "ARS"
+  },
+  {
+    "aCode": "ORK",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "CZM",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "CUC",
+    "cCode": "COP"
+  },
+  {
+    "aCode": "CUE",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "CGB",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "CUR",
+    "cCode": "ANG"
+  },
+  {
+    "aCode": "CWB",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "CUZ",
+    "cCode": "PEN"
+  },
+  {
+    "aCode": "DAD",
+    "cCode": "VND"
+  },
+  {
+    "aCode": "DKR",
+    "cCode": "XOF"
+  },
+  {
+    "aCode": "DLM",
+    "cCode": "TRY"
+  },
+  {
+    "aCode": "DFW",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "DAM",
+    "cCode": "SYP"
+  },
+  {
+    "aCode": "DMM",
+    "cCode": "SAR"
+  },
+  {
+    "aCode": "DAR",
+    "cCode": "TZS"
+  },
+  {
+    "aCode": "YDF",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "DEL",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "DNZ",
+    "cCode": "TRY"
+  },
+  {
+    "aCode": "DPS",
+    "cCode": "IDR"
+  },
+  {
+    "aCode": "DEN",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "DTT",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "DAC",
+    "cCode": "BDT"
+  },
+  {
+    "aCode": "DJE",
+    "cCode": "TND"
+  },
+  {
+    "aCode": "DNK",
+    "cCode": "UAH"
+  },
+  {
+    "aCode": "DOH",
+    "cCode": "QAR"
+  },
+  {
+    "aCode": "DOM",
+    "cCode": "XCD"
+  },
+  {
+    "aCode": "DOK",
+    "cCode": "UAH"
+  },
+  {
+    "aCode": "DTM",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "DHN",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "DLA",
+    "cCode": "XAF"
+  },
+  {
+    "aCode": "DRS",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "DXB",
+    "cCode": "AED"
+  },
+  {
+    "aCode": "DUB",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "DBV",
+    "cCode": "HRK"
+  },
+  {
+    "aCode": "DUR",
+    "cCode": "ZAR"
+  },
+  {
+    "aCode": "RDU",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "DYU",
+    "cCode": "TJS"
+  },
+  {
+    "aCode": "DUS",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "EDI",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "EGS",
+    "cCode": "ISK"
+  },
+  {
+    "aCode": "EIN",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "SVX",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "ETH",
+    "cCode": "ILS"
+  },
+  {
+    "aCode": "EMD",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "EBB",
+    "cCode": "UGX"
+  },
+  {
+    "aCode": "ECN",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "FMN",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "FAO",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "FYV",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "FEG",
+    "cCode": "UZS"
+  },
+  {
+    "aCode": "FEN",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "FEZ",
+    "cCode": "MAD"
+  },
+  {
+    "aCode": "HAM",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "GCN",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "PSA",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "FLR",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "FLW",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "FLN",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "FNL",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "FDF",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "FLL",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "YMM",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "FMY",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "VPS",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "FOR",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "FRA",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "FKL",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "FPO",
+    "cCode": "BSD"
+  },
+  {
+    "aCode": "FUE",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "FUK",
+    "cCode": "JPY"
+  },
+  {
+    "aCode": "FNC",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "FOC",
+    "cCode": "CNY"
+  },
+  {
+    "aCode": "GPS",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "GAU",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "GDN",
+    "cCode": "PLN"
+  },
+  {
+    "aCode": "GDZ",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "GVA",
+    "cCode": "CHF"
+  },
+  {
+    "aCode": "GEO",
+    "cCode": "GYD"
+  },
+  {
+    "aCode": "GRO",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "GLA",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "GOI",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "GYN",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "OOL",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "GOT",
+    "cCode": "SEK"
+  },
+  {
+    "aCode": "GRX",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "GCM",
+    "cCode": "KYD"
+  },
+  {
+    "aCode": "LYS",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "GDL",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "BJX",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "CAN",
+    "cCode": "CNY"
+  },
+  {
+    "aCode": "GUA",
+    "cCode": "GTQ"
+  },
+  {
+    "aCode": "GYE",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "KVD",
+    "cCode": "AZN"
+  },
+  {
+    "aCode": "HFA",
+    "cCode": "ILS"
+  },
+  {
+    "aCode": "YHZ",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "YTO",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "HGH",
+    "cCode": "CNY"
+  },
+  {
+    "aCode": "HAN",
+    "cCode": "VND"
+  },
+  {
+    "aCode": "HAJ",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "EVE",
+    "cCode": "NOK"
+  },
+  {
+    "aCode": "HAU",
+    "cCode": "NOK"
+  },
+  {
+    "aCode": "HAV",
+    "cCode": "CUP"
+  },
+  {
+    "aCode": "HEL",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "HER",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "HMO",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "ITO",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "HIJ",
+    "cCode": "JPY"
+  },
+  {
+    "aCode": "SGN",
+    "cCode": "VND"
+  },
+  {
+    "aCode": "HOG",
+    "cCode": "CUP"
+  },
+  {
+    "aCode": "HKG",
+    "cCode": "HKD"
+  },
+  {
+    "aCode": "HNL",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "HOU",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "HUN",
+    "cCode": "TWD"
+  },
+  {
+    "aCode": "HUX",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "HUY",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "HRG",
+    "cCode": "EGP"
+  },
+  {
+    "aCode": "HYD",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "IBZ",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "IGU",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "IGR",
+    "cCode": "ARS"
+  },
+  {
+    "aCode": "IOS",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "IND",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "IDR",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "INN",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "IOA",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "IQQ",
+    "cCode": "CLP"
+  },
+  {
+    "aCode": "IKT",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "ISB",
+    "cCode": "PKR"
+  },
+  {
+    "aCode": "ISC",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "IST",
+    "cCode": "TRY"
+  },
+  {
+    "aCode": "ZIH",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "IZM",
+    "cCode": "TRY"
+  },
+  {
+    "aCode": "JAX",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "JAI",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "JKT",
+    "cCode": "IDR"
+  },
+  {
+    "aCode": "JED",
+    "cCode": "SAR"
+  },
+  {
+    "aCode": "XRY",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "JPA",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "JDH",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "JNB",
+    "cCode": "ZAR"
+  },
+  {
+    "aCode": "IXJ",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "JDO",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "KBL",
+    "cCode": "AFN"
+  },
+  {
+    "aCode": "OGG",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "KGD",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "MKC",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "KHI",
+    "cCode": "PKR"
+  },
+  {
+    "aCode": "FKB",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "KTM",
+    "cCode": "NPR"
+  },
+  {
+    "aCode": "LIH",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "KUN",
+    "cCode": "LTL"
+  },
+  {
+    "aCode": "KVA",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "ASR",
+    "cCode": "TRY"
+  },
+  {
+    "aCode": "KZN",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "YLW",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "CFU",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "HRK",
+    "cCode": "UAH"
+  },
+  {
+    "aCode": "LBD",
+    "cCode": "TJS"
+  },
+  {
+    "aCode": "IEV",
+    "cCode": "UAH"
+  },
+  {
+    "aCode": "KIN",
+    "cCode": "JMD"
+  },
+  {
+    "aCode": "KTT",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "TYS",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "USM",
+    "cCode": "THB"
+  },
+  {
+    "aCode": "KXK",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "KOA",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "KYA",
+    "cCode": "TRY"
+  },
+  {
+    "aCode": "KBR",
+    "cCode": "MYR"
+  },
+  {
+    "aCode": "BKI",
+    "cCode": "MYR"
+  },
+  {
+    "aCode": "CCJ",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "KBV",
+    "cCode": "THB"
+  },
+  {
+    "aCode": "KRK",
+    "cCode": "PLN"
+  },
+  {
+    "aCode": "KUL",
+    "cCode": "MYR"
+  },
+  {
+    "aCode": "KCH",
+    "cCode": "MYR"
+  },
+  {
+    "aCode": "KUT",
+    "cCode": "GEL"
+  },
+  {
+    "aCode": "KAO",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "KWI",
+    "cCode": "KWD"
+  },
+  {
+    "aCode": "LCG",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "LPB",
+    "cCode": "BOB"
+  },
+  {
+    "aCode": "LAP",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "LOS",
+    "cCode": "NGN"
+  },
+  {
+    "aCode": "LHE",
+    "cCode": "PKR"
+  },
+  {
+    "aCode": "SUF",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "LGK",
+    "cCode": "MYR"
+  },
+  {
+    "aCode": "ACE",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "LCA",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "LPA",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "LAS",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "LEH",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "LBA",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "IXL",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "LXA",
+    "cCode": "CNY"
+  },
+  {
+    "aCode": "LIR",
+    "cCode": "CRC"
+  },
+  {
+    "aCode": "LIM",
+    "cCode": "PEN"
+  },
+  {
+    "aCode": "LIS",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "LPL",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "LJU",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "YXU",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "LON",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "LDY",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "LGB",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "LAX",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "SDF",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "LAD",
+    "cCode": "AOA"
+  },
+  {
+    "aCode": "LKO",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "LUG",
+    "cCode": "CHF"
+  },
+  {
+    "aCode": "VSG",
+    "cCode": "UAH"
+  },
+  {
+    "aCode": "LUX",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "LXR",
+    "cCode": "EGP"
+  },
+  {
+    "aCode": "LWO",
+    "cCode": "UAH"
+  },
+  {
+    "aCode": "MFM",
+    "cCode": "MOP"
+  },
+  {
+    "aCode": "MCZ",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "MAG",
+    "cCode": "PGK"
+  },
+  {
+    "aCode": "MSN",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "MAD",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "IXM",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "GDX",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "MQF",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "SEZ",
+    "cCode": "SCR"
+  },
+  {
+    "aCode": "MCX",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "AGP",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "MLE",
+    "cCode": "MVR"
+  },
+  {
+    "aCode": "MLA",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "MGA",
+    "cCode": "NIO"
+  },
+  {
+    "aCode": "MAO",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "MAN",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "IXE",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "MNL",
+    "cCode": "PHP"
+  },
+  {
+    "aCode": "ZLO",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "MDQ",
+    "cCode": "ARS"
+  },
+  {
+    "aCode": "MRS",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "MSU",
+    "cCode": "LSL"
+  },
+  {
+    "aCode": "MSS",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "MRU",
+    "cCode": "MUR"
+  },
+  {
+    "aCode": "MZT",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "MDE",
+    "cCode": "COP"
+  },
+  {
+    "aCode": "MEL",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "MEM",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "MDZ",
+    "cCode": "ARS"
+  },
+  {
+    "aCode": "MAH",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "MID",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "ETZ",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "MEX",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "MIA",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "JMK",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "MIL",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "MKE",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "MRV",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "MSP",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "MSQ",
+    "cCode": "BYR"
+  },
+  {
+    "aCode": "MOD",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "MBA",
+    "cCode": "KES"
+  },
+  {
+    "aCode": "MIR",
+    "cCode": "TND"
+  },
+  {
+    "aCode": "YQM",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "MCM",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "MBJ",
+    "cCode": "JMD"
+  },
+  {
+    "aCode": "MTY",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "MVD",
+    "cCode": "UYU"
+  },
+  {
+    "aCode": "YMQ",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "MOV",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "MLM",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "MOW",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "MJF",
+    "cCode": "NOK"
+  },
+  {
+    "aCode": "OMO",
+    "cCode": "BAM"
+  },
+  {
+    "aCode": "FMO",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "MJV",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "MMK",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "MCT",
+    "cCode": "OMR"
+  },
+  {
+    "aCode": "MYR",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "MJT",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "NDR",
+    "cCode": "MAD"
+  },
+  {
+    "aCode": "NGO",
+    "cCode": "JPY"
+  },
+  {
+    "aCode": "NAG",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "NBO",
+    "cCode": "KES"
+  },
+  {
+    "aCode": "NAL",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "NMA",
+    "cCode": "UZS"
+  },
+  {
+    "aCode": "YCD",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "NKG",
+    "cCode": "CNY"
+  },
+  {
+    "aCode": "NTE",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "NAP",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "NAS",
+    "cCode": "BSD"
+  },
+  {
+    "aCode": "NAT",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "NVT",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "NUX",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "MSY",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "NYC",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "NTL",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "NCL",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "ZNE",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "NHA",
+    "cCode": "VND"
+  },
+  {
+    "aCode": "NCE",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "NJC",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "GOJ",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "NSK",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "NQT",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "NOU",
+    "cCode": "XPF"
+  },
+  {
+    "aCode": "NOZ",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "OVB",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "NUE",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "OAK",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "ODS",
+    "cCode": "UAH"
+  },
+  {
+    "aCode": "OKA",
+    "cCode": "JPY"
+  },
+  {
+    "aCode": "OLB",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "OMS",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "ORN",
+    "cCode": "DZD"
+  },
+  {
+    "aCode": "SNA",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "REN",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "ORL",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "OSA",
+    "cCode": "JPY"
+  },
+  {
+    "aCode": "OSL",
+    "cCode": "NOK"
+  },
+  {
+    "aCode": "OSR",
+    "cCode": "CZK"
+  },
+  {
+    "aCode": "YOW",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "OUD",
+    "cCode": "MAD"
+  },
+  {
+    "aCode": "OUL",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "PPG",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "PMO",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "PSP",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "PMI",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "PFN",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "PTY",
+    "cCode": "PAB"
+  },
+  {
+    "aCode": "PPT",
+    "cCode": "XPF"
+  },
+  {
+    "aCode": "PFO",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "PBM",
+    "cCode": "SRD"
+  },
+  {
+    "aCode": "PAR",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "PBH",
+    "cCode": "BTN"
+  },
+  {
+    "aCode": "PAT",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "PWQ",
+    "cCode": "KZT"
+  },
+  {
+    "aCode": "PEN",
+    "cCode": "MYR"
+  },
+  {
+    "aCode": "PZE",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "PEI",
+    "cCode": "COP"
+  },
+  {
+    "aCode": "PEE",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "PER",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "PEW",
+    "cCode": "PKR"
+  },
+  {
+    "aCode": "PSG",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "PKC",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "PHL",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "PNH",
+    "cCode": "KHR"
+  },
+  {
+    "aCode": "PHX",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "HKT",
+    "cCode": "THB"
+  },
+  {
+    "aCode": "PZB",
+    "cCode": "ZAR"
+  },
+  {
+    "aCode": "PTG",
+    "cCode": "ZAR"
+  },
+  {
+    "aCode": "PIP",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "PIT",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "PIU",
+    "cCode": "PEN"
+  },
+  {
+    "aCode": "TGD",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "PIZ",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "PTP",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "PDL",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "PMV",
+    "cCode": "VEF"
+  },
+  {
+    "aCode": "PAP",
+    "cCode": "HTG"
+  },
+  {
+    "aCode": "IXZ",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "PLZ",
+    "cCode": "ZAR"
+  },
+  {
+    "aCode": "PHE",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "POS",
+    "cCode": "TTD"
+  },
+  {
+    "aCode": "PWM",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "PDX",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "POA",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "BPS",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "OPO",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "PRG",
+    "cCode": "CZK"
+  },
+  {
+    "aCode": "YXS",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "PRN",
+    "cCode": "RSD"
+  },
+  {
+    "aCode": "PLS",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "PXM",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "POP",
+    "cCode": "DOP"
+  },
+  {
+    "aCode": "PVR",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "PUY",
+    "cCode": "HRK"
+  },
+  {
+    "aCode": "PUW",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "PNQ",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "PUJ",
+    "cCode": "DOP"
+  },
+  {
+    "aCode": "PDP",
+    "cCode": "UYU"
+  },
+  {
+    "aCode": "TAO",
+    "cCode": "CNY"
+  },
+  {
+    "aCode": "YQB",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "ZQN",
+    "cCode": "NZD"
+  },
+  {
+    "aCode": "UIO",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "RBA",
+    "cCode": "MAD"
+  },
+  {
+    "aCode": "RAJ",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "IXR",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "REC",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "REG",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "YQR",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "RNS",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "REU",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "REK",
+    "cCode": "ISK"
+  },
+  {
+    "aCode": "RHO",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "RAO",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "RIX",
+    "cCode": "LVL"
+  },
+  {
+    "aCode": "RMI",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "RIO",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "RUH",
+    "cCode": "SAR"
+  },
+  {
+    "aCode": "RMC",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "RMA",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "ROM",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "ROV",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "RTM",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "RVN",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "SAC",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "STX",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "YYT",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "STL",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "SLU",
+    "cCode": "XCD"
+  },
+  {
+    "aCode": "SXM",
+    "cCode": "ANG"
+  },
+  {
+    "aCode": "LED",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "STT",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "LTT",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "SLC",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "SSA",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "SZG",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "KUF",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "SMI",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "ADZ",
+    "cCode": "COP"
+  },
+  {
+    "aCode": "SAT",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "BRC",
+    "cCode": "ARS"
+  },
+  {
+    "aCode": "SFO",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "SJC",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "SJO",
+    "cCode": "CRC"
+  },
+  {
+    "aCode": "SJU",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "SLP",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "CPC",
+    "cCode": "ARS"
+  },
+  {
+    "aCode": "AFA",
+    "cCode": "ARS"
+  },
+  {
+    "aCode": "SAL",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "EAS",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "SPC",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "SRZ",
+    "cCode": "BOB"
+  },
+  {
+    "aCode": "SMR",
+    "cCode": "COP"
+  },
+  {
+    "aCode": "SCL",
+    "cCode": "CLP"
+  },
+  {
+    "aCode": "STI",
+    "cCode": "DOP"
+  },
+  {
+    "aCode": "SDQ",
+    "cCode": "DOP"
+  },
+  {
+    "aCode": "SAO",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "VXE",
+    "cCode": "CVE"
+  },
+  {
+    "aCode": "SPK",
+    "cCode": "JPY"
+  },
+  {
+    "aCode": "RTW",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "YXE",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "SLZ",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "SEA",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "SEL",
+    "cCode": "KRW"
+  },
+  {
+    "aCode": "SVQ",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "SHA",
+    "cCode": "CNY"
+  },
+  {
+    "aCode": "SNN",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "SSH",
+    "cCode": "EGP"
+  },
+  {
+    "aCode": "SZX",
+    "cCode": "CNY"
+  },
+  {
+    "aCode": "SDZ",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "REP",
+    "cCode": "KHR"
+  },
+  {
+    "aCode": "SIN",
+    "cCode": "SGD"
+  },
+  {
+    "aCode": "SOF",
+    "cCode": "BGN"
+  },
+  {
+    "aCode": "SOU",
+    "cCode": "GBP"
+  },
+  {
+    "aCode": "SPU",
+    "cCode": "HRK"
+  },
+  {
+    "aCode": "GEG",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "SXR",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "RUN",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "SVG",
+    "cCode": "NOK"
+  },
+  {
+    "aCode": "STW",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "STO",
+    "cCode": "SEK"
+  },
+  {
+    "aCode": "SQO",
+    "cCode": "SEK"
+  },
+  {
+    "aCode": "SXB",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "STR",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "YSB",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "SUV",
+    "cCode": "FJD"
+  },
+  {
+    "aCode": "SYD",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "TPE",
+    "cCode": "TWD"
+  },
+  {
+    "aCode": "TLL",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "TAL",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "TNG",
+    "cCode": "MAD"
+  },
+  {
+    "aCode": "TAS",
+    "cCode": "UZS"
+  },
+  {
+    "aCode": "TBS",
+    "cCode": "GEL"
+  },
+  {
+    "aCode": "THR",
+    "cCode": "IRR"
+  },
+  {
+    "aCode": "TLV",
+    "cCode": "ILS"
+  },
+  {
+    "aCode": "TCI",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "THE",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "SKG",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "JTR",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "TRV",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "TIJ",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "TIA",
+    "cCode": "ALL"
+  },
+  {
+    "aCode": "TRZ",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "TIR",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "TIV",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "TYO",
+    "cCode": "JPY"
+  },
+  {
+    "aCode": "TOF",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "TLN",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "TUF",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "TSV",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "TPS",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "TIP",
+    "cCode": "LYD"
+  },
+  {
+    "aCode": "TOS",
+    "cCode": "NOK"
+  },
+  {
+    "aCode": "TRD",
+    "cCode": "NOK"
+  },
+  {
+    "aCode": "TUC",
+    "cCode": "ARS"
+  },
+  {
+    "aCode": "TUN",
+    "cCode": "TND"
+  },
+  {
+    "aCode": "TRN",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "TGZ",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "TJM",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "UDI",
+    "cCode": "BRL"
+  },
+  {
+    "aCode": "UDR",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "UFA",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "ULN",
+    "cCode": "MNT"
+  },
+  {
+    "aCode": "UUD",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "ULY",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "USH",
+    "cCode": "ARS"
+  },
+  {
+    "aCode": "BDQ",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "VLC",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "VLL",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "YVR",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "VRA",
+    "cCode": "CUP"
+  },
+  {
+    "aCode": "VNS",
+    "cCode": "INR"
+  },
+  {
+    "aCode": "VAR",
+    "cCode": "BGN"
+  },
+  {
+    "aCode": "VCE",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "VER",
+    "cCode": "MXN"
+  },
+  {
+    "aCode": "VRN",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "YYJ",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "VIE",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "VGO",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "VNO",
+    "cCode": "LTL"
+  },
+  {
+    "aCode": "OGZ",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "VVO",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "VOG",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "VOZ",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "WGA",
+    "cCode": "AUD"
+  },
+  {
+    "aCode": "WAW",
+    "cCode": "PLN"
+  },
+  {
+    "aCode": "WAS",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "WLG",
+    "cCode": "NZD"
+  },
+  {
+    "aCode": "PBI",
+    "cCode": "USD"
+  },
+  {
+    "aCode": "YWG",
+    "cCode": "CAD"
+  },
+  {
+    "aCode": "WRO",
+    "cCode": "PLN"
+  },
+  {
+    "aCode": "WUH",
+    "cCode": "CNY"
+  },
+  {
+    "aCode": "XMN",
+    "cCode": "CNY"
+  },
+  {
+    "aCode": "YKS",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "RGN",
+    "cCode": "MMK"
+  },
+  {
+    "aCode": "EVN",
+    "cCode": "AMD"
+  },
+  {
+    "aCode": "UUS",
+    "cCode": "RUB"
+  },
+  {
+    "aCode": "ZAD",
+    "cCode": "HRK"
+  },
+  {
+    "aCode": "ZAG",
+    "cCode": "HRK"
+  },
+  {
+    "aCode": "ZTH",
+    "cCode": "EUR"
+  },
+  {
+    "aCode": "ZNZ",
+    "cCode": "TZS"
+  },
+  {
+    "aCode": "CGO",
+    "cCode": "CNY"
+  },
+  {
+    "aCode": "ZRH",
+    "cCode": "CHF"
+  },
+  {
+    "aCode": "SHJ",
+    "cCode": "AED"
+  },
+  {
+    "aCode": "RPR",
+    "cCode": "INR"
+  }
+]
