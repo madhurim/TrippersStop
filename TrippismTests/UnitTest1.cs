@@ -53,7 +53,8 @@ namespace TrippismTests
             }
 
             NoSqlConnector mongoConnector = new NoSqlConnector();
-            IMongoDatabase monodb = mongoConnector.connect();
+            IMongoDatabase mongodb = mongoConnector.connect();
+            mongodb.CreateCollection("MyTestCollection");
             
 
         }
