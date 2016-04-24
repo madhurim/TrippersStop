@@ -17,8 +17,8 @@ namespace DataLayer
 
         public IMongoDatabase connect()
         {
-            _mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["MongodbConnection"].ConnectionString);
-            return _mongoClient.GetDatabase(ConfigurationManager.AppSettings["MongodbName"]);
+            _mongoClient = new MongoClient(ConfigurationManager.AppSettings["MongoDBServer"]);
+            return _mongoClient.GetDatabase(ConfigurationManager.AppSettings["MongoDBName"]);
         }
     }
 }
