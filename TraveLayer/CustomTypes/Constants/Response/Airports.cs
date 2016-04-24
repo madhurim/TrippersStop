@@ -53,4 +53,14 @@ namespace TraveLayer.CustomTypes.Constants.Response
         public int? rank { get; set; }
         public List<string> themes { get; set; }
     }
+    public class AirportCurrency
+    {
+        public string aCode { get; set; }    // airport_Code
+        public string cCode { get; set; }   // Currency_Code
+    }
+    public class AirportCurrencyOutput
+    {
+        public List<AirportCurrency> AirportCurrencies { get; set; }   
+
+    }
 }
