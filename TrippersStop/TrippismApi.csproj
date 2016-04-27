@@ -406,6 +406,9 @@
   <ItemGroup>
     <Content Include="Constants\highranked_currency.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Constants\airports_currency.json" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

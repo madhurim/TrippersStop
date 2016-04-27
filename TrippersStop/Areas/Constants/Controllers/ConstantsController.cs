@@ -109,7 +109,7 @@ namespace Trippism.Areas.Constants.Controllers
         }
 
 
-        [Route("api/Constants/GetHighRankedAirportsCurrency")]
+        [Route("api/Constants/GetAirportsCurrency")]
         [ResponseType(typeof(List<TraveLayer.CustomTypes.Constants.Response.AirportCurrency>))]
         public async Task<HttpResponseMessage> GetHighRankedAirportsCurrency()
         {
@@ -117,7 +117,7 @@ namespace Trippism.Areas.Constants.Controllers
             if (tripAirports != null)
                 return Request.CreateResponse(HttpStatusCode.OK, tripAirports);
 
-            string jsonPath = GetFullPath(ConfigurationManager.AppSettings["HighRankedAirportsCurrencyJsonPath"].ToString());
+            string jsonPath = GetFullPath(ConfigurationManager.AppSettings["AirportsCurrencyJsonPath"].ToString());
             return await Task.Run(() =>
             { return GetAirportCurrencyResponse(jsonPath, TrippismHighRankedAirportsCurrencyKey); });
         }
