@@ -12,8 +12,7 @@ namespace TraveLayer.CustomTypes.Sabre.SoapServices.Request
         public string GuestCounts { get; set; }
         public string HotelCityCode { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public string SecurityToken { get; set; }
+        public DateTime EndDate { get; set; } 
         public string CurrencyCode { get; set; }
     }
 }
