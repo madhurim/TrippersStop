@@ -71,39 +71,25 @@
       <Private>True</Private>
       <HintPath>..\packages\EntityFrameworkExtension.2.0.1\lib\System.Data.Entity.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TrippismEntities">
+      <HintPath>..\TrippismEntities\bin\Debug\TrippismEntities.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Anonymous.cs" />
-    <Compile Include="Entities\AuthDetails.cs" />
-    <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Entities\CustomerActivity.cs" />
-    <Compile Include="Entities\DefaultLog.cs" />
-    <Compile Include="Interfaces\IAnonymous.cs" />
-    <Compile Include="Interfaces\IAuthDetails.cs" />
-    <Compile Include="Interfaces\ICustomer.cs" />
-    <Compile Include="Interfaces\ICustomerActivity.cs" />
-    <Compile Include="Interfaces\IDefaultLog.cs" />
+    <Compile Include="Interfaces\IDBContext.cs" />
     <Compile Include="Interfaces\INoSqlConnector.cs" />
     <Compile Include="MongoDBProperty.cs" />
-    <Compile Include="NoSqlConnector.cs" />
+    <Compile Include="MongoDBConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Interfaces\IMongoDBRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IRepositoryAnonymous.cs" />
-    <Compile Include="Repositories\Interfaces\IRepositoryAuthDetails.cs" />
-    <Compile Include="Repositories\Interfaces\IRepositoryCustomerActivity.cs" />
-    <Compile Include="Repositories\Interfaces\IRepositoryDefaultLog.cs" />
-    <Compile Include="Repositories\MongoDBRepository.cs" />
-    <Compile Include="Repositories\RepositoryAnonymous.cs" />
-    <Compile Include="Repositories\RepositoryAuthDetails.cs" />
-    <Compile Include="Repositories\RepositoryCustomerActivity.cs" />
-    <Compile Include="Repositories\RepositoryDefaultLog.cs" />
+    <Compile Include="MongoDBContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -111,6 +97,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

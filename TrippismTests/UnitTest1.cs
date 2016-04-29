@@ -9,7 +9,6 @@ using System.Web;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using System.Net.Http;
 using System.Net;
-using DataLayer;
 using MongoDB.Driver;
 
 namespace TrippismTests
@@ -52,9 +51,9 @@ namespace TrippismTests
                 redis.Save<String>("trippism", "redis");
             }
 
-            NoSqlConnector mongoConnector = new NoSqlConnector();
-            IMongoDatabase mongodb = mongoConnector.connect();
-            mongodb.CreateCollection("MyTestCollection");
+            //NoSqlConnector mongoConnector = new NoSqlConnector();
+            //IMongoDatabase mongodb = mongoConnector.connect();
+            //mongodb.CreateCollection("MyTestCollection");
             
 
         }
