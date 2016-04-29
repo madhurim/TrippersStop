@@ -19,6 +19,7 @@ namespace TrippismApi.TraveLayer
     {
         String _RedisServer ;
         double _RedisExpireInMin;
+        String _RedisSlave;
 
         public double RedisExpireInMin 
         {
@@ -51,9 +52,11 @@ namespace TrippismApi.TraveLayer
 
         public bool Save<T>(string key, T keyData, double expireInMin)
         {
+
             bool isSuccess = false;
             try
             {
+                
                 using (var redisClient = new RedisClient(RedisHost))
                 {
                     isSuccess = redisClient.Set<T>(key, keyData, DateTime.Now.AddMinutes(expireInMin));
@@ -103,10 +106,24 @@ namespace TrippismApi.TraveLayer
         {
             try
             {
-                using (var redisClient = new RedisClient(RedisHost))
-                {
-                    return redisClient.Get<T>(key);
-                }
+              //  using (var redisClient = new RedisClient(RedisHost))
+              //  {
+                    //check if Master is available
+                    var redisClient = new RedisClient(RedisHost);
+                    if (IsConnected())
+                    { 
+                        return redisClient.Get<T>(key);
+                    }
+                    else
+                    {
+                        _RedisSlave = ConfigurationManager.AppSettings["RedisServerSlave"].ToString();
+                        redisClient.Dispose();
+                        using(var redisClientSlave = new RedisClient(_RedisSlave))
+                        { 
+                            return redisClientSlave.Get<T>(key);  
+                        }                        
+                    }
+              //  }
             }
             catch
             {

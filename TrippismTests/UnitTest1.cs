@@ -15,7 +15,7 @@ using MongoDB.Driver;
 namespace TrippismTests
 {
     
-    public class LeadFareCalendarTest
+    public class IntegrationTests
     {
         [Fact]
         public void LeadFareCalendarGet()
@@ -49,12 +49,14 @@ namespace TrippismTests
             
             if(redis.IsConnected())
             {
-                redis.Save<String>("trippism", "redis");
+                redis.Save<String>("unittest", "masterslave");
             }
 
-            NoSqlConnector mongoConnector = new NoSqlConnector();
-            IMongoDatabase mongodb = mongoConnector.connect();
-            mongodb.CreateCollection("MyTestCollection");
+            string value = redis.GetByKey<string>("unittest");
+
+           // NoSqlConnector mongoConnector = new NoSqlConnector();
+           // IMongoDatabase mongodb = mongoConnector.connect();
+           // mongodb.CreateCollection("MyTestCollection");
             
 
         }
