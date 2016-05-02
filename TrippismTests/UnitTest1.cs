@@ -41,11 +41,7 @@ namespace TrippismTests
         [Fact]
         public void RedisAwsTest()
         {
-            RedisService redis = new RedisService();
-            redis.RedisHost = "ec2-54-186-220-236.us-west-2.compute.amazonaws.com"; // ubuntu instance
-            //redis.RedisHost = "ec2-54-187-128-185.us-west-2.compute.amazonaws.com";   // windows instance
-           // redis.RedisHost = "localhost";
-            redis.RedisExpireInMin = 10;
+            RedisService redis = new RedisService();           
             
             if(redis.IsConnected())
             {
@@ -56,8 +52,7 @@ namespace TrippismTests
 
            // NoSqlConnector mongoConnector = new NoSqlConnector();
            // IMongoDatabase mongodb = mongoConnector.connect();
-           // mongodb.CreateCollection("MyTestCollection");
-            
+           // mongodb.CreateCollection("MyTestCollection");            
 
         }
     }
