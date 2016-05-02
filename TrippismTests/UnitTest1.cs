@@ -9,13 +9,13 @@ using System.Web;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using System.Net.Http;
 using System.Net;
-using DataLayer;
+//using DataLayer;
 using MongoDB.Driver;
 
 namespace TrippismTests
 {
     
-    public class LeadFareCalendarTest
+    public class IntegrationTests
     {
         [Fact]
         public void LeadFareCalendarGet()
