@@ -9,13 +9,12 @@ using System.Web;
 using TraveLayer.CustomTypes.Sabre.ViewModels;
 using System.Net.Http;
 using System.Net;
-using DataLayer;
 using MongoDB.Driver;
 
 namespace TrippismTests
 {
     
-    public class LeadFareCalendarTest
+    public class IntegrationTests
     {
         [Fact]
         public void LeadFareCalendarGet()
@@ -45,14 +44,14 @@ namespace TrippismTests
             
             if(redis.IsConnected())
             {
-                redis.Save<String>("trippism", "redis");
+                redis.Save<String>("unittest", "masterslave");
             }
 
             string value = redis.GetByKey<string>("unittest");
 
            // NoSqlConnector mongoConnector = new NoSqlConnector();
            // IMongoDatabase mongodb = mongoConnector.connect();
-           // mongodb.CreateCollection("MyTestCollection");            
+           // mongodb.CreateCollection("MyTestCollection"); 
 
         }
     }
