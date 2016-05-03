@@ -48,7 +48,7 @@ namespace TrippismApi.TraveLayer
 
         public RedisService()
         {
-            _RedisServer = ConfigurationManager.AppSettings["RedisServer"].ToString();
+            _RedisServer = ConfigurationManager.AppSettings["RedisServerMaster"].ToString();
             _RedisExpireInMin = double.Parse(ConfigurationManager.AppSettings["RedisExpireInMin"].ToString());
             _RedisPassword = ConfigurationManager.AppSettings["RedisPassword"].ToString();
             _RedisPort = int.Parse( ConfigurationManager.AppSettings["RedisPort"].ToString() );
