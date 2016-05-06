@@ -20,7 +20,8 @@ namespace TrippismApi.TraveLayer
         String _RedisServer ;
         double _RedisExpireInMin;
         String _RedisSlave;
-        String _RedisPassword;
+        String _RedisPasswordMaster;
+        String _RedisPasswordSlave;
         int _RedisPort;
 
         public double RedisExpireInMin 
@@ -49,8 +50,10 @@ namespace TrippismApi.TraveLayer
         public RedisService()
         {
             _RedisServer = ConfigurationManager.AppSettings["RedisServerMaster"].ToString();
+            _RedisSlave = ConfigurationManager.AppSettings["RedisServerSlave"].ToString();
             _RedisExpireInMin = double.Parse(ConfigurationManager.AppSettings["RedisExpireInMin"].ToString());
-            _RedisPassword = ConfigurationManager.AppSettings["RedisPassword"].ToString();
+            _RedisPasswordMaster = ConfigurationManager.AppSettings["RedisPasswordMaster"].ToString();
+            _RedisPasswordSlave = ConfigurationManager.AppSettings["RedisPasswordSlave"].ToString();
             _RedisPort = int.Parse( ConfigurationManager.AppSettings["RedisPort"].ToString() );
         }
 
@@ -61,7 +64,7 @@ namespace TrippismApi.TraveLayer
             try
             {
                 
-                using (var redisClient = new RedisClient(RedisHost , _RedisPort , _RedisPassword))
+                using (var redisClient = new RedisClient(RedisHost , _RedisPort , _RedisPasswordMaster))
                 {
                     isSuccess = redisClient.Set<T>(key, keyData, DateTime.Now.AddMinutes(expireInMin));
                 }
@@ -78,7 +81,7 @@ namespace TrippismApi.TraveLayer
             bool isSuccess = false;
             try
             {
-                using (var redisClient = new RedisClient(RedisHost, _RedisPort, _RedisPassword))
+                using (var redisClient = new RedisClient(RedisHost, _RedisPort, _RedisPasswordMaster))
                 {
                     isSuccess = redisClient.Set<T>(key, keyData, DateTime.Now.AddMinutes(RedisExpireInMin));
                 }
@@ -95,7 +98,7 @@ namespace TrippismApi.TraveLayer
             bool isSuccess = false;
             try
             {
-                using (var redisClient = new RedisClient(RedisHost, _RedisPort, _RedisPassword))
+                using (var redisClient = new RedisClient(RedisHost, _RedisPort, _RedisPasswordMaster))
                 {
                     isSuccess = redisClient.Expire(key,0);
                 }
@@ -113,7 +116,7 @@ namespace TrippismApi.TraveLayer
               //  using (var redisClient = new RedisClient(RedisHost))
               //  {
                     //check if Master is available
-                var redisClient = new RedisClient(RedisHost, _RedisPort, _RedisPassword);
+                var redisClient = new RedisClient(RedisHost, _RedisPort, _RedisPasswordMaster);
                     if (IsConnected())
                     { 
                         return redisClient.Get<T>(key);
@@ -122,7 +125,7 @@ namespace TrippismApi.TraveLayer
                     {
                         _RedisSlave = ConfigurationManager.AppSettings["RedisServerSlave"].ToString();
                         redisClient.Dispose();
-                        using(var redisClientSlave = new RedisClient(_RedisSlave))
+                        using (var redisClientSlave = new RedisClient(_RedisSlave, _RedisPort, _RedisPasswordSlave))
                         { 
                             return redisClientSlave.Get<T>(key);  
                         }                        
@@ -140,7 +143,7 @@ namespace TrippismApi.TraveLayer
             bool isSuccess = false;
             try
             {
-                using (var redisClient = new RedisClient(RedisHost, _RedisPort, _RedisPassword))
+                using (var redisClient = new RedisClient(RedisHost, _RedisPort, _RedisPasswordMaster))
                 {
 
                     isSuccess = redisClient.Ping();

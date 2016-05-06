@@ -45,10 +45,10 @@ namespace TrippismTests
             
             if(redis.IsConnected())
             {
-                redis.Save<String>("trippism", "redis");
+                redis.Save<String>("TestingSlavePassword", "Works");
             }
 
-            string value = redis.GetByKey<string>("unittest");
+            string value = redis.GetByKey<string>("TestingSlavePassword");
 
            // NoSqlConnector mongoConnector = new NoSqlConnector();
            // IMongoDatabase mongodb = mongoConnector.connect();
