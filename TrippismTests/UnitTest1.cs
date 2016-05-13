@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Net;
 //using DataLayer;
 using MongoDB.Driver;
+using DataLayer;
 
 namespace TrippismTests
 {
@@ -41,18 +42,18 @@ namespace TrippismTests
         [Fact]
         public void RedisAwsTest()
         {
-            RedisService redis = new RedisService();           
+           /* RedisService redis = new RedisService();           
             
             if(redis.IsConnected())
             {
                 redis.Save<String>("TestingSlavePassword", "Works");
             }
 
-            string value = redis.GetByKey<string>("TestingSlavePassword");
+            string value = redis.GetByKey<string>("TestingSlavePassword");*/
 
-           // NoSqlConnector mongoConnector = new NoSqlConnector();
-           // IMongoDatabase mongodb = mongoConnector.connect();
-           // mongodb.CreateCollection("MyTestCollection");            
+           MongoDBConnector mongoConnector = new MongoDBConnector();
+           IMongoDatabase mongodb = mongoConnector.connect();
+           mongodb.CreateCollection("TestPrimaryReplicationCollection");            
 
         }
     }
