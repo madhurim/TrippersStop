@@ -417,6 +417,8 @@ namespace Trippism.Areas.Sabre.Controllers
                 url.Append("&outboundflightstops=" + instaflightRequest.outboundflightstops);
             if (instaflightRequest.inboundflightstops != null)
                 url.Append("&inboundflightstops=" + instaflightRequest.inboundflightstops);
+            if (instaflightRequest.limit != null)
+                url.Append("&limit=" + instaflightRequest.limit);
             return url.ToString();
         }
         private string GetDestinationUrl(Destinations destinationsRequest, bool isNonStop = false)

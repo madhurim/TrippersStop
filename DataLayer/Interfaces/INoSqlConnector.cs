@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 
-namespace DataLayer.Interfaces
+namespace DataLayer
 {
-    interface INoSqlConnector
+    interface INoSqlConnector<T>
     {
-        IMongoDatabase connect();
+        T connect();
     }
 }

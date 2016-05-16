@@ -22,6 +22,7 @@ namespace Trippism.Areas.Constants.Controllers
         private const string TrippismCurrencySymbolsKey = "Trippism.Constants.CurrencySymbols";
         private const string TrippismAirportsKey = "Trippism.Constants.Airports";
         private const string TrippismHighRankedAirportsKey = "Trippism.Constants.HighRankedAirports";
+        private const string TrippismHighRankedAirportsCurrencyKey = "Trippism.Constants.HighRankedAirports.Currency";
         private const string TrippismAirlinesKey = "Trippism.Constants.Airlines";
         public ConstantsController(ICacheService cacheService)
         {
@@ -91,6 +92,34 @@ namespace Trippism.Areas.Constants.Controllers
             var airports = ServiceStackSerializer.DeSerialize<AirportRoot>(airportJsonString);
             _cacheService.Save<TraveLayer.CustomTypes.Constants.Response.AirportRoot>(cacheKey, airports);
             return Request.CreateResponse(HttpStatusCode.OK, airports.AirportsRoot.AirportsDetail);
+        }
+
+        private HttpResponseMessage GetAirportCurrencyResponse(string jsonPath, string cacheKey)
+        {
+            string airportJsonString = string.Empty;
+            using (StreamReader readerAirportJson = new StreamReader(jsonPath))
+            {
+                airportJsonString = readerAirportJson.ReadToEnd();
+            }
+            var airports = ServiceStackSerializer.DeSerialize<List<AirportCurrency>>(airportJsonString);
+            AirportCurrencyOutput airportCurrencyOutput = new AirportCurrencyOutput();
+            airportCurrencyOutput.AirportCurrencies = airports;
+            _cacheService.Save<AirportCurrencyOutput>(cacheKey, airportCurrencyOutput);
+            return Request.CreateResponse(HttpStatusCode.OK, airportCurrencyOutput);
+        }
+
+
+        [Route("api/Constants/GetAirportsCurrency")]
+        [ResponseType(typeof(List<TraveLayer.CustomTypes.Constants.Response.AirportCurrency>))]
+        public async Task<HttpResponseMessage> GetHighRankedAirportsCurrency()
+        {
+            var tripAirports = _cacheService.GetByKey<AirportCurrencyOutput>(TrippismHighRankedAirportsCurrencyKey);
+            if (tripAirports != null)
+                return Request.CreateResponse(HttpStatusCode.OK, tripAirports);
+
+            string jsonPath = GetFullPath(ConfigurationManager.AppSettings["AirportsCurrencyJsonPath"].ToString());
+            return await Task.Run(() =>
+            { return GetAirportCurrencyResponse(jsonPath, TrippismHighRankedAirportsCurrencyKey); });
         }
 
         [Route("api/Constants/GetAirlines")]
