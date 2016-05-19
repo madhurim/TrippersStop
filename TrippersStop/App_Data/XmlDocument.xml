@@ -501,6 +501,11 @@
             API returns the hoatel range based on city code and date 
             </summary>
         </member>
+        <member name="M:TrippismApi.Areas.Sabre.Controllers.HotelController.GetAll(TraveLayer.CustomTypes.Sabre.SoapServices.Request.HotelRequest)">
+            <summary>
+            API returns the basic hotel details based on city code and date 
+            </summary>
+        </member>
         <member name="T:TrippismApi.Areas.Sabre.Controllers.AdvancedCalendarController">
             <summary>
             AdvancedCalendar is used for -
