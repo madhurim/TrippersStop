@@ -242,22 +242,6 @@ namespace Trippism.APIHelper
             Mapper.Register<OTA_HotelAvailRS, Hotels>()
            .Member(h => h.HotelAvailability, m => m.AvailabilityOptions);
 
-
-            // HotelInfo
-            //Mapper.Register<OTA_HotelAvailRSAvailabilityOption, HotelDetail>()
-            //     .Member(h => h.Address, m => m.BasicPropertyInfo.Address)
-            // .Member(h => h.HotelCityCode, m => m.BasicPropertyInfo.HotelCityCode)
-            // .Member(h => h.HotelCode, m => m.BasicPropertyInfo.HotelCode)
-            // .Member(h => h.HotelName, m => m.BasicPropertyInfo.HotelName)
-            // .Member(h => h.Latitude, m => m.BasicPropertyInfo.Latitude)
-            // .Member(h => h.HotelRating, m => m.BasicPropertyInfo.Property)
-            // .Member(h => h.RateRange, m => m.BasicPropertyInfo.RateRange)
-            // .Member(h => h.Longitude, m => m.BasicPropertyInfo.Longitude);
-
-
-            //Mapper.Register<OTA_HotelAvailRS, HotelInfo>()
-            //  .Member(h => h.HotelDetail, m => m.AvailabilityOptions);
-
             Mapper.Register<OTA_HotelAvailRS, HotelInfo>()
               .Member(h => h.HotelAvailability, m => m.AvailabilityOptions);
 
