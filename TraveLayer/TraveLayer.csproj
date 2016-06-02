@@ -158,6 +158,7 @@
     <Compile Include="CustomTypes\SabreSoap\ViewModels\Hotel.cs" />
     <Compile Include="CustomTypes\SabreSoap\ViewModels\HotelAvailability.cs" />
     <Compile Include="CustomTypes\SabreSoap\ViewModels\HotelDetail.cs" />
+    <Compile Include="CustomTypes\SabreSoap\ViewModels\HotelInfo.cs" />
     <Compile Include="CustomTypes\SabreSoap\ViewModels\HotelOutput.cs" />
     <Compile Include="CustomTypes\SabreSoap\ViewModels\HotelRating.cs" />
     <Compile Include="CustomTypes\SabreSoap\ViewModels\HotelResponse.cs" />

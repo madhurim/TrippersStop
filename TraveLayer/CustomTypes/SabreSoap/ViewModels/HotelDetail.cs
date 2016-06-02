@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels
 {
     public class HotelDetail
@@ -16,5 +12,11 @@ namespace TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels
         public string HotelCode { get; set; }
         public string HotelCityCode { get; set; }
         public RateRange RateRange { get; set; }
+
+        public PropertyOptionInfo PropertyOptionInfo { get; set; }
+    }
+    public class PropertyOptionInfo
+    {
+        public bool FreeWifiInRooms { get; set; }
     }
 }

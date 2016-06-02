@@ -154,7 +154,7 @@ namespace Trippism.Areas.GooglePlace.Controllers
                 //Filter : the types returned by Google should have the types in the request                
                 //Keyword=Beach : the name in the result should have "beach" , "resort" or "resorts"
                 googleplace = CleanUpGoogleData(locationsearch, googleplace);
-                
+
                 TraveLayer.CustomTypes.Google.ViewModels.Google lstLocations = Mapper.Map<GoogleOutput, TraveLayer.CustomTypes.Google.ViewModels.Google>(googleplace);
                 if (lstLocations.results.Any())
                     _cacheService.Save<TraveLayer.CustomTypes.Google.ViewModels.Google>(cacheKey, lstLocations);
@@ -173,10 +173,10 @@ namespace Trippism.Areas.GooglePlace.Controllers
             string[] types = null;
 
             // &types=restaurant|cafe 
-            if (locationsearch.Types.Contains("&types="))
-            {
+            if (locationsearch.Types == null)
+                results = googleplace.results;
+            else if (locationsearch.Types.Contains("&types="))
                 types = locationsearch.Types.Replace("&types=", System.String.Empty).Split('|');
-            }
 
             if (types != null && types.Length > 0 && !types[0].Contains("keyword"))
             {
@@ -226,6 +226,10 @@ namespace Trippism.Areas.GooglePlace.Controllers
                 url += locationsearch.Types;
             if (!string.IsNullOrWhiteSpace(locationsearch.Keywords))
                 url += locationsearch.Keywords;
+            if (!string.IsNullOrWhiteSpace(locationsearch.Radius))
+                url += string.Format("&radius={0}", locationsearch.Radius);
+            if (!string.IsNullOrWhiteSpace(locationsearch.Name))
+                url += string.Format("&name={0}", locationsearch.Name);
             return url;
         }
     }

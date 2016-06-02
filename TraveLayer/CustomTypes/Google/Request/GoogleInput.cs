@@ -9,5 +9,7 @@ namespace TraveLayer.CustomTypes.Google.Request
         public string Types { get; set; }
         public string Keywords { get; set; }
         public string[] ExcludeTypes { get; set; }
+        public string Radius { get; set; }
+        public string Name { get; set; }
     }
 }
