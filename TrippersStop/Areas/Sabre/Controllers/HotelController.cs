@@ -1,8 +1,4 @@
 ﻿using ExpressMapper;
-using System;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TraveLayer.CustomTypes.Sabre.SoapServices.Request;
@@ -25,13 +21,13 @@ namespace TrippismApi.Areas.Sabre.Controllers
         /// <summary>
         /// Set api class and cache service.
         /// </summary>
-        public HotelController(ISabreHotelSoapCaller apiCaller, ICacheService cacheService,IBusinessLayer<Hotels, HotelOutput> iBusinessLayer)
+        public HotelController(ISabreHotelSoapCaller apiCaller, ICacheService cacheService, IBusinessLayer<Hotels, HotelOutput> iBusinessLayer)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;
             _iBusinessLayer = iBusinessLayer;
         }
-  
+
         /// <summary>
         /// API returns the hoatel range based on city code and date 
         /// </summary>
@@ -57,9 +53,37 @@ namespace TrippismApi.Areas.Sabre.Controllers
             if (hotels != null && hotels.ApplicationResults != null && hotels.ApplicationResults.status == CompletionCodes.Complete)
             {
                 var response = Mapper.Map<OTA_HotelAvailRS, Hotels>(hotels);
-                hotelResponse=_iBusinessLayer.Process(response);     
+                hotelResponse = _iBusinessLayer.Process(response);
             }
             return hotelResponse;
-        }   
+        }
+
+        /// <summary>
+        /// API returns the basic hotel details based on city code and date 
+        /// </summary>
+        [ResponseType(typeof(HotelOutput))]
+        [Route("api/sabre/hotels/all")]
+        public async Task<IHttpActionResult> GetAll([FromUri]HotelRequest hotelRequest)
+        {
+            return await Task.Run(() =>
+            { return GetAllHotel(hotelRequest); });
+        }
+
+        private IHttpActionResult GetAllHotel(HotelRequest hotelRequest)
+        {
+            TrippismApi.ApiHelper.SetSabreSoapApiToken(_apiCaller, _cacheService);
+            var response = GetAllResponse(hotelRequest);
+            return Ok(response);
+        }
+        private HotelInfo GetAllResponse(HotelRequest hotelRequest)
+        {
+            var hotels = _apiCaller.GetHotels(hotelRequest);
+            if (hotels != null && hotels.ApplicationResults != null && hotels.ApplicationResults.status == CompletionCodes.Complete)
+            {
+                var response = Mapper.Map<OTA_HotelAvailRS, HotelInfo>(hotels);
+                return response;
+            }
+            return null;
+        }
     }
 }

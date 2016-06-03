@@ -13,6 +13,7 @@ using TraveLayer.CustomTypes.Yelp.Response;
 using TraveLayer.CustomTypes.YouTube.Response;
 using TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels;
 using TrippismApi.TraveLayer.Hotel.Sabre.HotelAvailabilityRequest;
+using TraveLayer.CustomTypes.SabreSoap.ViewModels;
 
 namespace Trippism.APIHelper
 {
@@ -232,13 +233,18 @@ namespace Trippism.APIHelper
              .Member(h => h.RateRange, m => m.RateRange)
              .Member(h => h.Longitude, m => m.Longitude);
 
+            Mapper.Register<OTA_HotelAvailRSAvailabilityOptionBasicPropertyInfoPropertyOptionInfo, PropertyOptionInfo>()
+                .Member(h => h.FreeWifiInRooms, m => m.FreeWifiInRooms.Ind);
 
             Mapper.Register<OTA_HotelAvailRSAvailabilityOption, HotelAvailability>()
                 .Member(h => h.HotelDetail, m => m.BasicPropertyInfo);
 
-
             Mapper.Register<OTA_HotelAvailRS, Hotels>()
            .Member(h => h.HotelAvailability, m => m.AvailabilityOptions);
+
+            Mapper.Register<OTA_HotelAvailRS, HotelInfo>()
+              .Member(h => h.HotelAvailability, m => m.AvailabilityOptions);
+
         }
     }
 }
