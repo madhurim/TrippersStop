@@ -62,7 +62,7 @@ namespace TrippismApi
             registerMap.RegisterMappingEntities();
             registerMap.RegisterTripAdvisorMapping();
             RegisterMap.RegisterSabreSoapMapping();
-
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new Trippism.APIExtention.Handler.SabreSoapSessionHandler(container));
             //GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
             // GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerSelector), new AreaHttpControllerSelector(GlobalConfiguration.Configuration));
         }

@@ -6,7 +6,7 @@ namespace TrippismApi.TraveLayer.Hotel.Sabre
     public interface ISabreHotelSoapCaller : ISabreSoapCaller
     {
         OTA_HotelAvailRS GetHotels(HotelRequest hotelRequest);
-        string SabreSessionTokenKey{get;}
+        string SabreSessionTokenKey { get; set; }
 
     }
 }

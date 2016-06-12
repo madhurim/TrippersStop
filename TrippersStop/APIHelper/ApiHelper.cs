@@ -8,6 +8,25 @@ namespace TrippismApi
 {
     public static class ApiHelper
     {
+        static string[] SabreSoapCacheKeys = new string[] { "TrippismApi.SabreSessionToken.One", "TrippismApi.SabreSessionToken.Two", "TrippismApi.SabreSessionToken.Three", "TrippismApi.SabreSessionToken.Four", "TrippismApi.SabreSessionToken.Five", "TrippismApi.SabreSessionToken.Six", "TrippismApi.SabreSessionToken.Seven", "TrippismApi.SabreSessionToken.Eight", "TrippismApi.SabreSessionToken.Nine", "TrippismApi.SabreSessionToken.Ten" };
+
+        public static void CreateSabreSoapTokenPool(ISabreHotelSoapCaller apiCaller, ICacheService cacheService)
+        {
+            foreach (var key in SabreSoapCacheKeys)
+            {
+                var securityToken = cacheService.GetByKey<string>(key);
+                if (string.IsNullOrWhiteSpace(securityToken))
+                {
+                    SabreSessionCaller sabreSessionCaller = new SabreSessionCaller();
+                    securityToken = sabreSessionCaller.GetToken();
+                    string expireTime = ConfigurationManager.AppSettings.Get("SabreSoapSessionExpireInMin");
+                    if (!string.IsNullOrWhiteSpace(expireTime))
+                    {
+                        cacheService.Save<string>(key, securityToken, double.Parse(expireTime));
+                    }
+                }
+            }
+        }
         public static void SetApiToken(IAsyncSabreAPICaller apiCaller, ICacheService cacheService)
         {
             apiCaller.Accept = "application/json";

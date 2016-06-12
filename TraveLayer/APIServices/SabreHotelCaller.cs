@@ -15,10 +15,8 @@ namespace TrippismApi.TraveLayer.Hotel.Sabre
         const string HotelAvailabilityPartyFrom = "WebServiceClient";
         public string SabreSessionTokenKey
         {
-            get
-            {
-                return "TrippismApi.SabreSessionToken";
-            }
+            get;
+            set;
         }
 
         public string SabreSoapBaseServiceURL
