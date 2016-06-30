@@ -12,6 +12,7 @@ using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
 using Trippism.APIExtention.Filters;
 using TraveLayer.CustomTypes.TripAdvisor.Request;
 using TrippismApi.TraveLayer;
+using BusinessLogic;
 
 namespace Trippism.Areas.TripAdvisor.Controllers
 {
@@ -22,17 +23,19 @@ namespace Trippism.Areas.TripAdvisor.Controllers
     [ServiceStackFormatterConfigAttribute]
     public class AttractionsController : ApiController
     {
- 
+
         readonly ITripAdvisorAPIAsyncCaller _apiCaller;
         const string PropertiesCacheKey = "TripAdvisor.Properties";
         const string AttractionsCacheKey = "TripAdvisor.Attractions";
+        readonly IBusinessLayer<LocationAttraction, LocationAttraction> _iBusinessLayer;
 
         /// <summary>
         /// Set Api caller service
         /// </summary>
-        public AttractionsController(ITripAdvisorAPIAsyncCaller apiCaller)
+        public AttractionsController(ITripAdvisorAPIAsyncCaller apiCaller, IBusinessLayer<LocationAttraction, LocationAttraction> iBusinessLayer)
         {
             _apiCaller = apiCaller;
+            _iBusinessLayer = iBusinessLayer;
         }
         private string APIPropertiesUrl
         {
@@ -86,6 +89,7 @@ namespace Trippism.Areas.TripAdvisor.Controllers
             {
                 var attractions = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
                 var locations = Mapper.Map<LocationInfo, LocationAttraction>(attractions);
+                locations = _iBusinessLayer.Process(locations);
                 return Ok(locations);
             }
             return ResponseMessage(new HttpResponseMessage(result.StatusCode));
