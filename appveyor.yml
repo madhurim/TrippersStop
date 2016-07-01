@@ -1,0 +1,14 @@
+version: 1.0.{build}
+pull_requests:
+  do_not_increment_build_number: true
+branches:
+  only:
+  - develop
+skip_non_tags: true
+configuration: Debug
+force_https_clone: true
+build:
+  verbosity: minimal
+artifacts:
+- path: /deploy/trippism.zip
+  name: Trippism
