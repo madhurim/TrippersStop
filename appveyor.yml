@@ -9,3 +9,6 @@ configuration: Debug
 force_https_clone: true
 build:
   verbosity: minimal
+artifacts:
+- path: /deploy/trippism.zip
+  name: Trippism
