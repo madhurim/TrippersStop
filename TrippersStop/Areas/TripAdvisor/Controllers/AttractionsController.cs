@@ -83,16 +83,44 @@ namespace Trippism.Areas.TripAdvisor.Controllers
 
         private IHttpActionResult GetMapAttractions(AttractionsRequest attractionsRequest)
         {
-            string urlAPI = GetAttractionsApiURL(attractionsRequest);
-            APIResponse result = _apiCaller.Get(urlAPI).Result;
-            if (result.StatusCode == HttpStatusCode.OK)
+            string[] SubCategories = null;
+            if (!string.IsNullOrWhiteSpace(attractionsRequest.SubCategory))
             {
-                var attractions = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
-                var locations = Mapper.Map<LocationInfo, LocationAttraction>(attractions);
-                locations = _iBusinessLayer.Process(locations);
-                return Ok(locations);
+                SubCategories = attractionsRequest.SubCategory.Split(',');
             }
-            return ResponseMessage(new HttpResponseMessage(result.StatusCode));
+            if (SubCategories.Length == 1)
+            {
+                string urlAPI = GetAttractionsApiURL(attractionsRequest);
+                APIResponse result = _apiCaller.Get(urlAPI).Result;
+                if (result.StatusCode == HttpStatusCode.OK)
+                {
+                    var attractions = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
+                    var locations = Mapper.Map<LocationInfo, LocationAttraction>(attractions);
+                    locations = _iBusinessLayer.Process(locations);
+                    return Ok(locations);
+                }
+                return ResponseMessage(new HttpResponseMessage(result.StatusCode));
+            }
+            else
+            {
+                var location = new LocationAttraction();
+                location.Attractions = new System.Collections.Generic.List<Attraction>();
+                Parallel.ForEach(SubCategories,
+                   (item) =>
+                   {
+                       attractionsRequest.SubCategory = item;
+                       var result = _apiCaller.Get(GetAttractionsApiURL(attractionsRequest)).Result;
+                       if (result.StatusCode == HttpStatusCode.OK)
+                       {
+                           var attractions = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
+                           var locations = Mapper.Map<LocationInfo, LocationAttraction>(attractions);
+                           location.Attractions.AddRange(locations.Attractions);
+                       }
+                   }
+                 );
+                location = _iBusinessLayer.Process(location);
+                return Ok(location);
+            }
         }
 
 
