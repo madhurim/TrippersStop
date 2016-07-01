@@ -55,5 +55,22 @@ namespace TrippismTests
            // mongodb.CreateCollection("MyTestCollection");            
 
         }
+        [Fact]
+        public void MongoLocalTest()
+        {
+            RedisService redis = new RedisService();
+
+            if (redis.IsConnected())
+            {
+                redis.Save<String>("trippism", "redis");
+            }
+
+            string value = redis.GetByKey<string>("unittest");
+
+            // NoSqlConnector mongoConnector = new NoSqlConnector();
+            // IMongoDatabase mongodb = mongoConnector.connect();
+            // mongodb.CreateCollection("MyTestCollection");            
+
+        }
     }
 }
