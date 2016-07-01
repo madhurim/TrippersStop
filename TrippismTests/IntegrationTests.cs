@@ -41,14 +41,14 @@ namespace TrippismTests
         [Fact]
         public void RedisAwsTest()
         {
-            RedisService redis = new RedisService();           
+          /*  RedisService redis = new RedisService();           
             
             if(redis.IsConnected())
             {
                 redis.Save<String>("trippism", "redis");
             }
 
-            string value = redis.GetByKey<string>("unittest");
+            string value = redis.GetByKey<string>("unittest");*/
 
            // NoSqlConnector mongoConnector = new NoSqlConnector();
            // IMongoDatabase mongodb = mongoConnector.connect();
@@ -58,14 +58,14 @@ namespace TrippismTests
         [Fact]
         public void MongoLocalTest()
         {
-            RedisService redis = new RedisService();
+          /*  RedisService redis = new RedisService();
 
             if (redis.IsConnected())
             {
                 redis.Save<String>("trippism", "redis");
             }
 
-            string value = redis.GetByKey<string>("unittest");
+            string value = redis.GetByKey<string>("unittest");*/
 
             // NoSqlConnector mongoConnector = new NoSqlConnector();
             // IMongoDatabase mongodb = mongoConnector.connect();
