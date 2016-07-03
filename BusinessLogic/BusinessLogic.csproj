@@ -46,6 +46,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReviewsBusinessLayer.cs" />
     <Compile Include="SasonalityBusnessLayer.cs" />
+    <Compile Include="TripAdvisorShopsAndSpasBusinessLayer.cs" />
+    <Compile Include="TripAdvisorBusinessLayer.cs" />
     <Compile Include="WeatherBusinessLayer.cs" />
   </ItemGroup>
   <ItemGroup>
