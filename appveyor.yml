@@ -8,6 +8,7 @@ skip_non_tags: true
 configuration: Debug
 force_https_clone: true
 build:
+  publish_wap_xcopy: true
   verbosity: minimal
 after_build:
 - cmd: 7z a trippism.zip %APPVEYOR_BUILD_FOLDER%\*.*
