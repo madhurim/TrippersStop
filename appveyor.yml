@@ -9,6 +9,8 @@ configuration: Debug
 force_https_clone: true
 build:
   verbosity: minimal
+after_build:
+- cmd: 7z a trippism.zip %APPVEYOR_BUILD_FOLDER%\*.*
 artifacts:
-- path: /deploy/trippism.zip
+- path: trippism.zip
   name: Trippism
