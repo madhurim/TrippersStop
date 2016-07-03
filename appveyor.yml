@@ -13,5 +13,5 @@ build:
 after_build:
 - cmd: 7z a trippism.zip %APPVEYOR_BUILD_FOLDER%\*.*
 artifacts:
-- path: trippism.zip
-  name: Trippism
+- path: TrippismApi.zip
+  name: TrippismApi
