@@ -26,16 +26,15 @@ namespace Trippism.Areas.TripAdvisor.Controllers
 
         readonly ITripAdvisorAPIAsyncCaller _apiCaller;
         const string RestaurantsCacheKey = "TripAdvisor.Restaurants";
-        readonly IBusinessLayer<LocationAttraction, LocationAttraction> _iBusinessLayer;
+        readonly ITripAdvisorRestaurantsBusinessLayer<LocationAttraction, LocationAttraction> _iTripAdvisorRestaurantsBusinessLayer;
 
         /// <summary>
         /// Set Api caller and Cache service
         /// </summary>
-        public RestaurantsController(ITripAdvisorAPIAsyncCaller apiCaller, IBusinessLayer<LocationAttraction, LocationAttraction> iBusinessLayer)
+        public RestaurantsController(ITripAdvisorAPIAsyncCaller apiCaller, ITripAdvisorRestaurantsBusinessLayer<LocationAttraction, LocationAttraction> iTripAdvisorRestaurantsBusinessLayer)
         {
             _apiCaller = apiCaller;
-            _iBusinessLayer = iBusinessLayer;
-
+            _iTripAdvisorRestaurantsBusinessLayer = iTripAdvisorRestaurantsBusinessLayer;
         }
         private string APIRestaurantsUrl
         {
@@ -66,7 +65,7 @@ namespace Trippism.Areas.TripAdvisor.Controllers
             {
                 var restaurants = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
                 var locations = Mapper.Map<LocationInfo, LocationAttraction>(restaurants);
-                locations = _iBusinessLayer.Process(locations);
+                locations = _iTripAdvisorRestaurantsBusinessLayer.Process(locations);
                 return Ok(locations);
             }
             return ResponseMessage(new HttpResponseMessage(result.StatusCode));
@@ -85,12 +84,12 @@ namespace Trippism.Areas.TripAdvisor.Controllers
             if (!string.IsNullOrWhiteSpace(restaurantsRequest.Distance))
                 apiUrl.Append("&lang=" + restaurantsRequest.Locale);
             if (!string.IsNullOrWhiteSpace(restaurantsRequest.SubCategory))
-                apiUrl.Append("&subcategory=" + restaurantsRequest.SubCategory);          
+                apiUrl.Append("&subcategory=" + restaurantsRequest.SubCategory);
             if (!string.IsNullOrWhiteSpace(restaurantsRequest.Cuisines))
                 apiUrl.Append("&cuisines=" + restaurantsRequest.Cuisines);
             if (!string.IsNullOrWhiteSpace(restaurantsRequest.Prices))
                 apiUrl.Append("&prices=" + restaurantsRequest.Prices);
-           
+
             return apiUrl.ToString();
         }
     }
