@@ -947,7 +947,7 @@
             When specifying a Lat/Long point, returns a list of 10 properties found within a given distance from that point. If there are more than 10 properties within the radius requested, the 10 nearest properties will be returned.   In lieu of lat long, can specify a location ID and the output will return nearest POIs
             </summary>
         </member>
-        <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller,BusinessLogic.IBusinessLayer{TraveLayer.CustomTypes.TripAdvisor.ViewModels.LocationAttraction,TraveLayer.CustomTypes.TripAdvisor.ViewModels.LocationAttraction})">
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.AttractionsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller,BusinessLogic.ITripAdvisorBusinessLayer{TraveLayer.CustomTypes.TripAdvisor.ViewModels.LocationAttraction,TraveLayer.CustomTypes.TripAdvisor.ViewModels.LocationAttraction},BusinessLogic.ITripAdvisorHistoricalBusinessLayer{TraveLayer.CustomTypes.TripAdvisor.ViewModels.LocationAttraction,TraveLayer.CustomTypes.TripAdvisor.ViewModels.LocationAttraction},BusinessLogic.ITripAdvisorShopsAndSpasBusinessLayer{TraveLayer.CustomTypes.TripAdvisor.ViewModels.LocationAttraction,TraveLayer.CustomTypes.TripAdvisor.ViewModels.LocationAttraction})">
             <summary>
             Set Api caller service
             </summary>
@@ -968,7 +968,7 @@
             When specifying a Lat/Long point, returns a list of 10 properties found within a given distance from that point. If there are more than 10 properties within the radius requested, the 10 nearest properties will be returned.   In lieu of lat long, can specify a location ID and the output will return nearest POIs
             </summary>
         </member>
-        <member name="M:Trippism.Areas.TripAdvisor.Controllers.RestaurantsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller,BusinessLogic.IBusinessLayer{TraveLayer.CustomTypes.TripAdvisor.ViewModels.LocationAttraction,TraveLayer.CustomTypes.TripAdvisor.ViewModels.LocationAttraction})">
+        <member name="M:Trippism.Areas.TripAdvisor.Controllers.RestaurantsController.#ctor(TrippismApi.TraveLayer.ITripAdvisorAPIAsyncCaller,BusinessLogic.ITripAdvisorRestaurantsBusinessLayer{TraveLayer.CustomTypes.TripAdvisor.ViewModels.LocationAttraction,TraveLayer.CustomTypes.TripAdvisor.ViewModels.LocationAttraction})">
             <summary>
             Set Api caller and Cache service
             </summary>

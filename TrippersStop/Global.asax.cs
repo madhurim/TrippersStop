@@ -51,9 +51,10 @@ namespace TrippismApi
             container.RegisterWebApiRequest<ISabreHotelSoapCaller, SabreHotelCaller>();
             container.RegisterWebApiRequest<IBusinessLayer<Hotels, HotelOutput>, SabreHotelSoapCallerBusinessLayer>();
 
-            container.RegisterWebApiRequest<IBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorBusinessLayer>();
-            //container.RegisterWebApiRequest<IBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorShopsAndSpasBusinessLayer>();
-
+            container.RegisterWebApiRequest<ITripAdvisorBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorBusinessLayer>();
+            container.RegisterWebApiRequest<ITripAdvisorHistoricalBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorHistoricalBusinessLayer>();
+            container.RegisterWebApiRequest<ITripAdvisorShopsAndSpasBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorShopsAndSpasBusinessLayer>();
+            container.RegisterWebApiRequest<ITripAdvisorRestaurantsBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorRestaurantsBusinessLayer>();
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 

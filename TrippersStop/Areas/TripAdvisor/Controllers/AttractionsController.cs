@@ -27,15 +27,19 @@ namespace Trippism.Areas.TripAdvisor.Controllers
         readonly ITripAdvisorAPIAsyncCaller _apiCaller;
         const string PropertiesCacheKey = "TripAdvisor.Properties";
         const string AttractionsCacheKey = "TripAdvisor.Attractions";
-        readonly IBusinessLayer<LocationAttraction, LocationAttraction> _iBusinessLayer;
+        readonly ITripAdvisorBusinessLayer<LocationAttraction, LocationAttraction> _iTripAdvisorBusinessLayer;
+        readonly ITripAdvisorHistoricalBusinessLayer<LocationAttraction, LocationAttraction> _iTripAdvisorHistoricalBusinessLayer;
+        readonly ITripAdvisorShopsAndSpasBusinessLayer<LocationAttraction, LocationAttraction> _iTripAdvisorShopsAndSpasBusinessLayer;
 
         /// <summary>
         /// Set Api caller service
         /// </summary>
-        public AttractionsController(ITripAdvisorAPIAsyncCaller apiCaller, IBusinessLayer<LocationAttraction, LocationAttraction> iBusinessLayer)
+        public AttractionsController(ITripAdvisorAPIAsyncCaller apiCaller, ITripAdvisorBusinessLayer<LocationAttraction, LocationAttraction> iTripAdvisorBusinessLayer, ITripAdvisorHistoricalBusinessLayer<LocationAttraction, LocationAttraction> iTripAdvisorHistoricalBusinessLayer, ITripAdvisorShopsAndSpasBusinessLayer<LocationAttraction, LocationAttraction> iTripAdvisorShopsAndSpasBusinessLayer)
         {
             _apiCaller = apiCaller;
-            _iBusinessLayer = iBusinessLayer;
+            _iTripAdvisorBusinessLayer = iTripAdvisorBusinessLayer;
+            _iTripAdvisorHistoricalBusinessLayer = iTripAdvisorHistoricalBusinessLayer;
+            _iTripAdvisorShopsAndSpasBusinessLayer = iTripAdvisorShopsAndSpasBusinessLayer;
         }
         private string APIPropertiesUrl
         {
@@ -96,7 +100,10 @@ namespace Trippism.Areas.TripAdvisor.Controllers
                 {
                     var attractions = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
                     var locations = Mapper.Map<LocationInfo, LocationAttraction>(attractions);
-                    locations = _iBusinessLayer.Process(locations);
+                    switch (attractionsRequest.SubCategory) {
+                        case "Shopping": locations = _iTripAdvisorShopsAndSpasBusinessLayer.Process(locations); break;
+                        default: locations = _iTripAdvisorBusinessLayer.Process(locations); break;
+                    }                    
                     return Ok(locations);
                 }
                 return ResponseMessage(new HttpResponseMessage(result.StatusCode));
@@ -118,7 +125,7 @@ namespace Trippism.Areas.TripAdvisor.Controllers
                        }
                    }
                  );
-                location = _iBusinessLayer.Process(location);
+                location = _iTripAdvisorHistoricalBusinessLayer.Process(location);
                 return Ok(location);
             }
         }
