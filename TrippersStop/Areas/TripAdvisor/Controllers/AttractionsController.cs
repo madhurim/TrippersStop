@@ -12,6 +12,7 @@ using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
 using Trippism.APIExtention.Filters;
 using TraveLayer.CustomTypes.TripAdvisor.Request;
 using TrippismApi.TraveLayer;
+using BusinessLogic;
 
 namespace Trippism.Areas.TripAdvisor.Controllers
 {
@@ -22,17 +23,23 @@ namespace Trippism.Areas.TripAdvisor.Controllers
     [ServiceStackFormatterConfigAttribute]
     public class AttractionsController : ApiController
     {
- 
+
         readonly ITripAdvisorAPIAsyncCaller _apiCaller;
         const string PropertiesCacheKey = "TripAdvisor.Properties";
         const string AttractionsCacheKey = "TripAdvisor.Attractions";
+        readonly ITripAdvisorBusinessLayer<LocationAttraction, LocationAttraction> _iTripAdvisorBusinessLayer;
+        readonly ITripAdvisorHistoricalBusinessLayer<LocationAttraction, LocationAttraction> _iTripAdvisorHistoricalBusinessLayer;
+        readonly ITripAdvisorShopsAndSpasBusinessLayer<LocationAttraction, LocationAttraction> _iTripAdvisorShopsAndSpasBusinessLayer;
 
         /// <summary>
         /// Set Api caller service
         /// </summary>
-        public AttractionsController(ITripAdvisorAPIAsyncCaller apiCaller)
+        public AttractionsController(ITripAdvisorAPIAsyncCaller apiCaller, ITripAdvisorBusinessLayer<LocationAttraction, LocationAttraction> iTripAdvisorBusinessLayer, ITripAdvisorHistoricalBusinessLayer<LocationAttraction, LocationAttraction> iTripAdvisorHistoricalBusinessLayer, ITripAdvisorShopsAndSpasBusinessLayer<LocationAttraction, LocationAttraction> iTripAdvisorShopsAndSpasBusinessLayer)
         {
             _apiCaller = apiCaller;
+            _iTripAdvisorBusinessLayer = iTripAdvisorBusinessLayer;
+            _iTripAdvisorHistoricalBusinessLayer = iTripAdvisorHistoricalBusinessLayer;
+            _iTripAdvisorShopsAndSpasBusinessLayer = iTripAdvisorShopsAndSpasBusinessLayer;
         }
         private string APIPropertiesUrl
         {
@@ -80,15 +87,47 @@ namespace Trippism.Areas.TripAdvisor.Controllers
 
         private IHttpActionResult GetMapAttractions(AttractionsRequest attractionsRequest)
         {
-            string urlAPI = GetAttractionsApiURL(attractionsRequest);
-            APIResponse result = _apiCaller.Get(urlAPI).Result;
-            if (result.StatusCode == HttpStatusCode.OK)
+            string[] SubCategories = null;
+            if (!string.IsNullOrWhiteSpace(attractionsRequest.SubCategory))
             {
-                var attractions = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
-                var locations = Mapper.Map<LocationInfo, LocationAttraction>(attractions);
-                return Ok(locations);
+                SubCategories = attractionsRequest.SubCategory.Split(',');
             }
-            return ResponseMessage(new HttpResponseMessage(result.StatusCode));
+            if (SubCategories.Length == 1)
+            {
+                string urlAPI = GetAttractionsApiURL(attractionsRequest);
+                APIResponse result = _apiCaller.Get(urlAPI).Result;
+                if (result.StatusCode == HttpStatusCode.OK)
+                {
+                    var attractions = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
+                    var locations = Mapper.Map<LocationInfo, LocationAttraction>(attractions);
+                    switch (attractionsRequest.SubCategory) {
+                        case "Shopping": locations = _iTripAdvisorShopsAndSpasBusinessLayer.Process(locations); break;
+                        default: locations = _iTripAdvisorBusinessLayer.Process(locations); break;
+                    }                    
+                    return Ok(locations);
+                }
+                return ResponseMessage(new HttpResponseMessage(result.StatusCode));
+            }
+            else
+            {
+                var location = new LocationAttraction();
+                location.Attractions = new System.Collections.Generic.List<Attraction>();
+                Parallel.ForEach(SubCategories,
+                   (item) =>
+                   {
+                       attractionsRequest.SubCategory = item;
+                       var result = _apiCaller.Get(GetAttractionsApiURL(attractionsRequest)).Result;
+                       if (result.StatusCode == HttpStatusCode.OK)
+                       {
+                           var attractions = ServiceStackSerializer.DeSerialize<LocationInfo>(result.Response);
+                           var locations = Mapper.Map<LocationInfo, LocationAttraction>(attractions);
+                           location.Attractions.AddRange(locations.Attractions);
+                       }
+                   }
+                 );
+                location = _iTripAdvisorHistoricalBusinessLayer.Process(location);
+                return Ok(location);
+            }
         }
 
 

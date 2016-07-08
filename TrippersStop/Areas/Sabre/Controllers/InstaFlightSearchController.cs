@@ -278,8 +278,14 @@ namespace Trippism.Areas.Sabre.Controllers
                     {
                         fareInfo.LowestNonStopFare = new LowestNonStopFare();
                         var pricedItineraries = instaFlightNonStop.PricedItineraries[0];
-                        fareInfo.LowestNonStopFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
-                            .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
+                        List<string> airlineCodes = new List<string>();
+                        for (int i = 0; i < pricedItineraries.OriginDestinationOption.Count(); i++)
+                        {
+                            var originDestiantionOption = pricedItineraries.OriginDestinationOption[i];
+                            string code = originDestiantionOption.FlightSegment.Select(y => y.OperatingAirline.Code).FirstOrDefault();
+                            airlineCodes.Add(code);
+                        }
+                        fareInfo.LowestNonStopFare.AirlineCodes = airlineCodes.Distinct().ToList();
                         fareInfo.LowestNonStopFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
 
                         fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;
@@ -297,8 +303,14 @@ namespace Trippism.Areas.Sabre.Controllers
                     {
                         fareInfo.LowestFare = new LowestFare();
                         var pricedItineraries = instaFlightStop.PricedItineraries[0];
-                        fareInfo.LowestFare.AirlineCodes = pricedItineraries.OriginDestinationOption[0]
-                            .FlightSegment.Select(x => x.OperatingAirline.Code).Distinct().ToList();
+                        List<string> airlineCodes = new List<string>();
+                        for (int i = 0; i < pricedItineraries.OriginDestinationOption.Count(); i++)
+                        {
+                            var originDestiantionOption = pricedItineraries.OriginDestinationOption[i];
+                            string code = originDestiantionOption.FlightSegment.Select(y => y.OperatingAirline.Code).FirstOrDefault();
+                            airlineCodes.Add(code);
+                        }
+                        fareInfo.LowestFare.AirlineCodes = airlineCodes.Distinct().ToList();
                         fareInfo.LowestFare.Fare = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount;
 
                         fareInfo.CurrencyCode = pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode;

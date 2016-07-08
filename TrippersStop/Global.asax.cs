@@ -7,6 +7,7 @@ using System.Web.Routing;
 using TraveLayer.CacheServices;
 using TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels;
 using TraveLayer.CustomTypes.SabreSoap.ViewModels;
+using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
 using Trippism.APIHelper;
 using TrippismApi.TraveLayer;
 using TrippismApi.TraveLayer.Hotel.Sabre;
@@ -49,7 +50,11 @@ namespace TrippismApi
             container.RegisterWebApiRequest<ITripAdvisorAPIAsyncCaller, TripAdvisorAPICaller>();
             container.RegisterWebApiRequest<ISabreHotelSoapCaller, SabreHotelCaller>();
             container.RegisterWebApiRequest<IBusinessLayer<Hotels, HotelOutput>, SabreHotelSoapCallerBusinessLayer>();
-            
+
+            container.RegisterWebApiRequest<ITripAdvisorBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorBusinessLayer>();
+            container.RegisterWebApiRequest<ITripAdvisorHistoricalBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorHistoricalBusinessLayer>();
+            container.RegisterWebApiRequest<ITripAdvisorShopsAndSpasBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorShopsAndSpasBusinessLayer>();
+            container.RegisterWebApiRequest<ITripAdvisorRestaurantsBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorRestaurantsBusinessLayer>();
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 

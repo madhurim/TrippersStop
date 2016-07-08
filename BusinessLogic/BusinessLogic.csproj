@@ -46,6 +46,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReviewsBusinessLayer.cs" />
     <Compile Include="SasonalityBusnessLayer.cs" />
+    <Compile Include="TripAdvisor\ITripAdvisorRestaurantsBusinessLayer.cs" />
+    <Compile Include="TripAdvisor\ITripAdvisorBusinessLayer.cs" />
+    <Compile Include="TripAdvisor\ITripAdvisorHistoricalBusinessLayer.cs" />
+    <Compile Include="TripAdvisor\ITripAdvisorShopsAndSpasBusinessLayer.cs" />
+    <Compile Include="TripAdvisor\TripAdvisorRestaurantsBusinessLayer.cs" />
+    <Compile Include="TripAdvisor\TripAdvisorHistoricalBusinessLayer.cs" />
+    <Compile Include="TripAdvisor\TripAdvisorShopsAndSpasBusinessLayer.cs" />
+    <Compile Include="TripAdvisor\TripAdvisorBusinessLayer.cs" />
     <Compile Include="WeatherBusinessLayer.cs" />
   </ItemGroup>
   <ItemGroup>

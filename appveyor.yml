@@ -1,0 +1,17 @@
+version: 1.0.{build}
+pull_requests:
+  do_not_increment_build_number: true
+branches:
+  only:
+  - develop
+skip_non_tags: true
+configuration: Debug
+force_https_clone: true
+build:
+  publish_wap_xcopy: true
+  verbosity: minimal
+after_build:
+- cmd: 7z a trippism.zip %APPVEYOR_BUILD_FOLDER%\*.*
+artifacts:
+- path: TrippismApi.zip
+  name: TrippismApi
