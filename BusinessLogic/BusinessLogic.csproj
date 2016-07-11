@@ -40,12 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SabreHotelSoapCallerBusinessLayer.cs" />
-    <Compile Include="GoogleAttractionsBusinessLayer.cs" />
     <Compile Include="IBusinessLayer.cs" />
     <Compile Include="FareInsightsBusinessLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReviewsBusinessLayer.cs" />
-    <Compile Include="SasonalityBusnessLayer.cs" />
     <Compile Include="TripAdvisor\ITripAdvisorRestaurantsBusinessLayer.cs" />
     <Compile Include="TripAdvisor\ITripAdvisorBusinessLayer.cs" />
     <Compile Include="TripAdvisor\ITripAdvisorHistoricalBusinessLayer.cs" />
