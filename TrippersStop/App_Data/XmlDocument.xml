@@ -978,7 +978,7 @@
             The response provides results to a maximum of 10 restaurants  
             </summary>
         </member>
-        <member name="M:Trippism.Areas.Weather.Controllers.HistoryController.#ctor(TrippismApi.TraveLayer.IAsyncGoogleReverseLookupAPICaller,TrippismApi.TraveLayer.IAsyncWeatherAPICaller,TrippismApi.TraveLayer.ICacheService)">
+        <member name="M:Trippism.Areas.Weather.Controllers.HistoryController.#ctor(TrippismApi.TraveLayer.IAsyncGoogleReverseLookupAPICaller,TrippismApi.TraveLayer.IAsyncWeatherAPICaller,TrippismApi.TraveLayer.ICacheService,BusinessLogic.IBusinessLayer{TraveLayer.CustomTypes.Weather.Trip,TraveLayer.CustomTypes.Weather.TripWeather})">
             <summary>
             Returns a weather summary based on historical information between the specified dates (30 days max).
             </summary>
