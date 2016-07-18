@@ -37,7 +37,7 @@ namespace TrippismProfiles.Controllers
         /// It's used to save customer seach activity.
         /// </summary>
         [HttpPost]
-        [Route("api/profile/activity/search")]
+        [Route("api/profile/activity/save")]
         public async Task<HttpResponseMessage> Save(SearchActivityViewModel searchActivityViewModel)
         {
             return await Task.Run(() => SaveSearch(searchActivityViewModel));
