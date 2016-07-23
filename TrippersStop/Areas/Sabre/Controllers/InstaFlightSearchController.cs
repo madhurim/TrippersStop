@@ -73,8 +73,9 @@ namespace Trippism.Areas.Sabre.Controllers
                 #region Non stop flight
                 if (instaflightRequest.DepartureDate == DateTime.Now.ToString(dateFormat))
                 {
-                    var requestObject = new InstaFlightSearchInput();
-                    ApiHelper.CopyPropertiesTo<InstaFlightSearchInput, InstaFlightSearchInput>(instaflightRequest, requestObject);
+                    //var requestObject = new InstaFlightSearchInput();
+                    var requestObject = instaflightRequest.ShallowCopy();
+                    //ApiHelper.CopyPropertiesTo<InstaFlightSearchInput, InstaFlightSearchInput>(instaflightRequest, requestObject);
                     DateTime departureDate = DateTime.ParseExact(instaflightRequest.DepartureDate, dateFormat, null);
                     DateTime returnDate = DateTime.ParseExact(instaflightRequest.ReturnDate, dateFormat, null);
                     requestObject.DepartureDate = departureDate.AddDays(1).ToString(dateFormat);
@@ -332,8 +333,7 @@ namespace Trippism.Areas.Sabre.Controllers
         private APIResponse GetDestinationResponse(Destinations destinationsRequest, bool isNonStop)
         {
             string dateFormat = "yyyy-MM-dd";
-            var requestObject = new Destinations();
-            ApiHelper.CopyPropertiesTo<Destinations, Destinations>(destinationsRequest, requestObject);
+            Destinations requestObject = destinationsRequest.ShallowCopy();
             string url = GetDestinationUrl(requestObject, isNonStop);
             APIResponse response = GetAPIResponse(url);
             if (response.StatusCode == HttpStatusCode.NotFound && requestObject.DepartureDate == DateTime.Now.ToString(dateFormat))

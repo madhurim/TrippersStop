@@ -26,7 +26,7 @@ namespace Trippism.Areas.Weather.Controllers
         /// <summary>
         /// Returns a weather summary based on historical information between the specified dates (30 days max).
         /// </summary>
-        public HistoryController(IAsyncGoogleReverseLookupAPICaller apiGoogleReverseLookupCaller, IAsyncWeatherAPICaller apiCaller, ICacheService cacheService, IBusinessLayer<Trip,TripWeather> weatherBusinessLayer)
+        public HistoryController(IAsyncGoogleReverseLookupAPICaller apiGoogleReverseLookupCaller, IAsyncWeatherAPICaller apiCaller, ICacheService cacheService, IBusinessLayer<Trip, TripWeather> weatherBusinessLayer)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;
@@ -102,15 +102,14 @@ namespace Trippism.Areas.Weather.Controllers
             weather = ServiceStackSerializer.DeSerialize<HistoryOutput>(Response);
             if (weather != null && weather.trip != null)
             {
-                Trip trip = weather.trip;                
+                Trip trip = weather.trip;
                 TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(trip);
                 tripWeather.WeatherChances = new List<WeatherChance>();
                 if (trip.chance_of != null)
                 {
-                   // ApiHelper.FilterChanceRecord(trip, tripWeather);
                     TripWeather chances = _weatherBusinessLayer.Process(trip);
                     tripWeather.WeatherChances = chances.WeatherChances;
-                  
+
                 }
                 _cacheService.Save<TripWeather>(cacheKey, tripWeather);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, tripWeather);
@@ -118,6 +117,6 @@ namespace Trippism.Areas.Weather.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.NoContent);
         }
-       
+
     }
 }
