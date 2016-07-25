@@ -8,6 +8,7 @@ using TraveLayer.CacheServices;
 using TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels;
 using TraveLayer.CustomTypes.SabreSoap.ViewModels;
 using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
+using TraveLayer.CustomTypes.Weather;
 using Trippism.APIHelper;
 using TrippismApi.TraveLayer;
 using TrippismApi.TraveLayer.Hotel.Sabre;
@@ -50,6 +51,7 @@ namespace TrippismApi
             container.RegisterWebApiRequest<ITripAdvisorAPIAsyncCaller, TripAdvisorAPICaller>();
             container.RegisterWebApiRequest<ISabreHotelSoapCaller, SabreHotelCaller>();
             container.RegisterWebApiRequest<IBusinessLayer<Hotels, HotelOutput>, SabreHotelSoapCallerBusinessLayer>();
+            container.RegisterWebApiRequest<IBusinessLayer<Trip, TripWeather>, WeatherBusinessLayer>();
 
             container.RegisterWebApiRequest<ITripAdvisorBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorBusinessLayer>();
             container.RegisterWebApiRequest<ITripAdvisorHistoricalBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorHistoricalBusinessLayer>();

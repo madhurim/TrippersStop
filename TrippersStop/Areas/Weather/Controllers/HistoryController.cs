@@ -11,6 +11,8 @@ using TraveLayer.CustomTypes.Weather;
 using TraveLayer.CustomTypes.Weather.Request;
 using TrippismApi;
 using TrippismApi.TraveLayer;
+using BusinessLogic;
+
 namespace Trippism.Areas.Weather.Controllers
 {
     public class HistoryController : ApiController
@@ -19,14 +21,17 @@ namespace Trippism.Areas.Weather.Controllers
         IAsyncWeatherAPICaller _apiCaller;
         ICacheService _cacheService;
         IAsyncGoogleReverseLookupAPICaller _apiGoogleReverseLookupCaller;
+        IBusinessLayer<Trip, TripWeather> _weatherBusinessLayer;
+
         /// <summary>
         /// Returns a weather summary based on historical information between the specified dates (30 days max).
         /// </summary>
-        public HistoryController(IAsyncGoogleReverseLookupAPICaller apiGoogleReverseLookupCaller, IAsyncWeatherAPICaller apiCaller, ICacheService cacheService)
+        public HistoryController(IAsyncGoogleReverseLookupAPICaller apiGoogleReverseLookupCaller, IAsyncWeatherAPICaller apiCaller, ICacheService cacheService, IBusinessLayer<Trip, TripWeather> weatherBusinessLayer)
         {
             _apiCaller = apiCaller;
             _cacheService = cacheService;
             _apiGoogleReverseLookupCaller = apiGoogleReverseLookupCaller;
+            _weatherBusinessLayer = weatherBusinessLayer;
         }
         /// <summary>
         /// Returns a weather summary based on historical information between the specified dates (30 days max).
@@ -97,12 +102,14 @@ namespace Trippism.Areas.Weather.Controllers
             weather = ServiceStackSerializer.DeSerialize<HistoryOutput>(Response);
             if (weather != null && weather.trip != null)
             {
-                Trip trip = weather.trip;                
+                Trip trip = weather.trip;
                 TripWeather tripWeather = Mapper.Map<Trip, TripWeather>(trip);
                 tripWeather.WeatherChances = new List<WeatherChance>();
                 if (trip.chance_of != null)
                 {
-                    ApiHelper.FilterChanceRecord(trip, tripWeather);
+                    TripWeather chances = _weatherBusinessLayer.Process(trip);
+                    tripWeather.WeatherChances = chances.WeatherChances;
+
                 }
                 _cacheService.Save<TripWeather>(cacheKey, tripWeather);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, tripWeather);
@@ -111,45 +118,5 @@ namespace Trippism.Areas.Weather.Controllers
             return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
-        private void FilterChanceRecord(Trip trip, TripWeather tripWeather)
-        {
-            Type type = trip.chance_of.GetType();
-            PropertyInfo[] properties = type.GetProperties();
-            string propertyName = string.Empty;
-            Chance propertyValue = null;
-            string separator = string.Empty;
-            foreach (PropertyInfo property in properties)
-            {
-                propertyName = property.Name;
-                var result = property.GetValue(trip.chance_of, null);
-                if (result != null)
-                {
-                    propertyValue = result as Chance;
-                    bool addToCollection = IsValidRecord(propertyValue);
-                    if (addToCollection)
-                        AddChanceOfRecord(tripWeather, propertyValue, propertyName);
-                }
-            }
-        }
-
-        private void AddChanceOfRecord(TripWeather tripWeather, Chance propertyValue, string propertyName)
-        {
-            tripWeather.WeatherChances.Add(new WeatherChance()
-            {
-                ChanceType = propertyName,
-                Description = propertyValue.description,
-                Name = propertyValue.name,
-                Percentage = propertyValue.percentage
-            });
-        }
-
-        private bool IsValidRecord(Chance chance)
-        {
-            if (chance != null && chance.percentage > 30)
-            {
-                return true;
-            }
-            return false;
-        }
     }
 }

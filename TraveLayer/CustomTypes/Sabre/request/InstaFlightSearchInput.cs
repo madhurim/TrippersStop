@@ -17,5 +17,10 @@ namespace TraveLayer.CustomTypes.Sabre.Request
         public short? outboundflightstops { get; set; }
         public short? inboundflightstops { get; set; }
         public short? limit { get; set; }
+
+        public InstaFlightSearchInput ShallowCopy()
+        {
+            return (InstaFlightSearchInput)this.MemberwiseClone();
+        }
     }
 }

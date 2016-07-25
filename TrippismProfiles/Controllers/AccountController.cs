@@ -13,7 +13,7 @@ using TrippismProfiles.Models;
 using TrippismRepositories;
 
 namespace TrippismProfiles.Controllers
-{ 
+{
     /// <summary>
     /// It's used to get customer account information.
     /// </summary>
@@ -45,20 +45,20 @@ namespace TrippismProfiles.Controllers
         /// <summary>
         /// This method is used to get customer details
         /// </summary>
-        [HttpPut]
-        [TrippismAuthorize]
+        //[HttpPut]
+        //[TrippismAuthorize]
         [Route("api/profile/account")]
         public async Task<HttpResponseMessage> Get()
         {
             return await Task.Run(() => { return GetCustomer(); });
         }
 
-     
+
         /// <summary>
         /// This method is used to update customer details
         /// </summary>
         [HttpPut]
-        [TrippismAuthorize]
+        //[TrippismAuthorize]
         [Route("api/profile/account")]
         public async Task<HttpResponseMessage> Update(SignUpViewModel authDetailsViewModel)
         {
@@ -93,8 +93,8 @@ namespace TrippismProfiles.Controllers
             if (authDetails == null)
                 return Request.CreateResponse(HttpStatusCode.NotFound, TrippismConstants.CustomerNotFound);
 
-              authDetails.IsActive = false;
-              _IAuthDetailsRepository.UpdateCustomer(authDetails);
+            authDetails.IsActive = false;
+            _IAuthDetailsRepository.UpdateCustomer(authDetails);
             return Request.CreateResponse(HttpStatusCode.OK, TrippismConstants.RecordDeleted);
         }
         private HttpResponseMessage UpdateCustomer(SignUpViewModel authDetailsViewModel)
@@ -119,19 +119,19 @@ namespace TrippismProfiles.Controllers
 
         private HttpResponseMessage UpdatePassword(UpdatePasswordViewModel updatePasswordViewModel)
         {
-              var authDetails = _IAuthDetailsRepository.FindCustomer(this.AuthId);
-              if (authDetails == null)
-              {
-                 return Request.CreateResponse(HttpStatusCode.NotFound, TrippismConstants.CustomerNotFound);
-              }  
-              var oldPassword=PasswordHash.CreateHash(updatePasswordViewModel.OldPassword) ;
-              if(oldPassword!=authDetails.Password)
-              {
-                  return Request.CreateResponse(HttpStatusCode.Forbidden, TrippismConstants.IncorrectPassword);
-              }
-             authDetails.Password =  PasswordHash.CreateHash(updatePasswordViewModel.NewPassword);
+            var authDetails = _IAuthDetailsRepository.FindCustomer(this.AuthId);
+            if (authDetails == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, TrippismConstants.CustomerNotFound);
+            }
+            var oldPassword = PasswordHash.CreateHash(updatePasswordViewModel.OldPassword);
+            if (oldPassword != authDetails.Password)
+            {
+                return Request.CreateResponse(HttpStatusCode.Forbidden, TrippismConstants.IncorrectPassword);
+            }
+            authDetails.Password = PasswordHash.CreateHash(updatePasswordViewModel.NewPassword);
             _IAuthDetailsRepository.UpdateCustomer(authDetails);
-             return Request.CreateResponse(HttpStatusCode.OK, TrippismConstants.PasswordUpdatedSuccessfully);
+            return Request.CreateResponse(HttpStatusCode.OK, TrippismConstants.PasswordUpdatedSuccessfully);
         }
         private HttpResponseMessage GetCustomer()
         {

@@ -80,7 +80,7 @@ namespace TrippismProfiles.Controllers
             newanonym.VisitedTime = anonymousUser.VisitedTime;
             newanonym.VisitorGuid = Guid.NewGuid();
             _IAnonymousRepository.AddCustomer(newanonym);
-            return Request.CreateResponse(HttpStatusCode.OK, anonymousUser);
+            return Request.CreateResponse(HttpStatusCode.OK, newanonym);
         }
 
         private HttpResponseMessage GetUser(Guid anonymousId)

@@ -22,5 +22,9 @@ namespace TraveLayer.CustomTypes.Sabre.ViewModels
         public string PointOfSaleCountry { get; set; }
         public string Region { get; set; }
         public string TopDestinations { get; set; }
+        public Destinations ShallowCopy()
+        {
+            return (Destinations)this.MemberwiseClone();
+        }
     }
 }
