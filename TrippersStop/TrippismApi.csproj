@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -224,8 +225,10 @@
     <Compile Include="APIExtention\MediaTypeFormatter\ServiceStackTextFormatter.cs" />
     <Compile Include="APIHelper\ApiHelper.cs" />
     <Compile Include="APIHelper\CompressedContent.cs" />
+    <Compile Include="APIHelper\ITokenManager.cs" />
     <Compile Include="APIHelper\MailgunEmail.cs" />
     <Compile Include="APIHelper\RegisterMap.cs" />
+    <Compile Include="APIHelper\TokenManager.cs" />
     <Compile Include="APIHelper\TrippismNLog.cs" />
     <Compile Include="Areas\Constants\ConstantsAreaRegistration.cs" />
     <Compile Include="Areas\Constants\Controllers\ConstantsController.cs" />
