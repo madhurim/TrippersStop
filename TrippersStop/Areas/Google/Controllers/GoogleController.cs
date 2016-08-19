@@ -141,12 +141,12 @@ namespace Trippism.Areas.GooglePlace.Controllers
                 googleplace = ServiceStackSerializer.DeSerialize<GoogleOutput>(result.Response);
 
                 //if next_page_token exists get the next set of results , combine.
-                if (!string.IsNullOrWhiteSpace(googleplace.next_page_token))
-                {
-                    result = _apiCaller.Get(url + "&pagetoken=" + googleplace.next_page_token).Result;
-                    GoogleOutput nextResult = ServiceStackSerializer.DeSerialize<GoogleOutput>(result.Response);
-                    googleplace.results.AddRange(nextResult.results);
-                }
+                //if (!string.IsNullOrWhiteSpace(googleplace.next_page_token))
+                //{
+                //    result = _apiCaller.Get(url + "&pagetoken=" + googleplace.next_page_token).Result;
+                //    GoogleOutput nextResult = ServiceStackSerializer.DeSerialize<GoogleOutput>(result.Response);
+                //    googleplace.results.AddRange(nextResult.results);
+                //}
 
                 if (locationsearch.ExcludeTypes != null)
                     googleplace.results = googleplace.results.Where(x => !x.types.Intersect(locationsearch.ExcludeTypes).Any()).ToList();
