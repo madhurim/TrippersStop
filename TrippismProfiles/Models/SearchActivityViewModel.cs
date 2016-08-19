@@ -10,6 +10,9 @@ namespace TrippismProfiles.Models
         public Guid Id { get; set; }
         public Guid CustomerId { get; set; }
       //  public int SearchType { get; set; }
+        public Guid RefGuid { get; set; }
+        public string Origin { get; set; }
+        public string Destination { get; set; }
         public string OriginAirPort { get; set; }
         public string DestinationAirPort { get; set; }
         public DateTime FromDate { get; set; }

@@ -42,5 +42,12 @@ namespace TrippismProfiles
                 new SimpleInjectorWebApiDependencyResolver(container);
            ApiHelper.RegisterMappingEntities();
         }
+        protected void Application_BeginRequest()
+        {
+            if (Request.HttpMethod == "OPTIONS")
+            {
+                Response.Flush();
+            }
+        }
     }
 }

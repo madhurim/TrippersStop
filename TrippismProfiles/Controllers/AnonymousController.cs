@@ -74,13 +74,13 @@ namespace TrippismProfiles.Controllers
         {
           /*  if (anonymousUser == null)
                 anonymousUser = new Anonymous(); */
-            anonymousUser.VisitedTime = DateTime.Now;
-            //anonymousUser.VisitorGuid = Guid.NewGuid();
             Anonymous newanonym = new Anonymous();
-            newanonym.VisitedTime = anonymousUser.VisitedTime;
+            newanonym.VisitedTime = DateTime.Now;            
             newanonym.VisitorGuid = Guid.NewGuid();
+            newanonym.Browser = anonymousUser.Browser;
+            newanonym.Device = anonymousUser.Device;            
             _IAnonymousRepository.AddCustomer(newanonym);
-            return Request.CreateResponse(HttpStatusCode.OK, newanonym);
+            return Request.CreateResponse(HttpStatusCode.OK, newanonym.VisitorGuid);
         }
 
         private HttpResponseMessage GetUser(Guid anonymousId)
