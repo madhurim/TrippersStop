@@ -11,6 +11,11 @@ using TraveLayer.CustomTypes.Constants.Response;
 using Trippism.APIExtention.Filters;
 using Trippism.APIHelper;
 using TrippismApi.TraveLayer;
+using TraveLayer.CustomTypes.CurrencyConversion.Request;
+using TraveLayer.CustomTypes.CurrencyConversion.Response;
+using TraveLayer.CustomTypes.CurrencyConversion.ViewModels;
+using TraveLayer.CustomTypes.Sabre.Response;
+
 namespace Trippism.Areas.Constants.Controllers
 {
     [GZipCompressionFilter]
@@ -165,6 +170,24 @@ namespace Trippism.Areas.Constants.Controllers
         private string GetFullPath(string path)
         {
             return System.Web.HttpContext.Current.Server.MapPath(path);
+        }
+
+        [HttpGet]
+        [Route("api/Constants/CurrencyConversion")]
+        public HttpResponseMessage Get(CurrencyConversionInput currencyConversionInput)
+        {
+            CurrencyConversionAPICaller _apiCaller = new CurrencyConversionAPICaller();
+            APIResponse result = _apiCaller.Get(null).Result;
+
+            CurrencyConversionOutput rate = new CurrencyConversionOutput();
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                rate = ServiceStackSerializer.DeSerialize<CurrencyConversionOutput>(result.Response);
+                CurrencyConversion currencyRates = Mapper.Map<CurrencyConversionOutput, CurrencyConversion>(rate);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, rate);
+                return response;
+            }            
+            return Request.CreateResponse(result.StatusCode, result.Response);
         }
     }
 }

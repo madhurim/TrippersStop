@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TraveLayer.CustomTypes.CurrencyConversion.ViewModels
+{
+    public class CurrencyConversion
+    {
+        public string Base { get; set; }
+        public Dictionary<string, double> rates { get; set; }
+    }
+}

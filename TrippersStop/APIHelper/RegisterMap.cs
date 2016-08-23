@@ -12,6 +12,8 @@ using RS = TraveLayer.CustomTypes.TripAdvisor.Response;
 using TraveLayer.CustomTypes.Yelp.Response;
 using TraveLayer.CustomTypes.YouTube.Response;
 using TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels;
+using TraveLayer.CustomTypes.CurrencyConversion.ViewModels;
+using TraveLayer.CustomTypes.CurrencyConversion.Response;
 using TrippismApi.TraveLayer.Hotel.Sabre.HotelAvailabilityRequest;
 using TraveLayer.CustomTypes.SabreSoap.ViewModels;
 
@@ -76,7 +78,7 @@ namespace Trippism.APIHelper
             Mapper.Register<GooglePlaceGeometry, TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceGeometry>();
             Mapper.Register<GooglePlaceLocation, TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceLocation>();
             Mapper.Register<GooglePlacePhotos, TraveLayer.CustomTypes.Google.ViewModels.GooglePlacePhotos>();
-
+            Mapper.Register<CurrencyConversionOutput, TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion>();
             Mapper.Compile();
         }
 
