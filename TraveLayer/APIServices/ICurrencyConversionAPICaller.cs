@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrippismApi.TraveLayer
 {
-    public interface IAsyncCurrencyConversionAPICaller : IAPIAsyncCaller
+    public interface ICurrencyConversionAPICaller : IAPIAsyncCaller
     {
         
     }

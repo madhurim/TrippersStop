@@ -12,15 +12,17 @@ using TraveLayer.CustomTypes.CurrencyConversion.Request;
 
 namespace TrippismApi.TraveLayer
 {
-    public class CurrencyConversionAPICaller : IAsyncCurrencyConversionAPICaller 
+    public class CurrencyConversionAPICaller : ICurrencyConversionAPICaller
     {
-        Uri _BaseAPIUri ;
+        Uri _BaseAPIUri;
         public Uri BaseAPIUri
         {
-            get{
+            get
+            {
                 return this._BaseAPIUri;
             }
-            set{
+            set
+            {
                 this._BaseAPIUri = value;
             }
         }
@@ -55,16 +57,19 @@ namespace TrippismApi.TraveLayer
         }
         public async Task<APIResponse> Get(string Method)
         {
-            using(var client = new HttpClient())
+            using (var client = new HttpClient())
             {
-                HttpResponseMessage openExchangeResponse = await client.GetAsync(this._BaseAPIUri + "?app_id="+this._ClientId).ConfigureAwait(false);
-
+                HttpResponseMessage openExchangeResponse = await client.GetAsync(this._BaseAPIUri + "?app_id="+this._ClientId).ConfigureAwait(false);                
                 if (!openExchangeResponse.IsSuccessStatusCode)
                 {
-                    JsonObject error = await openExchangeResponse.Content.ReadAsAsync<JsonObject>();
+                    var errorRespose = await openExchangeResponse.Content.ReadAsStringAsync();
+                    JsonObject error = errorRespose.FromJson<JsonObject>();
+                    //JsonObject error = await openExchangeResponse.Content.ReadAsAsync<JsonObject>();
                     string errorType = error.Get<string>("error");
-
-                    return new APIResponse { StatusCode = openExchangeResponse.StatusCode, Response = "404", RequestUrl = this._BaseAPIUri.ToString(), OriginalResponse = openExchangeResponse };
+                    string errorDescription = error.Get<string>("description");
+                    string errorMessage = error.Get<string>("message");
+                    string responseMessage = string.Join(" ", errorType, errorDescription, errorMessage).Trim();
+                    return new APIResponse { StatusCode = openExchangeResponse.StatusCode, Response = responseMessage };
                 }
                 var respose = await openExchangeResponse.Content.ReadAsStringAsync();
 
@@ -73,7 +78,7 @@ namespace TrippismApi.TraveLayer
         }
         public async Task<APIResponse> Post(string Method, string Body)
         {
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

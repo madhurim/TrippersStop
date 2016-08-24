@@ -123,7 +123,7 @@
     <Compile Include="APIServices\GoogleReverseLookupAPICaller.cs" />
     <Compile Include="APIServices\GooglePlaceAPICaller.cs" />
     <Compile Include="APIServices\IAPICaller.cs" />
-    <Compile Include="APIServices\IAsyncCurrencyConversionAPICaller.cs" />
+    <Compile Include="APIServices\ICurrencyConversionAPICaller.cs" />
     <Compile Include="APIServices\IAsyncGoogleAPICaller.cs" />
     <Compile Include="APIServices\IAsyncGoogleReverseLookupAPICaller.cs" />
     <Compile Include="APIServices\ISabreSoapCaller.cs" />

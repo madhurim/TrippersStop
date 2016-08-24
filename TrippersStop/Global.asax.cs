@@ -50,6 +50,7 @@ namespace TrippismApi
             container.RegisterWebApiRequest<IAsyncYouTubeAPICaller, YouTubeAPICaller>();
             container.RegisterWebApiRequest<ITripAdvisorAPIAsyncCaller, TripAdvisorAPICaller>();
             container.RegisterWebApiRequest<ISabreHotelSoapCaller, SabreHotelCaller>();
+            container.RegisterWebApiRequest<ICurrencyConversionAPICaller, CurrencyConversionAPICaller>();
             container.RegisterWebApiRequest<IBusinessLayer<Hotels, HotelOutput>, SabreHotelSoapCallerBusinessLayer>();
             container.RegisterWebApiRequest<IBusinessLayer<Trip, TripWeather>, WeatherBusinessLayer>();
 

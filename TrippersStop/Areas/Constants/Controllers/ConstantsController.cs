@@ -171,23 +171,5 @@ namespace Trippism.Areas.Constants.Controllers
         {
             return System.Web.HttpContext.Current.Server.MapPath(path);
         }
-
-        [HttpGet]
-        [Route("api/Constants/CurrencyConversion")]
-        public HttpResponseMessage Get(CurrencyConversionInput currencyConversionInput)
-        {
-            CurrencyConversionAPICaller _apiCaller = new CurrencyConversionAPICaller();
-            APIResponse result = _apiCaller.Get(null).Result;
-
-            CurrencyConversionOutput rate = new CurrencyConversionOutput();
-            if (result.StatusCode == HttpStatusCode.OK)
-            {
-                rate = ServiceStackSerializer.DeSerialize<CurrencyConversionOutput>(result.Response);
-                CurrencyConversion currencyRates = Mapper.Map<CurrencyConversionOutput, CurrencyConversion>(rate);
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, rate);
-                return response;
-            }            
-            return Request.CreateResponse(result.StatusCode, result.Response);
-        }
     }
 }
