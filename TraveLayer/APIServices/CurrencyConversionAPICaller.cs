@@ -52,28 +52,28 @@ namespace TrippismApi.TraveLayer
         }
         public CurrencyConversionAPICaller()
         {
-            _BaseAPIUri = new Uri(ConfigurationManager.AppSettings["OpenExchangeAPIUri"].ToString());
-            _ClientId = ConfigurationManager.AppSettings["OpenExchangeClientID"].ToString();
+            _BaseAPIUri = new Uri(ConfigurationManager.AppSettings["CurrencyConversionAPIUri"].ToString());
+            _ClientId = ConfigurationManager.AppSettings["CurrencyConversionClientID"].ToString();
         }
         public async Task<APIResponse> Get(string Method)
         {
             using (var client = new HttpClient())
             {
-                HttpResponseMessage openExchangeResponse = await client.GetAsync(this._BaseAPIUri + "?app_id="+this._ClientId).ConfigureAwait(false);                
-                if (!openExchangeResponse.IsSuccessStatusCode)
+                HttpResponseMessage currencyConversionResponse = await client.GetAsync(this._BaseAPIUri + "?app_id="+this._ClientId).ConfigureAwait(false);
+                if (!currencyConversionResponse.IsSuccessStatusCode)
                 {
-                    var errorRespose = await openExchangeResponse.Content.ReadAsStringAsync();
+                    var errorRespose = await currencyConversionResponse.Content.ReadAsStringAsync();
                     JsonObject error = errorRespose.FromJson<JsonObject>();
                     //JsonObject error = await openExchangeResponse.Content.ReadAsAsync<JsonObject>();
                     string errorType = error.Get<string>("error");
                     string errorDescription = error.Get<string>("description");
                     string errorMessage = error.Get<string>("message");
                     string responseMessage = string.Join(" ", errorType, errorDescription, errorMessage).Trim();
-                    return new APIResponse { StatusCode = openExchangeResponse.StatusCode, Response = responseMessage };
+                    return new APIResponse { StatusCode = currencyConversionResponse.StatusCode, Response = responseMessage };
                 }
-                var respose = await openExchangeResponse.Content.ReadAsStringAsync();
+                var respose = await currencyConversionResponse.Content.ReadAsStringAsync();
 
-                return new APIResponse { StatusCode = openExchangeResponse.StatusCode, Response = respose };
+                return new APIResponse { StatusCode = currencyConversionResponse.StatusCode, Response = respose };
             }
         }
         public async Task<APIResponse> Post(string Method, string Body)
