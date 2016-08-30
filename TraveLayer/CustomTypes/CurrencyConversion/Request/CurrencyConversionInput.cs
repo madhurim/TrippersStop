@@ -8,7 +8,7 @@ namespace TraveLayer.CustomTypes.CurrencyConversion.Request
 {
     public class CurrencyConversionInput
     {
-        public string CurrencyCode { get; set; }
-        public string ExchangeCurrencyCode { get; set; }
+        public string Base { get; set; }
+        public string Target{ get; set; }
     }
 }

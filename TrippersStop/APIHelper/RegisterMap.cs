@@ -78,7 +78,6 @@ namespace Trippism.APIHelper
             Mapper.Register<GooglePlaceGeometry, TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceGeometry>();
             Mapper.Register<GooglePlaceLocation, TraveLayer.CustomTypes.Google.ViewModels.GooglePlaceLocation>();
             Mapper.Register<GooglePlacePhotos, TraveLayer.CustomTypes.Google.ViewModels.GooglePlacePhotos>();
-            Mapper.Register<CurrencyConversionOutput, TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion>();
             Mapper.Compile();
         }
 

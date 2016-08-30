@@ -1,4 +1,5 @@
-﻿using ExpressMapper;
+﻿using BusinessLogic;
+using ExpressMapper;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -13,14 +14,16 @@ namespace Trippism.Areas.CurrencyConversion.Controllers
     public class CurrencyConversionController : ApiController
     {
         ICurrencyConversionAPICaller _apiCaller;
-        public CurrencyConversionController(ICurrencyConversionAPICaller apiCaller)
+        readonly IBusinessLayer<CurrencyConversionOutput, TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion> _iBusinessLayer;
+        public CurrencyConversionController(ICurrencyConversionAPICaller apiCaller,IBusinessLayer<CurrencyConversionOutput,TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion> iBusinessLayer)
         {
             _apiCaller = apiCaller;
+            _iBusinessLayer = iBusinessLayer;
         }
 
         [HttpGet]
         [Route("api/CurrencyConversion/Convert")]
-        public HttpResponseMessage Convert(CurrencyConversionInput currencyConversionInput)
+        public HttpResponseMessage Convert([FromUri]CurrencyConversionInput currencyConversionInput)
         {           
             APIResponse result = _apiCaller.Get(null).Result;
 
@@ -28,8 +31,9 @@ namespace Trippism.Areas.CurrencyConversion.Controllers
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 rate = ServiceStackSerializer.DeSerialize<CurrencyConversionOutput>(result.Response);
-                TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion currencyRates = Mapper.Map<CurrencyConversionOutput, TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion>(rate);
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, rate);
+                rate.Target = currencyConversionInput.Target;
+                TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion currencyRates = _iBusinessLayer.Process(rate);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, currencyRates);
                 return response;
             }
             return Request.CreateResponse(result.StatusCode, result.Response);

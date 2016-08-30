@@ -9,6 +9,7 @@ namespace TraveLayer.CustomTypes.CurrencyConversion.Response
     public class CurrencyConversionOutput
     {
         public string Base{ get; set; }
+        public string Target { get; set; }
         public Dictionary<string, double> rates { get; set; }        
     }
 }
