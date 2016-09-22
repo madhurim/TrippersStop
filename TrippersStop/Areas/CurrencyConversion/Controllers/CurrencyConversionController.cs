@@ -3,7 +3,6 @@ using ExpressMapper;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
 using System.Threading.Tasks;
 using TraveLayer.CustomTypes.CurrencyConversion.Request;
 using TraveLayer.CustomTypes.CurrencyConversion.Response;
@@ -16,55 +15,52 @@ namespace Trippism.Areas.CurrencyConversion.Controllers
 {
     public class CurrencyConversionController : ApiController
     {
-        const string conversionCacheKey = "CurrencyConversion";
+        const string conversionCacheKey = "CurrencyConversion.";
         ICurrencyConversionAPICaller _apiCaller;
-        //ICacheService _cacheService;
+        ICacheService _cacheService;
         readonly IBusinessLayer<CurrencyConversionOutput, TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion> _iBusinessLayer;
-        //public CurrencyConversionController(ICurrencyConversionAPICaller apiCaller, ICacheService cacheService,IBusinessLayer<CurrencyConversionOutput, TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion> iBusinessLayer)
-        public CurrencyConversionController(ICurrencyConversionAPICaller apiCaller, IBusinessLayer<CurrencyConversionOutput, TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion> iBusinessLayer)
+        //public CurrencyConversionController(ICurrencyConversionAPICaller apiCaller, IBusinessLayer<CurrencyConversionOutput, TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion> iBusinessLayer);
+        public CurrencyConversionController(ICurrencyConversionAPICaller apiCaller, ICacheService cacheService,IBusinessLayer<CurrencyConversionOutput, TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion> iBusinessLayer)
+        
         {
             _apiCaller = apiCaller;
             _iBusinessLayer = iBusinessLayer;
-            //_cacheService = cacheService;
+            _cacheService = cacheService;
         }
 
 
         [HttpGet]
-        [ResponseType(typeof(TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion))]
         [Route("api/CurrencyConversion/Convert")]
-        [TrippismCache(conversionCacheKey)]
-        public async Task<IHttpActionResult> Convert([FromUri]CurrencyConversionInput currencyConversionInput)
-        {
-            //string cacheKey = conversionCacheKey + string.Join(".", currencyConversionInput.Base, currencyConversionInput.Target);
-            //var conversionDetail = _cacheService.GetByKey<TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion>(cacheKey);
-            //if (conversionDetail != null)
-            //{
-            //    return Request.CreateResponse(HttpStatusCode.OK, conversionDetail);
-            //}
+        public async Task<HttpResponseMessage> Convert([FromUri]CurrencyConversionInput currencyConversionInput)
+        {            
             return await Task.Run(() =>
-            //{ return GetResponse(currencyConversionInput, cacheKey); });
             { return GetResponse(currencyConversionInput); });
+            ///{ return GetResponse(currencyConversionInput); });
         }
 
-        private IHttpActionResult GetResponse(CurrencyConversionInput currencySearch)
+        private HttpResponseMessage GetResponse(CurrencyConversionInput currencyConversionInput)
         {
-            APIResponse result = _apiCaller.Get(null).Result;
+            string cacheKey = conversionCacheKey + currencyConversionInput.Base;
 
-            CurrencyConversionOutput rate = new CurrencyConversionOutput();
-            if (result.StatusCode == HttpStatusCode.OK)
+            CurrencyConversionOutput  rate = _cacheService.GetByKey<TraveLayer.CustomTypes.CurrencyConversion.Response.CurrencyConversionOutput>(cacheKey);            
+            if (rate == null)
             {
-                rate = ServiceStackSerializer.DeSerialize<CurrencyConversionOutput>(result.Response);
-                rate.Target = currencySearch.Target;
-                TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion currencyRates = _iBusinessLayer.Process(rate);
+                APIResponse result = _apiCaller.Get(null).Result;
+                                
+                if (result.StatusCode == HttpStatusCode.OK)
+                {
+                    rate = ServiceStackSerializer.DeSerialize<CurrencyConversionOutput>(result.Response);
 
-                //if (currencyRates != null)
-                //    _cacheService.Save<TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion>(cacheKey, currencyRates);
-
-                //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, currencyRates);
-
-                return Ok(currencyRates);
+                    if (rate != null)
+                        _cacheService.Save<TraveLayer.CustomTypes.CurrencyConversion.Response.CurrencyConversionOutput>(cacheKey, rate);                    
+                }
             }
-            return ResponseMessage(new HttpResponseMessage(result.StatusCode));
+            rate.Target = currencyConversionInput.Target;                    
+            TraveLayer.CustomTypes.CurrencyConversion.ViewModels.CurrencyConversion currencyRates = _iBusinessLayer.Process(rate);
+
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, currencyRates);
+
+            return response;            
         }
     }
 }
