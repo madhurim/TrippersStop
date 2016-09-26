@@ -8,6 +8,7 @@ using TraveLayer.CustomTypes.CurrencyConversion.Request;
 using TraveLayer.CustomTypes.CurrencyConversion.Response;
 using TraveLayer.CustomTypes.Sabre.Response;
 using TrippismApi.TraveLayer;
+using System.Text;
 using Trippism.APIExtention.Filters;
 
 
@@ -45,7 +46,8 @@ namespace Trippism.Areas.CurrencyConversion.Controllers
             CurrencyConversionOutput  rate = _cacheService.GetByKey<TraveLayer.CustomTypes.CurrencyConversion.Response.CurrencyConversionOutput>(cacheKey);            
             if (rate == null)
             {
-                APIResponse result = _apiCaller.Get(null).Result;
+                string url = GetApiURL(currencyConversionInput);
+                APIResponse result = _apiCaller.Get(url).Result;
                                 
                 if (result.StatusCode == HttpStatusCode.OK)
                 {
@@ -61,6 +63,16 @@ namespace Trippism.Areas.CurrencyConversion.Controllers
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, currencyRates);
 
             return response;            
+        }
+
+        private string GetApiURL(CurrencyConversionInput currencyConversionInput)
+        {
+            StringBuilder apiUrl = new StringBuilder();
+            if(!string.IsNullOrWhiteSpace(currencyConversionInput.Base))
+            {
+                apiUrl.Append("?base=" + currencyConversionInput.Base);
+            }
+            return apiUrl.ToString();
         }
     }
 }

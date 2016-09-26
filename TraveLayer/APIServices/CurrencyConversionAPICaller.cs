@@ -59,7 +59,7 @@ namespace TrippismApi.TraveLayer
         {
             using (var client = new HttpClient())
             {
-                HttpResponseMessage currencyConversionResponse = await client.GetAsync(this._BaseAPIUri + "?app_id="+this._ClientId).ConfigureAwait(false);
+                HttpResponseMessage currencyConversionResponse = await client.GetAsync(this._BaseAPIUri + Method +"&app_id="+this._ClientId).ConfigureAwait(false);
                 if (!currencyConversionResponse.IsSuccessStatusCode)
                 {
                     var errorRespose = await currencyConversionResponse.Content.ReadAsStringAsync();
