@@ -123,6 +123,7 @@
     <Compile Include="APIServices\GoogleReverseLookupAPICaller.cs" />
     <Compile Include="APIServices\GooglePlaceAPICaller.cs" />
     <Compile Include="APIServices\IAPICaller.cs" />
+    <Compile Include="APIServices\ICurrencyConversionAPICaller.cs" />
     <Compile Include="APIServices\IAsyncGoogleAPICaller.cs" />
     <Compile Include="APIServices\IAsyncGoogleReverseLookupAPICaller.cs" />
     <Compile Include="APIServices\ISabreSoapCaller.cs" />
@@ -139,10 +140,14 @@
     <Compile Include="APIServices\YelpAPICaller.cs" />
     <Compile Include="APIServices\YouTubeAPICaller.cs" />
     <Compile Include="CacheServices\MemoryCacheService.cs" />
+    <Compile Include="APIServices\CurrencyConversionAPICaller.cs" />
     <Compile Include="CustomTypes\Constants\Response\Airlines.cs" />
     <Compile Include="CustomTypes\Constants\Response\Airports.cs" />
     <Compile Include="CustomTypes\Constants\Response\CurrencySymbols.cs" />
     <Compile Include="CustomTypes\Constants\ViewModels\CurrencySymbolsViewModel.cs" />
+    <Compile Include="CustomTypes\CurrencyConversion\Request\CurrencyConversionInput.cs" />
+    <Compile Include="CustomTypes\CurrencyConversion\Response\CurrencyConversionOutput.cs" />
+    <Compile Include="CustomTypes\CurrencyConversion\ViewModels\CurrencyConversion.cs" />
     <Compile Include="CustomTypes\Google\Request\GoogleInput.cs" />
     <Compile Include="CustomTypes\Google\Request\GooglePlaceInput.cs" />
     <Compile Include="CustomTypes\Google\Response\GoogleOutput.cs" />

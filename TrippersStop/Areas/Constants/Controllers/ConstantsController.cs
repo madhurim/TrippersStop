@@ -11,6 +11,11 @@ using TraveLayer.CustomTypes.Constants.Response;
 using Trippism.APIExtention.Filters;
 using Trippism.APIHelper;
 using TrippismApi.TraveLayer;
+using TraveLayer.CustomTypes.CurrencyConversion.Request;
+using TraveLayer.CustomTypes.CurrencyConversion.Response;
+using TraveLayer.CustomTypes.CurrencyConversion.ViewModels;
+using TraveLayer.CustomTypes.Sabre.Response;
+
 namespace Trippism.Areas.Constants.Controllers
 {
     [GZipCompressionFilter]

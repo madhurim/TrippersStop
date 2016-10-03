@@ -229,6 +229,8 @@
     <Compile Include="APIHelper\TrippismNLog.cs" />
     <Compile Include="Areas\Constants\ConstantsAreaRegistration.cs" />
     <Compile Include="Areas\Constants\Controllers\ConstantsController.cs" />
+    <Compile Include="Areas\CurrencyConversion\Controllers\CurrencyConversionController.cs" />
+    <Compile Include="Areas\CurrencyConversion\CurrencyConversionAreaRegistration.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleController.cs" />
     <Compile Include="Areas\Google\Controllers\GoogleGeoCodeController.cs" />
     <Compile Include="Areas\Google\Controllers\GooglePlaceDetailsController.cs" />
@@ -355,6 +357,8 @@
     <Folder Include="APIExtention\Handler\" />
     <Folder Include="Areas\Constants\Models\" />
     <Folder Include="Areas\Constants\Views\Shared\" />
+    <Folder Include="Areas\CurrencyConversion\Models\" />
+    <Folder Include="Areas\CurrencyConversion\Views\Shared\" />
     <Folder Include="Areas\Google\Models\" />
     <Folder Include="Areas\Google\Views\Shared\" />
     <Folder Include="Areas\IATA\Models\" />
@@ -405,6 +409,9 @@
   <ItemGroup>
     <Content Include="Constants\airports_currency.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\CurrencyConversion\Views\web.config" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -419,7 +426,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>14606</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

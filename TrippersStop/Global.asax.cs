@@ -5,6 +5,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using TraveLayer.CacheServices;
+using TraveLayer.CustomTypes.CurrencyConversion.Response;
+using TraveLayer.CustomTypes.CurrencyConversion.ViewModels;
 using TraveLayer.CustomTypes.Sabre.SoapServices.ViewModels;
 using TraveLayer.CustomTypes.SabreSoap.ViewModels;
 using TraveLayer.CustomTypes.TripAdvisor.ViewModels;
@@ -50,8 +52,10 @@ namespace TrippismApi
             container.RegisterWebApiRequest<IAsyncYouTubeAPICaller, YouTubeAPICaller>();
             container.RegisterWebApiRequest<ITripAdvisorAPIAsyncCaller, TripAdvisorAPICaller>();
             container.RegisterWebApiRequest<ISabreHotelSoapCaller, SabreHotelCaller>();
+            container.RegisterWebApiRequest<ICurrencyConversionAPICaller, CurrencyConversionAPICaller>();
             container.RegisterWebApiRequest<IBusinessLayer<Hotels, HotelOutput>, SabreHotelSoapCallerBusinessLayer>();
             container.RegisterWebApiRequest<IBusinessLayer<Trip, TripWeather>, WeatherBusinessLayer>();
+            container.RegisterWebApiRequest<IBusinessLayer<CurrencyConversionOutput, CurrencyConversion>, CurrencyConversionBusinessLayer>();
 
             container.RegisterWebApiRequest<ITripAdvisorBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorBusinessLayer>();
             container.RegisterWebApiRequest<ITripAdvisorHistoricalBusinessLayer<LocationAttraction, LocationAttraction>, TripAdvisorHistoricalBusinessLayer>();
