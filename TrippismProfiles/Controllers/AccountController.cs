@@ -47,7 +47,7 @@ namespace TrippismProfiles.Controllers
         /// </summary>
         //[HttpPut]
         //[TrippismAuthorize]
-        [Route("api/profile/account")]
+        [Route("api/profiles/account")]
         public async Task<HttpResponseMessage> Get()
         {
             return await Task.Run(() => { return GetCustomer(); });
@@ -59,19 +59,26 @@ namespace TrippismProfiles.Controllers
         /// </summary>
         [HttpPut]
         //[TrippismAuthorize]
-        [Route("api/profile/account")]
+        [Route("api/profiles/account")]
         public async Task<HttpResponseMessage> Update(SignUpViewModel authDetailsViewModel)
         {
             return await Task.Run(() => { return UpdateCustomer(authDetailsViewModel); });
+        }
+
+        [HttpPost]
+        [Route("api/profiles/account/forgotpassword")]
+        public async Task<HttpResponseMessage> pwd(SignUpViewModel authDetailsViewModel)
+        {
+            return await Task.Run(() => { return sendforgotPassword(authDetailsViewModel.UserName); });
         }
 
 
         /// <summary>
         /// This method is used to update customer password
         /// </summary>
-        [HttpPut]
-        [TrippismAuthorize]
-        [Route("api/profile/account/changepassword")]
+        [HttpPost]
+        //[TrippismAuthorize]
+        [Route("api/profiles/account/changepassword")]
         public async Task<HttpResponseMessage> ChangePassword(UpdatePasswordViewModel updatePasswordViewModel)
         {
             return await Task.Run(() => { return UpdatePassword(updatePasswordViewModel); });
@@ -81,7 +88,7 @@ namespace TrippismProfiles.Controllers
         /// This method is used to delete customer
         /// </summary>
         [TrippismAuthorize]
-        [Route("api/profile/account")]
+        [Route("api/profiles/account")]
         public async Task<HttpResponseMessage> DeleteCustomer()
         {
             return await Task.Run(() => { return DeleteUser(); });
@@ -149,5 +156,19 @@ namespace TrippismProfiles.Controllers
 
         }
 
+        private HttpResponseMessage sendforgotPassword(string Emailid)
+        {
+            if(!String.IsNullOrEmpty(Emailid))
+            {
+                var authDetails = _IAuthDetailsRepository.FindCustomer(Emailid);
+                if(authDetails == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, TrippismConstants.CustomerNotFound);
+                }
+                var password = authDetails.Password;
+                EmailVerification.SendMail(authDetails.Customer.FirstName, password, authDetails.UserName);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
     }
 }
