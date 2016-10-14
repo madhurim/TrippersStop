@@ -43,6 +43,12 @@ namespace TrippismProfiles.Controllers
             return await Task.Run(() => SaveSearch(searchActivityViewModel));
         }
 
+        [HttpPost]
+        [Route("api/profile/activity/destinationLikes")]
+        public async Task<HttpResponseMessage> LikesDestinations(DestinationLikesViewModel destinationLikesViewModel)
+        {  
+            return await Task.Run(() => SaveLikes(destinationLikesViewModel));
+        }
         /// <summary>
         /// It's used to get customer seach activity.
         /// </summary>
@@ -65,6 +71,7 @@ namespace TrippismProfiles.Controllers
 
         #region local Method
 
+        
         private HttpResponseMessage SaveSearch(SearchActivityViewModel searchActivityViewModel)
         {
             string message = string.Empty;
@@ -72,6 +79,14 @@ namespace TrippismProfiles.Controllers
             var searchCriteria = Mapper.Map<SearchActivityViewModel, SearchCriteria>(searchActivityViewModel);
             _IActivityRepository.SaveSearch(searchCriteria);
             return Request.CreateResponse(HttpStatusCode.OK, searchCriteria.Id);
+        }
+
+        private HttpResponseMessage SaveLikes(DestinationLikesViewModel destinationsLikesViewModel)
+        {
+            string message = string.Empty;
+            var destinationLikes = Mapper.Map<DestinationLikesViewModel, DestinationsLike>(destinationsLikesViewModel);
+            _IActivityRepository.SaveLikes(destinationLikes);
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         private HttpResponseMessage GetSearch(Guid customerId)

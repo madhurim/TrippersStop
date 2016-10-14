@@ -63,22 +63,29 @@ namespace DataLayer
             _db.GetCollection<T>(typeof(T).Name).InsertManyAsync(items);
         }
 
+        //public void Update<T>(System.Linq.Expressions.Expression<Func<T, bool>> expression, T item) where T : class, new()
+        //{
+        //    FilterDefinition<T> filters = Builders<T>.Filter.Where(expression == null ? (x => 1 == 1) : expression);
+
+        //    Type itemType = item.GetType();
+        //    List<BsonElement> bsonUpdateElements = new List<BsonElement>();
+
+        //    foreach (PropertyInfo prop in itemType.GetProperties())
+        //        bsonUpdateElements.Add(new BsonElement(prop.Name, BsonValue.Create(prop.GetValue(item, null))));
+
+        //    BsonDocument bsonDoc = new BsonDocument(bsonUpdateElements);
+        //    var bsonUpdateDoc = new BsonDocument { { "$set", bsonDoc } };
+        //    _db.GetCollection<T>(typeof(T).Name).UpdateOneAsync(filters, bsonUpdateDoc);
+        //}
+
+        //public void UpdateWithChild<T>(System.Linq.Expressions.Expression<Func<T, bool>> expression, T item) where T : class, new()
+        //{
+        //    FilterDefinition<T> filters = Builders<T>.Filter.Where(expression == null ? (x => 1 == 1) : expression);
+        //    BsonDocument bsonDoc = item.ToBsonDocument();
+        //    var bsonUpdateDoc = new BsonDocument { { "$set", bsonDoc } };
+        //    _db.GetCollection<T>(typeof(T).Name).UpdateOneAsync(filters, bsonUpdateDoc);
+        //}
         public void Update<T>(System.Linq.Expressions.Expression<Func<T, bool>> expression, T item) where T : class, new()
-        {
-            FilterDefinition<T> filters = Builders<T>.Filter.Where(expression == null ? (x => 1 == 1) : expression);
-
-            Type itemType = item.GetType();
-            List<BsonElement> bsonUpdateElements = new List<BsonElement>();
-
-            foreach (PropertyInfo prop in itemType.GetProperties())
-                bsonUpdateElements.Add(new BsonElement(prop.Name, BsonValue.Create(prop.GetValue(item, null))));
-
-            BsonDocument bsonDoc = new BsonDocument(bsonUpdateElements);
-            var bsonUpdateDoc = new BsonDocument { { "$set", bsonDoc } };
-            _db.GetCollection<T>(typeof(T).Name).UpdateOneAsync(filters, bsonUpdateDoc);
-        }
-
-        public void UpdateWithChild<T>(System.Linq.Expressions.Expression<Func<T, bool>> expression, T item) where T : class, new()
         {
             FilterDefinition<T> filters = Builders<T>.Filter.Where(expression == null ? (x => 1 == 1) : expression);
             BsonDocument bsonDoc = item.ToBsonDocument();

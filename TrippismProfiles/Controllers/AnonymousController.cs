@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using TrippismEntities;
 using TrippismProfiles.Constants;
@@ -42,10 +43,10 @@ namespace TrippismProfiles.Controllers
         /// Create new Anonymous Customer.
         /// </summary>
         [Route("api/profiles/anonymous")]
-        public async Task<HttpResponseMessage> Post(AnonymousViewModel anonymousUser)
+        public async Task<HttpResponseMessage> Post()
         {
             return await Task.Run(() =>
-            { return SaveUser(anonymousUser); });
+            { return SaveUser(); });
         }
         /// <summary>
         /// Update existing Anonymous Customer.
@@ -70,17 +71,19 @@ namespace TrippismProfiles.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }*/
 
-        private HttpResponseMessage SaveUser(AnonymousViewModel anonymousUser)
+        private HttpResponseMessage SaveUser()
         {
-          /*  if (anonymousUser == null)
-                anonymousUser = new Anonymous(); */
-            anonymousUser.VisitedTime = DateTime.Now;
-            //anonymousUser.VisitorGuid = Guid.NewGuid();
+            HttpRequestBase baseRequest = ((HttpContextWrapper)Request.Properties["MS_HttpContext"]).Request as HttpRequestBase;
+            
+            HttpBrowserCapabilitiesBase browser = baseRequest.Browser;
+          
             Anonymous newanonym = new Anonymous();
-            newanonym.VisitedTime = anonymousUser.VisitedTime;
+            newanonym.VisitedTime = DateTime.Now;            
             newanonym.VisitorGuid = Guid.NewGuid();
+            newanonym.Browser = browser.Browser;
+            newanonym.Device = browser.Platform;
             _IAnonymousRepository.AddCustomer(newanonym);
-            return Request.CreateResponse(HttpStatusCode.OK, newanonym);
+            return Request.CreateResponse(HttpStatusCode.OK, newanonym.VisitorGuid);
         }
 
         private HttpResponseMessage GetUser(Guid anonymousId)
