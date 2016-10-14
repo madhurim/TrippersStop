@@ -17,12 +17,12 @@ namespace TrippismRepositories
 
         public AuthDetails UpdateCustomer(AuthDetails authDetails)
         {
-            var authInfo = _iDBContext.FindOne<AuthDetails>(a => a.Id == authDetails.Id);
+            var authInfo = _iDBContext.FindOne<AuthDetails>(a => a.CustomerGuid == authDetails.CustomerGuid);
             if (authInfo == null)
             {
                 return null;
             }
-            _iDBContext.Update<AuthDetails>(null, authInfo);
+            _iDBContext.Update<AuthDetails>(null, authDetails);
             return authInfo;
         }
 
@@ -34,16 +34,16 @@ namespace TrippismRepositories
             return authDetails;
         }
 
-        public AuthDetails FindCustomer(string userName)
+        public AuthDetails FindCustomer(string eMail)
         {
-            var authDetails = _iDBContext.FindOne<AuthDetails>(x => x.UserName == userName);
+            var authDetails = _iDBContext.FindOne<AuthDetails>(x => x.Email == eMail);
             return authDetails;
         }
 
 
         public AuthDetails FindCustomer(Guid authId)
         {
-            var authInfo = _iDBContext.FindOne<AuthDetails>(a => a.Id == authId);
+            var authInfo = _iDBContext.FindOne<AuthDetails>(a => a.CustomerGuid == authId);
             return authInfo;
         }
     }

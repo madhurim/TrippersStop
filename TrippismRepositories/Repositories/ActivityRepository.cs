@@ -20,13 +20,17 @@ namespace TrippismRepositories
             _iDBContext.Add<SearchCriteria>(searchCriteria);
             return searchCriteria;
         }
-
+        public DestinationsLike SaveLikes(DestinationsLike destinationLikes)
+        {
+            _iDBContext.Add<DestinationsLike>(destinationLikes);
+            return destinationLikes;
+        }
         public List<SearchCriteria> FindSearch(Guid customerId)
         {
             var searchList = _iDBContext.Find<SearchCriteria>(x => x.RefGuid == customerId).ToList();
             return searchList;
         }
-
+        
         public List<SearchCriteria> FindSearch(Guid customerId, int pageIndex, int pageSize)
         {
             var searchList = _iDBContext.Find<SearchCriteria>(x => x.RefGuid ==  customerId, pageIndex, pageSize).ToList();

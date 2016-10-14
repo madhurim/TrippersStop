@@ -17,5 +17,6 @@ namespace TrippismProfiles
 
         [Required]
         public string ConfirmPassword { get; set; }
+        public Guid CustomerGuid { get; set; }
     }
 }

@@ -69,7 +69,7 @@ namespace TrippismProfiles.Controllers
         [Route("api/profiles/account/forgotpassword")]
         public async Task<HttpResponseMessage> pwd(SignUpViewModel authDetailsViewModel)
         {
-            return await Task.Run(() => { return sendforgotPassword(authDetailsViewModel.UserName); });
+            return await Task.Run(() => { return sendforgotPassword(authDetailsViewModel.Email); });
         }
 
 
@@ -107,32 +107,32 @@ namespace TrippismProfiles.Controllers
         private HttpResponseMessage UpdateCustomer(SignUpViewModel authDetailsViewModel)
         {
             string message = string.Empty;
-            var authDetails = _IAuthDetailsRepository.FindCustomer(this.AuthId);
+            var authDetails = _IAuthDetailsRepository.FindCustomer(authDetailsViewModel.CustomerGuid);
             if (authDetails == null)
                 return Request.CreateResponse(HttpStatusCode.NotFound, TrippismConstants.CustomerNotFound);
-            if (authDetails.Customer != null)
-            {
-                authDetails.Customer.FirstName = authDetailsViewModel.Customer.FirstName;
-                authDetails.Customer.LastName = authDetailsViewModel.Customer.LastName;
-                authDetails.Customer.DOB = authDetailsViewModel.Customer.DOB;
-                authDetails.Customer.Gender = authDetailsViewModel.Customer.Gender;
-                authDetails.Customer.Mobile = authDetailsViewModel.Customer.Mobile;
-                _IAuthDetailsRepository.UpdateCustomer(authDetails);
-                SignUpViewModel authViewModel = Mapper.Map<AuthDetails, SignUpViewModel>(authDetails);
-                return Request.CreateResponse(HttpStatusCode.OK, authViewModel);
-            }
+            //if (authDetails.Customer != null)
+            //{
+            //    authDetails.Customer.FirstName = authDetailsViewModel.Customer.FirstName;
+            //    authDetails.Customer.LastName = authDetailsViewModel.Customer.LastName;
+            //    authDetails.Customer.DOB = authDetailsViewModel.Customer.DOB;
+            //    authDetails.Customer.Gender = authDetailsViewModel.Customer.Gender;
+            //    authDetails.Customer.Mobile = authDetailsViewModel.Customer.Mobile;
+            //    _IAuthDetailsRepository.UpdateCustomer(authDetails);
+            //    SignUpViewModel authViewModel = Mapper.Map<AuthDetails, SignUpViewModel>(authDetails);
+            //    return Request.CreateResponse(HttpStatusCode.OK, authViewModel);
+            //}
             return Request.CreateResponse(HttpStatusCode.NotFound, TrippismConstants.CustomerNotFound);
         }
 
         private HttpResponseMessage UpdatePassword(UpdatePasswordViewModel updatePasswordViewModel)
         {
-            var authDetails = _IAuthDetailsRepository.FindCustomer(this.AuthId);
+            var authDetails = _IAuthDetailsRepository.FindCustomer(updatePasswordViewModel.CustomerGuid);
             if (authDetails == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, TrippismConstants.CustomerNotFound);
             }
             var oldPassword = PasswordHash.CreateHash(updatePasswordViewModel.OldPassword);
-            if (oldPassword != authDetails.Password)
+            if (!PasswordHash.ValidatePassword(updatePasswordViewModel.OldPassword, authDetails.Password))
             {
                 return Request.CreateResponse(HttpStatusCode.Forbidden, TrippismConstants.IncorrectPassword);
             }
@@ -166,7 +166,7 @@ namespace TrippismProfiles.Controllers
                     return Request.CreateResponse(HttpStatusCode.NotFound, TrippismConstants.CustomerNotFound);
                 }
                 var password = authDetails.Password;
-                EmailVerification.SendMail(authDetails.Customer.FirstName, password, authDetails.UserName);
+                EmailVerification.SendMail(null, password, authDetails.Email);
             }
             return Request.CreateResponse(HttpStatusCode.OK);
         }

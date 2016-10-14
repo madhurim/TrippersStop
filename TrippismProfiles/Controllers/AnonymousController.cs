@@ -74,7 +74,7 @@ namespace TrippismProfiles.Controllers
         private HttpResponseMessage SaveUser()
         {
             HttpRequestBase baseRequest = ((HttpContextWrapper)Request.Properties["MS_HttpContext"]).Request as HttpRequestBase;
-
+            
             HttpBrowserCapabilitiesBase browser = baseRequest.Browser;
           
             Anonymous newanonym = new Anonymous();
