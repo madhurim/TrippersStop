@@ -43,10 +43,10 @@ namespace TrippismProfiles.Controllers
         /// Create new Anonymous Customer.
         /// </summary>
         [Route("api/profiles/anonymous")]
-        public async Task<HttpResponseMessage> Post()
+        public async Task<HttpResponseMessage> Post(Anonymous anonoymous)
         {
             return await Task.Run(() =>
-            { return SaveUser(); });
+            { return SaveUser(anonoymous); });
         }
         /// <summary>
         /// Update existing Anonymous Customer.
@@ -71,7 +71,7 @@ namespace TrippismProfiles.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }*/
 
-        private HttpResponseMessage SaveUser()
+        private HttpResponseMessage SaveUser(Anonymous anonoymous)
         {
             HttpRequestBase baseRequest = ((HttpContextWrapper)Request.Properties["MS_HttpContext"]).Request as HttpRequestBase;
             
@@ -82,6 +82,11 @@ namespace TrippismProfiles.Controllers
             newanonym.VisitorGuid = Guid.NewGuid();
             newanonym.Browser = browser.Browser;
             newanonym.Device = browser.Platform;
+            newanonym.City = anonoymous.City;
+            newanonym.Region = anonoymous.Region;
+            newanonym.Country = anonoymous.Country;
+            newanonym.Ipaddress = anonoymous.Ipaddress;
+
             _IAnonymousRepository.AddCustomer(newanonym);
             return Request.CreateResponse(HttpStatusCode.OK, newanonym.VisitorGuid);
         }
