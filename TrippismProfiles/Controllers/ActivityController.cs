@@ -43,11 +43,36 @@ namespace TrippismProfiles.Controllers
             return await Task.Run(() => SaveSearch(searchActivityViewModel));
         }
 
+
+        /// <summary>
+        /// It's used to save customer destinations likes.
+        /// </summary>
         [HttpPost]
         [Route("api/profile/activity/destinationLikes")]
-        public async Task<HttpResponseMessage> LikesDestinations(DestinationLikesViewModel destinationLikesViewModel)
-        {  
+        public async Task<HttpResponseMessage> LikesDestinations(MyDestinationsViewModel destinationLikesViewModel)
+        {
             return await Task.Run(() => SaveLikes(destinationLikesViewModel));
+        }
+
+
+        /// <summary>
+        /// It's used to delete customer destinations likes.
+        /// </summary>
+        [HttpPost]
+        [Route("api/profile/activity/deleteDestinationLikes")]
+        public async Task<HttpResponseMessage> DeleteLikesDestinations(MyDestinationsViewModel destinationLikesViewModel)
+        {
+            return await Task.Run(() => DeleteLikes(destinationLikesViewModel));
+        }
+
+        /// <summary>
+        /// It's used to getting customer list of destinations likes.
+        /// </summary>
+        [HttpGet]
+        [Route("api/profile/activity/getdestinationLikes")]
+        public async Task<HttpResponseMessage> GetLikesDestinations(Guid customerId, string origin)
+        {
+            return await Task.Run(() => GetLikes(customerId, origin));
         }
         /// <summary>
         /// It's used to get customer seach activity.
@@ -68,10 +93,9 @@ namespace TrippismProfiles.Controllers
         {
             return await Task.Run(() => GetSearch(customerId, pageNo, pageSize));
         }
-
         #region local Method
 
-        
+
         private HttpResponseMessage SaveSearch(SearchActivityViewModel searchActivityViewModel)
         {
             string message = string.Empty;
@@ -81,12 +105,23 @@ namespace TrippismProfiles.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, searchCriteria.Id);
         }
 
-        private HttpResponseMessage SaveLikes(DestinationLikesViewModel destinationsLikesViewModel)
+        private HttpResponseMessage SaveLikes(MyDestinationsViewModel MyDestinationssViewModel)
         {
             string message = string.Empty;
-            var destinationLikes = Mapper.Map<DestinationLikesViewModel, DestinationsLike>(destinationsLikesViewModel);
+            var destinationLikes = Mapper.Map<MyDestinationsViewModel, MyDestinations>(MyDestinationssViewModel);
             _IActivityRepository.SaveLikes(destinationLikes);
+            return Request.CreateResponse(HttpStatusCode.OK, destinationLikes);
+        }
+        private HttpResponseMessage DeleteLikes(MyDestinationsViewModel MyDestinationssViewModel)
+        {
+            _IActivityRepository.DeleteDestinationLikes(MyDestinationssViewModel.CustomerGuid,MyDestinationssViewModel.Origin,MyDestinationssViewModel.Destination);
             return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        private HttpResponseMessage GetLikes(Guid customerId, string origin)
+        {
+            var SearchData = _IActivityRepository.FindDestinationLikes(customerId, origin);
+            return Request.CreateResponse(HttpStatusCode.OK, SearchData);
         }
 
         private HttpResponseMessage GetSearch(Guid customerId)

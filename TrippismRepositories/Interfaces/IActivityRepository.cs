@@ -5,7 +5,7 @@ using TrippismEntities;
 
 namespace TrippismRepositories
 {
-    public interface IActivityRepository 
+    public interface IActivityRepository
     {
         SearchCriteria SaveSearch(SearchCriteria searchCriteria);
         List<SearchCriteria> FindSearch(Guid customerId);
@@ -13,6 +13,9 @@ namespace TrippismRepositories
 
         int GetCount(Guid customerId);
 
-        DestinationsLike SaveLikes(DestinationsLike destinationLikes);
+        MyDestinations SaveLikes(MyDestinations destinationLikes);
+
+        List<MyDestinations> FindDestinationLikes(Guid customerId,string origin);
+        int DeleteDestinationLikes(Guid customerId, string origin, string destination);
     }
 }

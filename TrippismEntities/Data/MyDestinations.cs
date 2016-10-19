@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrippismEntities
 {
-    public class DestinationsLike : EntityBase
+    public class MyDestinations : EntityBase
     {
         public Guid CustomerGuid { get; set; }
         public string Origin { get; set; }

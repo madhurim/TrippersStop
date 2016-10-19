@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TrippismProfiles.Models
 {
-    public class DestinationLikesViewModel
+    public class MyDestinationsViewModel
     {
         public Guid Id { get; set; }
         public Guid CustomerGuid { get; set; }

@@ -10,8 +10,8 @@ namespace TrippismRepositories
 {
     public class ActivityRepository : IActivityRepository
     {
-          private IDBContext _iDBContext;
-          public ActivityRepository(IDBContext iDBContext)
+        private IDBContext _iDBContext;
+        public ActivityRepository(IDBContext iDBContext)
         {
             this._iDBContext = iDBContext;
         }
@@ -20,9 +20,9 @@ namespace TrippismRepositories
             _iDBContext.Add<SearchCriteria>(searchCriteria);
             return searchCriteria;
         }
-        public DestinationsLike SaveLikes(DestinationsLike destinationLikes)
+        public MyDestinations SaveLikes(MyDestinations destinationLikes)
         {
-            _iDBContext.Add<DestinationsLike>(destinationLikes);
+            _iDBContext.Add<MyDestinations>(destinationLikes);
             return destinationLikes;
         }
         public List<SearchCriteria> FindSearch(Guid customerId)
@@ -30,18 +30,28 @@ namespace TrippismRepositories
             var searchList = _iDBContext.Find<SearchCriteria>(x => x.RefGuid == customerId).ToList();
             return searchList;
         }
-        
+
         public List<SearchCriteria> FindSearch(Guid customerId, int pageIndex, int pageSize)
         {
-            var searchList = _iDBContext.Find<SearchCriteria>(x => x.RefGuid ==  customerId, pageIndex, pageSize).ToList();
+            var searchList = _iDBContext.Find<SearchCriteria>(x => x.RefGuid == customerId, pageIndex, pageSize).ToList();
             return searchList;
         }
 
-
+        public List<MyDestinations> FindDestinationLikes(Guid customerId, string origin)
+        {
+            var searchList = _iDBContext.Find<MyDestinations>(x => x.CustomerGuid == customerId && x.Origin == origin).ToList();
+            return searchList;
+        }
         public int GetCount(Guid customerId)
         {
             var count = _iDBContext.Find<SearchCriteria>(x => x.RefGuid == customerId).Count;
             return count;
+        }
+
+        public int DeleteDestinationLikes(Guid customerId,string origin,string destination)
+        {
+            _iDBContext.Delete<MyDestinations>(x => x.CustomerGuid == customerId && x.Origin == origin && x.Destination == destination);
+            return 1;
         }
     }
 }

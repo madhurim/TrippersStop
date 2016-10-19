@@ -49,6 +49,7 @@ namespace TrippismProfiles
             Mapper.Register<SearchCriteria, SearchActivityViewModel>()
                  // .Member(h => h.SearchType, m => m.SearchedTypeID)
                    .Member(h => h.CustomerId, m => m.RefGuid);
+            Mapper.Register<MyDestinationsViewModel, MyDestinations>();
             Mapper.Compile();
         }
         /// <summary>
