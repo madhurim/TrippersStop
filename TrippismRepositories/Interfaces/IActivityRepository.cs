@@ -15,7 +15,9 @@ namespace TrippismRepositories
 
         MyDestinations SaveLikes(MyDestinations destinationLikes);
 
-        List<MyDestinations> FindDestinationLikes(Guid customerId,string origin);
-        int DeleteDestinationLikes(Guid customerId, string origin, string destination);
+        List<MyDestinations> FindDestinationLikesList(Guid customerId);
+        MyDestinations UpdateDestinationLikes(MyDestinations myDestination);
+        MyDestinations FindDestinationLikes(Guid customerId, string origin);
+        int DeleteDestinationLikes(Guid customerId, string destination);
     }
 }

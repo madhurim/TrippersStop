@@ -22,6 +22,6 @@ namespace TrippismProfiles.Models
         public DateTime LoginTime { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool IsEmailVerified { get; set; }
-        public CustomerViewModel Customer { get; set; }
+        public CustomerViewModel Customer { get; set; }        
     }
 }

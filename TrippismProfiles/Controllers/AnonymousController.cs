@@ -23,7 +23,7 @@ namespace TrippismProfiles.Controllers
         IAnonymousRepository _IAnonymousRepository;
 
 
-                /// <summary>
+        /// <summary>
         /// Set api - Anonymous Repository.
         /// </summary>
         public AnonymousController(IAnonymousRepository iAnonymousRepository)
@@ -43,45 +43,53 @@ namespace TrippismProfiles.Controllers
         /// Create new Anonymous Customer.
         /// </summary>
         [Route("api/profiles/anonymous")]
-        public async Task<HttpResponseMessage> Post()
+        public async Task<HttpResponseMessage> Post(Anonymous anonoymous)
         {
             return await Task.Run(() =>
-            { return SaveUser(); });
+            { return SaveUser(anonoymous); });
         }
         /// <summary>
         /// Update existing Anonymous Customer.
         /// </summary>
         [Route("api/profiles/anonymous")]
-    /*    public async Task<HttpResponseMessage> Put(Anonymous anonymousUser)
-        {
-            return await Task.Run(() =>
-            { return UpdateUser(anonymousUser); });
-        }
-
-        private HttpResponseMessage UpdateUser(AnonymousViewModel anonymousUser)
-        {
-            var user = _IAnonymousRepository.GetCustomer(anonymousUser.Id);
-            if (user == null)
+        /*    public async Task<HttpResponseMessage> Put(Anonymous anonymousUser)
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, TrippismConstants.CustomerNotFound);
+                return await Task.Run(() =>
+                { return UpdateUser(anonymousUser); });
             }
-            //MM: this is not needed perhaps
-            //user.KnownGuid = anonymousUser.KnownGuid;
-            _IAnonymousRepository.UpdateCustomer(anonymousUser);
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }*/
 
-        private HttpResponseMessage SaveUser()
+            private HttpResponseMessage UpdateUser(AnonymousViewModel anonymousUser)
+            {
+                var user = _IAnonymousRepository.GetCustomer(anonymousUser.Id);
+                if (user == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, TrippismConstants.CustomerNotFound);
+                }
+                //MM: this is not needed perhaps
+                //user.KnownGuid = anonymousUser.KnownGuid;
+                _IAnonymousRepository.UpdateCustomer(anonymousUser);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }*/
+
+        private HttpResponseMessage SaveUser(Anonymous anonoymous)
         {
             HttpRequestBase baseRequest = ((HttpContextWrapper)Request.Properties["MS_HttpContext"]).Request as HttpRequestBase;
-            
+
             HttpBrowserCapabilitiesBase browser = baseRequest.Browser;
-          
+
             Anonymous newanonym = new Anonymous();
-            newanonym.VisitedTime = DateTime.Now;            
+            newanonym.VisitedTime = DateTime.Now;
             newanonym.VisitorGuid = Guid.NewGuid();
-            newanonym.Browser = browser.Browser;
+            newanonym.Ipaddress = anonoymous.Ipaddress;
+            newanonym.Browser = baseRequest.UserAgent;
+            newanonym.MobileDeviceManufacturer = baseRequest.Browser.MobileDeviceManufacturer;
+            newanonym.MobileDeviceModel = baseRequest.Browser.MobileDeviceModel;
+            newanonym.InputType = baseRequest.Browser.InputType;
             newanonym.Device = browser.Platform;
+            newanonym.City = anonoymous.City;
+            newanonym.Region = anonoymous.Region;
+            newanonym.Country = anonoymous.Country;
+
             _IAnonymousRepository.AddCustomer(newanonym);
             return Request.CreateResponse(HttpStatusCode.OK, newanonym.VisitorGuid);
         }

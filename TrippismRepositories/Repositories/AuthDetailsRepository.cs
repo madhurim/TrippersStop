@@ -22,7 +22,7 @@ namespace TrippismRepositories
             {
                 return null;
             }
-            _iDBContext.Update<AuthDetails>(null, authDetails);
+            _iDBContext.Update<AuthDetails>(a => a.CustomerGuid == authDetails.CustomerGuid, authDetails);
             return authInfo;
         }
 

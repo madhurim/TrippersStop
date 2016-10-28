@@ -30,5 +30,6 @@ namespace TrippismProfiles.Constants
         public const string PasswordUpdatedSuccessfully = "Password updated successfully";
 
         public const string IncorrectPassword = "Incorrect old password";
+
     }
 }

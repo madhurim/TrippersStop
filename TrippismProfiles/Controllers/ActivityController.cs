@@ -70,9 +70,9 @@ namespace TrippismProfiles.Controllers
         /// </summary>
         [HttpGet]
         [Route("api/profile/activity/getdestinationLikes")]
-        public async Task<HttpResponseMessage> GetLikesDestinations(Guid customerId, string origin)
+        public async Task<HttpResponseMessage> GetLikesDestinations(Guid customerId)
         {
-            return await Task.Run(() => GetLikes(customerId, origin));
+            return await Task.Run(() => GetLikes(customerId));
         }
         /// <summary>
         /// It's used to get customer seach activity.
@@ -107,20 +107,28 @@ namespace TrippismProfiles.Controllers
 
         private HttpResponseMessage SaveLikes(MyDestinationsViewModel MyDestinationssViewModel)
         {
-            string message = string.Empty;
             var destinationLikes = Mapper.Map<MyDestinationsViewModel, MyDestinations>(MyDestinationssViewModel);
-            _IActivityRepository.SaveLikes(destinationLikes);
+            var exitsDestinationLikes = _IActivityRepository.FindDestinationLikes(destinationLikes.CustomerGuid, destinationLikes.Destination);
+            if (exitsDestinationLikes == null)
+            {
+                _IActivityRepository.SaveLikes(destinationLikes);
+            }
+            else
+            {
+                exitsDestinationLikes.LikeStatus = (exitsDestinationLikes.LikeStatus) ? false : true;
+                destinationLikes = _IActivityRepository.UpdateDestinationLikes(exitsDestinationLikes);
+            }
             return Request.CreateResponse(HttpStatusCode.OK, destinationLikes);
         }
         private HttpResponseMessage DeleteLikes(MyDestinationsViewModel MyDestinationssViewModel)
         {
-            _IActivityRepository.DeleteDestinationLikes(MyDestinationssViewModel.CustomerGuid,MyDestinationssViewModel.Origin,MyDestinationssViewModel.Destination);
+            _IActivityRepository.DeleteDestinationLikes(MyDestinationssViewModel.CustomerGuid, MyDestinationssViewModel.Destination);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        private HttpResponseMessage GetLikes(Guid customerId, string origin)
+        private HttpResponseMessage GetLikes(Guid customerId)
         {
-            var SearchData = _IActivityRepository.FindDestinationLikes(customerId, origin);
+            var SearchData = _IActivityRepository.FindDestinationLikesList(customerId);
             return Request.CreateResponse(HttpStatusCode.OK, SearchData);
         }
 

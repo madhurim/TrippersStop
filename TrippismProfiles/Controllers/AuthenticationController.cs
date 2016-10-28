@@ -75,6 +75,7 @@ namespace TrippismProfiles.Controllers
             authdetail.LoginTime = DateTime.Now;
             authdetail.ModifiedDate = DateTime.Now;
             authdetail.IsActive = true;
+            authdetail.Token = null;
             //if (authdetail.Customer == null)
             //{
             //    authdetail.Customer = new Customer()

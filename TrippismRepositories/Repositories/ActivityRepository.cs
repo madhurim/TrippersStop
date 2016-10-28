@@ -37,10 +37,20 @@ namespace TrippismRepositories
             return searchList;
         }
 
-        public List<MyDestinations> FindDestinationLikes(Guid customerId, string origin)
+        public List<MyDestinations> FindDestinationLikesList(Guid customerId)
         {
-            var searchList = _iDBContext.Find<MyDestinations>(x => x.CustomerGuid == customerId && x.Origin == origin).ToList();
+            var searchList = _iDBContext.Find<MyDestinations>(x => x.CustomerGuid == customerId).ToList();
             return searchList;
+        }
+        public MyDestinations FindDestinationLikes(Guid customerId, string destination)
+       {
+            var searchList = _iDBContext.Find<MyDestinations>(x => x.CustomerGuid == customerId && x.Destination == destination).FirstOrDefault();
+            return searchList;
+        }
+        public MyDestinations UpdateDestinationLikes(MyDestinations myDestination)
+        {
+            _iDBContext.Update<MyDestinations>(a => a.CustomerGuid == myDestination.CustomerGuid && a.Destination == myDestination.Destination, myDestination);
+            return myDestination;
         }
         public int GetCount(Guid customerId)
         {
@@ -48,9 +58,9 @@ namespace TrippismRepositories
             return count;
         }
 
-        public int DeleteDestinationLikes(Guid customerId,string origin,string destination)
+        public int DeleteDestinationLikes(Guid customerId, string destination)
         {
-            _iDBContext.Delete<MyDestinations>(x => x.CustomerGuid == customerId && x.Origin == origin && x.Destination == destination);
+            _iDBContext.Delete<MyDestinations>(x => x.CustomerGuid == customerId && x.Destination == destination);
             return 1;
         }
     }

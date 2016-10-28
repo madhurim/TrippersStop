@@ -18,6 +18,7 @@ namespace TrippismEntities
         public bool IsEmailVerified { get; set; }
         public bool IsActive { get; set; }
         //public Customer Customer { get; set; }
+        public string Token { get; set; }
 
         public enum AuthType
         {
