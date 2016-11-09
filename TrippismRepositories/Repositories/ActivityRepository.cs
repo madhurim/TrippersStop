@@ -39,7 +39,7 @@ namespace TrippismRepositories
 
         public List<MyDestinations> FindDestinationLikesList(Guid customerId)
         {
-            var searchList = _iDBContext.Find<MyDestinations>(x => x.CustomerGuid == customerId).ToList();
+            var searchList = _iDBContext.Find<MyDestinations>(x => x.CustomerGuid == customerId && x.LikeStatus == true).ToList();
             return searchList;
         }
         public MyDestinations FindDestinationLikes(Guid customerId, string destination)

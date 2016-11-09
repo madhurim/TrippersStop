@@ -23,7 +23,7 @@ namespace TrippismProfiles
         }
         public static void SendForgotPwasswordMail(string firstName, string changePasswordUrl, string ToEmailID)
         {
-            string body = string.Format(@"<br/><br/>As per your request to reset your Trippism password.Please click on below link.<br/><br/><a href='{0}'>Click here to change your password.</a>
+            string body = string.Format(@"<br/>As per your request to reset your Trippism password.<br/><br/><a href='{0}'>Click here to change your password.</a>
                                         <br/><br/> Thank you!", changePasswordUrl);
 
             var result = Task.Run(() => MailgunEmail.SendComplexMessage("noreply@trippism.com", "Trippism: Request for reset Password", new List<string>() { ToEmailID }, body));
