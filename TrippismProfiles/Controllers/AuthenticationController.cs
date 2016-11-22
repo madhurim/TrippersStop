@@ -23,12 +23,14 @@ namespace TrippismProfiles.Controllers
 
         IAuthDetailsRepository _IAuthDetailsRepository;
         ICacheService _cacheService;
+        IEmailTemplateRepository _IEmailTemplateRepository;
         /// <summary>
         /// Set api - Authentication Repository.
         /// </summary>
-        public AuthenticationController(IAuthDetailsRepository iAuthDetailsRepository, ICacheService cacheService)
+        public AuthenticationController(IAuthDetailsRepository iAuthDetailsRepository, IEmailTemplateRepository iEmailTemplateRepository, ICacheService cacheService)
         {
             _IAuthDetailsRepository = iAuthDetailsRepository;
+            _IEmailTemplateRepository = iEmailTemplateRepository;
             _cacheService = cacheService;
         }
 
@@ -61,13 +63,13 @@ namespace TrippismProfiles.Controllers
             var data = _IAuthDetailsRepository.FindCustomer(authdetail.Email);
             if (data != null)
                 return Request.CreateResponse(HttpStatusCode.Found, TrippismConstants.CustomerAlreadyExist);
-            
-    
+
+
             string strPwd = ApiHelper.CreateRandomPassword(8);
 
-            data = _IAuthDetailsRepository.FindCustomer(authdetail.CustomerGuid);  
-          
-            Guid guid = authdetail.CustomerGuid == Guid.Empty ? System.Guid.NewGuid() : ((data != null) ? System.Guid.NewGuid()  : authdetail.CustomerGuid);
+            data = _IAuthDetailsRepository.FindCustomer(authdetail.CustomerGuid);
+
+            Guid guid = authdetail.CustomerGuid == Guid.Empty ? System.Guid.NewGuid() : ((data != null) ? System.Guid.NewGuid() : authdetail.CustomerGuid);
             authdetail.Password = PasswordHash.CreateHash(strPwd);
             authdetail.CustomerGuid = guid;
             authdetail.IsEmailVerified = false;
@@ -76,22 +78,19 @@ namespace TrippismProfiles.Controllers
             authdetail.ModifiedDate = DateTime.Now;
             authdetail.IsActive = true;
             authdetail.Token = null;
-            //if (authdetail.Customer == null)
-            //{
-            //    authdetail.Customer = new Customer()
-            //        {
-            //            Email = authdetail.UserName
-            //        };
 
-            //}
-            //authdetail.Customer.CreatedDate = DateTime.Now;
-            //authdetail.Customer.ModifiedDate = DateTime.Now;         
             _IAuthDetailsRepository.AddCustomer(authdetail);
-            //if (authdetail.Customer != null)
-            //{
-            //    EmailVerification.SendMail(authdetail.Customer.FirstName, strPwd, authdetail.UserName);
-            //}
-            EmailVerification.SendMail(null, strPwd, authdetail.Email);
+
+            var emailTemplateName = "New Account Password";
+            var mail = _IEmailTemplateRepository.GetEmailTemplate(emailTemplateName);
+
+            mail.Body = mail.Body.Replace("<hostlink>", "http://dev.trippism.com/")
+                                   .Replace("<logo>", "http://dev.trippism.com/images/trippism-logo.png")
+                                   .Replace("<password>", strPwd)
+                                   .Replace("<sitename>", "Trippism")
+                                   .Replace("<year>", DateTime.Now.Year.ToString());
+            
+            EmailVerification.SendUserMail("noreply@trippism.com", authdetail.Email, mail.Subject, mail.Body);
             SignUpViewModel authViewModel = Mapper.Map<AuthDetails, SignUpViewModel>(authdetail);
             return Request.CreateResponse(HttpStatusCode.OK, authViewModel);
         }
@@ -110,9 +109,9 @@ namespace TrippismProfiles.Controllers
                 string ipAddress = ApiHelper.GetClientIP(Request);
                 string userAgent = ApiHelper.GetClientUserAgent(Request);
 
-                string token = SecurityManager.GenerateToken(authDetails.Email, authDetails.Password, ipAddress, userAgent,DateTime.UtcNow.Ticks); 
+                string token = SecurityManager.GenerateToken(authDetails.Email, authDetails.Password, ipAddress, userAgent, DateTime.UtcNow.Ticks);
 
-                return Request.CreateResponse(HttpStatusCode.OK, new {AuthDetailsViewModel=  authDetailsViewModel, SecutityToken=token});
+                return Request.CreateResponse(HttpStatusCode.OK, new { AuthDetailsViewModel = authDetailsViewModel, SecutityToken = token });
             }
         }
     }

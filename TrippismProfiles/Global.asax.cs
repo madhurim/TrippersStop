@@ -33,6 +33,7 @@ namespace TrippismProfiles
             container.RegisterWebApiRequest<IAnonymousRepository, AnonymousRepository>();
             container.RegisterWebApiRequest<IActivityRepository, ActivityRepository>();
             container.RegisterWebApiRequest<IAuthDetailsRepository, AuthDetailsRepository>();
+            container.RegisterWebApiRequest<IEmailTemplateRepository, EmailTemplateRepository>();
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 
