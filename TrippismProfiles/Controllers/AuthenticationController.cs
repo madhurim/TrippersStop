@@ -85,10 +85,16 @@ namespace TrippismProfiles.Controllers
             var mail = _IEmailTemplateRepository.GetEmailTemplate(emailTemplateName);
 
             mail.Body = mail.Body.Replace("<hostlink>", "http://dev.trippism.com/")
-                                   .Replace("<logo>", "http://dev.trippism.com/images/trippism-logo.png")
-                                   .Replace("<password>", strPwd)
-                                   .Replace("<sitename>", "Trippism")
-                                   .Replace("<year>", DateTime.Now.Year.ToString());
+                                    .Replace("<logo>", "http://dev.trippism.com/images/trippism-logo.png")
+                                    .Replace("<password>", strPwd)
+                                    .Replace("<sitename>", "Trippism")
+                                    .Replace("<year>", DateTime.Now.Year.ToString())
+                                    .Replace("<facebook>", "https://www.facebook.com/trippismcom-1493664570958968/")
+                                    .Replace("<twitter>", "https://twitter.com/trippismapp")
+                                    .Replace("<pinterest>", "https://www.pinterest.com/trippismsite/trippism/")
+                                    .Replace("<linkedin>", "https://www.linkedin.com/company/trippism?trk=vsrp_companies_res_name&trkInfo=VSRPsearchId%3A44363051459161854061%2CVSRPtargetId%3A10201827%2CVSRPcmpt%3Aprimary")
+                                    .Replace("<blog>", "http://blog.trippism.com/")
+                                    .Replace("<faqs>", "http://dev.trippism.com/#/FAQs");
             
             EmailVerification.SendUserMail("noreply@trippism.com", authdetail.Email, mail.Subject, mail.Body);
             SignUpViewModel authViewModel = Mapper.Map<AuthDetails, SignUpViewModel>(authdetail);
