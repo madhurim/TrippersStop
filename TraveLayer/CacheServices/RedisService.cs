@@ -156,7 +156,7 @@ namespace TrippismApi.TraveLayer
                 List<string> listToaddress = new List<string>();
                 listToaddress.Add("shubham4616@gmail.com");
                 MailgunEmail mail = new MailgunEmail();
-                //mail.SendComplexMessage("subham@trivenitechnologies.in", "Redis connection failed", listToaddress, "Redis services is not connected.Please check your redis connection");
+                mail.SendComplexMessage("subham@trivenitechnologies.in", "Redis connection failed", listToaddress, "Redis services is not connected.Please check your redis connection");
             }
             return isSuccess;
         }
