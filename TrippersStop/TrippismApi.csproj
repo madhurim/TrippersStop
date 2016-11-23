@@ -224,7 +224,6 @@
     <Compile Include="APIExtention\MediaTypeFormatter\ServiceStackTextFormatter.cs" />
     <Compile Include="APIHelper\ApiHelper.cs" />
     <Compile Include="APIHelper\CompressedContent.cs" />
-    <Compile Include="APIHelper\MailgunEmail.cs" />
     <Compile Include="APIHelper\RegisterMap.cs" />
     <Compile Include="APIHelper\TrippismNLog.cs" />
     <Compile Include="Areas\Constants\ConstantsAreaRegistration.cs" />
@@ -376,6 +375,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EmailService\EmailService.csproj">
+      <Project>{10ffe3f0-d633-4604-ab48-4652ae55ae8b}</Project>
+      <Name>EmailService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TraveLayer\TraveLayer.csproj">
       <Project>{c5baab69-8d1d-4402-9573-4b6f2939b7ef}</Project>
       <Name>TraveLayer</Name>

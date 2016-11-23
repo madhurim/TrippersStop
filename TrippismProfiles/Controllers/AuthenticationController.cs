@@ -95,8 +95,9 @@ namespace TrippismProfiles.Controllers
                                     .Replace("<linkedin>", "https://www.linkedin.com/company/trippism?trk=vsrp_companies_res_name&trkInfo=VSRPsearchId%3A44363051459161854061%2CVSRPtargetId%3A10201827%2CVSRPcmpt%3Aprimary")
                                     .Replace("<blog>", "http://blog.trippism.com/")
                                     .Replace("<faqs>", "http://dev.trippism.com/#/FAQs");
-            
-            EmailVerification.SendUserMail("noreply@trippism.com", authdetail.Email, mail.Subject, mail.Body);
+
+            EmailVerification sendmail = new EmailVerification();
+            sendmail.SendUserMail("noreply@trippism.com", authdetail.Email, mail.Subject, mail.Body);
             SignUpViewModel authViewModel = Mapper.Map<AuthDetails, SignUpViewModel>(authdetail);
             return Request.CreateResponse(HttpStatusCode.OK, authViewModel);
         }

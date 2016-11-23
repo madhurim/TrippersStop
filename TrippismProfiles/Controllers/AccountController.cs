@@ -169,7 +169,8 @@ namespace TrippismProfiles.Controllers
 
                 var changePasswordUrl = "http://" + Url + "/#/changepassword/T=" + authDetails.Token + ";G=" + authDetails.CustomerGuid;
                 _IAuthDetailsRepository.UpdateCustomer(authDetails);
-                EmailVerification.SendForgotPwasswordMail(null, changePasswordUrl, authDetails.Email);
+                EmailVerification mail = new EmailVerification();
+                mail.SendForgotPwasswordMail(null, changePasswordUrl, authDetails.Email);
             }
             return Request.CreateResponse(HttpStatusCode.OK, "Please, Check Your Mail!");
         }

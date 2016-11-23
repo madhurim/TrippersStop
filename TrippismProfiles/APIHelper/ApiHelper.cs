@@ -7,6 +7,8 @@ using System.Web;
 using TrippismApi.TraveLayer;
 using TrippismEntities;
 using TrippismProfiles.Models;
+using EmailService;
+
 namespace TrippismProfiles
 {
     /// <summary>
@@ -43,7 +45,8 @@ namespace TrippismProfiles
             {
                 List<string> listToaddress = new List<string>();
                 listToaddress.Add("shubham4616@gmail.com");
-                MailgunEmail.SendComplexMessage("subham@trivenitechnologies.in", "Redis connection failed", listToaddress, "Redis services is not connected.Please check your redis connection");
+                MailgunEmail mail = new MailgunEmail();
+                mail.SendComplexMessage("subham@trivenitechnologies.in", "Redis connection failed", listToaddress, "Redis services is not connected.Please check your redis connection");
             }
             return isRedisAvailable;
         }
@@ -52,9 +55,9 @@ namespace TrippismProfiles
         /// </summary>
         public static void RegisterMappingEntities()
         {
-            Mapper.Register<AuthDetails,SignUpViewModel>();
+            Mapper.Register<AuthDetails, SignUpViewModel>();
             Mapper.Register<SearchCriteria, SearchActivityViewModel>()
-                 // .Member(h => h.SearchType, m => m.SearchedTypeID)
+                // .Member(h => h.SearchType, m => m.SearchedTypeID)
                    .Member(h => h.CustomerId, m => m.RefGuid);
             Mapper.Register<MyDestinationsViewModel, MyDestinations>();
             Mapper.Compile();
@@ -64,8 +67,8 @@ namespace TrippismProfiles
         /// </summary>
         public static string GetClientIP(HttpRequestMessage request)
         {
-           // request = request ?? Request;
-             const string HttpContextName = "MS_HttpContext";
+            // request = request ?? Request;
+            const string HttpContextName = "MS_HttpContext";
             const string RemoteEndpointMessage =
                   "System.ServiceModel.Channels.RemoteEndpointMessageProperty";
             if (request.Properties.ContainsKey(HttpContextName))
@@ -80,8 +83,8 @@ namespace TrippismProfiles
             else if (HttpContext.Current != null)
             {
                 return HttpContext.Current.Request.UserHostAddress;
-            }        
-            return null;         
+            }
+            return null;
         }
         /// <summary>
         /// This method is used to get user agent information
@@ -91,6 +94,6 @@ namespace TrippismProfiles
             var userAgent = ((System.Web.HttpContextBase)request.Properties["MS_HttpContext"]).Request.UserAgent;
             return userAgent;
         }
-        
+
     }
 }
