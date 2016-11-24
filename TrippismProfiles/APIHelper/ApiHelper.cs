@@ -39,12 +39,6 @@ namespace TrippismProfiles
             bool isRedisAvailable = false;
             RedisService redisService = new RedisService();
             isRedisAvailable = redisService.IsConnected();
-            if (!isRedisAvailable)
-            {
-                List<string> listToaddress = new List<string>();
-                listToaddress.Add("shubham4616@gmail.com");
-                MailgunEmail.SendComplexMessage("subham@trivenitechnologies.in", "Redis connection failed", listToaddress, "Redis services is not connected.Please check your redis connection");
-            }
             return isRedisAvailable;
         }
         /// <summary>

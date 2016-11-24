@@ -224,7 +224,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="APIHelper\EmailVerification.cs" />
-    <Compile Include="APIHelper\MailgunEmail.cs" />
     <Compile Include="APIHelper\PasswordHash.cs" />
     <Compile Include="APIHelper\SecurityManager.cs" />
     <Compile Include="APIHelper\TrippismNLog.cs">
@@ -344,6 +343,12 @@
     <None Include="Properties\PublishProfiles\trippism.pubxml" />
     <None Include="Properties\PublishProfiles\TrippismProfile.pubxml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EmailService\EmailService.csproj">
+      <Project>{10ffe3f0-d633-4604-ab48-4652ae55ae8b}</Project>
+      <Name>EmailService</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
