@@ -15,18 +15,44 @@ namespace DataLayer
     public class MongoDBConnector : INoSqlConnector<IMongoDatabase>
     {
         private MongoClient _mongoClient;
-
+        MailgunEmail mail = new MailgunEmail();
         public IMongoDatabase connect()
         {
-            MailgunEmail mail = new MailgunEmail();
             _mongoClient = new MongoClient(ConfigurationManager.AppSettings["MongoDBServer"]);
-            if (_mongoClient.Cluster.Description.State == MongoDB.Driver.Core.Clusters.ClusterState.Disconnected)
+
+            try
             {
-                List<string> listToaddress = new List<string>();
-                listToaddress.Add("shubham4616@gmail.com");
-                mail.SendComplexMessage("subham@trivenitechnologies.in", "MongoDB connection failed", listToaddress, "MongoDB is not connected.Please check your MongoDB connection");
+                foreach (MongoServerInstance instance in _mongoClient.GetServer().Instances)//_mongoClient.GetServer().Instances)
+                {
+                    //instance.Ping();
+                    // or you can try
+                    if (instance.State == MongoServerState.Disconnected)
+                    {
+                        connectionFailMail("");
+                        // send email
+                        return null;
+                    }
+                }
+                return _mongoClient.GetDatabase(ConfigurationManager.AppSettings["MongodbName"]);
+
             }
-            return _mongoClient.GetDatabase(ConfigurationManager.AppSettings["MongodbName"]);
+            catch (MongoConnectionException mex)
+            {
+                connectionFailMail(mex.ToString());
+                return null;
+            }
+            catch (Exception ex)
+            {
+                connectionFailMail(ex.ToString());
+                return null;
+            }
+        }
+
+        public void connectionFailMail(string ErrorMessage)
+        {
+            List<string> listToaddress = new List<string>();
+            listToaddress.Add("subham@trivenitechnologies.in");
+            mail.SendComplexMessage("noreply@trippism.com", "MongoDB connection failed", listToaddress, "MongoDB is not connected. Please check your MongoDB connection. " + ErrorMessage);
         }
     }
 }
