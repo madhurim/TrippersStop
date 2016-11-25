@@ -23,6 +23,7 @@ namespace TrippismApi.TraveLayer
         String _RedisSlave;
         String _RedisPassword;
         int _RedisPort;
+        MailgunEmail mail = new MailgunEmail();
 
         public double RedisExpireInMin
         {
@@ -146,19 +147,21 @@ namespace TrippismApi.TraveLayer
 
                     isSuccess = redisClient.Ping();
                 }
+                if (!isSuccess)
+                    connectionFailMail("");
             }
-            catch
+            catch (Exception ex)
             {
                 isSuccess = false;
-            }
-            if (!isSuccess)
-            {
-                List<string> listToaddress = new List<string>();
-                listToaddress.Add("subham@trivenitechnologies.in");
-                MailgunEmail mail = new MailgunEmail();
-                mail.SendComplexMessage("noreply@trippism.com", "Redis connection failed", listToaddress, "Redis services is not connected.Please check your redis connection");
+                connectionFailMail(ex.Message.ToString());
             }
             return isSuccess;
+        }
+        public void connectionFailMail(string ErrorMessage)
+        {
+            List<string> listToaddress = new List<string>();
+            listToaddress.Add("subham@trivenitechnologies.in");
+            mail.SendComplexMessage("noreply@trippism.com", "Redis connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>Redis connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
         }
 
     }

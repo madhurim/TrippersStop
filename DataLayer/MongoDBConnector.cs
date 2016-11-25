@@ -28,8 +28,7 @@ namespace DataLayer
                     // or you can try
                     if (instance.State == MongoServerState.Disconnected)
                     {
-                        connectionFailMail("");
-                        // send email
+                        connectionFailMail(instance.BuildInfo.ToString());
                         return null;
                     }
                 }
@@ -38,12 +37,12 @@ namespace DataLayer
             }
             catch (MongoConnectionException mex)
             {
-                connectionFailMail(mex.ToString());
+                connectionFailMail(mex.Message.ToString());
                 return null;
             }
             catch (Exception ex)
             {
-                connectionFailMail(ex.ToString());
+                connectionFailMail(ex.Message.ToString());
                 return null;
             }
         }
@@ -52,7 +51,7 @@ namespace DataLayer
         {
             List<string> listToaddress = new List<string>();
             listToaddress.Add("subham@trivenitechnologies.in");
-            mail.SendComplexMessage("noreply@trippism.com", "MongoDB connection failed", listToaddress, "MongoDB is not connected. Please check your MongoDB connection. " + ErrorMessage);
+            mail.SendComplexMessage("noreply@trippism.com", "MongoDB connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
         }
     }
 }
