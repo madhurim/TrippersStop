@@ -92,6 +92,7 @@
     <Compile Include="Interfaces\IDBContext.cs" />
     <Compile Include="Interfaces\IEmailContext.cs" />
     <Compile Include="Interfaces\INoSqlConnector.cs" />
+    <Compile Include="MongoDBAbstract .cs" />
     <Compile Include="MongoDBProperty.cs" />
     <Compile Include="MongoDBConnector.cs" />
     <Compile Include="TrippismTemplateMongoDBContext.cs" />
