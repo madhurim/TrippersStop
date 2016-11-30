@@ -47,6 +47,36 @@ namespace DataLayer
             }
         }
 
+        public IMongoDatabase connect(string connectionString, string databaseName)
+        {
+            _mongoClient = new MongoClient(connectionString);
+
+            try
+            {
+                foreach (MongoServerInstance instance in _mongoClient.GetServer().Instances)//_mongoClient.GetServer().Instances)
+                {
+                    //instance.Ping();
+                    // or you can try
+                    if (instance.State == MongoServerState.Disconnected)
+                    {
+                        connectionFailMail(instance.BuildInfo.ToString());
+                        return null;
+                    }
+                }
+                return _mongoClient.GetDatabase(databaseName);
+            }
+            catch (MongoConnectionException mex)
+            {
+                connectionFailMail(mex.Message.ToString());
+                return null;
+            }
+            catch (Exception ex)
+            {
+                connectionFailMail(ex.Message.ToString());
+                return null;
+            }
+        }
+
         public void connectionFailMail(string ErrorMessage)
         {
             List<string> listToaddress = new List<string>();

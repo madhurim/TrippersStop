@@ -14,16 +14,14 @@ using DataLayer;
 
 namespace DataLayer
 {
-     //   public class MongoDBContext<TObject> : IDBContext<TObject> where TObject : EntityBase
-    public class MongoDBContext : IDBContext
+    public class TrippismTemplateMongoDBContext : IEmailContext
     {
         MongoDBConnector mongoDBConnector = new MongoDBConnector();
         protected IMongoDatabase _db;
 
-        public MongoDBContext()
+        public TrippismTemplateMongoDBContext()
         {
-            _db = mongoDBConnector.connect();
-           // CreateCollectionIfNotExist(typeof(TObject));
+            _db = mongoDBConnector.connect(ConfigurationManager.AppSettings["EmailTemplateMongoDBServer"], ConfigurationManager.AppSettings["EmailTemplateMongoDBName"]);
         }
 
         public List<T> Find<T>(System.Linq.Expressions.Expression<Func<T, bool>> expression) where T : class, new()
@@ -63,28 +61,6 @@ namespace DataLayer
             _db.GetCollection<T>(typeof(T).Name).InsertManyAsync(items);
         }
 
-        //public void Update<T>(System.Linq.Expressions.Expression<Func<T, bool>> expression, T item) where T : class, new()
-        //{
-        //    FilterDefinition<T> filters = Builders<T>.Filter.Where(expression == null ? (x => 1 == 1) : expression);
-
-        //    Type itemType = item.GetType();
-        //    List<BsonElement> bsonUpdateElements = new List<BsonElement>();
-
-        //    foreach (PropertyInfo prop in itemType.GetProperties())
-        //        bsonUpdateElements.Add(new BsonElement(prop.Name, BsonValue.Create(prop.GetValue(item, null))));
-
-        //    BsonDocument bsonDoc = new BsonDocument(bsonUpdateElements);
-        //    var bsonUpdateDoc = new BsonDocument { { "$set", bsonDoc } };
-        //    _db.GetCollection<T>(typeof(T).Name).UpdateOneAsync(filters, bsonUpdateDoc);
-        //}
-
-        //public void UpdateWithChild<T>(System.Linq.Expressions.Expression<Func<T, bool>> expression, T item) where T : class, new()
-        //{
-        //    FilterDefinition<T> filters = Builders<T>.Filter.Where(expression == null ? (x => 1 == 1) : expression);
-        //    BsonDocument bsonDoc = item.ToBsonDocument();
-        //    var bsonUpdateDoc = new BsonDocument { { "$set", bsonDoc } };
-        //    _db.GetCollection<T>(typeof(T).Name).UpdateOneAsync(filters, bsonUpdateDoc);
-        //}
         public void Update<T>(System.Linq.Expressions.Expression<Func<T, bool>> expression, T item) where T : class, new()
         {
             FilterDefinition<T> filters = Builders<T>.Filter.Where(expression == null ? (x => 1 == 1) : expression);
@@ -121,6 +97,5 @@ namespace DataLayer
         {
 
         }
-
     }
 }

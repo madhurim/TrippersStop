@@ -21,7 +21,8 @@ namespace TrippismProfiles
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             var container = new Container();
-            container.RegisterWebApiRequest<IDBContext, MongoDBContext>();
+            container.RegisterWebApiRequest<IDBContext, TrippismMongoDBContext>();
+            container.RegisterWebApiRequest<IEmailContext, TrippismTemplateMongoDBContext>();
             if (ApiHelper.IsRedisAvailable())
             {
                 container.RegisterWebApiRequest<ICacheService, RedisService>();
@@ -41,7 +42,7 @@ namespace TrippismProfiles
 
             GlobalConfiguration.Configuration.DependencyResolver =
                 new SimpleInjectorWebApiDependencyResolver(container);
-           ApiHelper.RegisterMappingEntities();
+            ApiHelper.RegisterMappingEntities();
         }
     }
 }
