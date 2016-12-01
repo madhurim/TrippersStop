@@ -57,6 +57,8 @@
     <Compile Include="Data\AuthDetails.cs" />
     <Compile Include="Data\Customer.cs" />
     <Compile Include="Data\CustomerActivity.cs" />
+    <Compile Include="Data\EmailTemplate.cs" />
+    <Compile Include="Data\MyDestinations.cs" />
     <Compile Include="Data\SearchCriteria.cs" />
     <Compile Include="Data\ViewAttractionPlace.cs" />
     <Compile Include="Data\ViewYoutubeVideo.cs" />

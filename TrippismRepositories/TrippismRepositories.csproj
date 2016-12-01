@@ -49,11 +49,13 @@
     <Compile Include="Interfaces\IAccountRepository.cs" />
     <Compile Include="Interfaces\IAnonymousRepository.cs" />
     <Compile Include="Interfaces\IAuthDetailsRepository.cs" />
+    <Compile Include="Interfaces\IEmailTemplateRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\ActivityRepository.cs" />
     <Compile Include="Repositories\AnonymousRepository.cs" />
     <Compile Include="Repositories\AuthDetailsRepository.cs" />
+    <Compile Include="Repositories\EmailTemplateRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
