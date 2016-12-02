@@ -24,6 +24,7 @@ namespace TrippismProfiles.Controllers
     {
         IAuthDetailsRepository _IAuthDetailsRepository;
         ICacheService _cacheService;
+        IEmailTemplateRepository _IEmailTemplateRepository;
 
         private Guid AuthId
         {
@@ -37,9 +38,10 @@ namespace TrippismProfiles.Controllers
         /// <summary>
         /// Set api - Anonymous Repository.
         /// </summary>
-        public AccountController(IAuthDetailsRepository iAuthDetailsRepository, ICacheService cacheService)
+        public AccountController(IAuthDetailsRepository iAuthDetailsRepository, IEmailTemplateRepository iEmailTemplateRepository, ICacheService cacheService)
         {
             _IAuthDetailsRepository = iAuthDetailsRepository;
+            _IEmailTemplateRepository = iEmailTemplateRepository;
             _cacheService = cacheService;
         }
 
@@ -167,10 +169,25 @@ namespace TrippismProfiles.Controllers
                 }
                 authDetails.Token = ApiHelper.CreateRandomPassword(8);
 
+                var emailTemplateName = "Reset Password";
+                var mail = _IEmailTemplateRepository.GetEmailTemplate(emailTemplateName);
+
                 var changePasswordUrl = "http://" + Url + "/#/changepassword/T=" + authDetails.Token + ";G=" + authDetails.CustomerGuid;
                 _IAuthDetailsRepository.UpdateCustomer(authDetails);
-                EmailVerification mail = new EmailVerification();
-                mail.SendForgotPwasswordMail(null, changePasswordUrl, authDetails.Email);
+                mail.Body = mail.Body.Replace("<hostlink>", "http://dev.trippism.com/")
+                                    .Replace("<logo>", "http://dev.trippism.com/images/trippism-logo.png")
+                                    .Replace("<changePasswordLink>", changePasswordUrl)
+                                    .Replace("<sitename>", "Trippism")
+                                    .Replace("<year>", DateTime.Now.Year.ToString())
+                                    .Replace("<facebook>", "https://www.facebook.com/trippismcom-1493664570958968/")
+                                    .Replace("<twitter>", "https://twitter.com/trippismapp")
+                                    .Replace("<pinterest>", "https://www.pinterest.com/trippismsite/trippism/")
+                                    .Replace("<linkedin>", "https://www.linkedin.com/company/trippism?trk=vsrp_companies_res_name&trkInfo=VSRPsearchId%3A44363051459161854061%2CVSRPtargetId%3A10201827%2CVSRPcmpt%3Aprimary")
+                                    .Replace("<blog>", "http://blog.trippism.com/")
+                                    .Replace("<faqs>", "http://dev.trippism.com/#/FAQs");
+
+                EmailVerification sendmail = new EmailVerification();
+                sendmail.SendUserMail("noreply@trippism.com", authDetails.Email, mail.Subject, mail.Body);
             }
             return Request.CreateResponse(HttpStatusCode.OK, "Please, Check Your Mail!");
         }
