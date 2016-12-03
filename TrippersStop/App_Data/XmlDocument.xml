@@ -4,11 +4,6 @@
         <name>Trippism</name>
     </assembly>
     <members>
-        <member name="M:Trippism.Areas.GooglePlace.Controllers.GooglePlaceController.GetAttractions(TraveLayer.CustomTypes.TripAdvisor.Request.AttractionsRequest)">
-            <summary>
-            The response provides review comments of attractions
-            </summary>
-        </member>
         <member name="M:TrippismApi.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
             Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
@@ -259,6 +254,31 @@
             Initializes a new instance of the <see cref="T:TrippismApi.Areas.HelpPage.HelpPageSampleGenerator"/> class.
             </summary>
         </member>
+        <member name="P:TrippismApi.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:TrippismApi.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:TrippismApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:TrippismApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:TrippismApi.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
         <member name="M:TrippismApi.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
             <summary>
             Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
@@ -331,31 +351,6 @@
             <param name="type">The type.</param>
             <param name="mediaType">Type of the media.</param>
             <returns></returns>
-        </member>
-        <member name="P:TrippismApi.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
-            <summary>
-            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
-            </summary>
-        </member>
-        <member name="P:TrippismApi.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
-            <summary>
-            Gets the objects that are used directly as samples for certain actions.
-            </summary>
-        </member>
-        <member name="P:TrippismApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
-            <summary>
-            Gets the objects that are serialized as samples by the supported formatters.
-            </summary>
-        </member>
-        <member name="P:TrippismApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
-            <summary>
-            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
-            stopping when the factory successfully returns a non-<see langref="null"/> object.
-            </summary>
-            <remarks>
-            Collection includes just <see cref="M:TrippismApi.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
-            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
-            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
         </member>
         <member name="T:TrippismApi.Areas.HelpPage.HelpPageSampleKey">
             <summary>
@@ -664,19 +659,6 @@
             Get response from api based on url.
             </summary>
         </member>
-        <member name="M:Trippism.Areas.Sabre.Controllers.LeadPriceCalendarController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
-            <summary>
-            Set api class and cache service.
-            </summary>
-        </member>
-        <member name="M:Trippism.Areas.Sabre.Controllers.LeadPriceCalendarController.Get(TraveLayer.CustomTypes.Sabre.Request.LeadPrIceCalendarInput)">
-            <summary>
-            Returns the current nonstop lead fare and an overall lead fare available to destinations from a specific origin on roundtrip travel dates
-            for 192 days
-            </summary>
-            <param name="leadPriceRequest">
-            Return record based on destinations Request Type</param>
-        </member>
         <member name="T:TrippismApi.Areas.Sabre.Controllers.MultiAirportCityController">
             <summary>
             API retrieves a list of multi-airport city (MAC) codes.
@@ -901,6 +883,24 @@
             <summary>
             Fet farerange and fare forcast based on dates and destinations
             </summary>
+        </member>
+        <member name="M:Trippism.Areas.GooglePlace.Controllers.GooglePlaceController.GetAttractions(TraveLayer.CustomTypes.TripAdvisor.Request.AttractionsRequest)">
+            <summary>
+            The response provides review comments of attractions
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.Sabre.Controllers.LeadPriceCalendarController.#ctor(TrippismApi.TraveLayer.IAsyncSabreAPICaller,TrippismApi.TraveLayer.ICacheService)">
+            <summary>
+            Set api class and cache service.
+            </summary>
+        </member>
+        <member name="M:Trippism.Areas.Sabre.Controllers.LeadPriceCalendarController.Get(TraveLayer.CustomTypes.Sabre.Request.LeadPrIceCalendarInput)">
+            <summary>
+            Returns the current nonstop lead fare and an overall lead fare available to destinations from a specific origin on roundtrip travel dates
+            for 192 days
+            </summary>
+            <param name="leadPriceRequest">
+            Return record based on destinations Request Type</param>
         </member>
         <member name="T:Trippism.Areas.TripAdvisor.Controllers.LocationController">
              <summary>

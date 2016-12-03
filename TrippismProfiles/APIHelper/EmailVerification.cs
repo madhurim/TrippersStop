@@ -22,8 +22,11 @@ namespace TrippismProfiles
             string body = string.Format(@"<br/>Thank you for registering for the Trippism.<br/><br/><br/> Your Trippism account  password is: {0}. <br/><br/>
                                                     You can change the password by clicking the change password link<br/><br/> Thank you!", pwd);
 
-            var result = mail.SendComplexMessage("noreply@trippism.com", "Trippism: +", new List<string>() { ToEmailID }, body);
+            // var result = mail.SendComplexMessage("noreply@trippism.com", "Trippism: +", new List<string>() { ToEmailID }, body);
             //var result = Task.Run(() => mail.SendComplexMessage("noreply@trippism.com", "Trippism: +", new List<string>() { ToEmailID }, body));
+
+            IEmailService email = new SESEmail();
+            email.SendMessage("noreply@trippism.com", "Trippism: +", new List<string>() { ToEmailID }, body);
         }
 
         public void SendForgotPwasswordMail(string firstName, string changePasswordUrl, string ToEmailID)

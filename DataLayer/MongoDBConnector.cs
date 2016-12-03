@@ -81,7 +81,11 @@ namespace DataLayer
         {
             List<string> listToaddress = new List<string>();
             listToaddress.Add("subham@trivenitechnologies.in");
-            mail.SendComplexMessage("noreply@trippism.com", "MongoDB connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
+            // changed to implement aws email
+            // mail.SendComplexMessage("noreply@trippism.com", "MongoDB connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
+
+            IEmailService email = new SESEmail();
+            email.SendMessage("noreply@trippism.com", "MongoDB connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
         }
     }
 }
