@@ -20,8 +20,11 @@ namespace Trippism.Controllers.Email
                 foreach (var toaddress in toemail)
                     listToaddress.Add(toaddress);
 
-                MailgunEmail mail = new MailgunEmail();
-                mail.SendComplexMessage(email.From, email.subject, listToaddress, email.body);
+             //   MailgunEmail mail = new MailgunEmail();
+             //   mail.SendComplexMessage(email.From, email.subject, listToaddress, email.body);
+
+                SESEmail mail = new SESEmail();
+                mail.SendMessage(email.From, email.subject, listToaddress, email.body);
                 result.Data = new { status = "ok" };
 
                 return result;
