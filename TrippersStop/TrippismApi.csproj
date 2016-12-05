@@ -102,8 +102,8 @@
       <HintPath>..\packages\NLog.Mongo.4.0.0.35\lib\net45\NLog.Mongo.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\RestSharp.dll</HintPath>
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net451\RestSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
