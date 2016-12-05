@@ -15,7 +15,6 @@ namespace DataLayer
     public class MongoDBConnector : INoSqlConnector<IMongoDatabase>
     {
         private MongoClient _mongoClient;
-        MailgunEmail mail = new MailgunEmail();
         public IMongoDatabase connect()
         {
             _mongoClient = new MongoClient(ConfigurationManager.AppSettings["MongoDBServer"]);
@@ -83,9 +82,10 @@ namespace DataLayer
             listToaddress.Add("subham@trivenitechnologies.in");
             // changed to implement aws email
             // mail.SendComplexMessage("noreply@trippism.com", "MongoDB connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
+            string fromEmail = ConfigurationManager.AppSettings["MailGunFromemail"];
 
             IEmailService email = new SESEmail();
-            email.SendMessage("noreply@trippism.com", "MongoDB connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
+            email.SendMessage(fromEmail, "MongoDB connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
         }
     }
 }

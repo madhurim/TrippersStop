@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Newtonsoft.JsonResult;
 using EmailService;
+using System.Configuration;
 
 namespace Trippism.Controllers.Email
 {
@@ -20,11 +21,15 @@ namespace Trippism.Controllers.Email
                 foreach (var toaddress in toemail)
                     listToaddress.Add(toaddress);
 
-             //   MailgunEmail mail = new MailgunEmail();
-             //   mail.SendComplexMessage(email.From, email.subject, listToaddress, email.body);
+                //   MailgunEmail mail = new MailgunEmail();
+                //   mail.SendComplexMessage(email.From, email.subject, listToaddress, email.body);
 
-                SESEmail mail = new SESEmail();
-                mail.SendMessage(email.From, email.subject, listToaddress, email.body);
+                string Subject = email.From + " shares: " + email.subject;
+
+                IEmailService mail = new SESEmail();
+                string fromemail = ConfigurationManager.AppSettings["MailGunFromemail"];
+
+                mail.SendMessage(fromemail, Subject, listToaddress, email.body);
                 result.Data = new { status = "ok" };
 
                 return result;

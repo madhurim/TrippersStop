@@ -23,7 +23,6 @@ namespace TrippismApi.TraveLayer
         String _RedisSlave;
         String _RedisPassword;
         int _RedisPort;
-        MailgunEmail mail = new MailgunEmail();
 
         public double RedisExpireInMin
         {
@@ -161,10 +160,12 @@ namespace TrippismApi.TraveLayer
         {
             List<string> listToaddress = new List<string>();
             listToaddress.Add("subham@trivenitechnologies.in");
-           // mail.SendComplexMessage("noreply@trippism.com", "Redis connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>Redis connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
+            string fromEmail = ConfigurationManager.AppSettings["MailGunFromemail"];
+
+            // mail.SendComplexMessage("noreply@trippism.com", "Redis connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>Redis connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
 
             IEmailService email = new SESEmail();
-            email.SendMessage("noreply@trippism.com", "Redis connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
+            email.SendMessage(fromEmail, "Redis connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
 
         }
 

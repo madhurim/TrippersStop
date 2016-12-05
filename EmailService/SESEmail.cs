@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Configuration;
 
 namespace EmailService
 {
@@ -11,18 +13,24 @@ namespace EmailService
         public string SendMessage(string From, string subject, List<string> useremails, string htmlBody)
         {
             string returnMessage = String.Empty;
-          
 
             String FROM = From;   // Replace with your "From" address. This address must be verified.
             String TO = String.Join(";", useremails); // Replace with a "To" address. If your account is still in the
             // sandbox, this address must be verified.
 
-            String SUBJECT = subject;
-            String BODY = htmlBody;
+            //String SUBJECT = subject;
+            //String BODY = htmlBody;
+
+            MailMessage mailmessage = new MailMessage(From, TO)
+            {
+                Body = htmlBody,
+                Subject = subject,
+                IsBodyHtml = true
+            };
 
             // Supply your SMTP credentials below. Note that your SMTP credentials are different from your AWS credentials.
-            String SMTP_USERNAME = "AKIAIRWFC64MP7MYUJXQ";  // Replace with your SMTP username. 
-            String SMTP_PASSWORD = "AqiBgKAvmPJVWOtf35vCbSl8K3883KpbIrrCHu2ggqpF";  // Replace with your SMTP password.
+            String SMTP_USERNAME = ConfigurationManager.AppSettings["Username"];  // Replace with your SMTP username. 
+            String SMTP_PASSWORD = ConfigurationManager.AppSettings["Password"];  // Replace with your SMTP password.
 
             // Amazon SES SMTP host name. This example uses the US West (Oregon) region.
             const String HOST = "email-smtp.us-west-2.amazonaws.com";
@@ -44,13 +52,12 @@ namespace EmailService
                 // Send the email. 
                 try
                 {
-                   
-                    client.Send(FROM, TO, SUBJECT, BODY);
+                    client.Send(mailmessage);
+                    //client.Send(FROM, TO, SUBJECT, BODY);
                     Console.WriteLine("Email sent!");
                 }
                 catch (Exception ex)
                 {
-                   
                     returnMessage = "Error message: " + ex.Message;
                 }
             }

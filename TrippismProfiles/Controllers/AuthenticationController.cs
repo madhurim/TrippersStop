@@ -1,5 +1,6 @@
 ﻿using ExpressMapper;
 using System;
+using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -84,20 +85,25 @@ namespace TrippismProfiles.Controllers
             var emailTemplateName = "New Account Password";
             var mail = _IEmailTemplateRepository.GetEmailTemplate(emailTemplateName);
 
-            mail.Body = mail.Body.Replace("<hostlink>", "http://dev.trippism.com/")
-                                    .Replace("<logo>", "http://dev.trippism.com/images/trippism-logo.png")
+            string hostUrl = Request.Headers.Referrer.AbsoluteUri.ToString();
+
+            mail.Body = mail.Body.Replace("<hostlink>", hostUrl)
+                                    .Replace("<logo>", hostUrl + "images/trippism-logo.png")
                                     .Replace("<password>", strPwd)
                                     .Replace("<sitename>", "Trippism")
                                     .Replace("<year>", DateTime.Now.Year.ToString())
-                                    .Replace("<facebook>", "https://www.facebook.com/trippismcom-1493664570958968/")
-                                    .Replace("<twitter>", "https://twitter.com/trippismapp")
-                                    .Replace("<pinterest>", "https://www.pinterest.com/trippismsite/trippism/")
-                                    .Replace("<linkedin>", "https://www.linkedin.com/company/trippism?trk=vsrp_companies_res_name&trkInfo=VSRPsearchId%3A44363051459161854061%2CVSRPtargetId%3A10201827%2CVSRPcmpt%3Aprimary")
-                                    .Replace("<blog>", "http://blog.trippism.com/")
-                                    .Replace("<faqs>", "http://dev.trippism.com/#/FAQs");
+                                    .Replace("<facebook>", ConfigurationManager.AppSettings["FacebookUrl"].ToString())
+                                    .Replace("<twitter>", ConfigurationManager.AppSettings["TwitterUrl"].ToString())
+                                    .Replace("<pinterest>", ConfigurationManager.AppSettings["PinterestUrl"].ToString())
+                                    .Replace("<linkedin>", ConfigurationManager.AppSettings["LinkedinUrl"].ToString())
+                                    .Replace("<blog>", ConfigurationManager.AppSettings["BlogUrl"].ToString())
+                                    .Replace("<faqs>", hostUrl + "#/FAQs");
+
+            string fromEmail = ConfigurationManager.AppSettings["MailGunFromemail"];
 
             EmailVerification sendmail = new EmailVerification();
-            sendmail.SendUserMail("noreply@trippism.com", authdetail.Email, mail.Subject, mail.Body);
+            sendmail.SendUserMail(fromEmail, authdetail.Email, mail.Subject, mail.Body);
+
             SignUpViewModel authViewModel = Mapper.Map<AuthDetails, SignUpViewModel>(authdetail);
             return Request.CreateResponse(HttpStatusCode.OK, authViewModel);
         }

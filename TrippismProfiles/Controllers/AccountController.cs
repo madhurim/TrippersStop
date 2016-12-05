@@ -1,6 +1,7 @@
 ﻿using ExpressMapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -24,6 +25,7 @@ namespace TrippismProfiles.Controllers
     {
         IAuthDetailsRepository _IAuthDetailsRepository;
         ICacheService _cacheService;
+        IEmailTemplateRepository _IEmailTemplateRepository;
 
         private Guid AuthId
         {
@@ -37,10 +39,11 @@ namespace TrippismProfiles.Controllers
         /// <summary>
         /// Set api - Anonymous Repository.
         /// </summary>
-        public AccountController(IAuthDetailsRepository iAuthDetailsRepository, ICacheService cacheService)
+        public AccountController(IAuthDetailsRepository iAuthDetailsRepository, ICacheService cacheService, IEmailTemplateRepository IEmailTemplateRepository)
         {
             _IAuthDetailsRepository = iAuthDetailsRepository;
             _cacheService = cacheService;
+            _IEmailTemplateRepository = IEmailTemplateRepository;
         }
 
         /// <summary>
@@ -167,10 +170,30 @@ namespace TrippismProfiles.Controllers
                 }
                 authDetails.Token = ApiHelper.CreateRandomPassword(8);
 
+                var emailTemplateName = "Reset Password";
+                var mail = _IEmailTemplateRepository.GetEmailTemplate(emailTemplateName);
+
                 var changePasswordUrl = "http://" + Url + "/#/changepassword/T=" + authDetails.Token + ";G=" + authDetails.CustomerGuid;
+
+                string hostUrl = Request.Headers.Referrer.AbsoluteUri.ToString();
+
                 _IAuthDetailsRepository.UpdateCustomer(authDetails);
-                EmailVerification mail = new EmailVerification();
-                mail.SendForgotPwasswordMail(null, changePasswordUrl, authDetails.Email);
+                mail.Body = mail.Body.Replace("<hostlink>", hostUrl)
+                                    .Replace("<logo>", hostUrl + "images/trippism-logo.png")
+                                    .Replace("<changePasswordLink>", changePasswordUrl)
+                                    .Replace("<sitename>", "Trippism")
+                                    .Replace("<year>", DateTime.Now.Year.ToString())
+                                    .Replace("<facebook>", ConfigurationManager.AppSettings["FacebookUrl"].ToString())
+                                    .Replace("<twitter>", ConfigurationManager.AppSettings["TwitterUrl"].ToString())
+                                    .Replace("<pinterest>", ConfigurationManager.AppSettings["PinterestUrl"].ToString())
+                                    .Replace("<linkedin>", ConfigurationManager.AppSettings["LinkedinUrl"].ToString())
+                                    .Replace("<blog>", ConfigurationManager.AppSettings["BlogUrl"].ToString())
+                                    .Replace("<faqs>", hostUrl + "#/FAQs");
+
+                string fromEmail = ConfigurationManager.AppSettings["MailGunFromemail"];
+
+                EmailVerification sendmail = new EmailVerification();
+                sendmail.SendUserMail(fromEmail, authDetails.Email, mail.Subject, mail.Body);
             }
             return Request.CreateResponse(HttpStatusCode.OK, "Please, Check Your Mail!");
         }
