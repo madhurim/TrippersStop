@@ -88,7 +88,7 @@ namespace TrippismProfiles.Controllers
             string hostUrl = Request.Headers.Referrer.AbsoluteUri.ToString();
 
             mail.Body = mail.Body.Replace("<hostlink>", hostUrl)
-                                    .Replace("<logo>", hostUrl + "images/trippism-logo.png")
+                                    .Replace("<logo>", hostUrl + ConfigurationManager.AppSettings["TrippismLogoPath"].ToString())
                                     .Replace("<password>", strPwd)
                                     .Replace("<sitename>", "Trippism")
                                     .Replace("<year>", DateTime.Now.Year.ToString())

@@ -160,12 +160,26 @@ namespace TrippismApi.TraveLayer
         {
             List<string> listToaddress = new List<string>();
             listToaddress.Add("subham@trivenitechnologies.in");
+
+            //---------------- Start Send Redis Connection Failed to selected Member ----------------------
+            //Disable Getting Config Email Address Due to still not set up Redis on server
+
+            //string email = ConfigurationManager.AppSettings["ConnectionFailNotification"].ToString();
+
+            //var toemail = email.Split(',');
+            //List<string> listToaddress = new List<string>();
+            //foreach (var toaddress in toemail)
+            //    listToaddress.Add(toaddress);
+
+            //----------------End Send Redis Connection Failed to selected Member ----------------------
+
+
             string fromEmail = ConfigurationManager.AppSettings["MailGunFromemail"];
 
             // mail.SendComplexMessage("noreply@trippism.com", "Redis connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>Redis connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
 
-            IEmailService email = new SESEmail();
-            email.SendMessage(fromEmail, "Redis connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
+            IEmailService iemail = new SESEmail();
+            iemail.SendMessage(fromEmail, "Redis connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
 
         }
 

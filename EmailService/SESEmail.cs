@@ -15,7 +15,7 @@ namespace EmailService
             string returnMessage = String.Empty;
 
             String FROM = From;   // Replace with your "From" address. This address must be verified.
-            String TO = String.Join(";", useremails); // Replace with a "To" address. If your account is still in the
+            String TO = String.Join(",", useremails); // Replace with a "To" address. If your account is still in the
             // sandbox, this address must be verified.
 
             //String SUBJECT = subject;
@@ -29,8 +29,8 @@ namespace EmailService
             };
 
             // Supply your SMTP credentials below. Note that your SMTP credentials are different from your AWS credentials.
-            String SMTP_USERNAME = ConfigurationManager.AppSettings["Username"];  // Replace with your SMTP username. 
-            String SMTP_PASSWORD = ConfigurationManager.AppSettings["Password"];  // Replace with your SMTP password.
+            String SMTP_USERNAME = ConfigurationManager.AppSettings["SESEmailUsername"];  // Replace with your SMTP username. 
+            String SMTP_PASSWORD = ConfigurationManager.AppSettings["SESEmailPassword"];  // Replace with your SMTP password.
 
             // Amazon SES SMTP host name. This example uses the US West (Oregon) region.
             const String HOST = "email-smtp.us-west-2.amazonaws.com";
