@@ -143,7 +143,6 @@ namespace TrippismApi.TraveLayer
             {
                 using (var redisClient = new RedisClient(RedisHost, _RedisPort, _RedisPassword))
                 {
-
                     isSuccess = redisClient.Ping();
                 }
                 if (!isSuccess)
@@ -179,7 +178,7 @@ namespace TrippismApi.TraveLayer
             // mail.SendComplexMessage("noreply@trippism.com", "Redis connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>Redis connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
 
             IEmailService iemail = new SESEmail();
-            iemail.SendMessage(fromEmail, "Redis connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
+            iemail.SendMessage(fromEmail, "Redis connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>Redis connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
 
         }
 
