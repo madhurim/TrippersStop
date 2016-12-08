@@ -15,7 +15,6 @@ namespace DataLayer
     public class MongoDBConnector : INoSqlConnector<IMongoDatabase>
     {
         private MongoClient _mongoClient;
-        MailgunEmail mail = new MailgunEmail();
         public IMongoDatabase connect()
         {
             _mongoClient = new MongoClient(ConfigurationManager.AppSettings["MongoDBServer"]);
@@ -79,9 +78,19 @@ namespace DataLayer
 
         public void connectionFailMail(string ErrorMessage)
         {
+            string email = ConfigurationManager.AppSettings["ConnectionFailNotification"].ToString();
+
+            var toemail = email.Split(',');
             List<string> listToaddress = new List<string>();
-            listToaddress.Add("subham@trivenitechnologies.in");
-            mail.SendComplexMessage("noreply@trippism.com", "MongoDB connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
+            foreach (var toaddress in toemail)
+                listToaddress.Add(toaddress);
+
+            // changed to implement aws email
+            // mail.SendComplexMessage("noreply@trippism.com", "MongoDB connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
+            string fromEmail = ConfigurationManager.AppSettings["MailGunFromemail"];
+
+            IEmailService iemail = new SESEmail();
+            iemail.SendMessage(fromEmail, "MongoDB connection failed", listToaddress, "<html><body><div><p><strong>Title: </strong>MongoDB connection failed.</p><p><strong>Time: </strong>" + DateTime.Now.ToString() + "</p><p><strong style='color:#b90005;'>Error Message: </strong>" + ErrorMessage + "</p><p></p></div></body></html>");
         }
     }
 }

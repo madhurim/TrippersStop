@@ -109,9 +109,13 @@
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="ActivityControllerTest.cs" />
     <Compile Include="ActivityRepositoryTest.cs" />
+    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="GenericTest1.GenericTest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +126,10 @@
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
       <Project>{14b3909b-3036-4a7c-bc81-e56941952b43}</Project>
       <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EmailService\EmailService.csproj">
+      <Project>{10ffe3f0-d633-4604-ab48-4652ae55ae8b}</Project>
+      <Name>EmailService</Name>
     </ProjectReference>
     <ProjectReference Include="..\TraveLayer\TraveLayer.csproj">
       <Project>{c5baab69-8d1d-4402-9573-4b6f2939b7ef}</Project>
