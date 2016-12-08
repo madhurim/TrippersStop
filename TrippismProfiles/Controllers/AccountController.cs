@@ -39,11 +39,11 @@ namespace TrippismProfiles.Controllers
         /// <summary>
         /// Set api - Anonymous Repository.
         /// </summary>
-        public AccountController(IAuthDetailsRepository iAuthDetailsRepository, ICacheService cacheService, IEmailTemplateRepository IEmailTemplateRepository)
+        public AccountController(IAuthDetailsRepository iAuthDetailsRepository, ICacheService cacheService, IEmailTemplateRepository iEmailTemplateRepository)
         {
             _IAuthDetailsRepository = iAuthDetailsRepository;
+            _IEmailTemplateRepository = iEmailTemplateRepository;
             _cacheService = cacheService;
-            _IEmailTemplateRepository = IEmailTemplateRepository;
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace TrippismProfiles.Controllers
 
                 _IAuthDetailsRepository.UpdateCustomer(authDetails);
                 mail.Body = mail.Body.Replace("<hostlink>", hostUrl)
-                                    .Replace("<logo>", hostUrl + "images/trippism-logo.png")
+                                    .Replace("<logo>", hostUrl + ConfigurationManager.AppSettings["TrippismLogoPath"].ToString())
                                     .Replace("<changePasswordLink>", changePasswordUrl)
                                     .Replace("<sitename>", "Trippism")
                                     .Replace("<year>", DateTime.Now.Year.ToString())
