@@ -16,12 +16,12 @@ namespace TrippismProfiles.Models
         public int AuthenticationType { get; set; }
         public Guid CustomerGuid { get; set; }
         [Required]
-        public string UserName { get; set; }
+        public string Email { get; set; }
 
         public DateTime CreatedDate { get; set; }
         public DateTime LoginTime { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool IsEmailVerified { get; set; }
-        public CustomerViewModel Customer { get; set; }
+        public CustomerViewModel Customer { get; set; }        
     }
 }

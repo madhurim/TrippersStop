@@ -2,45 +2,54 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Newtonsoft.JsonResult;
-
+using EmailService;
+using System.Configuration;
 
 namespace Trippism.Controllers.Email
 {
     public class EmailController : ApiController
     {
-        
+
         [HttpPost]
         public System.Web.Mvc.JsonResult SendEmailtoUser(Email email)
         {
             var result = new JsonResult();
             try
-            {   
+            {
                 var toemail = email.To.Split(',');
                 List<string> listToaddress = new List<string>();
                 foreach (var toaddress in toemail)
                     listToaddress.Add(toaddress);
-                
-                APIHelper.MailgunEmail.SendComplexMessage(email.From, email.subject, listToaddress, email.body);
-                result.Data = new{status = "ok"};
+
+                //   MailgunEmail mail = new MailgunEmail();
+                //   mail.SendComplexMessage(email.From, email.subject, listToaddress, email.body);
+
+                string Subject = email.From + " shares: " + email.subject;
+
+                IEmailService mail = new SESEmail();
+                string fromemail = ConfigurationManager.AppSettings["MailGunFromemail"];
+
+                mail.SendMessage(fromemail, Subject, listToaddress, email.body);
+                result.Data = new { status = "ok" };
 
                 return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                result.Data = new{ status = ex.Message,};
+                result.Data = new { status = ex.Message, };
                 return result;
             }
         }
 
     }
 
-        public class Email
-        {
-            public string From { get; set; }
-            public string To { get; set; }
-            public string subject { get; set; }
-            public string body { get; set; }
-            
-        }
-      
+    public class Email
+    {
+        public string From { get; set; }
+        public string To { get; set; }
+        public string subject { get; set; }
+        public string body { get; set; }
+
+    }
+
 }

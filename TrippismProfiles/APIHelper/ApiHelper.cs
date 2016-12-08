@@ -1,5 +1,6 @@
 using ExpressMapper;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -49,6 +50,7 @@ namespace TrippismProfiles
             Mapper.Register<SearchCriteria, SearchActivityViewModel>()
                  // .Member(h => h.SearchType, m => m.SearchedTypeID)
                    .Member(h => h.CustomerId, m => m.RefGuid);
+            Mapper.Register<MyDestinationsViewModel, MyDestinations>();
             Mapper.Compile();
         }
         /// <summary>
